@@ -9,8 +9,6 @@ Por lo tanto nuestro grupo formado por:
     4. Jose Prince
     5. Josue Marroquín
 
-
-Paragraph 1 
 A continuacion en este repositorio se mostrara todos los avances de cada miembro del grupo y además todos los archivos que se realizaron para poder llegar al programa. 
 
 A continuación se encontraran Todos los diferentes link para accesar a cada folder.
@@ -23,7 +21,6 @@ Avances 1 conlleva con el progreso del corte 1 donde se identifica el posible pr
 El Corte 1 se encuentra los avances de la primera fase del proyecto. 
 
 
-Paragraph 2
 Esta es la siguiente fase de nuestro proyecto. 
 En esta parte se encuentra:
 **Avances: Corte 2**
