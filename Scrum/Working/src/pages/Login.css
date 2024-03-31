@@ -32,6 +32,14 @@
     color: black;
 }
 
+.RoleButton {
+    background-color: whitesmoke;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    
+}
+
+
 .loginButton {
     margin-top: 20px;
     cursor: pointer;
@@ -53,3 +61,57 @@
     border-radius: 10px;
 }
 
+ion-select::part(placeholder),
+ion-select::part(text) {
+    flex: 0 0 auto;
+}
+
+
+ion-select::part(text) {
+    color: #545ca7;
+}
+
+ion-select::part(icon) {
+    color: gray;
+    opacity: 1;
+}
+
+/* styles.css */
+.custom-ion-select {
+    --placeholder-color: gray;
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
+}
+
+.custom-ion-select::part(placeholder),
+.custom-ion-select::part(text) {
+    flex: 0 0 auto;
+}
+
+.custom-ion-select::part(placeholder)::first-letter {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.custom-ion-select::part(text) {
+    color: #545ca7;
+}
+
+.custom-ion-select::part(icon) {
+    color: gray;
+    opacity: 1;
+}
+
+
+.list-md {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: whitesmoke;
+}
