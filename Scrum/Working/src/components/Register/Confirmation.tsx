@@ -5,7 +5,14 @@ interface ContainerProps { }
 
 const confirmation: React.FC<ContainerProps> = () => {
     return (
-            <IonInput label='Confirmar contraseña' type='password' labelPlacement='floating' fill='outline' placeholder='Confirme su contraseña' className='inputs'></IonInput>
+            <IonInput 
+                label='Confirmar contraseña' 
+                type='password' 
+                labelPlacement='floating' 
+                fill='outline' 
+                placeholder='Confirme su contraseña' 
+                className='inputs'
+                color='tertiary'></IonInput>
     )
 }
 

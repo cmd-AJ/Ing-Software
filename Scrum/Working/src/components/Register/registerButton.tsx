@@ -5,7 +5,7 @@ interface ContainerProps { }
 
 const RegisterButton: React.FC<ContainerProps> = () => {
     return (
-<IonButton className='buttons'>Registrase</IonButton>
+<IonButton className='buttons' color='secondary'><b>Registrarse</b></IonButton>
     )
 }
 

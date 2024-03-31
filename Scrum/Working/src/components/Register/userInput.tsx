@@ -5,7 +5,13 @@ interface ContainerProps { }
 
 const userInput: React.FC<ContainerProps> = () => {
     return (
-            <IonInput label='Nombre' labelPlacement='floating' fill='outline' placeholder='Ingresar nombre' className='inputs'></IonInput>
+            <IonInput 
+                label='Nombre' 
+                labelPlacement='floating' 
+                fill='outline' 
+                placeholder='Ingresar nombre' 
+                className='inputs'
+                color='tertiary'></IonInput>
     )
 }
 

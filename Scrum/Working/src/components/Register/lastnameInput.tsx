@@ -5,7 +5,13 @@ interface ContainerProps { }
 
 const lastnameInput: React.FC<ContainerProps> = () => {
     return (
-            <IonInput label='Apellidos' labelPlacement='floating' fill='outline' placeholder='Ingresar apellidos' className='inputs'></IonInput>
+            <IonInput 
+                label='Apellidos' 
+                labelPlacement='floating' 
+                fill='outline' 
+                placeholder='Ingresar apellidos' 
+                className='inputs'
+                color='tertiary'></IonInput>
     )
 }
 

@@ -5,10 +5,13 @@ interface ContainerProps { }
 
 const roleInput: React.FC<ContainerProps> = () => {
     return (
-      <IonItem className='inputs'>
-        <IonSelect aria-label="role" placeholder="Elige tu rol">
-          <IonSelectOption value="Empleador">Empleador</IonSelectOption>
-          <IonSelectOption value="Empleado">Empleado</IonSelectOption>
+      <IonItem className='inputs' color='primary'>
+        <IonSelect 
+          aria-label="role" 
+          placeholder="Elige tu rol" 
+          interface='alert'>
+            <IonSelectOption value="Empleador" color='tertiary'>Empleador</IonSelectOption>
+            <IonSelectOption value="Empleado" color='tertiary'>Empleado</IonSelectOption>
         </IonSelect>
       </IonItem>
         )

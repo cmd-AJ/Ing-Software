@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem } from '@ionic/react'
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonFooter } from '@ionic/react'
 import UserInput from '../components/Register/userInput'
 import LastnameInput from '../components/Register/lastnameInput'
 import PasswordInput from '../components/Register/passwordInput'
@@ -14,8 +14,10 @@ import './Register.css'
 const Register: React.FC = () => {
     return (
         <IonPage>
-            <IonHeader>
-                <IonTitle size='large'>Registrar sesión</IonTitle>
+            <IonHeader className='header'>
+                <IonToolbar color='tertiaryz'>
+                    <IonTitle size='large' className='header'>Registrar sesión</IonTitle>
+                </IonToolbar>
             </IonHeader>
             <div className='center'>
                 <UserInput />
@@ -28,6 +30,9 @@ const Register: React.FC = () => {
                 <RegisterButton />
                 <LinkLogin />
             </div>
+            <IonFooter >
+                <div className='footer'></div>
+            </IonFooter>
         </IonPage>
     )
 }
