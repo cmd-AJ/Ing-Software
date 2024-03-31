@@ -7,6 +7,7 @@ import EmailInput from '../components/Register/emailInput'
 import PhoneInput from '../components/Register/phoneInput'
 import RoleInput from '../components/Register/roleInput'
 import RegisterButton from '../components/Register/registerButton'
+import LinkLogin from '../components/Register/LinkLogin'
 import React from 'react'
 import './Register.css'
 
@@ -25,6 +26,7 @@ const Register: React.FC = () => {
                 <PhoneInput />
                 <RoleInput />
                 <RegisterButton />
+                <LinkLogin />
             </div>
         </IonPage>
     )

@@ -1,3 +1,9 @@
+@import url('../theme/variables.css');
+
+.header {
+    display: flex;
+}
+
 .center {
     display: flex;
     flex-direction: column;
@@ -5,4 +11,5 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+    background-color: var(--ion-color-primary);
 }

@@ -10,6 +10,8 @@ import {
     IonList
 } from '@ionic/react';
 import './Login.css';
+import Register from './Register'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
     return (
@@ -35,7 +37,9 @@ const Login = () => {
                         </IonList>
                         <IonButton expand="block" className='loginButton' color="none">Login</IonButton>
                     </form>
-                    <IonButton expand="block" className='loginRegisterButton' color="none">Register</IonButton>
+                        <Link to='/register' className='loginRegisterButton' color='none'>
+                            Register
+                        </Link>
                 </div>
             </IonContent>
         </IonPage>
