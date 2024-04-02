@@ -1,10 +1,11 @@
-import { Client } from 'pg';
+import pkg from 'pg';
+const { Client } = pkg;
 
 const dbConfig = {
     user: 'username',
     password: 'password',
-    host: 'host',
-    port: 'port_number',
+    host: 'localhost',
+    port: 5432,
     database: 'database_name',
 };
 
