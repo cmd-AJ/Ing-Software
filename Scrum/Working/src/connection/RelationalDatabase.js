@@ -2,11 +2,11 @@ import pkg from 'pg';
 const { Client } = pkg;
 
 const dbConfig = {
-    user: 'username',
-    password: 'password',
+    user: 'postgres',
+    password: 'passWxample',
     host: 'localhost',
-    port: 5432,
-    database: 'database_name',
+    port: '5432',
+    database: 'software',
 };
 
 // Establishing the connection to the db

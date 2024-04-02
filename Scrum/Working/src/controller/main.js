@@ -28,7 +28,7 @@ app.use(cors({
         } = req.body
 
         const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role)
-        res.status(200)
+        res.status(200).json({ Succes: 'User inserted' })
     } catch (error) {
         
     }

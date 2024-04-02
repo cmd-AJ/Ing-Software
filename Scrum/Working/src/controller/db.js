@@ -19,8 +19,8 @@ export async function getUsers() {
 export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role) {
     try {
         const query = {
-            text: 'INSERT INTO Usuarios (DPI, Nombre, Apellidos, Contrasenia, Email, Telefono) VALUES ($1, $2, $3, $4, $5, $6)',
-            values: [DPI, name, lastnames, password, email, phoneNumber],
+            text: 'INSERT INTO Usuarios (dpi, nombre, apellidos, contrasenia, email, telefono, role) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            values: [DPI, name, lastnames, password, email, phoneNumber, role],
         };
 
         const result = await client.query(query);
