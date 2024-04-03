@@ -1,19 +1,75 @@
-import React from 'react';
 import {
     IonContent,
     IonPage,
     IonInput,
     IonButton,
     IonItem,
+    IonTitle,
     IonSelect,
     IonSelectOption,
-    IonList
+    IonList,
+    IonHeader,
+    IonToolbar
 } from '@ionic/react';
 import './Login.css';
-import Register from './Register'
+
+import DpiInput from '../components/Register/dpiInput'
+import PasswordInput from '../components/Register/passwordInput'
+import RoleInput from '../components/Register/roleInput'
+import RegisterButton from '../components/Register/registerButton'
+import LoginButton from '../components/Register/loginButton';
+import React, { useState } from 'react'
+
 import { Link } from 'react-router-dom'
 
-const Login = () => {
+const Login: React.FC = () => {
+    const [dpi, setDpi] = useState('')
+    const [password, setPassword] = useState('')
+    const [role, setRole] = useState('')
+
+    const [validateDpi, setValidateDpi] = useState(false)
+    const [validatePassword, setValidatePassword] = useState(false)
+
+
+    return(
+        <IonPage>
+            <div className='center'>
+            <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
+            <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
+            <RoleInput setRole={setRole} />
+            <LoginButton
+                dpi={dpi}
+                validateDpi={validateDpi}
+                password={password}
+                validatePassword={validatePassword}
+                role={role}/>
+            </div>
+        </IonPage>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const Login2 = () => {
     return (
         <IonPage>
             <IonContent fullscreen>
