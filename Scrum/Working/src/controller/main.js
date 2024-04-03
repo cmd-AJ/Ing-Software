@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser } from './db.js'
+import { getUsers, insertUser, getUserbyDPI } from './db.js'
 
 const app = express()
 const port = 3000
@@ -31,6 +31,22 @@ app.use(cors({
         res.status(200).json({ Succes: 'User inserted' })
     } catch (error) {
         
+    }
+  })
+
+  app.get('/users/:dpi', async(req, res) => {
+    try {
+      const { dpi } = req.params
+      const user = await getUserbyDPI(dpi)
+
+      if(user){
+        res.status(200).json(user)
+      } else{
+        res.status(404).json({ error: 'user not found' })
+      }
+      
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   })
 
