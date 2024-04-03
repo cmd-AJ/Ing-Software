@@ -4,20 +4,17 @@ import {
     IonInput,
     IonButton,
     IonItem,
-    IonTitle,
     IonSelect,
     IonSelectOption,
     IonList,
-    IonHeader,
-    IonToolbar
 } from '@ionic/react';
 import './Login.css';
 
 import DpiInput from '../components/Register/dpiInput'
 import PasswordInput from '../components/Register/passwordInput'
 import RoleInput from '../components/Register/roleInput'
-import RegisterButton from '../components/Register/registerButton'
-import LoginButton from '../components/Register/loginButton';
+import LoginButton from '../components/Register/loginButton'
+import LinkRegister from '../components/Register/LinkRegister';
 import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
@@ -42,7 +39,9 @@ const Login: React.FC = () => {
                 validateDpi={validateDpi}
                 password={password}
                 validatePassword={validatePassword}
-                role={role}/>
+                role={role}
+                />
+            <LinkRegister/>
             </div>
         </IonPage>
     )
