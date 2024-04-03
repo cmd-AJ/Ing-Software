@@ -1,15 +1,21 @@
 @import url('/src/theme/variables.css');
 
 .inputs {
-    width: 50%;
+    width: 300px;
     margin: 5px;
     /* color: var(--ion-color-secondary); */
 }
 
+.primary-input {
+    background: aliceblue;
+    color: #999999;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
 .custom-ion-select-menu {
     /* Agrega aquí tus estilos personalizados para el menú desplegable */
-    background-color: #ffffff;  /* Ejemplo de color de fondo */
-    color: #000000;  /* Ejemplo de color de texto */
+    color: #ffffff;  /* Ejemplo de color de texto */
     /* Agrega más estilos según tus necesidades */
 }
 
