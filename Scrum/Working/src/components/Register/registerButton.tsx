@@ -1,4 +1,5 @@
 import { IonButton } from '@ionic/react'
+import { createUser } from '../../controller/UserController'
 import './button.css'
 
 interface ContainerProps { name : String, 
@@ -29,6 +30,7 @@ const RegisterButton: React.FC<ContainerProps> = ({ name, validateName,
 
     const handleClick = () => {
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || email == '') && validateDpi && validateTel && (role != "")) {
+            createUser(dpi, name, lastname, password, email, tel, role)
             console.log(name)
             console.log(lastname)
             console.log(password)

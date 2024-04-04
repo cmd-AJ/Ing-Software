@@ -9,7 +9,7 @@ async function getUsers(){
     }
 }
 
-function createUser(dpi, name, lastnames, password, email, phoneNumber, role){
+function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String){
     const data = {
         "dpi": dpi ,
         "name": name,
@@ -42,22 +42,24 @@ function createUser(dpi, name, lastnames, password, email, phoneNumber, role){
     
 }
 
-async function userExists(dpi, password) {
+async function userExists(dpi: any, password: any) {
     try {
         const users = await getUsers();
-        return users.some(user => user.id === dpi && user.password === password);
+        return users.some((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
     } catch (error) {
         console.error('Error checking if user exists:', error);
         return false;
     }
 }
 
-async function getUser(dpi, password) {
+async function getUser(dpi: any, password: any) {
     try {
         const users = await getUsers();
-        return users.find(user => user.id === dpi && user.password === password);
+        return users.find((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
     } catch (error) {
         console.error('Error getting user:', error);
         return null; 
     }
 }
+
+export { createUser }

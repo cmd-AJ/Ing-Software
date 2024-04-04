@@ -34,7 +34,7 @@ const Register: React.FC = () => {
     return (
         <IonPage>
             <IonHeader className='header'>
-                <IonToolbar color='tertiaryz'>
+                <IonToolbar color='tertiary'>
                     <IonTitle size='large' className='header'>Registrar sesión</IonTitle>
                 </IonToolbar>
             </IonHeader>
