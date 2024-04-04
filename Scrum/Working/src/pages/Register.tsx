@@ -39,31 +39,53 @@ const Register: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <div className='center'>
-                <UserInput setName={setName} validateName={validateName} setValidateName={setValidateName}/>
-                <LastnameInput setLastname={setLastname} validateLastname={validateLastname} setValidateLastname={setValidateLastname}/>
-                <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
-                <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password}/>
-                <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
-                <EmailInput setEmail={setEmail} validatesEmail={validateEmail} setValidateEmail={setValidateEmail}/>
-                <PhoneInput setTel={setCell} validateTel={validateTel} setValidateTel={setValidateTel}/>
-                <RoleInput setRole={setRole} />
-                <RegisterButton 
-                    name={name} 
-                    validateName={validateName}
-                    lastname={lastname}
-                    validateLastname={validateLastname}
-                    password={password}
-                    validatePassword={validatePassword}
-                    confirmation={confirmation}
-                    validateConfirmation={validateConfirmation}
-                    dpi={dpi}
-                    validateDpi={validateDpi}
-                    email={email}
-                    validateEmail={validateEmail}
-                    tel={cell}
-                    validateTel={validateTel}
-                    role={role}/>
-                <LinkLogin />
+                <div className='space'></div>
+                <div className='component'>
+                    <UserInput setName={setName} validateName={validateName} setValidateName={setValidateName}/>
+                </div>
+                <div className='component'>
+                    <LastnameInput setLastname={setLastname} validateLastname={validateLastname} setValidateLastname={setValidateLastname}/>
+                </div>
+                <div className='component'>
+                    <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
+                </div>
+                <div className='component'>
+                    <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password}/>
+                </div>
+                <div className='component'>
+                    <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
+                </div>
+                <div className='component'>
+                    <EmailInput setEmail={setEmail} validatesEmail={validateEmail} setValidateEmail={setValidateEmail}/>
+                </div>
+                <div className='component'>
+                    <PhoneInput setTel={setCell} validateTel={validateTel} setValidateTel={setValidateTel}/>
+                </div>
+                <div className='component'>
+                    <RoleInput setRole={setRole} />
+                </div>
+                <div className='component'>
+                    <RegisterButton 
+                        name={name} 
+                        validateName={validateName}
+                        lastname={lastname}
+                        validateLastname={validateLastname}
+                        password={password}
+                        validatePassword={validatePassword}
+                        confirmation={confirmation}
+                        validateConfirmation={validateConfirmation}
+                        dpi={dpi}
+                        validateDpi={validateDpi}
+                        email={email}
+                        validateEmail={validateEmail}
+                        tel={cell}
+                        validateTel={validateTel}
+                        role={role}
+                    />
+                </div>
+                <div className='component'>
+                    <LinkLogin />
+                </div>
             </div>
             <IonFooter >
                 <div className='footer'></div>
