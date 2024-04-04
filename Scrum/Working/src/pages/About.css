@@ -1,0 +1,34 @@
+ion-toolbar {
+  --background: #1961af; 
+  --ion-color-base: #007bff; 
+  height: 80px;
+  display: flex;
+}
+
+ion-title{
+  font-size: 30px;
+  font-family: 'Georgia', serif;
+}
+
+ion-segment-button{
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  width: 100%;
+  flex: 1;
+  --color: rgb(0, 0, 0); /* Black text color */
+
+}
+
+ion-segment{
+  height: 60px;
+  background-color: rgb(41, 126, 138);
+  justify-content: space-around;
+  display: flex;
+}
+
+#mainContent {
+  overflow-y: auto; 
+  max-height: calc(100vh - 56px);
+}
+
+  
