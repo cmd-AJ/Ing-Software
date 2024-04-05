@@ -20,3 +20,10 @@ docker ps - a
 
 eliminar un docker es 
 docker rm ID
+
+
+Editado los grupos de seguridad de AWS
+Puerto 5432 --Para Postgressql
+Puerto 80 --Para nGInx (HTTP)
+Puerto 22 Para conección ssh
+Puerto 443 HTTPS
