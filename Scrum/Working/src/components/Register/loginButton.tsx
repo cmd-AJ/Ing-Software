@@ -1,5 +1,7 @@
 import { IonButton } from '@ionic/react'
 import './button.css'
+import { userExists } from '../../controller/UserController'
+
 
 interface ContainerProps { 
     dpi : String, 
@@ -17,7 +19,15 @@ const LoginButton: React.FC<ContainerProps> = ({
 }) => {
 
     const handleClick = () => {
-        if (validatePassword &&  validateDpi && (role != "")) {         
+        if (validatePassword &&  validateDpi && (role != "")) {  
+            const login = userExists(dpi, password)
+            if (login ){
+                console.log("Has iniciado sesion correctamente")
+            }
+            else{
+                console.log("Usuario no encontrado")
+            }
+            
             console.log(dpi)
             console.log(password)
             console.log(role)

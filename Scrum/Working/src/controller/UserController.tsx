@@ -62,4 +62,4 @@ async function getUser(dpi: any, password: any) {
     }
 }
 
-export { createUser }
+export { createUser, userExists }
