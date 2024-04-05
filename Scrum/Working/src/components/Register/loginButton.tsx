@@ -18,21 +18,25 @@ const LoginButton: React.FC<ContainerProps> = ({
 
 }) => {
 
-    const handleClick = () => {
-        if (validatePassword &&  validateDpi && (role != "")) {  
-            const login = userExists(dpi, password)
-            if (login ){
-                console.log("Has iniciado sesion correctamente")
-            }
-            else{
-                console.log("Usuario no encontrado")
+    const handleClick = async () => {
+        if (validatePassword && validateDpi && (role !== "")) {  
+            try {
+                const login = await userExists(dpi, password);
+                if (login) {
+                    console.log("Has iniciado sesion correctamente");
+                } else {
+                    console.log("Usuario no encontrado");
+                }
+            } catch (error) {
+                console.error("Error:", error);
             }
             
-            console.log(dpi)
-            console.log(password)
-            console.log(role)
+            console.log(dpi);
+            console.log(password);
+            console.log(role);
         }
     }
+    
 
     return (
         <IonButton 

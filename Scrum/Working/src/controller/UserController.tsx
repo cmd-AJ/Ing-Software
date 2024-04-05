@@ -42,15 +42,17 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
     
 }
 
-async function userExists(dpi: any, password: any) {
+async function userExists(dpi: String, password: String) {
     try {
         const users = await getUsers();
-        return users.some((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
+        
+        return users.some((user: { dpi: String; contrasenia: String; }) => user.dpi === dpi && user.contrasenia === password);
     } catch (error) {
         console.error('Error checking if user exists:', error);
         return false;
     }
 }
+
 
 async function getUser(dpi: any, password: any) {
     try {
@@ -62,4 +64,4 @@ async function getUser(dpi: any, password: any) {
     }
 }
 
-export { createUser, userExists }
+export { createUser, userExists}
