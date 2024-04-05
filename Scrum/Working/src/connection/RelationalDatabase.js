@@ -3,10 +3,10 @@ const { Client } = pkg;
 
 const dbConfig = {
     user: 'postgres',
-    password: 'passWxample',
-    host: 'localhost',
+    password: 'post123',
+    host: '18.205.239.226',
     port: '5432',
-    database: 'software',
+    database: 'postgres',
 };
 
 // Establishing the connection to the db

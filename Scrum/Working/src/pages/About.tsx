@@ -27,8 +27,8 @@ const About: React.FC = () => {
         <IonToolbar>
           <IonTitle>Woking</IonTitle>
           <IonButtons slot="end">
-            <IonButton routerLink="/home">Registrarse</IonButton>
-            <IonButton routerLink="/register">Iniciar Sesión</IonButton>
+            <IonButton routerLink="/register">Registrarse</IonButton>
+            <IonButton routerLink="/home">Iniciar Sesión</IonButton>
           </IonButtons>
         </IonToolbar>
         <IonSegment>
@@ -45,12 +45,34 @@ const About: React.FC = () => {
           {/* Add about section content here */}
           <IonCard>
             <IonCardHeader>
-              <IonCardSubtitle>Encuentra a tu empleado perfecto</IonCardSubtitle>
-              <IonCardTitle>Un sistema eficiente</IonCardTitle>
+              <IonCardTitle class= "IonCardTitle">Acerda de Woking</IonCardTitle>
             </IonCardHeader>
-            <IonCardContent>
-              Diferente
-              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <IonCardContent id="aboutContent">
+            <div className="contentWrapper">
+              <div className="imageWrapper">
+                <img src="/src/assets/employee-and-customer-experience.jpg" alt="Descripción de la imagen" />
+              </div>
+              <div className="textWrapper">
+              En el núcleo de nuestra visión se encuentra una aplicación revolucionaria diseñada 
+              para unir empleados con empleadores en sectores altamente especializados, prometiendo
+               una era de vanguardia y eficiencia sin precedentes. Nuestra plataforma, concebida con 
+               la más avanzada tecnología, se especializa en descifrar la complejidad de las 
+               necesidades laborales específicas, facilitando conexiones perfectas entre talentos 
+               únicos y oportunidades excepcionales. Al priorizar la precisión en el emparejamiento y 
+               la agilidad en los procesos, nos esforzamos por superar las expectativas tradicionales 
+               del mercado laboral. Cada función de nuestra solucion está diseñada para impulsar la innovación, 
+               ofreciendo a empleados y empleadores herramientas intuitivas que permiten una interacción 
+               fluida y efectiva. Este enfoque asegura no solo el cumplimiento de los requisitos laborales 
+               sino también la promoción del crecimiento mutuo y la satisfacción.
+
+
+
+
+
+
+
+              </div>
+            </div>
             </IonCardContent>
           </IonCard>
         </section>
