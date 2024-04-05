@@ -15,7 +15,7 @@ ion-segment-button{
   display: flex;
   width: 100%;
   flex: 1;
-  --color: rgb(0, 0, 0); /* Black text color */
+  --color: rgb(0, 0, 0);
 
 }
 
@@ -29,6 +29,54 @@ ion-segment{
 #mainContent {
   overflow-y: auto; 
   max-height: calc(100vh - 56px);
+  --background: #fff;
 }
 
-  
+.contentWrapper {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+
+.imageWrapper img {
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+  border-radius: 10%;
+  background-color: #007bff;
+}
+
+.textWrapper {
+  font-size: 25px;
+  display: flex;
+  flex: 1;
+  padding-left: 100px;
+  width: 100%;
+  height: 100%;
+  margin-right: 100px;
+  margin-bottom: 50px;
+  justify-content: space-around;
+  text-align: justify;
+}
+
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    flex-direction: column;
+    align-items: stretch;
+}}
+
+.imageWrapper img {
+  max-width: 100%; /* Allows i
+  mage to scale down on smaller screens */
+}
+
+.IonCardTitle {
+  font-family: 'Arial', sans-serif; /* Example font family */
+  font-size: 34px; /* Adjust font size as needed */
+  font-weight: bold; /* Make the title bold */
+  color: #ffffff; /* Example color (orange) */
+  background-color: #e2850ada; /* Example background color */
+  padding: 10px 20px; /* Add padding to create space around the title */
+  border-radius: 5px; /* Add rounded corners */
+}
