@@ -29,6 +29,28 @@ Puerto 22 Para conección ssh
 Puerto 443 HTTPS
 
 
+Instalación de dependencias
+Node JS
+sudo apt-get nodejs
+
+Npm
+sudo apt-get npm
+
+
+Instalación de Ionic
+
+OJO debido a que es Ubuntu y la forma de instalar globalmente entonces debemos de utilizar o instalar
+nvm para versionar los paquetes de javascript
+
+npm install -g @ionic/cli @capacitor/assets
+
+npm install && ionic serve
+
+ionic serve //este es el comando para correr el código en la web
+
+
+
+
 Realización del Server instalación de Docker al servidor
 Base de datos postgresql 
 Nombre: postgres
