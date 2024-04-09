@@ -64,13 +64,6 @@ const About: React.FC = () => {
                ofreciendo a empleados y empleadores herramientas intuitivas que permiten una interacción 
                fluida y efectiva. Este enfoque asegura no solo el cumplimiento de los requisitos laborales 
                sino también la promoción del crecimiento mutuo y la satisfacción.
-
-
-
-
-
-
-
               </div>
             </div>
             </IonCardContent>
