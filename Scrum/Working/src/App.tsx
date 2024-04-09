@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import About from './pages/About'
+import Search from './pages/Search';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,6 +42,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/about">
           <About />
+        </Route>
+        <Route exact path='/search'>
+          <Search/>
         </Route>
         <Route exact path='/'>
           <Redirect to='/about' />
