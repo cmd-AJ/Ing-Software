@@ -245,6 +245,19 @@ button {
   color: white;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Oculta el desplazamiento por defecto */
+}
+
+/* Estilo para agregar scroll cuando la ventana se hace más pequeña */
+@media (max-width: 768px) {
+  body {
+    overflow: auto; /* Agrega un scroll cuando la ventana se hace más pequeña */
+  }
+}
+
 html {
   /* For more information on dynamic font scaling, visit the documentation: 
   https://ionicframework.com/docs/layout/dynamic-font-scaling */
