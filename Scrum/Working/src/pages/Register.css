@@ -1,6 +1,6 @@
 @import url('../theme/variables.css');
 
-.header {
+.headerR {
     background-color: var(--ion-color-tertiary);
     font-size: 30px;
 }

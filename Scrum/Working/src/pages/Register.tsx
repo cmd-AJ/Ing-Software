@@ -33,9 +33,9 @@ const Register: React.FC = () => {
 
     return (
         <IonPage>
-            <IonHeader className='header'>
+            <IonHeader className='headerR'>
                 <IonToolbar color='tertiary'>
-                    <IonTitle size='large' className='header'>Registrar sesión</IonTitle>
+                    <IonTitle size='large' className='headerR'>Registrar sesión</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <div className='center'>
