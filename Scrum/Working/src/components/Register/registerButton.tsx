@@ -1,6 +1,9 @@
 import { IonButton } from '@ionic/react'
 import { createUser } from '../../controller/UserController'
 import './button.css'
+import CryptoJS from 'crypto-js';
+
+
 
 type User = {
     name: string,
@@ -34,10 +37,12 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
 
     const handleClick = () => {
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
-            createUser(user.dpi, user.name, user.lastname, user.password, user.email, user.tel, user.role)
+            
+            createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
             console.log(user.name)
             console.log(user.lastname)
-            console.log(user.password)
+            console.log( CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex) )
+            console.log( CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex) )
             console.log(user.dpi)
             console.log(user.email)
             console.log(user.tel)
