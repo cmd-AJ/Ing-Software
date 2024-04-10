@@ -7,9 +7,9 @@ const Search: React.FC = () => {
   const [request, setRequest] = useState('');
 
   const handleRequestChange = (value: string) => {
-    if (value.trim() !== '') { // Verifica si el valor ingresado no está vacío
+    if (value.trim() !== '') { 
       setRequest(value);
-      console.log("Valor ingresado:", value); // Realiza un console.log del valor ingresado
+      console.log("Valor ingresado:", value);
     } else {
       console.log("No se ha ingresado nada en la búsqueda.");
     }
@@ -18,7 +18,12 @@ const Search: React.FC = () => {
   return (
     <IonPage>
       <div className='search'>
-        <SearchBar onRequestChange={handleRequestChange} />
+        <div className="bg"></div>
+        <div className="bg bg2"></div>
+        <div className="bg bg3"></div>
+       
+          <SearchBar onRequestChange={handleRequestChange} />
+      
       </div>
     </IonPage>
   );
