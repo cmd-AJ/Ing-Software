@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IonPage } from '@ionic/react';
 import './Search.css';
 import SearchBar from '../components/Search/SearchBar';
+import Navigation from '../components/Navigation/Navigation';
 
 const Search: React.FC = () => {
   const [request, setRequest] = useState('');
@@ -17,6 +18,8 @@ const Search: React.FC = () => {
 
   return (
     <IonPage>
+    <Navigation/>
+
       <div className='search'>
         <div className="bg"></div>
         <div className="bg bg2"></div>
