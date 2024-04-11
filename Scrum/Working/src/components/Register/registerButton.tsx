@@ -52,6 +52,7 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
 
     return (
         <IonButton 
+            routerLink='/empleado'
             className='buttons' 
             color='secondary'
             onClick={handleClick}
