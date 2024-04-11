@@ -35,18 +35,12 @@ const LoginButton: React.FC<ContainerProps> = ({
                 console.error("Error:", error);
             }
             
-            console.log(dpi);
-            console.log(CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
-            console.log(role);
         }
-    }
-
-    // b477cc5dc15d0c0f00422fd41c1f886b9fb059fc6bf692eceed35c5bf5084fb4
-    
+    }    
 
     return (
         <IonButton 
-            className='buttons' 
+            style={{ margin: '20px'}} 
             color='secondary'
             onClick={handleClick}
         ><b>Iniciar sesión</b></IonButton>

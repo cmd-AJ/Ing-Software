@@ -8,6 +8,13 @@
     background-size: cover;
 }
 
+#loginCenter {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+}
+
 .loginTitle {
     font-size: 50px;
     display: flex;
