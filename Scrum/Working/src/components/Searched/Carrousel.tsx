@@ -1,18 +1,18 @@
 import './Carrousel.css'
 
 import React, { useState, useEffect } from 'react';
-import './Carrousel.css'; // Asegúrate de tener un archivo CSS para este componente con las clases correspondientes
+import './Carrousel.css'; 
 const [selectedItem, setSelectedItem] = useState<number>(1);
 
 const Carrousel: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<number>(1);
   
     useEffect(() => {
-      // Coloca tu código jQuery dentro de useEffect
+      
       $('input').on('change', function() {
         $('body').toggleClass('blue');
       });
-    }, []); // Asegúrate de pasar un array vacío como segundo argumento para que useEffect se ejecute solo una vez al montar el componente
+    }, []); 
   
     const handleItemClick = (itemNumber: number) => {
       setSelectedItem(itemNumber);

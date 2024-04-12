@@ -24,7 +24,7 @@ const Searched: React.FC = () => {
   
         <div className='searched'>
             <SearchBar onRequestChange={handleRequestChange} />
-            <Carrousel/>
+            <Cards/>
         
         </div>
       </IonPage>
