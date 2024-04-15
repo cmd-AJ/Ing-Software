@@ -12,6 +12,16 @@ import DpiInput from '../components/Register/dpiInput'
 import React, { useState } from 'react'
 import './Register.css'
 
+type User = {
+    name: string,
+    lastname: string,
+    password: string,
+    email: string,
+    dpi: string,
+    tel: string,
+    role: string
+}
+
 const Register: React.FC = () => {    
     const [name , setName] = useState('')
     const [lastname, setLastname] = useState('')
@@ -31,11 +41,21 @@ const Register: React.FC = () => {
     const [validateEmail, setValidateEmail] = useState(false)
     const [validateTel, setValidateTel] = useState(false)
 
+    const User : User = {
+        name : name,
+        lastname: lastname,
+        password: password,
+        email: email,
+        dpi: dpi,
+        tel: cell,
+        role: role
+    }
+
     return (
         <IonPage>
-            <IonHeader className='header'>
+            <IonHeader className='headerR'>
                 <IonToolbar color='tertiary'>
-                    <IonTitle size='large' className='header'>Registrar sesión</IonTitle>
+                    <IonTitle size='large' className='headerR'>Registrar sesión</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <div className='center'>
@@ -66,24 +86,17 @@ const Register: React.FC = () => {
                 </div>
                 <div className='component'>
                     <RegisterButton 
-                        name={name} 
                         validateName={validateName}
-                        lastname={lastname}
                         validateLastname={validateLastname}
-                        password={password}
                         validatePassword={validatePassword}
-                        confirmation={confirmation}
                         validateConfirmation={validateConfirmation}
-                        dpi={dpi}
                         validateDpi={validateDpi}
-                        email={email}
                         validateEmail={validateEmail}
-                        tel={cell}
                         validateTel={validateTel}
-                        role={role}
+                        user={User}
                     />
                 </div>
-                <div className='component'>
+                <div className='    '>
                     <LinkLogin />
                 </div>
             </div>

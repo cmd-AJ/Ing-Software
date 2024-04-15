@@ -1,0 +1,153 @@
+@import url('/src/theme/variables.css');
+
+.header {
+    min-width: 1780px;
+    height: 240px;
+    background-color: white;
+    border-radius: 30px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.info {
+    width: 1780px;
+    height: 100%;
+    display: flex;
+}
+
+.placeholder{
+    min-width: 1920px;
+    height: 190px;
+    background-color: white;
+}
+
+.feedImg {
+    width: 1780px;
+    height: 60%;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    margin: 0;
+}
+
+.lowerHeader {
+    position: relative;
+    top: -5%;
+    width: 1780px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    color: var(--ion-color-tertiary);
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.lowerElements {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+#profileImg {
+    height: 150px;
+    width: 150px;
+    position: relative;
+    top: -75%;
+}
+
+.nameDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.work {
+    font-size: 20px;
+}
+
+.roundedButton {
+    position: relative;
+    top: 50%;
+    height: 60px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    margin-right: 8px;
+}
+
+.button {
+    position: relative;
+    top: 50%;
+    height: 60px;
+    border-radius: 20px;
+    font-size: 20px;
+    transform: translateY(-50%);
+}
+
+.leftInfo {
+    height: 500px;
+    width: 550px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.centerInfo {
+    height: 500px;
+    width: 900px;
+    background-color: white;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    color: black;
+    padding: 25px;
+}
+
+.rightInfo {
+    height: 500px;
+    width: 550px;
+    background-color: white;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    padding: 25px;
+}
+
+.ratingContainer {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 465px;
+    background-color: white;
+    color: black;
+    font-size: 30px;
+    padding: 25px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: 30px;
+    padding: 25px;
+    border-radius: 30px;
+}
+
+.jobsContainer {
+
+}
+
+.contratsContainer {
+
+}

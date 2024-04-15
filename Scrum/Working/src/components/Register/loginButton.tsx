@@ -1,6 +1,7 @@
 import { IonButton } from '@ionic/react'
 import './button.css'
 import { userExists } from '../../controller/UserController'
+import CryptoJS from 'crypto-js';
 
 
 interface ContainerProps { 
@@ -20,8 +21,11 @@ const LoginButton: React.FC<ContainerProps> = ({
 
     const handleClick = async () => {
         if (validatePassword && validateDpi && (role !== "")) {  
+
+            CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
+
             try {
-                const login = await userExists(dpi, password);
+                const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
                     console.log("Has iniciado sesion correctamente");
                 } else {
@@ -31,16 +35,12 @@ const LoginButton: React.FC<ContainerProps> = ({
                 console.error("Error:", error);
             }
             
-            console.log(dpi);
-            console.log(password);
-            console.log(role);
         }
-    }
-    
+    }    
 
     return (
         <IonButton 
-            className='buttons' 
+            style={{ margin: '20px'}} 
             color='secondary'
             onClick={handleClick}
         ><b>Iniciar sesión</b></IonButton>

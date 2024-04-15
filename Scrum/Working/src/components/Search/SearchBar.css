@@ -1,0 +1,18 @@
+.search-bar-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 110vmin;
+}
+
+.custom-searchbar {
+    height: 100%; /* Ajusta la altura según sea necesario */
+    width: 80%; 
+  --background: #dedede;
+  --color: rgb(19, 17, 17);
+  --placeholder-color: rgb(74, 71, 71);
+  --icon-color: gray;
+  --clear-button-color: #fff;
+  --border-radius: 20px;
+}
+

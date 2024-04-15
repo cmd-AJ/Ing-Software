@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import About from './pages/About'
+import Search from './pages/Search';
+import Searched from './pages/Searched';
+
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -26,6 +29,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './pages/Login.css';
+import Dashboard_Worker from './pages/Dashboard-Worker';
 
 setupIonicReact();
 
@@ -41,6 +45,16 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/about">
           <About />
+        </Route>
+
+        <Route exact path='/empleado'>
+          <Dashboard_Worker />
+        </Route>
+        <Route exact path='/search'>
+          <Search/>
+        </Route>
+        <Route exact path='/searched'>
+          <Searched/>
         </Route>
         <Route exact path='/'>
           <Redirect to='/about' />
