@@ -1,5 +1,5 @@
 import getClient from './../connection/RelationalDatabase.js';
-import driver from './../connection/GraphDataBase.js'
+import session from './../connection/GraphDataBase.js'
 
 const client = getClient();
 
@@ -50,14 +50,18 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
 }
 
 export async function getJobs() {
-    const session = driver.session();
-
     try {
-        const query = 'MATCH (t:Trabajo) RETURN t.nombre_trabajo AS nombre_trabajo';
+        const query = 'MATCH (t:Trabajo) RETURN t';
         const result = await session.run(query);
 
-        // Transformar los registros obtenidos en un arreglo de nombres de trabajos
-        const jobs = result.records.map(record => record.get('nombre_trabajo'));
+        // Transformar los registros obtenidos en un arreglo de objetos JSON
+        const jobs = result.records.map(record => {
+            const job = record.get('t');
+            return {
+                id: job.identity.low, // Obtener el ID del trabajo
+                nombre_trabajo: job.properties.nombre_trabajo // Obtener el nombre del trabajo
+            };
+        });
         return jobs;
     } catch (error) {
         console.error('Error getting jobs:', error);
@@ -66,5 +70,7 @@ export async function getJobs() {
         await session.close();
     }
 }
+
+
 
 
