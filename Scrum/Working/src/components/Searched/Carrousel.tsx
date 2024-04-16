@@ -33,15 +33,12 @@ const Carrousel: React.FC = () => {
       <div className="cards">
         <label className="card" htmlFor="item-1" id="song-1">
           <Information/>
-          <button className="hire-button">Contratar</button>
         </label>
         <label className="card" htmlFor="item-2" id="song-2">
           <Information/>
-          <button className="hire-button">Contratar</button>
         </label>
         <label className="card" htmlFor="item-3" id="song-3">
           <Information/>
-          <button className="hire-button">Contratar</button>
         </label>
       </div>
     </div>

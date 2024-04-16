@@ -12,8 +12,8 @@
   
   .outer-div,
   .inner-div {
-    height: var(--card-height);
-    max-width: var(--card-width);
+    height: 100%;
+    max-width:  100%;
     margin: 0 auto;
     position: relative;
   }
@@ -47,7 +47,7 @@
   .front__bkg-photo {
     position: relative;
     height: 150px;
-    width: var(--card-width);
+    width: 100%;
     background: url("https://images.unsplash.com/photo-1511207538754-e8555f2bc187?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=88672068827eaeeab540f584b883cc66&auto=format&fit=crop&w=1164&q=80")
       no-repeat;
     background-size: cover;
@@ -71,13 +71,15 @@
   }
   
   .front__text {
+    margin-top: 40px;
     position: relative;
     top: -55px;
     margin: 0 auto;
     font-family: "Montserrat";
     font-size: 18px;
+  }
   
-    .front__text-header {
+  .front__text-header {
       font-weight: 700;
       font-family: "Oswald";
       text-transform: uppercase;
@@ -85,6 +87,7 @@
     }
   
     .front__text-para {
+      margin-top: 20px;
       position: relative;
       top: -5px;
       color: #000;
@@ -101,8 +104,8 @@
       margin-right: 6px;
       color: gray;
     }
-  
-    .front__text-hover {
+
+    .hire-button {
       position: relative;
       top: 10px;
       font-size: 10px;
@@ -115,8 +118,15 @@
       border-radius: 30px;
       background: var(--red);
       color: var(--white);
+      display: block; /* Para hacer que el botón se comporte como un bloque */
+      margin: 0 auto; /* Centrar horizontalmente */
     }
-  }
+    
+    
+    .hire-button:hover {
+      background-color: #06132f;
+    }
+    
   
 
   
