@@ -28,6 +28,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './pages/Login.css';
 import Dashboard_Worker from './pages/Dashboard-Worker';
+import React from 'react';
 
 setupIonicReact();
 
