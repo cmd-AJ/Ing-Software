@@ -31,8 +31,6 @@ create table Chats(
 	mensaje varchar(100)
 )
 
-<<<<<<< Updated upstream
-=======
 insert into chats(DPIreceptor,DPIemisor )
 values ('XXXX XXXXX XXXX', 'XXXX XXXXX XXXX')
 
@@ -65,7 +63,6 @@ alter table mensaje add constraint fkey_mensaje
 	references chats(IDchat)
 	
 	
->>>>>>> Stashed changes
 create table Resena(
 	IDresena serial primary key,
 	idtrabajo int,
@@ -75,8 +72,6 @@ create table Resena(
 	dpi_empleador int
 )
 
-<<<<<<< Updated upstream
-=======
 
 alter table resena 
 alter column dpi_trabajador type varchar(15)
@@ -104,7 +99,6 @@ select * from trabajodisponible
 
 
 
->>>>>>> Stashed changes
 create table trabajoDisponible(
 	idTrabajo serial primary key,
 	descripcion text ,
@@ -209,8 +203,6 @@ create table suspendido(
 	unban date,
 	estado bool	  
 )
-<<<<<<< Updated upstream
-=======
 
 --Suspendido? tal vez agregar un event trigger (Posible solucion)
 
@@ -247,4 +239,3 @@ add fecha_nacimiento varchar(10)
 
 
 
->>>>>>> Stashed changes
