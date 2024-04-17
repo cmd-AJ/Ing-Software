@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import './Input.css'
+import React from 'react'
 
 interface ContainerProps { }
 
