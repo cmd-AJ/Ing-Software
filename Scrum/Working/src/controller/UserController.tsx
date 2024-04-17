@@ -31,6 +31,7 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
         if (!response.ok){
             console.log("There was an error on the response")
         }
+        console.log(response.json())
         return response.json()
     })
     .then(data => {

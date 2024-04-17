@@ -1,14 +1,28 @@
+import React from 'react'
 import CenterInfo from './CenterInfo'
 import LeftInfo from './LeftInfo'
 import RightInfo from './RightInfo'
 import './style.css'
 
-interface ContainerProps {  }
+type User = {
+    name: string,
+    lastname: string,
+    password: string,
+    email: string,
+    dpi: string,
+    tel: string,
+    role: string
+}
+  
 
-const Info: React.FC<ContainerProps> = () => {
+interface ContainerProps {  
+    user: User
+}
+
+const Info: React.FC<ContainerProps> = ({user}) => {
     return (
         <div className="info">
-            <LeftInfo />
+            <LeftInfo  user={user}/>
             <CenterInfo />
             <RightInfo />
         </div>

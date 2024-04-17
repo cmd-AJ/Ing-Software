@@ -99,7 +99,7 @@ const dpiInput: React.FC<ContainerProps> = ({setDpi, validateDpi, setValidateBoo
     const [isTouched, setIsTouched] = useState(false)
 
     const validate = (value: string) => {            
-        (value !== '' && cuiValido(value)) ? setValidateBoolean(true) : setValidateBoolean(true);
+        (value !== '' && cuiValido(value)) ? setValidateBoolean(true) : setValidateBoolean(false);
     }
 
     const markTouched = () => {

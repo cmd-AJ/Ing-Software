@@ -1,13 +1,16 @@
+import React from 'react'
 import Name from './Name'
 import './style.css'
 
-interface ContainerProps {  }
+interface ContainerProps { 
+    name: string
+ }
 
-const LeftLower: React.FC<ContainerProps> = () => {
+const LeftLower: React.FC<ContainerProps> = ({ name }) => {
     return (
         <div className='lowerElements'>
             <img src='https://cdn-icons-png.flaticon.com/512/74/74472.png' id='profileImg'/>
-            <Name />
+            <Name name={name}/>
         </div>
     )
 }
