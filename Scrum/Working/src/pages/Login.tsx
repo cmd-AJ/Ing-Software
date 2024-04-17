@@ -34,13 +34,15 @@ const Login: React.FC = () => {
                 <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
                 <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
                 <RoleInput setRole={setRole} />
-                <LoginButton
-                    dpi={dpi}
-                    validateDpi={validateDpi}
-                    password={password}
-                    validatePassword={validatePassword}
-                    role={role}
-                />
+                <div id='loginCenter'>
+                    <LoginButton
+                        dpi={dpi}
+                        validateDpi={validateDpi}
+                        password={password}
+                        validatePassword={validatePassword}
+                        role={role}
+                    />
+                </div>
                 <LinkRegister/>
             </div>
         </IonPage>

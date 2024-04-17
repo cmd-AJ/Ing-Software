@@ -2,6 +2,7 @@ import { IonButton } from '@ionic/react'
 import { createUser } from '../../controller/UserController'
 import './button.css'
 import CryptoJS from 'crypto-js';
+import React, { useState } from 'react';
 
 
 
@@ -35,23 +36,21 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
     validateTel,
     user }) => {
 
+    const [role, setRole] = useState(false)
+
     const handleClick = () => {
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
-            
-            createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
-            console.log(user.name)
-            console.log(user.lastname)
-            console.log( CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex) )
-            console.log( CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex) )
-            console.log(user.dpi)
-            console.log(user.email)
-            console.log(user.tel)
-            console.log(user.role)
+            if (user.role == 'Empleado') 
+                setRole(true)
+            // createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
+            user.password = CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex)
+            localStorage.setItem('User', JSON.stringify(user))
         }
     }
 
     return (
         <IonButton 
+            routerLink= {role ? '/empleado' : '/'}
             className='buttons' 
             color='secondary'
             onClick={handleClick}

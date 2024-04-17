@@ -11,24 +11,28 @@ create table Usuarios(
 
 create table tipotrabajo(
 	nombre_trabajo varchar(100) primary key,
-	descripcion varchar(300)
+	descripcion varchar(300)	
+)
 
-	
+insert into tipotrabajo
+values ('Carpintero','artesano que trabaja con madera para crear una variedad de objetos, desde muebles y estructuras hasta elementos decorativos y artísticos.' )
+select * from usuarios u 
+
+create table Trabajador(
+	DPI varchar(15),
+	nombre_trabajo varchar(100)
 )
 
 
--- create table Trabajador(
-	--DPI varchar(13) primary key,
-	--nombre_trabajo
---)
+alter table trabajador  add constraint forTipotrabajo
+	foreign key (nombre_trabajo)
+	references tipotrabajo(nombre_trabajo)
 
 
 create table Chats(
-	IDchat varchar(100) primary key,
-	IDreceptor varchar(100),
-	IDEmisor varchar(100),
-	IDmensaje varchar(100),
-	mensaje varchar(100)
+	IDchat Serial primary key,
+	DPIreceptor varchar(100),
+	DPIemisor varchar(100)
 )
 
 insert into chats(DPIreceptor,DPIemisor )
@@ -44,24 +48,7 @@ alter table chats  add constraint fkey_dpireceptor
 	references usuarios(DPI)
 
 	
-	
-select * from chats
 
-create table mensaje(
-	id_mensaje serial primary key,
-	id_chat int ,
-	contenido text
-)
-
-insert into mensaje(id_chat, contenido) 
-values(5, 'Hola me llamo Peter')
-
-
-
-alter table mensaje add constraint fkey_mensaje
-	foreign key (id_chat)
-	references chats(IDchat)
-	
 	
 create table Resena(
 	IDresena serial primary key,
@@ -71,31 +58,6 @@ create table Resena(
 	dpi_trabajador int,
 	dpi_empleador int
 )
-
-
-alter table resena 
-alter column dpi_trabajador type varchar(15)
-
-alter table resena 
-alter column dpi_empleador type varchar(15)
-
-
-alter table resena  add constraint fkey_dpitrab
-	foreign key (dpi_trabajador)
-	references usuarios(dpi)
-
-alter table resena  add constraint fkey_dpiempleador
-	foreign key (dpi_empleador)
-	references usuarios(dpi)
-	
-
-insert into resena(idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador)
-values(1, 5.0, 'Excelennte trabajo', '3834 49898 0101' , '3810 35859 0101')
-	
-select * from resena
-
-select * from trabajodisponible
-
 
 
 
@@ -204,18 +166,6 @@ create table suspendido(
 	estado bool	  
 )
 
---Suspendido? tal vez agregar un event trigger (Posible solucion)
-
-select * from suspendido
-
-alter table suspendido add constraint dpireportado
-	foreign key (dpi)
-	references usuarios(dpi)
-
-insert into suspendido (DPI, fechainicio, unban, estado)
-values('3810 35859 0101', now(), '2024-04-17', true)
-
-select * from suspendido
 
 
 alter table usuarios 
