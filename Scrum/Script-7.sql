@@ -11,26 +11,46 @@ create table Usuarios(
 
 create table tipotrabajo(
 	nombre_trabajo varchar(100) primary key,
-	descripcion varchar(300)
+	descripcion varchar(300)	
+)
 
-	
+insert into tipotrabajo
+values ('Carpintero','artesano que trabaja con madera para crear una variedad de objetos, desde muebles y estructuras hasta elementos decorativos y artísticos.' )
+select * from usuarios u 
+
+create table Trabajador(
+	DPI varchar(15),
+	nombre_trabajo varchar(100)
 )
 
 
--- create table Trabajador(
-	--DPI varchar(13) primary key,
-	--nombre_trabajo
---)
+alter table trabajador  add constraint forTipotrabajo
+	foreign key (nombre_trabajo)
+	references tipotrabajo(nombre_trabajo)
 
 
 create table Chats(
-	IDchat varchar(100) primary key,
-	IDreceptor varchar(100),
-	IDEmisor varchar(100),
-	IDmensaje varchar(100),
-	mensaje varchar(100)
+	IDchat Serial primary key,
+	DPIreceptor varchar(100),
+	DPIemisor varchar(100)
 )
 
+insert into chats(DPIreceptor,DPIemisor )
+values ('XXXX XXXXX XXXX', 'XXXX XXXXX XXXX')
+
+
+alter table chats  add constraint fkey_dpiemisor
+	foreign key (DPIemisor)
+	references usuarios(DPI)
+	
+alter table chats  add constraint fkey_dpireceptor
+	foreign key (DPIreceptor)
+	references usuarios(DPI)
+
+	
+	
+	
+	
 create table Resena(
 	IDresena varchar(100) primary key,
 	calificacion int, 
@@ -38,6 +58,10 @@ create table Resena(
 	id_trabajador varchar(100),
 	id_empleador varchar(100)
 )
+
+
+
+
 
 create table trabajoDisponible(
 	idTrabajo varchar(100) primary key,
@@ -92,3 +116,29 @@ create table suspendido(
 	estado varchar(100)
 	  
 )
+
+
+select * from usuarios
+
+
+alter table usuarios 
+add municipio varchar(100)
+
+alter table usuarios 
+add imagen varchar(255)
+
+alter table usuarios 
+add rating float
+
+
+alter table usuarios 
+add sexo varchar(10)
+
+
+alter table usuarios 
+add fecha_nacimiento varchar(10)
+
+
+
+
+
