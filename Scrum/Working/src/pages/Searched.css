@@ -1,0 +1,10 @@
+.searched {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    background-color: #1e3650;
+}
+  
+  

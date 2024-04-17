@@ -25,7 +25,6 @@ const Search: React.FC = () => {
         <div className="bg bg2"></div>
         <div className="bg bg3"></div>
        
-          <SearchBar onRequestChange={handleRequestChange} />
       
       </div>
     </IonPage>

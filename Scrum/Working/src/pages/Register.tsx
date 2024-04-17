@@ -96,7 +96,7 @@ const Register: React.FC = () => {
                         user={User}
                     />
                 </div>
-                <div className='component'>
+                <div className='    '>
                     <LinkLogin />
                 </div>
             </div>
