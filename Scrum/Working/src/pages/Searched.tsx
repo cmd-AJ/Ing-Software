@@ -22,9 +22,7 @@ const Searched: React.FC = () => {
       <Navigation/>
   
         <div className='searched'>
-            <SearchBar onRequestChange={handleRequestChange} />
             <Carrousel/>
-        
         </div>
       </IonPage>
     );
