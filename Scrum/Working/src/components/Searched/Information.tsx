@@ -1,8 +1,17 @@
 import React from 'react';
 import { IonContent } from '@ionic/react';
-import './Information.css'; // Asegúrate de tener el archivo CSS para estilos
+import './Information.css';
+import { Trabajador } from './type' 
 
-const Information: React.FC = () => {
+const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
+  //...
+
+  interface Trabajador {
+    nombre: string;
+    dpi: string;
+    municipio: string;
+    rating: string;
+  }
   
   return (
     <IonContent>    
@@ -11,10 +20,14 @@ const Information: React.FC = () => {
           <div className="front__bkg-photo"></div>
           <div className="front__face-photo"></div>
           <div className="front__text">
-            <h2 className="front__text-header">Trabajador 1</h2>
-            <h3 className="front__text-header">2271241972010</h3>
-            <p className="front__text-para"><i className="fas fa-map-marker-alt front-icons"></i>Sant Rosa</p> 
-            <p className="front__text-para"><i className="fas fa-map-marker-alt front-icons"></i>7.8</p>
+            <h2 className="front__text-header">{trabajador.nombre}</h2>
+            <h3 className="front__text-header">{trabajador.dpi}</h3>
+            <p className="front__text-para">
+              <i className="fas fa-map-marker-alt front-icons"></i>{trabajador.municipio}
+            </p>
+            <p className="front__text-para">
+              <i className="fas fa-map-marker-alt front-icons"></i>{trabajador.rating}
+            </p>
             <button className="hire-button">Contratar</button>
             </div>
         </div>
@@ -24,3 +37,4 @@ const Information: React.FC = () => {
 };
 
 export default Information;
+
