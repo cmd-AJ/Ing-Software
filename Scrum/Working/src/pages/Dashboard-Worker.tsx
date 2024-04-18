@@ -3,29 +3,41 @@ import Header from "../components/Dashboard-Worker/Header";
 import Info from '../components/Dashboard-Worker/Info'
 import './Dashboard-Worker.css'
 import NavigationBar from "../components/Navigation/Navigation";
-import Placeholder from "../components/Dashboard-Worker/PlaceHolder";
 import React, { useEffect, useState } from "react";
+import ModalE from "../components/ModalEmployer/ModalE";
 
 type User = {
-  name: string,
-  lastname: string,
-  password: string,
-  email: string,
-  dpi: string,
-  tel: string,
+  name : string
+  lastname : string
+  trabajo: string
+  rating: number
+  sexo: string
+  fecha_nacimiento: string
+  municipio: string
+  tel: string
+  correo: string
+  image: string
+  dpi: string
   role: string
 }
 
 const Dashboard_Worker: React.FC = () => {
 
+  const [ editModal, setEditModal] = useState(false)
+
   const [myUser, setMyUser] = useState<User>({
-    name: '',
-    lastname: '',
-    password: '',
-    email: '',
-    dpi: '',
-    tel: '',
-    role: ''
+    name : 'string',
+    lastname : 'string',
+    trabajo: 'string',
+    rating: 0,
+    sexo: 'string',
+    fecha_nacimiento: 'string',
+    municipio: 'string',
+    tel: 'string',
+    correo: 'string',
+    image: 'string',
+    dpi: 'string',
+    role: 'string'
   }
 )
 
@@ -39,26 +51,31 @@ const Dashboard_Worker: React.FC = () => {
   }, [])
 
     return (
-      <IonPage className="contentC">
-          <NavigationBar />
-        <IonRow style={{
-          justifyContent: 'center'
-        }}>
-          <Header user={myUser} />
-        </IonRow>
-        <IonRow style={{
-          justifyContent: 'center'
-        }}>
-          <Info user={myUser}/> 
-        </IonRow>
-
-
-      </IonPage>
-
-
-
-
-        
+      <>
+        <IonPage className="contentC">
+            {editModal && <div style={{
+              position: 'absolute',
+              backgroundColor: 'black',
+              width: '100%',
+              height: '100%',
+              zIndex: '11',
+              opacity: '0.6'
+            }}></div>}
+          <IonRow>
+            <NavigationBar />
+          </IonRow>
+          <IonRow style={{
+            justifyContent: 'center'
+          }}>
+            <Header user={myUser} setEditModal={setEditModal}/>
+          </IonRow>
+          <IonRow style={{
+            justifyContent: 'center'
+          }}>
+            <Info user={myUser}/> 
+          </IonRow>
+        </IonPage>
+      </>
     );
   };
   

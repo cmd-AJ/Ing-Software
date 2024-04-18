@@ -90,7 +90,8 @@
 
 .leftInfo {
     height: 500px;
-    width: 100%;
+    min-width: 220px;
+    width: 50%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -98,7 +99,7 @@
 
 .centerInfo {
     height: 500px;
-    width: 900px;
+    width: 100%;
     background-color: white;
     margin-left: 50px;
     margin-right: 50px;
@@ -112,7 +113,8 @@
 
 .rightInfo {
     height: 500px;
-    width: 550px;
+    min-width: 220px;
+    width: 50%;
     background-color: white;
     border-radius: 30px;
     margin-bottom: 20px;
@@ -125,11 +127,11 @@
 .ratingContainer {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 120px;
     width: 100%;
     background-color: white;
     color: black;
-    font-size: 30px;
+    font-size: 23px;
     padding: 25px;
     border-radius: 30px;
     margin-bottom: 30px;
@@ -142,7 +144,7 @@
     width: 100%;
     background-color: white;
     color: black;
-    font-size: 30px;
+    font-size: 22px;
     padding: 25px;
     border-radius: 30px;
 }
