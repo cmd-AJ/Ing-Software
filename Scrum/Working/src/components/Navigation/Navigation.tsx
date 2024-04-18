@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   IonHeader,
   IonToolbar,
@@ -12,8 +12,11 @@ import { personOutline, mailOutline, briefcaseOutline, peopleOutline, settingsOu
 import SearchBar from '../Search/SearchBar';
 import './Navigation.css'
 
-const NavigationBar: React.FC = () => {
-  const [request, setRequest] = useState('');
+interface NavigationBarProps {
+  setRequest: (value: string) => void;
+}
+
+const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
 
   const handleRequestChange = (value: string) => {
     if (value.trim() !== '') {
@@ -33,7 +36,7 @@ const NavigationBar: React.FC = () => {
               <IonText className="custom-text">SABTE</IonText>
             </IonCol>
             <IonCol size="6">
-            <SearchBar onRequestChange={handleRequestChange} />
+              <SearchBar onRequestChange={handleRequestChange} />
             </IonCol>
             <IonCol className="ion-text-center"><IonIcon icon={personOutline} className="navbar-icon" /></IonCol>
             <IonCol className="ion-text-center"><IonIcon icon={mailOutline} className="navbar-icon" /></IonCol>
@@ -48,5 +51,3 @@ const NavigationBar: React.FC = () => {
 };
 
 export default NavigationBar;
-
-

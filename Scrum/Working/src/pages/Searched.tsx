@@ -8,21 +8,12 @@ import Information from '../components/Searched/Information';
 const Searched: React.FC = () => {
     const [request, setRequest] = useState('');
   
-    const handleRequestChange = (value: string) => {
-      if (value.trim() !== '') { 
-        setRequest(value);
-        console.log("Valor ingresado:", value);
-      } else {
-        console.log("No se ha ingresado nada en la búsqueda.");
-      }
-    };
-  
     return (
       <IonPage>
-      <Navigation/>
+      <Navigation setRequest={setRequest}/>
   
         <div className='searched'>
-            <Carrousel job={'Mecanico'} />
+            <Carrousel job={request} />
         </div>
       </IonPage>
     );
