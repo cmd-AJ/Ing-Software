@@ -66,10 +66,6 @@
     justify-content: center;
 }
 
-.work {
-    font-size: 20px;
-}
-
 .roundedButton {
     position: relative;
     top: 50%;
@@ -91,7 +87,7 @@
 .leftInfo {
     height: 500px;
     min-width: 220px;
-    width: 50%;
+    width: 30%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -140,13 +136,27 @@
 .dataContainer {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     height: 100%;
     width: 100%;
     background-color: white;
     color: black;
-    font-size: 22px;
     padding: 25px;
     border-radius: 30px;
+}
+
+.dataContainerFull {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.dataContainerText {
+    font-size: 23px;
+}
+
+.dataLabel {
+    font-size: 17px;
 }
 
 .jobsContainer {

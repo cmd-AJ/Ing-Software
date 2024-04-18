@@ -1,5 +1,10 @@
 import React from 'react'
 import './style.css'
+import Sexo from './DataComponents/Sexo'
+import Edad from './DataComponents/Edad'
+import Departamento from './DataComponents/Departamento'
+import Municipio from './DataComponents/Municipio'
+import Tel from './DataComponents/Telefono'
 
 type User = {
     name : string
@@ -22,13 +27,11 @@ interface ContainerProps {
 const DataContainer: React.FC<ContainerProps> = ({user}) => {
     return (
         <div className='dataContainer'>
-            <p>Sexo: {user.sexo}</p>
-            <hr/>
-            <p>Edad: </p>
-            <p>Departamento:</p>
-            <p>Municipio: {user.municipio}</p>
-            <p>Telefono: {user.tel}</p>
-            <p>Correo: {user.correo}</p>
+            <Sexo sexo={user.tel}/>
+            <Edad edad={user.tel}/>
+            <Departamento departamento='45'/>
+            <Municipio municipio='45'/>
+            <Tel tel={user.tel}/>
         </div>
     )
 }

@@ -5,13 +5,15 @@ import './style.css'
 interface ContainerProps { 
     name: string
     img: string
+    email: string
  }
 
-const LeftLower: React.FC<ContainerProps> = ({ name, img }) => {
+const LeftLower: React.FC<ContainerProps> = ({ name, img, email }) => {
+
     return (
         <div className='lowerElements'>
             <img src={img} id='profileImg'/>
-            <Name name={name}/>
+            <Name name={name} email={email}/>
         </div>
     )
 }
