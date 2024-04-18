@@ -2,9 +2,7 @@ import { useState } from 'react';
 import './Searched.css'
 import { IonPage } from '@ionic/react';
 import Navigation from '../components/Navigation/Navigation';
-import SearchBar from '../components/Search/SearchBar';
 import Carrousel from '../components/Searched/Carrousel';
-import Information from '../components/Searched/Information';
 const Searched: React.FC = () => {
     const [request, setRequest] = useState('');
   

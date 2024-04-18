@@ -74,6 +74,7 @@ async function getWorkersByJob(job: String) {
 
         const trabajadores: Trabajador[] = data.map((worker: any) => ({
             nombre: `${worker.nombre} ${worker.apellido}`,
+            telefono: worker.telefono,
             dpi: worker.dpi,
             municipio: worker.municipio,
             rating: worker.rating,

@@ -61,6 +61,7 @@ export async function getWorkers(trabajo) {
             const worker = record.get('tra');
             return {
                 nombre: worker.properties.Nombre, // Obtener el nombre del trabajo
+                telefono: worker.properties.Telefono,
                 municipio: worker.properties.Municipio,
                 rating: worker.properties.Rating,
                 apellido: worker.properties.Apellido,
