@@ -22,7 +22,7 @@ const Searched: React.FC = () => {
       <Navigation/>
   
         <div className='searched'>
-            <Carrousel/>
+            <Carrousel job={'Mecanico'} />
         </div>
       </IonPage>
     );
