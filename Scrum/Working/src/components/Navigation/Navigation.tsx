@@ -33,15 +33,21 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
         <IonGrid>
           <IonRow className="ion-align-items-center">
             <IonCol className="ion-text-center">
-              <IonText className="custom-text">SABTE</IonText>
+              <IonText className="appName-text">SABTE</IonText>
             </IonCol>
             <IonCol size="6">
               <SearchBar onRequestChange={handleRequestChange} />
             </IonCol>
+            <IonCol className="ion-text-center">
+              <IonText className="custom-text">HILOS</IonText>
+            </IonCol>
+            <IonCol className="ion-text-center">
+              <IonText className="custom-text">CHATS</IonText>
+            </IonCol>
+            <IonCol className="ion-text-center">
+              <IonText className="custom-text">AGENDA</IonText>
+            </IonCol>
             <IonCol className="ion-text-center"><IonIcon icon={personOutline} className="navbar-icon" /></IonCol>
-            <IonCol className="ion-text-center"><IonIcon icon={mailOutline} className="navbar-icon" /></IonCol>
-            <IonCol className="ion-text-center"><IonIcon icon={briefcaseOutline} className="navbar-icon" /></IonCol>
-            <IonCol className="ion-text-center"><IonIcon icon={peopleOutline} className="navbar-icon" /></IonCol>
             <IonCol className="ion-text-center"><IonIcon icon={settingsOutline} className="navbar-icon" /></IonCol>
           </IonRow>
         </IonGrid>
@@ -49,5 +55,5 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
     </IonHeader>
   );
 };
-
+  
 export default NavigationBar;

@@ -64,5 +64,12 @@ app.use(cors({
     console.log(`Server listening at http://127.0.0.1:${port}`)
   })
 
-  
-  
+  app.put('/setsettings', async(req, res) => {
+    try {
+      const [ municipio, imagen, sexo, fecha_nacimiento, rating, numero, DPI ] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.rating, req.body.numero, req.body.DPI]
+      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, rating, numero, DPI) 
+      res.send('Inserted succesfully')
+    } catch (error) {
+        throw error
+    }
+  })
