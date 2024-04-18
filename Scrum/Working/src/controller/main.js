@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, getUserbyDPI, getJobs } from './db.js'
+import { getUsers, insertUser, getUserbyDPI, getWorkers } from './db.js'
 
 const app = express()
 const port = 3000
@@ -50,16 +50,19 @@ app.use(cors({
     }
   })
 
-  app.listen(port, () => {
-    console.log(`Server listening at http://127.0.0.1:${port}`)
-  })
-
-  app.get('/jobs', async (req, res) => {
+  app.get('/workers/:job', async (req, res) => {
     try {
-      const jobs = await getJobs();
-      res.status(200).json(jobs);
+      const { job } = req.params
+      const workers = await getWorkers(job);
+      res.status(200).json(workers);
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+  app.listen(port, () => {
+    console.log(`Server listening at http://127.0.0.1:${port}`)
+  })
+
+  
   

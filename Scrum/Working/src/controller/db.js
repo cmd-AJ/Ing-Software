@@ -49,27 +49,31 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
     }
 }
 
-export async function getJobs() {
+export async function getWorkers(trabajo) {
     try {
-        const query = 'MATCH (t:Trabajo) RETURN t';
+        const query = `MATCH p=(tra:Trabajador)-[:trabaja_de]->(tr:Trabajo) WHERE tr.nombre_trabajo = '${trabajo}' RETURN tra LIMIT 25`;
         const result = await session.run(query);
 
         // Transformar los registros obtenidos en un arreglo de objetos JSON
-        const jobs = result.records.map(record => {
-            const job = record.get('t');
+        const workers = result.records.map(record => {
+            const worker = record.get('tra');
             return {
-                id: job.identity.low, // Obtener el ID del trabajo
-                nombre_trabajo: job.properties.nombre_trabajo // Obtener el nombre del trabajo
+                nombre: worker.properties.Nombre, // Obtener el nombre del trabajo
+                municipio: worker.properties.Municipio,
+                rating: worker.properties.Rating,
+                apellido: worker.properties.Apellido,
+                dpi: worker.properties.DPI
             };
         });
-        return jobs;
+        return workers;
     } catch (error) {
-        console.error('Error getting jobs:', error);
+        console.error('Error getting workers:', error);
         throw error;
     } finally {
         await session.close();
     }
 }
+
 
 
 
