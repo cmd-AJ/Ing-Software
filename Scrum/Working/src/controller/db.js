@@ -1,5 +1,5 @@
 import getClient from './../connection/RelationalDatabase.js';
-import session from './../connection/GraphDataBase.js'
+import { createSession } from './../connection/GraphDataBase.js';
 
 const client = getClient();
 
@@ -50,6 +50,8 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
 }
 
 export async function getWorkers(trabajo) {
+    const session = createSession();
+
     try {
         const query = `MATCH p=(tra:Trabajador)-[:trabaja_de]->(tr:Trabajo) WHERE tr.nombre_trabajo = '${trabajo}' RETURN tra LIMIT 25`;
         const result = await session.run(query);
