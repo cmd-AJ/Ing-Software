@@ -65,3 +65,9 @@ docker ps - a
 
 eliminar un docker es 
 docker rm ID
+
+
+
+Se agrego y se quitó el PEM debido a que ya hay una IP pública
+3.212.157.247.
+Solo nginx no funciona debido a que hay conflictos de puertos

@@ -4,7 +4,6 @@ import { IonPage } from '@ionic/react';
 import Navigation from '../components/Navigation/Navigation';
 import SearchBar from '../components/Search/SearchBar';
 import Carrousel from '../components/Searched/Carrousel';
-import Cards from '../components/Searched/Cards';
 import Information from '../components/Searched/Information';
 const Searched: React.FC = () => {
     const [request, setRequest] = useState('');
@@ -23,9 +22,7 @@ const Searched: React.FC = () => {
       <Navigation/>
   
         <div className='searched'>
-            <SearchBar onRequestChange={handleRequestChange} />
             <Carrousel/>
-        
         </div>
       </IonPage>
     );

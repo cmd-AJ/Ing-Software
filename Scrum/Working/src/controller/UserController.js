@@ -9,7 +9,7 @@ async function getUsers(){
     }
 }
 
-function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String){
+function createUser(dpi, name, lastnames, password, email, phoneNumber, role){
     const data = {
         "dpi": dpi ,
         "name": name,
@@ -31,7 +31,6 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
         if (!response.ok){
             console.log("There was an error on the response")
         }
-        console.log(response.json())
         return response.json()
     })
     .then(data => {
@@ -43,26 +42,22 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
     
 }
 
-async function userExists(dpi: String, password: String) {
+async function userExists(dpi, password) {
     try {
         const users = await getUsers();
-        
-        return users.some((user: { dpi: String; contrasenia: String; }) => user.dpi === dpi && user.contrasenia === password);
+        return users.some(user => user.id === dpi && user.password === password);
     } catch (error) {
         console.error('Error checking if user exists:', error);
         return false;
     }
 }
 
-
-async function getUser(dpi: any, password: any) {
+async function getUser(dpi, password) {
     try {
         const users = await getUsers();
-        return users.find((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
+        return users.find(user => user.id === dpi && user.password === password);
     } catch (error) {
         console.error('Error getting user:', error);
         return null; 
     }
 }
-
-export { createUser, userExists}

@@ -24,10 +24,9 @@ input[type=radio] {
 }
 
 .container {
-  width: 100%;
+  width: 523px;
   max-width: 800px;
-  max-height: 600px;
-  height: 100%;
+  height: 750px;
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
@@ -69,20 +68,4 @@ input[type=radio] {
   img {
     box-shadow: 0px 0px 5px 0px rgba(81, 81, 81, 0.47);
   }
-}
-
-.hire-button {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.hire-button:hover {
-  background-color: #45a049;
 }

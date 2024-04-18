@@ -1,7 +1,8 @@
 @import url('/src/theme/variables.css');
 
 .header {
-    min-width: 1780px;
+    min-width: 600px;
+    width: 92%;
     height: 240px;
     background-color: white;
     border-radius: 30px;
@@ -10,14 +11,15 @@
 }
 
 .info {
-    width: 1780px;
+    min-width: 600px;
+    width: 92%;
     height: 100%;
     display: flex;
 }
 
 .placeholder{
     min-width: 1920px;
-    height: 190px;
+    height: 80px;
     background-color: white;
 }
 
@@ -32,7 +34,8 @@
 .lowerHeader {
     position: relative;
     top: -5%;
-    width: 1780px;
+    min-width: 600px;
+    width: 100%;
     height: 100px;
     display: flex;
     flex-direction: row;
@@ -87,7 +90,7 @@
 
 .leftInfo {
     height: 500px;
-    width: 550px;
+    width: 100%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -123,7 +126,7 @@
     display: flex;
     flex-direction: column;
     height: 200px;
-    width: 465px;
+    width: 100%;
     background-color: white;
     color: black;
     font-size: 30px;
