@@ -4,14 +4,6 @@ import './Information.css';
 import { Trabajador } from './type' 
 
 const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
-  //...
-
-  interface Trabajador {
-    nombre: string;
-    dpi: string;
-    municipio: string;
-    rating: string;
-  }
   
   return (
     <IonContent>    
@@ -21,12 +13,13 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
           <div className="front__face-photo"></div>
           <div className="front__text">
             <h2 className="front__text-header">{trabajador.nombre}</h2>
-            <h3 className="front__text-header">{trabajador.dpi}</h3>
+            <h2 className="front__text-header">{trabajador.telefono}</h2>
+            <h3 className="front__text-header">DPI: {trabajador.dpi}</h3>
             <p className="front__text-para">
               <i className="fas fa-map-marker-alt front-icons"></i>{trabajador.municipio}
             </p>
             <p className="front__text-para">
-              <i className="fas fa-map-marker-alt front-icons"></i>{trabajador.rating}
+              <i className="fas fa-map-marker-alt front-icons"></i>Calficación: {trabajador.rating}
             </p>
             <button className="hire-button">Contratar</button>
             </div>

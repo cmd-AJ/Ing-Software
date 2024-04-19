@@ -1,3 +1,5 @@
+import { Trabajador } from "../components/Searched/type";
+
 async function getUsers(){
     try {
         const response = await fetch('http://localhost:3000/users')
@@ -65,4 +67,24 @@ async function getUser(dpi: any, password: any) {
     }
 }
 
-export { createUser, userExists}
+async function getWorkersByJob(job: String) {
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/workers/${job}`);
+        const data = await response.json();
+
+        const trabajadores: Trabajador[] = data.map((worker: any) => ({
+            nombre: `${worker.nombre} ${worker.apellido}`,
+            telefono: worker.telefono,
+            dpi: worker.dpi,
+            municipio: worker.municipio,
+            rating: worker.rating,
+        }));
+
+        return trabajadores;
+    } catch (error) {
+        console.error('Error fetching workers:', error);
+        return [];
+    }
+}
+
+export { createUser, userExists, getWorkersByJob}

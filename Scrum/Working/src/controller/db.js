@@ -1,4 +1,5 @@
 import getClient from './../connection/RelationalDatabase.js';
+import { createSession } from './../connection/GraphDataBase.js';
 
 const client = getClient();
 
@@ -47,4 +48,43 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
         throw error;
     }
 }
+
+export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, rating, numero, DPI) {
+    try {
+        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}', fecha_nacimiento = '${fecha_nacimiento}', rating = '${rating}', numero = ${numero} where DPI = '${DPI}'`);
+        console.log('Data inserted successfully')
+    } catch (error) {
+        console.error('Error inserting user:', error);
+        throw error;
+    }
+}
+
+export async function getWorkers(trabajo) {
+    const session = createSession();
+
+    try {
+        const query = `MATCH p=(tra:Trabajador)-[:trabaja_de]->(tr:Trabajo) WHERE tr.nombre_trabajo = '${trabajo}' RETURN tra LIMIT 25`;
+        const result = await session.run(query);
+
+        // Transformar los registros obtenidos en un arreglo de objetos JSON
+        const workers = result.records.map(record => {
+            const worker = record.get('tra');
+            return {
+                nombre: worker.properties.Nombre, // Obtener el nombre del trabajo
+                telefono: worker.properties.Telefono,
+                municipio: worker.properties.Municipio,
+                rating: worker.properties.Rating,
+                apellido: worker.properties.Apellido,
+                dpi: worker.properties.DPI
+            };
+        });
+        return workers;
+    } catch (error) {
+        console.error('Error getting workers:', error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
 

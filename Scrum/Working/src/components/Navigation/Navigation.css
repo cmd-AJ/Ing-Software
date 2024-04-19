@@ -1,14 +1,61 @@
-.navbar-icon {
-    font-size: 32px; 
-    transition: transform 0.3s ease;
-  }
-  
-  .navbar-icon:hover {
-    transform: scale(1.5);
-  }
+.navbar-icon, .custom-text {
+  transition: transform 0.3s ease;  /* Ensuring transition is applied universally */
+}
 
-  .custom-text {
-    font-size: 1.5em; 
-    font-weight: bold; 
-    color: #ffffff; 
+.navbar-icon:hover, .custom-text:hover {
+  transform: scale(1.5);  /* Using transform scale for hover */
+}
+
+/* Additional universal base styles, ensuring they do not interfere */
+.ion-grid {
+  background-color: #125089;
+  padding: 10px 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.ion-row, .ion-col {
+  padding: 0;
+  margin: 0;
+}
+
+.custom-text {
+  color: #ecf0f1;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;  /* This can help with transformation effects if block level elements are needed */
+}
+
+.navbar-icon{
+  font-size: 30px;
+}
+
+ion-header, ion-toolbar {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .navbar-icon, .custom-text {
+      font-size: 14px;
   }
+}
+
+@keyframes wave-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.appName-text {
+  background: linear-gradient(-45deg, #FFFFFF, #ebd9d9, #E0E0E0, #F7F7F7);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;  /* Makes the text color transparent, showing the gradient */
+  animation: wave-animation 10s ease infinite;
+  font-size: 28px;  /* Adjust font size as needed */
+  font-weight: bold; /* Makes the text bold */
+  display: inline-block; /* Required for background-clip to work properly */
+}
