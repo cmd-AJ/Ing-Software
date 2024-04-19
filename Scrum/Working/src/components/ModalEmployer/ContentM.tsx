@@ -11,6 +11,7 @@ import Departamento from "./Inputs/Departamento"
 import Municipio from './Inputs/Municipio'
 import Birthday from "./Inputs/Birthday"
 import EditBtn from "./EditBtn"
+import FileUpload from "./Inputs/FileInput"
 
 type User = {
     name : string
@@ -55,6 +56,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
                 </IonCardTitle>
             </IonCardHeader>
             <Line />
+            <FileUpload />
             <Work setOficio={setOficio}/>
             <Birthday fecha={date} setFecha={setDate}/>
             <Sexo sexo={sexo} setSexo={setSexo}/>

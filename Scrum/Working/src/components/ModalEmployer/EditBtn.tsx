@@ -1,5 +1,6 @@
 import { IonButton } from "@ionic/react"
 import React, { useCallback } from "react"
+import { setSettings } from "../../controller/UserController"
 
 type User = {
     name : string
@@ -47,6 +48,17 @@ const EditBtn : React.FC<ContainerProps> = ({
         user.departamento = departamento
         localStorage.setItem('User', JSON.stringify(user))
         console.log(user)
+
+        const userData = {
+            municipio: user.municipio,
+            image: user.image,
+            sexo: user.sexo,
+            fecha_nacimiento: user.fecha_nacimiento,
+            numero: user.tel,
+            DPI: user.dpi,
+        }
+
+        setSettings(userData)
     }
 
     return (
