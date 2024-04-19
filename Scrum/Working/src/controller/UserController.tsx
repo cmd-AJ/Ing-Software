@@ -87,7 +87,23 @@ async function getWorkersByJob(job: String) {
     }
 }
 
-export { createUser, userExists, getWorkersByJob}
+
+async function setSettings(userData) { 
+    try {
+        const data = await fetch(`http://127.0.0.1:3000/setSettings`, 
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+    } catch (error) {
+        console.error('Error modifying user:', error)
+    }
+}
+
+export { createUser, userExists, getWorkersByJob, setSettings}
 
 export async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero:string, DPI: string) {
     const object = {

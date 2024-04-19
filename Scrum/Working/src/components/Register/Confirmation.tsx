@@ -36,7 +36,7 @@ const confirmation: React.FC<ContainerProps> = ({ setConfirmation, validateConfi
     const handleInputChange = (event: CustomEvent<InputChangeEventDetail>) => {
         const value = (event.target as HTMLInputElement).value;
         setConfirmation(value);
-      }
+    }
 
     return (
             <IonInput 

@@ -5,14 +5,21 @@ import RightInfo from './RightInfo'
 import './style.css'
 
 type User = {
-    name: string,
-    lastname: string,
-    password: string,
-    email: string,
-    dpi: string,
-    tel: string,
+    name : string
+    lastname : string
+    trabajo: string
+    rating: number
+    sexo: string
+    fecha_nacimiento: string
+    municipio: string
+    tel: string
+    correo: string
+    image: string
+    dpi: string
     role: string
-}
+    departamento: string
+    edad: number
+  }
   
 
 interface ContainerProps {  

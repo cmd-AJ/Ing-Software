@@ -1,12 +1,16 @@
+import React from 'react'
 import './style.css'
+import Stars from './Stars'
 
-interface ContainerProps {  }
+interface ContainerProps { 
+    rating: number
+ }
 
-const RatingContainer: React.FC<ContainerProps> = () => {
+const RatingContainer: React.FC<ContainerProps> = ({ rating }) => {
     return (
         <div className='ratingContainer'>
-            <p>Rating</p>
-            <p>Estrellitas</p>
+            <p>Calificación:</p>
+            <Stars rating={rating}/>
         </div>
     )
 }

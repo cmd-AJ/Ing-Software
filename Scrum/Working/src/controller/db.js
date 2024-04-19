@@ -49,9 +49,9 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
     }
 }
 
-export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, rating, numero, DPI) {
+export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI) {
     try {
-        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}', fecha_nacimiento = '${fecha_nacimiento}', rating = '${rating}', numero = ${numero} where DPI = '${DPI}'`);
+        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}', fecha_nacimiento = '${fecha_nacimiento}', numero = ${numero} where DPI = '${DPI}'`);
         console.log('Data inserted successfully')
     } catch (error) {
         console.error('Error inserting user:', error);

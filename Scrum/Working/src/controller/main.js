@@ -65,11 +65,15 @@ app.use(cors({
   })
 
   app.put('/setsettings', async(req, res) => {
-    try {
-      const [ municipio, imagen, sexo, fecha_nacimiento, rating, numero, DPI ] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.rating, req.body.numero, req.body.DPI]
-      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, rating, numero, DPI) 
-      res.send('Inserted succesfully')
-    } catch (error) {
-        throw error
+    const [ municipio, imagen, sexo, fecha_nacimiento, numero, DPI ] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.numero, req.body.DPI]
+    if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI) {
+      res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
+    } else {
+      try {
+        const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI) 
+        res.send('Inserted succesfully')
+      } catch (error) {
+          throw error
+      }
     }
   })
