@@ -26,7 +26,8 @@ interface ContainerProps {
     tel: string,
     correo: string,
     departamento: string,
-    user: User
+    user: User,
+    image: string
 }
 
 const EditBtn : React.FC<ContainerProps> = ({
@@ -36,7 +37,8 @@ const EditBtn : React.FC<ContainerProps> = ({
    tel,
    correo,
    departamento,
-   user 
+   user,
+   image 
 }) => {
 
     const handleClick = () => {
@@ -46,6 +48,7 @@ const EditBtn : React.FC<ContainerProps> = ({
         user.tel = tel
         user.correo = correo
         user.departamento = departamento
+        user.image = image
         localStorage.setItem('User', JSON.stringify(user))
         console.log(user)
 

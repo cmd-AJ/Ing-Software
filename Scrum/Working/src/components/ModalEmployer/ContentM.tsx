@@ -38,6 +38,7 @@ interface ContainerProps {
 const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
 
     const [oficio, setOficio] = useState('')
+    const [image, setImage] = useState(user.image)
     const [date, setDate] = useState(user.fecha_nacimiento)
     const [sexo, setSexo] = useState(user.sexo)
     const [tel, setTel] = useState(user.tel)
@@ -57,7 +58,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
                 </IonCardTitle>
             </IonCardHeader>
             <Line />
-            <FileUpload />
+            <FileUpload image={image} setImage={setImage}/>
             <Work setOficio={setOficio}/>
             <Birthday fecha={date} setFecha={setDate}/>
             <Sexo sexo={sexo} setSexo={setSexo}/>
@@ -66,7 +67,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
             <Departamento departamento={departamento} setDepartamento={setDepartamento}/>
             <Municipio municipio={municipio} setMunicipio={setMunicipio} departamento={departamento}/>
             <EditBtn user={user} municipio={municipio} departamento={departamento}
-            birthday={date} tel={tel} correo={correo} sexo={sexo}/>
+            birthday={date} tel={tel} correo={correo} sexo={sexo} image={image}/>
         </div>
     )
 }
