@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import Sexo from './DataComponents/Sexo'
 import Edad from './DataComponents/Edad'
@@ -19,18 +19,20 @@ type User = {
     image: string
     dpi: string
     role: string
+    departamento: string
 }
 interface ContainerProps { 
     user: User
  }
 
 const DataContainer: React.FC<ContainerProps> = ({user}) => {
+    
     return (
         <div className='dataContainer'>
-            <Sexo sexo={user.tel}/>
-            <Edad edad={user.tel}/>
-            <Departamento departamento='45'/>
-            <Municipio municipio='45'/>
+            <Sexo sexo={user.sexo}/>
+            <Edad edad={user.fecha_nacimiento}/>
+            <Departamento departamento={user.departamento}/>
+            <Municipio municipio={user.municipio.substring(0,1) + user.municipio.toLowerCase().slice(1)}/>
             <Tel tel={user.tel}/>
         </div>
     )

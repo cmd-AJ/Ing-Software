@@ -1,9 +1,11 @@
 import React from 'react';
 import './stars.css';
 
-interface ContainerProps {}
+interface ContainerProps {
+  rating : number
+}
 
-const Stars: React.FC<ContainerProps> = () => {
+const Stars: React.FC<ContainerProps> = ({ rating }) => {
   return (
     <>
       <svg style={{ display: 'none' }}>
@@ -42,7 +44,7 @@ const Stars: React.FC<ContainerProps> = () => {
         </defs>
       </svg>
       <div className="rating">
-        <progress className="rating-bg" value="5" max="5"></progress>
+        <progress className="rating-bg" value={rating} max="5"></progress>
         <svg>
           <use xlinkHref="#fivestars" />
         </svg>

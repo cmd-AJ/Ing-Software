@@ -6,7 +6,6 @@
     width: 120px;
     height: 24px;
     position: relative;
-    background-color: gray;
   }
   
   .rating progress.rating-bg {

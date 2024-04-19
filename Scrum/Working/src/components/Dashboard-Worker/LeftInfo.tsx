@@ -16,14 +16,17 @@ type User = {
     image: string
     dpi: string
     role: string
+    departamento: string
 }
 
-interface ContainerProps { user: User }
+interface ContainerProps { 
+    user: User
+}
 
 const LeftInfo: React.FC<ContainerProps> = ({user}) => {
     return (
         <div className='leftInfo'>
-            <RatingContainer />
+            <RatingContainer rating={user.rating}/>
             <DataContainer user={user}/>
         </div>
     )

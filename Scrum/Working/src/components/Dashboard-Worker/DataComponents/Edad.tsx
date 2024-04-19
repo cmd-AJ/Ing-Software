@@ -9,7 +9,7 @@ interface ContainerProps {
 const Edad: React.FC<ContainerProps> = ({ edad }) => {
     return (
         <div className="dataContainerFull">
-            <IonIcon icon={hourglassOutline} size="large"></IonIcon>
+            <IonIcon icon={hourglassOutline} size="large" color='secondary'></IonIcon>
             <div>
                 <p className="dataLabel">Edad:</p>
                 <p className='dataContainerText'>{edad}</p>

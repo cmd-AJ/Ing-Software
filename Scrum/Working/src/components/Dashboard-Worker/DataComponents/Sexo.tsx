@@ -9,7 +9,7 @@ interface ContainerProps {
 const Sexo: React.FC<ContainerProps> = ({ sexo }) => {
     return (
         <div className="dataContainerFull">
-            <IonIcon icon={accessibility} size="large"></IonIcon>
+            <IonIcon icon={accessibility} size="large" color='secondary'></IonIcon>
             <div>
                 <p className="dataLabel">Sexo:</p>
                 <p className='dataContainerText'>{sexo}</p>

@@ -1,5 +1,5 @@
 import { IonIcon } from "@ionic/react"
-import { callOutline } from "ionicons/icons"
+import { callSharp } from "ionicons/icons"
 import React from "react"
 
 interface ContainerProps { 
@@ -9,7 +9,7 @@ interface ContainerProps {
 const Tel: React.FC<ContainerProps> = ({ tel }) => {
     return (
         <div className="dataContainerFull">
-            <IonIcon icon={callOutline} size="large"></IonIcon>
+            <IonIcon icon={callSharp} size="large" color="secondary"></IonIcon>
             <div>
                 <p className="dataLabel">Teléfono:</p>
                 <p className='dataContainerText'>{tel}</p>
