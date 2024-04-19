@@ -16,7 +16,9 @@ type User = {
     image: string
     dpi: string
     role: string
-}
+    departamento: string
+    edad: number
+  }
   
 
 interface ContainerProps { 

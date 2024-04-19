@@ -19,8 +19,8 @@ const Birthday: React.FC<ContainerProps> = ({fecha ,setFecha}) => {
 
     const handleDateChange = (event: CustomEvent) => {
         const selectedValue = event.detail.value;
-        setDate(selectedValue);
-        setFecha(selectedValue)
+        setDate(selectedValue.split('T')[0]);
+        setFecha(selectedValue.split('T')[0])
     }
 
     const formatDate = (dateString: string) => {

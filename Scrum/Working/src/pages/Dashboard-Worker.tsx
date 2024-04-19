@@ -3,10 +3,8 @@ import Header from "../components/Dashboard-Worker/Header";
 import Info from '../components/Dashboard-Worker/Info'
 import './Dashboard-Worker.css'
 import NavigationBar from "../components/Navigation/Navigation";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalE from "../components/ModalEmployer/ModalE";
-import BackgroundM from "../components/ModalEmployer/BackgroundM";
-import { Departamentos } from "../Departamentos/Departamentos";
 
 type User = {
   name : string
@@ -22,6 +20,7 @@ type User = {
   dpi: string
   role: string
   departamento: string
+  edad: number
 }
 
 const Dashboard_Worker: React.FC = () => {
@@ -42,18 +41,26 @@ const Dashboard_Worker: React.FC = () => {
     image: '',
     dpi: '',
     role: '',
-    departamento: ''
+    departamento: '',
+    edad: 0
   }
 )
 
-  useEffect(() => {
-    const user = localStorage.getItem('User')
-    if (user != null){
-      setMyUser(JSON.parse(user))
-      
-      console.log(myUser)
+useEffect(() => {
+  const user = localStorage.getItem("User");
+  if (user != null) {
+    const parsedUser = JSON.parse(user);
+    setMyUser(parsedUser);
+    if (parsedUser.fecha_nacimiento !== "") {
+      const fechaNacimiento = new Date(parsedUser.fecha_nacimiento);
+      const fechaActual = new Date();
+      const difMiliSeconds = fechaActual.getTime() - fechaNacimiento.getTime();
+      const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
+      const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
+      setMyUser((prevUser) => ({ ...prevUser, edad: edadAños }));
     }
-  }, [])
+  }
+}, []);
 
     return (
       <>

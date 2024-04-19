@@ -3,7 +3,7 @@ import { hourglassOutline } from "ionicons/icons"
 import React from "react"
 
 interface ContainerProps { 
-    edad: string
+    edad: number
  }
 
 const Edad: React.FC<ContainerProps> = ({ edad }) => {

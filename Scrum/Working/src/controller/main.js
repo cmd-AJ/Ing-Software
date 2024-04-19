@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, getUserbyDPI, getWorkers } from './db.js'
+import { getUsers, insertUser, getUserbyDPI, getWorkers, setsettings } from './db.js'
 
 const app = express()
 const port = 3000

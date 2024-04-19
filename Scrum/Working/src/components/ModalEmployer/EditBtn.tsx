@@ -51,7 +51,7 @@ const EditBtn : React.FC<ContainerProps> = ({
 
         const userData = {
             municipio: user.municipio,
-            image: user.image,
+            imagen: user.image,
             sexo: user.sexo,
             fecha_nacimiento: user.fecha_nacimiento,
             numero: user.tel,
