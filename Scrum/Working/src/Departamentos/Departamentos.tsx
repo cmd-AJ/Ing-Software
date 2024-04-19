@@ -1,4 +1,5 @@
 type Municipios = Record<string, string>;
+type Municipio = string[]
 
 function Departamentos(dpi: string) {
 
@@ -465,7 +466,475 @@ function Municipios(dpi: string) {
     return municipios[departamento][muni]
 }
 
+function getMunicipios(departamento: string) {
+
+    if (departamento === '') {
+        return ['']
+    }
+
+
+    const municipios1: Municipio = [
+        'GUATEMALA',
+        'SANTA CATARINA PINULA',
+        'SAN JOSE PINULA',
+        'SAN JOSE DEL GOLFO',
+        'PALENCIA',
+        'CHINAUTLA',
+        'SAN PEDRO AYAMPUC',
+        'MIXCO',
+        'SAN PEDRO SACATEPEQUEZ',
+        'SAN JUAN SACATEPEQUEZ',
+        'SAN RAYMUNDO',
+        'CHUARRANCHO',
+        'FRAIJANES',
+        'AMATITLAN',
+        'VILLA NUEVA',
+        'VILLA CANALES',
+        'SAN MIGUEL PETAPA',
+    ]
+
+    const municipios2: Municipio = [
+         'GUASTATOYA',
+         'MORAZAN',
+         'SAN AGUSTIN ACASAGUASTLAN',
+         'SAN CRISTOBAL ACASAGUASTLAN',
+         'EL JICARO',
+         'SANSARE',
+         'SANARATE',
+         'SAN ANTONIO LA PAZ',
+    ]
+
+    const municipios3: Municipio = [
+         'ANTIGUA',
+         'JOCOTENANGO',
+         'PASTORES',
+         'SUMPANGO',
+         'SANTO DOMINGO XENACOJ',
+         'SANTIAGO SACATEPEQUEZ',
+         'SAN BARTOLOME MILPAS ALTAS',
+         'SAN LUCAS SACATEPEQUEZ',
+         'SANTA LUCIA MILPAS ALTAS',
+         'MAGDALENA MILPAS ALTAS',
+         'SANTA MARIA DE JESUS',
+         'CIUDAD VIEJA',
+         'SAN MIGUEL DUENAS',
+         'ALOTENANGO',
+         'SAN ANTONIO AGUAS CALIENTES',
+         'SANTA CATARINA BARAHONA',
+    ]
+
+    const municipios4: Municipio = [
+         'CHIMALTENANGO',
+         'SAN JOSE POAQUIL',
+         'SAN MARTIN JILOTEPEQUE',
+         'SAN JUAN COMALAPA',
+         'SANTA APOLONIA',
+         'TECPAN GUATEMALA',
+         'PATZUN',
+         'SAN MIGUEL POCHUTA',
+         'PATZICIA',
+         'SANTA CRUZ BALANYA',
+         'ACATENANGO',
+         'SAN PEDRO YEPOCAPA',
+         'SAN ANDRES ITZAPA',
+         'PARRAMOS',
+         'ZARAGOZA',
+         'EL TEJAR',
+    ]
+
+    const municipios5: Municipio = [
+         'ESCUINTLA',
+         'SANTA LUCIA COTZUMALGUAPA',
+         'LA DEMOCRACIA',
+         'SIQUINALA',
+         'MASAGUA',
+         'TIQUISATE',
+         'LA GOMERA',
+         'GUANAGAZAPA',
+         'SAN JOSE',
+         'IZTAPA',
+         'PALIN',
+         'SAN VICENTE PACAYA',
+        'NUEVA CONCEPCION',
+    ]
+
+
+    const municipios6: Municipio = [
+         'CUILAPA',
+         'BARBERENA',
+        'SANTA ROSA DE LIMA',
+         'CASILLAS',
+         'SAN RAFAEL LAS FLORES',
+         'ORATORIO',
+         'SAN JUAN TECUACO',
+         'CHIQUIMULILLA',
+         'TAXISCO',
+         'SANTA MARIA IXHUATAN',
+         'GUAZACAPAN',
+         'SANTA CRUZ NARANJO',
+         'PUEBLO NUEVO VIÑAS',
+         'NUEVA SANTA ROSA',
+    ]
+
+    const municipios7: Municipio = [
+         'SOLOLA',
+         'SAN JOSE CHACAYA',
+         'SANTA MARIA VISITACION',
+         'SANTA LUCIA UTATLAN',
+         'NAHUALA',
+         'SANTA CATARINA IXTAHUACAN',
+         'SANTA CLARA LA LAGUNA',
+         'CONCEPCION',
+         'SAN ANDRES SEMETABAJ',
+         'PANAJACHEL',
+         'SANTA CATARINA PALOPO',
+         'SAN ANTONIO PALOPO',
+         'SAN LUCAS TOLIMAN',
+         'SANTA CRUZ LA LAGUNA',
+         'SAN PABLO LA LAGUNA',
+         'SAN MARCOS LA LAGUNA',
+         'SAN JUAN LA LAGUNA',
+         'SAN PEDRO LA LAGUNA',
+         'SANTIAGO ATITLAN',
+    ]
+
+    const municipios8: Municipio = [
+         'TOTONICAPAN',
+         'SAN CRISTOBAL TOTONICAPAN',
+         'SAN FRANCISCO EL ALTO',
+         'SAN ANDRES XECUL',
+         'MOMOSTENANGO',
+         'SANTA MARIA CHIQUIMULA',
+         'SANTA LUCIA LA REFORMA',
+        'SAN BARTOLO AGUAS CALIENTES',
+    ]
+
+    const municipios9: Municipio = [
+         'QUETZALTENANGO',
+         'SALCAJA',
+         'OLINTEPEQUE',
+         'SAN CARLOS SIJA',
+         'SIBILIA',
+         'CABRICAN',
+         'CAJOLA',
+         'SAN MIGUEL SIGUILA',
+         'SAN JUAN OSTUNCALCO',
+         'SAN MATEO',
+         'CONCEPCION CHIQUIRICHAPA',
+         'SAN MARTIN SACATEPEQUEZ',
+         'ALMOLONGA',
+         'CANTEL',
+         'HUITAN',
+         'ZUNIL',
+         'COLOMBA COSTA CUCA',
+         'SAN FRANCISCO LA UNION',
+         'EL PALMAR',
+         'COATEPEQUE',
+         'GENOVA COSTA CUCA',
+         'FLORES COSTA CUCA',
+         'LA ESPERANZA',
+         'PALESTINA DE LOS ALTOS',
+    ]
+
+    const municipios10: Municipio = [
+         'MAZATENANGO',
+         'CUYOTENANGO',
+         'SAN FRANCISCO ZAPOTITLAN',
+         'SAN BERNARDINO',
+         'SAN JOSE EL IDOLO',
+         'SANTO DOMINGO SUCHITEPEQUEZ',
+         'SAN LORENZO',
+         'SAMAYAC',
+         'SAN PABLO JOCOPILAS',
+         'SAN ANTONIO SUCHITEPEQUEZ',
+         'SAN MIGUEL PANAM',
+         'SAN GABRIEL',
+         'CHICACAO',
+         'PATULUL',
+         'SANTA BARBARA',
+         'SAN JUAN BAUTISTA',
+         'SANTO TOMAS LA UNION',
+         'ZUNILITO',
+         'PUEBLO NUEVO',
+         'RIO BRAVO',
+    ]
+
+    const municipios11: Municipio = [
+         'RETALHULEU',
+         'SAN SEBASTIAN',
+         'SANTA CRUZ MULUA',
+         'SAN MARTIN ZAPOTITLAN',
+         'SAN FELIPE',
+         'SAN ANDRES VILLA SECA',
+         'CHAMPERICO',
+         'NUEVO SAN CARLOS',
+         'EL ASINTAL',
+    ]
+
+    const municipios12: Municipio = [
+         'SAN MARCOS',
+         'SAN PEDRO SACATEPEQUEZ',
+         'SAN ANTONIO SACATEPEQUEZ',
+         'COMITANCILLO',
+         'SAN MIGUEL IXTAHUACAN',
+         'CONCEPCION TUTUAPA',
+         'TACANA',
+         'SIBINAL',
+         'TAJUMULCO',
+         'TEJUTLA',
+         'SAN RAFAEL PIE DE LA CUESTA',
+         'NUEVO PROGRESO',
+         'EL TUMBADOR',
+         'SAN JOSE EL RODEO',
+         'MALACATAN',
+        'CATARINA',
+         'AYUTLA (TECUN UMAN)',
+         'OCOS',
+         'SAN PABLO',
+         'EL QUETZAL',
+         'LA REFORMA',
+         'PAJAPITA',
+         'IXCHIGUAN',
+         'SAN JOSE OJETENAN',
+         'SAN CRISTOBAL CUCHO',
+         'SIPACAPA',
+         'ESQUIPULAS PALO GORDO',
+         'RIO BLANCO',
+         'SAN LORENZO',
+    ]
+
+    const municipios13: Municipio = [
+         'HUEHUETENANGO',
+         'CHIANTLA',
+         'MALACATANCITO',
+         'CUILCO',
+         'NENTON',
+         'SAN PEDRO NECTA',
+         'JACALTENANGO',
+         'SAN PEDRO SOLOMA',
+         'SAN ILDEFONSO IXTAHUACAN',
+         'SANTA BARBARA',
+         'LA LIBERTAD',
+         'LA DEMOCRACIA',
+         'SAN MIGUEL ACATAN',
+         'SAN RAFAEL LA INDEPENDENCIA',
+         'TODOS SANTOS CUCHUMATAN',
+         'SAN JUAN ATITAN',
+        'SANTA EULALIA',
+         'SAN MATEO IXTATAN',
+         'COLOTENANGO',
+         'SAN SEBASTIAN HUEHUETENANGO',
+         'TECTITAN',
+         'CONCEPCION HUISTA',
+         'SAN JUAN IXCOY',
+        'SAN ANTONIO HUISTA',
+         'SAN SEBASTIAN COATAN',
+         'SANTA CRUZ BARILLAS',
+         'AGUACATAN',
+         'SAN RAFAEL PETZAL',
+         'SAN GASPAR IXCHIL',
+         'SANTIAGO CHIMALTENANGO',
+         'SANTA ANA HUISTA',
+         'UNIÓN CANTINIL',
+    ]
+
+    const municipios14: Municipio = [
+        'SANTA CRUZ DEL QUICHE',
+        'CHICHE',
+        'CHINIQUE',
+        'ZACUALPA',
+        'CHAJUL',
+        'STO TOMAS CHICHICASTENANGO',
+        'PATZITE',
+        'SAN ANTONIO ILOTENANGO',
+        'SAN PEDRO JOCOPILAS',
+        'CUNEN',
+        'SAN JUAN COTZAL',
+        'JOYABAJ',
+        'NEBAJ',
+        'SAN ANDRES SAJCABAJA',
+        'SAN MIGUEL USPANTAN',
+        'SACAPULAS',
+        'SAN BARTOLOME JOCOTENANGO',
+        'CANILLA',
+        'CHICAMAN',
+        'IXCAN',
+        'PACHALUN',
+        'PLAYA GRANDE',
+    ]
+
+    const municipios15: Municipio = [
+        'SALAMA',
+        'SAN MIGUEL CHICAJ',
+        'RABINAL',
+        'CUBULCO',
+        'GRANADOS',
+        'SANTA CRUZ EL CHOL',
+        'SAN JERONIMO',
+        'PURULHA',
+    ]
+    
+    const municipios16: Municipio = [
+        'COBAN',
+        'SANTA CRUZ VERAPAZ',
+        'SAN CRISTOBAL VERAPAZ',
+        'TACTIC',
+        'TAMAHU',
+        'SAN MIGUEL TUCURU',
+        'PANZOS',
+        'SENAHU',
+        'SAN PEDRO CARCHA',
+        'SAN JUAN CHAMELCO',
+        'LANQUIN',
+        'SANTA MARIA CAHABON',
+        'CHISEC',
+        'CHAHAL',
+        'FRAY BARTOLOME DE LAS CASAS',
+        'LA TINTA',
+        'RAXRUHÁ',
+    ]
+
+    const municipios17: Municipio = [
+         'FLORES',
+         'SAN JOSE',
+         'SAN BENITO',
+         'SAN ANDRES',
+         'LA LIBERTAD',
+         'SAN FRANCISCO',
+         'SANTA ANA',
+         'DOLORES',
+         'SAN LUIS',
+         'SAYAXCHE',
+         'MELCHOR DE MENCOS',
+         'POPTUN',
+    ]
+
+    const municipios18: Municipio = [
+         'PUERTO BARRIOS',
+         'LIVINGSTON',
+         'EL ESTOR',
+         'MORALES',
+         'LOS AMATES',
+    ]
+
+    const municipios19: Municipio = [
+         'ZACAPA',
+         'ESTANZUELA',
+         'RIO HONDO',
+         'GUALAN',
+         'TECULUTAN',
+         'USUMATLAN',
+         'CABANAS',
+         'SAN DIEGO',
+        'LA UNION',
+        'HUITE',
+    ]
+
+    const municipios20: Municipio = [
+        'CHIQUIMULA',
+        'SAN JOSE LA ARADA',
+        'SAN JUAN LA ERMITA',
+        'JOCOTAN',
+        'CAMOTAN',
+        'OLOPA',
+        'ESQUIPULAS',
+        'CONCEPCION LAS MINAS',
+        'QUEZALTEPEQUE',
+        'SAN JACINTO',
+        'IPALA',
+    ]
+
+    const municipios21: Municipio = [
+        'JALAPA',
+        'SAN PEDRO PINULA',
+        'SAN LUIS JILOTEPEQUE',
+        'SAN MANUEL CHAPARRON',
+        'SAN CARLOS ALZATATE',
+        'MONJAS',
+        'MATAQUESCUINTLA',
+    ]
+
+    const municipios22: Municipio = [
+        'JUTIAPA',
+        'EL PROGRESO',
+        'SANTA CATARINA MITA',
+        'AGUA BLANCA',
+        'ASUNCION MITA',
+        'YUPILTEPEQUE',
+        'ATESCATEMPA',
+        'JEREZ',
+        'EL ADELANTO',
+        'ZAPOTITLAN',
+        'COMAPA',
+        'JALPATAGUA',
+        'CONGUACO',
+        'MOYUTA',
+        'PASACO',
+        'SAN JOSE ACATEMPA',
+        'QUESADA',
+    ]
+
+    const municipios: Record<string, Municipio> = {
+        'Guatemala': municipios1,
+        'El Progreso': municipios2,
+        'Sacatepequez': municipios3,
+        'Chimaltenango': municipios4,
+        'Escuintla': municipios5,
+        'Santa Rosa': municipios6,
+        'Solola': municipios7,
+        'Totonicapan': municipios8,
+        'Quetzaltenango': municipios9,
+        'Suchitepequez': municipios10,
+        'Retalhuleu': municipios11,
+        'San Marcos': municipios12,
+        'Huehuetenango': municipios13,
+        'El Quiche': municipios14,
+        'Baja Verapaz': municipios15,
+        'Alta Verapaz': municipios16,
+        'El Peten': municipios17,
+        'Izabal': municipios18,
+        'Zacapa': municipios19,
+        'Chiquimula': municipios20,
+        'Jalapa': municipios21,
+        'Jutiapa': municipios22
+    }
+   
+    return municipios[departamento]
+}
+
+function getDepartamentos() {
+
+    let depsList : string[] = [
+        'Guatemala',
+        'El Progreso',
+        'Sacatepequez',
+        'Chimaltenango',
+        'Escuintla',
+        'Santa Rosa',
+        'Solola',
+        'Totonicapan',
+        'Quetzaltenango',
+        'Suchitepequez',
+        'Retalhuleu',
+        'San Marcos',
+        'Huehuetenango',
+        'El Quiche',
+        'Baja Verapaz',
+        'Alta Verapaz',
+        'El Peten',
+        'Izabal',
+        'Zacapa',
+        'Chiquimula',
+        'Jalapa',
+        'Jutiapa'
+    ]
+
+    return depsList
+}
+
 export {
     Departamentos,
-    Municipios  
+    Municipios,
+    getDepartamentos,
+    getMunicipios  
 } 

@@ -1,5 +1,6 @@
 import { InputChangeEventDetail, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/react'
 import './Input.css'
+import React from 'react';
 
 interface ContainerProps { 
   setRole : (role : string) => void,
