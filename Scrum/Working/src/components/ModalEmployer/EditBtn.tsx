@@ -27,7 +27,8 @@ interface ContainerProps {
     correo: string,
     departamento: string,
     user: User,
-    image: string
+    image: string,
+    setEditM: (editM : boolean) => void
 }
 
 const EditBtn : React.FC<ContainerProps> = ({
@@ -38,7 +39,8 @@ const EditBtn : React.FC<ContainerProps> = ({
    correo,
    departamento,
    user,
-   image 
+   image, 
+   setEditM
 }) => {
 
     const handleClick = () => {
@@ -51,7 +53,7 @@ const EditBtn : React.FC<ContainerProps> = ({
         user.image = image
         localStorage.setItem('User', JSON.stringify(user))
         console.log(user)
-
+        
         const userData = {
             municipio: user.municipio,
             imagen: user.image,
@@ -60,8 +62,9 @@ const EditBtn : React.FC<ContainerProps> = ({
             numero: user.tel,
             DPI: user.dpi,
         }
-
+        
         setSettings(userData)
+        setEditM(false)
     }
 
     return (

@@ -60,7 +60,7 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
             if (user.role == 'Empleado') 
                 setRole(true)
-            // createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
+            createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
             user.password = CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex)
         
             const data: userData = {

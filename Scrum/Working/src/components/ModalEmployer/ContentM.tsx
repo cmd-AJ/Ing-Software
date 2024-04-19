@@ -67,7 +67,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
             <Departamento departamento={departamento} setDepartamento={setDepartamento}/>
             <Municipio municipio={municipio} setMunicipio={setMunicipio} departamento={departamento}/>
             <EditBtn user={user} municipio={municipio} departamento={departamento}
-            birthday={date} tel={tel} correo={correo} sexo={sexo} image={image}/>
+            birthday={date} tel={tel} correo={correo} sexo={sexo} image={image} setEditM={setModalE}/>
         </div>
     )
 }

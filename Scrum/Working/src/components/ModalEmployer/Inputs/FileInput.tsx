@@ -37,7 +37,7 @@ const FileUpload: React.FC<ContainerProps> = ({ image, setImage }) => {
       {/* Botón con imagen */}
       <label htmlFor="file-upload">
         <img
-          src={image} // Cambiado de href a src para la imagen
+          src={image} 
           alt="Subir archivo"
           height="100px"
           style={{ cursor: "pointer", borderRadius: '50%' }}
