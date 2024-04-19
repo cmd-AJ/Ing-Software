@@ -25,7 +25,7 @@ const About: React.FC = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Woking</IonTitle>
+          <IonTitle>SABTE</IonTitle>
           <IonButtons slot="end">
             <IonButton routerLink="/register">Registrarse</IonButton>
             <IonButton routerLink="/home">Iniciar Sesión</IonButton>
