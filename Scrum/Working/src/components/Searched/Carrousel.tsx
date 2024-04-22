@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Carrousel.css';
 import Information from './Information';
 import { Trabajador } from './type';
-import { getWorkersByJob } from '../../controller/UserController'; // Assuming you have an API function to fetch workers
+import { getWorkersByJob } from '../../controller/UserController';
 
 const Carrousel: React.FC<{ job: string }> = ({ job }) => {
   const [workers, setWorkers] = useState<Trabajador[]>([]);
@@ -24,20 +24,8 @@ const Carrousel: React.FC<{ job: string }> = ({ job }) => {
   const handleItemClick = (itemNumber: number) => {
     setSelectedItem(itemNumber);
   };
-
   return (
     <div className="container">
-      {workers.map((worker, index) => (
-        
-        <input
-          key={index}
-          type="radio"
-          name="slider"
-          id={`item-${index + 1}`}
-          checked={selectedItem === index + 1}
-          onChange={() => handleItemClick(index + 1)}
-        />
-      ))}
       <div className="cards">
         {workers.map((worker, index) => (
           <label key={index} className="card" htmlFor={`item-${index + 1}`} id={`song-${index + 1}`}>
