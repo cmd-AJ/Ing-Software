@@ -1,5 +1,5 @@
 import { InputChangeEventDetail, IonInput } from "@ionic/react"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import './Inputs.css'
 
 interface ContainerProps { 
@@ -18,6 +18,10 @@ const Email: React.FC<ContainerProps> = ({email, setEmail, validatesEmail, setVa
         /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
         )
     } 
+
+    useEffect(()=>{
+        setValidateEmail(validateEmail(email))
+    }, [])
 
     const validate = (value: string) => {
 
@@ -50,7 +54,7 @@ const Email: React.FC<ContainerProps> = ({email, setEmail, validatesEmail, setVa
         onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
         onIonChange={handleInputChange}
         onFocus={handleFocus}
-        value={email}
+        placeholder={email}
         ></IonInput>
     )
 }

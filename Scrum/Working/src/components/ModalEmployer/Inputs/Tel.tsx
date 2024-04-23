@@ -31,7 +31,7 @@ const Tel: React.FC<ContainerProps> = ({tel, setTel}) => {
             }
         }}
         onIonChange={handleInputChange}
-        value={tel}></IonInput>
+        placeholder={tel}></IonInput>
     )
 }
 

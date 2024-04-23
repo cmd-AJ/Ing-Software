@@ -25,8 +25,7 @@ type User = {
 
 const Dashboard_Worker: React.FC = () => {
 
-  const [ editModal, setEditModal] = useState(false)
-  
+  const [ editModal, setEditModal] = useState(false)  
 
   const [myUser, setMyUser] = useState<User>({
     name : '',
@@ -44,23 +43,23 @@ const Dashboard_Worker: React.FC = () => {
     departamento: '',
     edad: 0
   }
-)
+  )
 
-useEffect(() => {
-  const user = localStorage.getItem("User");
-  if (user != null) {
-    const parsedUser = JSON.parse(user);
-    setMyUser(parsedUser);
-    if (parsedUser.fecha_nacimiento !== "") {
-      const fechaNacimiento = new Date(parsedUser.fecha_nacimiento);
-      const fechaActual = new Date();
-      const difMiliSeconds = fechaActual.getTime() - fechaNacimiento.getTime();
-      const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
-      const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
-      setMyUser((prevUser) => ({ ...prevUser, edad: edadAños }));
+  useEffect(() => {
+    const user = localStorage.getItem("User");
+    if (user != null) {
+      const parsedUser = JSON.parse(user);
+      setMyUser(parsedUser);
+      if (parsedUser.fecha_nacimiento !== "") {
+        const fechaNacimiento = new Date(parsedUser.fecha_nacimiento);
+        const fechaActual = new Date();
+        const difMiliSeconds = fechaActual.getTime() - fechaNacimiento.getTime();
+        const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
+        const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
+        setMyUser((prevUser) => ({ ...prevUser, edad: edadAños }));
+      }
     }
-  }
-}, []);
+  }, [myUser]);
 
     return (
       <>
@@ -82,7 +81,7 @@ useEffect(() => {
         </IonPage>
       </>
     );
-  };
+};
   
 
 export default Dashboard_Worker
