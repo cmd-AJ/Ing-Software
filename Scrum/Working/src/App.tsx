@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import About from './pages/About'
 import Search from './pages/Search';
 import Searched from './pages/Searched';
+import Chat from './pages/Chat';
 
 
 
@@ -47,7 +48,6 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
-
         <Route exact path='/empleado'>
           <Dashboard_Worker />
         </Route>
@@ -56,6 +56,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path='/searched'>
           <Searched/>
+        </Route>
+        <Route exact path='/chat'>
+          <Chat/>
         </Route>
         <Route exact path='/'>
           <Redirect to='/about' />
