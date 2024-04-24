@@ -10,7 +10,8 @@
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
-    "start": "node src/controller/main.js"
+    "start": "node src/controller/main.js",
+    "cucumber": "cucumber-js"
   },
   "dependencies": {
     "@capacitor/app": "5.0.7",
@@ -31,7 +32,6 @@
     "express": "^4.19.2",
     "ionicons": "^7.0.0",
     "neo4j-driver": "^5.19.0",
-    "pg": "^8.11.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^5.3.4",
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "5.7.4",
+    "@cucumber/cucumber": "^10.5.1",
     "@testing-library/dom": ">=7.21.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -49,10 +50,13 @@
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-legacy": "^5.0.0",
     "@vitejs/plugin-react": "^4.0.1",
+    "chai": "^5.1.0",
     "cypress": "^13.5.0",
+    "dotenv": "^16.4.5",
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^22.1.0",
+    "pg": "^8.11.5",
     "terser": "^5.4.0",
     "typescript": "^5.1.6",
     "vite": "5.2.8",
