@@ -31,6 +31,7 @@ import './theme/variables.css';
 import './pages/Login.css';
 import Dashboard_Worker from './pages/Dashboard-Worker';
 import React from 'react';
+import Dashboard_Employer from './pages/Dashboard-Employer';
 
 setupIonicReact();
 
@@ -56,6 +57,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path='/searched'>
           <Searched/>
+        </Route>
+        <Route exact path='/empleador'>
+          <Dashboard_Employer />
         </Route>
         <Route exact path='/'>
           <Redirect to='/about' />

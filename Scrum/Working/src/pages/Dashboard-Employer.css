@@ -1,0 +1,7 @@
+@import url('../theme/variables.css');
+
+.contentC {
+    background-color: var(--ion-color-primary);
+    height: 100%;
+    overflow: auto;
+}
