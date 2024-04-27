@@ -28,7 +28,7 @@ const LowerHeader: React.FC<ContainerProps> = ({ user, setEditModal }) => {
 
     return (
         <div className="lowerHeader">
-            <LeftLower name={user.name + ' ' +user.lastname} img={user.image} email={user.correo}/>
+            <LeftLower name={user.name + ' ' +user.lastname} img={user.image} email={user.correo} role={user.role}/>
             <RightLower setEditModal={setEditModal}/>
         </div>
     )
