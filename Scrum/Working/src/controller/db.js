@@ -49,9 +49,9 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
     }
 }
 
-export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI) {
+export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol, telefono) {
     try {
-        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}', fecha_nacimiento = '${fecha_nacimiento}', numero = ${numero} where DPI = '${DPI}'`);
+        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}',  fecha_nacimiento = '${fecha_nacimiento}', numero = ${numero} , rol = ${rol}, telefono = ${telefono} where DPI = '${DPI}'`);
         console.log('Data inserted successfully')
     } catch (error) {
         console.error('Error inserting user:', error);
@@ -88,3 +88,15 @@ export async function getWorkers(trabajo) {
 }
 
 
+
+export async function gettrabajo(dpi){
+    try {
+        const result = await client.query(`select nombre_trabajo  from usuarios left join trabajador on usuarios.dpi = trabajador.dpi where usuarios.dpi = '${dpi}'`
+        )
+        return result.rows
+        
+    } catch (error) {
+        console.error('Error getting user:', error);
+        throw error;
+    }
+}

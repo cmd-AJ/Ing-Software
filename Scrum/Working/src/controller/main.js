@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, getUserbyDPI, getWorkers, setsettings } from './db.js'
+import { getUsers, insertUser, gettrabajo ,getUserbyDPI, getWorkers, setsettings } from './db.js'
 
 const app = express()
 const port = 3000
@@ -65,15 +65,31 @@ app.use(cors({
   })
 
   app.put('/setsettings', async(req, res) => {
-    const [ municipio, imagen, sexo, fecha_nacimiento, numero, DPI ] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.numero, req.body.DPI]
-    if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI) {
+    const [ municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol ] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.numero, req.body.DPI, req.body.rol]
+    if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI || !rol) {
       res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
     } else {
       try {
-        const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI) 
+        const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol) 
         res.send('Inserted succesfully')
       } catch (error) {
           throw error
       }
+    }
+  })
+
+
+  app.get('/ctrabajo/:dpi', async(req, res) => {
+    try {
+      const { dpi } = req.params
+      const user = await gettrabajo(dpi)
+      if(user){
+        res.status(200).json(user)
+      } else{
+        res.status(404).json({ error: 'user not found' })
+      }
+      
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' })
     }
   })

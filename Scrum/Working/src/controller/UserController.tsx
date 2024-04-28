@@ -88,7 +88,7 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function setSettings(userData) { 
+async function setSettings(userData: any) { 
     try {
         const data = await fetch(`http://127.0.0.1:3000/setSettings`, 
         {
@@ -124,4 +124,16 @@ export async function updatecuenta(municipio: string, imagen: string, sexo: stri
         },
         body: JSON.stringify(object)
     })
+}
+
+export async function conseguirtrabajo( dpi: string) {
+    
+    const data = await fetch(`http://127.0.0.1:3000/ctrabajo/${dpi}`,
+    {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    return data
 }
