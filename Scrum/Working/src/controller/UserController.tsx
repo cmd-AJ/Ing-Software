@@ -88,7 +88,7 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function setSettings(userData) { 
+async function setSettings(userData: any) { 
     try {
         const data = await fetch(`http://127.0.0.1:3000/setSettings`, 
         {
