@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, gettrabajo ,getUserbyDPI, getWorkers, setsettings } from './db.js'
+import { getUsers, insertUser, gettrabajo ,getUserbyDPI, getWorkers, setsettings, getContactsByUserDPI} from './db.js'
 
 const app = express()
 const port = 3000
@@ -93,3 +93,14 @@ app.use(cors({
       res.status(500).json({ error: 'Internal Server Error' })
     }
   })
+
+  app.get('/contacts/:dpi', async (req, res) => {
+    try {
+        const { dpi } = req.params;
+        const contacts = await getContactsByUserDPI(dpi);
+        res.status(200).json(contacts);
+    } catch (error) {
+        console.error('Error getting contacts:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
