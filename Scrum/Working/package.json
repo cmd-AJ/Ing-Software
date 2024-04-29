@@ -11,9 +11,8 @@
     "test.unit": "vitest",
     "lint": "eslint",
     "start": "node src/controller/main.js",
-    "cucumber": "cucumber-js ./cucumber/features",
+    "cucumber": "cucumber-js ./cucumber/f eatures",
     "loginfeat": "node loginfeat.js"
-
   },
   "dependencies": {
     "@capacitor/app": "5.0.7",

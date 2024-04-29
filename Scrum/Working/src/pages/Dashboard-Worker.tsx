@@ -2,7 +2,6 @@ import { IonCard, IonCardContent, IonContent, IonGrid, IonPage, IonRow, IonTitle
 import Header from "../components/Dashboard-Worker/Header";
 import Info from '../components/Dashboard-Worker/Info'
 import './Dashboard-Worker.css'
-import NavigationBar from "../components/Navigation/Navigation";
 import React, { useEffect, useState } from "react";
 import ModalE from "../components/ModalEmployer/ModalE";
 
@@ -65,9 +64,6 @@ const Dashboard_Worker: React.FC = () => {
       <>
         <IonPage className="contentC">
             {editModal && <ModalE user={myUser} setModalE={setEditModal}/>}
-          <IonRow>
-            <NavigationBar />
-          </IonRow>
           <IonRow style={{
             justifyContent: 'center'
           }}>
