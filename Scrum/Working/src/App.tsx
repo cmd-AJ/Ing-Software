@@ -6,8 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register'
 import About from './pages/About'
 import Searched from './pages/Searched';
-
-
+import MainLayout from './pages/MainLayout/MainLayout';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -31,6 +30,7 @@ import './pages/Login.css';
 import Dashboard_Worker from './pages/Dashboard-Worker';
 import React from 'react';
 
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -48,12 +48,16 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path='/empleado'>
+          <MainLayout>
           <Dashboard_Worker />
+          </MainLayout>
         </Route>
        
+       {/*
         <Route exact path='/searched'>
           <Searched/>
         </Route>
+        */}
         <Route exact path='/'>
           <Redirect to='/about' />
         </Route>
