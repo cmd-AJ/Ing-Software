@@ -100,3 +100,33 @@ export async function gettrabajo(dpi){
         throw error;
     }
 }
+
+export async function getChatsByUserDPI(dpi) {
+    try {
+        // Buscar chats donde el DPI proporcionado sea el receptor
+        const receiverQuery = {
+            text: 'SELECT IDchat, DPIemisor FROM chats WHERE DPIreceptor = $1',
+            values: [dpi],
+        };
+
+        const receiverChats = await client.query(receiverQuery);
+
+        // Buscar chats donde el DPI proporcionado sea el emisor
+        const senderQuery = {
+            text: 'SELECT IDchat, DPIreceptor FROM chats WHERE DPIemisor = $1',
+            values: [dpi],
+        };
+
+        const senderChats = await client.query(senderQuery);
+
+        // Combinar y deduplicar los chats encontrados
+        const allChats = [...receiverChats.rows, ...senderChats.rows];
+        const uniqueChats = Array.from(new Set(allChats.map(chat => chat.idchat)));
+
+        return uniqueChats;
+    } catch (error) {
+        console.error('Error getting chats by user DPI:', error);
+        throw error;
+    }
+}
+
