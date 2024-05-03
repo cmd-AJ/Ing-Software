@@ -2,12 +2,14 @@ import './Searched.css'
 import { IonPage } from '@ionic/react';
 import Carrousel from '../components/Searched/Carrousel';
 
+//Temporally
+
 interface SearchedProps {
   request: string;
   setRequest: (value: string) => void;
 }
 
-const Searched: React.FC<SearchedProps> = () => {
+const Searched: React.FC = () => {
   
   return (
     <IonPage>

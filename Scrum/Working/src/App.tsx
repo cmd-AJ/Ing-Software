@@ -46,21 +46,21 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
-
-        <Route exact path='/empleado'>
+        
+        {/*
+        Single page implementation
+        */}
+        <Route exact path="/searched">
           <MainLayout>
-          <Dashboard_Worker />
+            <Searched />
           </MainLayout>
         </Route>
-       
-       {/*
-        <Route exact path='/searched'>
-          <Searched/>
+        <Route exact path="/empleado">
+          <MainLayout>
+            <Dashboard_Worker />
+          </MainLayout>
         </Route>
-        */}
-        <Route exact path='/'>
-          <Redirect to='/about' />
-        </Route>
+        
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
