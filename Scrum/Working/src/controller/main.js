@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, gettrabajo ,getUserbyDPI, getWorkers, setsettings, getContactsByUserDPI} from './db.js'
+import { getUsers, insertUser, gettrabajo ,getUserbyDPI, getWorkers, setsettings, getContactsByUserDPI, getTrustedUsersByDpi} from './db.js'
 
 const app = express()
 const port = 3000
@@ -104,3 +104,16 @@ app.use(cors({
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+ app.get('/trustNetwork/:dpi', async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    console.log(dpi)
+    const trustedUsers = await getTrustedUsersByDpi(dpi)
+    res.status(200).json(trustedUsers);
+    
+  } catch (error) {
+    console.error('Error getting trusted Users:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+ })
