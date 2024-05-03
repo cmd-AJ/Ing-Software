@@ -63,7 +63,7 @@ export async function getWorkers(trabajo) {
     const session = createSession();
 
     try {
-        const query = `MATCH p=(tra:Trabajador)-[:trabaja_de]->(tr:Trabajo) WHERE tr.nombre_trabajo = '${trabajo}' RETURN tra LIMIT 25`;
+        const query = `MATCH p=(usr:Usuario)-[:trabaja_de]->(tr:Trabajo) WHERE tr.nombre_trabajo = '${trabajo}' RETURN usr LIMIT 25`;
         const result = await session.run(query);
 
         // Transformar los registros obtenidos en un arreglo de objetos JSON
