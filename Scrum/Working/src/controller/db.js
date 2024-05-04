@@ -102,33 +102,22 @@ export async function getChatsByUserDPI(dpi) {
 
 export async function getContactsByUserDPI(dpi) {
     try {
-        // Obtener chats donde el usuario es el receptor o el emisor
-        const chatQuery = {
-            text: 'SELECT DPIemisor, DPIreceptor FROM chats WHERE DPIemisor = $1 OR DPIreceptor = $1',
+        const query = {
+            text: "SELECT imagen AS img, nombre || ' ' || apellidos AS name " + 
+                  "FROM usuarios " + 
+                  "WHERE dpi IN (" + 
+                  "    SELECT dpiemisor FROM chats AS contactos " + 
+                  "    WHERE dpireceptor = $1 " + 
+                  "    UNION " + 
+                  "    SELECT dpireceptor FROM chats AS contactos " +
+                  "    WHERE dpiemisor = $1 " +
+                  ")",
             values: [dpi],
         };
 
-        const chatResult = await client.query(chatQuery);
-
-        // Obtener DPIs únicos de los chats
-        const uniqueDPIs = new Set();
-        chatResult.rows.forEach(chat => {
-            uniqueDPIs.add(chat.dpiemisor);
-            uniqueDPIs.add(chat.dpireceptor);
-        });
-
-        // Convertir DPIs únicos a una matriz
-        const uniqueDPIsArray = Array.from(uniqueDPIs);
-
-        // Obtener información de usuario para los DPIs únicos
-        const userInfoQuery = {
-            text: 'SELECT dpi, nombre, apellidos, imagen FROM usuarios WHERE dpi = ANY($1)',
-            values: [uniqueDPIsArray],
-        };
-
-        const userInfoResult = await client.query(userInfoQuery);
-
-        return userInfoResult.rows;
+        const result = await client.query(query);
+        return result.rows;
+        
     } catch (error) {
         console.error('Error getting contacts by user DPI:', error);
         throw error;

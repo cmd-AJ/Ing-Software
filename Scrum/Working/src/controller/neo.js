@@ -45,7 +45,8 @@ export async function getTrustedUsersByDpi(dpi){
                 municipio: user.properties.Municipio,
                 rating: user.properties.Rating,
                 apellido: user.properties.Apellido,
-                dpi: user.properties.DPI
+                dpi: user.properties.DPI,
+                imagen: user.properties.imagen
             };
         });
         return users;
