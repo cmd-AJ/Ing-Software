@@ -71,29 +71,35 @@ export async function gettrabajo(dpi){
     }
 }
 
-export async function getChatsByUserDPI(dpi) {
+export async function getChatBetweenUsers(dpi1, dpi2) {
     try {
-        // Buscar chats donde el DPI proporcionado sea el receptor
-        const receiverQuery = {
-            text: 'SELECT IDchat, DPIemisor FROM chats WHERE DPIreceptor = $1',
-            values: [dpi],
+        // search de chat id corresponding to both
+        const query = {
+            text: "SELECT idchat " + 
+                  "FROM chats " + 
+                  "WHERE (dpireceptor = $1 AND dpiemisor = $2) " + 
+                  "OR (dpireceptor = $2 AND dpiemisor = $1)",
+            values: [dpi1, dpi2],
         };
 
-        const receiverChats = await client.query(receiverQuery);
+        const chatID = await client.query(query)
 
-        // Buscar chats donde el DPI proporcionado sea el emisor
-        const senderQuery = {
-            text: 'SELECT IDchat, DPIreceptor FROM chats WHERE DPIemisor = $1',
-            values: [dpi],
-        };
+        // Extract the id
+        const chat = chatID.rows[0].idchat
 
-        const senderChats = await client.query(senderQuery);
+        // Getting the chat messages by dpi
+        const messagesQuery = {
+            text: "SELECT id_mensaje, contenido, time, dpi " + 
+                  "FROM mensaje " +
+                  "WHERE id_chat = $1 " +
+                  "ORDER BY time ",
+                values: [chat]
+        }
 
-        // Combinar y deduplicar los chats encontrados
-        const allChats = [...receiverChats.rows, ...senderChats.rows];
-        const uniqueChats = Array.from(new Set(allChats.map(chat => chat.idchat)));
+        const result = await client.query(messagesQuery)
 
-        return uniqueChats;
+        return result.rows
+        
     } catch (error) {
         console.error('Error getting chats by user DPI:', error);
         throw error;
@@ -103,7 +109,7 @@ export async function getChatsByUserDPI(dpi) {
 export async function getContactsByUserDPI(dpi) {
     try {
         const query = {
-            text: "SELECT imagen AS img, nombre || ' ' || apellidos AS name " + 
+            text: "SELECT dpi, imagen AS img, nombre || ' ' || apellidos AS name " + 
                   "FROM usuarios " + 
                   "WHERE dpi IN (" + 
                   "    SELECT dpiemisor FROM chats AS contactos " + 

@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatsByUserDPI} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -114,6 +114,18 @@ app.get('/trustNetwork/:dpi', async (req, res) => {
 
   } catch (error) {
     console.error('Error getting trusted Users:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+app.post('/contacts/messages', async (req, res) => {
+  try {
+    const { dpi1, dpi2 } = req.body;
+    const chatMessagges = await getChatBetweenUsers(dpi1, dpi2)
+    res.status(200).json(chatMessagges);
+
+  } catch (error) {
+    console.error('Error getting chat messages:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
