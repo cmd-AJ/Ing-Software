@@ -73,7 +73,7 @@ export async function gettrabajo(dpi){
 
 export async function getChatBetweenUsers(dpi1, dpi2) {
     try {
-        // search de chat id corresponding to both
+        // search de chat id corresponding to both dpi
         const query = {
             text: "SELECT idchat " + 
                   "FROM chats " + 
