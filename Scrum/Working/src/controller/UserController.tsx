@@ -116,7 +116,7 @@ export async function updatecuenta(municipio: string, imagen: string, sexo: stri
         DPI: DPI
     }
 
-    const data = await fetch('http://127.0.0.1:4000/setsettings',
+    const data = await fetch('http://127.0.0.1:3000/setsettings',
         {
             method: 'PUT',
             headers: {
