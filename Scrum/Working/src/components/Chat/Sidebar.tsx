@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Sidebar.css';
 
-const Sidebar: React.FC<{ people: { img: string; name: string; time: string; preview: string; }[] }> = ({ people }) => {
+const Sidebar = ({ people }) => {
+    const [selectedPerson, setSelectedPerson] = useState(null);
+
+    const handlePersonClick = (name) => {
+        setSelectedPerson(name);
+    };
+
     return (
         <div className="wrapper">
             <div className="container1">
@@ -11,8 +17,8 @@ const Sidebar: React.FC<{ people: { img: string; name: string; time: string; pre
                         <a href="javascript:;" className="search"></a>
                     </div>
                     <ul className="people">
-                        {people.map((person, index) => (
-                            <li key={index} className="person">
+                        {people.map((person: any, index: any) => (
+                            <li key={index} className="person" onClick={() => handlePersonClick(person.name)}>
                                 <img src={person.img} alt="" />
                                 <span className="name">{person.name}</span>
                                 <span className="time">{person.time}</span>
@@ -22,7 +28,10 @@ const Sidebar: React.FC<{ people: { img: string; name: string; time: string; pre
                     </ul>
                 </div> 
                 <div className="right">
-                    <div className="top"><span>To: <span className="name">Persona con la que está chateando</span></span></div>
+                    <div className="top">
+                        <span>To: <span className="name">{selectedPerson ? selectedPerson : "Persona con la que está chateando"}</span></span>
+                    </div>
+                    {/*PENDIENTE AÑADIRLA LÓGICA PARA MOSTRAR EL CHAT CORRESPONDIENTE  */}
                 </div>
             </div>
         </div>

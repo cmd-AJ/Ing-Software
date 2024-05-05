@@ -4,7 +4,7 @@ import Sidebar from '../components/Chat/Sidebar';
 import './Home.css';
 
 const Chat: React.FC = () => {
-  // Datos de ejemplo de personas
+
   const people = [
     {
       img: 'https://i.pinimg.com/564x/d3/1a/1e/d31a1ef159f75c6540e765ad6838c0c9.jpg',
@@ -30,7 +30,7 @@ const Chat: React.FC = () => {
       time: '16:23 AM',
       preview: 'Mensaje de prueba 4',
     },
-    // Añade más personas según sea necesario
+
   ];
 
   return (
