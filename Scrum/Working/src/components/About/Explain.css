@@ -1,0 +1,70 @@
+.info-content {
+    display: flex;
+    width: 100%;
+    height: 350px;
+    align-items: center; /* Center children vertically */
+    justify-content: space-between; /* Space between the children */
+    background-color: rgb(175, 190, 214);
+  }
+  
+
+  .content-title {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally in the block */
+    justify-content: center; /* Center content vertically in the block */
+    text-align: center; /* Ensures text within is centered */
+  }
+
+
+
+  .circular-image-wrapper {
+    width: 40%;
+    display: flex;
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+  }
+
+  .circular-image-wrapper ion-img {
+    width: 100%; /* Cover the area of the div */
+    height: 100%; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers the area and is not stretched */
+  }
+  
+  .image-holder {
+    width: 300px; /* Adjust the width to fill the container */
+    height: 300px;
+    border-radius: 50%; /* Circular shape */
+    background-color: black; /* Fallback color */
+    background-size: cover; /* Cover the entire div without stretching */
+    background-position: center; /* Center the background image */
+}
+
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.text-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 38px; /* Adjust size as necessary */
+  font-weight: 700; /* Bold font weight for the title */
+  color: #333; /* Dark gray for better readability */
+  animation: floatTitle 3s ease-in-out infinite;
+}
+
+.content-style {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; /* Adjust size for readability */
+  color: #000000; /* Lighter gray for the content text */
+  line-height: 1.6; /* Enhances readability of paragraphs */
+  margin-left: 30px;
+}
+
+@keyframes floatTitle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust the value for more or less movement */
+  }
+}

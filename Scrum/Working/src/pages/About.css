@@ -29,7 +29,8 @@ ion-segment{
 #mainContent {
   overflow-y: auto; 
   max-height: calc(100vh - 56px);
-  --background: #fff;
+  --background: #ffffff; /*MAIN BACKGROUND*/
+  
 }
 
 .contentWrapper {
@@ -44,20 +45,9 @@ ion-segment{
   margin-right: 20px; /* Adjust spacing between image and text */
 }
 
-.imageWrapper img {
-  max-width: 100%; /* Adjust image width */
-  height: auto;
-  border-radius: 10%;
-}
 
 
-.textWrapper {
-  font-size: 20px;
-  display: flex;
-  flex: 1;
-  justify-content: space-around;
-  text-align: justify;
-}
+
 
 
 @media (max-width: 768px) {
@@ -67,12 +57,90 @@ ion-segment{
 }}
 
 
-.IonCardTitle {
-  font-family: 'Arial', sans-serif; /* Example font family */
-  font-size: 24px; /* Adjust font size as needed */
-  font-weight: bold; /* Make the title bold */
-  color: #ffffff; /* Example color (orange) */
-  background-color: #e2850ada; /* Example background color */
-  padding: 10px 20px; /* Add padding to create space around the title */
-  border-radius: 5px; /* Add rounded corners */
+/*About css*/
+
+
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
+
+h1.apptitle {
+  margin: 0;
+  color: white; /* Ensures the title is visible against the background */
+  font-size: 65px; /* Starting font size */
+  position: absolute; /* Positions the title absolutely within the relative parent */
+  top: 155px; /* Aligns to the top of the parent container */
+  left: 90px; /* Provides some padding from the left */
+  animation: floatAnimation 3s ease-in-out infinite; /* Applies the floating animation */
+}
+
+
+
+.background-image {
+  background-image: url('https://i.pinimg.com/736x/e3/71/c2/e371c2f47f39e92b8245a3f3df47457d.jpg'); /* Background image URL */
+  background-size: cover;
+  background-position: center;
+  height: 400px; /* Height of the background area */
+  display: flex;
+  width: 100%;
+}
+
+
+#aboutContent {
+  width: 100%; /* Full width to remove side spaces */
+}
+
+section#nextSection {
+  background-color: transparent; /* Ensures the background is empty */
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.emptyTitle {
+  color: black; /* Set the color for visibility */
+  font-size: 20px; /* Adjust based on your preference */
+}
+section#about {
+  width: 100%; /* Ensure the section takes full width */
+  margin: 0; /* Remove any margin */
+  padding: 0; /* Remove any padding */
+}
+
+
+h1.emptyTitle {
+  margin: 0;
+  color: rgb(71, 62, 62); /* Dark grayish color for visibility */
+  font-size: 32px; /* Large font size for impact */
+  top: 155px; /* Vertical positioning */
+  left: 90px; /* Horizontal positioning */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+  transition: all 0.3s ease-in-out; /* Smooth transition for any hover effects */
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+h1.emptyTitle:hover {
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); /* Darker and larger shadow on hover for interactive effect */
+  transform: scale(1.05); /* Slightly enlarges the text on hover */
+}
+
+.explain-content{
+  display: flex;
+  background-color: #1961af;
+  flex-direction: row;
+  height: 300px;
+  
+}
+
+
+
