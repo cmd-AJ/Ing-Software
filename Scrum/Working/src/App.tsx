@@ -1,15 +1,11 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register'
-import About from './pages/About'
-import Search from './pages/Search';
 import Searched from './pages/Searched';
-
-
-
+import MainLayout from './pages/MainLayout/MainLayout';
+import About from './pages/About';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -32,6 +28,7 @@ import './pages/Login.css';
 import Dashboard_Worker from './pages/Dashboard-Worker';
 import React from 'react';
 
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -47,19 +44,27 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
-
         <Route exact path='/profile'>
           <Dashboard_Worker />
         </Route>
-        <Route exact path='/search'>
-          <Search/>
+        <Route exact path="/">
+          <About />
         </Route>
-        <Route exact path='/searched'>
-          <Searched/>
+        
+        {/*
+        Single page implementation
+        */}
+        <Route exact path="/searched">
+          <MainLayout>
+            <Searched />
+          </MainLayout>
         </Route>
-        <Route exact path='/'>
-          <Redirect to='/about' />
+        <Route exact path="/empleado">
+          <MainLayout>
+            <Dashboard_Worker />
+          </MainLayout>
         </Route>
+        
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

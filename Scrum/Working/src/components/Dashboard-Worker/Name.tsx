@@ -17,7 +17,7 @@ const Name: React.FC<ContainerProps> = ({name, email, role}) => {
         } else {
             setUserDesc('Trabajo')
         }
-    })
+    },[])
 
     return (
         <div className="nameDisplay">

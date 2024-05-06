@@ -2,13 +2,24 @@ import { IonButton, IonIcon } from '@ionic/react'
 import Chats from './Chats'
 import { chatbubbleEllipses, pencilOutline } from 'ionicons/icons'
 import './style.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface ContainerProps {     
     setEditModal: (editModal: boolean) => void
+    role: string
 }
 
-const RightLower: React.FC<ContainerProps> = ({setEditModal}) => {
+const RightLower: React.FC<ContainerProps> = ({setEditModal, role}) => {
+
+    const [userExist, setUserExist] = useState(false)
+
+    useEffect(() => {
+        if (role === 'Empleador'){
+            setUserExist(false)
+        } else {
+            setUserExist(true)
+        }
+    })
 
     return (
         <div className='lowerElements'>
@@ -18,9 +29,9 @@ const RightLower: React.FC<ContainerProps> = ({setEditModal}) => {
             <IonButton shape='round' color='tertiary' className='roundedButton' onClick={() => setEditModal(true)}>
                 <IonIcon icon={pencilOutline} size='large'></IonIcon>
             </IonButton>
-            <IonButton shape='round' className='button' color='tertiary'> 
+            { userExist && <IonButton shape='round' className='button' color='tertiary'> 
                 Añadir trabajo
-            </IonButton>
+            </IonButton>}
         </div>
     )
 }
