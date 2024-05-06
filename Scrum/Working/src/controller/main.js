@@ -85,7 +85,7 @@ app.get('/ctrabajo/:dpi', async (req, res) => {
     const { dpi } = req.params
     const user = await gettrabajo(dpi)
     if (user) {
-      res.status(200).json(user)
+      res.status(200).send(user)
     } else {
       res.status(404).json({ error: 'user not found' })
     }
