@@ -33,13 +33,15 @@ type User = {
 interface ContainerProps { 
     user: User
     setModalE: (modalE: boolean) => void
+    setEditUser: (user: User) => void
 }
 
-const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
+const ContentM: React.FC<ContainerProps> = ({user, setModalE, setEditUser}) => {
 
     const [oficio, setOficio] = useState('')
     const [image, setImage] = useState(user.image)
     const [date, setDate] = useState(user.fecha_nacimiento)
+    const [validateDate, setValidateDate] = useState(false)
     const [sexo, setSexo] = useState(user.sexo)
     const [tel, setTel] = useState(user.tel)
     const [correo, setCorreo] = useState(user.correo)
@@ -60,14 +62,15 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
             <Line />
             <FileUpload image={image} setImage={setImage}/>
             <Work setOficio={setOficio}/>
-            <Birthday fecha={date} setFecha={setDate}/>
+            <Birthday fecha={date} setFecha={setDate} setValidateDate={setValidateDate}/>
             <Sexo sexo={sexo} setSexo={setSexo}/>
             <Tel tel={tel} setTel={setTel}/>
             <Email email={correo} setEmail={setCorreo} validatesEmail={validateCorreo} setValidateEmail={setValidateCorreo} />
             <Departamento departamento={departamento} setDepartamento={setDepartamento}/>
             <Municipio municipio={municipio} setMunicipio={setMunicipio} departamento={departamento}/>
             <EditBtn user={user} municipio={municipio} departamento={departamento}
-            birthday={date} tel={tel} correo={correo} sexo={sexo} image={image} setEditM={setModalE}/>
+            birthday={date} tel={tel} correo={correo} sexo={sexo} image={image} setEditM={setModalE}
+            validateEmail={validateCorreo} validateDate={validateDate}/>
         </div>
     )
 }

@@ -1,48 +1,76 @@
-import { IonButton, IonDatetime, IonInput } from "@ionic/react"
-import React, { useState } from "react"
+import { IonButton, IonDatetime, IonInput } from "@ionic/react";
+import React, { useEffect, useState } from "react";
 
-interface ContainerProps { 
+interface ContainerProps {
     fecha: string,
     setFecha: (fecha: string) => void
- }
+    setValidateDate: (validateDate: boolean) => void
+}
 
-const Birthday: React.FC<ContainerProps> = ({fecha ,setFecha}) => {
+const Birthday: React.FC<ContainerProps> = ({ fecha, setFecha, setValidateDate }) => {
 
-    const [date, setDate] = useState(fecha)
-    const [datePicker, setDatePicker] = useState(false)
-    const [showDate, setShowDate] = useState(false)
+    const [date, setDate] = useState(fecha);
+    const [datePicker, setDatePicker] = useState(false);
+    const [showDate, setShowDate] = useState(false);
+
+    useEffect(() => {
+        const dateC = new Date(date);
+        const realDate = new Date(dateC.setDate(dateC.getDate() + 1));
+
+        const fechaActual = new Date();
+        const difMiliSeconds = fechaActual.getTime() - realDate.getTime();
+        const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
+        const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
+
+        if (edadAños >= 18) {
+            setValidateDate(true)
+        }
+    }, [])
 
     const handleClick = () => {
-        setDatePicker(true)
-        setShowDate(true)
+        setDatePicker(true);
+        setShowDate(true);
     }
 
     const handleDateChange = (event: CustomEvent) => {
         const selectedValue = event.detail.value;
         setDate(selectedValue.split('T')[0]);
-        setFecha(selectedValue.split('T')[0])
+        setFecha(selectedValue.split('T')[0]);
     }
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('es-ES'); // Cambia 'es-ES' por el código de tu idioma si es necesario
-    };
+        const realDate = new Date(date.setDate(date.getDate() + 1));
+
+        const fechaActual = new Date();
+        const difMiliSeconds = fechaActual.getTime() - realDate.getTime();
+        const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
+        const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
+
+        if (edadAños >= 18) {
+            setValidateDate(true)
+            return realDate.toLocaleDateString('es-ES'); // Cambia 'es-ES' por el código de tu idioma si es necesario
+        } else {
+            return 'Fecha inválida'
+        }
+    }
 
     return (
         <>
-            <IonInput 
-                label='Fecha de nacimiento:' 
-                className="inputsModal"
+            <IonInput
+                label='Fecha de nacimiento:'
+                className={`inputsModal `} // Agregar la clase 'ion-invalid' si hay un error
                 onClick={handleClick}
                 value={formatDate(date)}></IonInput>
             {(datePicker && showDate) &&
-            <IonDatetime 
-                presentation="date"
-                onBlur={() => setDatePicker(false)}
-                onIonChange={handleDateChange}></IonDatetime>
+                <IonDatetime
+                    style={{ position: 'absolute', zIndex: '3' }}
+                    presentation="date"
+                    onBlur={() => setDatePicker(false)}
+                    onIonChange={handleDateChange}></IonDatetime>
             }
         </>
     )
 }
 
-export default Birthday
+export default Birthday;

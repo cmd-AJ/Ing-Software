@@ -29,6 +29,8 @@ interface ContainerProps {
     user: User,
     image: string,
     setEditM: (editM : boolean) => void
+    validateEmail: boolean
+    validateDate: boolean
 }
 
 const EditBtn : React.FC<ContainerProps> = ({
@@ -40,31 +42,36 @@ const EditBtn : React.FC<ContainerProps> = ({
    departamento,
    user,
    image, 
-   setEditM
+   setEditM,
+    validateEmail,
+    validateDate
 }) => {
 
     const handleClick = () => {
-        user.municipio = municipio
-        user.sexo = sexo
-        user.fecha_nacimiento = birthday
-        user.tel = tel
-        user.correo = correo
-        user.departamento = departamento
-        user.image = image
-        localStorage.setItem('User', JSON.stringify(user))
-        console.log(user)
-        
-        const userData = {
-            municipio: user.municipio,
-            imagen: user.image,
-            sexo: user.sexo,
-            fecha_nacimiento: user.fecha_nacimiento,
-            numero: user.tel,
-            DPI: user.dpi,
+        if (validateEmail && validateDate) {
+            user.municipio = municipio
+            user.sexo = sexo
+            user.fecha_nacimiento = birthday
+            user.tel = tel
+            user.correo = correo
+            user.departamento = departamento
+            user.image = image
+            localStorage.setItem('User', JSON.stringify(user))
+            console.log(user)
+            
+            const userData = {
+                municipio: user.municipio,
+                imagen: user.image,
+                sexo: user.sexo,
+                fecha_nacimiento: user.fecha_nacimiento,
+                numero: user.tel,
+                DPI: user.dpi,
+            }
+            
+            setSettings(userData)
+            setEditM(false)
         }
-        
-        setSettings(userData)
-        setEditM(false)
+
     }
 
     return (

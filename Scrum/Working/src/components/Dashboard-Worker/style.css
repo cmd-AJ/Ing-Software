@@ -153,6 +153,7 @@
 
 .dataContainerText {
     font-size: 23px;
+    max-height: 28px;
 }
 
 .dataLabel {

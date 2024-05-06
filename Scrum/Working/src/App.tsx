@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import About from './pages/About'
-import Search from './pages/Search';
 import Searched from './pages/Searched';
 import Chat from './pages/Chat';
 
@@ -33,6 +32,7 @@ import './pages/Login.css';
 import Dashboard_Worker from './pages/Dashboard-Worker';
 import React from 'react';
 
+
 setupIonicReact();
 
 const App: React.FC = () => (
@@ -52,7 +52,7 @@ const App: React.FC = () => (
           <Dashboard_Worker />
         </Route>
         <Route exact path='/search'>
-          <Search/>
+          <Home />
         </Route>
         <Route exact path='/searched'>
           <Searched/>
@@ -63,6 +63,7 @@ const App: React.FC = () => (
         <Route exact path='/'>
           <Redirect to='/about' />
         </Route>
+        
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
