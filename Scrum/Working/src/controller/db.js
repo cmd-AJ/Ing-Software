@@ -129,3 +129,18 @@ export async function getContactsByUserDPI(dpi) {
         throw error;
     }
 }
+
+
+
+export async function updatetrab(trabajo, dpi) {
+    try {
+        const result = await client.query(`UPDATE trabajador set nombre_trabajo  = '${trabajo}' where dpi = '${dpi}';`);
+        console.log('Data updated  successfully')
+    } catch (error) {
+        console.error('Error inserting user:', error);
+        throw error;
+    }
+}
+
+
+
