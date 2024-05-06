@@ -150,3 +150,19 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
     }
   }
   
+  export async function configurartrabajo( trabajo: string ,dpi: string) {
+    const object = {
+        trabajo: trabajo,
+        dpi:dpi
+    }
+
+    const data = await fetch(`http://127.0.0.1:3000/confitrab`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        })
+    return data
+}
