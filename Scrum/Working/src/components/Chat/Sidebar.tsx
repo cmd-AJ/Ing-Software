@@ -7,11 +7,12 @@ const Sidebar = () => {
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
+    const [loggedUserDpi, setLoggedUserDpi] = useState("3834 49898 0101"); // DPI del usuario loggeado
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const contactsData = await getContacts("3834 49898 0101");
+                const contactsData = await getContacts(loggedUserDpi);
                 setContacts(contactsData);
             } catch (error) {
                 console.error('Error fetching contacts:', error);
@@ -23,19 +24,19 @@ const Sidebar = () => {
         return () => {
             setContacts([]);
         };
-    }, []);
+    }, [loggedUserDpi]);
 
     const handlePersonClick = async (dpi) => {
         const selectedPerson = contacts.find(person => person.dpi === dpi);
         setSelectedPerson(selectedPerson);
 
         try {
-            const chatMessages = await getChatMessages("3810 35859 0101", "3834 49898 0101");
+            const chatMessages = await getChatMessages(loggedUserDpi, dpi);
             
-            // Formatear los mensajes para que coincidan con el formato esperado por el componente Chat
+            // Formatear los mensajes
             const formattedMessages = chatMessages.map(msg => ({
                 message: msg.contenido,
-                sender: msg.dpi === "3810 35859 0101" ? 'me' : 'you'
+                sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
             }));
 
             setMessages(formattedMessages);

@@ -15,10 +15,10 @@
 }
 
 .chat-bubble.me {
-    background-color: #DCF8C6;
+    background-color: #026685;
     align-self: flex-end;
 }
 
 .chat-bubble.you {
-    background-color: #E0E0E0;
+    background-color: #212121;
 }
