@@ -115,3 +115,32 @@ section#about {
   padding: 0; /* Remove any padding */
 }
 
+
+h1.emptyTitle {
+  margin: 0;
+  color: rgb(71, 62, 62); /* Dark grayish color for visibility */
+  font-size: 32px; /* Large font size for impact */
+  top: 155px; /* Vertical positioning */
+  left: 90px; /* Horizontal positioning */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+  transition: all 0.3s ease-in-out; /* Smooth transition for any hover effects */
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+h1.emptyTitle:hover {
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); /* Darker and larger shadow on hover for interactive effect */
+  transform: scale(1.05); /* Slightly enlarges the text on hover */
+}
+
+.explain-content{
+  display: flex;
+  background-color: #1961af;
+  flex-direction: row;
+  height: 300px;
+  
+}
+
+
+
