@@ -22,6 +22,8 @@ const Name: React.FC<ContainerProps> = ({name, email, role, dpi}) => {
                         const jobData = await response.json();
                         if (jobData.length > 0 && jobData[0].nombre_trabajo != null) {
                             setUserDesc(jobData[0].nombre_trabajo);
+                            console.log(jobData[0].nombre_trabajo);
+                            
                         } else {
                             setUserDesc('Empleado');
                         }
