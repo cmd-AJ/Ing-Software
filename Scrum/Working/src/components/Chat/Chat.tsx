@@ -1,10 +1,17 @@
 import React from 'react';
 import './chat.css';
 
-const ChatBubble = ({ message, sender }) => {
+const ChatBubble = ({ message, time, sender }) => {
+    const formattedTime = (timeString) => {
+        const timePart = timeString.split('T')[1];
+        const [hour, minute] = timePart.split(':').slice(0, 2);
+        return `${hour}:${minute}`;
+    };
+    
     return (
         <div className={`chat-bubble ${sender === 'me' ? 'me' : 'you'}`}>
-            {message}
+            <div className="message-content">{message}</div>
+            <div className="message-time">{formattedTime(time)}</div>
         </div>
     );
 }
@@ -13,7 +20,7 @@ const Chat = ({ messages }) => {
     return (
         <div className="chat-container">
             {messages.map((msg, index) => (
-                <ChatBubble key={index} message={msg.message} sender={msg.sender} />
+                <ChatBubble key={index} message={msg.message} time={msg.time} sender={msg.sender} />
             ))}
         </div>
     );

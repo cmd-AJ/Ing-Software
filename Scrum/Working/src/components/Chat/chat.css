@@ -3,15 +3,19 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
+    width: 100%;
+    overflow-y: auto;
 }
 
 .chat-bubble {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     max-width: 70%;
     margin-bottom: 5px;
     padding: 10px;
     border-radius: 10px;
     font-size: 16px;
+    position: relative;
 }
 
 .chat-bubble.me {
@@ -22,3 +26,13 @@
 .chat-bubble.you {
     background-color: #212121;
 }
+
+.message-content {
+    margin-bottom: 5px; 
+}
+
+.message-time {
+    font-size: 12px;
+    color: #dbdbdb;
+    margin-top: 1px;
+    align-self: flex-end; }

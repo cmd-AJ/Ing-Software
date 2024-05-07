@@ -33,9 +33,9 @@ const Sidebar = () => {
         try {
             const chatMessages = await getChatMessages(loggedUserDpi, dpi);
             
-            // Formatear los mensajes
             const formattedMessages = chatMessages.map(msg => ({
                 message: msg.contenido,
+                time: msg.time,
                 sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
             }));
 
