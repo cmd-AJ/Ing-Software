@@ -1,6 +1,6 @@
 import { IonButton } from "@ionic/react"
 import React, { useCallback } from "react"
-import { setSettings, updatecuenta } from "../../controller/UserController"
+import { updatecuenta } from "../../controller/UserController"
 
 type User = {
     name : string

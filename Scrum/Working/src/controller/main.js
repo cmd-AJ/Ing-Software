@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers} from './db.js'
+
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -66,8 +67,8 @@ app.listen(port, () => {
 })
 
 app.put('/setsettings', async (req, res) => {
-  const { municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol, telefono } = req.body; 
-  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI || !rol || !telefono) {
+  const { municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono } = req.body; 
+  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !DPI || !rol || !telefono) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
@@ -128,5 +129,42 @@ app.post('/contacts/messages', async (req, res) => {
   } catch (error) {
     console.error('Error getting chat messages:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+app.put('/confitrab', async (req, res) => {
+  const [dpi, trabajo] = [req.body.dpi, req.body.trabajo]
+  if (!trabajo || !dpi) {
+    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
+  } else {
+    try {
+      const resp = await updatetrab(trabajo, dpi)
+      res.send('Updated succesfully')
+    } catch (error) {
+      throw error
+    }
+  }
+})
+
+//Tomar nota el dpi es del trabajador osea el que esta haciendo el trabajo 
+app.get('/trabajoanterior/:dpi', async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    const trabjant = await gettrabajoant(dpi)
+    res.status(200).json(trabjant);
+
+  } catch (error) {
+    console.error('Error getting trabajos anteriores:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+app.post('/trabajaoanterior', async (req, res) => {
+  try {
+    const [ dpi, estado ] = [ req.body.dpi, req.body.estado]
+    const result = await insertartrabant(dpi, estado)
+    res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
+  } catch (error) {
   }
 })

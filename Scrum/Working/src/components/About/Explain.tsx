@@ -15,9 +15,9 @@ interface InfoCardProps {
 }
 
 const InfoCard: React.FC<InfoCardProps> = ({ title, content, imageUrl }) => {
-    const imageStyle = {
-        backgroundImage: `url(${imageUrl})`
-      };
+  const imageStyle = {
+    backgroundImage: `url(${imageUrl})`,
+  };
   return (
     <div className="info-content">
       <div className="content-title">
@@ -25,7 +25,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, content, imageUrl }) => {
         <p className="content-style">{content}</p>
       </div>
       <div className="circular-image-wrapper">
-      <div className="image-holder" style={imageStyle}></div>
+        <div className="image-holder" style={imageStyle}></div>
       </div>
     </div>
   );

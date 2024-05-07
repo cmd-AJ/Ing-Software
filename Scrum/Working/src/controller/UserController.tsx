@@ -89,24 +89,7 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function setSettings(userData: any) {
-    try {
-        const data = await fetch(`http://127.0.0.1:3000/setSettings`,
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
-    } catch (error) {
-        console.error('Error modifying user:', error)
-    }
-}
-
-export { createUser, userExists, getWorkersByJob, setSettings }
-
-export async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero: string, DPI: string) {
+async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero: string, DPI: string) {
     const object = {
         municipio: municipio,
         imagen: imagen,
@@ -126,6 +109,9 @@ export async function updatecuenta(municipio: string, imagen: string, sexo: stri
             body: JSON.stringify(object)
         })
 }
+
+export { createUser, userExists, getWorkersByJob, updatecuenta }
+
 
 export async function conseguirtrabajo(dpi: string) {
 
@@ -163,6 +149,34 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
+        })
+    return data
+}
+
+
+
+export async function gettrabajoanterior(dpi: string) {
+
+    const data = await fetch(`http://127.0.0.1:3000/trabajoanterior/${dpi}`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    return data
+}
+
+//DPI y Estado (Descripcion)
+export async function insertrabajoanterior(trabajo : object) {
+
+    const data = await fetch(`http://127.0.0.1:3000/trabajaoanterior/`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(trabajo)
         })
     return data
 }
