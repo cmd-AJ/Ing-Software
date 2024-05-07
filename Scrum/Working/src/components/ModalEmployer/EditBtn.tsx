@@ -1,6 +1,6 @@
 import { IonButton } from "@ionic/react"
 import React, { useCallback } from "react"
-import { setSettings } from "../../controller/UserController"
+import { setSettings, updatecuenta } from "../../controller/UserController"
 
 type User = {
     name : string
@@ -64,11 +64,13 @@ const EditBtn : React.FC<ContainerProps> = ({
                 imagen: user.image,
                 sexo: user.sexo,
                 fecha_nacimiento: user.fecha_nacimiento,
-                numero: user.tel,
+                numero: 0,
                 DPI: user.dpi,
+                telefono: user.tel
             }
             
-            setSettings(userData)
+            updatecuenta(user.municipio, user.image, user.sexo, user.fecha_nacimiento, user.rating.toString(), '0',user.dpi)
+
             setEditM(false)
         }
 

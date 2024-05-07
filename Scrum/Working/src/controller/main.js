@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -66,18 +66,19 @@ app.listen(port, () => {
 })
 
 app.put('/setsettings', async (req, res) => {
-  const [municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.numero, req.body.DPI, req.body.rol]
-  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI || !rol) {
-    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
+  const { municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol, telefono } = req.body; 
+  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI || !rol || !telefono) {
+    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
-      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol)
-      res.send('Inserted succesfully')
+      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol, telefono);
+      res.send('Inserted successfully');
     } catch (error) {
-      throw error
+      throw error;
     }
   }
-})
+});
+
 
 
 app.get('/ctrabajo/:dpi', async (req, res) => {
@@ -127,20 +128,5 @@ app.post('/contacts/messages', async (req, res) => {
   } catch (error) {
     console.error('Error getting chat messages:', error);
     res.status(500).json({ error: 'Internal Server Error' });
-  }
-})
-
-
-app.put('/confitrab', async (req, res) => {
-  const [dpi, trabajo] = [req.body.dpi, req.body.trabajo]
-  if (!trabajo || !dpi) {
-    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
-  } else {
-    try {
-      const resp = await updatetrab(trabajo, dpi)
-      res.send('Updated succesfully')
-    } catch (error) {
-      throw error
-    }
   }
 })
