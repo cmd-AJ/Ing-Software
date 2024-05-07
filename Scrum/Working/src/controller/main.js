@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -66,12 +66,12 @@ app.listen(port, () => {
 })
 
 app.put('/setsettings', async (req, res) => {
-  const [municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.numero, req.body.DPI, req.body.rol]
+  const [municipio, imagen, sexo, fecha_nacimiento, telefono, DPI, rol] = [req.body.municipio, req.body.imagen, req.body.sexo, req.body.fecha_nacimiento, req.body.telefono, req.body.DPI, req.body.rol]
   if (!municipio || !imagen || !sexo || !fecha_nacimiento || !numero || !DPI || !rol) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
   } else {
     try {
-      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol)
+      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono)
       res.send('Inserted succesfully')
     } catch (error) {
       throw error
@@ -142,5 +142,27 @@ app.put('/confitrab', async (req, res) => {
     } catch (error) {
       throw error
     }
+  }
+})
+
+//Tomar nota el dpi es del trabajador osea el que esta haciendo el trabajo 
+app.get('/trabajoanterior/:dpi', async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    const trabjant = await gettrabajoant(dpi)
+    res.status(200).json(trabjant);
+
+  } catch (error) {
+    console.error('Error getting trabajos anteriores:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+app.post('/trabajaoanterior', async (req, res) => {
+  try {
+    const [ dpi, estado ] = [ req.body.dpi, req.body.estado]
+    const result = await insertartrabant(dpi, estado)
+    res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
+  } catch (error) {
   }
 })

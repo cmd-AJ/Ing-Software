@@ -105,26 +105,6 @@ async function setSettings(userData: any) {
 
 export { createUser, userExists, getWorkersByJob, setSettings }
 
-export async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero: string, DPI: string) {
-    const object = {
-        municipio: municipio,
-        imagen: imagen,
-        sexo: sexo,
-        fecha_nacimiento: fecha_nacimiento,
-        rating: rating,
-        numero: numero,
-        DPI: DPI
-    }
-
-    const data = await fetch('http://127.0.0.1:3000/setsettings',
-        {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(object)
-        })
-}
 
 export async function conseguirtrabajo(dpi: string) {
 
@@ -162,6 +142,34 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
+        })
+    return data
+}
+
+
+
+export async function gettrabajoanterior(dpi: string) {
+
+    const data = await fetch(`http://127.0.0.1:3000/trabajoanterior/${dpi}`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    return data
+}
+
+//DPI y Estado (Descripcion)
+export async function insertrabajoanterior(trabajo : object) {
+
+    const data = await fetch(`http://127.0.0.1:3000/trabajaoanterior/`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(trabajo)
         })
     return data
 }

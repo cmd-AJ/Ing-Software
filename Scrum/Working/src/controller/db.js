@@ -48,9 +48,9 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
     }
 }
 
-export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol, telefono) {
+export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono) {
     try {
-        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}',  fecha_nacimiento = '${fecha_nacimiento}', numero = ${numero} , rol = ${rol}, telefono = ${telefono} where DPI = '${DPI}'`);
+        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}',  fecha_nacimiento = '${fecha_nacimiento}', rol = ${rol}, telefono = ${telefono} where DPI = '${DPI}'`);
         console.log('Data inserted successfully')
     } catch (error) {
         console.error('Error inserting user:', error);
@@ -142,5 +142,26 @@ export async function updatetrab(trabajo, dpi) {
     }
 }
 
+export async function gettrabajoant(dpi){
+    try {
+        const result = await client.query(`select estado, dpitrabajador, dpiempleador from completado 
+        where dpitrabajador  = '${dpi}'`
+        )
+        return result.rows
+    } catch (error) {
+        console.error('Error getting user:', error);
+        throw error;
+    }
+}
 
 
+//Estado es la descripcion eg. Se termino con aticipio o lo mejor de todo
+export async function insertartrabant(DPI, estado) {
+    try {
+        const result = await client.query(`insert into completado(estado, dpitrabajador) values( '${estado}', '${DPI}')`);
+        console.log('Data inserted successfully');
+    } catch (error) {
+        console.error('Error inserting user:', error);
+        throw error;
+    }
+}
