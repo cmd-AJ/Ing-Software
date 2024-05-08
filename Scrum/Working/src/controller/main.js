@@ -67,15 +67,16 @@ app.listen(port, () => {
 })
 
 app.put('/setsettings', async (req, res) => {
-  const { municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono } = req.body; 
-  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !DPI || !rol || !telefono) {
+  const { municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono, trabajo } = req.body; 
+  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !DPI || !rol || !telefono || !trabajo) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
-      const resp = await setsettings(municipio, imagen, sexo, fecha_nacimiento, numero, DPI, rol, telefono);
+      await setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono, trabajo);
       res.send('Inserted successfully');
     } catch (error) {
-      throw error;
+      console.error('Error inserting user:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
     }
   }
 });

@@ -1,5 +1,5 @@
 import { IonButton } from "@ionic/react"
-import React, { useCallback } from "react"
+import React from "react"
 import { updatecuenta } from "../../controller/UserController"
 
 type User = {
@@ -28,6 +28,7 @@ interface ContainerProps {
     departamento: string,
     user: User,
     image: string,
+    oficio : string
     setEditM: (editM : boolean) => void
     validateEmail: boolean
     validateDate: boolean
@@ -44,7 +45,8 @@ const EditBtn : React.FC<ContainerProps> = ({
    image, 
    setEditM,
     validateEmail,
-    validateDate
+    validateDate,
+    oficio
 }) => {
 
     const handleClick = () => {
@@ -68,9 +70,8 @@ const EditBtn : React.FC<ContainerProps> = ({
                 DPI: user.dpi,
                 telefono: user.tel
             }
-            
-            updatecuenta(user.municipio, user.image, user.sexo, user.fecha_nacimiento, user.rating.toString(), '0',user.dpi)
-
+            debugger
+            updatecuenta(user.municipio, user.image, user.sexo, user.fecha_nacimiento, user.rating.toString(), '0',user.dpi, oficio)
             setEditM(false)
         }
 

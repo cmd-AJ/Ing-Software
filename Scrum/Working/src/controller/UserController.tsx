@@ -89,7 +89,7 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero: string, DPI: string) {
+async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero: string, DPI: string, trabajo: string) {
     const object = {
         municipio: municipio,
         imagen: imagen,
@@ -97,7 +97,8 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         fecha_nacimiento: fecha_nacimiento,
         rating: rating,
         numero: numero,
-        DPI: DPI
+        DPI: DPI,
+        trabajo: trabajo
     }
 
     const data = await fetch('http://127.0.0.1:3000/setsettings',
