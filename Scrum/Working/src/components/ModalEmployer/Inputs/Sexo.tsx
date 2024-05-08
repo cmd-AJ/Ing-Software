@@ -1,4 +1,4 @@
-import { InputChangeEventDetail, IonSelect, IonSelectOption } from "@ionic/react"
+import { IonSelect, IonSelectOption } from "@ionic/react"
 import React from "react"
 import './Inputs.css'
 
@@ -7,18 +7,21 @@ interface ContainerProps {
     setSexo: (sexo: string) => void
  }
 
-const Sexo: React.FC<ContainerProps> = ({sexo, setSexo}) => {
+const Sexo: React.FC<ContainerProps> = ({ sexo, setSexo }) => {
 
-    const handleInputChange = (event: CustomEvent<InputChangeEventDetail>) => {
-        const value = (event.target as HTMLInputElement).value;
-        setSexo(value);
+    const handleSexoChange = (event: CustomEvent) => {
+        const selectedValue = event.detail.value;
+        setSexo(selectedValue);
     }
 
     return (
-        <IonSelect label="Sexo:"
-        className="inputsModal"
-        onIonChange={handleInputChange}
-        value={sexo}>
+        <IonSelect 
+            label="Sexo:"
+            className="inputsModal"
+            onIonChange={handleSexoChange}
+            value={sexo}
+        >
+            {/* Opciones de selección de sexo */}
             <IonSelectOption value='Masculino'>Masculino</IonSelectOption>
             <IonSelectOption value='Femenino'>Femenino</IonSelectOption>
         </IonSelect>

@@ -53,15 +53,14 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
     validateTel,
     user }) => {
 
-    const [role, setRole] = useState(false)
+    const [userExist, setUserExist] = useState(false)
 
     const handleClick = () => {
+        debugger
         const municipio = Municipios(user.dpi)
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
-            if (user.role == 'Empleado') 
-                setRole(true)
+            setUserExist(true)
             createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
-            user.password = CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex)
         
             const data: userData = {
                 name: user.name,
@@ -84,7 +83,7 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
 
     return (
         <IonButton 
-            routerLink= {role ? '/empleado' : '/'}
+            routerLink= {userExist ? '/home' : undefined}
             className='buttons' 
             color='secondary'
             onClick={handleClick}

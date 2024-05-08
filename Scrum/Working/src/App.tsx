@@ -44,6 +44,9 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
+        <Route exact path='/profile'>
+          <Dashboard_Worker />
+        </Route>
         <Route exact path="/">
           <About />
         </Route>

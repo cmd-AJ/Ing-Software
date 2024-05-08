@@ -30,8 +30,8 @@ const Info: React.FC<ContainerProps> = ({user}) => {
     return (
         <div className="info">
             <LeftInfo  user={user}/>
-            <CenterInfo />
-            <RightInfo />
+            <CenterInfo role={user.role}/>
+            <RightInfo role={user.role}/>
         </div>
     )
 }

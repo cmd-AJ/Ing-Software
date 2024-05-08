@@ -1,14 +1,25 @@
 import React from 'react'
 import './style.css'
 
-interface ContainerProps {  }
+interface ContainerProps { 
+    role : string
+}
 
-const CenterInfo: React.FC<ContainerProps> = () => {
-    return (
-        <div className='centerInfo'>
-            Trabajos anteriores
-        </div>
-    )
+const CenterInfo: React.FC<ContainerProps> = ({role}) => {
+
+    if (role === 'Empleador'){
+        return (
+            <div className='centerInfo'>
+                Contratos anteriores
+            </div>
+        )
+    } else {
+        return (
+            <div className='centerInfo'>
+                Contratos anteriores
+            </div>
+        )
+    }
 }
 
 export default CenterInfo

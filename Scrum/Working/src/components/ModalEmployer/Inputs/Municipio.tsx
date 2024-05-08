@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { getMunicipios } from "../../../Departamentos/Departamentos"
-import { IonItem, IonList, IonSelect, IonSelectOption } from "@ionic/react"
+import { IonSelect, IonSelectOption } from "@ionic/react"
 import './Inputs.css'
 
 interface ContainerProps { 
@@ -9,26 +9,32 @@ interface ContainerProps {
     departamento: string,
  }
 
-const Municipio: React.FC<ContainerProps> = ({ municipio, setMunicipio, departamento}) => {
+const Municipio: React.FC<ContainerProps> = ({ municipio, setMunicipio, departamento }) => {
 
-    const [listMuni, setListMuni] = useState<string[]>([''])
+    const [listMuni, setListMuni] = useState<string[]>([])
+
     useEffect(() => {
+        // Cargar los municipios cuando cambie el departamento seleccionado
         setListMuni(getMunicipios(departamento))
     }, [departamento])
 
-    const handleDateChange = (event: CustomEvent) => {
+    const handleMunicipioChange = (event: CustomEvent) => {
         const selectedValue = event.detail.value
         setMunicipio(selectedValue)
     }
 
     return (
-        <IonSelect label="Municipio:"
-        className="inputsModal"
-        onIonChange={handleDateChange}
-        value={municipio}>
+        <IonSelect 
+            label="Municipio:"
+            className="inputsModal"
+            onIonChange={handleMunicipioChange}
+            value={municipio}
+        >
+            {/* Mapear los municipios disponibles */}
             {listMuni.map((option, index) => (
                 <IonSelectOption key={index} value={option}>
-                    {option.substring(0,1) + option.toLowerCase().slice(1)}
+                    {/* Convertir la primera letra en mayúscula */}
+                    {option.charAt(0).toUpperCase() + option.slice(1).toLowerCase()}
                 </IonSelectOption>
             ))}
         </IonSelect>
