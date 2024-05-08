@@ -67,12 +67,12 @@ app.listen(port, () => {
 })
 
 app.put('/setsettings', async (req, res) => {
-  const { municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono, trabajo } = req.body; 
-  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !DPI || !rol || !telefono || !trabajo) {
+  const { municipio, imagen, sexo, fecha_nacimiento, DPI, role, telefono, trabajo } = req.body; 
+  if (!municipio || !imagen || !sexo || !fecha_nacimiento || !DPI || !role || !telefono || !trabajo) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
-      await setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono, trabajo);
+      await setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, role, telefono, trabajo);
       res.send('Inserted successfully');
     } catch (error) {
       console.error('Error inserting user:', error);

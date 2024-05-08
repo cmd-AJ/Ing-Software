@@ -50,7 +50,7 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
 
 export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono, trabajo) {
     try {
-        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}',  fecha_nacimiento = '${fecha_nacimiento}', rol = ${rol}, telefono = ${telefono} where DPI = '${DPI}'`);
+        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}',  fecha_nacimiento = '${fecha_nacimiento}', role = '${rol}', telefono = '${telefono}' where DPI = '${DPI}'`);
         console.log('Data inserted successfully')
         if (rol !== 'Empleador') {
             updatetrab(trabajo, DPI)

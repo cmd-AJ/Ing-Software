@@ -49,7 +49,7 @@ const EditBtn : React.FC<ContainerProps> = ({
     oficio
 }) => {
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if (validateEmail && validateDate) {
             user.municipio = municipio
             user.sexo = sexo
@@ -70,8 +70,10 @@ const EditBtn : React.FC<ContainerProps> = ({
                 DPI: user.dpi,
                 telefono: user.tel
             }
-            debugger
-            updatecuenta(user.municipio, user.image, user.sexo, user.fecha_nacimiento, user.rating.toString(), '0',user.dpi, oficio)
+            
+            console.log(oficio);
+            
+            await updatecuenta(user.municipio, user.image, user.sexo, user.fecha_nacimiento,user.dpi, user.role ,user.tel,oficio)
             setEditM(false)
         }
 

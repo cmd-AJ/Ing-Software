@@ -11,29 +11,31 @@ const Birthday: React.FC<ContainerProps> = ({ fecha, setFecha, setValidateDate }
 
     const [date, setDate] = useState(fecha);
     const [datePicker, setDatePicker] = useState(false);
+    const [showDate, setShowDate] = useState(false);
 
     useEffect(() => {
         const dateC = new Date(date);
         const realDate = new Date(dateC.setDate(dateC.getDate() + 1));
-    
+
         const fechaActual = new Date();
         const difMiliSeconds = fechaActual.getTime() - realDate.getTime();
         const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
         const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
-    
+
         if (edadAños >= 18) {
             setValidateDate(true)
         }
-    }, [date])
+    }, [])
+
     const handleClick = () => {
         setDatePicker(true);
+        setShowDate(true);
     }
 
     const handleDateChange = (event: CustomEvent) => {
         const selectedValue = event.detail.value;
         setDate(selectedValue.split('T')[0]);
         setFecha(selectedValue.split('T')[0]);
-        setDatePicker(false); // Ocultar el selector de fecha después de seleccionar una fecha
     }
 
     const formatDate = (dateString: string) => {
@@ -60,10 +62,11 @@ const Birthday: React.FC<ContainerProps> = ({ fecha, setFecha, setValidateDate }
                 className={`inputsModal `} // Agregar la clase 'ion-invalid' si hay un error
                 onClick={handleClick}
                 value={formatDate(date)}></IonInput>
-            {datePicker &&
+            {(datePicker && showDate) &&
                 <IonDatetime
                     style={{ position: 'absolute', zIndex: '3' }}
                     presentation="date"
+                    onBlur={() => setDatePicker(false)}
                     onIonChange={handleDateChange}></IonDatetime>
             }
         </>

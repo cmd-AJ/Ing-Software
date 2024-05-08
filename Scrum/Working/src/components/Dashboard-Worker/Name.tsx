@@ -9,7 +9,7 @@ interface ContainerProps {
     role : string
 }
 
-const Name: React.FC<ContainerProps> = ({name, email, role, dpi}) => {
+const Name: React.FC<ContainerProps> = ({ name, email, role, dpi }) => {
 
     const [userDesc, setUserDesc] = useState('')
 
@@ -22,8 +22,6 @@ const Name: React.FC<ContainerProps> = ({name, email, role, dpi}) => {
                         const jobData = await response.json();
                         if (jobData.length > 0 && jobData[0].nombre_trabajo != null) {
                             setUserDesc(jobData[0].nombre_trabajo);
-                            console.log(jobData[0].nombre_trabajo);
-                            
                         } else {
                             setUserDesc('Empleado');
                         }
@@ -46,8 +44,8 @@ const Name: React.FC<ContainerProps> = ({name, email, role, dpi}) => {
 
     return (
         <div className="nameDisplay">
-            <p style={{fontSize: '20px'}}>{name}</p>
-            <p style={{fontSize: '28px'}}>{userDesc}</p>
+            <p style={{ fontSize: '20px' }}>{name}</p>
+            <p style={{ fontSize: '28px' }}>{userDesc}</p>
             <p>{email}</p>
         </div>
     )

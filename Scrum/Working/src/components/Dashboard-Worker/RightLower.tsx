@@ -1,5 +1,4 @@
 import { IonButton, IonIcon } from '@ionic/react'
-import Chats from './Chats'
 import { chatbubbleEllipses, pencilOutline } from 'ionicons/icons'
 import './style.css'
 import React, { useEffect, useState } from 'react'
@@ -14,12 +13,8 @@ const RightLower: React.FC<ContainerProps> = ({setEditModal, role}) => {
     const [userExist, setUserExist] = useState(false)
 
     useEffect(() => {
-        if (role === 'Empleador'){
-            setUserExist(false)
-        } else {
-            setUserExist(true)
-        }
-    })
+        setUserExist(role !== 'Empleador');
+    }, [role]);
 
     return (
         <div className='lowerElements'>

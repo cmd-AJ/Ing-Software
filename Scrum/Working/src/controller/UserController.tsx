@@ -89,14 +89,14 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, rating: string, numero: string, DPI: string, trabajo: string) {
+async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol : string, telefono: string, trabajo: string) {
     const object = {
         municipio: municipio,
         imagen: imagen,
         sexo: sexo,
         fecha_nacimiento: fecha_nacimiento,
-        rating: rating,
-        numero: numero,
+        telefono: telefono,
+        role: rol,
         DPI: DPI,
         trabajo: trabajo
     }

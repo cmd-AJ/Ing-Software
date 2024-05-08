@@ -60,7 +60,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
             </IonCardHeader>
             <Line />
             <FileUpload image={image} setImage={setImage}/>
-            <Work setOficio={setOficio} oficio={oficio}/>
+            <Work setOficio={setOficio}/>
             <Birthday fecha={date} setFecha={setDate} setValidateDate={setValidateDate}/>
             <Sexo sexo={sexo} setSexo={setSexo}/>
             <Tel tel={tel} setTel={setTel}/>
