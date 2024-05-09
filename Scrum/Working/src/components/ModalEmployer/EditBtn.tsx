@@ -1,6 +1,6 @@
 import { IonButton } from "@ionic/react"
-import React, { useCallback } from "react"
-import { setSettings } from "../../controller/UserController"
+import React from "react"
+import { updatecuenta } from "../../controller/UserController"
 
 type User = {
     name : string
@@ -28,6 +28,7 @@ interface ContainerProps {
     departamento: string,
     user: User,
     image: string,
+    oficio : string
     setEditM: (editM : boolean) => void
     validateEmail: boolean
     validateDate: boolean
@@ -44,10 +45,11 @@ const EditBtn : React.FC<ContainerProps> = ({
    image, 
    setEditM,
     validateEmail,
-    validateDate
+    validateDate,
+    oficio
 }) => {
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if (validateEmail && validateDate) {
             user.municipio = municipio
             user.sexo = sexo
@@ -64,11 +66,14 @@ const EditBtn : React.FC<ContainerProps> = ({
                 imagen: user.image,
                 sexo: user.sexo,
                 fecha_nacimiento: user.fecha_nacimiento,
-                numero: user.tel,
+                numero: 0,
                 DPI: user.dpi,
+                telefono: user.tel
             }
             
-            setSettings(userData)
+            console.log(oficio);
+            
+            await updatecuenta(user.municipio, user.image, user.sexo, user.fecha_nacimiento,user.dpi, user.role ,user.tel,oficio)
             setEditM(false)
         }
 

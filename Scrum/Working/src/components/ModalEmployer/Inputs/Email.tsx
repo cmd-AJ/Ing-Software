@@ -5,58 +5,56 @@ import './Inputs.css'
 interface ContainerProps { 
     email: string
     setEmail: (email: string) => void
-    validatesEmail : Boolean,
-    setValidateEmail : (validateEmail : boolean) => void
- }
+    validatesEmail: boolean,
+    setValidateEmail: (validateEmail: boolean) => void
+}
 
 const Email: React.FC<ContainerProps> = ({email, setEmail, validatesEmail, setValidateEmail}) => {
 
     const [isTouched, setIsTouched] = useState(false)
 
-    const validateEmail = (email: string) => {
-        return email.match(
-        /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-        )
-    } 
+    useEffect(() => {
+        validate(email); // Llama a validate cuando email cambia
+    }, [email])
 
-    useEffect(()=>{
-        setValidateEmail(validateEmail(email))
-    }, [])
+    const validateEmail = (email: string) => {
+        return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+    }
 
     const validate = (value: string) => {
-
-        if (value === '' || validateEmail(value) !== null) {
-            setValidateEmail(true)
-        } else {
-            setValidateEmail(false)
-        }            
+        const isValid = value === '' || validateEmail(value);
+        setValidateEmail(isValid);
     }
 
     const markTouched = () => {
         setIsTouched(true);
-    } 
+    }
 
     const handleInputChange = (event: CustomEvent<InputChangeEventDetail>) => {
         const value = (event.target as HTMLInputElement).value;
         setEmail(value);
+        validate(value); // Llama a validate cuando cambia el valor del input
     }
-
-    const [focus, setFocus] = useState(false)
 
     const handleFocus = () => {
         setFocus(true)
     }
+
     return (
         <IonInput 
-        className={`${'inputsModal'} ${validatesEmail === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
-        label="Correo:"
-        errorText="Correo inválido"
-        onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
-        onIonChange={handleInputChange}
-        onFocus={handleFocus}
-        placeholder={email}
-        ></IonInput>
+            className={`inputsModal ${validatesEmail ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
+            label="Correo:"
+            errorText="Correo inválido"
+            onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }}
+            onIonChange={handleInputChange}
+            onFocus={handleFocus}
+            placeholder={email}
+        />
     )
 }
 
 export default Email
+function setFocus(arg0: boolean) {
+    throw new Error("Function not implemented.")
+}
+

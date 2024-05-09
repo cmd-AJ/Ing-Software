@@ -22,37 +22,36 @@ const FileUpload: React.FC<ContainerProps> = ({ image, setImage }) => {
           console.log("Archivo seleccionado:", file);
           // Aquí puedes manejar el archivo seleccionado, como cargarlo a un servidor o procesarlo de alguna manera
         }
-      };
-      
+    };
 
-  return (
-    <div
-      style={{
-        marginTop: "10px",
-        width: "100%",
-        display: "flex",
-        justifyContent: "center"
-      }}
-    >
-      {/* Botón con imagen */}
-      <label htmlFor="file-upload">
-        <img
-          src={image} 
-          alt="Subir archivo"
-          height="100px"
-          style={{ cursor: "pointer", borderRadius: '50%' }}
-        />
-      </label>
-      {/* Input de tipo file oculto */}
-      <input
-        id="file-upload"
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={handleFileUpload}
-      />
-    </div>
-  );
+    return (
+        <div
+            style={{
+                marginTop: "10px",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center"
+            }}
+        >
+            {/* Botón con imagen */}
+            <label htmlFor="file-upload">
+                <img
+                    src={image}
+                    alt="Subir archivo"
+                    height="100px"
+                    style={{ cursor: "pointer", borderRadius: '50%' }}
+                />
+            </label>
+            {/* Input de tipo file oculto */}
+            <input
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handleFileUpload}
+            />
+        </div>
+    );
 };
 
 export default FileUpload;

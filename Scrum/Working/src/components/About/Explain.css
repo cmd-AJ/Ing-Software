@@ -1,0 +1,119 @@
+.info-content {
+  display: flex;
+  width: 100%;
+  align-items: center; /* Center children vertically */
+  justify-content: space-between; /* Space between the children */
+  background-color: rgb(175, 190, 214);
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.content-title {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally in the block */
+  justify-content: center; /* Center content vertically in the block */
+  text-align: center; /* Ensures text within is centered */
+
+}
+
+.circular-image-wrapper {
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-items: center; /* Center the image vertically */
+  justify-content: center; /* Center the image horizontally */
+  margin: 20px; 
+}
+
+.image-holder {
+  width: 300px; /* Adjust the width to be responsive */
+  height: 300px; /* Maintain aspect ratio */
+  max-width: 300px; /* Limit max width */
+  max-height: 300px; /* Limit max height */
+  border-radius: 50%; /* Circular shape */
+  background-color: black; /* Fallback color */
+  background-size: cover; /* Cover the entire div without stretching */
+  background-position: center; /* Center the background image */
+  border: 5px dashed rgb(73, 212, 239); /* Circular dashed border */
+
+}
+
+
+
+
+.text-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px; /* Consider viewport conditions */
+    font-weight: 700; /* Bold font weight for the title */
+    color: #333; /* Dark gray for better readability */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    letter-spacing: 0.5px; /* Slightly spaced out letters */
+    margin-bottom: 10px; /* Space between title and content */
+    animation: floatTitle 3s ease-in-out infinite;
+}
+
+.content-style {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px; /* Size suitable for content */
+    color: #444; /* Slightly lighter than title for contrast */
+    line-height: 1.6; /* Enhances readability of paragraphs */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Very subtle shadow for lifting the text */
+    margin: 0 30px 30px; /* Margins for better text block handling */
+}
+
+@keyframes floatTitle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Gentle vertical movement for dynamic effect */
+    }
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .content-title, .circular-image-wrapper {
+      width: 100%; /* Stack elements on smaller screens */
+  }
+
+  .info-content {
+      flex-direction: column; /* Stack elements vertically */
+  }
+
+  .text-title {
+      font-size: 32px; /* Smaller font size for smaller screens */
+  }
+
+  .content-style {
+      font-size: 18px; /* Smaller font size for smaller screens */
+  }
+}
+
+/* Additional media query for very small screens */
+@media (max-width: 480px) {
+  .text-title {
+      font-size: 24px; /* Even smaller font size for very small screens */
+  }
+
+  .content-style {
+      font-size: 16px; /* Even smaller font size for very small screens */
+  }
+}
+
+
+
+
+
+
+@keyframes floatTitle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px); /* Adjust the value for more or less movement */
+  }
+}
+

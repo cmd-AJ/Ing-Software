@@ -33,10 +33,9 @@ type User = {
 interface ContainerProps { 
     user: User
     setModalE: (modalE: boolean) => void
-    setEditUser: (user: User) => void
 }
 
-const ContentM: React.FC<ContainerProps> = ({user, setModalE, setEditUser}) => {
+const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
 
     const [oficio, setOficio] = useState('')
     const [image, setImage] = useState(user.image)
@@ -70,7 +69,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE, setEditUser}) => {
             <Municipio municipio={municipio} setMunicipio={setMunicipio} departamento={departamento}/>
             <EditBtn user={user} municipio={municipio} departamento={departamento}
             birthday={date} tel={tel} correo={correo} sexo={sexo} image={image} setEditM={setModalE}
-            validateEmail={validateCorreo} validateDate={validateDate}/>
+            validateEmail={validateCorreo} validateDate={validateDate} oficio={oficio}/>
         </div>
     )
 }

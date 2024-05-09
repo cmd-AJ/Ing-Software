@@ -2,6 +2,7 @@ import { IonButton } from '@ionic/react'
 import './button.css'
 import { userExists } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
+import React from 'react';
 
 
 interface ContainerProps { 
@@ -27,7 +28,10 @@ const LoginButton: React.FC<ContainerProps> = ({
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
+
                     console.log("Has iniciado sesion correctamente");
+                    console.log(login);
+                    
                 } else {
                     console.log("Usuario no encontrado");
                 }

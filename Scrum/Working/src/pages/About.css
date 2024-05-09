@@ -99,6 +99,7 @@ section#nextSection {
   background-color: transparent; /* Ensures the background is empty */
   padding: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -108,10 +109,123 @@ section#nextSection {
 .emptyTitle {
   color: black; /* Set the color for visibility */
   font-size: 20px; /* Adjust based on your preference */
+  font-weight: bold;
 }
+
+.emptyTitle-cx {
+  color: black; /* Set the color for visibility */
+  font-size: 32px; /* Adjust based on your preference */
+  font-weight: bold;
+}
+
+h1.emptyTitle-cx  {
+  width: 100%;
+  margin: 0;
+  color: rgb(71, 62, 62); /* Dark grayish color for visibility */
+  font-size: 32px; /* Large font size for impact */
+  top: 155px; /* Vertical positioning */
+  left: 90px; /* Horizontal positioning */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+  transition: all 0.3s ease-in-out; /* Smooth transition for any hover effects */
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+h1.emptyTitle-cx:hover {
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); /* Darker and larger shadow on hover for interactive effect */
+  transform: scale(1.5); /* Slightly enlarges the text on hover */
+}
+
 section#about {
   width: 100%; /* Ensure the section takes full width */
   margin: 0; /* Remove any margin */
   padding: 0; /* Remove any padding */
 }
 
+
+h1.emptyTitle {
+  margin: 0;
+  color: rgb(71, 62, 62); /* Dark grayish color for visibility */
+  font-size: 32px; /* Large font size for impact */
+  top: 155px; /* Vertical positioning */
+  left: 90px; /* Horizontal positioning */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); /* Adds a subtle shadow for depth */
+  transition: all 0.3s ease-in-out; /* Smooth transition for any hover effects */
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+h1.emptyTitle:hover {
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8); /* Darker and larger shadow on hover for interactive effect */
+  transform: scale(1.05); /* Slightly enlarges the text on hover */
+}
+
+.explain-content{
+  display: flex;
+  background-color: #1961af;
+  flex-direction: row;
+  height: 300px;
+  
+}
+
+.description-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #4989b620;
+  border-radius: 10px;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.description-section p {
+  font-size: 32px;
+  line-height: 1.5;
+  color: #333;
+  text-align: center; /* Justify the text */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cool font style */
+}
+
+
+#employess{
+  display: flex;
+  flex-direction: column;
+}
+
+
+#contact {
+  margin-top: 10px;
+  text-align: center;
+  padding: 20px;
+  background-color: rgb(0, 0, 0);
+}
+
+.social-icons {
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 24px;
+  color: #333;
+}
+
+.email-link,
+.terms-link,
+.rights {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #555;
+  text-decoration: none;
+}
+
+.email-link:hover,
+.terms-link:hover {
+  text-decoration: underline;
+}

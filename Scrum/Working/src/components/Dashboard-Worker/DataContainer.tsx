@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './style.css'
 import Sexo from './DataComponents/Sexo'
 import Edad from './DataComponents/Edad'
