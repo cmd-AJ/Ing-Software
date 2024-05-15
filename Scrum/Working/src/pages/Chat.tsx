@@ -7,7 +7,6 @@ const Chat: React.FC = () => {
 
   return (
     <IonPage>
-      {/* Pasando los datos de personas a la Sidebar */}
       <Sidebar />
     </IonPage>
   );

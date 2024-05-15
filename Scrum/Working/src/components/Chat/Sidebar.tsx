@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
 import Chat from './Chat';
+import Bottom from './Bottom';
 import { getContacts, getChatMessages } from '../../controller/ChatController';
 
 const Sidebar = () => {
@@ -69,6 +70,9 @@ const Sidebar = () => {
                         <span>To: <span className="name">{selectedPerson ? selectedPerson.name : "Persona con la que está chateando"}</span></span>
                     </div>
                     <Chat messages={messages} />
+                    <div className="bottom">
+                        <Bottom />
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,50 @@
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    background-color: #f0f0f0;
+    border-top: 1px solid #dbdbdb;
+}
+
+.input-message{
+    width: 90%;
+    height: 42px;
+    padding: 0 15px;
+    border: 1px solid #dbdbdb;
+    background-color: #eceff1;
+    border-radius: 17px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    outline: none;
+    color: #757575;
+}
+
+.send{
+    display: block;
+    float: right;
+    width: 42px;
+    height: 42px;
+    margin-left: 10px;
+    background-color: #168ad7;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.hire{
+    display: block;
+    float: right;
+    width: 42px;
+    height: 42px;
+    margin-left: 10px;
+    background-color: #17cf6d;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
