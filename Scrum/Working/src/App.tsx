@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Searched from './pages/Searched';
 import MainLayout from './pages/MainLayout/MainLayout';
 import About from './pages/About';
+import Chat from './pages/Chat';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -46,6 +47,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path='/profile'>
           <Dashboard_Worker />
+        </Route>
+        <Route exact path="/chat">
+          <Chat />
         </Route>
         <Route exact path="/">
           <About />
