@@ -76,12 +76,9 @@
 }
 
 .button {
-    position: relative;
-    top: 50%;
     height: 60px;
     border-radius: 20px;
     font-size: 20px;
-    transform: translateY(-50%);
 }
 
 .leftInfo {
