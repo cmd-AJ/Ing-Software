@@ -25,7 +25,6 @@ const Carrousel: React.FC<{ job: string }> = ({ job }) => {
     setSelectedItem(itemNumber);
   };
   return (
-    <div className="container">
       <div className="cards">
         {workers.map((worker, index) => (
           <label key={index} className="card" htmlFor={`item-${index + 1}`} id={`song-${index + 1}`}>
@@ -33,7 +32,6 @@ const Carrousel: React.FC<{ job: string }> = ({ job }) => {
           </label>
         ))}
       </div>
-    </div>
   );
 };
 

@@ -18,11 +18,14 @@
 }
 
 .cards {
-  margin-top: 75%;
   display: grid; 
   grid-template-columns: repeat(3, 2fr); 
-  gap: 25px; 
   width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
 }
 
 
