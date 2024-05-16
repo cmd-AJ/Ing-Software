@@ -46,7 +46,6 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
 }
 
 async function userExists(dpi: String, password: String) {
-    debugger
     try {
         const users = await getUsers();
 

@@ -2,7 +2,7 @@ import { IonButton } from '@ionic/react'
 import './button.css'
 import { userExists } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
-import React from 'react';
+import React, { useState } from 'react';
 
 
 interface ContainerProps { 
@@ -20,6 +20,8 @@ const LoginButton: React.FC<ContainerProps> = ({
 
 }) => {
 
+    const [userExist, setUserExist] = useState(false)
+
     const handleClick = async () => {
         if (validatePassword && validateDpi && (role !== "")) {  
 
@@ -28,7 +30,7 @@ const LoginButton: React.FC<ContainerProps> = ({
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
-
+                    setUserExist(true)
                     console.log("Has iniciado sesion correctamente");
                     console.log(login);
                     
@@ -44,6 +46,7 @@ const LoginButton: React.FC<ContainerProps> = ({
 
     return (
         <IonButton 
+            routerLink= {userExist ? '/searched' : undefined}
             style={{ margin: '20px'}} 
             color='secondary'
             onClick={handleClick}

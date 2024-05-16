@@ -56,7 +56,6 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
     const [userExist, setUserExist] = useState(false)
 
     const handleClick = () => {
-        debugger
         const municipio = Municipios(user.dpi)
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
             setUserExist(true)
