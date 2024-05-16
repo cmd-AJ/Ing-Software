@@ -13,6 +13,7 @@ const Searched: React.FC<{ job: string }> = ({ job }) => {
           <div className="bg bg2"></div>
           <div className="bg bg3"></div>
           <Carrousel job={job} />
+          {/* <Grid job={job} /> Uncomment if Grid also uses job */}
       </div>
     </IonPage>
   );
