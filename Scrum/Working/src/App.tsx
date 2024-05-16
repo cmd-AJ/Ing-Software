@@ -59,8 +59,14 @@ const App: React.FC = () => (
         Single page implementation
         */}
         <Route exact path="/searched">
+        <Route path="/searched" render={({ location }) => {
+          const job = new URLSearchParams(location.search).get('job');
+          return <MainLayout><Searched job={job || ''} /></MainLayout>;
+        }} exact />
+        </Route>
+        <Route exact path="/empleado">
           <MainLayout>
-            <Searched />
+            <Dashboard_Worker />
           </MainLayout>
         </Route>
         <Route exact path='/'>
