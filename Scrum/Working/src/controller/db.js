@@ -76,6 +76,26 @@ export async function gettrabajo(dpi){
     }
 }
 
+export async function getChatID(dpi1, dpi2){
+    try {
+        // search de chat id corresponding to both dpi
+        const query = {
+            text: "SELECT idchat " + 
+                  "FROM chats " + 
+                  "WHERE (dpireceptor = $1 AND dpiemisor = $2) " + 
+                  "OR (dpireceptor = $2 AND dpiemisor = $1)",
+            values: [dpi1, dpi2],
+        };
+
+        const chatID = await client.query(query)
+        return chatID.rows
+        
+    } catch (error) {
+        console.error('Error getting chats by user DPI:', error);
+        throw error;
+    }
+}
+
 export async function getChatBetweenUsers(dpi1, dpi2) {
     try {
         // search de chat id corresponding to both dpi
