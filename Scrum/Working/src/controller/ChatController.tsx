@@ -58,6 +58,7 @@ export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
         }
 
         const responseData = await response.json();
+        console.log(responseData);
         return responseData;
 
     } catch (error) {
