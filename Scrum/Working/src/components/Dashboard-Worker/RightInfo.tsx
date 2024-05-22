@@ -10,13 +10,14 @@ const RightInfo: React.FC<ContainerProps> = ({role}) => {
     if (role === 'Empleador'){
         return (
             <div className='rightInfo'>
-                Personas de confianza
+                <h1>Personas de confianza</h1>
             </div>
         )
     } else {
         return (
             <div className='rightInfo'>
-                Contratos anteriores
+                <h1>Contratos anteriores</h1>
+                <div className='dividerSec'></div>
             </div>
         )
     }
