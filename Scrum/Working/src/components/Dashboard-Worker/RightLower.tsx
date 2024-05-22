@@ -24,7 +24,7 @@ const RightLower: React.FC<ContainerProps> = ({setEditModal, role}) => {
             <IonButton shape='round' color='tertiary' className='roundedButton' onClick={() => setEditModal(true)}>
                 <IonIcon icon={pencilOutline} size='large'></IonIcon>
             </IonButton>
-            { userExist && <IonButton shape='round' className='button' color='tertiary'> 
+            { userExist && <IonButton shape='round' className='roundedButton' color='tertiary'> 
                 Añadir trabajo
             </IonButton>}
         </div>

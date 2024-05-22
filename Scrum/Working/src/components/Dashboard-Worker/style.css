@@ -73,6 +73,7 @@
     border-radius: 50%;
     transform: translateY(-50%);
     margin-right: 8px;
+    font-size: 20px;
 }
 
 .button {

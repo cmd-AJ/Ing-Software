@@ -5,3 +5,15 @@
     height: 100%;
     overflow: auto;
 }
+
+.ion-page {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    contain: layout size style;
+    z-index: 0;
+  }

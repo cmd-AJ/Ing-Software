@@ -32,10 +32,10 @@ const About: React.FC = () => {
         <IonToolbar>
           <IonTitle>SABTE</IonTitle>
           <IonButtons slot="end">
-            <IonButton style={{ marginTop: "12vh" }} routerLink="/register">
+            <IonButton routerLink="/register">
               Registrarse
             </IonButton>
-            <IonButton style={{ marginTop: "12vh" }} routerLink="/home">
+            <IonButton routerLink="/home">
               Iniciar Sesión
             </IonButton>
           </IonButtons>
