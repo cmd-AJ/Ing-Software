@@ -7,7 +7,6 @@
     background-color: white;
     border-radius: 30px;
     margin-top: 60px;
-    margin-bottom: 30px;
 }
 
 .info {
@@ -15,12 +14,8 @@
     width: 92%;
     height: 100%;
     display: flex;
-}
-
-.placeholder{
-    min-width: 1920px;
-    height: 80px;
-    background-color: white;
+    position: relative;
+    top: -100px;
 }
 
 .feedImg {
