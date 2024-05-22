@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './details.css';
 import { IonDatetime } from '@ionic/react';
 
-const Details = () => {
+const Details = ({ onClose }) => {
+    const [selectedDate, setSelectedDate] = useState('');
+
+    const handleDateChange = (event) => {
+        const newValue = event.detail.value;
+        setSelectedDate(newValue);
+        console.log(newValue);
+        onClose();
+    };
+
     return (
         <div className="details-container">
-            <IonDatetime className='calendar' showDefaultButtons={true}></IonDatetime>
+            <IonDatetime
+                showDefaultButtons={true}
+                onIonChange={handleDateChange}
+            ></IonDatetime>
+            <p>Selected Date: {selectedDate}</p>
         </div>
     );
 }
-
 
 export default Details;

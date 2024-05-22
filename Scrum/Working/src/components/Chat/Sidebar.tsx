@@ -11,6 +11,7 @@ const Sidebar = () => {
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState("3834 49898 0101"); // DPI del usuario loggeado
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -57,7 +58,7 @@ const Sidebar = () => {
                     message: msg.contenido,
                     time: msg.time,
                     sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
-                }));
+              }));
 
                 setMessages(formattedMessages);
             } catch (error) {
@@ -67,7 +68,7 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="wrapper">
+        <div className={`wrapper ${isDetailsOpen ? 'blur' : ''}`}>
             <div className="container1">
                 <div className="left">
                     <div className="top">
@@ -90,9 +91,9 @@ const Sidebar = () => {
                         <span>To: <span className="name">{selectedPerson ? selectedPerson.name : "Persona con la que está chateando"}</span></span>
                     </div>
                     <Chat messages={messages} />
-                    {/* <Details /> */}
+                        {isDetailsOpen && <Details onClose={() => setIsDetailsOpen(false)} />}
                     <div className="bottom">
-                        <Bottom loggedUserDpi={loggedUserDpi} selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} updateMessages={updateMessages} /> 
+                        <Bottom loggedUserDpi={loggedUserDpi} selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} updateMessages={updateMessages} onHireClick={() => setIsDetailsOpen(true)} /> 
                     </div>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import './Botton.css';
+import './Bottom.css';
 import { getChatIdWithDPI, insertChatMessage } from '../../controller/ChatController';
 
-const Bottom = ({ loggedUserDpi, selectedPersonDpi, updateMessages }) => {
+const Bottom = ({ loggedUserDpi, selectedPersonDpi, updateMessages, onHireClick }) => {
 
     const [message, setMessage] = useState('');  
+
     const sendMessage = async () => {
       try {
         const response = await getChatIdWithDPI(loggedUserDpi, selectedPersonDpi);
@@ -20,6 +21,7 @@ const Bottom = ({ loggedUserDpi, selectedPersonDpi, updateMessages }) => {
         console.error("Error while sending message:", error);
       }
     };
+
     return (
       <div className="bottom">
         <textarea
@@ -29,7 +31,7 @@ const Bottom = ({ loggedUserDpi, selectedPersonDpi, updateMessages }) => {
           onChange={(e) => setMessage(e.target.value)}
         />
         <button className="send" onClick={sendMessage}>Send</button>
-        <button className="hire">Hire</button>
+        <button className="hire" onClick={onHireClick}>Hire</button>
       </div>
     );
 }
