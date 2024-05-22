@@ -1,3 +1,4 @@
+import { text } from 'express';
 import getClient from './../connection/RelationalDatabase.js';
 
 const client = getClient();
@@ -75,6 +76,26 @@ export async function gettrabajo(dpi){
     }
 }
 
+export async function getChatID(dpi1, dpi2){
+    try {
+        // search de chat id corresponding to both dpi
+        const query = {
+            text: "SELECT idchat " + 
+                  "FROM chats " + 
+                  "WHERE (dpireceptor = $1 AND dpiemisor = $2) " + 
+                  "OR (dpireceptor = $2 AND dpiemisor = $1)",
+            values: [dpi1, dpi2],
+        };
+
+        const chatID = await client.query(query)
+        return chatID.rows
+        
+    } catch (error) {
+        console.error('Error getting chats by user DPI:', error);
+        throw error;
+    }
+}
+
 export async function getChatBetweenUsers(dpi1, dpi2) {
     try {
         // search de chat id corresponding to both dpi
@@ -93,7 +114,7 @@ export async function getChatBetweenUsers(dpi1, dpi2) {
 
         // Getting the chat messages by dpi
         const messagesQuery = {
-            text: "SELECT id_mensaje, contenido, time, dpi " + 
+            text: "SELECT id_chat, id_mensaje, contenido, time, dpi " + 
                   "FROM mensaje " +
                   "WHERE id_chat = $1 " +
                   "ORDER BY time ",
@@ -101,7 +122,6 @@ export async function getChatBetweenUsers(dpi1, dpi2) {
         }
 
         const result = await client.query(messagesQuery)
-
         return result.rows
         
     } catch (error) {
@@ -166,6 +186,21 @@ export async function insertartrabant(DPI, estado) {
         console.log('Data inserted successfully');
     } catch (error) {
         console.error('Error inserting user:', error);
+        throw error;
+    }
+}
+
+export async function insertChatMessage(contenido, id_chat, dpi){
+    try {
+        const query = {
+            text: "INSERT INTO mensaje(contenido, id_chat, dpi, time) VALUES( $1, $2, $3, CURRENT_TIMESTAMP)",
+            values: [contenido, id_chat, dpi]
+        }
+        await client.query(query)
+        console.log("Added message to chat")
+
+    } catch (error) {
+        console.error('Error inserting message:', error)
         throw error;
     }
 }

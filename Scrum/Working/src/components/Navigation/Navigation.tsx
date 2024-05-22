@@ -23,11 +23,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
   const handleRequestChange = (value: string) => {
     if (value.trim() !== '') {
       setRequest(value);
-      console.log("Valor ingresado:", value);
+      history.push(`/searched?job=${encodeURIComponent(value)}`);
     } else {
       console.log("No se ha ingresado nada en la búsqueda.");
     }
   };
+  
 
   return (
     <IonHeader>

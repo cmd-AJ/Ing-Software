@@ -1,16 +1,23 @@
 .searched {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: top;
+    overflow-y: auto;
 
 }
-  
+
+.cards-container {
+  overflow-y: scroll;
+}
+
   
 .search {
     height: 100%;
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;

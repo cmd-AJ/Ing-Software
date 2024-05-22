@@ -4,6 +4,8 @@
   align-items: center; /* Center children vertically */
   justify-content: space-between; /* Space between the children */
   background-color: rgb(175, 190, 214);
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .content-title {
@@ -22,24 +24,28 @@
   display: flex;
   align-items: center; /* Center the image vertically */
   justify-content: center; /* Center the image horizontally */
-  margin: 20px
+  margin: 20px; 
 }
 
 .image-holder {
-  width: 250px; /* Adjust the width to be responsive */
-  height: 250px; /* Maintain aspect ratio */
+  width: 300px; /* Adjust the width to be responsive */
+  height: 300px; /* Maintain aspect ratio */
   max-width: 300px; /* Limit max width */
   max-height: 300px; /* Limit max height */
   border-radius: 50%; /* Circular shape */
   background-color: black; /* Fallback color */
   background-size: cover; /* Cover the entire div without stretching */
   background-position: center; /* Center the background image */
+  border: 5px dashed rgb(73, 212, 239); /* Circular dashed border */
+
 }
+
+
 
 
 .text-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 38px; /* Consider viewport conditions */
+    font-size: 48px; /* Consider viewport conditions */
     font-weight: 700; /* Bold font weight for the title */
     color: #333; /* Dark gray for better readability */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */

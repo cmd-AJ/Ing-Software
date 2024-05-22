@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertChatMessage, getChatID} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -167,5 +167,28 @@ app.post('/trabajaoanterior', async (req, res) => {
     const result = await insertartrabant(dpi, estado)
     res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
   } catch (error) {
+  }
+})
+
+app.post('/contacts/message', async (req, res) => {
+  try {
+    const { contenido, id_chat, dpi} = req.body;
+    await insertChatMessage(contenido, id_chat, dpi) 
+    res.status(200).json({ Succes: 'Mensaje insertado'})
+  } catch (error) {
+    console.error('Error posting message:', error)
+    res.status(500).json({error: 'Internal Server Error' })
+  }
+})
+
+app.post('/contacts/chatID', async (req, res) => {
+  try {
+    const { dpi1, dpi2 } = req.body;
+    const chatMessagges = await getChatID(dpi1, dpi2)
+    res.status(200).json(chatMessagges);
+
+  } catch (error) {
+    console.error('Error getting chat messages:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 })

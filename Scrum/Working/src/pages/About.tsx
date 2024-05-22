@@ -16,6 +16,8 @@ import {
 } from "@ionic/react";
 import InfoCard from "../components/About/Explain";
 import "./About.css";
+import Carousel from "../components/About/Carousel";
+import EmployeeCarousel from "../components/About/EmployeeCarousel";
 
 const About: React.FC = () => {
   // Function to handle click event and scroll to section
@@ -42,16 +44,16 @@ const About: React.FC = () => {
         </IonToolbar>
         <IonSegment>
           <IonSegmentButton onClick={() => scrollToSection("about")}>
-            About
+            Acerca de
           </IonSegmentButton>
           <IonSegmentButton onClick={() => scrollToSection("customers")}>
-            Customers
-          </IonSegmentButton>
-          <IonSegmentButton onClick={() => scrollToSection("contact")}>
-            Contact
+            Clientes
           </IonSegmentButton>
           <IonSegmentButton onClick={() => scrollToSection("employees")}>
-            Employees
+            Empleados
+          </IonSegmentButton>
+          <IonSegmentButton onClick={() => scrollToSection("contact")}>
+            Contacto
           </IonSegmentButton>
         </IonSegment>
       </IonHeader>
@@ -65,105 +67,73 @@ const About: React.FC = () => {
             </IonCardContent>
           </section>
           <section id="nextSection">
-                <h1 className="emptyTitle">
-                  Sistema Accesible<br/>de busqueda de trabajos especificos
-                </h1>
+            <h1 className="emptyTitle">
+              Sistema Accesible
+              <br />
+              de busqueda de trabajos especificos
+            </h1>
           </section>
-            <InfoCard
-              title="Misión"
-              content="En el corazón de nuestra misión en SABTE se encuentra el compromiso de transformar y optimizar la manera en que los profesionales especializados y los empleadores se conectan en el mercado laboral. Nuestra visión es desarrollar una plataforma digital innovadora que no solo facilite un encuentro eficiente entre la oferta y demanda de servicios especializados, sino que también promueva un entorno de confianza y transparencia. Aspiramos a eliminar las barreras que actualmente dificultan la contratación de talentos especializados, ofreciendo una solución accesible e integral que responda a las necesidades de ambos sectores.
+          <InfoCard
+            title="Misión"
+            content="En el corazón de nuestra misión en SABTE se encuentra el compromiso de transformar y optimizar la manera en que los profesionales especializados y los empleadores se conectan en el mercado laboral. Nuestra visión es desarrollar una plataforma digital innovadora que no solo facilite un encuentro eficiente entre la oferta y demanda de servicios especializados, sino que también promueva un entorno de confianza y transparencia. Aspiramos a eliminar las barreras que actualmente dificultan la contratación de talentos especializados, ofreciendo una solución accesible e integral que responda a las necesidades de ambos sectores.
 
               "
-              imageUrl="https://procesa.es/wp-content/uploads/2019/12/bsqueda-empleo.jpg"
-            />
-            <InfoCard
-              title="Visión"
-
-              content="Nuestra visión se extiende a construir una comunidad en donde cada miembro, sin importar el nivel de habilidades tecnológicas, pueda encontrar oportunidades de crecimiento y desarrollo profesional. Estamos dedicados a hacer que cada interacción en nuestra plataforma no solo sea posible, sino excepcional, asegurando que cada profesional pueda demostrar su valía y cada empleador pueda hallar el talento ideal. En SABTE, creemos en el poder de unir a las personas a través de la tecnología para crear un futuro más inclusivo y próspero para todos los profesionales especializados.
+            imageUrl="https://procesa.es/wp-content/uploads/2019/12/bsqueda-empleo.jpg"
+          />
+          <InfoCard
+            title="Visión"
+            content="Nuestra visión se extiende a construir una comunidad en donde cada miembro, sin importar el nivel de habilidades tecnológicas, pueda encontrar oportunidades de crecimiento y desarrollo profesional. Estamos dedicados a hacer que cada interacción en nuestra plataforma no solo sea posible, sino excepcional, asegurando que cada profesional pueda demostrar su valía y cada empleador pueda hallar el talento ideal. En SABTE, creemos en el poder de unir a las personas a través de la tecnología para crear un futuro más inclusivo y próspero para todos los profesionales especializados.
               "
-              imageUrl="https://c8.alamy.com/compes/2cb921p/adicta-a-la-tecnologia-joven-carrera-mixta-femenino-hombre-personas-utilizar-smartphones-chat-en-redes-sociales-comunicarse-en-linea-tipo-enviar-mensajes-de-correo-electronico-concepto-de-vida-virtual-dibujos-animados-vector-ilustracion-2cb921p.jpg"
-            />
-          <section>
-            
-          </section>
+            imageUrl="https://c8.alamy.com/compes/2cb921p/adicta-a-la-tecnologia-joven-carrera-mixta-femenino-hombre-personas-utilizar-smartphones-chat-en-redes-sociales-comunicarse-en-linea-tipo-enviar-mensajes-de-correo-electronico-concepto-de-vida-virtual-dibujos-animados-vector-ilustracion-2cb921p.jpg"
+          />
+          <section></section>
         </section>
 
         <section id="customers">
-          <IonCard>
-            <IonCardHeader>
-              <IonCardSubtitle>Tu eres la prioridad</IonCardSubtitle>
-              <IonCardTitle>El cliente siempre tiene la razon</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              Nuestros cliente tienen fiabilidad
+          <section id="nextSection">
+            <h1 className="emptyTitle-cx">
+              Clientes
               <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-            </IonCardContent>
-          </IonCard>
+            </h1>
+          </section>
+          <Carousel />
         </section>
 
         <section id="employees">
-          {/* Add employees section content here */}
-          <IonCard>
-            <IonCardHeader>
-              <IonCardSubtitle>Diversidad unica</IonCardSubtitle>
-              <IonCardTitle>
-                Multiples empleados para multiples clientes
-              </IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              Solo buscas y lo encontramos por ti
+          <section id="nextSection">
+            <h1 className="emptyTitle-cx">
+              Empleados
               <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-            </IonCardContent>
-          </IonCard>
+            </h1>
+            <section className="description-section">
+              <p>
+                Genera tu red de contactos, gana y haz crecer tu red de
+                confianza, creando oportunidades para todos.
+              </p>
+            </section>
+          </section>
+          <EmployeeCarousel />
         </section>
 
         <section id="contact">
-          {/* Add contact section content here */}
-          <IonCard>
-            <IonCardHeader>
-              <IonCardSubtitle>Dudas</IonCardSubtitle>
-              <IonCardTitle>Contacto</IonCardTitle>
-            </IonCardHeader>
-
-            <IonCardContent>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-            </IonCardContent>
-          </IonCard>
+          <div className="social-icons">
+            <a href="#" className="social-icon">
+              <i className="icon ion-logo-facebook"></i>
+            </a>
+            <a href="#" className="social-icon">
+              <i className="icon ion-logo-twitter"></i>
+            </a>
+            <a href="#" className="social-icon">
+              <i className="icon ion-logo-instagram"></i>
+            </a>
+          </div>
+          <a href="mailto:contact@example.com" className="email-link">
+            mar22397@uvg.edu.gt
+          </a>
+          <a href="#" className="terms-link">
+            Términos de uso
+          </a>
+          <p className="rights">© 2024 All Rights Reserved</p>
         </section>
       </IonContent>
     </>
