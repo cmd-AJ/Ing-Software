@@ -6,6 +6,7 @@
   cursor: pointer;
   overflow-y: hidden;
   transition: none; 
+  opacity: 0;
 }
 
 .container {
@@ -26,6 +27,29 @@
   align-items: center;
 }
   
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+.card {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.card {
+  animation: slideIn 0.25s ease-out forwards;
+}
 

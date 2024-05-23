@@ -37,3 +37,61 @@ export async function getChatMessages(dpi1: string, dpi2: string) {
         throw error; // Rethrow the error to be handled by the caller
     }
 }
+
+export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
+    try {
+        const data = {
+            dpi1: dpi1,
+            dpi2: dpi2
+        };
+
+        const response = await fetch("http://127.0.0.1:3000/contacts/chatID", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch chat ID');
+        }
+
+        const responseData = await response.json();
+        console.log(responseData);
+        return responseData;
+
+    } catch (error) {
+        console.error("Error while getting chat ID:", error);
+        throw error; // Rethrow the error to be handled by the caller
+    }
+}
+
+export async function insertChatMessage(content: string, chatID: string, dpi: string) {
+    try {
+        const data = {
+            contenido: content,
+            id_chat: chatID,
+            dpi: dpi
+        };
+
+        const response = await fetch("http://127.0.0.1:3000/contacts/message", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to post message');
+        }
+
+        const responseData = await response.json();
+        return responseData; 
+    } catch (error) {
+        console.error("Error while inserting message:", error);
+        throw error; 
+    }
+}
+
