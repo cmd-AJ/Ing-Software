@@ -192,3 +192,28 @@ export async function getUser(dpi) {
         throw error;
     }
 }
+
+export async function getUserName(dpi) {
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error(`Error fetching user: ${response.status} ${response.statusText}`);
+        }
+
+        // Parsear la respuesta JSON
+        const userData = await response.json();
+        const names = userData[0].nombre.split(' ')
+        const lastnames = userData[0].apellidos.split(' ')
+        return names[0]+' '+lastnames[0]
+    } catch (error) {
+        console.error('Error fetching user by DPI:', error);
+        throw error;
+    }
+}

@@ -1,56 +1,66 @@
-import React, { useEffect, useState } from "react"
-import { gettrabajoanterior } from "../../../controller/UserController"
+import React, { useEffect, useState } from "react";
+import { getUserName, gettrabajoanterior } from "../../../controller/UserController";
 
 interface ContainerProps {
-    type : string
+    type: string;
 }
 
-const ContratsSab : React.FC<ContainerProps> = ({type}) => {
+interface Contrat {
+    id: string;
+    estado: string;
+    dpitrabajador: string;
+}
 
-    const [contrats, setContrats] = useState([])
+const ContratsSab: React.FC<ContainerProps> = ({ type }) => {
+    const [contrats, setContrats] = useState<Contrat[]>([]);
+    const [names, setNames] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await gettrabajoanterior('3810 35859 0101');
-                const data = await response.json()
-                console.log(data)
-                setContrats(data)
+                const data: Contrat[] = await response.json();
+                setContrats(data);
+
+                // Fetch names for each contrat
+                const namesData: { [key: string]: string } = {};
+                for (const contrat of data) {
+                    const name = await getUserName(contrat.dpitrabajador);
+                    namesData[contrat.dpitrabajador] = name;
+                }
+                setNames(namesData);
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }
         };
-    
+
         fetchData();
     }, []);
 
-    if (type === 'Empleador'){
+    if (type === 'Empleador') {
         return (
             <div className="listSec">
-                {
-                    contrats.map(contrat => (
-                        <div className="contratDisplay">
-                            ds
-                        </div>
-                    ))
-                }
+                {contrats.map(contrat => (
+                    <div key={contrat.id} className="contratDisplay">
+                        ds
+                    </div>
+                ))}
             </div>
-        )
+        );
     } else {
         return (
             <div className="listSec">
-                {
-                    contrats.map(contrat => (
-                        <div className="contratDisplay">
-                            <h5 style={{margin: '0px'}}>{contrat.estado}</h5>
-                            <h6 style={{margin: '0px'}}> Empleador: {contrat.dpitrabajador}</h6>
-                        </div>
-                    ))
-                }
+                {contrats.map(contrat => (
+                    <div key={contrat.id} className="contratDisplay">
+                        <h5 style={{ margin: '0px' }}>{contrat.estado}</h5>
+                        <h6 style={{ margin: '0px' }}>
+                            Empleador: {names[contrat.dpitrabajador] || 'Cargando...'}
+                        </h6>
+                    </div>
+                ))}
             </div>
-        )
+        );
     }
-}
+};
 
-export default ContratsSab
-
+export default ContratsSab;
