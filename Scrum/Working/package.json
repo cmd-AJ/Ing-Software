@@ -12,7 +12,8 @@
     "lint": "eslint",
     "start": "node src/controller/main.js",
     "cucumber": "cucumber-js ./cucumber/f eatures",
-    "loginfeat": "node loginfeat.js"
+    "loginfeat": "node loginfeat.js",
+    "test": "vitest"
   },
   "dependencies": {
     "@capacitor/app": "5.0.7",

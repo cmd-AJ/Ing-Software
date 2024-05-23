@@ -57,10 +57,18 @@ async function userExists(dpi: String, password: String) {
 }
 
 
-async function getUser(dpi: any, password: any) {
+export async function getUser(dpi: any, password: any) {
     try {
         const users = await getUsers();
-        return users.find((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
+        let foundUser = null;
+
+        users.forEach((user: { id: any; password: any; }) => {
+            console.log(  )
+            if (user.id === dpi && user.password === password) {
+                foundUser = user;
+            }
+        });
+        return foundUser
     } catch (error) {
         console.error('Error getting user:', error);
         return null;
