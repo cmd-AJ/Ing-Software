@@ -56,6 +56,32 @@ async function userExists(dpi: String, password: String) {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+export async function getUser(dpi: any, password: any) {
+    try {
+        console.log(`get users func pass: ${password}`)
+        console.log(`get users func dpi: ${dpi}`)
+
+        const users = await getUsers();
+        let foundUser = null;
+
+        users.forEach((user: { id: any; password: any; }) => {
+            console.log(  )
+            if (user.id === dpi && user.password === password) {
+                foundUser = user;
+            }
+        });
+        return foundUser
+    } catch (error) {
+        console.error('Error getting user:', error);
+        return null;
+    }
+}
+
+
+>>>>>>> 39fe5b73a3222603c064c2591305c72d46c43f2b
 async function getWorkersByJob(job: String) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/workers/${job}`);
