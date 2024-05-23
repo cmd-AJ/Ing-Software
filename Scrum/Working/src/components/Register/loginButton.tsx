@@ -3,14 +3,16 @@ import './button.css'
 import { userExists } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 
 interface ContainerProps { 
-    dpi : String, 
+    dpi : string, 
     validateDpi : Boolean,
-    password : String,
+    password : string,
     validatePassword : Boolean, 
-    role : String
+    role : string   
 }
 
 const LoginButton: React.FC<ContainerProps> = ({ 
@@ -19,7 +21,7 @@ const LoginButton: React.FC<ContainerProps> = ({
     role 
 
 }) => {
-
+    const history = useHistory();
     const handleClick = async () => {
         if (validatePassword && validateDpi && (role !== "")) {  
 
@@ -31,6 +33,14 @@ const LoginButton: React.FC<ContainerProps> = ({
 
                     console.log("Has iniciado sesion correctamente");
                     console.log(login);
+                    localStorage.setItem('dpi', dpi);
+
+                    const job = "";  // Esto debe ser dinámico según tus necesidades
+
+                    localStorage.setItem('job', job);
+                    history.push(`/searched?dpi=${dpi}&job=${job}`);
+
+
                     
                 } else {
                     console.log("Usuario no encontrado");
