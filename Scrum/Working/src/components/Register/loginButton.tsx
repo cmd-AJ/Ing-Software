@@ -2,13 +2,9 @@ import { IonButton } from '@ionic/react'
 import './button.css'
 import { userExists } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
-<<<<<<< HEAD
 import React, { useState } from 'react';
-=======
-import React from 'react';
 import { useHistory } from 'react-router-dom';
 
->>>>>>> f078d554a432d04bbeb3a34ca5a962e27e95e2b0
 
 
 interface ContainerProps { 
@@ -25,13 +21,8 @@ const LoginButton: React.FC<ContainerProps> = ({
     role 
 
 }) => {
-<<<<<<< HEAD
-
     const [userExist, setUserExist] = useState(false)
-
-=======
     const history = useHistory();
->>>>>>> f078d554a432d04bbeb3a34ca5a962e27e95e2b0
     const handleClick = async () => {
         if (validatePassword && validateDpi && (role !== "")) {  
 
