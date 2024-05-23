@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -212,5 +212,16 @@ app.post('/contacts/chatID', async (req, res) => {
   } catch (error) {
     console.error('Error getting chat messages:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+app.post('/contacts/hire', async (req, res) => {
+  try {
+    const { descripcion, dpiempleador, dpiempleado, timeStampCita } = req.body;
+     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita)
+     res.status(200).json({ Success: 'Contrato realizado'})
+  } catch (error) {
+    console.error('Error while hiring person:', error)
+    res.status(500).json({ error: 'Internal Server Error'})
   }
 })

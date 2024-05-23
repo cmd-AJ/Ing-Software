@@ -227,3 +227,17 @@ export async function insertChatMessage(contenido, id_chat, dpi){
         throw error;
     }
 }
+
+export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita){
+    try {
+        const query = {
+            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)",
+            values: [descripcion, dpiempleador, dpiempleado, timeStampCita]
+        }
+        await client.query(query)
+
+    } catch (error) {
+        console.error('Error whil hiring', error)
+        throw error;
+    }
+}
