@@ -2,15 +2,21 @@ import { IonButton } from '@ionic/react'
 import './button.css'
 import { userExists } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
+<<<<<<< HEAD
 import React, { useState } from 'react';
+=======
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+>>>>>>> f078d554a432d04bbeb3a34ca5a962e27e95e2b0
 
 
 interface ContainerProps { 
-    dpi : String, 
+    dpi : string, 
     validateDpi : Boolean,
-    password : String,
+    password : string,
     validatePassword : Boolean, 
-    role : String
+    role : string   
 }
 
 const LoginButton: React.FC<ContainerProps> = ({ 
@@ -19,9 +25,13 @@ const LoginButton: React.FC<ContainerProps> = ({
     role 
 
 }) => {
+<<<<<<< HEAD
 
     const [userExist, setUserExist] = useState(false)
 
+=======
+    const history = useHistory();
+>>>>>>> f078d554a432d04bbeb3a34ca5a962e27e95e2b0
     const handleClick = async () => {
         if (validatePassword && validateDpi && (role !== "")) {  
 
@@ -33,6 +43,14 @@ const LoginButton: React.FC<ContainerProps> = ({
                     setUserExist(true)
                     console.log("Has iniciado sesion correctamente");
                     console.log(login);
+                    localStorage.setItem('dpi', dpi);
+
+                    const job = "";  // Esto debe ser dinámico según tus necesidades
+
+                    localStorage.setItem('job', job);
+                    history.push(`/searched?dpi=${dpi}&job=${job}`);
+
+
                     
                 } else {
                     console.log("Usuario no encontrado");

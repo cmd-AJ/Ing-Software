@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertChatMessage, getChatID} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -161,10 +161,32 @@ app.get('/trabajoanterior/:dpi', async (req, res) => {
   }
 })
 
+app.get('/trabajoanteriorSABTE/:dpi', async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    const trabjant = await gettrabajoSABTE(dpi)
+    res.status(200).json(trabjant);
+
+  } catch (error) {trabajoanterior
+    console.error('Error getting trabajos anteriores:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
 app.post('/trabajaoanterior', async (req, res) => {
   try {
-    const [ dpi, estado ] = [ req.body.dpi, req.body.estado]
-    const result = await insertartrabant(dpi, estado)
+    const [ dpitrabajador, dpiempleador, titulo, estado, imagen ] = [  req.body.dpitrabajador, req.body.dpiempleador, req.body.titulo, req.body.estado, req.body.imagen]
+    const result = await insertartrabant(dpitrabajador, dpiempleador, titulo, estado, imagen)
+    res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
+  } catch (error) {
+  }
+})
+
+
+app.post('/instipotrabajo', async (req, res) => {
+  try {
+    const [ nombre_trabajo, descripcion ] = [ req.body.nombre_trabajo, req.body.descripcion]
+    const result = await insertartipotrabajo(nombre_trabajo, descripcion)
     res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
   } catch (error) {
   }
