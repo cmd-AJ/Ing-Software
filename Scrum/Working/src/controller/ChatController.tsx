@@ -95,3 +95,38 @@ export async function insertChatMessage(content: string, chatID: string, dpi: st
     }
 }
 
+export async function makeHiring(description: string, dpiEmployer: string, dpiEmployee: string, appointmentTimeStamp: string) {
+    try {
+        // Convert the Guatemalan time (UTC-6) to UTC
+        const localTime = new Date(appointmentTimeStamp);
+        const offset = localTime.getTimezoneOffset() * 60000; // offset in milliseconds
+        const utcTime = new Date(localTime.getTime() + offset);
+
+        const data = {
+            descripcion: description,
+            dpiempleador: dpiEmployer,
+            dpiempleado: dpiEmployee,
+            timeStampCita: utcTime.toISOString() // Converts to UTC string
+        };
+
+        const response = await fetch("http://127.0.0.1:3000/contacts/hire", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to Hire worker');
+        }
+
+        const responseData = await response.json();
+        return responseData;
+    } catch (error) {
+        console.error("Error while hiring worker:", error);
+        throw error;
+    }
+}
+
+

@@ -1,6 +1,6 @@
 import { Trabajador } from "../components/Searched/type";
 
-async function getUsers() {
+export async function getUsers() {
     try {
         const response = await fetch('http://localhost:3000/users')
         const data = await response.json()
@@ -59,6 +59,9 @@ async function userExists(dpi: String, password: String) {
 
 export async function getUser(dpi: any, password: any) {
     try {
+        console.log(`get users func pass: ${password}`)
+        console.log(`get users func dpi: ${dpi}`)
+
         const users = await getUsers();
         let foundUser = null;
 
@@ -74,6 +77,7 @@ export async function getUser(dpi: any, password: any) {
         return null;
     }
 }
+
 
 async function getWorkersByJob(job: String) {
     try {
