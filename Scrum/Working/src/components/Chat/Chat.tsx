@@ -1,7 +1,6 @@
 import React from 'react';
 import './chat.css';
 
-
 const ChatBubble = ({ message, time, sender }) => {
     const formattedTime = (timeString) => {
         const timePart = timeString.split('T')[1];
@@ -26,6 +25,5 @@ const Chat = ({ messages }) => {
         </div>
     );
 }
-
 
 export default Chat;
