@@ -130,3 +130,26 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
 }
 
 
+
+export async function getHirings(dpi: string) {
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/contacts/hirings/${dpi}`);
+        const data = await response.json();
+
+        // Convert the UTC timestamp to Guatemalan time
+        const adjustedData = data.map((hiring: any) => {
+            const utcDate = new Date(hiring.timestampcita);
+            // Guatemala is UTC-6
+            const guatemalaOffset = -6 * 60; // offset in minutes
+            const guatemalaTime = new Date(utcDate.getTime() + (guatemalaOffset * 60 * 1000));
+            // Format the date as a string or keep it as a Date object depending on your needs
+            hiring.timestampcita = guatemalaTime.toISOString().replace('T', ' ').substring(0, 19); // This formats the date as 'YYYY-MM-DD HH:MM:SS'
+            return hiring;
+        });
+
+        return adjustedData;
+    } catch (error) {
+        console.error('Error fetching contacts:', error);
+        return [];
+    }
+}
