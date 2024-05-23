@@ -181,7 +181,7 @@ export async function gettrabajoant(dpi){
 //Trabajados en SABTE
 export async function gettrabajoSABTE(dpi){
     try {
-        const result = await client.query(`select titulo, estado, dpitrabajador, imagen, dpiempleador from completado where dpiempleador is not null and dpitrabajador = '${dpi}'`)
+        const result = await client.query(`select titulo, estado, imagen from completado where dpiempleador is not null and dpitrabajador = '${dpi}'`)
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
@@ -201,7 +201,6 @@ export async function insertartrabant(dpitrabajador, dpiempleador, titulo, estad
     }
 }
 
-<<<<<<< HEAD
 export async function insertartipotrabajo(nombre_trabajo, descripcion) {
     try {
         const result = await client.query(`insert into tipotrabajo (nombre_trabajo, descripcion) values ( '${nombre_trabajo}', '${descripcion}' )`);
@@ -214,7 +213,6 @@ export async function insertartipotrabajo(nombre_trabajo, descripcion) {
 
 
 
-=======
 export async function insertChatMessage(contenido, id_chat, dpi){
     try {
         const query = {
@@ -229,4 +227,3 @@ export async function insertChatMessage(contenido, id_chat, dpi){
         throw error;
     }
 }
->>>>>>> b8042363ed01aea4fbc19f778af20f8298e4190d
