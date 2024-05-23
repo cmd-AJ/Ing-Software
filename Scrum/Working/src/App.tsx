@@ -47,9 +47,6 @@ const App: React.FC = () => (
         <Route exact path="/profile">
           <Dashboard_Worker />
         </Route>
-        <Route exact path="/chat">
-          <Chat />
-        </Route>
         <Route exact path="/">
           <About />
         </Route>
@@ -75,6 +72,11 @@ const App: React.FC = () => (
         <Route exact path="/empleado">
           <MainLayout>
             <Dashboard_Worker />
+          </MainLayout>
+        </Route>
+        <Route exact path="/chat">
+          <MainLayout>
+            <Chat />
           </MainLayout>
         </Route>
         <Route exact path="/">

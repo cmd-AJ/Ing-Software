@@ -1,6 +1,6 @@
 import { Trabajador } from "../components/Searched/type";
 
-async function getUsers() {
+export async function getUsers() {
     try {
         const response = await fetch('http://localhost:3000/users')
         const data = await response.json()
