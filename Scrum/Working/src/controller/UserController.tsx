@@ -46,7 +46,6 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
 }
 
 async function userExists(dpi: String, password: String) {
-    debugger
     try {
         const users = await getUsers();
 
@@ -173,7 +172,21 @@ export async function insertrabajoanterior(trabajo : object) {
 
     const data = await fetch(`http://127.0.0.1:3000/trabajaoanterior/`,
         {
-            method: 'GET',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(trabajo)
+        })
+    return data
+}
+
+
+export async function insertartipodetrabajo(trabajo : object) {
+
+    const data = await fetch(`http://127.0.0.1:3000/instipotrabajo/`,
+        {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },

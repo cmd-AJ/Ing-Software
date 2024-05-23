@@ -146,11 +146,22 @@ export async function updatetrab(trabajo, dpi) {
     }
 }
 
+//SIN SABTE
 export async function gettrabajoant(dpi){
     try {
-        const result = await client.query(`select estado, dpitrabajador, dpiempleador from completado 
-        where dpitrabajador  = '${dpi}'`
+        const result = await client.query(`select titulo, estado, dpitrabajador, imagen  from completado where dpiempleador is null and dpitrabajador = '${dpi}'`
         )
+        return result.rows
+    } catch (error) {
+        console.error('Error getting user:', error);
+        throw error;
+    }
+}
+
+//Trabajados en SABTE
+export async function gettrabajoSABTE(dpi){
+    try {
+        const result = await client.query(`select titulo, estado, dpitrabajador, imagen, dpiempleador from completado where dpiempleador is not null and dpitrabajador = '${dpi}'`)
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
@@ -160,12 +171,25 @@ export async function gettrabajoant(dpi){
 
 
 //Estado es la descripcion eg. Se termino con aticipio o lo mejor de todo
-export async function insertartrabant(DPI, estado) {
+export async function insertartrabant(dpitrabajador, dpiempleador, titulo, estado, imagen) {
     try {
-        const result = await client.query(`insert into completado(estado, dpitrabajador) values( '${estado}', '${DPI}')`);
+        const result = await client.query(`insert into completado(estado, dpitrabajador, dpiempleador, titulo, imagen) values( '${estado}', '${dpitrabajador}', '${dpiempleador}', '${titulo}', '${imagen}' )`);
         console.log('Data inserted successfully');
     } catch (error) {
         console.error('Error inserting user:', error);
         throw error;
     }
 }
+
+export async function insertartipotrabajo(nombre_trabajo, descripcion) {
+    try {
+        const result = await client.query(`insert into tipotrabajo (nombre_trabajo, descripcion) values ( '${nombre_trabajo}', '${descripcion}' )`);
+        console.log('Data inserted successfully');
+    } catch (error) {
+        console.error('Error inserting user:', error);
+        throw error;
+    }
+}
+
+
+
