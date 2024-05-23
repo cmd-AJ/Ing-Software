@@ -56,17 +56,6 @@ async function userExists(dpi: String, password: String) {
     }
 }
 
-
-async function getUser(dpi: any, password: any) {
-    try {
-        const users = await getUsers();
-        return users.find((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
-    } catch (error) {
-        console.error('Error getting user:', error);
-        return null;
-    }
-}
-
 async function getWorkersByJob(job: String) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/workers/${job}`);
@@ -179,4 +168,27 @@ export async function insertrabajoanterior(trabajo : object) {
             body: JSON.stringify(trabajo)
         })
     return data
+}
+
+export async function getUser(dpi) {
+    try {
+        const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error(`Error fetching user: ${response.status} ${response.statusText}`);
+        }
+
+        // Parsear la respuesta JSON
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.error('Error fetching user by DPI:', error);
+        throw error;
+    }
 }
