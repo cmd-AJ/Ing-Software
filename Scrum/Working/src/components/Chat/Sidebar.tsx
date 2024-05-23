@@ -93,12 +93,21 @@ const Sidebar = () => {
                         <span>To: <span className="name">{selectedPerson ? selectedPerson.name : "Persona con la que está chateando"}</span></span>
                     </div>
                     {isDetailsOpen ? (
-                        <Details onClose={() => setIsDetailsOpen(false)} />
+                        <Details 
+                            onClose={() => setIsDetailsOpen(false)} 
+                            dpiEmployer={loggedUserDpi} 
+                            dpiEmployee={selectedPerson ? selectedPerson.dpi : null} 
+                        />
                     ) : (
                         <Chat messages={messages} />
                     )}
                     <div className="bottom">
-                        <Bottom loggedUserDpi={loggedUserDpi} selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} updateMessages={updateMessages} onHireClick={() => setIsDetailsOpen(true)} /> 
+                        <Bottom 
+                            loggedUserDpi={loggedUserDpi} 
+                            selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} 
+                            updateMessages={updateMessages} 
+                            onHireClick={() => setIsDetailsOpen(true)} 
+                        /> 
                     </div>
                 </div>
             </div>
