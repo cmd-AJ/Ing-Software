@@ -1,6 +1,6 @@
 import { Trabajador } from "../components/Searched/type";
 
-async function getUsers() {
+export async function getUsers() {
     try {
         const response = await fetch('http://localhost:3000/users')
         const data = await response.json()
@@ -57,15 +57,19 @@ async function userExists(dpi: String, password: String) {
 }
 
 
-async function getUser(dpi: any, password: any) {
+export async function getUser(dpi: string, password: string) {
     try {
+        console.log(`get users func pass: ${password}`)
+        console.log(`get users func dpi: ${dpi}`)
+
         const users = await getUsers();
-        return users.find((user: { id: any; password: any; }) => user.id === dpi && user.password === password);
+        return users.find((user: { id: string; password: string }) => user.id === dpi && user.password === password);
     } catch (error) {
         console.error('Error getting user:', error);
         return null;
     }
 }
+
 
 async function getWorkersByJob(job: String) {
     try {

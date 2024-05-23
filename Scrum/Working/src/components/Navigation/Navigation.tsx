@@ -44,8 +44,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
             <IonCol className="ion-text-center">
               <IonText className="custom-text">HILOS</IonText>
             </IonCol>
-            <IonCol className="ion-text-center">
-              <IonText className="custom-text">CHATS</IonText>
+            <IonCol className="ion-text-center" onClick={() => history.push('/chat')}>
+              <IonText className="custom-text" >CHATS</IonText>
             </IonCol>
             <IonCol className="ion-text-center">
               <IonText className="custom-text">AGENDA</IonText>

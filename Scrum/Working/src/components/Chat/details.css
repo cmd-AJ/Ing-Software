@@ -18,3 +18,33 @@
     background-color: #000000;
     padding: 20px;
 }
+
+.details-container {
+    position: relative;
+    padding: 20px;
+}
+
+.floating-input-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.floating-input-container input {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.floating-input-container button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
