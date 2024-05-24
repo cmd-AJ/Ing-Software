@@ -54,7 +54,7 @@ const ContratsSab: React.FC<ContainerProps> = ({ type }) => {
                     <div className="contratDisplay">
                         <h5 style={{ margin: '0px' }}>{contrat.estado}</h5>
                         <h6 style={{ margin: '0px' }}>
-                            Empleador: {names[contrat.dpitrabajador] || 'Cargando...'}
+                            Empleado: {names[contrat.dpitrabajador] || 'Cargando...'}
                         </h6>
                     </div>
                 ))}
