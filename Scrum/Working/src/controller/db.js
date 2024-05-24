@@ -17,6 +17,22 @@ export async function getUsers() {
     }
 }
 
+export async function getUserbyDPI(dpi){
+    try {
+        const query = {
+            text: 'SELECT * FROM Usuarios Where dpi = $1',
+            values: [dpi]
+        };
+
+        const result = await client.query(query)
+        return result.rows
+        
+    } catch (error) {
+        console.error('Error getting user:', error);
+        throw error;
+    }
+}
+
 export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role) {
     try {
         const query = {

@@ -56,8 +56,6 @@ async function userExists(dpi: String, password: String) {
     }
 }
 
-<<<<<<< HEAD
-=======
 
 export async function getUser(dpi: any, password: any) {
     try {
@@ -70,7 +68,7 @@ export async function getUser(dpi: any, password: any) {
         users.forEach((user: { id: any; password: any; }) => {
             console.log(  )
             if (user.id === dpi && user.password === password) {
-                foundUser = user;
+                //foundUser = user;
             }
         });
         return foundUser
@@ -81,7 +79,7 @@ export async function getUser(dpi: any, password: any) {
 }
 
 
->>>>>>> 39fe5b73a3222603c064c2591305c72d46c43f2b
+
 async function getWorkersByJob(job: String) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/workers/${job}`);
@@ -210,7 +208,7 @@ export async function insertartipodetrabajo(trabajo : object) {
     return data
 }
 
-export async function getUser(dpi) {
+export async function getUser2(dpi) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
             method: 'GET',

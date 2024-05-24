@@ -176,3 +176,10 @@
    padding-top: 10px;
    padding-bottom: 10px;
 }
+
+.persondatadisplay {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}

@@ -148,8 +148,8 @@ app.put('/confitrab', async (req, res) => {
   }
 })
 
-//Tomar nota el dpi es del trabajador osea el que esta haciendo el trabajo 
 app.get('/trabajoanterior/:dpi', async (req, res) => {
+//Tomar nota el dpi es del trabajador osea el que esta haciendo el trabajo 
   try {
     const { dpi } = req.params;
     const trabjant = await gettrabajoant(dpi)

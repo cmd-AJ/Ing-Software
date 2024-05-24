@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react"
 import { getTrustedPeople } from "../../controller/UserController"
+import TrustPerson from "./trustPerson"
 
-interface COntainerProps {  }
+interface ContainerProps {  }
 
-const TrustPeople: React.FC<COntainerProps> = () => {
+const TrustPeople: React.FC<ContainerProps> = () => {
 
-    const [people, setPeople] = useState([])
+    const [people, setPeople] = useState<any[]>([])
 
     useEffect(() => {
         const fetchData = async () => {
             const data = await getTrustedPeople('7234 51119 0101')
-            console.log(data)
+            setPeople(data)
         }
 
         fetchData()
     },[])
 
     return (
-        <div className="trustSec"></div>
+        <div className="trustSec">
+            {
+                people.map(person => (
+                    <TrustPerson nombre={person.nombre} apellido={person.apellido} rating={person.rating} tel={person.telefono} img={person.image}/>
+                ))
+            }
+        </div>
     )
 }
 

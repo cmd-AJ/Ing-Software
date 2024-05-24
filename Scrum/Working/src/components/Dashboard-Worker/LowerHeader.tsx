@@ -22,14 +22,15 @@ type User = {
 interface ContainerProps { 
     user: User,
     setEditModal: (editModal: boolean) => void
+    setEditTrabajo: (editTrabajo : boolean) => void
  }
 
-const LowerHeader: React.FC<ContainerProps> = ({ user, setEditModal }) => {
+const LowerHeader: React.FC<ContainerProps> = ({ user, setEditModal, setEditTrabajo }) => {
 
     return (
         <div className="lowerHeader">
             <LeftLower name={user.name + ' ' +user.lastname} img={user.image} email={user.correo} role={user.role} dpi={user.dpi}/>
-            <RightLower setEditModal={setEditModal} role={user.role}/>
+            <RightLower setEditModal={setEditModal} role={user.role} setEditTrabajo={setEditTrabajo}/>
         </div>
     )
 }

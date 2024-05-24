@@ -6,7 +6,7 @@ interface ContainerProps {
 }
 
 interface Contrat {
-    id: string;
+    dpiempleador: string;
     estado: string;
     dpitrabajador: string;
 }
@@ -25,8 +25,8 @@ const ContratsSab: React.FC<ContainerProps> = ({ type }) => {
                 // Fetch names for each contrat
                 const namesData: { [key: string]: string } = {};
                 for (const contrat of data) {
-                    const name = await getUserName(contrat.dpitrabajador);
-                    namesData[contrat.dpitrabajador] = name;
+                        const name = await getUserName(contrat.dpitrabajador);
+                        namesData[contrat.dpitrabajador] = name;
                 }
                 setNames(namesData);
             } catch (error) {
@@ -41,7 +41,7 @@ const ContratsSab: React.FC<ContainerProps> = ({ type }) => {
         return (
             <div className="listSec">
                 {contrats.map(contrat => (
-                    <div key={contrat.id} className="contratDisplay">
+                    <div className="contratDisplay">
                         ds
                     </div>
                 ))}
@@ -51,7 +51,7 @@ const ContratsSab: React.FC<ContainerProps> = ({ type }) => {
         return (
             <div className="listSec">
                 {contrats.map(contrat => (
-                    <div key={contrat.id} className="contratDisplay">
+                    <div className="contratDisplay">
                         <h5 style={{ margin: '0px' }}>{contrat.estado}</h5>
                         <h6 style={{ margin: '0px' }}>
                             Empleador: {names[contrat.dpitrabajador] || 'Cargando...'}

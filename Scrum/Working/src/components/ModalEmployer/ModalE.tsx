@@ -23,13 +23,14 @@ type User = {
 interface ContainerProps { 
     user: User,
     setModalE: (modalE: boolean) => void 
+    modalE: boolean
 }
 
-const ModalE : React.FC<ContainerProps> = ({user, setModalE}) => {
+const ModalE : React.FC<ContainerProps> = ({user, setModalE, modalE}) => {
     return (
         <>
             <BackgroundM />
-            <BackM user={user} setModalE={setModalE}/>
+            <BackM user={user} setModalE={setModalE} modalE={modalE}/>
         </>
     )
 }

@@ -24,6 +24,7 @@ type User = {
 
 const Dashboard_Worker: React.FC = () => {
   const [ editModal, setEditModal] = useState(false);  
+  const [editTrabajo, setEditTrabajo] = useState(false)
 
   const [myUser, setMyUser] = useState<User>({
     name : '',
@@ -60,9 +61,10 @@ const Dashboard_Worker: React.FC = () => {
 
   return (
     <IonPage className="contentC">
-      {editModal && <ModalE user={myUser} setModalE={setEditModal}/>}
+      {editModal && <ModalE user={myUser} setModalE={setEditModal} modalE={editModal}/>}
+      {editTrabajo && <ModalE user={myUser} setModalE={setEditTrabajo} modalE={editModal}/>}
       <IonRow style={{ justifyContent: 'center' }}>
-        <Header user={myUser} setEditModal={setEditModal}/>
+        <Header user={myUser} setEditModal={setEditModal} setEditTrabajo={setEditTrabajo}/>
       </IonRow>
       <IonRow style={{ justifyContent: 'center' }}>
         <Info user={myUser}/> 

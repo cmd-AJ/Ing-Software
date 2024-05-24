@@ -5,10 +5,11 @@ import React, { useEffect, useState } from 'react'
 
 interface ContainerProps {     
     setEditModal: (editModal: boolean) => void
+    setEditTrabajo: (editTrabajo : boolean) => void
     role: string
 }
 
-const RightLower: React.FC<ContainerProps> = ({setEditModal, role}) => {
+const RightLower: React.FC<ContainerProps> = ({setEditModal, role, setEditTrabajo}) => {
 
     const [userExist, setUserExist] = useState(false)
 
@@ -24,7 +25,7 @@ const RightLower: React.FC<ContainerProps> = ({setEditModal, role}) => {
             <IonButton shape='round' color='tertiary' className='roundedButton' onClick={() => setEditModal(true)}>
                 <IonIcon icon={pencilOutline} size='large'></IonIcon>
             </IonButton>
-            { userExist && <IonButton shape='round' className='roundedButton' color='tertiary'> 
+            { userExist && <IonButton shape='round' className='roundedButton' color='tertiary' onClick={() => setEditTrabajo(true)}> 
                 Añadir trabajo
             </IonButton>}
         </div>

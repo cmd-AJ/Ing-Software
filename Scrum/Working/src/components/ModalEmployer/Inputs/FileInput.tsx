@@ -39,7 +39,7 @@ const FileUpload: React.FC<ContainerProps> = ({ image, setImage }) => {
                     src={image}
                     alt="Subir archivo"
                     height="100px"
-                    style={{ cursor: "pointer", borderRadius: '50%' }}
+                    style={{ cursor: "pointer", borderRadius: '50%', position: 'unset', width: '15%', marginLeft: '45%' }}
                 />
             </label>
             {/* Input de tipo file oculto */}
