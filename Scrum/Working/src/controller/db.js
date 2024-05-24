@@ -17,7 +17,7 @@ export async function getUsers() {
     }
 }
 
-export async function getUserbyDPI(dpi){
+export async function getUserbyDPI(dpi) {
     try {
         const query = {
             text: 'SELECT * FROM Usuarios Where dpi = $1',
@@ -26,7 +26,7 @@ export async function getUserbyDPI(dpi){
 
         const result = await client.query(query)
         return result.rows
-        
+
     } catch (error) {
         console.error('Error getting user:', error);
         throw error;
@@ -63,32 +63,32 @@ export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI
 
 
 
-export async function gettrabajo(dpi){
+export async function gettrabajo(dpi) {
     try {
         const result = await client.query(`select nombre_trabajo  from usuarios left join trabajador on usuarios.dpi = trabajador.dpi where usuarios.dpi = '${dpi}'`
         )
         return result.rows
-        
+
     } catch (error) {
         console.error('Error getting user:', error);
         throw error;
     }
 }
 
-export async function getChatID(dpi1, dpi2){
+export async function getChatID(dpi1, dpi2) {
     try {
         // search de chat id corresponding to both dpi
         const query = {
-            text: "SELECT idchat " + 
-                  "FROM chats " + 
-                  "WHERE (dpireceptor = $1 AND dpiemisor = $2) " + 
-                  "OR (dpireceptor = $2 AND dpiemisor = $1)",
+            text: "SELECT idchat " +
+                "FROM chats " +
+                "WHERE (dpireceptor = $1 AND dpiemisor = $2) " +
+                "OR (dpireceptor = $2 AND dpiemisor = $1)",
             values: [dpi1, dpi2],
         };
 
         const chatID = await client.query(query)
         return chatID.rows
-        
+
     } catch (error) {
         console.error('Error getting chats by user DPI:', error);
         throw error;
@@ -99,10 +99,10 @@ export async function getChatBetweenUsers(dpi1, dpi2) {
     try {
         // search de chat id corresponding to both dpi
         const query = {
-            text: "SELECT idchat " + 
-                  "FROM chats " + 
-                  "WHERE (dpireceptor = $1 AND dpiemisor = $2) " + 
-                  "OR (dpireceptor = $2 AND dpiemisor = $1)",
+            text: "SELECT idchat " +
+                "FROM chats " +
+                "WHERE (dpireceptor = $1 AND dpiemisor = $2) " +
+                "OR (dpireceptor = $2 AND dpiemisor = $1)",
             values: [dpi1, dpi2],
         };
 
@@ -113,16 +113,16 @@ export async function getChatBetweenUsers(dpi1, dpi2) {
 
         // Getting the chat messages by dpi
         const messagesQuery = {
-            text: "SELECT id_chat, id_mensaje, contenido, time, dpi " + 
-                  "FROM mensaje " +
-                  "WHERE id_chat = $1 " +
-                  "ORDER BY time ",
-                values: [chat]
+            text: "SELECT id_chat, id_mensaje, contenido, time, dpi " +
+                "FROM mensaje " +
+                "WHERE id_chat = $1 " +
+                "ORDER BY time ",
+            values: [chat]
         }
 
         const result = await client.query(messagesQuery)
         return result.rows
-        
+
     } catch (error) {
         console.error('Error getting chats by user DPI:', error);
         throw error;
@@ -132,21 +132,21 @@ export async function getChatBetweenUsers(dpi1, dpi2) {
 export async function getContactsByUserDPI(dpi) {
     try {
         const query = {
-            text: "SELECT dpi, imagen AS img, nombre || ' ' || apellidos AS name " + 
-                  "FROM usuarios " + 
-                  "WHERE dpi IN (" + 
-                  "    SELECT dpiemisor FROM chats AS contactos " + 
-                  "    WHERE dpireceptor = $1 " + 
-                  "    UNION " + 
-                  "    SELECT dpireceptor FROM chats AS contactos " +
-                  "    WHERE dpiemisor = $1 " +
-                  ")",
+            text: "SELECT dpi, imagen AS img, nombre || ' ' || apellidos AS name " +
+                "FROM usuarios " +
+                "WHERE dpi IN (" +
+                "    SELECT dpiemisor FROM chats AS contactos " +
+                "    WHERE dpireceptor = $1 " +
+                "    UNION " +
+                "    SELECT dpireceptor FROM chats AS contactos " +
+                "    WHERE dpiemisor = $1 " +
+                ")",
             values: [dpi],
         };
 
         const result = await client.query(query);
         return result.rows;
-        
+
     } catch (error) {
         console.error('Error getting contacts by user DPI:', error);
         throw error;
@@ -166,7 +166,7 @@ export async function updatetrab(trabajo, dpi) {
 }
 
 //SIN SABTE
-export async function gettrabajoant(dpi){
+export async function gettrabajoant(dpi) {
     try {
         const result = await client.query(`select titulo, estado, dpitrabajador, imagen  from completado where dpiempleador is null and dpitrabajador = '${dpi}'`
         )
@@ -178,7 +178,7 @@ export async function gettrabajoant(dpi){
 }
 
 //Trabajados en SABTE
-export async function gettrabajoSABTE(dpi){
+export async function gettrabajoSABTE(dpi) {
     try {
         const result = await client.query(`select titulo, estado, imagen from completado where dpiempleador is not null and dpitrabajador = '${dpi}'`)
         return result.rows
@@ -212,7 +212,7 @@ export async function insertartipotrabajo(nombre_trabajo, descripcion) {
 
 
 
-export async function insertChatMessage(contenido, id_chat, dpi){
+export async function insertChatMessage(contenido, id_chat, dpi) {
     try {
         const query = {
             text: "INSERT INTO mensaje(contenido, id_chat, dpi, time) VALUES( $1, $2, $3, CURRENT_TIMESTAMP)",
@@ -227,7 +227,7 @@ export async function insertChatMessage(contenido, id_chat, dpi){
     }
 }
 
-export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita){
+export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita) {
     try {
         const query = {
             text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)",
@@ -236,7 +236,25 @@ export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeS
         await client.query(query)
 
     } catch (error) {
-        console.error('Error whil hiring', error)
+        console.error('Error while hiring', error)
         throw error;
+    }
+}
+
+export async function getCurrentHirings(dpi) {
+    try {
+        const query = {
+            text: "SELECT td.dpiempleado, u.nombre || ' ' ||u.apellidos AS nombre, u.telefono, u.imagen, td.descripcion, td.timestampcita " +
+                  "FROM trabajodisponible td " +
+                  "JOIN usuarios u ON (td.dpiempleado = u.dpi) " +
+                  "WHERE td.dpiempleador = $1 ",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error whil getting hirings")
+        throw error
     }
 }

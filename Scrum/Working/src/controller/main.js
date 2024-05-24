@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
@@ -222,6 +222,17 @@ app.post('/contacts/hire', async (req, res) => {
      res.status(200).json({ Success: 'Contrato realizado'})
   } catch (error) {
     console.error('Error while hiring person:', error)
+    res.status(500).json({ error: 'Internal Server Error'})
+  }
+})
+
+app.get('/contacts/hirings/:dpi', async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    const hirings = await getCurrentHirings(dpi)
+    res.status(200).json(hirings)
+  } catch (error) {
+    console.error("Error while getting hirings:", error)
     res.status(500).json({ error: 'Internal Server Error'})
   }
 })

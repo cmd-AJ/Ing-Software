@@ -7,6 +7,7 @@ import Searched from "./pages/Searched";
 import MainLayout from "./pages/MainLayout/MainLayout";
 import About from "./pages/About";
 import Chat from "./pages/Chat";
+import Dashboard from "./pages/Dashboard";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -47,6 +48,9 @@ const App: React.FC = () => (
         <Route exact path="/profile">
           <Dashboard_Worker />
         </Route>
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
         <Route exact path="/">
           <About />
         </Route>
@@ -77,6 +81,11 @@ const App: React.FC = () => (
         <Route exact path="/chat">
           <MainLayout>
             <Chat />
+          </MainLayout>
+        </Route>
+        <Route exact path="/dashboard">
+          <MainLayout>
+            <Dashboard />
           </MainLayout>
         </Route>
         <Route exact path="/">

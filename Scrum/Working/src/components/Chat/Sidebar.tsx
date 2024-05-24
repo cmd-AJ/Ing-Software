@@ -78,10 +78,12 @@ const Sidebar = () => {
                     <ul className="people">
                         {contacts.map((person, index) => (
                             <li key={index} className="person" onClick={() => handlePersonClick(person.dpi)}>
-                                <img src={person.img} alt="" />
-                                <span className="name">{person.name}</span>
-                                <span className="time">{person.time}</span>
-                                <span className="preview">{person.preview}</span>
+                                <img src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
+                                <div className="text-container">
+                                    <span className="name">{person.name}</span>
+                                    <span className="time">{person.time}</span>
+                                    <span className="preview">{person.preview}</span>
+                                </div>
                             </li>
                         ))}
                     </ul>
@@ -91,12 +93,21 @@ const Sidebar = () => {
                         <span>To: <span className="name">{selectedPerson ? selectedPerson.name : "Persona con la que está chateando"}</span></span>
                     </div>
                     {isDetailsOpen ? (
-                        <Details onClose={() => setIsDetailsOpen(false)} />
+                        <Details 
+                            onClose={() => setIsDetailsOpen(false)} 
+                            dpiEmployer={loggedUserDpi} 
+                            dpiEmployee={selectedPerson ? selectedPerson.dpi : null} 
+                        />
                     ) : (
                         <Chat messages={messages} />
                     )}
                     <div className="bottom">
-                        <Bottom loggedUserDpi={loggedUserDpi} selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} updateMessages={updateMessages} onHireClick={() => setIsDetailsOpen(true)} /> 
+                        <Bottom 
+                            loggedUserDpi={loggedUserDpi} 
+                            selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} 
+                            updateMessages={updateMessages} 
+                            onHireClick={() => setIsDetailsOpen(true)} 
+                        /> 
                     </div>
                 </div>
             </div>

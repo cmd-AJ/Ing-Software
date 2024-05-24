@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './details.css';
 import { IonDatetime } from '@ionic/react';
+import { makeHiring } from '../../controller/ChatController';
 
-const Details = ({ onClose }) => {
+const Details = ({ onClose, dpiEmployer, dpiEmployee }) => {
     const [selectedDate, setSelectedDate] = useState('');
     const [isInputVisible, setIsInputVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -18,8 +19,14 @@ const Details = ({ onClose }) => {
         setInputValue(e.target.value);
     };
 
-    const handleDoneClick = () => {
+    const handleDoneClick = async () => {
         console.log(inputValue);
+        try {
+            await makeHiring(inputValue, dpiEmployer, dpiEmployee, selectedDate);
+            console.log('Hiring made successfully');
+        } catch (error) {
+            console.error('Error making hiring:', error);
+        }
         setIsInputVisible(false);
         onClose();
     };
