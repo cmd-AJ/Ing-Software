@@ -15,7 +15,6 @@ type User = {
     image: string
     dpi: string
     role: string
-    departamento: string
 }
 
 
@@ -56,7 +55,6 @@ const EditBtn : React.FC<ContainerProps> = ({
             user.fecha_nacimiento = birthday
             user.tel = tel
             user.correo = correo
-            user.departamento = departamento
             user.image = image
             localStorage.setItem('User', JSON.stringify(user))
             console.log(user)

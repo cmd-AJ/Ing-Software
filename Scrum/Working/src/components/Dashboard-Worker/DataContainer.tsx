@@ -5,6 +5,7 @@ import Edad from './DataComponents/Edad'
 import Departamento from './DataComponents/Departamento'
 import Municipio from './DataComponents/Municipio'
 import Tel from './DataComponents/Telefono'
+import { Departamentos } from '../../Departamentos/Departamentos'
 
 type User = {
     name : string
@@ -19,20 +20,18 @@ type User = {
     image: string
     dpi: string
     role: string
-    departamento: string
-    edad: number
   }
 interface ContainerProps { 
     user: User
  }
 
 const DataContainer: React.FC<ContainerProps> = ({user}) => {
-    
+    debugger
     return (
         <div className='dataContainer'>
             <Sexo sexo={user.sexo}/>
-            <Edad edad={user.edad}/>
-            <Departamento departamento={user.departamento}/>
+            <Edad birthdate={user.fecha_nacimiento}/>
+            <Departamento departamento={Departamentos(user.dpi)}/>
             <Municipio municipio={user.municipio.substring(0,1) + user.municipio.toLowerCase().slice(1)}/>
             <Tel tel={user.tel}/>
         </div>

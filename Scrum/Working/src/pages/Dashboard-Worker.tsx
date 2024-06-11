@@ -18,8 +18,6 @@ type User = {
   image: string;
   dpi: string;
   role: string;
-  departamento: string;
-  edad: number;
 };
 
 const Dashboard_Worker: React.FC = () => {
@@ -39,8 +37,6 @@ const Dashboard_Worker: React.FC = () => {
     image: '',
     dpi: '',
     role: '',
-    departamento: '',
-    edad: 0
   });
 
   useEffect(() => {
@@ -48,14 +44,6 @@ const Dashboard_Worker: React.FC = () => {
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
-      if (parsedUser.fecha_nacimiento !== "") {
-        const fechaNacimiento = new Date(parsedUser.fecha_nacimiento);
-        const fechaActual = new Date();
-        const difMiliSeconds = fechaActual.getTime() - fechaNacimiento.getTime();
-        const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
-        const edadAños = Math.floor(difMiliSeconds / miliSecondsYear);
-        setMyUser(prevUser => ({ ...prevUser, edad: edadAños }));
-      }
     }
     
   }, []);
