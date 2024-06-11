@@ -4,8 +4,8 @@ import RatingContainer from './RatingContainer'
 import './style.css'
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

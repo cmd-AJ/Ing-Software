@@ -4,8 +4,8 @@ import BackM from "./BackM"
 import './modalStyle.css'
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

@@ -3,8 +3,8 @@ import React from "react"
 import { updatecuenta } from "../../controller/UserController"
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

@@ -4,8 +4,8 @@ import RightLower from './RightLower'
 import './style.css'
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string
+    apellidos : string
     trabajo: string
     rating: number
     sexo: string
@@ -27,7 +27,7 @@ const LowerHeader: React.FC<ContainerProps> = ({ user, setEditModal, setEditTrab
 
     return (
         <div className="lowerHeader">
-            <LeftLower name={user.name + ' ' +user.lastname} img={user.image} email={user.correo} role={user.role} dpi={user.dpi}/>
+            <LeftLower name={user.nombre + ' ' +user.apellidos} img={user.image} email={user.correo} role={user.role} dpi={user.dpi}/>
             <RightLower setEditModal={setEditModal} role={user.role} setEditTrabajo={setEditTrabajo}/>
         </div>
     )

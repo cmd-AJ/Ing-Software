@@ -5,8 +5,8 @@ import RightInfo from './RightInfo'
 import './style.css'
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

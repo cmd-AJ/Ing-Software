@@ -15,8 +15,8 @@ import FileUpload from "./Inputs/FileInput"
 import { Departamentos } from "../../Departamentos/Departamentos"
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

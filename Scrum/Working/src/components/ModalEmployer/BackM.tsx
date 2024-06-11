@@ -4,8 +4,8 @@ import ContentM from "./ContentM"
 import ContentMT from "./ContentMT"
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

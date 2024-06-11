@@ -4,8 +4,8 @@ import './style.css'
 import { IonCard } from '@ionic/react'
 
 type User = {
-    name : string
-    lastname : string
+    nombre : string;
+    apellidos : string;
     trabajo: string
     rating: number
     sexo: string

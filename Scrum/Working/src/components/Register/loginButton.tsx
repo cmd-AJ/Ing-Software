@@ -5,25 +5,6 @@ import CryptoJS from 'crypto-js';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-type userData = {
-    name : string
-    apellidps : string
-    contrasenia: string
-    trabajo: string
-    rating: number
-    sexo: string
-    fecha_nacimiento: string
-    municipio: string
-    telefono: string
-    email: string
-    imagen: string
-    dpi: string
-    role: string
-    departamento: string
-    numero: number
-}
-
-
 interface ContainerProps { 
     dpi : string, 
     validateDpi : Boolean,

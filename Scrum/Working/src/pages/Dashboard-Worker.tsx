@@ -6,8 +6,8 @@ import React, { useEffect, useState } from "react";
 import ModalE from "../components/ModalEmployer/ModalE";
 
 type User = {
-  name : string;
-  lastname : string;
+  nombre : string;
+  apellidos : string;
   trabajo: string;
   rating: number;
   sexo: string;
@@ -25,8 +25,8 @@ const Dashboard_Worker: React.FC = () => {
   const [editTrabajo, setEditTrabajo] = useState(false)
 
   const [myUser, setMyUser] = useState<User>({
-    name : '',
-    lastname : '',
+    nombre : '',
+    apellidos : '',
     trabajo: '',
     rating: 0,
     sexo: '',
