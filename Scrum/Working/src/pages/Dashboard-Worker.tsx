@@ -57,7 +57,8 @@ const Dashboard_Worker: React.FC = () => {
         setMyUser(prevUser => ({ ...prevUser, edad: edadAños }));
       }
     }
-  }, [myUser]);
+    
+  }, []);
 
   return (
     <IonPage className="contentC">

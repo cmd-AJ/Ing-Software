@@ -1,10 +1,27 @@
 import { IonButton } from '@ionic/react'
 import './button.css'
-import { userExists, getUser } from '../../controller/UserController'
+import { userExists, getUser, getUser2 } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
+type userData = {
+    name : string
+    apellidps : string
+    contrasenia: string
+    trabajo: string
+    rating: number
+    sexo: string
+    fecha_nacimiento: string
+    municipio: string
+    telefono: string
+    email: string
+    imagen: string
+    dpi: string
+    role: string
+    departamento: string
+    numero: number
+}
 
 
 interface ContainerProps { 
@@ -32,9 +49,12 @@ const LoginButton: React.FC<ContainerProps> = ({
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
-                    setUserExist(true)
-
+                    const data = await getUser2(dpi)
+                    console.log(data);
                     
+                    localStorage.setItem('User', JSON.stringify(data[0]))
+                    
+                    setUserExist(true)
                     console.log("Has iniciado sesion correctamente");
                     console.log(login);
                     localStorage.setItem('dpi', dpi);

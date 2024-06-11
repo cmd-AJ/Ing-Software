@@ -12,23 +12,24 @@ import Municipio from './Inputs/Municipio'
 import Birthday from "./Inputs/Birthday"
 import EditBtn from "./EditBtn"
 import FileUpload from "./Inputs/FileInput"
+import { Departamentos } from "../../Departamentos/Departamentos"
 
 type User = {
-    name : string
-    lastname : string
-    trabajo: string
-    rating: number
-    sexo: string
-    fecha_nacimiento: string
-    municipio: string
-    tel: string
-    correo: string
-    image: string
-    dpi: string
-    role: string
-    departamento: string
-    edad: number
-  }
+    name : string;
+    lastname : string;
+    trabajo: string;
+    rating: number;
+    sexo: string;
+    fecha_nacimiento: string;
+    municipio: string;
+    tel: string;
+    correo: string;
+    image: string;
+    dpi: string;
+    role: string;
+    departamento: string;
+    edad: number;
+  };
 
 interface ContainerProps { 
     user: User
@@ -45,7 +46,7 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
     const [tel, setTel] = useState(user.tel)
     const [correo, setCorreo] = useState(user.correo)
     const [validateCorreo, setValidateCorreo] = useState(false)
-    const [departamento, setDepartamento] = useState(user.departamento)
+    const [dpi, setDPI] = useState(user.dpi)
     const [municipio, setMunicipio] = useState(user.municipio)
 
     return (
@@ -65,9 +66,8 @@ const ContentM: React.FC<ContainerProps> = ({user, setModalE}) => {
             <Sexo sexo={sexo} setSexo={setSexo}/>
             <Tel tel={tel} setTel={setTel}/>
             <Email email={correo} setEmail={setCorreo} validatesEmail={validateCorreo} setValidateEmail={setValidateCorreo} />
-            <Departamento departamento={departamento} setDepartamento={setDepartamento}/>
-            <Municipio municipio={municipio} setMunicipio={setMunicipio} departamento={departamento}/>
-            <EditBtn user={user} municipio={municipio} departamento={departamento}
+            <Municipio municipio={municipio} setMunicipio={setMunicipio} dpi={dpi}/>
+            <EditBtn user={user} municipio={municipio} departamento={Departamentos(dpi)}
             birthday={date} tel={tel} correo={correo} sexo={sexo} image={image} setEditM={setModalE}
             validateEmail={validateCorreo} validateDate={validateDate} oficio={oficio}/>
         </div>

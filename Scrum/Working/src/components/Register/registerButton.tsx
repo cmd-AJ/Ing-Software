@@ -19,18 +19,20 @@ type User = {
 
 type userData = {
     name : string
-    lastname : string
+    apellidps : string
+    contrasenia: string
     trabajo: string
     rating: number
     sexo: string
     fecha_nacimiento: string
     municipio: string
-    tel: string
-    correo: string
-    image: string
+    telefono: string
+    email: string
+    imagen: string
     dpi: string
     role: string
     departamento: string
+    numero: number
 }
 
 interface ContainerProps {  

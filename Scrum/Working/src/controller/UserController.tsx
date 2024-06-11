@@ -208,7 +208,7 @@ export async function insertartipodetrabajo(trabajo : object) {
     return data
 }
 
-export async function getUser2(dpi) {
+export async function getUser2(dpi: string) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
             method: 'GET',
@@ -231,7 +231,7 @@ export async function getUser2(dpi) {
     }
 }
 
-export async function getUserName(dpi) {
+export async function getUserName(dpi: string) {
     try {
         const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
             method: 'GET',
