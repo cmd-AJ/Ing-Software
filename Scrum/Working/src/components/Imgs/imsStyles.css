@@ -1,0 +1,24 @@
+.circle-container {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden; 
+    width: 150px; 
+    height: 150px; 
+    position: absolute; 
+    transform: translate(10%, -30%); 
+    z-index: 1; 
+}
+
+@media (max-width: 412px){
+    .circle-container {
+        width: 120px;
+        height: 120px;
+        transform: translate(10%, -10%); 
+    }
+}
+
+#circleStyle {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

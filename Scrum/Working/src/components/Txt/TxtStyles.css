@@ -1,0 +1,8 @@
+.vertical-txt-display {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-left: 180px;
+    width: 100%;
+}

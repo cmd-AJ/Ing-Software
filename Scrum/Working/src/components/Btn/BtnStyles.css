@@ -1,0 +1,30 @@
+.roundedButton {
+    height: 60px;
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.btn-header-horizontal {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.iconsImg-subdivision {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+@media (max-width: 814px){
+    .btn-header-horizontal{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .iconsImg-subdivision {
+        justify-content: space-evenly;
+    }
+}
+

@@ -1,12 +1,14 @@
 @import url('/src/theme/variables.css');
 
 .header {
-    min-width: 600px;
     width: 92%;
-    height: 240px;
+    height: auto;
+    min-height: 140px;
     background-color: white;
     border-radius: 30px;
-    margin-top: 60px;
+    margin-top: 20px;
+    display: grid;
+    grid-template-rows: 60% 40%;
 }
 
 .info {
@@ -19,40 +21,41 @@
 }
 
 .feedImg {
-    width: 1780px;
-    height: 60%;
+    object-fit: fill;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     margin: 0;
+    grid-row: 1 / 2;
 }
 
 .lowerHeader {
-    position: relative;
-    top: 135px;
-    min-width: 600px;
     width: 100%;
-    height: 100px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-content: center;
     color: var(--ion-color-tertiary);
-    padding-right: 20px;
-    padding-left: 20px;
+    background-color: var(--ion-color-secondary);
+    grid-row: 2 / 2;
 }
 
-.lowerElements {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-content: center;
+
+
+@media (max-width: 782px){
+    .lowerElements {
+        justify-content: space-evenly;
+    }
+    .lowerHeader {
+        flex-direction: column;
+    }
 }
+ 
 
 #profileImg {
     height: 150px;
     width: 150px;
     position: relative;
     top: -75%;
+    margin-left: 5px;
 }
 
 .nameDisplay {

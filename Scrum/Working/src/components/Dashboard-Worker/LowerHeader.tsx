@@ -29,6 +29,7 @@ const LowerHeader: React.FC<ContainerProps> = ({ user, setEditModal, setEditTrab
         <div className="lowerHeader">
             <LeftLower name={user.nombre + ' ' +user.apellidos} img={user.image} email={user.correo} role={user.role} dpi={user.dpi}/>
             <RightLower setEditModal={setEditModal} role={user.role} setEditTrabajo={setEditTrabajo}/>
+            
         </div>
     )
 }

@@ -18,7 +18,7 @@ const RightLower: React.FC<ContainerProps> = ({setEditModal, role, setEditTrabaj
     }, [role]);
 
     return (
-        <div className='lowerElements'>
+        <div className='lowerElements' style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start'}}>
             <IonButton shape='round' className='roundedButton' color='tertiary'>
                <IonIcon icon={chatbubbleEllipses} size='large'></IonIcon>
             </IonButton>

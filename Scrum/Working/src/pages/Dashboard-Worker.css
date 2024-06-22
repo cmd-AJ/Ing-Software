@@ -4,16 +4,53 @@
     background-color: var(--ion-color-primary);
     height: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 100%;
+    align-content:center;
+    padding-right: 42px;
+    overflow: hidden;
 }
 
-.ion-page {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+.dashboard-row {
+    height: auto;
+    width: 100%;
+    margin: 20px;
+}
+
+.header-card {
     display: flex;
-    position: absolute;
+    height: auto;
+    width: 100%;
+    background-color: white;
+    border-radius: 30px;
+    overflow: hidden;
     flex-direction: column;
-    contain: layout size style;
-    z-index: 0;
-  }
+}
+
+.feed-img {
+    height: 65%;
+    width: 100%;
+    border-radius: 30px;
+}
+
+.lower-displayment {
+    width: 100%;
+    height: 200%;
+    background-color: var(--ion-color-primary-contrast);
+    display: flex;
+    flex-direction: row;
+    color: var(--ion-color-tertiary);
+}
+
+@media (max-width: 814px){
+    .lower-displayment {
+        flex-direction: column;
+    }
+}
+
+.headerImg {
+    width: '100%';
+    height: '65%';
+    object-fit: 'fill';
+}
