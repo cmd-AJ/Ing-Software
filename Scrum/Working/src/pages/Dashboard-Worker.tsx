@@ -5,11 +5,13 @@ import CircleImg from "../components/Imgs/CircleImg";
 import UserText from "../components/Txt/UserText";
 import BtnDisplayment from "../components/Btn/BtnDisplayment";
 import ModalE from "../components/ModalEmployer/ModalE";
+import LeftInfoDisplay from "../components/Displayments/LeftInfoDisplay";
+import Departamento from "../components/ModalEmployer/Inputs/Departamento";
+import { Departamentos } from "../Departamentos/Departamentos";
 
 type User = {
   nombre : string;
   apellidos : string;
-  trabajo: string;
   rating: number;
   sexo: string;
   fecha_nacimiento: string;
@@ -19,6 +21,9 @@ type User = {
   image: string;
   dpi: string;
   role: string;
+  edad: string;
+  banner: string;
+  departamento: string
 };
 
 const Dashboard_Worker: React.FC = () => {
@@ -28,7 +33,6 @@ const Dashboard_Worker: React.FC = () => {
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
     apellidos : '',
-    trabajo: '',
     rating: 0,
     sexo: '',
     fecha_nacimiento: '',
@@ -38,6 +42,9 @@ const Dashboard_Worker: React.FC = () => {
     image: '',
     dpi: '',
     role: '',
+    edad: '',
+    banner: '',
+    departamento: ''
   });
 
   useEffect(() => {
@@ -70,10 +77,12 @@ const Dashboard_Worker: React.FC = () => {
                 <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
             </div>
         </div>
+        <div className="info-display-grid">
+          <LeftInfoDisplay sexo={myUser.sexo} departamento={myUser.departamento} municipio={myUser.municipio} edad={myUser.edad} tel={myUser.tel}/>
+          <div style={{width: '100%', backgroundColor: 'black'}}>kl</div>
+          <div style={{width: '100%', backgroundColor: 'blue'}}>kl</div>
+        </div>
       </div>
-      <IonRow className="dashboard-row">
-        
-      </IonRow>
     </IonPage>
   );
 };

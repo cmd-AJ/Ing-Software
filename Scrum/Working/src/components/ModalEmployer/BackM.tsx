@@ -5,17 +5,19 @@ import ContentMT from "./ContentMT"
 
 type User = {
     nombre : string;
-    apellidos : string;
-    trabajo: string
-    rating: number
-    sexo: string
-    fecha_nacimiento: string
-    municipio: string
-    tel: string
-    correo: string
-    image: string
-    dpi: string
-    role: string
+  apellidos : string;
+  rating: number;
+  sexo: string;
+  fecha_nacimiento: string;
+  municipio: string;
+  tel: string;
+  correo: string;
+  image: string;
+  dpi: string;
+  role: string;
+  edad: string;
+  banner: string;
+  departamento: string
   }
 
 interface ContainerProps { 

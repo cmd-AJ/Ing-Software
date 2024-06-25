@@ -1,0 +1,39 @@
+@import url('../../theme/variables.css');
+
+#left-displayment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--ion-color-tertiary);
+}
+
+#rating-display, #info-div-display{
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    border-radius: 25px;
+    padding: 10px;
+    background-color: var(--ion-color-primary-contrast);
+}
+
+#info-div-display{
+    height: 100%;
+}
+
+#rating-display{
+    margin-bottom: 10px;
+}
+
+.info-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.info-text-display{
+    display: flex;
+    flex-direction: column;
+}

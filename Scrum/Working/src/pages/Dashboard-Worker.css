@@ -16,6 +16,9 @@
     height: auto;
     width: 100%;
     margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .header-card {
@@ -43,14 +46,19 @@
     color: var(--ion-color-tertiary);
 }
 
-@media (max-width: 814px){
-    .lower-displayment {
-        flex-direction: column;
-    }
+.info-display-grid {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
 }
 
 .headerImg {
     width: '100%';
     height: '65%';
     object-fit: 'fill';
+}
+
+@media (max-width: 814px){
+    .lower-displayment {
+        flex-direction: column;
+    }
 }

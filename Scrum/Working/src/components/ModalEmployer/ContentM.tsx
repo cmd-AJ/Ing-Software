@@ -17,7 +17,6 @@ import { Departamentos } from "../../Departamentos/Departamentos"
 type User = {
     nombre : string;
     apellidos : string;
-    trabajo: string;
     rating: number;
     sexo: string;
     fecha_nacimiento: string;
@@ -27,6 +26,9 @@ type User = {
     image: string;
     dpi: string;
     role: string;
+    edad: string;
+    banner: string;
+    departamento: string
   };
 
 interface ContainerProps { 
