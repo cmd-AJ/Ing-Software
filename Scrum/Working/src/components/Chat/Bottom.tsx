@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import './Bottom.css';
 import { getChatIdWithDPI, insertChatMessage } from '../../controller/ChatController';
 
-const Bottom = ({ loggedUserDpi, selectedPersonDpi, updateMessages, onHireClick }) => {
+
+type BottomProps = {
+  loggedUserDpi: string;
+  selectedPersonDpi: any; 
+  updateMessages: () => void; 
+  onHireClick: () => void; 
+};
+
+const Bottom: React.FC<BottomProps> = ({ loggedUserDpi , selectedPersonDpi, updateMessages, onHireClick }) => {
 
     const [message, setMessage] = useState('');  
 

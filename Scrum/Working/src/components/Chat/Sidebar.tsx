@@ -6,12 +6,25 @@ import Bottom from './Bottom';
 
 import { getContacts, getChatMessages } from '../../controller/ChatController';
 
-const Sidebar = () => {
-    const [selectedPerson, setSelectedPerson] = useState(null);
-    const [contacts, setContacts] = useState([]);
-    const [messages, setMessages] = useState([]);
-    const [loggedUserDpi, setLoggedUserDpi] = useState("3834 49898 0101"); // DPI del usuario loggeado
-    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+//Esto es el objeto de los contactos llamados por la API
+interface Contact {
+    name: string
+    dpi: string
+    img: string
+    time: any
+    preview:any
+
+  }
+
+const Sidebar: React.FC<{ }> = () => {
+
+  const [selectedPerson, setSelectedPerson] = useState<Contact>();
+  const [contacts, setContacts] = useState<Contact[]>([]); // Type contacts as array of Contact objects
+  const [messages, setMessages] = useState([]);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [loggedUserDpi, setLoggedUserDpi] = useState("3834 49898 0101"); // DPI del usuario loggeado
+  
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,14 +43,14 @@ const Sidebar = () => {
         };
     }, [loggedUserDpi]);
 
-    const handlePersonClick = async (dpi) => {
+    const handlePersonClick = async (dpi: string) => {
         const selectedPerson = contacts.find(person => person.dpi === dpi);
         setSelectedPerson(selectedPerson);
 
         try {
             const chatMessages = await getChatMessages(loggedUserDpi, dpi);
             
-            const formattedMessages = chatMessages.map(msg => ({
+            const formattedMessages = chatMessages.map((msg: { contenido: string; time: any; dpi: string; }) => ({
                 message: msg.contenido,
                 time: msg.time,
                 sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
@@ -54,7 +67,7 @@ const Sidebar = () => {
             try {
                 const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi);
                 
-                const formattedMessages = chatMessages.map(msg => ({
+                const formattedMessages = chatMessages.map((msg: { contenido: string; time: any; dpi: string; }) => ({
                     message: msg.contenido,
                     time: msg.time,
                     sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
