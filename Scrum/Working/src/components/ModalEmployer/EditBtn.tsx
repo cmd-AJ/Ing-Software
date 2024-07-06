@@ -22,6 +22,7 @@ type User = {
 
 interface ContainerProps { 
     municipio: string,
+    banner : string,
     sexo: string,
     birthday: string,
     tel: string,
@@ -47,7 +48,8 @@ const EditBtn : React.FC<ContainerProps> = ({
    setEditM,
     validateEmail,
     validateDate,
-    oficio
+    oficio,
+    banner
 }) => {
 
     const handleClick = async () => {

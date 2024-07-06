@@ -18,7 +18,7 @@ type User = {
   edad: string;
   banner: string;
   departamento: string
-  }
+}
 
 interface ContainerProps { 
     user: User,

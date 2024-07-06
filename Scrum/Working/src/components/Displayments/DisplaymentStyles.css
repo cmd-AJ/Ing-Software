@@ -1,11 +1,27 @@
 @import url('../../theme/variables.css');
 
-#left-displayment {
-    width: 100%;
+#left-displayment, #center-displayment, #right-displayment {
+    width: auto;
+    height: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     color: var(--ion-color-tertiary);
+    border-radius: 25px;
+}
+
+#center-displayment, #right-displayment {
+    background-color: var(--ion-color-primary-contrast);
+    padding: 10px;
+}
+
+#left-displayment {
+    gap: 10px;
+}
+
+#center-displayment {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-height: 500px;
 }
 
 #rating-display, #info-div-display{
@@ -18,7 +34,7 @@
 }
 
 #info-div-display{
-    height: 100%;
+    height: auto;
 }
 
 #rating-display{
@@ -36,4 +52,20 @@
 .info-text-display{
     display: flex;
     flex-direction: column;
+}
+
+@media (max-width: 814px){
+    #rating-display {
+        border-radius: 0 0 25px 25px;
+    }
+
+    #center-displayment {
+        margin-left: 0px;
+        margin-right: 0px;
+        border-radius: 0 0 25px 25px;
+    }
+
+    #right-displayment {
+        border-radius: 0 0 25px 25px;
+    }
 }

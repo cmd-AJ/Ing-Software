@@ -8,6 +8,9 @@ import ModalE from "../components/ModalEmployer/ModalE";
 import LeftInfoDisplay from "../components/Displayments/LeftInfoDisplay";
 import Departamento from "../components/ModalEmployer/Inputs/Departamento";
 import { Departamentos } from "../Departamentos/Departamentos";
+import ModalStructure from "../components/Modals/ModalStructure";
+import Profile from "../components/Modals/Structures/Profile";
+import ProfileDataDisplay from "../components/Displayments/ProfileDataDisplay";
 
 type User = {
   nombre : string;
@@ -29,7 +32,7 @@ type User = {
 const Dashboard_Worker: React.FC = () => {
   const [ editModal, setEditModal] = useState(false);  
   const [editTrabajo, setEditTrabajo] = useState(false)
-
+  
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
     apellidos : '',
@@ -46,19 +49,23 @@ const Dashboard_Worker: React.FC = () => {
     banner: '',
     departamento: ''
   });
+    
+  const [image,setImage] = useState(myUser.image)
+
 
   useEffect(() => {
     const user = localStorage.getItem("User");
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
+      setImage(myUser.image)
     }
     
   }, []);
 
   return (
     <IonPage className="contentC">
-      {editModal && <ModalE user={myUser} setModalE={setEditModal} modalE={editModal} />}
+      {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
       {editTrabajo && <ModalE user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
       <div className="dashboard-row">
         <div className="header-card">
@@ -66,7 +73,7 @@ const Dashboard_Worker: React.FC = () => {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/800px-Naruto_logo.svg.png"
             style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
             <div className="lower-displayment">
-              <div style={{height: '100%'}}>
+              <div>
                 <CircleImg reference={myUser.image}/>
                 <UserText 
                   text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
@@ -77,11 +84,7 @@ const Dashboard_Worker: React.FC = () => {
                 <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
             </div>
         </div>
-        <div className="info-display-grid">
-          <LeftInfoDisplay sexo={myUser.sexo} departamento={myUser.departamento} municipio={myUser.municipio} edad={myUser.edad} tel={myUser.tel}/>
-          <div style={{width: '100%', backgroundColor: 'black'}}>kl</div>
-          <div style={{width: '100%', backgroundColor: 'blue'}}>kl</div>
-        </div>
+        <ProfileDataDisplay user={myUser}/>
       </div>
     </IonPage>
   );

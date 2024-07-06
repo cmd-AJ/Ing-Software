@@ -1,0 +1,26 @@
+.img-input-size{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.circular-image-upload, .rectangular-image-upload {
+    height: 125px;
+    cursor: pointer;
+    position: unset;
+}
+
+.rectangular-image-upload {
+    width: 100%;
+    object-fit: fill;
+}
+
+.circular-image-upload {
+    width: 125px;
+    border-radius: 50%;
+}
+
+.inputsModal {
+    color: black;
+    font-size: 20px; 
+}

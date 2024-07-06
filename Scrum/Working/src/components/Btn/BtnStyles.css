@@ -17,14 +17,51 @@
     justify-content: flex-end;
 }
 
+.edit-user-btn{
+    margin-top: auto;
+    width: 50%;
+}
+
+.center-div-btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-edit-user{
+    width: 25%;
+    margin-top: auto;
+    height: 45px;
+    margin-bottom: 5%;
+}
+
+#close-btn{
+    color: gray;
+    height: 35px;
+    width: 35px;
+}
+
+#close-btn:hover{
+    color: red;
+}
+
 @media (max-width: 814px){
     .btn-header-horizontal{
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
     }
 
     .iconsImg-subdivision {
         justify-content: space-evenly;
+    }
+
+    .btn-header-horizontal {
+        justify-content: center;
+    }
+
+    .btn-edit-user{
+        width: 100%;
     }
 }
 

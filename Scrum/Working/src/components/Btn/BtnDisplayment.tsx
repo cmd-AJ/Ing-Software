@@ -19,10 +19,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
 ) => {
     return (
         <div className="btn-header-horizontal">
-            <div className='iconsImg-subdivision'>
-                <ModalBtnI img={chatbubbleEllipses} setEdit={setEdit1}/>
-                <ModalBtnI img={pencilOutline} setEdit={setEdit2}/>
-            </div>
+            <ModalBtnI img={pencilOutline} setEdit={setEdit2}/>
             <ModalBtnN label="Añadir trabajo" setEdit={setEdit3}/>
         </div>
     )

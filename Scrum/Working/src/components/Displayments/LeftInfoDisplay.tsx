@@ -1,4 +1,3 @@
-import RatingContainer from '../Dashboard-Worker/RatingContainer'
 import './DisplaymentStyles.css'
 import InfoDisplayment from './InfoDisplayment'
 import RatingDisplayment from './RatingDisplayment'

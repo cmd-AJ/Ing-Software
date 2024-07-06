@@ -54,8 +54,6 @@ const LoginButton: React.FC<ContainerProps> = ({
                     } else {
                         console.log("No se encontró el usuario.");
                     }
-
-
                     
                 } else {
                     console.log("Usuario no encontrado");
