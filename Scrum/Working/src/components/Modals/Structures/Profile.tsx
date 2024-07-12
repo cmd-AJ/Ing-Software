@@ -1,16 +1,13 @@
 import { IonButton, IonInput } from "@ionic/react"
 import ImgInput from "../../Inputs/ImgInput"
-import BtnCloseModal from "../../Btn/BtnCloseModal"
 import { useEffect, useState } from "react";
 import DataList from "../../Inputs/DataList";
 import InputSelector from "../../Inputs/InputSelector";
 import DateSelector from "../../Inputs/DateSelector";
-import { use } from "chai";
 import InputWrite from "../../Inputs/InputWrite";
 import { useMaskito } from "@maskito/react";
 import { Departamentos, getMunicipios } from "../../../Departamentos/Departamentos";
 import BtnEditUser from "../../Btn/BtnEditUser";
-import Birthday from "../../ModalEmployer/Inputs/Birthday";
 
 interface ContainerProps {
     user: User
@@ -25,7 +22,7 @@ type User = {
     municipio: string;
     tel: string;
     correo: string;
-    image: string;
+    imagen: string;
     dpi: string;
     role: string;
     edad: string;
@@ -36,7 +33,7 @@ type User = {
 const Profile : React.FC<ContainerProps> = ({ user}) => {
 
     const [banner , setBanner] = useState(user.banner)
-    const [image, setImage] = useState(user.image)
+    const [image, setImage] = useState(user.imagen)
     const [job, setJob] = useState('')
     const [sex, setSex] = useState(user.sexo)
     const [date, setDate] = useState(user.fecha_nacimiento)

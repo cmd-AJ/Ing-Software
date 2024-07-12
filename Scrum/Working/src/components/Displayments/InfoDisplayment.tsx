@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './DisplaymentStyles.css'
 import InfoDisplay from './InfoDisplay'
 import { accessibility, hourglassOutline, homeSharp,callSharp } from "ionicons/icons"
@@ -17,6 +18,28 @@ const InfoDisplayment : React.FC<ContainerProps> = ({
     edad,
     tel
 }) => {
+
+    useEffect(()=>{
+        if (sexo === null){
+            sexo = ''
+        }
+
+        if (departamento === null){
+            departamento = ''
+        }
+
+        if (municipio === null){
+            municipio = ''
+        }
+
+        if (edad === null){
+            edad = ''
+        }
+
+        if (tel === null){
+            tel = ''
+        }
+    })
     return (
         <div id='info-div-display'>
             <InfoDisplay textLabel='Sexo:' textUser={sexo} img={accessibility}/>

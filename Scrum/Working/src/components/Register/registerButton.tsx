@@ -17,23 +17,6 @@ type User = {
     role: string
 }
 
-type userData = {
-    name : string
-    apellidos : string
-    trabajo: string
-    rating: number
-    sexo: string
-    fecha_nacimiento: string
-    municipio: string
-    telefono: string
-    email: string
-    imagen: string
-    dpi: string
-    role: string
-    departamento: string
-    banner: string
-}
-
 interface ContainerProps {  
     validateName : Boolean, 
     validateLastname: Boolean,

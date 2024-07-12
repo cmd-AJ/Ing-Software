@@ -11,7 +11,7 @@ import Profile from "../components/Modals/Structures/Profile";
 import ProfileDataDisplay from "../components/Displayments/ProfileDataDisplay";
 
 type User = {
-  name : string;
+  nombre : string;
   apellidos : string;
   rating: number;
   sexo: string;
@@ -19,7 +19,7 @@ type User = {
   municipio: string;
   tel: string;
   correo: string;
-  image: string;
+  imagen: string;
   dpi: string;
   role: string;
   edad: string;
@@ -32,7 +32,7 @@ const Dashboard_Worker: React.FC = () => {
   const [editTrabajo, setEditTrabajo] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
-    name : '',
+    nombre : '',
     apellidos : '',
     rating: 0,
     sexo: '',
@@ -40,7 +40,7 @@ const Dashboard_Worker: React.FC = () => {
     municipio: '',
     tel: '',
     correo: '',
-    image: '',
+    imagen: '',
     dpi: '',
     role: '',
     edad: '',
@@ -48,7 +48,7 @@ const Dashboard_Worker: React.FC = () => {
     departamento: ''
   });
     
-  const [image,setImage] = useState(myUser.image)
+  const [image,setImage] = useState(myUser.imagen)
 
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Dashboard_Worker: React.FC = () => {
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
-      setImage(myUser.image)
+      setImage(myUser.imagen)
     }
     
   }, []);
@@ -68,13 +68,13 @@ const Dashboard_Worker: React.FC = () => {
       <div className="dashboard-row">
         <div className="header-card">
           <IonImg
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/800px-Naruto_logo.svg.png"
+            src={myUser.banner}
             style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
             <div className="lower-displayment">
               <div>
-                <CircleImg reference={myUser.image}/>
+                <CircleImg reference={myUser.imagen}/>
                 <UserText 
-                  text1={myUser.name.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
+                  text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
                   text2={myUser.role}
                   text3={myUser.correo}
                 />
