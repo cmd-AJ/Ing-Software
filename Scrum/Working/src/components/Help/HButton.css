@@ -1,0 +1,39 @@
+.h-button {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #3b82f6; 
+    color: white;
+    width: 235px;
+    height: 185px;
+    padding: 0.5rem; 
+    border-radius: 0.5rem; 
+    border: none;
+    box-shadow: 0 4px #2563eb; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .h-button:hover {
+    filter: brightness(1.1); 
+    transform: translateY(-1px); 
+    box-shadow: 0 6px #2563eb; 
+  }
+  
+  .h-button:active {
+    filter: brightness(0.9); 
+    transform: translateY(2px);
+    box-shadow: 0 2px #2563eb; 
+  }
+  
+  .h-button .icon {
+    font-size: 3rem;
+  }
+  
+  .h-button .text {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  

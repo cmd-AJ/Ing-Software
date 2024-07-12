@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './details.css';
-import { IonDatetime } from '@ionic/react';
 import { makeHiring } from '../../controller/ChatController';
 
 const Details = ({ onClose, dpiEmployer, dpiEmployee }) => {
@@ -9,9 +8,8 @@ const Details = ({ onClose, dpiEmployer, dpiEmployee }) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleDateChange = (event) => {
-        const newValue = event.detail.value;
-        setSelectedDate(newValue);
-        console.log(newValue);
+        setSelectedDate(event.target.value);
+        console.log(event.target.value);
         setIsInputVisible(true);
     };
 
@@ -34,10 +32,12 @@ const Details = ({ onClose, dpiEmployer, dpiEmployee }) => {
     return (
         <div className="details-container">
             {!isInputVisible && (
-                <IonDatetime
-                    showDefaultButtons={true}
-                    onIonChange={handleDateChange}
-                ></IonDatetime>
+                <div className="custom-datetime-picker">
+                    <input 
+                        type="datetime-local" 
+                        onChange={handleDateChange} 
+                    />
+                </div>
             )}
             <p>Selected Date: {selectedDate}</p>
             {isInputVisible && (

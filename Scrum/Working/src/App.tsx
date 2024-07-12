@@ -8,6 +8,7 @@ import MainLayout from "./pages/MainLayout/MainLayout";
 import About from "./pages/About";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
+import Help from "./pages/Help"
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -51,6 +52,9 @@ const App: React.FC = () => (
         <Route exact path="/dashboard">
           <Dashboard />
         </Route>
+        <Route exact path="/help">
+          <Help />
+        </Route>
         <Route exact path="/">
           <About />
         </Route>
@@ -86,6 +90,11 @@ const App: React.FC = () => (
         <Route exact path="/dashboard">
           <MainLayout>
             <Dashboard />
+          </MainLayout>
+        </Route>
+        <Route exact path="/help">
+          <MainLayout>
+          <Help />
           </MainLayout>
         </Route>
         <Route exact path="/">
