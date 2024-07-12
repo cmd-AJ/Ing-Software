@@ -12,6 +12,7 @@ export async function getUsers() {
 }
 
 function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String) {
+    debugger
     const data = {
         "dpi": dpi,
         "name": name,
