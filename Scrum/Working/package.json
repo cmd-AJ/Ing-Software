@@ -10,7 +10,6 @@
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
-    "start": "node src/controller/main.js",
     "cucumber": "cucumber-js ./cucumber/f eatures",
     "loginfeat": "node loginfeat.js",
     "test": "vitest"
@@ -27,7 +26,6 @@
     "@maskito/react": "^2.2.0",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
     "crypto.js": "^3.2.1",
@@ -57,13 +55,15 @@
     "cypress": "^13.5.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.35.0",
+
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^22.1.0",
     "pg": "^8.11.5",
     "terser": "^5.4.0",
     "typescript": "^5.1.6",
     "vite": "5.2.8",
-    "vitest": "^0.34.6"
-  },
+    "vitest": "^0.34.6" 
+  }
+  ,
   "description": "An Ionic project"
 }
