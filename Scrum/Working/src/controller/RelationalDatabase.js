@@ -4,7 +4,7 @@ const { Client } = pkg;
 const dbConfig = {
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-    host: '3.212.157.247',
+    host: process.env.HOST,
     port: process.env.PORT,
     database: process.env.POSTGRES_DB,
 };

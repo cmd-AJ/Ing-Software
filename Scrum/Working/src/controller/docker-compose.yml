@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   db:
@@ -14,7 +14,6 @@ services:
       - pgdata:/var/lib/postgresql/data
     env_file:
       - .env
-
   web:
     build:
       context: .
@@ -22,8 +21,13 @@ services:
     container_name: node_app
     ports:
       - "3000:3000"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PORT: ${PORT}
+      HOST: ${HOST}
     depends_on:
       - db
-
 volumes:
   pgdata:
