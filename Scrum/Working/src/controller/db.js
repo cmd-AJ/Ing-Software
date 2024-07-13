@@ -1,5 +1,5 @@
 import { text } from 'express';
-import getClient from './../connection/RelationalDatabase.js';
+import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 

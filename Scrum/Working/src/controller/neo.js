@@ -1,4 +1,4 @@
-import { createSession } from './../connection/GraphDataBase.js';
+import { createSession } from './GraphDataBase.js';
 
 export async function getWorkers(trabajo) {
     const session = createSession();
