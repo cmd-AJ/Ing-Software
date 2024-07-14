@@ -1,5 +1,5 @@
 import { text } from 'express';
-import getClient from './../connection/RelationalDatabase.js';
+import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
@@ -20,7 +20,7 @@ export async function getUsers() {
 export async function getUserbyDPI(dpi) {
     try {
         const query = {
-            text: 'SELECT * FROM Usuarios Where dpi = $1',
+            text: 'SELECT dpi, nombre, apellidos, email, telefono, role, municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
             values: [dpi]
         };
 

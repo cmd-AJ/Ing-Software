@@ -14,6 +14,12 @@ app.use(cors({
   allowedHeaders: ['Content-Type'],
 }))
 
+
+
+app.get('/', (req, res) => {
+  res.send('Trying the API in order to know if it works or not')
+})
+
 app.get('/users', async (req, res) => {
   try {
     const users = await getUsers()

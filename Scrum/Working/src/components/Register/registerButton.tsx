@@ -19,8 +19,7 @@ type User = {
 
 type userData = {
     name : string
-    apellidps : string
-    contrasenia: string
+    apellidos : string
     trabajo: string
     rating: number
     sexo: string
@@ -32,7 +31,7 @@ type userData = {
     dpi: string
     role: string
     departamento: string
-    numero: number
+    banner: string
 }
 
 interface ContainerProps {  
@@ -63,22 +62,8 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
             setUserExist(true)
             createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
         
-            const data: userData = {
-                name: user.name,
-                lastname: user.lastname,
-                trabajo: '',
-                rating: 0,
-                sexo: '',
-                fecha_nacimiento: '',
-                municipio:             municipio.substring(0,1) + municipio.toLowerCase().slice(1),
-                tel: user.tel,
-                correo: user.email,
-                image: 'https://cdn-icons-png.flaticon.com/512/74/74472.png',
-                dpi: user.dpi,
-                role: user.role,
-                departamento: Departamentos(user.dpi)
-            }
-            localStorage.setItem('User', JSON.stringify(data))
+            console.log('funcionando');
+            
         }
     }
 

@@ -11,7 +11,7 @@ import Profile from "../components/Modals/Structures/Profile";
 import ProfileDataDisplay from "../components/Displayments/ProfileDataDisplay";
 
 type User = {
-  nombre : string;
+  name : string;
   apellidos : string;
   rating: number;
   sexo: string;
@@ -32,7 +32,7 @@ const Dashboard_Worker: React.FC = () => {
   const [editTrabajo, setEditTrabajo] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
-    nombre : '',
+    name : '',
     apellidos : '',
     rating: 0,
     sexo: '',
@@ -64,7 +64,7 @@ const Dashboard_Worker: React.FC = () => {
   return (
     <IonPage className="contentC">
       {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
-      {editTrabajo && <ModalE user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
+      {editTrabajo && <ModalStructure user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
       <div className="dashboard-row">
         <div className="header-card">
           <IonImg
@@ -74,7 +74,7 @@ const Dashboard_Worker: React.FC = () => {
               <div>
                 <CircleImg reference={myUser.image}/>
                 <UserText 
-                  text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
+                  text1={myUser.name.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
                   text2={myUser.role}
                   text3={myUser.correo}
                 />
