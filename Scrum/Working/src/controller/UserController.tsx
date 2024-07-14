@@ -83,7 +83,7 @@ export async function getUser(dpi: any, password: any) {
 
 async function getWorkersByJob(job: String) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/workers/${job}`);
+        const response = await fetch(`http://3.212.157.247:3000/workers/${job}`);
         const data = await response.json();
 
         const trabajadores: Trabajador[] = data.map((worker: any) => ({
@@ -114,7 +114,7 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         trabajo: trabajo
     }
 
-    const data = await fetch('http://127.0.0.1:3000/setsettings',
+    const data = await fetch('http://3.212.157.247:3000/setsettings',
         {
             method: 'PUT',
             headers: {
@@ -129,7 +129,7 @@ export { createUser, userExists, getWorkersByJob, updatecuenta }
 
 export async function conseguirtrabajo(dpi: string) {
 
-    const data = await fetch(`http://127.0.0.1:3000/ctrabajo/${dpi}`,
+    const data = await fetch(`http://3.212.157.247:3000/ctrabajo/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -141,7 +141,7 @@ export async function conseguirtrabajo(dpi: string) {
 
 export async function getTrustedPeople(dpi: string): Promise<any[]> {
     try {
-      const response = await fetch(`http://127.0.0.1:3000/trustNetwork/${dpi}`);
+      const response = await fetch(`http://3.212.157.247:3000/trustNetwork/${dpi}`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -156,7 +156,7 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
         dpi:dpi
     }
 
-    const data = await fetch(`http://127.0.0.1:3000/confitrab`,
+    const data = await fetch(`http://3.212.157.247:3000/confitrab`,
         {
             method: 'PUT',
             headers: {
@@ -171,7 +171,7 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
 
 export async function gettrabajoanterior(dpi: string) {
 
-    const data = await fetch(`http://127.0.0.1:3000/trabajoanterior/${dpi}`,
+    const data = await fetch(`http://3.212.157.247:3000/trabajoanterior/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -184,7 +184,7 @@ export async function gettrabajoanterior(dpi: string) {
 //DPI y Estado (Descripcion)
 export async function insertrabajoanterior(trabajo : object) {
 
-    const data = await fetch(`http://127.0.0.1:3000/trabajaoanterior/`,
+    const data = await fetch(`http://3.212.157.247:3000/trabajaoanterior/`,
         {
             method: 'POST',
             headers: {
@@ -198,7 +198,7 @@ export async function insertrabajoanterior(trabajo : object) {
 
 export async function insertartipodetrabajo(trabajo : object) {
 
-    const data = await fetch(`http://127.0.0.1:3000/instipotrabajo/`,
+    const data = await fetch(`http://3.212.157.247:3000/instipotrabajo/`,
         {
             method: 'POST',
             headers: {
@@ -211,7 +211,7 @@ export async function insertartipodetrabajo(trabajo : object) {
 
 export async function getUser2(dpi: string) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
+        const response = await fetch(`http://3.212.157.247:3000/users/${dpi}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -234,7 +234,7 @@ export async function getUser2(dpi: string) {
 
 export async function getUserName(dpi: string) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
+        const response = await fetch(`http://3.212.157.247:3000/users/${dpi}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
