@@ -2,7 +2,7 @@ import { Trabajador } from "../components/Searched/type";
 
 export async function getUsers() {
     try {
-        const response = await fetch('http://localhost:3000/users')
+        const response = await fetch('http://3.212.157.247:3000/users')
         const data = await response.json()
         return data
     } catch (error) {
@@ -23,7 +23,7 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
         "role": role
     }
 
-    fetch('http://localhost:3000/users', {
+    fetch('http://3.212.157.247:3000/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
