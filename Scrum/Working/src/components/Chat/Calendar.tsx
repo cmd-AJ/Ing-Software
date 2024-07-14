@@ -1,33 +1,47 @@
+import * as React from 'react';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import dayjs, { Dayjs } from 'dayjs';
+import TextField from '@mui/material/TextField';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
-import React, { useState } from "react";
-import { Calendar } from 'primereact/calendar';
-
-export default function TimeDemo() {
-    const [datetime12h, setDateTime12h] = useState(null);
-    const [datetime24h, setDateTime24h] = useState(null);
-    const [time, setTime] = useState(null);
-
-    return (
-        <div className="card flex flex-wrap gap-3 p-fluid">
-            <div className="flex-auto">
-                <label htmlFor="calendar-12h" className="font-bold block mb-2">
-                    12h Format
-                </label>
-                <Calendar id="calendar-12h" value={datetime12h} onChange={(e) => setDateTime12h(e.value)} showTime hourFormat="12" />
-            </div>
-            <div className="flex-auto">
-                <label htmlFor="calendar-24h" className="font-bold block mb-2">
-                    24h Format
-                </label>
-                <Calendar id="calendar-24h" value={datetime24h} onChange={(e) => setDateTime24h(e.value)} showTime hourFormat="24" />
-            </div>
-            <div className="flex-auto">
-                <label htmlFor="calendar-timeonly" className="font-bold block mb-2">
-                    Time Only
-                </label>
-                <Calendar id="calendar-timeonly" value={time} onChange={(e) => setTime(e.value)} timeOnly />
-            </div>
-        </div>
-    )
+interface CalendarProps {
+  onChange: (date: Dayjs | null) => void;
 }
-        
+
+const CustomDatePickerToolbar = styled('div')({
+    '& .MuiTypography-h4': {
+      color: 'black', // Cambia el color del texto del día seleccionado a negro
+    },
+    '& .MuiPickersCalendarHeader-label': {
+      color: 'black', // Cambia el color del texto del mes y año a negro
+    },
+  });
+
+const Calendar: React.FC<CalendarProps> = ({ onChange }) => {
+  const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(dayjs());
+
+  const handleDateChange = (date: Dayjs | null) => {
+    setSelectedDate(date);
+    onChange(date);
+  };
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <CustomDatePickerToolbar>
+        <StaticDatePicker
+          orientation="landscape"
+          openTo="day"
+          value={selectedDate}
+          onChange={handleDateChange}
+          renderInput={(params) => <TextField {...params} />}
+          toolbarTitle={<Typography variant="h4">{selectedDate ? selectedDate.format('ddd, MMM D') : ''}</Typography>}
+        />
+      </CustomDatePickerToolbar>
+    </LocalizationProvider>
+  );
+};
+
+export default Calendar;
