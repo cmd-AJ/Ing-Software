@@ -40,7 +40,7 @@ const Calendar: React.FC<CalendarProps> = ({ onChange }) => {
           value={selectedDate}
           onChange={handleDateChange}
           renderInput={(params) => <TextField {...params} />}
-          toolbarTitle={<Typography variant="h4">{selectedDate ? selectedDate.format('ddd, MMM D') : ''}</Typography>}
+          showToolbar={false}
         />
       </CustomDatePickerToolbar>
     </LocalizationProvider>

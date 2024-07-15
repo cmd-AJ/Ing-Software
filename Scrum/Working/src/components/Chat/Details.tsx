@@ -24,7 +24,7 @@ const Details: React.FC<DetailsProps> = ({ onClose, dpiEmployer, dpiEmployee }) 
         <Calendar onChange={handleDateChange} />
       </div>
       <div className="information-container">
-        <Information />
+        <Information date={selectedDate} />
       </div>
     </div>
   );
