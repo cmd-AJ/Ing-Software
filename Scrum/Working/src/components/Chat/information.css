@@ -1,0 +1,49 @@
+.information-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 3vh;
+  }
+  
+  .information-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    margin-right: 1vw;
+    margin-left: -1vw;
+  }
+  
+  .text-input {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%; /* Puedes ajustar este valor según tus necesidades */
+  }
+  
+  .text-input label {
+    font-size: 0.8rem;
+    color: black;
+    margin-bottom: 5px;
+  }
+  
+  .text-input input {
+    border: none;
+    border-bottom: 1px solid rgb(63, 63, 63);
+    background: transparent;
+    color: black;
+    font-size: 1rem;
+    padding: 5px 0;
+    width: 25vw; /* Puedes ajustar este valor según tus necesidades */
+  }
+  
+  .text-input input:focus {
+    outline: none;
+    border-bottom: 1px solid rgb(63, 63, 63);
+  }
+  

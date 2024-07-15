@@ -18,6 +18,9 @@ const CustomDatePickerToolbar = styled('div')({
     '& .MuiPickersCalendarHeader-label': {
       color: 'black', // Cambia el color del texto del mes y año a negro
     },
+    '& .MuiPickersYear-yearButton': {
+      color: 'black', // Cambia el color de los botones de los años a negro
+    },
   });
 
 const Calendar: React.FC<CalendarProps> = ({ onChange }) => {
