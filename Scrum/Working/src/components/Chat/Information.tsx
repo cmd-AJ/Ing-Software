@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './information.css';
+import dayjs from 'dayjs';
 
 interface InformationProps {
   date: dayjs.Dayjs | null;
@@ -11,7 +12,6 @@ const Information: React.FC<InformationProps> = ({ date }) => {
   const [amount, setAmount] = useState('');
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    // Permitir solo números, backspace, delete, tab, escape, enter y las flechas
     if (
       !(
         (event.key >= '0' && event.key <= '9') ||
@@ -34,7 +34,10 @@ const Information: React.FC<InformationProps> = ({ date }) => {
   };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(event.target.value);
+    const timeValue = event.target.value;
+    const [hours, minutes] = timeValue.split(':').map(Number);
+    const time24 = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    setTime(time24);
   };
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
