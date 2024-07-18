@@ -1,6 +1,7 @@
 import { IonDatetime, IonInput } from "@ionic/react";
 import { useEffect, useState } from "react";
 import './InputStyles.css'
+import React from "react";
 
 interface ContainerProps {
     date: string;
