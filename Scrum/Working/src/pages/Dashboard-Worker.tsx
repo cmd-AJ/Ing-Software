@@ -1,14 +1,16 @@
-import { IonButton, IonCard, IonCardContent, IonContent, IonGrid, IonImg, IonPage, IonRow, IonTitle } from "@ionic/react";
-import './Dashboard-Worker.css';
+import "./Dashboard-Worker.css"
 import React, { useEffect, useState } from "react";
-import CircleImg from "../components/Imgs/CircleImg";
-import UserText from "../components/Txt/UserText";
-import BtnDisplayment from "../components/Btn/BtnDisplayment";
-import LeftInfoDisplay from "../components/Displayments/LeftInfoDisplay";
-import { Departamentos } from "../Departamentos/Departamentos";
-import ModalStructure from "../components/Modals/ModalStructure";
-import Profile from "../components/Modals/Structures/Profile";
-import ProfileDataDisplay from "../components/Displayments/ProfileDataDisplay";
+import {
+  IonPage,
+  IonImg
+} from "@ionic/react";
+import ModalStructure from "../components/Modals/ModalStructure"
+import CircleImg from "../components/Imgs/CircleImg"
+import Profile from "../components/Modals/Structures/Profile"
+import UserText from "../components/Txt/UserText"
+import TextND from "../components/Txt/TextND";
+import HorizontalDivider from "../components/Dividers/HorizontalDivider";
+import BtnDisplayment from "../components/Btn/BtnDisplayment"
 
 type User = {
   nombre : string;
@@ -81,8 +83,30 @@ const Dashboard_Worker: React.FC = () => {
               </div>
                 <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
             </div>
+            <HorizontalDivider />
+            <div className="dataGrid">
+              <div className="dataDisplay">
+                <TextND text="Edad:" size="small"/>
+                <TextND text={myUser.apellidos} size="medium"/>
+              </div>
+              <div>
+                2
+              </div>
+              <div>
+                3
+              </div>
+              <div>
+                4
+              </div>
+              <div>
+                5
+              </div>
+              <div>
+                6
+              </div>
+            </div>
+        {/* <ProfileDataDisplay user={myUser}/> */}
         </div>
-        <ProfileDataDisplay user={myUser}/>
       </div>
     </IonPage>
   );
