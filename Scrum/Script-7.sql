@@ -14,10 +14,6 @@ create table tipotrabajo(
 	descripcion varchar(300)	
 )
 
-insert into tipotrabajo
-values ('Carpintero','artesano que trabaja con madera para crear una variedad de objetos, desde muebles y estructuras hasta elementos decorativos y artísticos.' )
-select * from usuarios u 
-
 create table Trabajador(
 	DPI varchar(15),
 	nombre_trabajo varchar(100)
@@ -93,9 +89,6 @@ alter table resena  add constraint fkey_dpiempleador
 	references usuarios(dpi)
 	
 
-insert into resena(idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador)
-values(1, 5.0, 'Excelennte trabajo', '3834 49898 0101' , '3810 35859 0101')
-	
 select * from resena
 
 select * from trabajodisponible
@@ -147,8 +140,6 @@ create table threads(
 alter table threads 
 alter column usuario type varchar(20)
 
-insert into threads(usuario, descripcion, titulo, etiquetas)
-values( 'AJ3834', 'Creen que Jose e Ving son los mejores trabajadores?', 'Necesito informacion de ellos', Array['trabajador','efieciente'] )
 
 
 create table mensajethreads(
@@ -164,9 +155,6 @@ alter table mensajethreads  add constraint mensajethread
 	foreign key (idthread)
 	references threads(idthreads)
 	
-insert into mensajethreads(idthread, contenido, dpi_emisor, usuario)
-values(1, 'No los recomiendo la verdad', '3834 49898 0101', 'AJ3834')
-
 
 
 create table moderadores( 
@@ -174,9 +162,6 @@ create table moderadores(
 	nombre varchar(30),
 	DPI varchar(15)
 )
-
-insert into moderadores (nombre, DPI)
-values('Andre Jo','3834 49898 0101')
 
 
 create table reporte(
@@ -196,9 +181,6 @@ alter table reporte  add constraint dpireportado
 	foreign key (dpireportuser)
 	references usuarios(dpi)
 	
-insert into reporte (dpireportuser, dpiemisor, estado, contenido)
-values('3810 35859 0101', '3834 49898 0101', false, 'No me gusto el comentario que hizo en threads' )
-
 
 create table suspendido(
 	idsuspend serial primary key,
@@ -215,9 +197,6 @@ select * from suspendido
 alter table suspendido add constraint dpireportado
 	foreign key (dpi)
 	references usuarios(dpi)
-
-insert into suspendido (DPI, fechainicio, unban, estado)
-values('3810 35859 0101', now(), '2024-04-17', true)
 
 select * from suspendido
 
