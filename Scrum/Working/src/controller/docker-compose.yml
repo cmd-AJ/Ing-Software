@@ -31,7 +31,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PORT: ${PORT}
-      HOST: ${HOST}
+      HOST: db
       API_KEY: ${API_KEY}
     depends_on:
       - db
