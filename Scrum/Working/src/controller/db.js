@@ -20,7 +20,7 @@ export async function getUsers() {
 export async function getUserbyDPI(dpi) {
     try {
         const query = {
-            text: 'SELECT dpi, nombre, apellidos, email, telefono, role, municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
+            text: 'SELECT nombre, apellidos, email, telefono, role, departamento,municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
             values: [dpi]
         };
 
@@ -33,7 +33,7 @@ export async function getUserbyDPI(dpi) {
     }
 }
 
-export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role) {
+export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio) {
     try {
         const query = {
             text: `
@@ -48,7 +48,7 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
                 'https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg'
             )
         `,
-        values: [DPI, name, lastnames, password, email, phoneNumber, role],
+        values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio],
         };
 
         const result = await client.query(query);

@@ -61,6 +61,7 @@
     display: grid;
     grid-template-rows: 50% 50%;
     grid-template-columns: 33.33% 33.33% 33.33%;
+    padding: 20px;
 }
 
 .dataDisplay {
@@ -76,5 +77,11 @@
 
     .contentC{
         height: 1085px;
+    }
+
+    .dataGrid{
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 33.33% 33.33% 33.33%;
+    
     }
 }

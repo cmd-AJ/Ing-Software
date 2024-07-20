@@ -11,6 +11,7 @@ import UserText from "../components/Txt/UserText"
 import TextND from "../components/Txt/TextND";
 import HorizontalDivider from "../components/Dividers/HorizontalDivider";
 import BtnDisplayment from "../components/Btn/BtnDisplayment"
+import '../theme/variables.css';
 
 type User = {
   nombre : string;
@@ -19,7 +20,7 @@ type User = {
   sexo: string;
   fecha_nacimiento: string;
   municipio: string;
-  tel: string;
+  telefono: string;
   correo: string;
   imagen: string;
   dpi: string;
@@ -30,6 +31,9 @@ type User = {
 };
 
 const Dashboard_Worker: React.FC = () => {
+  const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
+  const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
+
   const [ editModal, setEditModal] = useState(false);  
   const [editTrabajo, setEditTrabajo] = useState(false)
   
@@ -40,7 +44,7 @@ const Dashboard_Worker: React.FC = () => {
     sexo: '',
     fecha_nacimiento: '',
     municipio: '',
-    tel: '',
+    telelefono: '',
     correo: '',
     imagen: '',
     dpi: '',
@@ -86,23 +90,28 @@ const Dashboard_Worker: React.FC = () => {
             <HorizontalDivider />
             <div className="dataGrid">
               <div className="dataDisplay">
-                <TextND text="Edad:" size="small"/>
-                <TextND text={myUser.apellidos} size="medium"/>
+                <TextND text="Edad:" size="medium" hex={tertiaryColor}/>
+                <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
               </div>
-              <div>
-                2
+              <div className="dataDisplay">
+                <TextND text="Departamento:" size="medium" hex={tertiaryColor}/>
+                <TextND text={myUser.departamento} size="medium" hex={secondaryContrast}/>
               </div>
-              <div>
-                3
+              <div className="dataDisplay">
+                <TextND text="Teléfono:" size="medium" hex={tertiaryColor}/>
+                <TextND text={myUser.telefono} size="medium" hex={secondaryContrast}/>
               </div>
-              <div>
-                4
+              <div className="dataDisplay">
+                <TextND text="Sexo:" size="medium" hex={tertiaryColor}/>
+                <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
               </div>
-              <div>
-                5
+              <div className="dataDisplay">
+                <TextND text="Municipio:" size="medium" hex={tertiaryColor}/>
+                <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
               </div>
-              <div>
-                6
+              <div className="dataDisplay">
+                <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>
+                <TextND text={myUser.correo} size="medium" hex={secondaryContrast}/>
               </div>
             </div>
         {/* <ProfileDataDisplay user={myUser}/> */}

@@ -26,10 +26,10 @@ app.get('/users', async (req, res) => {
 app.post('/users', async (req, res) => {
   try {
     const {
-      dpi, name, lastnames, password, email, phoneNumber, role
+      dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio
     } = req.body
 
-    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role)
+    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio)
     res.status(200).json({ Succes: 'User inserted' })
   } catch (error) {
 

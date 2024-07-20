@@ -11,7 +11,7 @@ export async function getUsers() {
     }
 }
 
-function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String) {
+function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String, departamento: string, municipio: string) {
     debugger
     const data = {
         "dpi": dpi,
@@ -20,7 +20,9 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
         "password": password,
         "email": email,
         "phoneNumber": phoneNumber,
-        "role": role
+        "role": role,
+        "departamento": departamento,
+        "municipio": municipio
     }
 
     fetch('http://localhost:3000/users', {
