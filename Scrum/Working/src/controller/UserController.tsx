@@ -2,10 +2,10 @@ import { Trabajador } from "../components/Searched/type";
 
 export async function getUsers() {
     try {
-        const response = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/users`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
             headers: {
                 'Content-Type': 'application/json',
-                'api-key': process.env.API_KEY + ''
+                'api-key': import.meta.env.VITE_API_KEY
             }
         })
         const data = await response.json()
@@ -28,11 +28,11 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
         "role": role
     }
 
-    fetch(`http://${process.env.HOST}:${process.env.PORTI}/users`, {
+    fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'api-key': process.env.API_KEY + ''
+            'api-key': import.meta.env.VITE_API_KEY
         },
         body: JSON.stringify(data)
     })
@@ -88,10 +88,10 @@ export async function getUser(dpi: any, password: any) {
 
 async function getWorkersByJob(job: String) {
     try {
-        const response = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/workers/${job}`,{
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/workers/${job}`,{
             headers: {
                 'Content-Type': 'application/json',
-                'api-key': process.env.API_KEY + ''
+                'api-key': import.meta.env.VITE_API_KEY
             }
         });
         const data = await response.json();
@@ -124,11 +124,11 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         trabajo: trabajo
     }
 
-    const data = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/setsettings`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/setsettings`,
         {
             method: 'PUT',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
@@ -140,11 +140,11 @@ export { createUser, userExists, getWorkersByJob, updatecuenta }
 
 export async function conseguirtrabajo(dpi: string) {
 
-    const data = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/ctrabajo/${dpi}`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/ctrabajo/${dpi}`,
         {
             method: 'GET',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         })
@@ -153,9 +153,9 @@ export async function conseguirtrabajo(dpi: string) {
 
 export async function getTrustedPeople(dpi: string): Promise<any[]> {
     try {
-      const response = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/trustNetwork/${dpi}`,{
+      const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trustNetwork/${dpi}`,{
         headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
       });
@@ -173,11 +173,11 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
         dpi:dpi
     }
 
-    const data = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/confitrab`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/confitrab`,
         {
             method: 'PUT',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
@@ -189,11 +189,11 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
 
 export async function gettrabajoanterior(dpi: string) {
 
-    const data = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/trabajoanterior/${dpi}`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanterior/${dpi}`,
         {
             method: 'GET',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         })
@@ -203,11 +203,11 @@ export async function gettrabajoanterior(dpi: string) {
 //DPI y Estado (Descripcion)
 export async function insertrabajoanterior(trabajo : object) {
 
-    const data = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/trabajaoanterior/`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajaoanterior/`,
         {
             method: 'POST',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(trabajo)
@@ -218,11 +218,11 @@ export async function insertrabajoanterior(trabajo : object) {
 
 export async function insertartipodetrabajo(trabajo : object) {
 
-    const data = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/instipotrabajo/`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/instipotrabajo/`,
         {
             method: 'POST',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(trabajo)
@@ -232,10 +232,10 @@ export async function insertartipodetrabajo(trabajo : object) {
 
 export async function getUser2(dpi: string) {
     try {
-        const response = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/users/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users/${dpi}`, {
             method: 'GET',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         });
@@ -256,10 +256,10 @@ export async function getUser2(dpi: string) {
 
 export async function getUserName(dpi: string) {
     try {
-        const response = await fetch(`http://${process.env.HOST}:${process.env.PORTI}/users/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users/${dpi}`, {
             method: 'GET',
             headers: {
-                'api-key': process.env.API_KEY + '',
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         });

@@ -8,11 +8,12 @@ import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 const app = express()
 const port = 3000
 
+
 app.use(express.json())
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'api-key' ],
 }))
 
 
@@ -33,14 +34,8 @@ app.get('/test', apiKeyAuth ,async (req, res) => {
 
 app.get('/users',apiKeyAuth ,async (req, res) => {
   try {
-    const k = req.body.k
-    if( k === process.env.API_KEY){
       const users = await getUsers()
       res.status(200).json(users)
-    }
-    else{
-      res.send('Data Unknown, process done')
-    }
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
   }
