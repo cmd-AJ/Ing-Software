@@ -15,7 +15,8 @@ export async function getWorkers(trabajo) {
                 telefono: worker.properties.telefono,
                 municipio: worker.properties.municipio,
                 rating: worker.properties.rating,
-                apellido: worker.properties.apellidos,
+                apellidos: worker.properties.apellidos,
+                imagen: worker.properties.imagen,
                 dpi: worker.properties.dpi
             };
         });
