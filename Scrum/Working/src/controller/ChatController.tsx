@@ -1,6 +1,11 @@
 export async function getContacts(dpi: String) {
     try {
-        const response = await fetch(`http://3.212.157.247:3000/contacts/${dpi}`);
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/${dpi}`,{
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
 
         return data;
@@ -18,9 +23,10 @@ export async function getChatMessages(dpi1: string, dpi2: string) {
             dpi2: dpi2
         };
 
-        const response = await fetch("http://3.212.157.247:3000/contacts/messages", {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/messages`, {
             method: 'POST',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -45,9 +51,10 @@ export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
             dpi2: dpi2
         };
 
-        const response = await fetch("http://3.212.157.247:3000/contacts/chatID", {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/chatID`, {
             method: 'POST',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -75,9 +82,10 @@ export async function insertChatMessage(content: string, chatID: string, dpi: st
             dpi: dpi
         };
 
-        const response = await fetch("http://3.212.157.247:3000/contacts/message", {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/message`, {
             method: 'POST',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -109,9 +117,10 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
             timeStampCita: utcTime.toISOString() // Converts to UTC string
         };
 
-        const response = await fetch("http://3.212.157.247:3000/contacts/hire", {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hire`, {
             method: 'POST',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -133,7 +142,12 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
 
 export async function getHirings(dpi: string) {
     try {
-        const response = await fetch(`http://3.212.157.247:3000/contacts/hirings/${dpi}`);
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hirings/${dpi}`,{
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
 
         // Convert the UTC timestamp to Guatemalan time
