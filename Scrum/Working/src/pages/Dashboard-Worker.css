@@ -1,28 +1,25 @@
 @import url('../theme/variables.css');
 
+:root {
+    --size-default: 200px;
+}
+
 .contentC {
-    background-color: var(--ion-color-primary);
+    background-color: var(--ion-color-primary); 
     padding-top: 40px;
     padding-left: 15%;
     padding-right: 15%;
+    max-height: 1420px;
+    min-height: 100vh;
     height: auto;
-    max-height: 1200px;
-    overflow: auto;
-    display: flex;
-    overflow: auto;
-}
-
-.dashboard-row {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    overflow-y: auto;
 }
 
 .header-card {
     display: flex;
     height: auto;
+    min-height: 800px;
+    max-height: 1225px;
     width: 100%;
     background-color: white;
     border-radius: 30px;

@@ -1,8 +1,9 @@
 import "./Dashboard-Worker.css"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   IonPage,
-  IonImg
+  IonImg,
+  IonContent
 } from "@ionic/react";
 import ModalStructure from "../components/Modals/ModalStructure"
 import CircleImg from "../components/Imgs/CircleImg"
@@ -55,71 +56,97 @@ const Dashboard_Worker: React.FC = () => {
     departamento: ''
   });
     
-  const [image,setImage] = useState(myUser.imagen)
+  const [image, setImage] = useState(myUser.imagen);
 
+  const headerCardRef = useRef<HTMLDivElement>(null);
+  const contentCRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const user = localStorage.getItem("User");
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
-      setImage(myUser.imagen)
+      setImage(parsedUser.imagen);
     }
-    
   }, []);
 
+  useEffect(() => {
+    const adjustContentHeight = () => {
+      if (headerCardRef.current && contentCRef.current) {
+        const headerCardHeight = headerCardRef.current.offsetHeight;
+        contentCRef.current.style.height = `${headerCardHeight + 195}px`;
+      }
+    };
+
+    // Inicializa el ResizeObserver
+    const resizeObserver = new ResizeObserver(adjustContentHeight);
+
+    if (headerCardRef.current) {
+      resizeObserver.observe(headerCardRef.current);
+    }
+
+    // Limpia el observer al desmontar el componente
+    return () => {
+      if (headerCardRef.current) {
+        resizeObserver.unobserve(headerCardRef.current);
+      }
+    };
+  }, [headerCardRef, contentCRef]);
+
   return (
-    <IonPage className="contentC">
-      {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
-      {editTrabajo && <ModalStructure user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
-      <div className="dashboard-row">
-        <div className="header-card">
-          <IonImg
-            src={myUser.banner}
-            style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
-            <div className="lower-displayment">
-              <div>
-                <CircleImg reference={myUser.imagen}/>
-                <UserText 
-                  text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
-                  text2={myUser.role}
-                  text3={myUser.correo}
-                />
+    <IonPage>
+      <IonContent>
+        <div className="contentC" ref={contentCRef}>
+          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
+          {editTrabajo && <ModalStructure user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
+          <div className="header-card" ref={headerCardRef}>
+            <IonImg
+              src={myUser.banner}
+              style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
+              <div className="lower-displayment">
+                <div>
+                  <CircleImg reference={myUser.imagen}/>
+                  <UserText 
+                    text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
+                    text2={myUser.role}
+                    text3={myUser.correo}
+                  />
+                </div>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
               </div>
-                <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
-            </div>
-            <HorizontalDivider />
-            <div className="dataGrid">
-              <div className="dataDisplay">
-                <TextND text="Edad:" size="medium" hex={tertiaryColor}/>
-                <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+              <HorizontalDivider />
+              <div className="dataGrid">
+                <div className="dataDisplay">
+                  <TextND text="Edad:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Departamento:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.departamento} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Teléfono:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.telefono} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Sexo:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Municipio:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.correo} size="medium" hex={secondaryContrast}/>
+                </div>
               </div>
-              <div className="dataDisplay">
-                <TextND text="Departamento:" size="medium" hex={tertiaryColor}/>
-                <TextND text={myUser.departamento} size="medium" hex={secondaryContrast}/>
-              </div>
-              <div className="dataDisplay">
-                <TextND text="Teléfono:" size="medium" hex={tertiaryColor}/>
-                <TextND text={myUser.telefono} size="medium" hex={secondaryContrast}/>
-              </div>
-              <div className="dataDisplay">
-                <TextND text="Sexo:" size="medium" hex={tertiaryColor}/>
-                <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
-              </div>
-              <div className="dataDisplay">
-                <TextND text="Municipio:" size="medium" hex={tertiaryColor}/>
-                <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
-              </div>
-              <div className="dataDisplay">
-                <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>
-                <TextND text={myUser.correo} size="medium" hex={secondaryContrast}/>
-              </div>
-            </div>
-            <HorizontalDivider/>
-            <UserDataDisplay/>
-        {/* <ProfileDataDisplay user={myUser}/> */}
+              <HorizontalDivider/>
+              <UserDataDisplay/>
+            {/* <ProfileDataDisplay user={myUser}/> */}
+          </div>
         </div>
-      </div>
+      </IonContent>
     </IonPage>
   );
 };
