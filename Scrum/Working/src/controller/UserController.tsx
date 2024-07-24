@@ -1,3 +1,4 @@
+import { Departamentos, Municipios } from "../Departamentos/Departamentos";
 import { Trabajador } from "../components/Searched/type";
 
 export async function getUsers() {
@@ -11,8 +12,8 @@ export async function getUsers() {
     }
 }
 
-function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String, departamento: string, municipio: string) {
-    debugger
+function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
+
     const data = {
         "dpi": dpi,
         "name": name,

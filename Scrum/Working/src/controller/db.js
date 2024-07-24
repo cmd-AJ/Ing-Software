@@ -35,17 +35,20 @@ export async function getUserbyDPI(dpi) {
 
 export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio) {
     try {
+
         const query = {
             text: `
             INSERT INTO Usuarios (
                 dpi, nombre, apellidos, contrasenia, email, telefono, role, 
-                municipio, sexo, fecha_nacimiento, rating, imagen, banner
+                municipio, sexo, fecha_nacimiento, rating, imagen, banner, 
+                departamento, municipio
             ) 
             VALUES (
                 $1, $2, $3, $4, $5, $6, $7, 
                 '', '', '', 0, 
                 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 
-                'https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg'
+                'https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg',
+                $8, $9
             )
         `,
         values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio],
