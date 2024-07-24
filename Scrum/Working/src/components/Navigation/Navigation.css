@@ -62,7 +62,7 @@ ion-header, ion-toolbar {
     font-size: 14px;
   }
   
-
+  
 
   .responsive-navbar {
     flex-direction: row;
@@ -73,8 +73,8 @@ ion-header, ion-toolbar {
   }
   .search-bar-col {
     order: 1; /* Make the search bar the first element in the column */
-    flex: 1 1 100%; /* Ensure it takes the full width on smaller screens */
-    
+    flex: 2 1 100%; /* Ensure it takes the full width on smaller screens */
+
   }
 
 }

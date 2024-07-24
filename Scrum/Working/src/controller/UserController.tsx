@@ -89,12 +89,14 @@ export async function getUser(dpi: any, password: any) {
 async function getWorkersByJob(job: String) {
     try {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/workers/${job}`,{
+        
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
             }
         });
         const data = await response.json();
+        console.log(data)
 
         const trabajadores: Trabajador[] = data.map((worker: any) => ({
             nombre: `${worker.nombre} ${worker.apellido}`,

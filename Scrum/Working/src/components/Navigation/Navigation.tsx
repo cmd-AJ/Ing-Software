@@ -52,7 +52,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
             <IonCol className="ion-text-center" onClick={() => history.push('/empleado')}>
               <IonIcon icon={personOutline} className="navbar-icon" />
             </IonCol>
-            <IonCol className="ion-text-center">
+            <IonCol className="ion-text-center" onClick={() => history.push('/help')}>
               <IonIcon icon={settingsOutline} className="navbar-icon" />
             </IonCol>
           </IonRow>
