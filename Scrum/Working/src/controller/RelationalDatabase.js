@@ -2,11 +2,11 @@ import pkg from 'pg';
 const { Client } = pkg;
 
 const dbConfig = {
-    user: 'postgres',
-    password: '3955017c702d0c4040a738f2359219a9b0c1a290eb3252c9efd38a239efaf0aa',
-    host: '3.212.157.247',
-    port: '5432',
-    database: 'postgres',
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.HOST,
+    port: process.env.PORT,
+    database: process.env.POSTGRES_DB,
 };
 
 // Establishing the connection to the db

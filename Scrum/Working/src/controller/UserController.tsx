@@ -3,7 +3,12 @@ import { Trabajador } from "../components/Searched/type";
 
 export async function getUsers() {
     try {
-        const response = await fetch('http://localhost:3000/users')
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            }
+        })
         const data = await response.json()
         return data
     } catch (error) {
@@ -26,10 +31,11 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
         "municipio": municipio
     }
 
-    fetch('http://localhost:3000/users', {
+    fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'api-key': import.meta.env.VITE_API_KEY
         },
         body: JSON.stringify(data)
     })
@@ -52,7 +58,6 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
 async function userExists(dpi: String, password: String) {
     try {
         const users = await getUsers();
-
         return users.some((user: { dpi: String; contrasenia: String; }) => user.dpi === dpi && user.contrasenia === password);
     } catch (error) {
         console.error('Error checking if user exists:', error);
@@ -86,8 +91,15 @@ export async function getUser(dpi: any, password: any) {
 
 async function getWorkersByJob(job: String) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/workers/${job}`);
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/workers/${job}`,{
+        
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            }
+        });
         const data = await response.json();
+        console.log(data)
 
         const trabajadores: Trabajador[] = data.map((worker: any) => ({
             nombre: `${worker.nombre} ${worker.apellido}`,
@@ -117,10 +129,11 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         trabajo: trabajo
     }
 
-    const data = await fetch('http://127.0.0.1:3000/setsettings',
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/setsettings`,
         {
             method: 'PUT',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
@@ -132,10 +145,11 @@ export { createUser, userExists, getWorkersByJob, updatecuenta }
 
 export async function conseguirtrabajo(dpi: string) {
 
-    const data = await fetch(`http://127.0.0.1:3000/ctrabajo/${dpi}`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/ctrabajo/${dpi}`,
         {
             method: 'GET',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         })
@@ -144,7 +158,12 @@ export async function conseguirtrabajo(dpi: string) {
 
 export async function getTrustedPeople(dpi: string): Promise<any[]> {
     try {
-      const response = await fetch(`http://127.0.0.1:3000/trustNetwork/${dpi}`);
+      const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trustNetwork/${dpi}`,{
+        headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+      });
       const data = await response.json();
       return data;
     } catch (error) {
@@ -159,10 +178,11 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
         dpi:dpi
     }
 
-    const data = await fetch(`http://127.0.0.1:3000/confitrab`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/confitrab`,
         {
             method: 'PUT',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
@@ -174,10 +194,11 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
 
 export async function gettrabajoanterior(dpi: string) {
 
-    const data = await fetch(`http://127.0.0.1:3000/trabajoanterior/${dpi}`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanterior/${dpi}`,
         {
             method: 'GET',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         })
@@ -187,10 +208,11 @@ export async function gettrabajoanterior(dpi: string) {
 //DPI y Estado (Descripcion)
 export async function insertrabajoanterior(trabajo : object) {
 
-    const data = await fetch(`http://127.0.0.1:3000/trabajaoanterior/`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajaoanterior/`,
         {
             method: 'POST',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(trabajo)
@@ -201,10 +223,11 @@ export async function insertrabajoanterior(trabajo : object) {
 
 export async function insertartipodetrabajo(trabajo : object) {
 
-    const data = await fetch(`http://127.0.0.1:3000/instipotrabajo/`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/instipotrabajo/`,
         {
             method: 'POST',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(trabajo)
@@ -214,9 +237,10 @@ export async function insertartipodetrabajo(trabajo : object) {
 
 export async function getUser2(dpi: string) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users/${dpi}`, {
             method: 'GET',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         });
@@ -237,9 +261,10 @@ export async function getUser2(dpi: string) {
 
 export async function getUserName(dpi: string) {
     try {
-        const response = await fetch(`http://127.0.0.1:3000/users/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users/${dpi}`, {
             method: 'GET',
             headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
         });
