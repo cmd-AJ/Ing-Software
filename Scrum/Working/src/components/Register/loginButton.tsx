@@ -23,7 +23,6 @@ const LoginButton: React.FC<ContainerProps> = ({
     const history = useHistory();
     console.log(`password: ${password}`)
     const handleClick = async () => {
-        debugger
         if ((dpi != "") && (password != '') && (role !== "")) {  
 
             const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)

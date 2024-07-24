@@ -12,6 +12,7 @@ import TextND from "../components/Txt/TextND";
 import HorizontalDivider from "../components/Dividers/HorizontalDivider";
 import BtnDisplayment from "../components/Btn/BtnDisplayment"
 import '../theme/variables.css';
+import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 
 type User = {
   nombre : string;
@@ -44,7 +45,7 @@ const Dashboard_Worker: React.FC = () => {
     sexo: '',
     fecha_nacimiento: '',
     municipio: '',
-    telelefono: '',
+    telefono: '',
     correo: '',
     imagen: '',
     dpi: '',
@@ -114,6 +115,8 @@ const Dashboard_Worker: React.FC = () => {
                 <TextND text={myUser.correo} size="medium" hex={secondaryContrast}/>
               </div>
             </div>
+            <HorizontalDivider/>
+            <UserDataDisplay/>
         {/* <ProfileDataDisplay user={myUser}/> */}
         </div>
       </div>
