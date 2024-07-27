@@ -8,7 +8,7 @@ interface ContainerProps {
 
 const UserDataDisplay: React.FC<ContainerProps> = () => {
     return (
-        <div style={{display: 'flex', height: '100%'}}>
+        <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
             <ContratsDisplay/>
             <VerticalDivider />
             <div></div>

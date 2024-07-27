@@ -193,13 +193,27 @@ export async function gettrabajoant(dpi) {
     }
 }
 
-//Trabajados en SABTE
+//Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
         const result = await client.query(`select dpiempleador, fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
             where dpitrabajador = '${dpi}'
             and dpiempleador is not null`)
+        return result.rows
+    } catch (error) {
+        console.error('Error getting user:', error);
+        throw error;
+    }
+}
+
+//Trabajadores en SABTE empleador
+export async function getTrabajoSABTEemple(dpi) {
+    try {
+        const result = await client.query(`select dpitrabajador, fecha, fechafin, r.calificacion from completado c 
+            left join resena r on c.idresena = r.idresena 
+            where dpiempleador = '${dpi}'
+            and dpitrabajador is not null;`)
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
