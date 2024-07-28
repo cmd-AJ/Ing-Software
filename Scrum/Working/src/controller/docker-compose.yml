@@ -4,7 +4,6 @@ services:
   db:
     image: postgres:16.3
     container_name: postgres_db
-    restart: on-failure:3
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -21,7 +20,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: node_app
-    restart: on-failure:3
     env_file:
       - .env
     ports:
