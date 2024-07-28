@@ -1,3 +1,4 @@
+/* General styles for the navigation bar */
 .navbar-icon, .custom-text {
   transition: transform 0.3s ease;  /* Ensuring transition is applied universally */
 }
@@ -26,7 +27,7 @@
   display: inline-block;  /* This can help with transformation effects if block level elements are needed */
 }
 
-.navbar-icon{
+.navbar-icon {
   font-size: 30px;
 }
 
@@ -36,12 +37,7 @@ ion-header, ion-toolbar {
   padding: 0;
 }
 
-@media (max-width: 768px) {
-  .navbar-icon, .custom-text {
-      font-size: 14px;
-  }
-}
-
+/* Keyframes for animation */
 @keyframes wave-animation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -58,4 +54,50 @@ ion-header, ion-toolbar {
   font-size: 28px;  /* Adjust font size as needed */
   font-weight: bold; /* Makes the text bold */
   display: inline-block; /* Required for background-clip to work properly */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-icon, .custom-text {
+    font-size: 14px;
+  }
+  
+  
+
+  .responsive-navbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    height: auto; /* Allow height to adjust based on content */
+
+  }
+  .search-bar-col {
+    order: 1; /* Make the search bar the first element in the column */
+    flex: 2 1 100%; /* Ensure it takes the full width on smaller screens */
+
+  }
+
+}
+
+@media (min-width: 769px) {
+  .responsive-navbar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* Ensure no wrapping on larger screens */
+
+  }
+}
+
+.search-bar-col {
+  flex: 2; /* Make the search bar take up more space */
+  max-width: 800px;  /* Adjust as needed to fit your design */
+}
+
+.appName-text {
+  flex-shrink: 0;  /* Prevents the text from shrinking */
+}
+
+.navbar-icon, .custom-text {
+  flex-shrink: 0;  /* Prevents the icons and text from shrinking */
 }

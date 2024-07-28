@@ -1,13 +1,12 @@
 .search-bar-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    width: 110vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .custom-searchbar {
-    height: 100%; /* Ajusta la altura según sea necesario */
-    width: 80%; 
+  width: 100%;
   --background: #dedede;
   --color: rgb(19, 17, 17);
   --placeholder-color: rgb(74, 71, 71);

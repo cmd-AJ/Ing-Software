@@ -19,7 +19,6 @@ function SearchBar({ onRequestChange }: SearchBarProps) {
     <div className="search-bar-container">
       <IonSearchbar
         className="custom-searchbar"
-        class="custom"
         placeholder="¿Qué necesitas?"
         value={searchValue}
         onIonChange={handleInputChange} // Corrige el nombre del evento
