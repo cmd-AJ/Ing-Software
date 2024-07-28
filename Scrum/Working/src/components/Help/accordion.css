@@ -5,14 +5,12 @@
   --light-pink: hsl(275, 100%, 97%);
   --grayish-purple: hsl(292, 16%, 49%);
   --dark-purple: hsl(292, 42%, 14%);
-  /* font-size: 62.5%; */
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background-color: var(--light-pink);
-  /* background-image: url(../../../assets/FAQAccordion/background-pattern-desktop.svg); */
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -27,7 +25,6 @@
   padding: 4rem 3rem 3rem;
   border-radius: 1.5rem;
   margin: auto 0;
-  /* transition: all .3s; */
 }
 
 .accordion__heading {
@@ -39,8 +36,9 @@
 
 .accordion__image {
   margin-right: 2rem;
+  width: 2rem; /* Ajusta el tamaño del icono de estrella */
+  height: 2rem;
 }
-
 
 .accordion__item {
   padding: 1.5rem 0;
@@ -54,12 +52,13 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-
 }
 
 .accordion__title-wrapper img {
   cursor: pointer;
   margin-left: 1rem;
+  width: 1.5rem; /* Ajusta el tamaño del icono plus/minus */
+  height: 1.5rem;
 }
 
 .accordion__title {
@@ -67,14 +66,11 @@
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--dark-purple);
-
-  /* margin-bottom: 2rem; */
 }
 
 .accordion__title:hover {
   color: hsl(281, 86%, 55%);
 }
-
 
 .accordion__description {
   margin-top: 2rem;
@@ -85,7 +81,6 @@
 }
 
 @media only screen and (max-width: 650px) {
-
   .container {
     background-image: url(../../../assets/FAQAccordion/background-pattern-mobile.svg);
   }
@@ -95,6 +90,4 @@
     width: 100%;
     margin: 2rem;
   }
-
-
 }
