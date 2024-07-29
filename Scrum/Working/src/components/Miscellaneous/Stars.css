@@ -1,5 +1,6 @@
 .starShape {
-    width: 50px;  
+    width: 30px;
+    height: 30px;  
     aspect-ratio: 1;
     background: #888;
     clip-path: polygon(50% 0,
