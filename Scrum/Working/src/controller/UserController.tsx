@@ -220,6 +220,33 @@ export async function insertrabajoanterior(trabajo : object) {
     return data
 }
 
+export async function getContratEmployer(dpi : string) {
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTE/${dpi}`,
+        {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    return data
+}
+
+export async function getContratWorker(dpi : string) {
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTEemploy/${dpi}`,
+        {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    return data
+}
+
+
 
 export async function insertartipodetrabajo(trabajo : object) {
 

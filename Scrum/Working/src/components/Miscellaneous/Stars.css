@@ -18,20 +18,8 @@
 
 .starShape::-webkit-progress-value {
     background-color: #F8CA00; /* Color de la barra de progreso para WebKit */
-    clip-path: polygon(50% 0,
-        calc(50%*(1 + sin(.4turn))) calc(50%*(1 - cos(.4turn))),
-        calc(50%*(1 - sin(.2turn))) calc(50%*(1 - cos(.2turn))),
-        calc(50%*(1 + sin(.2turn))) calc(50%*(1 - cos(.2turn))),
-        calc(50%*(1 - sin(.4turn))) calc(50%*(1 - cos(.4turn)))
-    );
 }
 
 .starShape::-moz-progress-bar {
     background-color: #F8CA00; /* Color de la barra de progreso para Firefox */
-    clip-path: polygon(50% 0,
-        calc(50%*(1 + sin(.4turn))) calc(50%*(1 - cos(.4turn))),
-        calc(50%*(1 - sin(.2turn))) calc(50%*(1 - cos(.2turn))),
-        calc(50%*(1 + sin(.2turn))) calc(50%*(1 - cos(.2turn))),
-        calc(50%*(1 - sin(.4turn))) calc(50%*(1 - cos(.4turn)))
-    );
 }
