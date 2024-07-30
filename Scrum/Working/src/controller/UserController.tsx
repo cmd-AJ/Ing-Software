@@ -40,7 +40,6 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
             if (!response.ok) {
                 console.log("There was an error on the response")
             }
-            console.log(response.json())
             return response.json()
         })
         .then(data => {
@@ -65,14 +64,10 @@ async function userExists(dpi: String, password: String) {
 
 export async function getUser(dpi: any, password: any) {
     try {
-        console.log(`get users func pass: ${password}`)
-        console.log(`get users func dpi: ${dpi}`)
-
         const users = await getUsers();
         let foundUser = null;
 
         users.forEach((user: { id: any; password: any; }) => {
-            console.log(  )
             if (user.id === dpi && user.password === password) {
                 //foundUser = user;
             }
@@ -96,7 +91,6 @@ async function getWorkersByJob(job: String) {
             }
         });
         const data = await response.json();
-        console.log(data)
 
         const trabajadores: Trabajador[] = data.map((worker: any) => ({
             nombre: `${worker.nombre} ${worker.apellido}`,
@@ -141,16 +135,21 @@ export { createUser, userExists, getWorkersByJob, updatecuenta }
 
 
 export async function conseguirtrabajo(dpi: string) {
-
-    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/ctrabajo/${dpi}`,
-        {
-            method: 'GET',
-            headers: {
-                'api-key': import.meta.env.VITE_API_KEY,
-                'Content-Type': 'application/json'
-            }
-        })
-    return data
+    try{
+        const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/ctrabajo/${dpi}`,
+            {
+                method: 'GET',
+                headers: {
+                    'api-key': import.meta.env.VITE_API_KEY,
+                    'Content-Type': 'application/json'
+                }
+            })
+        return await data.json();
+    } catch (error) {
+        console.error('Error fetching trusted people:', error);
+        return error;
+      }
+    
 }
 
 export async function getTrustedPeople(dpi: string): Promise<any[]> {
