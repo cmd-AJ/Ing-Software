@@ -3,7 +3,7 @@ import cors from 'cors'
 import apiKeyAuth from './auth.js'
 
 import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
-import { getWorkers, getTrustedUsersByDpi } from './neo.js'
+import { getWorkers, getTrustedUsersByDpi, creatNeoUser } from './neo.js'
 
 const app = express()
 const port = 3000
@@ -50,7 +50,20 @@ app.post('/users', apiKeyAuth ,async (req, res) => {
     const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role)
     res.status(200).json({ Succes: 'User inserted' })
   } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
 
+app.post('/usersNeo', apiKeyAuth ,async (req, res) => {
+  try {
+    const {
+      nombre, apellidos, municipio, rating, imagen, dpi, telefono
+    } = req.body
+    const result = await creatNeoUser(nombre, apellidos, municipio, rating, imagen, dpi, telefono)
+    
+    res.status(200).json({ Succes: 'Neo User inserted' })
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 })
 

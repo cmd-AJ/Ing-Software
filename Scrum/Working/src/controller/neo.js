@@ -1,5 +1,22 @@
 import { createSession } from './GraphDataBase.js';
 
+export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen, dpi, telefono){
+    const session = createSession();
+
+    try {
+        const query = `CREATE (:Usuario {nombre: '${nombre}', apellidos: '${apellidos}', municipio: '${municipio}', rating: '${rating}', imagen: '${imagen}', dpi: '${dpi}', telefono:'${telefono}'})`;
+        const result = await session.run(query);
+        
+        return result;
+    } catch (error) {
+        console.error('Error inserting Neo User:', error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+
+}
+
 export async function getWorkers(trabajo) {
     const session = createSession();
 
