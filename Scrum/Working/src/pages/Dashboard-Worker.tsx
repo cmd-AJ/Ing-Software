@@ -119,7 +119,7 @@ const Dashboard_Worker: React.FC = () => {
                   <UserText 
                     text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
                     text2={myUser.role}
-                    text3={myUser.correo}
+                    rating={myUser.rating}
                   />
                 </div>
                   <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole}/>

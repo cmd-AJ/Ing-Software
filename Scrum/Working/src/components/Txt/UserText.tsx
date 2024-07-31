@@ -5,10 +5,10 @@ import './TxtStyles.css'
 interface ContainerProps {
     text1: string
     text2: string
-    text3: string
+    rating: number
 }
 
-const UserText: React.FC<ContainerProps> = ({text1, text2}) => {
+const UserText: React.FC<ContainerProps> = ({text1, text2, rating}) => {
 
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
@@ -17,7 +17,7 @@ const UserText: React.FC<ContainerProps> = ({text1, text2}) => {
         <div className="vertical-txt-display" >
             <TextND text={text1} size="medium" hex={tertiaryColor}/>
             <TextND text={text2} size="big" hex={tertiaryColor}/>
-            <RateBar rating={0.5}/>
+            <RateBar rating={rating}/>
             
         </div>
     )
