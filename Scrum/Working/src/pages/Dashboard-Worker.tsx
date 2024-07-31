@@ -58,6 +58,8 @@ const Dashboard_Worker: React.FC = () => {
     
   const [image, setImage] = useState(myUser.imagen);
 
+  const [userRole, setUserRole] = useState(true)
+
   const headerCardRef = useRef<HTMLDivElement>(null);
   const contentCRef = useRef<HTMLDivElement>(null);
 
@@ -70,7 +72,15 @@ const Dashboard_Worker: React.FC = () => {
     }
   }, []);
 
+  useEffect(()=> {
+    console.log(myUser.role);
+      if (myUser.role === 'Empleador'){
+        setUserRole(false)
+      }
+  }, [myUser])
+
   useEffect(() => {
+
     const adjustContentHeight = () => {
       if (headerCardRef.current && contentCRef.current) {
         const headerCardHeight = headerCardRef.current.offsetHeight;
@@ -112,7 +122,7 @@ const Dashboard_Worker: React.FC = () => {
                     text3={myUser.correo}
                   />
                 </div>
-                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole}/>
               </div>
               <HorizontalDivider />
               <div className="dataGrid">
