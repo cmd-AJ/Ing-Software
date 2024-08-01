@@ -113,8 +113,8 @@ app.put('/setsettings', apiKeyAuth ,async (req, res) => {
 });
 
 app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
-  const { municipio, imagen, telefono } = req.body; 
-  if (!municipio || !imagen || !telefono ) {
+  const { dpi, municipio, imagen, telefono } = req.body; 
+  if (!dpi || !municipio || !imagen || !telefono ) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
