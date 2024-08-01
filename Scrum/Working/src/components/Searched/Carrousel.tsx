@@ -25,17 +25,16 @@ const Carrousel: React.FC<{ job: string }> = ({ job }) => {
     setSelectedItem(itemNumber);
   };
   return (
-    <div className="cards">
+      <div className="cards">
       {workers.map((worker, index) => (
-        <label
-          key={index}
-          className="card"
-          htmlFor={`item-${index + 1}`}
-          id={`song-${index + 1}`}
-          style={{ animationDelay: `${index * 0.1}s` }}
-        >
-          <Information trabajador={worker} />
-        </label>
+        <div
+        key={index}
+        className="cardx"
+        onClick={() => handleItemClick(index + 1)}
+        style={{ animationDelay: `${index * 0.1}s` }}
+      >
+        <Information trabajador={worker} />
+      </div>
       ))}
     </div>
   );
