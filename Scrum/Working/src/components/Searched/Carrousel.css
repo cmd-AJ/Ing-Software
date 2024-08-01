@@ -1,7 +1,6 @@
-.card {
+.cardx {
   width: 250px; /* Ancho fijo */
   height: 600px; /* Alto fijo */
-  margin: 10px;
   margin-top: 20px;
   cursor: pointer;
   overflow-y: hidden;
@@ -34,8 +33,8 @@
   to { opacity: 1; }
 }
 
-.card {
-  animation: fadeIn 1s ease-out;
+.cardx {
+  animation: fadeIn 2s ease-out;
 }
 
 @keyframes slideIn {
@@ -49,7 +48,7 @@
   }
 }
 
-.card {
-  animation: slideIn 0.25s ease-out forwards;
+.cardx {
+  animation: slideIn 2s ease-out forwards;
 }
 
