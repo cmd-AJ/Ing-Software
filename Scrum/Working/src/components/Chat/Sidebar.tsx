@@ -18,6 +18,7 @@ const Sidebar = () => {
             try {
                 const contactsData = await getContacts(loggedUserDpi);
                 setContacts(contactsData);
+                console.log(contactsData)
             } catch (error) {
                 console.error('Error fetching contacts:', error);
             }
