@@ -1,4 +1,6 @@
+import { image } from "ionicons/icons";
 import { Trabajador } from "../components/Searched/type";
+import { toHaveAccessibleErrorMessage } from "@testing-library/jest-dom/matchers";
 
 export async function getUsers() {
     try {
@@ -161,6 +163,23 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(object)
+        })
+
+    const neoObject = {
+        dpi: DPI,
+        municipio: municipio,
+        imagen: imagen,
+        telefono: telefono,
+    }
+
+    const NeoData = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/setNeoSettings`,
+        {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(neoObject)
         })
 }
 
