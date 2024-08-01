@@ -3,7 +3,7 @@ import cors from 'cors'
 import apiKeyAuth from './auth.js'
 
 import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
-import { getWorkers, getTrustedUsersByDpi, creatNeoUser } from './neo.js'
+import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser} from './neo.js'
 
 const app = express()
 const port = 3000
@@ -112,6 +112,20 @@ app.put('/setsettings', apiKeyAuth ,async (req, res) => {
   }
 });
 
+app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
+  const { municipio, imagen, telefono } = req.body; 
+  if (!municipio || !imagen || !telefono ) {
+    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
+  } else {
+    try {
+      await updateNeoUser(municipio, imagen, telefono);
+      res.send('Updated successfully');
+    } catch (error) {
+      console.error('Error inserting user:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  }
+});
 
 
 app.get('/ctrabajo/:dpi', apiKeyAuth ,async (req, res) => {

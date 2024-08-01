@@ -17,6 +17,22 @@ export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen,
 
 }
 
+export async function updateNeoUser(municipio, imagen, telefono) {
+    const session = createSession();
+
+    try {
+        const query = `MATE (usr:Usuario {municipio: '${municipio}', imagen:'${imagen}, telefono:'${telefono}'})`;
+        const result = await session.run(query);
+
+        return result;
+    } catch (error) {
+        console.error('Error updating neo user')
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
 export async function getWorkers(trabajo) {
     const session = createSession();
 
