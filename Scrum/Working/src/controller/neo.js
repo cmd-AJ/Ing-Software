@@ -17,11 +17,14 @@ export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen,
 
 }
 
-export async function updateNeoUser(municipio, imagen, telefono) {
+export async function updateNeoUser(dpi, municipio, imagen, telefono) {
     const session = createSession();
 
     try {
-        const query = `MATE (usr:Usuario {municipio: '${municipio}', imagen:'${imagen}, telefono:'${telefono}'})`;
+        const query = `MATCH (usr:Usuario {dpi: '${dpi}'})
+                       SET usr.municipio = '${municipio}', usr.imagen = '${imagen}',  usr.telefono = '${telefono}'
+                       RETURN usr
+                        `;
         const result = await session.run(query);
 
         return result;
@@ -78,7 +81,7 @@ export async function getTrustedUsersByDpi(dpi){
                 telefono: user.properties.telefono,
                 municipio: user.properties.municipio,
                 rating: user.properties.rating,
-                apellido: user.properties.apellido,
+                apellido: user.properties.apellidos,
                 dpi: user.properties.dpi,
                 imagen: user.properties.imagen
             };
