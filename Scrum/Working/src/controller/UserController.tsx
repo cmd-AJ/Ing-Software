@@ -49,6 +49,39 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
             console.log("Could not create User");
         });
 
+        //Neo 4j post
+
+        const NeoData = {
+            "nombre": name,
+            "apellidos": lastnames,
+            "municipio": "",
+            "rating": "",
+            "imagen": "",
+            "dpi": dpi,
+            "telefono": phoneNumber
+        }
+    
+        fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            },
+            body: JSON.stringify(NeoData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.log("There was an error on the response")
+                }
+                return response.json()
+            })
+            .then(NeoData => {
+                console.log("Neo User Saved")
+            })
+            .catch(error => {
+                console.log("Could not create Neo User");
+            });
+
 }
 
 async function userExists(dpi: String, password: String) {
