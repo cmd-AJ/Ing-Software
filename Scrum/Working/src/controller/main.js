@@ -118,7 +118,7 @@ app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
-      await updateNeoUser(municipio, imagen, telefono);
+      await updateNeoUser(dpi, municipio, imagen, telefono);
       res.send('Updated successfully');
     } catch (error) {
       console.error('Error inserting user:', error);
