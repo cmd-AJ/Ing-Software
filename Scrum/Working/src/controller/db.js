@@ -196,7 +196,7 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+        const result = await client.query(`select dpiempleador, fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpiempleador  
             where dpitrabajador = '${dpi}'
