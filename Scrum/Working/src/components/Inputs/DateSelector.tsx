@@ -75,7 +75,7 @@ const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate
                     onIonChange={handleDateChange}
                     onIonCancel={handleCancel}
                     showDefaultButtons={true}
-                    style={{ position: 'absolute', zIndex: '3', color: 'white', top: '48%', left: '25%' }}
+                    style={{ position: 'absolute', zIndex: '3', color: 'black', top: '48%', left: '25%', backgroundColor: 'white', border: '1px solid #000' }}
                     
                 ></IonDatetime>
             }

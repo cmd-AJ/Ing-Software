@@ -61,10 +61,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: black;
 }
 
 .job-display {
     width: 100%;
+    align-items: flex-start;
 }
 
 @media (max-width: 814px){

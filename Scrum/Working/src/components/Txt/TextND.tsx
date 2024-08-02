@@ -20,7 +20,7 @@ const TextND : React.FC<ContainerProps> = ({text, size, hex}) => {
         
         case "small":
             return (
-                <p style={{fontSize: '15px', color: hex}}>{text}</p>
+                <p style={{fontSize: '18px', color: hex}}>{text}</p>
             );
     }
 }
