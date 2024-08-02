@@ -215,14 +215,9 @@ export async function getTrabajoSABTEemple(dpi) {
 		const query = `
 			SELECT u.nombre, u.apellidos, dpitrabajador, t.nombre_trabajo, u.imagen, fecha, fechafin, r.calificacion 
 			FROM completado c
-			LEFT JOIN resena r ON c.idresena = r.idresena
-			JOIN usuarios u ON u.dpi = c.dpitrabajador
-			JOIN trabajador t ON t.dpi = c.dpitrabajador
-			WHERE dpiempleador = $1
-			AND dpitrabajador IS NOT NULL;
 		`;
 		const values = [dpi];
-		const result = await client.query(query, values);
+		const result = await client.query(query);
 		return result.rows;
 	} catch (error) {
 		console.error('Error in getTrabajoSABTEemple function:', error);
