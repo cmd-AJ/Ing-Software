@@ -1,5 +1,41 @@
 import { createSession } from './GraphDataBase.js';
 
+export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen, dpi, telefono){
+    const session = createSession();
+
+    try {
+        const query = `CREATE (:Usuario {nombre: '${nombre}', apellidos: '${apellidos}', municipio: '${municipio}', rating: '${rating}', imagen: '${imagen}', dpi: '${dpi}', telefono:'${telefono}'})`;
+        const result = await session.run(query);
+        
+        return result;
+    } catch (error) {
+        console.error('Error inserting Neo User:', error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+
+}
+
+export async function updateNeoUser(dpi, municipio, imagen, telefono) {
+    const session = createSession();
+
+    try {
+        const query = `MATCH (usr:Usuario {dpi: '${dpi}'})
+                       SET usr.municipio = '${municipio}', usr.imagen = '${imagen}',  usr.telefono = '${telefono}'
+                       RETURN usr
+                        `;
+        const result = await session.run(query);
+
+        return result;
+    } catch (error) {
+        console.error('Error updating neo user')
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
 export async function getWorkers(trabajo) {
     const session = createSession();
 
@@ -45,7 +81,7 @@ export async function getTrustedUsersByDpi(dpi){
                 telefono: user.properties.telefono,
                 municipio: user.properties.municipio,
                 rating: user.properties.rating,
-                apellido: user.properties.apellido,
+                apellido: user.properties.apellidos,
                 dpi: user.properties.dpi,
                 imagen: user.properties.imagen
             };

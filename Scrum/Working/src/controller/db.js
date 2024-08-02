@@ -182,6 +182,7 @@ export async function updatetrab(trabajo, dpi) {
 //Trabjados en SABTE trabajador
 export async function gettrabajoant(dpi) {
     try {
+
         const result = await client.query(`select estado, titulo, imagen from completado c 
             where dpiempleador is null
             and dpitrabajador = '${dpi}'`
@@ -196,10 +197,10 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+        const result = await client.query(`select dpiempleador, fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpiempleador  
-            where dpitrabajador = '3833 86608 0101'
+            where dpitrabajador = '${dpi}'
             and dpiempleador is not null`)
         return result.rows
     } catch (error) {
@@ -209,47 +210,42 @@ export async function gettrabajoSABTE(dpi) {
 }
 
 //Trabajadores en SABTE empleador
-export async function getTrabajoSABTEemple(dpi) {
-    try {
-        const result = await client.query(`select u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo ,u.imagen  , fecha, fechafin, r.calificacion from completado c 
-            left join resena r on c.idresena = r.idresena 
-            join usuarios u on u.dpi = c.dpitrabajador  
-            join trabajador t on t.dpi = c.dpitrabajador 
-            where dpiempleador = '3833 86608 0102'
-            and dpitrabajador is not null;`)
->>>>>>> fc9461d43b7b019dcfac785e9cd58a9ee0f5d789
-        return result.rows
-    } catch (error) {
-        console.error('Error getting user:', error);
-        throw error;
-    }
+export async function getTrabajoSABTEemple(dpi) { 
+	try {
+		const result = await client.query(`select u.nombre, u.apellidos, dpitrabajador, t.nombre_trabajo, u.imagen, fecha, fechafin, r.calificacion from completado c
+		left join resena r on c.idresena = r.idresena
+		join usuarios u on u.dpi = c.dpitrabajador
+		join trabajador t on t.dpi = c.dpitrabajador
+		where dpiempleador = '${dpi}'
+		and dpitrabajador is not null;`)
+		return result.rows
+	} catch (error) {
+		console.error('Error getting user:', error);
+		throw error;
+	}
 }
-
 
 //Estado es la descripcion eg. Se termino con aticipio o lo mejor de todo
 export async function insertartrabant(dpitrabajador, dpiempleador, titulo, estado, imagen) {
-    try {
-        const result = await client.query(`insert into completado(estado, dpitrabajador, dpiempleador, titulo, imagen) values( '${estado}', '${dpitrabajador}', '${dpiempleador}', '${titulo}', '${imagen}' )`);
-        console.log('Data inserted successfully');
-    } catch (error) {
-        console.error('Error inserting user:', error);
-        throw error;
-    }
+	try {
+	const result = await client.query(`insert into completado(estado, dpitrabajador, dpiempleador, titulo, imagen) values( '${estado}', '${dpitrabajador}','${dpiempleador}', '${titulo}', '${imagen}')`);
+	console.log('Data inserted successfully');
+	} catch (error) {
+		console.error('Error inserting user:',error);
+	}
 }
 
 export async function insertartipotrabajo(nombre_trabajo, descripcion) {
-    try {
-        const result = await client.query(`insert into tipotrabajo (nombre_trabajo, descripcion) values ( '${nombre_trabajo}', '${descripcion}' )`);
-        console.log('Data inserted successfully');
-    } catch (error) {
-        console.error('Error inserting user:', error);
-        throw error;
-    }
+	try {
+	const result = await client.query(`insert into tipotrabajo (nombre_trabajo, descripcion) values ('${nombre_trabajo}', '${descripcion}')`);
+	console.log('Data inserted successfully');
+	} catch (error) {
+		console.log('Error inserting user:', error);
+		throw error;
+	}
 }
 
-
-
-export async function insertChatMessage(contenido, id_chat, dpi) {
+export async function insertChatMessage(contenido, id_chat, dpi) { 
     try {
         const query = {
             text: "INSERT INTO mensaje(contenido, id_chat, dpi, time) VALUES( $1, $2, $3, CURRENT_TIMESTAMP)",

@@ -1,5 +1,7 @@
 import { Departamentos, Municipios } from "../Departamentos/Departamentos";
+import { image } from "ionicons/icons";
 import { Trabajador } from "../components/Searched/type";
+import { toHaveAccessibleErrorMessage } from "@testing-library/jest-dom/matchers";
 
 export async function getUsers() {
     try {
@@ -52,6 +54,39 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             console.log("Could not create User");
         });
 
+        //Neo 4j post
+
+        const NeoData = {
+            "nombre": name,
+            "apellidos": lastnames,
+            "municipio": "",
+            "rating": "",
+            "imagen": "",
+            "dpi": dpi,
+            "telefono": phoneNumber
+        }
+    
+        fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            },
+            body: JSON.stringify(NeoData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.log("There was an error on the response")
+                }
+                return response.json()
+            })
+            .then(NeoData => {
+                console.log("Neo User Saved")
+            })
+            .catch(error => {
+                console.log("Could not create Neo User");
+            });
+
 }
 
 async function userExists(dpi: String, password: String) {
@@ -87,7 +122,7 @@ export async function getUser(dpi: any, password: any) {
 async function getWorkersByJob(job: String) {
     try {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/workers/${job}`,{
-        
+
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
@@ -96,7 +131,7 @@ async function getWorkersByJob(job: String) {
         const data = await response.json();
 
         const trabajadores: Trabajador[] = data.map((worker: any) => ({
-            nombre: `${worker.nombre} ${worker.apellido}`,
+            nombre: `${worker.nombre} ${worker.apellidos}`,
             telefono: worker.telefono,
             dpi: worker.dpi,
             municipio: worker.municipio,
@@ -111,7 +146,7 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol : string, telefono: string, trabajo: string) {
+async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol: string, telefono: string, trabajo: string) {
     const object = {
         municipio: municipio,
         imagen: imagen,
@@ -132,13 +167,30 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
             },
             body: JSON.stringify(object)
         })
+
+    const neoObject = {
+        dpi: DPI,
+        municipio: municipio,
+        imagen: imagen,
+        telefono: telefono,
+    }
+
+    const NeoData = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/setNeoSettings`,
+        {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(neoObject)
+        })
 }
 
 export { createUser, userExists, getWorkersByJob, updatecuenta }
 
 
 export async function conseguirtrabajo(dpi: string) {
-    try{
+    try {
         const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/ctrabajo/${dpi}`,
             {
                 method: 'GET',
@@ -151,30 +203,30 @@ export async function conseguirtrabajo(dpi: string) {
     } catch (error) {
         console.error('Error fetching trusted people:', error);
         return error;
-      }
-    
+    }
+
 }
 
 export async function getTrustedPeople(dpi: string): Promise<any[]> {
     try {
-      const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trustNetwork/${dpi}`,{
-        headers: {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trustNetwork/${dpi}`, {
+            headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             }
-      });
-      const data = await response.json();
-      return data;
+        });
+        const data = await response.json();
+        return data;
     } catch (error) {
-      console.error('Error fetching trusted people:', error);
-      return [];
+        console.error('Error fetching trusted people:', error);
+        return [];
     }
-  }
-  
-  export async function configurartrabajo( trabajo: string ,dpi: string) {
+}
+
+export async function configurartrabajo(trabajo: string, dpi: string) {
     const object = {
         trabajo: trabajo,
-        dpi:dpi
+        dpi: dpi
     }
 
     const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/confitrab`,
@@ -207,7 +259,7 @@ export async function gettrabajoanterior(dpi: string) {
 }
 
 //DPI y Estado (Descripcion)
-export async function insertrabajoanterior(trabajo : object) {
+export async function insertrabajoanterior(trabajo: object) {
 
     const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajaoanterior/`,
         {
@@ -254,7 +306,7 @@ export async function getContratWorker(dpi : string) {
 
 
 
-export async function insertartipodetrabajo(trabajo : object) {
+export async function insertartipodetrabajo(trabajo: object) {
 
     const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/instipotrabajo/`,
         {
@@ -311,7 +363,7 @@ export async function getUserName(dpi: string) {
         const userData = await response.json();
         const names = userData[0].nombre.split(' ')
         const lastnames = userData[0].apellidos.split(' ')
-        return names[0]+' '+lastnames[0]
+        return names[0] + ' ' + lastnames[0]
     } catch (error) {
         console.error('Error fetching user by DPI:', error);
         throw error;
