@@ -2,21 +2,21 @@ import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
 
 type User = {
-    nombre: string;
-    apellidos: string;
+    nombre : string;
+    apellidos : string;
     rating: number;
     sexo: string;
     fecha_nacimiento: string;
     municipio: string;
     tel: string;
     correo: string;
-    image: string;
+    imagen: string;
     dpi: string;
     role: string;
     edad: string;
     banner: string;
-    departamento: string;
-};
+    departamento: string
+  };
 
 interface ContainerProps {
     user: User;
