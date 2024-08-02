@@ -152,7 +152,7 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
               </div>
               <HorizontalDivider/>
-              <UserDataDisplay/>
+              <UserDataDisplay role={myUser.role} dpi={myUser.dpi}/>
             {/* <ProfileDataDisplay user={myUser}/> */}
           </div>
         </div>

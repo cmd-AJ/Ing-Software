@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getTrustedPeople } from "../../controller/UserController"
-import TrustPerson from "./trustPerson"
+import TrustPerson from "./TrustPerson"
+import './DisplaymentStyles.css'
 
 interface ContainerProps {  }
 
@@ -18,7 +19,7 @@ const TrustPeople: React.FC<ContainerProps> = () => {
     },[])
 
     return (
-        <div className="trustSec">
+        <div className="contrat-display">
             {
                 people.map(person => (
                     <TrustPerson nombre={person.nombre} apellido={person.apellido} rating={person.rating} tel={person.telefono} img={person.image}/>

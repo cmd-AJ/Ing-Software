@@ -22,7 +22,7 @@ const JobsDisplay:React.FC<ContainerProps> = ({dpi}) => {
 
     useEffect(()=>{
         const fecthData = async () =>{
-            const data = await gettrabajoanterior(dpi)
+            const data = await gettrabajoanterior('3833 86608 0101')
             if (data && data.length > 0) {
                 setData(data)
             } else {

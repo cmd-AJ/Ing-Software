@@ -28,7 +28,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi}) => {
 
     useEffect(()=>{
         const fecthData = async () => {
-            const data = await getContratWorker(dpi)
+            const data = await getContratWorker('3833 86608 0101')
             if (data && data.length > 0){
                 setData(data)
             } else {
