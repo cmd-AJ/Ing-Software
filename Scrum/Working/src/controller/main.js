@@ -223,7 +223,7 @@ app.get('/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
     if (!dpi) {
       return res.status(400).json({ error: 'DPI parameter is required' });
     }
-    const trabjant = await getTrabajoSABTEemple(dpi);
+    const trabjant = await gettrabajoSABTE(dpi);
     res.status(200).json(trabjant);
   } catch (error) {
     console.error('Error getting trabajos anteriores:', error);
