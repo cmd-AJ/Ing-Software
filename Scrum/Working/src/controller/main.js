@@ -217,7 +217,7 @@ app.get('/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/trabajoanteriorSABTEemploy', apiKeyAuth, async (req, res) => {
+app.get('/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
   try {
     const { dpi } = req.params;
     const trabjant = await getTrabajoSABTEemple(dpi);
