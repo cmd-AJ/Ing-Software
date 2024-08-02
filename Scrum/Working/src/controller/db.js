@@ -182,14 +182,10 @@ export async function updatetrab(trabajo, dpi) {
 //Trabjados en SABTE trabajador
 export async function gettrabajoant(dpi) {
     try {
-<<<<<<< HEAD
-        const result = await client.query(`select dpiempleador, fecha fechafin, r.calificacion from completado c
-            left join resena r on c.idresena = r.idresena where dpitrabajador = '${dpi}' and dpiempleador is not null`
-=======
+
         const result = await client.query(`select estado, titulo, imagen from completado c 
             where dpiempleador is null
             and dpitrabajador = '${dpi}'`
->>>>>>> fc9461d43b7b019dcfac785e9cd58a9ee0f5d789
         )
         return result.rows
     } catch (error) {
@@ -197,7 +193,6 @@ export async function gettrabajoant(dpi) {
         throw error;
     }
 }
-
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
