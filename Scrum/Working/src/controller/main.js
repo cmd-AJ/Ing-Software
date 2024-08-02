@@ -220,13 +220,16 @@ app.get('/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
 app.get('/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
   try {
     const { dpi } = req.params;
+    if (!dpi) {
+      return res.status(400).json({ error: 'DPI parameter is required' });
+    }
     const trabjant = await getTrabajoSABTEemple(dpi);
     res.status(200).json(trabjant);
   } catch (error) {
     console.error('Error getting trabajos anteriores:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
 
 app.post('/trabajaoanterior', apiKeyAuth ,async (req, res) => {
   try {
