@@ -274,7 +274,7 @@ export async function insertrabajoanterior(trabajo: object) {
 }
 
 export async function getContratEmployer(dpi : string) {
-    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTE/${dpi}`,
+    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTEemploy/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -289,7 +289,7 @@ export async function getContratEmployer(dpi : string) {
 }
 
 export async function getContratWorker(dpi : string) {
-    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTEemploy/${dpi}`,
+    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTE/${dpi}`,
         {
             method: 'GET',
             headers: {
