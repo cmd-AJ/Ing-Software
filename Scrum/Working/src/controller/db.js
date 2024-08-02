@@ -212,11 +212,11 @@ export async function gettrabajoSABTE(dpi) {
 //Trabajadores en SABTE empleador
 export async function getTrabajoSABTEemple(dpi) { 
 	try {
-		const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+		const result = await client.query(`select u.nombre , u.apellidos, dpitrabajador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
-            join usuarios u on u.dpi = c.dpiempleador  
-            where dpitrabajador = '${dpi}'
-            and dpiempleador is not null;`)
+            join usuarios u on u.dpi = c.dpitrabajador 
+            where dpiempleador = '${dpi}'
+            and dpitrabajador is not null;`)
         return result.rows
 	} catch (error) {
 		console.error('Error in getTrabajoSABTEemple function:', error);
