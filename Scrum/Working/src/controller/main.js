@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser} from './neo.js'
 
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getTrabajoSABTEemple} from './db.js'
-import { getWorkers, getTrustedUsersByDpi } from './neo.js'
 
 const app = express()
 const port = 3000
@@ -50,7 +50,20 @@ app.post('/users', apiKeyAuth ,async (req, res) => {
     const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio)
     res.status(200).json({ Succes: 'User inserted' })
   } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
 
+app.post('/usersNeo', apiKeyAuth ,async (req, res) => {
+  try {
+    const {
+      nombre, apellidos, municipio, rating, imagen, dpi, telefono
+    } = req.body
+    const result = await creatNeoUser(nombre, apellidos, municipio, rating, imagen, dpi, telefono)
+    
+    res.status(200).json({ Succes: 'Neo User inserted' })
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 })
 
@@ -99,6 +112,20 @@ app.put('/setsettings', apiKeyAuth ,async (req, res) => {
   }
 });
 
+app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
+  const { dpi, municipio, imagen, telefono } = req.body; 
+  if (!dpi || !municipio || !imagen || !telefono ) {
+    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
+  } else {
+    try {
+      await updateNeoUser(dpi, municipio, imagen, telefono);
+      res.send('Updated successfully');
+    } catch (error) {
+      console.error('Error inserting user:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  }
+});
 
 
 app.get('/ctrabajo/:dpi', apiKeyAuth ,async (req, res) => {

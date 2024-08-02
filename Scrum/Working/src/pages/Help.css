@@ -1,59 +1,8 @@
-
 .help-page {
-  background-color: #265382; 
-}
-
-.content-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem; 
-}
-
-.title {
-  font-size: 2rem; 
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem; 
-  color: white; 
-}
-
-.button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5rem; 
-  margin-bottom: 2rem; 
-}
-
-.subtitle {
-  font-size: 1.5rem; 
-  font-weight: normal;
-  text-align: center;
-  color: white; 
-}
-
-/* Estilos para los FAQs */
-.faq-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px solid white; 
-  padding: 1rem;
-  margin: 1rem 0;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: transparent; 
-}
-
-.faq-text {
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.faq-icon {
-  color: white;
-  font-size: 1.5rem;
+  height: 100vh; 
+  background-color: #255990; 
+  padding: 20px;
 }

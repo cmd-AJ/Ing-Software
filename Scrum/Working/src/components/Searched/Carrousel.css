@@ -1,8 +1,7 @@
-.card {
-  width: 250px; /* Ancho fijo */
+.cardx {
+  width: 300px; /* Ancho fijo */
   height: 600px; /* Alto fijo */
-  margin: 10px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   cursor: pointer;
   overflow-y: hidden;
   transition: none; 
@@ -22,9 +21,9 @@
   display: grid; 
   grid-template-columns: repeat(3, 2fr); 
   width: 100%; 
-  display: flex;
   justify-content: center;
   align-items: center;
+  justify-items: center;
 }
   
 
@@ -34,22 +33,20 @@
   to { opacity: 1; }
 }
 
-.card {
-  animation: fadeIn 1s ease-out;
-}
+
 
 @keyframes slideIn {
   from {
-    transform: translateX(-100px);
+    /* transform: translateX(-100px); */
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    /* transform: translateX(100px); */
     opacity: 1;
   }
 }
 
-.card {
-  animation: slideIn 0.25s ease-out forwards;
+.cardx {
+  animation: slideIn 2s ease-out forwards;
 }
 
