@@ -20,7 +20,7 @@ export async function getUsers() {
 export async function getUserbyDPI(dpi) {
     try {
         const query = {
-            text: 'SELECT dpi, nombre, apellidos, email, telefono, role, municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
+            text: 'SELECT nombre, apellidos, email, telefono, role, departamento,municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
             values: [dpi]
         };
 
@@ -33,11 +33,25 @@ export async function getUserbyDPI(dpi) {
     }
 }
 
-export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role) {
+export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio) {
     try {
+
         const query = {
-            text: 'INSERT INTO Usuarios (dpi, nombre, apellidos, contrasenia, email, telefono, role) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-            values: [DPI, name, lastnames, password, email, phoneNumber, role],
+            text: `
+            INSERT INTO Usuarios (
+                dpi, nombre, apellidos, contrasenia, email, telefono, role, 
+                municipio, sexo, fecha_nacimiento, rating, imagen, banner, 
+                departamento, municipio
+            ) 
+            VALUES (
+                $1, $2, $3, $4, $5, $6, $7, 
+                '', '', '', 0, 
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 
+                'https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg',
+                $8, $9
+            )
+        `,
+        values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio],
         };
 
         const result = await client.query(query);
@@ -168,8 +182,11 @@ export async function updatetrab(trabajo, dpi) {
 //Trabjados en SABTE trabajador
 export async function gettrabajoant(dpi) {
     try {
-        const result = await client.query(`select dpiempleador, fecha fechafin, r.calificacion from completado c
-            left join resena r on c.idresena = r.idresena where dpitrabajador = '${dpi}' and dpiempleador is not null`
+
+        const result = await client.query(`select estado, titulo, imagen from completado c 
+            where dpiempleador is null
+            and dpitrabajador = '${dpi}'`
+
         )
         return result.rows
     } catch (error) {
@@ -178,11 +195,30 @@ export async function gettrabajoant(dpi) {
     }
 }
 
-//Trabjadores en en SABTE trabajador
+//Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select dpitrabajador, fecha, fechafin, r.calificacion from completado c
-            left join resena r on c.idresena = r.idresena where dpiempleador = '${dpi}' and dpitrabajador is not null`)
+        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+            left join resena r on c.idresena = r.idresena 
+            join usuarios u on u.dpi = c.dpiempleador  
+            where dpitrabajador = '${dpi}'
+            and dpiempleador is not null`)
+        return result.rows
+    } catch (error) {
+        console.error('Error getting user:', error);
+        throw error;
+    }
+}
+
+//Trabajadores en SABTE empleador
+export async function getTrabajoSABTEemple(dpi) {
+    try {
+        const result = await client.query(`select u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo ,u.imagen  , fecha, fechafin, r.calificacion from completado c 
+            left join resena r on c.idresena = r.idresena 
+            join usuarios u on u.dpi = c.dpitrabajador  
+            join trabajador t on t.dpi = c.dpitrabajador 
+            where dpiempleador = '${dpi}'
+            and dpitrabajador is not null;`)
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);

@@ -1,7 +1,13 @@
 @import url('../../theme/variables.css');
 
 .horizontal {
-    width: 100%;
+    width: auto;
     background-color: var(--ion-color-tertiary);
     height: 1px;
+}
+
+.vertical {
+    height: auto;
+    background-color: var(--ion-color-tertiary);
+    width: 1px;
 }

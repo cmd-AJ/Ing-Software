@@ -1,3 +1,4 @@
+import React from 'react';
 import './InputStyles.css';
 
 interface ContainerProps {
