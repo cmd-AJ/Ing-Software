@@ -212,18 +212,12 @@ export async function gettrabajoSABTE(dpi) {
 //Trabajadores en SABTE empleador
 export async function getTrabajoSABTEemple(dpi) { 
 	try {
-		const query = `
-			SELECT u.nombre, u.apellidos, dpitrabajador, t.nombre_trabajo, u.imagen, fecha, fechafin, r.calificacion 
-			FROM completado c
-			LEFT JOIN resena r ON c.idresena = r.idresena
-			JOIN usuarios u ON u.dpi = c.dpitrabajador
-			JOIN trabajador t ON t.dpi = c.dpitrabajador
-			WHERE dpiempleador = $1
-			AND dpitrabajador IS NOT NULL;
-		`;
-		const values = [dpi];
-		const result = await client.query(query, values);
-		return result.rows;
+		const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+            left join resena r on c.idresena = r.idresena 
+            join usuarios u on u.dpi = c.dpiempleador  
+            where dpitrabajador = '${dpi}'
+            and dpiempleador is not null;`)
+        return result.rows
 	} catch (error) {
 		console.error('Error in getTrabajoSABTEemple function:', error);
 		throw error;
