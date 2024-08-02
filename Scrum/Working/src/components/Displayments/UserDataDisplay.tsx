@@ -13,7 +13,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
         <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
             <ContratsDisplay dpi={dpi}/>
             <VerticalDivider />
-            <JobsDisplay />
+            <JobsDisplay dpi={dpi}/>
         </div>
     )
 }
