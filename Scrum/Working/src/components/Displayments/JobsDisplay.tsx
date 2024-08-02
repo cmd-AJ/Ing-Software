@@ -39,7 +39,7 @@ const JobsDisplay:React.FC<ContainerProps> = ({dpi}) => {
             <div className="job-display">
             <TextND text="Trabajos realizados" size="big" hex={tertiaryColor}/>
                 <HorizontalDivider/>
-                <div style={{display: 'flex', width: '100%', minHeight: '320px', justifyContent: 'center', alignItems: 'center'}}>
+                <div style={{display: 'flex', width: '100%', minHeight: '280px', justifyContent: 'center', alignItems: 'center'}}>
                     <TextND text="No hay trabajos publicados" size="medium" hex="#888"/>
                 </div>
         </div>
