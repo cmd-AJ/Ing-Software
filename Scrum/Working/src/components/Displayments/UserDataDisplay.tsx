@@ -4,13 +4,14 @@ import ContratsDisplay from "./ContratsDisplay";
 import JobsDisplay from "./JobsDisplay";
 
 interface ContainerProps {
-
+    dpi: string
+    role: string
 }
 
-const UserDataDisplay: React.FC<ContainerProps> = () => {
+const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
     return (
         <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-            <ContratsDisplay/>
+            <ContratsDisplay dpi={dpi}/>
             <VerticalDivider />
             <JobsDisplay />
         </div>
