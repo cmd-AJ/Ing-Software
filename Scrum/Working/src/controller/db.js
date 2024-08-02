@@ -196,9 +196,10 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select dpiempleador, fecha, fechafin, r.calificacion from completado c 
+        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
-            where dpitrabajador = '${dpi}'
+            join usuarios u on u.dpi = c.dpiempleador  
+            where dpitrabajador = '3833 86608 0101'
             and dpiempleador is not null`)
         return result.rows
     } catch (error) {
@@ -210,9 +211,11 @@ export async function gettrabajoSABTE(dpi) {
 //Trabajadores en SABTE empleador
 export async function getTrabajoSABTEemple(dpi) {
     try {
-        const result = await client.query(`select dpitrabajador, fecha, fechafin, r.calificacion from completado c 
+        const result = await client.query(`select u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo ,u.imagen  , fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
-            where dpiempleador = '${dpi}'
+            join usuarios u on u.dpi = c.dpitrabajador  
+            join trabajador t on t.dpi = c.dpitrabajador 
+            where dpiempleador = '3833 86608 0102'
             and dpitrabajador is not null;`)
         return result.rows
     } catch (error) {
