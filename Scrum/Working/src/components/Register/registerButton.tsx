@@ -17,23 +17,6 @@ type User = {
     role: string
 }
 
-type userData = {
-    name : string
-    apellidos : string
-    trabajo: string
-    rating: number
-    sexo: string
-    fecha_nacimiento: string
-    municipio: string
-    telefono: string
-    email: string
-    imagen: string
-    dpi: string
-    role: string
-    departamento: string
-    banner: string
-}
-
 interface ContainerProps {  
     validateName : Boolean, 
     validateLastname: Boolean,
@@ -57,12 +40,11 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
     const [userExist, setUserExist] = useState(false)
 
     const handleClick = () => {
+        const departamento = Departamentos(user.dpi)
         const municipio = Municipios(user.dpi)
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
             setUserExist(true)
-            createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role)
-        
-            console.log('funcionando');
+            createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password+'').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role, departamento, municipio)
             
         }
     }

@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
 
+
 import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser} from './neo.js'
 
@@ -44,10 +45,10 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
 app.post('/users', apiKeyAuth ,async (req, res) => {
   try {
     const {
-      dpi, name, lastnames, password, email, phoneNumber, role
+      dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio
     } = req.body
 
-    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role)
+    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio)
     res.status(200).json({ Succes: 'User inserted' })
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -212,7 +213,18 @@ app.get('/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
     const trabjant = await gettrabajoSABTE(dpi)
     res.status(200).json(trabjant);
 
-  } catch (error) {trabajoanterior
+  } catch (error) {
+    console.error('Error getting trabajos anteriores:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+app.get('/trabajoanteriorSABTEemploy', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    const trabjant = await getTrabajoSABTEemple(dpi);
+    res.status(200).json(trabjant);
+  } catch (error) {
     console.error('Error getting trabajos anteriores:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }

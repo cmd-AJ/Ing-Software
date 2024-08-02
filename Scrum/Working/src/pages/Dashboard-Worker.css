@@ -1,28 +1,25 @@
 @import url('../theme/variables.css');
 
-.contentC {
-    background-color: var(--ion-color-primary);
-    height: auto;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    align-content:center;
-    padding-right: 42px;
-    overflow: auto;
+:root {
+    --size-default: 200px;
 }
 
-.dashboard-row {
+.contentC {
+    background-color: var(--ion-color-primary); 
+    padding-top: 40px;
+    padding-left: 15%;
+    padding-right: 15%;
+    max-height: 1420px;
+    min-height: 100vh;
     height: auto;
-    width: 100%;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    overflow-y: auto;
 }
 
 .header-card {
     display: flex;
     height: auto;
+    min-height: 800px;
+    max-height: 1225px;
     width: 100%;
     background-color: white;
     border-radius: 30px;
@@ -38,7 +35,7 @@
 
 .lower-displayment {
     width: 100%;
-    height: 200%;
+    height: auto;
     background-color: var(--ion-color-primary-contrast);
     display: flex;
     flex-direction: row;
@@ -56,6 +53,20 @@
     object-fit: 'fill';
 }
 
+.dataGrid {
+    color: black;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    padding: 20px;
+}
+
+.dataDisplay {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
 @media (max-width: 814px){
     .lower-displayment {
         flex-direction: column;
@@ -63,5 +74,11 @@
 
     .contentC{
         height: 1085px;
+    }
+
+    .dataGrid{
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 33.33% 33.33% 33.33%;
+    
     }
 }
