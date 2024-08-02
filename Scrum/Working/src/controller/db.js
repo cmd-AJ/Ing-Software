@@ -197,11 +197,11 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select dpiempleador, fecha, fechafin, r.calificacion from completado c 
+        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpiempleador  
             where dpitrabajador = '${dpi}'
-            and dpiempleador is not null`)
+            and dpiempleador is not null;`)
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
@@ -215,9 +215,14 @@ export async function getTrabajoSABTEemple(dpi) {
 		const query = `
 			SELECT u.nombre, u.apellidos, dpitrabajador, t.nombre_trabajo, u.imagen, fecha, fechafin, r.calificacion 
 			FROM completado c
+			LEFT JOIN resena r ON c.idresena = r.idresena
+			JOIN usuarios u ON u.dpi = c.dpitrabajador
+			JOIN trabajador t ON t.dpi = c.dpitrabajador
+			WHERE dpiempleador = $1
+			AND dpitrabajador IS NOT NULL;
 		`;
 		const values = [dpi];
-		const result = await client.query(query);
+		const result = await client.query(query, values);
 		return result.rows;
 	} catch (error) {
 		console.error('Error in getTrabajoSABTEemple function:', error);
