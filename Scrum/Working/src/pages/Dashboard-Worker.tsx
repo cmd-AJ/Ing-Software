@@ -140,11 +140,11 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Sexo:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                  <TextND text={myUser.sexo} size="medium" hex={secondaryContrast}/>
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Municipio:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                  <TextND text={myUser.municipio} size="medium" hex={secondaryContrast}/>
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>

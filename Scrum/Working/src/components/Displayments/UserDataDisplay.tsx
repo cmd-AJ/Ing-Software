@@ -13,19 +13,18 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
     if (role === 'Empleador'){
         return (
             <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                <ContratsDisplay dpi={dpi}/>
-                <VerticalDivider />
-                <JobsDisplay dpi={dpi}/>
+                <TrustPeople />
+                <VerticalDivider/>
             </div>
         )
     } else {
         return (
             <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                <TrustPeople />
-                <VerticalDivider/>
+                <ContratsDisplay dpi={dpi}/>
+                <VerticalDivider />
+                <JobsDisplay dpi={dpi}/>
             </div>
         )
-        
     }
 }
 
