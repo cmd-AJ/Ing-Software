@@ -1,8 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
-
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser} from './neo.js'
 
 const app = express()
@@ -44,10 +43,10 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
 app.post('/users', apiKeyAuth ,async (req, res) => {
   try {
     const {
-      dpi, name, lastnames, password, email, phoneNumber, role
+      dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio
     } = req.body
 
-    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role)
+    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio)
     res.status(200).json({ Succes: 'User inserted' })
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -118,7 +117,7 @@ app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
   } else {
     try {
-      await updateNeoUser(municipio, imagen, telefono);
+      await updateNeoUser(dpi, municipio, imagen, telefono);
       res.send('Updated successfully');
     } catch (error) {
       console.error('Error inserting user:', error);
@@ -212,11 +211,25 @@ app.get('/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
     const trabjant = await gettrabajoSABTE(dpi)
     res.status(200).json(trabjant);
 
-  } catch (error) {trabajoanterior
+  } catch (error) {
     console.error('Error getting trabajos anteriores:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
+
+app.get('/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi } = req.params;
+    if (!dpi) {
+      return res.status(400).json({ error: 'DPI parameter is required' });
+    }
+    const trabjant = await getTrabajoSABTEemple(dpi);
+    res.status(200).json(trabjant);
+  } catch (error) {
+    console.error('Error getting trabajos anteriores:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 app.post('/trabajaoanterior', apiKeyAuth ,async (req, res) => {
   try {

@@ -1,5 +1,6 @@
 import { IonSelect, IonSelectOption } from "@ionic/react"
 import './InputStyles.css'
+import React from "react"
 
 interface ContainerProps {
     label : string

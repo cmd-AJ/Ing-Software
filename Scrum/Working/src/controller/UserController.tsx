@@ -1,4 +1,7 @@
+import { Departamentos, Municipios } from "../Departamentos/Departamentos";
+import { image } from "ionicons/icons";
 import { Trabajador } from "../components/Searched/type";
+import { toHaveAccessibleErrorMessage } from "@testing-library/jest-dom/matchers";
 
 export async function getUsers() {
     try {
@@ -16,8 +19,8 @@ export async function getUsers() {
     }
 }
 
-function createUser(dpi: String, name: String, lastnames: String, password: String, email: String, phoneNumber: String, role: String) {
-    debugger
+function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
+
     const data = {
         "dpi": dpi,
         "name": name,
@@ -25,7 +28,9 @@ function createUser(dpi: String, name: String, lastnames: String, password: Stri
         "password": password,
         "email": email,
         "phoneNumber": phoneNumber,
-        "role": role
+        "role": role,
+        "departamento": departamento,
+        "municipio": municipio
     }
 
     fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
@@ -162,6 +167,23 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
             },
             body: JSON.stringify(object)
         })
+
+    const neoObject = {
+        dpi: DPI,
+        municipio: municipio,
+        imagen: imagen,
+        telefono: telefono,
+    }
+
+    const NeoData = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/setNeoSettings`,
+        {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(neoObject)
+        })
 }
 
 export { createUser, userExists, getWorkersByJob, updatecuenta }
@@ -223,7 +245,7 @@ export async function configurartrabajo(trabajo: string, dpi: string) {
 
 export async function gettrabajoanterior(dpi: string) {
 
-    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanterior/${dpi}`,
+    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanterior/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -231,6 +253,8 @@ export async function gettrabajoanterior(dpi: string) {
                 'Content-Type': 'application/json'
             }
         })
+    const data = await response.json()
+
     return data
 }
 
@@ -248,6 +272,38 @@ export async function insertrabajoanterior(trabajo: object) {
         })
     return data
 }
+
+export async function getContratEmployer(dpi : string) {
+    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTEemploy/${dpi}`,
+        {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+    const data = await response.json()
+
+    return data
+}
+
+export async function getContratWorker(dpi : string) {
+    const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trabajoanteriorSABTE/${dpi}`,
+        {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        }
+    )
+
+    const data = await response.json()
+
+    return data
+}
+
 
 
 export async function insertartipodetrabajo(trabajo: object) {

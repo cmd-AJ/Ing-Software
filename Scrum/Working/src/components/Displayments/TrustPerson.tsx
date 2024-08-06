@@ -1,4 +1,5 @@
 import React from "react"
+import './DisplaymentStyles.css'
 
 interface ContainerProps {
     nombre: string

@@ -1,25 +1,30 @@
-import { IonButton, IonCard, IonCardContent, IonContent, IonGrid, IonImg, IonPage, IonRow, IonTitle } from "@ionic/react";
-import './Dashboard-Worker.css';
-import React, { useEffect, useState } from "react";
-import CircleImg from "../components/Imgs/CircleImg";
-import UserText from "../components/Txt/UserText";
-import BtnDisplayment from "../components/Btn/BtnDisplayment";
-import LeftInfoDisplay from "../components/Displayments/LeftInfoDisplay";
-import { Departamentos } from "../Departamentos/Departamentos";
-import ModalStructure from "../components/Modals/ModalStructure";
-import Profile from "../components/Modals/Structures/Profile";
-import ProfileDataDisplay from "../components/Displayments/ProfileDataDisplay";
+import "./Dashboard-Worker.css"
+import React, { useEffect, useState, useRef } from "react";
+import {
+  IonPage,
+  IonImg,
+  IonContent
+} from "@ionic/react";
+import ModalStructure from "../components/Modals/ModalStructure"
+import CircleImg from "../components/Imgs/CircleImg"
+import Profile from "../components/Modals/Structures/Profile"
+import UserText from "../components/Txt/UserText"
+import TextND from "../components/Txt/TextND";
+import HorizontalDivider from "../components/Dividers/HorizontalDivider";
+import BtnDisplayment from "../components/Btn/BtnDisplayment"
+import '../theme/variables.css';
+import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 
 type User = {
-  name : string;
+  nombre : string;
   apellidos : string;
   rating: number;
   sexo: string;
   fecha_nacimiento: string;
   municipio: string;
-  tel: string;
+  telefono: string;
   correo: string;
-  image: string;
+  imagen: string;
   dpi: string;
   role: string;
   edad: string;
@@ -28,19 +33,22 @@ type User = {
 };
 
 const Dashboard_Worker: React.FC = () => {
+  const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
+  const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
+
   const [ editModal, setEditModal] = useState(false);  
   const [editTrabajo, setEditTrabajo] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
-    name : '',
+    nombre : '',
     apellidos : '',
     rating: 0,
     sexo: '',
     fecha_nacimiento: '',
     municipio: '',
-    tel: '',
+    telefono: '',
     correo: '',
-    image: '',
+    imagen: '',
     dpi: '',
     role: '',
     edad: '',
@@ -48,42 +56,107 @@ const Dashboard_Worker: React.FC = () => {
     departamento: ''
   });
     
-  const [image,setImage] = useState(myUser.image)
+  const [image, setImage] = useState(myUser.imagen);
 
+  const [userRole, setUserRole] = useState(true)
+
+  const headerCardRef = useRef<HTMLDivElement>(null);
+  const contentCRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const user = localStorage.getItem("User");
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
-      setImage(myUser.image)
+      setImage(parsedUser.imagen);
     }
-    
   }, []);
 
+  useEffect(()=> {
+    console.log(myUser.role);
+      if (myUser.role === 'Empleador'){
+        setUserRole(false)
+      }
+  }, [myUser])
+
+  useEffect(() => {
+
+    const adjustContentHeight = () => {
+      if (headerCardRef.current && contentCRef.current) {
+        const headerCardHeight = headerCardRef.current.offsetHeight;
+        contentCRef.current.style.height = `${headerCardHeight + 195}px`;
+      }
+    };
+
+    // Inicializa el ResizeObserver
+    const resizeObserver = new ResizeObserver(adjustContentHeight);
+
+    if (headerCardRef.current) {
+      resizeObserver.observe(headerCardRef.current);
+    }
+
+    // Limpia el observer al desmontar el componente
+    return () => {
+      if (headerCardRef.current) {
+        resizeObserver.unobserve(headerCardRef.current);
+      }
+    };
+  }, [headerCardRef, contentCRef]);
+
   return (
-    <IonPage className="contentC">
-      {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
-      {editTrabajo && <ModalStructure user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
-      <div className="dashboard-row">
-        <div className="header-card">
-          <IonImg
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/800px-Naruto_logo.svg.png"
-            style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
-            <div className="lower-displayment">
-              <div>
-                <CircleImg reference={myUser.image}/>
-                <UserText 
-                  text1={myUser.name.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
-                  text2={myUser.role}
-                  text3={myUser.correo}
-                />
+    <IonPage>
+      <IonContent>
+        <div className="contentC" ref={contentCRef}>
+          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
+          {editTrabajo && <ModalStructure user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
+          <div className="header-card" ref={headerCardRef}>
+            <IonImg
+              src={myUser.banner}
+              style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
+              <div className="lower-displayment">
+                <div>
+                  <CircleImg reference={myUser.imagen}/>
+                  <UserText 
+                    text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
+                    text2={myUser.role}
+                    rating={myUser.rating}
+                  />
+                </div>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole}/>
               </div>
-                <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditModal} setEdit3={setEditTrabajo}/>
-            </div>
+              <HorizontalDivider />
+              <div className="dataGrid">
+                <div className="dataDisplay">
+                  <TextND text="Edad:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Departamento:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.departamento} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Teléfono:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.telefono} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Sexo:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.sexo} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Municipio:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.municipio} size="medium" hex={secondaryContrast}/>
+                </div>
+                <div className="dataDisplay">
+                  <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>
+                  <TextND text={myUser.correo} size="medium" hex={secondaryContrast}/>
+                </div>
+              </div>
+              <HorizontalDivider/>
+              <UserDataDisplay role={myUser.role} dpi={myUser.dpi}/>
+            {/* <ProfileDataDisplay user={myUser}/> */}
+          </div>
         </div>
-        <ProfileDataDisplay user={myUser}/>
-      </div>
+      </IonContent>
     </IonPage>
   );
 };

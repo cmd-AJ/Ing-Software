@@ -54,6 +54,28 @@
     flex-direction: column;
 }
 
+.contrat-display, .job-display {
+    width: 35%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.job-display {
+    width: 100%;
+    align-items: flex-start;
+}
+
+.persondatadisplay {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
 @media (max-width: 814px){
     #rating-display {
         border-radius: 0 0 25px 25px;

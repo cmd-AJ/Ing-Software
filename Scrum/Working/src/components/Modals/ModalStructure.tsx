@@ -33,7 +33,7 @@ const ModalStructure: React.FC<ContainerProps> = ({setModal, content}) => {
             <div className='modal-position'>
                 <div className='modal-container'>
                     <div className='header-modal'>
-                        <TextND text='Editar Perfil:' size='big'/>
+                        <TextND text='Editar Perfil:' size='big' hex='#'/>
                         <BtnCloseModal setModal={setModal}/>
                     </div>
                     <HorizontalDivider/>

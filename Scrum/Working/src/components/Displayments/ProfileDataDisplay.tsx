@@ -13,13 +13,13 @@ type User = {
     municipio: string;
     tel: string;
     correo: string;
-    image: string;
+    imagen: string;
     dpi: string;
     role: string;
     edad: string;
     banner: string;
-    departamento: string;
-};
+    departamento: string
+  };
 
 interface ContainerProps {
     user: User;

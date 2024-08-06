@@ -1,6 +1,7 @@
 import { InputChangeEventDetail, IonInput } from "@ionic/react";
 import { useEffect, useState } from "react";
 import './InputStyles.css';
+import React from "react";
 
 interface ContainerProps {
     label: string;
