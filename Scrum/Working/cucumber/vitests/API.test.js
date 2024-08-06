@@ -55,3 +55,35 @@ describe('Quiero buscar a un contacto y sus mensajes', () => {
     expect(Array.isArray(data)).toBe(true) //no tiene trabajo
   });
 });
+
+
+describe('getWorkersByJob', () => {
+  it('Deberia de regresar un objecto con los atributos correctos', async () => {
+    const job = 'Carpintero'; // Asegúrate de que esto coincida con los datos que estás probando
+    const workers = await getWorkersByJob(job);
+
+    // Verifica que la respuesta sea un array y tenga al menos un elemento
+    expect(workers).not.toHaveLength(0); // Asegúrate de que hay al menos un trabajador
+
+    // Enfócate solo en el primer trabajador
+    const firstWorker = workers[0];
+
+    // Verifica que el primer objeto trabajador tenga las propiedades esperadas
+    expect(firstWorker).toHaveProperty('nombre');
+    expect(firstWorker).toHaveProperty('telefono');
+    expect(firstWorker).toHaveProperty('municipio');
+    expect(firstWorker).toHaveProperty('rating');
+    expect(firstWorker).toHaveProperty('imagen');
+    expect(firstWorker).toHaveProperty('dpi');
+
+    // Verifica que el primer objeto tenga los tipos correctos
+    expect(firstWorker).toEqual({
+      nombre: expect.any(String),
+      telefono: expect.any(String),
+      municipio: expect.any(String),
+      rating: expect.anything(), // Permite valores null o vacíos
+      imagen: expect.any(String),
+      dpi: expect.any(String)
+    });
+  });
+});

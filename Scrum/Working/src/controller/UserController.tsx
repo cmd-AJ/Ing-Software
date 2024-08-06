@@ -136,6 +136,7 @@ async function getWorkersByJob(job: String) {
             dpi: worker.dpi,
             municipio: worker.municipio,
             rating: worker.rating,
+            imagen: worker.imagen
         }));
 
         return trabajadores;
