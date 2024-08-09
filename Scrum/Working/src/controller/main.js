@@ -295,7 +295,7 @@ app.get('/contacts/hirings/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/contacts/addTrust', apiKeyAuth ,async (req, res) => {
+app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
      await addUserAsTrustedPerson(dpi1, dpi2)
