@@ -29,4 +29,4 @@ jobs:
         working-directory: Scrum/Working
         run: |
           npx eslint . --fix
-        continue-on-error: true
+        continue-on-error: false
