@@ -22,11 +22,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        working-directory: /Scrum/Working
+        working-directory: Ing-Software/Scrum/Working
         run: npm install
 
       - name: Run ESLint
-        working-directory: /Scrum/Working
+        working-directory: Ing-Software/Scrum/Working
         run: |
           npx eslint . --fix
         continue-on-error: true
