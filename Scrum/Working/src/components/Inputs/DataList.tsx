@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IonSelect, IonSelectOption, IonInput } from "@ionic/react";
 import './InputStyles.css'
-import { map } from 'jquery';
 
 interface ContainerProps {
     label : string

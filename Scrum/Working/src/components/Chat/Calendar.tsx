@@ -4,7 +4,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
-import { Typography } from '@mui/material';
 import { styled } from '@mui/system';
 
 interface CalendarProps {

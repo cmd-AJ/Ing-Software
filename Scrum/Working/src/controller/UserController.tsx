@@ -1,7 +1,4 @@
-import { Departamentos, Municipios } from "../Departamentos/Departamentos";
-import { image } from "ionicons/icons";
 import { Trabajador } from "../components/Searched/type";
-import { toHaveAccessibleErrorMessage } from "@testing-library/jest-dom/matchers";
 
 export async function getUsers() {
     try {

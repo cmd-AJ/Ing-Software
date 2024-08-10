@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonFooter } from '@ionic/react'
+import {IonHeader, IonPage, IonTitle, IonToolbar, IonFooter } from '@ionic/react'
 import UserInput from '../components/Register/userInput'
 import LastnameInput from '../components/Register/lastnameInput'
 import PasswordInput from '../components/Register/passwordInput'

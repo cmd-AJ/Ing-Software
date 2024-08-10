@@ -1,6 +1,5 @@
 import { IonContent } from '@ionic/react';
 import NavigationBar from '../../components/Navigation/Navigation';
-import Searched from '../Searched';
 import { useState } from 'react';
 
 

@@ -1,11 +1,4 @@
 import React from "react";
-import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonImg,
-} from "@ionic/react";
 import "./Explain.css";
 
 interface InfoCardProps {

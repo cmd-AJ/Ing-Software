@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import HorizontalDivider from "../Dividers/HorizontalDivider"
 import TextND from "../Txt/TextND"
-import CircleImg from "../Imgs/CircleImg"
-import { IonImg } from "@ionic/react"
 import Stars from "../Miscellaneous/Stars"
 
 type Contrat = {
