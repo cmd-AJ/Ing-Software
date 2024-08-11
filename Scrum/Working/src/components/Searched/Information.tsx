@@ -5,6 +5,11 @@ import { Trabajador } from './type'
 
 const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
   
+  const onHire = async () => {
+    console.log(`I want to hire: ${trabajador.nombre}`);
+    //TO DO: push history
+  }
+
   return (
     <IonContent>    
       <div className="inner-div">
@@ -21,7 +26,7 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
             <p className="front__text-para">
               <i className="fas fa-map-marker-alt front-icons"></i>Calficación: {trabajador.rating}
             </p>
-            <button className="hire-button">Contratar</button>
+            <button className="hire-button" onClick={() => onHire()}>Ver</button>
             </div>
         </div>
       </div>    
