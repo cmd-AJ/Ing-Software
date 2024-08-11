@@ -11,6 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: Credentials
 
     env:
       VITE_API_HOSTI: ${{ secrets.VITE_API_HOSTI }}
