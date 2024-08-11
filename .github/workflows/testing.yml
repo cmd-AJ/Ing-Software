@@ -8,14 +8,14 @@ on:
     branches:
       - main
 
-env:
-  VITE_API_HOSTI: ${{ secrets.VITE_API_HOSTI }}
-  VITE_PORTI: ${{ secrets.VITE_PORTI }}
-  VITE_API_KEY: ${{ secrets.API_KEY }}
-
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    env:
+      VITE_API_HOSTI: ${{ secrets.VITE_API_HOSTI }}
+      VITE_PORTI: ${{ secrets.VITE_PORTI }}
+      VITE_API_KEY: ${{ secrets.API_KEY }}
 
     defaults:
       run:
