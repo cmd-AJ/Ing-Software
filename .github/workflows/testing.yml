@@ -33,9 +33,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm run test
-
       - name: Print Environment Variables
         run: |
           echo "VITE_PORTI=${{ secrets.VITE_PORTI }}"
+
+      - name: Run tests
+        run: npm run test
