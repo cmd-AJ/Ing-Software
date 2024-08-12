@@ -14,6 +14,9 @@ import HorizontalDivider from "../components/Dividers/HorizontalDivider";
 import BtnDisplayment from "../components/Btn/BtnDisplayment"
 import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
+import BtnEraseLS from "../components/Btn/BtnEraseLS";
+import ModalBtnN from "../components/Btn/ModalsBtnN";
+import CloseSession from "../components/Modals/Structures/CloseSession";
 
 type User = {
   nombre : string;
@@ -38,6 +41,7 @@ const Dashboard_Worker: React.FC = () => {
 
   const [ editModal, setEditModal] = useState(false);  
   const [editTrabajo, setEditTrabajo] = useState(false)
+  const [closeSession, setCloseSession] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
@@ -107,12 +111,16 @@ const Dashboard_Worker: React.FC = () => {
     <IonPage>
       <IonContent>
         <div className="contentC" ref={contentCRef}>
-          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser}/>}/>}
-          {editTrabajo && <ModalStructure user={myUser} setModalE={setEditTrabajo} modalE={editModal} />}
+          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
+          {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
+          {closeSession && <ModalStructure setModal={setCloseSession} content={<CloseSession/>}/>}
           <div className="header-card" ref={headerCardRef}>
             <IonImg
               src={myUser.banner}
               style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
+              <div className="absolute-corner">
+                <ModalBtnN label='Cerrar Sesión' color="danger" setEdit={setCloseSession}/>
+              </div>
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>

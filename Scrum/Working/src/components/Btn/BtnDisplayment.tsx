@@ -1,3 +1,4 @@
+import React from 'react'
 import './BtnStyles.css'
 import ModalBtnI from './ModalBtnI'
 import ModalBtnN from './ModalsBtnN'
@@ -20,7 +21,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
     return (
         <div className="btn-header-horizontal">
             <ModalBtnI img={pencilOutline} setEdit={setEdit1}/>
-            {userRole && <ModalBtnN label="Añadir trabajo" setEdit={setEdit2}/>}
+            {userRole && <ModalBtnN label="Añadir trabajo" setEdit={setEdit2} color='tertiary'/>}
         </div>
     )
 }

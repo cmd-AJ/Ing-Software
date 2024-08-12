@@ -1,3 +1,4 @@
+import React from 'react';
 import BtnCloseModal from '../Btn/BtnCloseModal';
 import HorizontalDivider from '../Dividers/HorizontalDivider';
 import TextND from '../Txt/TextND';
@@ -8,23 +9,6 @@ interface ContainerProps {
     content: JSX.Element
 }
 
-type User = {
-    nombre : string;
-    apellidos : string;
-    rating: number;
-    sexo: string;
-    fecha_nacimiento: string;
-    municipio: string;
-    tel: string;
-    correo: string;
-    image: string;
-    dpi: string;
-    role: string;
-    edad: string;
-    banner: string;
-    departamento: string
-}
-
 const ModalStructure: React.FC<ContainerProps> = ({setModal, content}) => {
     return (
         <>
@@ -32,11 +16,6 @@ const ModalStructure: React.FC<ContainerProps> = ({setModal, content}) => {
         </div>
             <div className='modal-position'>
                 <div className='modal-container'>
-                    <div className='header-modal'>
-                        <TextND text='Editar Perfil:' size='big' hex='#'/>
-                        <BtnCloseModal setModal={setModal}/>
-                    </div>
-                    <HorizontalDivider/>
                     {content}
                 </div>
             </div>

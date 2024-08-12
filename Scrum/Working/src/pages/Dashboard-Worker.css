@@ -67,6 +67,12 @@
     height: auto;
 }
 
+.absolute-corner {
+    position: absolute;
+    left: 69%;
+    top: 5%
+}
+
 @media (max-width: 814px){
     .lower-displayment {
         flex-direction: column;

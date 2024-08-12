@@ -7,9 +7,14 @@ import InputWrite from "../../Inputs/InputWrite";
 import { useMaskito } from "@maskito/react";
 import { Departamentos, getMunicipios } from "../../../Departamentos/Departamentos";
 import BtnEditUser from "../../Btn/BtnEditUser";
+import React from "react";
+import BtnCloseModal from "../../Btn/BtnCloseModal";
+import HorizontalDivider from "../../Dividers/HorizontalDivider";
+import TextND from "../../Txt/TextND";
 
 interface ContainerProps {
     user: User
+    setEdit: (edit: boolean) => void
 }
 
 type User = {
@@ -29,7 +34,7 @@ type User = {
     departamento: string
   };
 
-const Profile : React.FC<ContainerProps> = ({ user}) => {
+const Profile : React.FC<ContainerProps> = ({ user, setEdit}) => {
 
     const [banner , setBanner] = useState(user.banner)
     const [image, setImage] = useState(user.imagen)
@@ -70,6 +75,12 @@ const Profile : React.FC<ContainerProps> = ({ user}) => {
 
     return (
         <>
+            <div className='header-modal'>
+                <TextND text='Editar Perfil:' size='big' hex='#'/>
+                <BtnCloseModal setModal={setEdit}/>
+            </div>
+            <HorizontalDivider/>
+            
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
                 <ImgInput image={banner} setImage={setBanner} type={true}/>
                 <ImgInput image={image} setImage={setImage} type={false}/>
