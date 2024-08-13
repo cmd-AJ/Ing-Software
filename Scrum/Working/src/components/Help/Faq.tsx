@@ -40,11 +40,15 @@ const Faq: React.FC = () => {
 
   return (
     <div className="faq-container">
-      <h1 className="faq-heading">Preguntas Frecuentes</h1>
+      <h1 className="faq-heading">FAQs</h1>
+      <h2 className="faq-subheading">Product Info</h2>
       {faqData.map((faq, index) => (
         <div key={index} className={`faq-item ${activeIndex === index ? 'active' : ''}`}>
           <div className="faq-question" onClick={() => toggleFaq(index)}>
             {faq.question}
+            <span className="faq-icon">
+              {activeIndex === index ? '-' : '+'}
+            </span>
           </div>
           <div className="faq-answer">
             {faq.answer}
