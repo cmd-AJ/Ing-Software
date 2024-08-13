@@ -2,13 +2,11 @@ import React from 'react';
 import { IonContent } from '@ionic/react';
 import './Information.css';
 import { Trabajador } from './type' 
+import { useHistory } from 'react-router-dom';
 
 const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
-  
-  const onHire = async () => {
-    console.log(`I want to hire: ${trabajador.nombre}`);
-    //TO DO: push history
-  }
+
+  const history = useHistory();
 
   return (
     <IonContent>    
@@ -26,7 +24,7 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
             <p className="front__text-para">
               <i className="fas fa-map-marker-alt front-icons"></i>Calficación: {trabajador.rating}
             </p>
-            <button className="hire-button" onClick={() => onHire()}>Ver</button>
+            <button className="hire-button" onClick={() => {history.push(`/employer-view`);}}>Ver</button>
             </div>
         </div>
       </div>    
