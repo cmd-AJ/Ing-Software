@@ -30,6 +30,7 @@ import "./theme/variables.css";
 import "./pages/Login.css";
 import Dashboard_Worker from "./pages/Dashboard-Worker";
 import React from "react";
+import EmployerProfileView from "./pages/employer_view/EmployerProfileView";
 
 setupIonicReact();
 
@@ -62,6 +63,7 @@ const App: React.FC = () => (
         {/*
         Single page implementation
         */}
+
         <Route exact path="/searched">
           <Route
             path="/searched"
@@ -77,6 +79,13 @@ const App: React.FC = () => (
             exact
           />
         </Route>
+
+        <Route exact path = "/employer-view">
+            <MainLayout>
+              <EmployerProfileView />
+            </MainLayout>
+        </Route>
+
         <Route exact path="/empleado">
           <MainLayout>
             <Dashboard_Worker />
