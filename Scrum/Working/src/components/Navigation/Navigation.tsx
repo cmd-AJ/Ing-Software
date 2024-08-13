@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   IonHeader,
   IonToolbar,
@@ -7,6 +7,10 @@ import {
   IonCol,
   IonIcon,
   IonText,
+  IonPopover,
+  IonContent,
+  IonItem,
+  IonList,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { personOutline, settingsOutline } from 'ionicons/icons';
@@ -19,6 +23,8 @@ interface NavigationBarProps {
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
   const history = useHistory();
+  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
+  const [clickEvent, setClickEvent] = useState<MouseEvent | undefined>(undefined);
 
   const handleRequestChange = (value: string) => {
     if (value.trim() !== '') {
@@ -27,6 +33,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
     } else {
       console.log("No se ha ingresado nada en la búsqueda.");
     }
+  };
+
+  const handleIconClick = (event: React.MouseEvent) => {
+    setClickEvent(event.nativeEvent);
+    setIsPopOverOpen(true);
   };
 
   return (
@@ -49,9 +60,31 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
             <IonCol className="ion-text-center" onClick={() => history.push('dashboard')}>
               <IonText className="custom-text">AGENDA</IonText>
             </IonCol>
-            <IonCol className="ion-text-center" onClick={() => history.push('/empleado')}>
+            
+            {/* Aquí activamos el popover y capturamos el evento de clic */}
+            <IonCol className="ion-text-center" onClick={handleIconClick}>
               <IonIcon icon={personOutline} className="navbar-icon" />
             </IonCol>
+            
+            <IonPopover
+              isOpen={isPopOverOpen}
+              onDidDismiss={() => setIsPopOverOpen(false)}
+              event={clickEvent}  // Posiciona el popover con base en el evento de clic
+              alignment="center"   // Alinea el popover al centro del ícono
+              side="bottom"        // Posiciona el popover debajo del ícono
+            >
+             <IonContent>
+                <IonList>
+                  <IonItem button={true}>
+                    Ver perfil
+                  </IonItem>
+                  <IonItem button={true}>
+                    Cerrar sesión
+                  </IonItem>
+                </IonList>
+              </IonContent>
+            </IonPopover>
+
             <IonCol className="ion-text-center" onClick={() => history.push('/help')}>
               <IonIcon icon={settingsOutline} className="navbar-icon" />
             </IonCol>

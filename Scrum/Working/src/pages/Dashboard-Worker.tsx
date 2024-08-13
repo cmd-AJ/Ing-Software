@@ -113,14 +113,10 @@ const Dashboard_Worker: React.FC = () => {
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
-          {closeSession && <ModalStructure setModal={setCloseSession} content={<CloseSession/>}/>}
           <div className="header-card" ref={headerCardRef}>
             <IonImg
               src={myUser.banner}
               style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
-              <div className="absolute-corner">
-                <ModalBtnN label='Cerrar Sesión' color="danger" setEdit={setCloseSession}/>
-              </div>
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>
