@@ -75,7 +75,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
             >
              <IonContent>
                 <IonList>
-                  <IonItem button={true}>
+                  <IonItem button={true} onClick={()=> history.push('empleado')}>
                     Ver perfil
                   </IonItem>
                   <IonItem button={true}>
