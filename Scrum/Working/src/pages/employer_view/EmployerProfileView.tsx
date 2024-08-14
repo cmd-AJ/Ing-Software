@@ -5,7 +5,7 @@ import './EmployerProfileView.css';
 import { Trabajador } from '../../components/Searched/type';
 
 const EmployerProfileView: React.FC = () => {
-  const location = useLocation<{ trabajador: Trabajador }>(); // Ensure Trabajador type is imported if required
+  const location = useLocation<{ trabajador: Trabajador }>();
 
   const trabajador = location.state.trabajador;
 

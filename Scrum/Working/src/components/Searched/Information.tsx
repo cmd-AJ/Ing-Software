@@ -10,7 +10,7 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
 
   return (
     <IonContent>    
-      <div className="inner-div">
+      <div className="inner-div" onClick={() => {history.push('/employer-view', { trabajador });}}>
         <div className="front">
           <div className="front__bkg-photo"></div>
           <div className="front__face-photo"></div>
@@ -24,10 +24,6 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
             <p className="front__text-para">
               <i className="fas fa-map-marker-alt front-icons"></i>Calficación: {trabajador.rating}
             </p>
-            <button className="hire-button" onClick={() => {
-              history.push('/employer-view', { trabajador });
-            }
-              }>Ver</button>
             </div>
         </div>
       </div>    
