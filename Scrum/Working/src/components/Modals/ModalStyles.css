@@ -47,6 +47,13 @@
     align-items: center;
 }
 
+.modal-logout {
+    position: 'absolute';
+    width: 100px;
+    height: auto;
+    z-index: 10;
+}
+
 @media (max-width: 740px){
     .modal-position {
         width: 350px;
