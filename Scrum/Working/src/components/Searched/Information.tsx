@@ -24,7 +24,10 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
             <p className="front__text-para">
               <i className="fas fa-map-marker-alt front-icons"></i>Calficación: {trabajador.rating}
             </p>
-            <button className="hire-button" onClick={() => {history.push(`/employer-view`);}}>Ver</button>
+            <button className="hire-button" onClick={() => {
+              history.push('/employer-view', { trabajador });
+            }
+              }>Ver</button>
             </div>
         </div>
       </div>    
