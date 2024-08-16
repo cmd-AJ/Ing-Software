@@ -81,7 +81,7 @@ const Dashboard_Worker: React.FC = () => {
       setMyUser(parsedUser);
       setImage(parsedUser.imagen);
     }
-  }, []);
+  }, [owner]);
 
   useEffect(()=> {
     console.log(myUser.role);
@@ -133,7 +133,7 @@ const Dashboard_Worker: React.FC = () => {
                     rating={myUser.rating}
                   />
                 </div>
-                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole}/>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole} owner={owner}/>
               </div>
               <HorizontalDivider />
               <div className="dataGrid">
