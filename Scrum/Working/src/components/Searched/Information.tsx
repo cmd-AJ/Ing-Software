@@ -3,14 +3,21 @@ import { IonContent } from '@ionic/react';
 import './Information.css';
 import { Trabajador } from './type' 
 import { useHistory } from 'react-router-dom';
+import { getUser2 } from '../../controller/UserController';
 
 const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
 
   const history = useHistory();
 
+  const handleClick = async () => {
+    const data = await getUser2(trabajador.dpi)
+    localStorage.setItem('notUser', JSON.stringify(data[0]))
+    history.push('/empleado?ownerUser=false')
+  }
+
   return (
     <IonContent>    
-      <div className="inner-div" onClick={() => {history.push('/empleado?ownerUser=False')}}>
+      <div className="inner-div" onClick={handleClick}>
         <div className="front">
           <div className="front__bkg-photo"></div>
           <div className="front__face-photo"></div>

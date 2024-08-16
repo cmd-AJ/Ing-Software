@@ -70,9 +70,12 @@ const Dashboard_Worker: React.FC = () => {
   const contentCRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(owner);
-    
-    const user = localStorage.getItem("User");
+    let user = null;
+    if (owner == 'true'){
+      user = localStorage.getItem("User");
+    } else {
+      user = localStorage.getItem("notUser");
+    }
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);

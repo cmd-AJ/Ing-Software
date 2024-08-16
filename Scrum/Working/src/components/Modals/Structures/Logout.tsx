@@ -18,7 +18,7 @@ const Logout: React.FC<ContainerProps> = () => {
 
     return (
         <>
-            <div className='profile-modal-options' onClick={() => history.push('/empleado?ownerUser=True')}>
+            <div className='profile-modal-options' onClick={() => history.push('/empleado?ownerUser=true')}>
                 <TextND text='Ver Perfil' size='small' hex='#000'/>
             </div>
             <div className='profile-modal-options' onClick={() => eraseLocalStorage()}>
