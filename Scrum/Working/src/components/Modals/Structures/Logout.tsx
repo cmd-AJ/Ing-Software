@@ -1,16 +1,25 @@
 import React from 'react';
 import '../ModalStyles.css';
 import TextND from '../../Txt/TextND';
+import { useHistory } from 'react-router-dom';
 
 interface ContainerProps {
 
 }
 
 const Logout: React.FC<ContainerProps> = () => {
+
+    const history = useHistory();
+
     return (
-        <div>
-            <TextND text='Ver Perfil' size='medium' hex='#000'/>
-        </div>
+        <>
+            <div className='profile-modal-options' onClick={() => history.push('/empleado')}>
+                <TextND text='Ver Perfil' size='small' hex='#000'/>
+            </div>
+            <div className='profile-modal-options'>
+                <TextND text='Cerrar Sesión' size='small' hex='#000'/>
+            </div>
+        </>
     )
 }
 

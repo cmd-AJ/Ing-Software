@@ -54,6 +54,16 @@
     z-index: 10;
 }
 
+.profile-modal-options {
+    border: 1px solid #000;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.profile-modal-options:hover {
+    background-color: var(--ion-color-secondary);
+}
+
 @media (max-width: 740px){
     .modal-position {
         width: 350px;

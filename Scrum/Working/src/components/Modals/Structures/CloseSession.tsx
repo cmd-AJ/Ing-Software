@@ -12,8 +12,7 @@ const CloseSession : React.FC<ContainerProps> = () => {
     return (
         <div className="center-content-modal">
             <TextND text="¿Estas seguro de cerrar tu sesión?" hex="#000" size="big"/>
-            <BtnEraseLS />
-            <IonButton />
+            <BtnEraseLS localstorageName="jaja"/>
         </div>
     )
 }

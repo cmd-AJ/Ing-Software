@@ -74,8 +74,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
               </IonCol>
 
               {/* Aquí activamos el modal al hacer clic en el icono */}
-              <IonCol className="ion-text-center" onClick={getPositionXY}>
-                <IonIcon icon={personOutline} className="navbar-icon" />
+              <IonCol className="ion-text-center">
+                <IonIcon icon={personOutline} className="navbar-icon" onClick={getPositionXY}/>
               </IonCol>
 
               <IonCol className="ion-text-center" onClick={() => history.push('/help')}>
