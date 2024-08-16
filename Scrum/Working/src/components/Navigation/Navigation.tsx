@@ -25,7 +25,6 @@ interface NavigationBarProps {
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
   const history = useHistory();
-  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
   const [positionX, setPositionX] = useState(0);
   const [positionY, setPositionY] = useState(0);
@@ -51,8 +50,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
   return (
     <>
       {/* Renderiza el modal solo cuando openLogout es true */}
-      {openLogout && <ModalWithoutBack x={positionX} y={positionY} setModal={setOpenLogout} content={<Logout/>}/>}
-      
+      {openLogout && <ModalWithoutBack x={positionX} y={positionY} setModal={setOpenLogout} content={<Logout/>}/>}      
       <IonHeader>
         <IonToolbar color="primary">
           <IonGrid>

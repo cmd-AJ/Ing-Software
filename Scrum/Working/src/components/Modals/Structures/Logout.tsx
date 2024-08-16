@@ -11,12 +11,17 @@ const Logout: React.FC<ContainerProps> = () => {
 
     const history = useHistory();
 
+    const eraseLocalStorage = () => {
+        localStorage.setItem("User", "")
+        history.push("about")
+    }
+
     return (
         <>
             <div className='profile-modal-options' onClick={() => history.push('/empleado')}>
                 <TextND text='Ver Perfil' size='small' hex='#000'/>
             </div>
-            <div className='profile-modal-options'>
+            <div className='profile-modal-options' onClick={() => eraseLocalStorage()}>
                 <TextND text='Cerrar Sesión' size='small' hex='#000'/>
             </div>
         </>
