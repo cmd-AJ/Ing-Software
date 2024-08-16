@@ -10,7 +10,7 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
 
   return (
     <IonContent>    
-      <div className="inner-div" onClick={() => {history.push('/employer-view', { trabajador });}}>
+      <div className="inner-div" onClick={() => {history.push('/empleado?ownerUser=False')}}>
         <div className="front">
           <div className="front__bkg-photo"></div>
           <div className="front__face-photo"></div>

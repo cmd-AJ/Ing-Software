@@ -14,9 +14,7 @@ import HorizontalDivider from "../components/Dividers/HorizontalDivider";
 import BtnDisplayment from "../components/Btn/BtnDisplayment"
 import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
-import BtnEraseLS from "../components/Btn/BtnEraseLS";
-import ModalBtnN from "../components/Btn/ModalsBtnN";
-import CloseSession from "../components/Modals/Structures/CloseSession";
+import { useLocation } from "react-router";
 
 type User = {
   nombre : string;
@@ -36,12 +34,16 @@ type User = {
 };
 
 const Dashboard_Worker: React.FC = () => {
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+
+  const owner = queryParams.get('ownerUser')
+
   const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
   const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
   const [ editModal, setEditModal] = useState(false);  
   const [editTrabajo, setEditTrabajo] = useState(false)
-  const [closeSession, setCloseSession] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
@@ -68,6 +70,8 @@ const Dashboard_Worker: React.FC = () => {
   const contentCRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log(owner);
+    
     const user = localStorage.getItem("User");
     if (user != null) {
       const parsedUser: User = JSON.parse(user);

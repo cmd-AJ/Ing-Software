@@ -7,10 +7,6 @@ import {
   IonCol,
   IonIcon,
   IonText,
-  IonPopover,
-  IonContent,
-  IonItem,
-  IonList,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { personOutline, settingsOutline } from 'ionicons/icons';
