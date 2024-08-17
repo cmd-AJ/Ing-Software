@@ -6,3 +6,10 @@
     margin-left: 180px;
     width: 100%;
 }
+
+
+@media (max-width: 814px){
+    .vertical-txt-display {
+        margin-left: 20px;
+    }
+}

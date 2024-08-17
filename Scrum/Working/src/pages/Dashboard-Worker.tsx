@@ -123,7 +123,7 @@ const Dashboard_Worker: React.FC = () => {
           <div className="header-card" ref={headerCardRef}>
             <IonImg
               src={myUser.banner}
-              style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
+              className="feed-img"></IonImg>
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>

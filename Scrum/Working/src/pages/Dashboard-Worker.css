@@ -28,9 +28,9 @@
 }
 
 .feed-img {
-    height: 65%;
+    height: 180px; 
     width: 100%;
-    border-radius: 30px;
+    object-fit: fill;
 }
 
 .lower-displayment {
@@ -80,6 +80,8 @@
 
     .contentC{
         height: 1085px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .dataGrid{

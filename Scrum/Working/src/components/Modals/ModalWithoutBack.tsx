@@ -33,7 +33,7 @@ const ModalWithoutBack: React.FC<ContainerProps> = ({x, y, setModal, content}) =
             style={{
             position: 'absolute', 
             top: y+65+'px', 
-            left: x-30+'px', 
+            left: x-45+'px', 
             backgroundColor: '#FFF',
             border: '1px solid #000', 
             width: 'auto', 
