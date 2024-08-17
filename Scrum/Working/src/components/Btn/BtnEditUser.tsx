@@ -1,5 +1,6 @@
 import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
+import React from "react";
 
 type User = {
     nombre : string;

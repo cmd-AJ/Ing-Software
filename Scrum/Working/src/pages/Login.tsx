@@ -1,12 +1,5 @@
 import {
-    IonContent,
     IonPage,
-    IonInput,
-    IonButton,
-    IonItem,
-    IonSelect,
-    IonSelectOption,
-    IonList,
 } from '@ionic/react';
 import './Login.css';
 
@@ -16,8 +9,6 @@ import RoleInput from '../components/Register/roleInput'
 import LoginButton from '../components/Register/loginButton'
 import LinkRegister from '../components/Register/LinkRegister';
 import React, { useState } from 'react'
-
-import { Link } from 'react-router-dom'
 
 const Login: React.FC = () => {
     const [dpi, setDpi] = useState('')

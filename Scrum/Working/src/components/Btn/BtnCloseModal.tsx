@@ -1,4 +1,4 @@
-import { IonButton, IonIcon } from "@ionic/react"
+import {  IonIcon } from "@ionic/react"
 import { closeOutline } from "ionicons/icons"
 
 interface ContainerProps {

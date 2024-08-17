@@ -1,4 +1,4 @@
-import { InputChangeEventDetail, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/react'
+import { InputChangeEventDetail, IonItem, IonSelect, IonSelectOption } from '@ionic/react'
 import './Input.css'
 import React from 'react';
 

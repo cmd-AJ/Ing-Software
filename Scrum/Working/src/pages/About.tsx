@@ -8,10 +8,6 @@ import {
   IonSegment,
   IonSegmentButton,
   IonContent,
-  IonCard,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
   IonCardContent,
 } from "@ionic/react";
 import InfoCard from "../components/About/Explain";

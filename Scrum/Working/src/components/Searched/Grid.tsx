@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Carrousel.css';
 import Information from './Information';
 import { Trabajador } from './type';

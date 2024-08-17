@@ -2,7 +2,7 @@ import Calendar from './Calendar';
 import Information from './Information'; // Asegúrate de usar la ruta correcta a tu componente Information
 import React, { useState } from 'react';
 import './details.css';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 interface DetailsProps {
   onClose: () => void;

@@ -1,11 +1,12 @@
 .cardx {
   width: 300px; /* Ancho fijo */
-  height: 600px; /* Alto fijo */
+  height: 500px; /* Alto fijo */
   /* margin-top: 20px; */
   cursor: pointer;
   overflow-y: hidden;
   transition: none; 
   opacity: 0;
+  transition: transform 0.3s ease-in-out;
 }
 
 .container {
@@ -49,4 +50,5 @@
 .cardx {
   animation: slideIn 2s ease-out forwards;
 }
+
 
