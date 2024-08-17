@@ -15,7 +15,7 @@
     object-fit: cover;
 }
 
-@media (max-width: 412px){
+@media (max-width: 660px){
     .circle-container {
         width: 120px;
         height: 120px;

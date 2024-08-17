@@ -47,7 +47,7 @@
     color: red;
 }
 
-@media (max-width: 814px){
+@media (max-width: 660px){
     .btn-header-horizontal{
         flex-direction: row;
         align-items: center;

@@ -42,7 +42,7 @@ const Dashboard_Worker: React.FC = () => {
   const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
   const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
-  const [ editModal, setEditModal] = useState(false);  
+  const [ editModal, setEditModal] = useState(false)
   const [editTrabajo, setEditTrabajo] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
@@ -68,7 +68,7 @@ const Dashboard_Worker: React.FC = () => {
 
   const headerCardRef = useRef<HTMLDivElement>(null);
   const contentCRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     let user = null;
     if (owner == 'true'){
