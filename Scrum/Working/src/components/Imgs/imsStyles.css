@@ -9,16 +9,16 @@
     z-index: 1; 
 }
 
-@media (max-width: 412px){
-    .circle-container {
-        width: 120px;
-        height: 120px;
-        transform: translate(10%, -10%); 
-    }
-}
-
 #circleStyle {
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+@media (max-width: 660px){
+    .circle-container {
+        width: 120px;
+        height: 120px;
+        transform: translate(10%, -110%); 
+    }
 }

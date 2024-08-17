@@ -24,7 +24,7 @@ type User = {
     sexo: string;
     fecha_nacimiento: string;
     municipio: string;
-    tel: string;
+    telefono: string;
     correo: string;
     imagen: string;
     dpi: string;
@@ -43,7 +43,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit}) => {
     const [date, setDate] = useState(user.fecha_nacimiento)
     const [validateDate, setValidateDate] = useState(false)
     const [municipio, setMunicipio] = useState(user.municipio) 
-    const [cellphone, setCellphone] = useState(user.tel)
+    const [cellphone, setCellphone] = useState(user.telefono)
     const [validatesCell, setValidatesCell] = useState(false)
     const [email, setEmail] = useState(user.correo)
     const [validatesEmail, setValidatesEmail] = useState(false)

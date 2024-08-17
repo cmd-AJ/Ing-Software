@@ -1,4 +1,5 @@
 import React from "react"
+import './TxtStyles.css'
 
 interface ContainerProps {
     text: string
@@ -10,17 +11,17 @@ const TextND : React.FC<ContainerProps> = ({text, size, hex}) => {
     switch (size) {
         case "big":
             return (
-                <p style={{fontSize: '30px', color: hex}}>{text}</p>
+                <p id='big-text' style={{color: hex}}>{text}</p>
             )
     
         case "medium":
             return (
-                <p style={{fontSize: '25px', color: hex}}>{text}</p>
+                <p id='medium-text' style={{color: hex}}>{text}</p>
             )
         
         case "small":
             return (
-                <p style={{fontSize: '18px', color: hex}}>{text}</p>
+                <p id='small-text' style={{color: hex}}>{text}</p>
             );
     }
 }

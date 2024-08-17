@@ -9,7 +9,7 @@ type User = {
     sexo: string;
     fecha_nacimiento: string;
     municipio: string;
-    tel: string;
+    telefono: string;
     correo: string;
     imagen: string;
     dpi: string;

@@ -14,9 +14,7 @@ import HorizontalDivider from "../components/Dividers/HorizontalDivider";
 import BtnDisplayment from "../components/Btn/BtnDisplayment"
 import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
-import BtnEraseLS from "../components/Btn/BtnEraseLS";
-import ModalBtnN from "../components/Btn/ModalsBtnN";
-import CloseSession from "../components/Modals/Structures/CloseSession";
+import { useLocation } from "react-router";
 
 type User = {
   nombre : string;
@@ -36,12 +34,16 @@ type User = {
 };
 
 const Dashboard_Worker: React.FC = () => {
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+
+  const owner = queryParams.get('ownerUser')
+
   const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
   const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
-  const [ editModal, setEditModal] = useState(false);  
+  const [ editModal, setEditModal] = useState(false)
   const [editTrabajo, setEditTrabajo] = useState(false)
-  const [closeSession, setCloseSession] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
@@ -66,15 +68,20 @@ const Dashboard_Worker: React.FC = () => {
 
   const headerCardRef = useRef<HTMLDivElement>(null);
   const contentCRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
-    const user = localStorage.getItem("User");
+    let user = null;
+    if (owner == 'true'){
+      user = localStorage.getItem("User");
+    } else {
+      user = localStorage.getItem("notUser");
+    }
     if (user != null) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
       setImage(parsedUser.imagen);
     }
-  }, []);
+  }, [owner]);
 
   useEffect(()=> {
     console.log(myUser.role);
@@ -113,14 +120,10 @@ const Dashboard_Worker: React.FC = () => {
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
-          {closeSession && <ModalStructure setModal={setCloseSession} content={<CloseSession/>}/>}
           <div className="header-card" ref={headerCardRef}>
             <IonImg
               src={myUser.banner}
-              style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
-              <div className="absolute-corner">
-                <ModalBtnN label='Cerrar Sesión' color="danger" setEdit={setCloseSession}/>
-              </div>
+              className="feed-img"></IonImg>
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>
@@ -130,7 +133,7 @@ const Dashboard_Worker: React.FC = () => {
                     rating={myUser.rating}
                   />
                 </div>
-                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole}/>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole} owner={owner}/>
               </div>
               <HorizontalDivider />
               <div className="dataGrid">
