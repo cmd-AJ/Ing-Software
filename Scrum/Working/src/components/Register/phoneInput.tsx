@@ -45,7 +45,7 @@ const emailInput: React.FC<ContainerProps> = ({ setTel, validateTel, setValidate
             fill='outline' 
             placeholder='XXXX-XXXX' 
             className={`${'inputs'} ${validateTel === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
-            color='tertiary'
+            color='light'
             errorText='Número telefónico inválido'
             ref={async (phoneInput) => {
                 if (phoneInput) {

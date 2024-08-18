@@ -1,8 +1,19 @@
-import React from 'react';
 import './chat.css';
 
-const ChatBubble = ({ message, time, sender }) => {
-    const formattedTime = (timeString) => {
+interface ChatBubbleProps {
+    message: string;
+    time: string;
+    sender: 'me' | 'you';
+}
+
+interface Message {
+    message: string;
+    time: string;
+    sender: 'me' | 'you';
+}
+
+const ChatBubble: React.FC<ChatBubbleProps>  = ({ message, time, sender }) => {
+    const formattedTime = (timeString: string) => {
         const timePart = timeString.split('T')[1];
         const [hour, minute] = timePart.split(':').slice(0, 2);
         return `${hour}:${minute}`;
@@ -16,7 +27,12 @@ const ChatBubble = ({ message, time, sender }) => {
     );
 }
 
-const Chat = ({ messages }) => {
+interface ChatProps {
+    messages: Message[];
+    onSendMessage: (newMessage: string) => void;
+}
+
+const Chat: React.FC<ChatProps> = ({ messages }) => {
     return (
         <div className="chat-container">
             {messages.map((msg, index) => (

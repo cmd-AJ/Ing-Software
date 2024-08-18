@@ -18,7 +18,6 @@ const Sidebar = () => {
             try {
                 const contactsData = await getContacts(loggedUserDpi);
                 setContacts(contactsData);
-                console.log(contactsData)
             } catch (error) {
                 console.error('Error fetching contacts:', error);
             }
@@ -74,11 +73,10 @@ const Sidebar = () => {
                 <div className="left">
                     <div className="top">
                         <input type="text" placeholder="Search" />
-                        <a href="javascript:;" className="search"></a>
                     </div>
                     <ul className="people">
                         {contacts.map((person, index) => (
-                            <li key={index} className="person" onClick={() => handlePersonClick(person.dpi)}>
+                            <li key={index} className="person" onClick={() => handlePersonClick(person.dpi)}> 
                                 <img src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>

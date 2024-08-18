@@ -11,8 +11,9 @@
 .ion-grid {
   background-color: #125089;
   padding: 10px 0;
-  margin: 0 auto;
+  margin: 4 auto;
   width: 100%;
+  
 }
 
 .ion-row, .ion-col {
@@ -74,7 +75,6 @@ ion-header, ion-toolbar {
   .search-bar-col {
     order: 1; /* Make the search bar the first element in the column */
     flex: 2 1 100%; /* Ensure it takes the full width on smaller screens */
-
   }
 
 }

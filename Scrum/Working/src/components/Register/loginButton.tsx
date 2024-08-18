@@ -69,7 +69,7 @@ const LoginButton: React.FC<ContainerProps> = ({
         <IonButton 
             routerLink= {userExist ? '/searched' : undefined}
             style={{ margin: '20px'}} 
-            color='secondary'
+            color='dark'
             onClick={handleClick}
         ><b>Iniciar sesión</b></IonButton>
     )

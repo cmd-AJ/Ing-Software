@@ -34,7 +34,7 @@ body {
 
 .left {
     float: left;
-    width: 25%;
+    width: 25vw;
     height: 100%;
     border: 1px solid var(--light);
     background-color: var(--white);
@@ -78,7 +78,6 @@ body {
     float: left;
     width: 42px;
     height: 42px;
-    margin-left: 10px;
     border: 1px solid var(--light);
     background-color: var(--blue);
     background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/name-type.png');
@@ -89,18 +88,17 @@ body {
 
 .left .people {
     margin-left: -40px;
-    /* width: calc(100%); */
 }
 
 .left .people .person {
+    
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
-    width: 100%;
+    width: 25vw;
     padding: 12px 10% 16px;
     cursor: pointer;
-    background-color: var(--white);
+    background-color: black;
 }
 
 .left .people .person:after {
@@ -178,14 +176,14 @@ body {
 .right {
     position: relative;
     float: left;
-    width: 75%;
+    width: 75vw;
     height: 100%;
 }
 
 .right .top {
     width: 100%;
-    height: 47px;
-    padding: 15px 29px;
+    height: 5.2vh;
+    padding: 1.5vh 3vw;
     background-color: #eceff1;
 }
 

@@ -13,14 +13,14 @@ const roleInput: React.FC<ContainerProps> = ({ setRole }) => {
   }
 
   return (
-    <IonItem className='inputs' color='primary'>
-      <IonSelect 
+    <IonItem className='inputs' color='undefined'>
+      <IonSelect
         aria-label="role" 
         placeholder="Elige tu rol" 
-        interface='alert'
+        interface='action-sheet'
         onIonChange={handleInputChange}>
-          <IonSelectOption value="Empleador" color='tertiary'>Empleador</IonSelectOption>
-          <IonSelectOption value="Empleado" color='tertiary'>Empleado</IonSelectOption>
+          <IonSelectOption value="Empleador" className="ion-select-option-empleador">Empleador</IonSelectOption>
+          <IonSelectOption value="Empleado"  className="ion-select-option-empleador">Empleado</IonSelectOption>
       </IonSelect>
     </IonItem>
   )

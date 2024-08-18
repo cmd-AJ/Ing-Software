@@ -2,7 +2,8 @@
 
 .headerR {
     background-color: var(--ion-color-tertiary);
-    font-size: 30px;
+    font-size: calc(150%);
+    text-align: center;
 }
 
 .footer {
@@ -15,8 +16,7 @@
 .center {
     width: 100%;
     height: 100%;
-    background-color: var(--ion-color-primary);
-    overflow-y: auto;
+    background-color: var(--secondary);
 }
 
 .component {
@@ -26,5 +26,9 @@
 }
 
 .space {
-    height: 15%;
+    height: 7vh;
+}
+
+.prueba{
+    height: 10px;
 }

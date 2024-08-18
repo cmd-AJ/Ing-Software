@@ -53,11 +53,7 @@ const Register: React.FC = () => {
 
     return (
         <IonPage>
-            <IonHeader className='headerR'>
-                <IonToolbar color='tertiary'>
-                    <IonTitle size='large' className='headerR'>Registrar sesión</IonTitle>
-                </IonToolbar>
-            </IonHeader>
+
             <div className='center'>
                 <div className='space'></div>
                 <div className='component'>
@@ -96,13 +92,13 @@ const Register: React.FC = () => {
                         user={User}
                     />
                 </div>
+                <div className='prueba'></div>
                 <div className='component'>
                     <LinkLogin />
                 </div>
+                <div className='space'></div>
             </div>
-            <IonFooter >
-                <div className='footer'></div>
-            </IonFooter>
+
         </IonPage>
     )
 }

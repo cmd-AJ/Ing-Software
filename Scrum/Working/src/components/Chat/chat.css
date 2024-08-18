@@ -27,16 +27,18 @@
 }
 
 .chat-bubble.me {
-    background-color: #026685;
+    background-color: #1961af; 
+    color: white;
     align-self: flex-end;
 }
 
 .chat-bubble.you {
-    background-color: #212121;
+    background-color: #000000;
+    color: white;
 }
 
 .message-content {
-    margin-bottom: 5px; 
+    margin-bottom: 1vw; 
 }
 
 .message-time {
