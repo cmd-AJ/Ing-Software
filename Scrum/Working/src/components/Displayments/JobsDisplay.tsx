@@ -12,9 +12,10 @@ type Job = {
 
 interface ContainerProps {
     dpi: string
+    selectedValue: string
 }
 
-const JobsDisplay:React.FC<ContainerProps> = ({dpi}) => {
+const JobsDisplay:React.FC<ContainerProps> = ({dpi, selectedValue}) => {
     
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
     const [data, setData] = useState<Job[]>([])
@@ -22,7 +23,7 @@ const JobsDisplay:React.FC<ContainerProps> = ({dpi}) => {
 
     useEffect(()=>{
         const fecthData = async () =>{
-            const data = await gettrabajoanterior('3833 86608 0101')
+            const data = await gettrabajoanterior(dpi)
             if (data && data.length > 0) {
                 setData(data)
             } else {
@@ -37,19 +38,29 @@ const JobsDisplay:React.FC<ContainerProps> = ({dpi}) => {
     if (error !== '') {
         return (
             <div className="job-display">
-            <TextND text="Trabajos realizados" size="big" hex={tertiaryColor}/>
-                <HorizontalDivider/>
+                {
+                    selectedValue !== 'rightSegment' &&
+                    <>
+                        <TextND text="Trabajos realizados" size="big" hex={tertiaryColor}/>
+                        <HorizontalDivider/>
+                    </>
+                }
                 <div style={{display: 'flex', width: '100%', minHeight: '280px', justifyContent: 'center', alignItems: 'center'}}>
                     <TextND text="No hay trabajos publicados" size="medium" hex="#888"/>
                 </div>
-        </div>
+            </div>
         )
     }
     
     return (
         <div className="job-display">
-            <TextND text="Trabajos realizados" size="big" hex={tertiaryColor}/>
-                <HorizontalDivider/>
+                {
+                    selectedValue !== 'rightSegment' &&
+                    <>
+                        <TextND text="Trabajos realizados" size="big" hex={tertiaryColor}/>
+                        <HorizontalDivider/>
+                    </>
+                }
                 {
                     data.map(job => (
                         <JobDisplay job={job}/>

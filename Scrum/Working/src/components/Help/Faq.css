@@ -1,29 +1,39 @@
 .faq-container {
   max-width: 700px;
-  margin: 20px auto; 
+  margin: 20px auto;
   padding: 20px;
-  background-color: #fff; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .faq-heading {
-  text-align: center;
-  margin-bottom: 20px;
+  text-align: left;
+  margin-bottom: 10px;
   font-size: 34px;
   color: #333;
 }
 
+.faq-subheading {
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #b48a00;
+}
+
 .faq-item {
   border-bottom: 1px solid #ccc;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .faq-question {
   cursor: pointer;
   font-weight: bold;
-  color: #666; 
+  color: #666;
   transition: color 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .faq-item.active .faq-question {
@@ -34,9 +44,15 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  color: #666; 
+  color: #666;
 }
 
 .faq-item.active .faq-answer {
-  max-height: 100px; 
+  max-height: 100px;
+}
+
+.faq-icon {
+  font-size: 24px;
+  margin-left: 10px;
+  margin-right: 10px; /* Añadir margen derecho para separar el icono */
 }

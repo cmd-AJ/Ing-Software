@@ -37,7 +37,6 @@ const LoginButton: React.FC<ContainerProps> = ({
                     
                     setUserExist(true)
                     console.log("Has iniciado sesion correctamente");
-                    console.log(login);
                     localStorage.setItem('dpi', dpi);
 
                     const job = "";  // Esto debe ser dinámico según tus necesidades

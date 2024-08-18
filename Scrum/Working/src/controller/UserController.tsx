@@ -221,6 +221,31 @@ export async function getTrustedPeople(dpi: string): Promise<any[]> {
     }
 }
 
+export async function addTrustedPeople(userDpi: string, newtrusteduserDpi: string): Promise<any[]> {
+    try {
+
+        const Object = {
+            dp1: userDpi,
+            dpi2: newtrusteduserDpi
+        }
+
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/trustNetwork/addTrust`, {
+            method: 'POST',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Object)
+        });
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding trusted people:', error);
+        return [];
+    }
+}
+
 export async function configurartrabajo(trabajo: string, dpi: string) {
     const object = {
         trabajo: trabajo,

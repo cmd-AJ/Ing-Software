@@ -1,5 +1,6 @@
 import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
+import React from "react";
 
 type User = {
     nombre : string;
@@ -8,7 +9,7 @@ type User = {
     sexo: string;
     fecha_nacimiento: string;
     municipio: string;
-    tel: string;
+    telefono: string;
     correo: string;
     imagen: string;
     dpi: string;

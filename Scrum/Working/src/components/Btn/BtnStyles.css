@@ -47,7 +47,7 @@
     color: red;
 }
 
-@media (max-width: 814px){
+@media (max-width: 660px){
     .btn-header-horizontal{
         flex-direction: row;
         align-items: center;
@@ -58,7 +58,8 @@
     }
 
     .btn-header-horizontal {
-        justify-content: center;
+        justify-content: flex-start;
+        margin-left: 10px;
     }
 
     .btn-edit-user{

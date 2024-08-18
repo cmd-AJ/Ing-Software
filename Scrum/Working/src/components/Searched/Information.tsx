@@ -2,17 +2,22 @@ import React from 'react';
 import { IonContent } from '@ionic/react';
 import './Information.css';
 import { Trabajador } from './type' 
+import { useHistory } from 'react-router-dom';
+import { getUser2 } from '../../controller/UserController';
 
 const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
-  
-  const onHire = async () => {
-    console.log(`I want to hire: ${trabajador.nombre}`);
-    //TO DO: push history
+
+  const history = useHistory();
+
+  const handleClick = async () => {
+    const data = await getUser2(trabajador.dpi)
+    localStorage.setItem('notUser', JSON.stringify(data[0]))
+    history.push('/empleado?ownerUser=false')
   }
 
   return (
     <IonContent>    
-      <div className="inner-div">
+      <div className="inner-div" onClick={handleClick}>
         <div className="front">
           <div className="front__bkg-photo"></div>
           <div className="front__face-photo"></div>
@@ -26,7 +31,6 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
             <p className="front__text-para">
               <i className="fas fa-map-marker-alt front-icons"></i>Calficación: {trabajador.rating}
             </p>
-            <button className="hire-button" onClick={() => onHire()}>Ver</button>
             </div>
         </div>
       </div>    

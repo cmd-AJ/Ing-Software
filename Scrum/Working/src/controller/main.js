@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
 import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
-import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser} from './neo.js'
+import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 
 const app = express()
 const port = 3000
@@ -291,6 +291,17 @@ app.get('/contacts/hirings/:dpi', apiKeyAuth ,async (req, res) => {
     res.status(200).json(hirings)
   } catch (error) {
     console.error("Error while getting hirings:", error)
+    res.status(500).json({ error: 'Internal Server Error'})
+  }
+})
+
+app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
+  try {
+    const { dpi1, dpi2 } = req.body;
+     await addUserAsTrustedPerson(dpi1, dpi2)
+     res.status(200).json({ Success: 'Trusted person was added'})
+  } catch (error) {
+    console.error('Trusted person could not be added:', error)
     res.status(500).json({ error: 'Internal Server Error'})
   }
 })
