@@ -40,11 +40,14 @@ body {
     background-color: var(--white);
 }
 
-.left .top {
-    position: relative;
-    width: 100%;
-    height: 96px;
-    padding: 29px;
+
+@media (min-width:600px){
+    .left .top {
+        position: relative;
+        width: 24.8vw;
+        height: 18vh;
+        padding: 29px;
+    }
 }
 
 .left .top:after {
@@ -59,19 +62,23 @@ body {
     transform: translate(-50%, 0);
 }
 
-.left input {
-    float: left;
-    width: 75%;
-    height: 42px;
-    padding: 0 15px;
-    border: 1px solid var(--light);
-    background-color: #eceff1;
-    border-radius: 21px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 400;
-    outline: none;
-    color: var(--grey)
+@media (min-width:600px){
+    .left input {
+        float: left;
+        width: 100%;
+        height: 42px;
+        padding: 0 15px;
+        border: 1px solid var(--light);
+        background-color: #eceff1;
+        border-radius: 21px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 400;
+        outline: none;
+        color: var(--grey)
+    }
+    
 }
+
 
 .left a.search {
     display: block;
@@ -86,8 +93,26 @@ body {
     border-radius: 50%;
 }
 
-.left .people {
-    margin-left: -40px;
+@media (min-width:500px){
+    .left .people {
+        margin-left: -7vw;
+    }
+    
+}
+@media (max-width:365px){
+    .left .people {
+        width: 37.8vw;
+        margin-left: -13.6vw;
+    }
+    
+}
+
+@media (min-width:365px) and (max-width:500px) {
+    .left .people {
+        width: 31.8vw;
+        margin-left: -8.7vw;
+    }
+    
 }
 
 .left .people .person {
@@ -95,10 +120,10 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    width: 25vw;
+    width: 24vw;
     padding: 12px 10% 16px;
     cursor: pointer;
-    background-color: black;
+    background-color: white;
 }
 
 .left .people .person:after {
@@ -113,13 +138,41 @@ body {
     transform: translate(-50%, 0);
 }
 
-.left .people .person img {
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
-    border-radius: 50%;
-    margin-left: 20px;
-    object-fit: cover;
+
+
+@media (min-width:500px){
+    .left .people .person img {
+        width: 4vw;
+        height: 8vh;
+        margin-right: 2vh;
+        border-radius: 50%;
+        margin-left: 4vw;
+        object-fit: cover;
+    }
+    
+    .searchpeople{
+        height: 0px;
+        width: 0px;
+        
+    }
+}
+@media (max-width:500px){
+    .left .people .person img {
+        width: 0vw;
+        height: 0vh;
+        border-radius: 50%;
+
+    }
+
+    .searchpeople{
+        font-size: 1.5vw;
+        background-color: white;
+        color: white;
+        border: 0px;
+        border-color: white;
+        
+    }
+
 }
 
 .left .people .person .text-container {

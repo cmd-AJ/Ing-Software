@@ -1,23 +1,7 @@
 @import url('../theme/variables.css');
 
-.headerR {
-    background-color: var(--ion-color-tertiary);
-    font-size: calc(150%);
-    text-align: center;
-}
 
-.footer {
-    background-color: var(--ion-color-tertiary);
-    font-size: 30px;
-    width: 100%;
-    min-height: 25px;
-}
 
-.center {
-    width: 100%;
-    height: 100%;
-    background-color: var(--secondary);
-}
 
 .component {
     width: 100%;
@@ -25,10 +9,31 @@
     justify-content: center;
 }
 
-.space {
-    height: 7vh;
+.space{
+    height: 5vh;
 }
 
-.prueba{
-    height: 10px;
+@media (max-height:800px) {
+    .center {
+        width: 100%;
+        height: 100%;
+        background-color: var(--secondary);
+        overflow-y:auto;
+        
+    }
+        
+}
+
+@media (min-height:800px) {
+
+
+    .center {
+        width: 100%;
+        height: 100%;
+        background-color: var(--secondary);
+        padding: 10%;
+    }
+    
+
+        
 }

@@ -80,7 +80,7 @@ const Register: React.FC = () => {
                 <div className='component'>
                     <RoleInput setRole={setRole} />
                 </div>
-                <div className='component'>
+                <div className='component' style={{marginTop:'3vh'}}>
                     <RegisterButton 
                         validateName={validateName}
                         validateLastname={validateLastname}
@@ -92,7 +92,7 @@ const Register: React.FC = () => {
                         user={User}
                     />
                 </div>
-                <div className='prueba'></div>
+                <div style={{margin:'10px', height:'0.5vh'}} className='space'></div>
                 <div className='component'>
                     <LinkLogin />
                 </div>

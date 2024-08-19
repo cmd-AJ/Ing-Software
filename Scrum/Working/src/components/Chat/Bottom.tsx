@@ -37,6 +37,7 @@ const  Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, upda
           placeholder="Type a message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          style={{height:'39px'}}
         />
         <button className="send" onClick={sendMessage}>Send</button>
         <button className="hire" onClick={onHireClick}>Hire</button>

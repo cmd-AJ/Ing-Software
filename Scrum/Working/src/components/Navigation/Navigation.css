@@ -1,3 +1,6 @@
+
+
+
 /* General styles for the navigation bar */
 .navbar-icon, .custom-text {
   transition: transform 0.3s ease;  /* Ensuring transition is applied universally */
@@ -30,6 +33,7 @@
 
 .navbar-icon {
   font-size: 30px;
+  color: white;
 }
 
 ion-header, ion-toolbar {
@@ -103,3 +107,4 @@ ion-header, ion-toolbar {
   flex-shrink: 0;  /* Prevents the icons and text from shrinking */
   cursor: pointer;
 }
+

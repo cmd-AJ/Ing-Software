@@ -12,6 +12,7 @@ const Sidebar = () => {
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState("3834 49898 0101"); // DPI del usuario loggeado
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,6 +30,13 @@ const Sidebar = () => {
             setContacts([]);
         };
     }, [loggedUserDpi]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+    }, []);
 
     const handlePersonClick = async (dpi) => {
         const selectedPerson = contacts.find(person => person.dpi === dpi);
@@ -72,12 +80,14 @@ const Sidebar = () => {
             <div className="container1">
                 <div className="left">
                     <div className="top">
-                        <input type="text" placeholder="Search" />
+                        {windowWidth >= 600 && (
+                            <input className='searchpeople' type="text" placeholder="Search" />
+                        )}
                     </div>
                     <ul className="people">
                         {contacts.map((person, index) => (
                             <li key={index} className="person" onClick={() => handlePersonClick(person.dpi)}> 
-                                <img src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
+                                <img className="imagen" src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>
                                     <span className="time">{person.time}</span>
