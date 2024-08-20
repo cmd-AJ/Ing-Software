@@ -1,4 +1,4 @@
-name: ESLint
+name: Production
 
 on:
   push:
@@ -31,6 +31,10 @@ jobs:
       - name: Install dependencies
         working-directory: Scrum/Working
         run: npm install
+
+      - name: Install Ionic
+        working-directory: Scrum/Working
+        run: npm i -g @ionic/cli
 
       - name: Build Production
         working-directory: Scrum/Working
