@@ -15,7 +15,7 @@ jobs:
       IP_ADD: ${{ secrets.IPADDRESS }}
       KEY: ${{ secrets.SERVERKEY }}
       DIR: ${{ vars.DIRECTION }}
-      VITE_API_HOST: ${{ secrets.VITE_API_HOST }}
+      VITE_API_HOSTI: ${{ secrets.VITE_API_HOSTI }}
       VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
       VITE_PORTI: ${{ secrets.VITE_PORTI }}
       
@@ -41,7 +41,7 @@ jobs:
         working-directory: Scrum/Working
         run: ionic build --prod
         env:
-          VITE_API_HOST: ${{ secrets.VITE_API_HOST }}
+          VITE_API_HOSTI: ${{ secrets.VITE_API_HOST }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
           VITE_PORTI: ${{ secrets.VITE_PORTI }}
 
