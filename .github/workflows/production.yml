@@ -28,13 +28,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        working-directory: Scrum/Working
-        run: npm install
-
       - name: Install Ionic
         working-directory: Scrum/Working
         run: npm i -g @ionic/cli
+
+      - name: Install dependencies
+        working-directory: Scrum/Working
+        run: npm install
 
       - name: Build Production
         working-directory: Scrum/Working
