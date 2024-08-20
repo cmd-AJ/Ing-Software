@@ -23,10 +23,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'latest'
+      - name: Set up nvm
+        run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+      - name: Set up latest NodeJS
+        run: nvm install --lts
+
+      - name: Set to latst Nodejs
+        run: nvm alias default lts/*
 
       - name: Install Ionic
         working-directory: Scrum/Working
