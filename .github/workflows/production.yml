@@ -40,7 +40,7 @@ jobs:
 
       - name: Save SSH key to file
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
+          echo "${{ secrets.SERVERKEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
 
       - name: Send to Production
