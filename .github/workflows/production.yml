@@ -45,7 +45,9 @@ jobs:
         run: chmod 600 ~/ssh_key.pem
 
       - name: Add remote host to known_hosts
-        run: ssh-keyscan -H $REMOTE_HOST >> ~/.ssh/known_hosts
+        run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -H $REMOTE_HOST >> ~/.ssh/known_hosts
         env:
           REMOTE_HOST: ${{ secrets.IPADDRESS }}  # Use your actual remote server address
 
