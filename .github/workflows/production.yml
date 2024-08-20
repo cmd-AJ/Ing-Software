@@ -29,6 +29,7 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
+        working-directory: Scrum/Working
         run: |
           npm install -g ionic @ionic/cli
           npm install 
