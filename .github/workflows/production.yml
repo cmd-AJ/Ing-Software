@@ -38,6 +38,11 @@ jobs:
         working-directory: Scrum/Working
         run: ionic build --prod
 
+      - name: Save SSH key to file
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
+          chmod 600 /tmp/id_rsa
+
       - name: Send to Production
         working-directory: Scrum/Working
-        run: scp -r -i ${{ secrets.SERVERKEY }} /dist ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
+        run: scp -r -i /tmp/id_rsa /dist ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
