@@ -15,6 +15,9 @@ jobs:
       IP_ADD: ${{ secrets.IPADDRESS }}
       KEY: ${{ secrets.SERVERKEY }}
       DIR: ${{ vars.DIRECTION }}
+      VITE_API_HOST: ${{ secrets.VITE_API_HOST }}
+      VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+      VITE_PORTI: ${{ secrets.VITE_PORTI }}
       
     permissions:
       contents: read
@@ -37,6 +40,10 @@ jobs:
       - name: Build Production
         working-directory: Scrum/Working
         run: ionic build --prod
+        env:
+          VITE_API_HOST: ${{ secrets.VITE_API_HOST }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+          VITE_PORTI: ${{ secrets.VITE_PORTI }}
 
       - name: Create SSH key file
         run: echo "${{ secrets.SERVERKEY }}" > ~/ssh_key.pem
