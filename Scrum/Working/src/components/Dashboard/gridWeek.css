@@ -1,20 +1,37 @@
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 10px; /* Espacio entre celdas */
-    width: 100%;
-    height: 100vh; /* Ajusta la altura según tus necesidades */
-  }
-  
-  .grid-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    font-size: 14px;
-    text-align: center;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 10px;
+  width: calc(100% - 50px);
+  height: calc(100% - 30vh);
+  margin: 15vh auto 0;
+  background-color: aqua;
+}
+
+
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.grid-item.black {
+  background-color: black;
+  color: white;
+}
+
+.grid-item.yellow {
+  background-color: yellow;
+}
+
+.grid-item.blue {
+  background-color: blue;
+  color: white;
+}
