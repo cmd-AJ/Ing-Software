@@ -38,16 +38,15 @@ jobs:
         working-directory: Scrum/Working
         run: ionic build --prod
 
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.SERVERKEY }}
+      - name: Create SSH key file
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key.pem
 
-      - name: Add remote host to known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H remotehost >> ~/.ssh/known_hosts
+      - name: Set permissions on the SSH key
+        run: chmod 600 ~/ssh_key.pem
 
       - name: Send to Production
         working-directory: Scrum/Working
-        run: scp -r -i ./local-dir /dist ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
+        run: scp -r -i  ~/ssh_key.pem /dist ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
+
+      - name: Remove SSH key file
+        run: rm ~/ssh_key.pem
