@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Production
         working-directory: Scrum/Working
-        run: Ionic build --prod
+        run: ionic build --prod
 
       - name: Send to Production
         working-directory: Scrum/Working
