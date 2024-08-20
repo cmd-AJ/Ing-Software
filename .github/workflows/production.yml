@@ -53,7 +53,7 @@ jobs:
 
       - name: Send to Production
         working-directory: Scrum/Working
-        run: scp -r -i  ~/ssh_key.pem dist ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
+        run: scp -r ./dist/*  -i  ~/ssh_key.pem  ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
 
       - name: Remove SSH key file
         run: rm ~/ssh_key.pem
