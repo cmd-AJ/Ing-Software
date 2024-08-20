@@ -1,0 +1,41 @@
+name: ESLint
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Producing:
+    name: Run nodejs libraries
+    runs-on: ubuntu-latest
+    environment: logincredentials
+    env:
+      IP_ADD: ${{ secrets.IPADDRESS }}
+      KEY: ${{ secrets.SERVERKEY }}
+      DIR: ${{ vars.DIRECTION }}
+      
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: Scrum/Working
+        run: npm install
+
+      - name: Build Production
+        working-directory: Scrum/Working
+        run: Ionic build --prod
+
+      - name: Send to Production
+        working-directory: Scrum/Working
+        run: scp -r -i ${{ secrets.SERVERKEY }} /dist ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
