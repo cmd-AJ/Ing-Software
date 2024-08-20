@@ -39,7 +39,7 @@ jobs:
         run: ionic build --prod
 
       - name: Create SSH key file
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key.pem
+        run: echo "${{ secrets.SERVERKEY }}" > ~/ssh_key.pem
 
       - name: Set permissions on the SSH key
         run: chmod 600 ~/ssh_key.pem
