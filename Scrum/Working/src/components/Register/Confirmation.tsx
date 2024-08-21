@@ -47,7 +47,7 @@ const confirmation: React.FC<ContainerProps> = ({ setConfirmation, validateConfi
                 placeholder='Confirme su contraseña'
                 errorText="Las contraseñas no coinciden" 
                 className={`${'inputs'} ${validateConfirmation === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
-                color='tertiary'
+                color='light'
                 onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
                 onFocus={handleFocus}
                 onIonChange={handleInputChange}

@@ -12,6 +12,7 @@ import {
 } from "@ionic/react";
 import InfoCard from "../components/About/Explain";
 import "./About.css";
+import "../theme/variables.css"
 import Carousel from "../components/About/Carousel";
 import EmployeeCarousel from "../components/About/EmployeeCarousel";
 
@@ -28,27 +29,27 @@ const About: React.FC = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>SABTE</IonTitle>
+          <IonHeader className="titleheader">SABTE</IonHeader>
           <IonButtons slot="end">
-            <IonButton routerLink="/register">
+            <IonButton routerLink="/register" className="colorheader">
               Registrarse
             </IonButton>
-            <IonButton routerLink="/home">
+            <IonButton routerLink="/home" className="colorheader">
               Iniciar Sesión
             </IonButton>
           </IonButtons>
         </IonToolbar>
         <IonSegment>
-          <IonSegmentButton onClick={() => scrollToSection("about")}>
+          <IonSegmentButton className="scrollbut" onClick={() => scrollToSection("about")}>
             Acerca de
           </IonSegmentButton>
-          <IonSegmentButton onClick={() => scrollToSection("customers")}>
+          <IonSegmentButton className="scrollbut" onClick={() => scrollToSection("customers")}>
             Clientes
           </IonSegmentButton>
-          <IonSegmentButton onClick={() => scrollToSection("employees")}>
+          <IonSegmentButton className="scrollbut" onClick={() => scrollToSection("employees")}>
             Empleados
           </IonSegmentButton>
-          <IonSegmentButton onClick={() => scrollToSection("contact")}>
+          <IonSegmentButton className="scrollbut" onClick={() => scrollToSection("contact")}>
             Contacto
           </IonSegmentButton>
         </IonSegment>

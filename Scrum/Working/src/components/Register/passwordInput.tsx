@@ -45,7 +45,7 @@ const PasswordInput: React.FC<ContainerProps> = ({ setPassword, validatePassword
             fill='outline'
             placeholder='Ingresar contraseña'
             className={`${'inputs'} ${validatePassword === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
-            color='tertiary'
+            color='light'
             errorText="Contraseña inválida"
             onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
             onFocus={handleFocus}

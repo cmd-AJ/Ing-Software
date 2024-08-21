@@ -1,4 +1,3 @@
-import './Searched.css'
 import React from 'react';
 import './Searched.css';
 import { IonPage } from '@ionic/react';

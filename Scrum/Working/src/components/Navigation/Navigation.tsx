@@ -48,7 +48,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
       {/* Renderiza el modal solo cuando openLogout es true */}
       {openLogout && <ModalWithoutBack x={positionX} y={positionY} setModal={setOpenLogout} content={<Logout/>}/>}      
       <IonHeader>
-        <IonToolbar color="primary">
+        <IonToolbar>
           <IonGrid>
             <IonRow className="ion-align-items-center responsive-navbar">
               <IonCol className="ion-text-center" onClick={() => history.push('/searched')}>

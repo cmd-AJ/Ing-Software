@@ -39,7 +39,7 @@ const emailInput: React.FC<ContainerProps> = ({ setName, validateName, setValida
         placeholder='Ingrese su nombre'
         labelPlacement={ focus ? 'stacked' : 'floating' }
         errorText="Nombre inválido"
-        color='tertiary'
+        color='light'
         onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
         onIonChange={handleInputChange}
         onFocus={handleFocus}

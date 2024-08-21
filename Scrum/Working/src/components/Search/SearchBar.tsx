@@ -17,7 +17,7 @@ function SearchBar({ onRequestChange }: SearchBarProps) {
 
   return (
     <div className="search-bar-container">
-      <IonSearchbar
+      <IonSearchbar 
         className="custom-searchbar"
         placeholder="¿Qué necesitas?"
         value={searchValue}

@@ -124,7 +124,7 @@ const dpiInput: React.FC<ContainerProps> = ({setDpi, validateDpi, setValidateBoo
             fill='outline' 
             placeholder='XXXX XXXXX XXXX' 
             className={`${'inputs'} ${validateDpi === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
-            color='tertiary'
+            color='light'
             errorText='DPI inválido'
             ref={async (dpiRef) => {
                 if (dpiRef) {

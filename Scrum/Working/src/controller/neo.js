@@ -1,12 +1,31 @@
 import { createSession } from './GraphDataBase.js';
 
-export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen, dpi, telefono){
+export async function addUserAsTrustedPerson(dpi1, dpi2) {
+    const session = createSession();
+
+    try {
+        const query = `MATCH (usr1:Usuario {dpi:'${dpi1}'}), (usr2:Usuario {dpi:'${dpi2}'})
+                       CREATE (usr1)-[:confia_en]->(usr2)`
+
+        const result = await session.run(query)
+        return result
+
+    } catch (error) {
+        console.error('Error adding user as trusted person:', error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+
+}
+
+export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen, dpi, telefono) {
     const session = createSession();
 
     try {
         const query = `CREATE (:Usuario {nombre: '${nombre}', apellidos: '${apellidos}', municipio: '${municipio}', rating: '${rating}', imagen: '${imagen}', dpi: '${dpi}', telefono:'${telefono}'})`;
         const result = await session.run(query);
-        
+
         return result;
     } catch (error) {
         console.error('Error inserting Neo User:', error);
@@ -66,7 +85,7 @@ export async function getWorkers(trabajo) {
 }
 
 
-export async function getTrustedUsersByDpi(dpi){
+export async function getTrustedUsersByDpi(dpi) {
     const session = createSession();
 
     try {

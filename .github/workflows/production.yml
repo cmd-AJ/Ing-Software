@@ -1,0 +1,66 @@
+name: Production
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Producing:
+    name: Run nodejs libraries
+    runs-on: ubuntu-latest
+    environment: logincredentials
+    env:
+      IP_ADD: ${{ secrets.IPADDRESS }}
+      KEY: ${{ secrets.SERVERKEY }}
+      DIR: ${{ vars.DIRECTION }}
+      VITE_API_HOSTI: ${{ secrets.VITE_API_HOSTI }}
+      VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+      VITE_PORTI: ${{ secrets.VITE_PORTI }}
+      
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        working-directory: Scrum/Working
+        run: |
+          npm install -g ionic @ionic/cli
+          npm install 
+
+      - name: Build Production
+        working-directory: Scrum/Working
+        run: ionic build --prod
+        env:
+          VITE_API_HOSTI: ${{ secrets.VITE_API_HOST }}
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+          VITE_PORTI: ${{ secrets.VITE_PORTI }}
+
+      - name: Create SSH key file
+        run: echo "${{ secrets.SERVERKEY }}" > ~/ssh_key.pem
+
+      - name: Set permissions on the SSH key
+        run: chmod 600 ~/ssh_key.pem
+
+      - name: Add remote host to known_hosts
+        run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -H $REMOTE_HOST >> ~/.ssh/known_hosts
+        env:
+          REMOTE_HOST: ${{ secrets.IPADDRESS }}  # Use your actual remote server address
+
+      - name: Send to Production
+        working-directory: Scrum/Working
+        run: scp -r  -i  ~/ssh_key.pem  dist/*  ubuntu@${{ secrets.IPADDRESS }}:${{ vars.DIRECTION }}
+
+      - name: Remove SSH key file
+        run: rm ~/ssh_key.pem

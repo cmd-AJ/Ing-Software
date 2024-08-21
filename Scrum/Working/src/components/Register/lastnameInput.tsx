@@ -38,7 +38,7 @@ const lastnameInput: React.FC<ContainerProps> = ({ setLastname, validateLastname
             placeholder='Ingresar apellidos' 
             className={`${'inputs'} ${validateLastname === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}
             onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
-            color='tertiary'
+            color='light'
             errorText="Apellidos inválido"
             onIonChange={handleInputChange}
             onFocus={handleFocus}
