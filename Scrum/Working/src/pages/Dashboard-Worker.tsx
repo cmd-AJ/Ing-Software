@@ -119,19 +119,11 @@ const Dashboard_Worker: React.FC = () => {
       <IonContent>
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
-<<<<<<< HEAD
-          {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}    
-          <div className="header-card" ref={headerCardRef}>
-            <IonImg
-              src={myUser.banner}
-              style={{height: '180px', width: '100%', objectFit: 'fill'}}></IonImg>
-=======
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           <div className="header-card" ref={headerCardRef}>
             <IonImg
               src={myUser.banner}
               className="feed-img"></IonImg>
->>>>>>> the-way-of-the-prince
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>
