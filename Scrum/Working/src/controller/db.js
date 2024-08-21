@@ -41,7 +41,7 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
             INSERT INTO Usuarios (
                 dpi, nombre, apellidos, contrasenia, email, telefono, role, 
                 municipio, sexo, fecha_nacimiento, rating, imagen, banner, 
-                departamento, municipio
+                departamento
             ) 
             VALUES (
                 $1, $2, $3, $4, $5, $6, $7, 
