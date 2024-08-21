@@ -69,6 +69,11 @@
     align-items: flex-start;
 }
 
+#job-individual-displayment {
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
 .persondatadisplay {
     width: 100%;
     display: flex;
@@ -89,5 +94,19 @@
 
     #right-displayment {
         border-radius: 0 0 25px 25px;
+    }
+
+    .contrat-display {
+        width: 100%;
+    }
+
+    .job-display {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #job-individual-displayment {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

@@ -1,4 +1,5 @@
 import TextND from "../Txt/TextND"
+import './DisplaymentStyles.css'
 
 type Job = {
     estado: string
@@ -15,7 +16,7 @@ const JobDisplay : React.FC<ContainerProps> = ({job}) => {
     const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
 
     return (
-        <div style={{marginLeft: '150px', marginRight: '150px'}}>
+        <div id="job-individual-displayment">
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <TextND text={job.titulo} size="medium" hex={tertiaryColor}/>
                 <TextND text={job.estado} size="small" hex={secondaryContrast}/>   

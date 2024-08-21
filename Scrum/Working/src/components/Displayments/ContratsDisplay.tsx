@@ -17,9 +17,10 @@ type Contrat = {
 
 interface ContainerProps {
     dpi: string
+    selectedValue: string
 }
 
-const ContratsDisplay : React.FC<ContainerProps> = ({dpi}) => {
+const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue}) => {
 
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
@@ -28,14 +29,13 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi}) => {
 
     useEffect(()=>{
         const fecthData = async () => {
-            const data = await getContratWorker('3833 86608 0101')
+            const data = await getContratWorker(dpi)
             if (data && data.length > 0){
                 setData(data)
             } else {
                 setError('Sin contratos')
                 setData([])
             }
-            
         }
 
         fecthData()
@@ -44,10 +44,15 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi}) => {
     if (error !== ''){
         return (
             <div className="contrat-display">
-                <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
-                <div style={{width: '100%'}}>
-                    <HorizontalDivider/>
-                </div>
+                {
+                    selectedValue !== 'leftSegment' &&
+                    <>
+                        <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
+                        <div style={{width: '100%'}}>
+                            <HorizontalDivider/>
+                        </div>
+                    </>
+                }
                 <div style={{minHeight: '280px', width:'100%', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
                     <TextND text="Sin contratos" size="medium" hex="#888"/>
                 </div>
@@ -58,9 +63,14 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi}) => {
 
     return (
         <div className="contrat-display">
-            <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
+            {
+                selectedValue !== 'leftSegment' &&
+                <>
+                    <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
+                    <HorizontalDivider/>
+                </>
+            }
             <div style={{width:'100%'}}>
-            <HorizontalDivider/>
                 {
                     data.map(contrat => (
                         <ContratDisplay contrat={contrat}/>

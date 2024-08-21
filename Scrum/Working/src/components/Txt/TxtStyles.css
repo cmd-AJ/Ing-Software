@@ -6,3 +6,30 @@
     margin-left: 180px;
     width: 100%;
 }
+
+#big-text {
+    font-size: 30px;
+}
+
+#medium-text {
+    font-size: 25px;
+}
+
+#small-text {
+    font-size: 18px;
+}
+
+
+@media (max-width: 660px){
+    .vertical-txt-display {
+        margin-left: 20px;
+    }
+
+    #big-text {
+        font-size: 25px;
+    }
+
+    #medium-text {
+        font-size: 18px;
+    }
+}

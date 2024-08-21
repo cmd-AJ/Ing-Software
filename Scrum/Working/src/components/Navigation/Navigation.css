@@ -54,6 +54,7 @@ ion-header, ion-toolbar {
   font-size: 28px;  /* Adjust font size as needed */
   font-weight: bold; /* Makes the text bold */
   display: inline-block; /* Required for background-clip to work properly */
+  cursor:  pointer;
 }
 
 /* Responsive styles */
@@ -100,4 +101,5 @@ ion-header, ion-toolbar {
 
 .navbar-icon, .custom-text {
   flex-shrink: 0;  /* Prevents the icons and text from shrinking */
+  cursor: pointer;
 }

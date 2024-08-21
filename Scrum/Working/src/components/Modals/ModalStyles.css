@@ -1,6 +1,6 @@
 @import url('/src/theme/variables.css');
 
-.modal-background{
+.modal-background, .modal-background2{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -11,9 +11,13 @@
     top: 0%;
 }
 
-.modal-position{
+.modal-background2 {
+    z-index: 11;
+}
+
+.modal-position, .modal-position2{
     position: absolute;
-    transform: translate(-50%, -55%);
+    transform: translate(-50%, -50%);
     top: 50%;
     padding: 15px;
     left: 50%;
@@ -23,6 +27,14 @@
     background-color: var(--ion-color-secondary);
     z-index: 6;
     border-radius: 10px;
+}
+
+.modal-position2 {
+    z-index: 12;
+    background-color: var(--ion-color-primary-contrast);
+    width: auto;
+    height: auto;
+    display: flex;
 }
 
 .modal-container{
@@ -45,6 +57,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.modal-logout {
+    position: 'absolute';
+    width: 100px;
+    height: auto;
+    z-index: 10;
+}
+
+.profile-modal-options {
+    border: 1px solid #888;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.profile-modal-options:hover {
+    background-color: var(--ion-color-secondary);
 }
 
 @media (max-width: 740px){
