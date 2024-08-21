@@ -52,8 +52,7 @@ const Register: React.FC = () => {
     }
 
     return (
-        <IonPage>
-
+        <>
             <div className='center'>
                 <div className='space'></div>
                 <div className='component'>
@@ -99,7 +98,7 @@ const Register: React.FC = () => {
                 <div className='space'></div>
             </div>
 
-        </IonPage>
+        </>
     )
 }
 
