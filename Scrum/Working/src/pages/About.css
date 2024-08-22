@@ -52,7 +52,7 @@
   }
 
   .titleheader{
-    color: var(--blanco);
+    color: var(--white);
     font-size: 5.5vh;
     margin-left: 2%;
     font-family: sans-serif;
@@ -229,7 +229,7 @@
   }
 
   .colorheader{
-    color: var(--blanco);
+    color: var(--white);
   }
 
   .scrollbut{
@@ -469,11 +469,11 @@
   }
 
   .colorheader{
-    color: var(--blanco);
+    color: var(--white);
   }
   
   .titleheader{
-    color: var(--blanco);
+    color: var(--white);
     font-size: 4vh;
     margin-left: 2vw;
     -webkit-box-shadow: none;
