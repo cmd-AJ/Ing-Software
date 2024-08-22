@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getChatIdWithDPI, getChatMessages, getHirings } from '../../src/controller/ChatController';
-import { conseguirtrabajo, getUser, getWorkersByJob, userExists } from '../../src/controller/UserController'
+import { getLoginUser, conseguirtrabajo, getUser, getWorkersByJob, userExists } from '../../src/controller/UserController'
 
 describe('Conseguir a un usuario', () => {
     it('adds one plus one and returns two', async () => {
@@ -8,6 +8,15 @@ describe('Conseguir a un usuario', () => {
       })
 });
 
+describe('Conseguir a un usuario', () => {
+  it('Prueba del nuevo login', async () => {
+      expect( await getLoginUser( '3833 86608 0102','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5' )).toBe(true)
+    })
+
+    it('Prueba del nuevo login', async () => {
+      expect( await getLoginUser( '3833 86608 0102','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfmm' )).toBe(false)
+    })
+});
 
 describe('Login Credenciales', () => {
   it('Soy empleador Ricardo Tapia e ingreso mis credenciales correctamente', async () => {

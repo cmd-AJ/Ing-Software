@@ -86,6 +86,32 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
 
 }
 
+export async function getLoginUser(dpi: any, password: any) {
+
+    const credentials = {
+        "dpi": dpi,
+        "password": password,
+    }
+
+    try {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/LoginUser`,{
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            },
+            
+            body: JSON.stringify(credentials)
+        });
+
+        const user = await response.json();
+
+        return user
+
+    } catch (error) {
+        return null;
+    }
+}
+
 async function userExists(dpi: String, password: String) {
     try {
         const users = await getUsers();
