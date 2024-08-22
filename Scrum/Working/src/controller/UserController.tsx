@@ -63,7 +63,7 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             "telefono": phoneNumber
         }
     
-        fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
+        fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/usersNeo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
