@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import { getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 
 const app = express()
@@ -35,6 +35,24 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
   try {
       const users = await getUsers()
       res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.post('/users', apiKeyAuth ,async (req, res) => {
+  try {
+    const {
+      dpi, password
+    } = req.body
+
+    const user = await getUserbyDPI(dpi)
+
+    if(user.contrasenia === password) {
+      res.status(200).json( user )
+    } else {
+      res.status(400).json({error: 'User not found'})
+    }
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
   }

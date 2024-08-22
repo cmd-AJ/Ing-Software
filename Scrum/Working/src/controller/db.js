@@ -17,6 +17,23 @@ export async function getUsers() {
     }
 }
 
+// This function returns the user and its data but also the password to checkt it later.
+export async function getLoginUser(dpi) {
+    try {
+        const query = {
+            text: 'SELECT nombre, apellidos, contrasenia, email, dpi,telefono, role,departamento, municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
+            values: [dpi]
+        };
+
+        const result = await client.query(query)
+        return result.rows
+
+    } catch (error) {
+        console.error('Error getting login user:', error);
+        throw error;
+    }
+}
+
 export async function getUserbyDPI(dpi) {
     try {
         const query = {
