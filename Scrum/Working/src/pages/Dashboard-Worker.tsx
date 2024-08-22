@@ -39,7 +39,7 @@ const Dashboard_Worker: React.FC = () => {
 
   const owner = queryParams.get('ownerUser')
 
-  const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
+  const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--black').trim()
   const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
   const [ editModal, setEditModal] = useState(false)

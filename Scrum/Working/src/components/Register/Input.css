@@ -106,7 +106,7 @@
 }
 
 ion-select::part(text) {
-    color: var(--ion-color-primary-contrast);
+    color: var(--white);
 }
 
 .alert-radio-inner.sc-ion-alert-md {
@@ -130,7 +130,7 @@ ion-select::part(text) {
 
 .a {
     background-color: transparent;
-    color: var(--ion-color-tertiary-contrast, white);
+    color: var(--white, white);
 }
 
 .input-fill-outline.sc-ion-input-md-h {

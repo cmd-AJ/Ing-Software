@@ -13,7 +13,7 @@ interface ContainerProps {
 
 const JobDisplay : React.FC<ContainerProps> = ({job}) => {
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
-    const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary-contrast').trim()
+    const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--black').trim()
 
     return (
         <div id="job-individual-displayment">

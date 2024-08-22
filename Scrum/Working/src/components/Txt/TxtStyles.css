@@ -8,14 +8,17 @@
 }
 
 #big-text {
+    margin: 0;
     font-size: 30px;
 }
 
 #medium-text {
+    margin: 0;
     font-size: 25px;
 }
 
 #small-text {
+    margin: 0;
     font-size: 18px;
 }
 
