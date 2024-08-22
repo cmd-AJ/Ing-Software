@@ -40,7 +40,7 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/LoginUser', apiKeyAuth ,async (req, res) => {
+app.get('/LoginUser', apiKeyAuth ,async (req, res) => {
   try {
     const {
       dpi, password
