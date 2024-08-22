@@ -46,9 +46,9 @@ app.get('/LoginUser', apiKeyAuth ,async (req, res) => {
       dpi, password
     } = req.body
 
-    const user = await getUserbyDPI(dpi)
+    const user = await getLoginUser(dpi)
 
-    if(user.contrasenia === password) {
+    if(user && user.contrasenia === password) {
       res.status(200).json( user )
     } else {
       res.status(400).json({error: 'User not found'})
