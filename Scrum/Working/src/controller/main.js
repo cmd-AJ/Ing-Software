@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
@@ -47,12 +48,18 @@ app.post('/LoginUser', apiKeyAuth ,async (req, res) => {
     } = req.body
 
     const user = await getLoginUser(dpi)
-    console.log(user)
-    if(user && user.contrasenia === password) {
-      res.status(200).json( user )
+
+    if (user) {
+      const isPasswordValid = await bcrypt.compare(password, user.contrasenia);
+      if (isPasswordValid) {
+        res.status(200).json(user);
+      } else {
+        res.status(400).json({error: 'Incorrect password'});
+      }
     } else {
-      res.status(400).json({error: 'User not found'})
+      res.status(400).json({error: 'User not found'});
     }
+
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
   }
