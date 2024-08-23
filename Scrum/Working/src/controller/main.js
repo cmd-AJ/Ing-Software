@@ -1,7 +1,8 @@
+import CryptoJS from 'crypto-js';
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
-import { getUsers, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import { getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 
 const app = express()
@@ -39,6 +40,31 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+app.post('/LoginUser', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi, password } = req.body;
+
+    const user = await getLoginUser(dpi);
+
+    if (user) {
+
+      if (password === user.contrasenia) {
+        return res.status(200).json(user);
+      } else {
+        return res.status(400).json({ error: 'Incorrect password' });
+      }
+    } else {
+      return res.status(400).json({ error: 'User not found' });
+    }
+
+  } catch (error) {
+    console.error('Login error:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 
 app.post('/users', apiKeyAuth ,async (req, res) => {
   try {

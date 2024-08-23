@@ -1,6 +1,6 @@
 import { IonButton } from '@ionic/react'
 import './button.css'
-import { userExists, getUser, getUser2 } from '../../controller/UserController'
+import { userExists, getUser2 } from '../../controller/UserController'
 import CryptoJS from 'crypto-js';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
@@ -21,7 +21,7 @@ const LoginButton: React.FC<ContainerProps> = ({
 }) => {
     const [userExist, setUserExist] = useState(false)
     const history = useHistory();
-    console.log(`password: ${password}`)
+    
     const handleClick = async () => {
         if ((dpi != "") && (password != '') && (role !== "")) {  
 
@@ -43,16 +43,6 @@ const LoginButton: React.FC<ContainerProps> = ({
 
                     localStorage.setItem('job', job);
                     history.push(`/searched?dpi=${dpi}&job=${job}`);
-
-                    const user = await getUser(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
-
-                    // Guardar los datos del usuario en localStorage como JSON
-                    if (user) {
-                        localStorage.setItem('user', JSON.stringify(user));
-                        console.log("Datos del usuario guardados en localStorage:", JSON.stringify(user));
-                    } else {
-                        console.log("No se encontró el usuario.");
-                    }
                     
                 } else {
                     console.log("Usuario no encontrado");

@@ -1,21 +1,5 @@
 import { Trabajador } from "../components/Searched/type";
 
-export async function getUsers() {
-    try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'api-key': import.meta.env.VITE_API_KEY
-            }
-        })
-        const data = await response.json()
-        return data
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        return [];
-    }
-}
-
 function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
 
     const data = {
@@ -86,35 +70,54 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
 
 }
 
-async function userExists(dpi: String, password: String) {
-    try {
-        const users = await getUsers();
-        return users.some((user: { dpi: String; contrasenia: String; }) => user.dpi === dpi && user.contrasenia === password);
-    } catch (error) {
-        console.error('Error checking if user exists:', error);
-        return false;
+export async function getLoginUser(dpi: any, password: any) {
+
+    const credentials = {
+        "dpi": dpi,
+        "password": password,
     }
-}
 
-
-export async function getUser(dpi: any, password: any) {
     try {
-        const users = await getUsers();
-        let foundUser = null;
-
-        users.forEach((user: { id: any; password: any; }) => {
-            if (user.id === dpi && user.password === password) {
-                //foundUser = user;
-            }
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/LoginUser`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            },
+            
+            body: JSON.stringify(credentials)
         });
-        return foundUser
+
+        if (!response.ok) {
+            return null;
+        }
+
+        const user = await response.json();
+
+        return user
+
     } catch (error) {
-        console.error('Error getting user:', error);
+        console.error("Error while getting login user", error)
         return null;
     }
 }
 
+async function userExists(dpi: String, password: String) {
+    try {
+        const user = await getLoginUser(dpi, password);
 
+        if(user){
+            return true;
+        } else {
+            return false;
+        }
+             
+        } catch (error) {
+
+            console.error('Error checking if user exists:', error);
+            return false;
+    }
+}
 
 async function getWorkersByJob(job: String) {
     try {

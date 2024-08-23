@@ -1,11 +1,19 @@
 import { describe, it, expect } from 'vitest'
 import { getChatIdWithDPI, getChatMessages, getHirings } from '../../src/controller/ChatController';
-import { conseguirtrabajo, getUser, getWorkersByJob, userExists } from '../../src/controller/UserController'
+import { getLoginUser, conseguirtrabajo, getWorkersByJob, userExists } from '../../src/controller/UserController'
 
 describe('Conseguir a un usuario', () => {
-    it('adds one plus one and returns two', async () => {
-        expect( await getUser( '3833 86608 0102','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5' )).toEqual(null)
-      })
+  it('Debería iniciar sesión correctamente con credenciales válidas', async () => {
+    const user = await getLoginUser('3833 86608 0102', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5');
+    expect(user).toBeDefined(); // Verifica que se haya obtenido un usuario
+    expect(user).toHaveProperty('dpi', '3833 86608 0102'); // Verifica propiedades específicas
+    // Puedes agregar más verificaciones según lo que devuelva el endpoint
+  });
+
+  it('Debería fallar con credenciales inválidas', async () => {
+    const user = await getLoginUser('3833 86608 0102', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfmm');
+    expect(user).toBeNull(); // Espera que la función regrese null en caso de error
+  });
 });
 
 
