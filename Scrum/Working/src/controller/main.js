@@ -1,5 +1,4 @@
 import CryptoJS from 'crypto-js';
-import bcrypt from "bcrypt";
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
@@ -49,7 +48,7 @@ app.post('/LoginUser', apiKeyAuth, async (req, res) => {
     const user = await getLoginUser(dpi);
 
     if (user) {
-      const hashedPassword = cryptoJS.SHA256(password).toString();
+      const hashedPassword = CryptoJS.SHA256(password).toString();
 
       if (hashedPassword === user.contrasenia) {
         return res.status(200).json(user);
