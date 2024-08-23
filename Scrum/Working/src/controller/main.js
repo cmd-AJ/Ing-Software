@@ -48,13 +48,11 @@ app.post('/LoginUser', apiKeyAuth, async (req, res) => {
     const user = await getLoginUser(dpi);
 
     if (user) {
-      const hashedPassword = CryptoJS.SHA256(password).toString();
       console.log(password)
-      console.log(hashedPassword)
       console.log(user.dpi)
       console.log(user.contrasenia)
 
-      if (hashedPassword === user.contrasenia) {
+      if (password === user.contrasenia) {
         return res.status(200).json(user);
       } else {
         return res.status(400).json({ error: 'Incorrect password' });
