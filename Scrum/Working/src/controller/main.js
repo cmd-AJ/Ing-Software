@@ -1,3 +1,4 @@
+import CryptoJS from 'crypto-js';
 import bcrypt from "bcrypt";
 import express from 'express'
 import cors from 'cors'
