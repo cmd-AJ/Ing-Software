@@ -48,21 +48,23 @@ app.post('/LoginUser', apiKeyAuth, async (req, res) => {
     const user = await getLoginUser(dpi);
 
     if (user) {
-      const isPasswordValid = await bcrypt.compare(password, user.contrasenia);
-      if (isPasswordValid) {
+      const hashedPassword = cryptoJS.SHA256(password).toString();
+
+      if (hashedPassword === user.contrasenia) {
         return res.status(200).json(user);
       } else {
-        return res.status(400).json({error: 'Incorrect password'});
+        return res.status(400).json({ error: 'Incorrect password' });
       }
     } else {
-      return res.status(400).json({error: 'User not found'});
+      return res.status(400).json({ error: 'User not found' });
     }
 
   } catch (error) {
-    console.error('Login error:', error);  // Log the error
+    console.error('Login error:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 app.post('/users', apiKeyAuth ,async (req, res) => {
