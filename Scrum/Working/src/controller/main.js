@@ -41,29 +41,29 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/LoginUser', apiKeyAuth ,async (req, res) => {
+app.post('/LoginUser', apiKeyAuth, async (req, res) => {
   try {
-    const {
-      dpi, password
-    } = req.body
+    const { dpi, password } = req.body;
 
-    const user = await getLoginUser(dpi)
+    const user = await getLoginUser(dpi);
 
     if (user) {
       const isPasswordValid = await bcrypt.compare(password, user.contrasenia);
       if (isPasswordValid) {
-        res.status(200).json(user);
+        return res.status(200).json(user);
       } else {
-        res.status(400).json({error: 'Incorrect password'});
+        return res.status(400).json({error: 'Incorrect password'});
       }
     } else {
-      res.status(400).json({error: 'User not found'});
+      return res.status(400).json({error: 'User not found'});
     }
 
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' })
+    console.error('Login error:', error);  // Log the error
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
+
 
 app.post('/users', apiKeyAuth ,async (req, res) => {
   try {
