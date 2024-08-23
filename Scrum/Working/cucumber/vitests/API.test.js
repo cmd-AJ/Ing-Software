@@ -1,12 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { getChatIdWithDPI, getChatMessages, getHirings } from '../../src/controller/ChatController';
-import { getLoginUser, conseguirtrabajo, getUser, getWorkersByJob, userExists } from '../../src/controller/UserController'
-
-describe('Conseguir a un usuario', () => {
-    it('adds one plus one and returns two', async () => {
-        expect( await getUser( '3833 86608 0102','5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5' )).toEqual(null)
-      })
-});
+import { getLoginUser, conseguirtrabajo, getWorkersByJob, userExists } from '../../src/controller/UserController'
 
 describe('Conseguir a un usuario', () => {
   it('Debería iniciar sesión correctamente con credenciales válidas', async () => {

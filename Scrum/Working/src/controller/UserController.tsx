@@ -1,21 +1,5 @@
 import { Trabajador } from "../components/Searched/type";
 
-export async function getUsers() {
-    try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'api-key': import.meta.env.VITE_API_KEY
-            }
-        })
-        const data = await response.json()
-        return data
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        return [];
-    }
-}
-
 function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
 
     const data = {
@@ -122,8 +106,6 @@ async function userExists(dpi: String, password: String) {
     try {
         const user = await getLoginUser(dpi, password);
 
-        console.log("aqui test", user);
-
         if(user){
             return true;
         } else {
@@ -136,26 +118,6 @@ async function userExists(dpi: String, password: String) {
             return false;
     }
 }
-
-
-export async function getUser(dpi: any, password: any) {
-    try {
-        const users = await getUsers();
-        let foundUser = null;
-
-        users.forEach((user: { id: any; password: any; }) => {
-            if (user.id === dpi && user.password === password) {
-                //foundUser = user;
-            }
-        });
-        return foundUser
-    } catch (error) {
-        console.error('Error getting user:', error);
-        return null;
-    }
-}
-
-
 
 async function getWorkersByJob(job: String) {
     try {
