@@ -1,12 +1,25 @@
 .background {
-    background-color: #222831;
+    background-color: #FFF;
     opacity: 0.9;
-    background-image: radial-gradient(#31363F 1.3px, transparent 1.3px), radial-gradient(#31363F 1.3px, #222831 1.3px);
     background-size: 52px 52px;
     background-position: 0 0, 26px 26px;
     height: 100vh; /* Asegúrate de que ocupe toda la altura de la ventana */
     display: flex;
     flex-direction: column;
     overflow-y: auto; /* Cambia a auto para que solo aparezca el scroll cuando sea necesario */
+}
+
+.calendar-header {
+    padding: 0 25px 0 25px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+}
+
+.center-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
