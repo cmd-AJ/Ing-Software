@@ -104,6 +104,10 @@ export async function getLoginUser(dpi: any, password: any) {
             body: JSON.stringify(credentials)
         });
 
+        if (!response.ok) {
+            return null;
+        }
+
         const user = await response.json();
 
         return user
@@ -116,11 +120,20 @@ export async function getLoginUser(dpi: any, password: any) {
 
 async function userExists(dpi: String, password: String) {
     try {
-        const users = await getUsers();
-        return users.some((user: { dpi: String; contrasenia: String; }) => user.dpi === dpi && user.contrasenia === password);
-    } catch (error) {
-        console.error('Error checking if user exists:', error);
-        return false;
+        const user = await getLoginUser(dpi, password);
+
+        console.log("aqui test", user);
+
+        if(user){
+            return true;
+        } else {
+            return false;
+        }
+             
+        } catch (error) {
+
+            console.error('Error checking if user exists:', error);
+            return false;
     }
 }
 

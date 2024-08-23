@@ -21,7 +21,7 @@ const LoginButton: React.FC<ContainerProps> = ({
 }) => {
     const [userExist, setUserExist] = useState(false)
     const history = useHistory();
-    console.log(`password: ${password}`)
+    
     const handleClick = async () => {
         if ((dpi != "") && (password != '') && (role !== "")) {  
 
