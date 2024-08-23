@@ -31,7 +31,7 @@ app.get('/test', apiKeyAuth ,async (req, res) => {
 })
 
 
-app.get('/users',apiKeyAuth ,async (req, res) => {
+app.post('/users',apiKeyAuth ,async (req, res) => {
   try {
       const users = await getUsers()
       res.status(200).json(users)
