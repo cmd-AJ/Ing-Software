@@ -49,6 +49,9 @@ app.post('/LoginUser', apiKeyAuth, async (req, res) => {
 
     if (user) {
       const hashedPassword = CryptoJS.SHA256(password).toString();
+      console.log(password)
+      console.log(hashedPassword)
+      console.log(user.contrasenia)
 
       if (hashedPassword === user.contrasenia) {
         return res.status(200).json(user);
