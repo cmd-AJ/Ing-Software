@@ -31,7 +31,7 @@ app.get('/test', apiKeyAuth ,async (req, res) => {
 })
 
 
-app.post('/users',apiKeyAuth ,async (req, res) => {
+app.get('/users',apiKeyAuth ,async (req, res) => {
   try {
       const users = await getUsers()
       res.status(200).json(users)
@@ -40,14 +40,14 @@ app.post('/users',apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/LoginUser', apiKeyAuth ,async (req, res) => {
+app.post('/LoginUser', apiKeyAuth ,async (req, res) => {
   try {
     const {
       dpi, password
     } = req.body
 
     const user = await getLoginUser(dpi)
-
+    console.log(user)
     if(user && user.contrasenia === password) {
       res.status(200).json( user )
     } else {
