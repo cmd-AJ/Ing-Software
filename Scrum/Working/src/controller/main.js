@@ -48,9 +48,6 @@ app.post('/LoginUser', apiKeyAuth, async (req, res) => {
     const user = await getLoginUser(dpi);
 
     if (user) {
-      console.log(password)
-      console.log(user.dpi)
-      console.log(user.contrasenia)
 
       if (password === user.contrasenia) {
         return res.status(200).json(user);

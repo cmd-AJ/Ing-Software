@@ -95,6 +95,7 @@ export async function getLoginUser(dpi: any, password: any) {
 
     try {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/LoginUser`,{
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
@@ -108,6 +109,7 @@ export async function getLoginUser(dpi: any, password: any) {
         return user
 
     } catch (error) {
+        console.error("Error while getting login user", error)
         return null;
     }
 }
