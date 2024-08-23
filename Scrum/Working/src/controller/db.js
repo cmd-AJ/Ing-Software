@@ -26,7 +26,7 @@ export async function getLoginUser(dpi) {
         };
 
         const result = await client.query(query)
-        return result.rows
+        return result.rows[0]
 
     } catch (error) {
         console.error('Error getting login user:', error);
