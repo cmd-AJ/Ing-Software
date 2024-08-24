@@ -6,21 +6,9 @@
   width: calc(100% - 50px);
   height: calc(100% - 30vh);
   margin: 15vh auto 0;
-  background-color: aqua;
+  background-color: none;
 }
 
-
-
-.grid-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-color: #f0f0f0; */
-  border: 1px solid #ccc;
-  /* padding: 10px;
-  font-size: 14px; */
-  /* text-align: center; */
-}
 
 .grid-item.black {
   background-color: black;
