@@ -1,25 +1,20 @@
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 10px;
-  width: calc(100% - 50px);
-  height: calc(100% - 30vh);
-  margin: 15vh auto 0;
-  background-color: none;
-}
-
-
-.grid-item.black {
-  background-color: black;
-  color: white;
-}
-
-.grid-item.yellow {
-  background-color: yellow;
-}
-
-.grid-item.blue {
-  background-color: blue;
-  color: white;
-}
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    width: calc(100% - 50px);
+    height: calc(100% - 30vh);
+    margin: 15vh auto 0;
+    background-color: none;
+  }
+  
+  .grid-item.black {
+    background-color: black;
+    color: white;
+  }
+  
+  .grid-item.yellow {
+    background-color: yellow;
+  }
+  
