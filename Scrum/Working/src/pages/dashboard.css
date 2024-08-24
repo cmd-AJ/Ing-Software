@@ -10,7 +10,7 @@
 }
 
 .calendar-header {
-    padding: 0 25px 0 25px;
+    padding: 10px 25px 10px 25px;
     width: 100%;
     display: grid;
     grid-template-rows: 100%;
@@ -33,5 +33,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 10px;
 }
 

@@ -75,4 +75,6 @@ export class Month {
         const firstDay = new Date(this.year, this.monthNumber - 1, 1);
         return firstDay.toLocaleDateString('es-ES', { weekday: 'short' }).substring(0, 2).toUpperCase();
     }
+
+    
 }

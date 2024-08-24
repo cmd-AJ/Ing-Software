@@ -1,0 +1,21 @@
+.change-button, .daynumbers-display {
+    background-color: #DDD;
+    color: #000;
+    border-radius: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-button {
+    width: 15%;
+}
+
+.change-button:hover {
+    background-color: #999;
+}
+
+.daynumbers-display {
+    padding: 10px;
+}

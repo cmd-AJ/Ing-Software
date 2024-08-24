@@ -5,6 +5,7 @@ import GridWeek from '../components/Dashboard/GridWeek';
 import { Month } from '../components/Calendar/MonthStruct';
 import TextND from '../components/Txt/TextND';
 import DoubleToggle from '../components/Miscellaneous/DoubleToggle';
+import DateChanger from '../components/Calendar/DateChange';
 
 const Dashboard: React.FC = () => {
 
@@ -31,7 +32,7 @@ const Dashboard: React.FC = () => {
                 <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
               </div>
               <div className='center-left-element'>
-
+                <DateChanger/>
               </div>
             </div>
             {
