@@ -1,6 +1,6 @@
 import React from 'react';
 import './gridWeek.css';
-import Notes from './Notes';
+import Notas from './Notes';
 
 const GridWeek = () => {
   const notes = [
@@ -34,26 +34,12 @@ const GridWeek = () => {
         if (col === 1 && row >= 2 && row <= 5) className += " blue";
 
         // Agregar Notes solo en celdas fuera de la primera fila y columna
-        if ((row > 1 && col > 1) && notes.length > 0) {
-          const note = notes.shift(); // Tomar la primera nota disponible
-          return (
-            <div key={index} className={className}>
-              <div className="card">
-                <img src={note.foto} alt={`Foto de ${note.trabajador}`} className="card-image" />
-                <div className="card-content">
-                  <h3 className="card-title">{note.descripción}</h3>
-                  <p className="card-hora">{note.hora}</p>
-                  <p className="card-descripción">{note.trabajador}</p>
-                  <p className="card-precio">{note.precio}</p>
-                </div>
-              </div>
-            </div>
-          );
-        }
-
         return (
           <div key={index} className={className}>
             {index + 1}
+            {row > 1 && col > 1 && notes.length > 0 && (
+              <Notas />
+            )}
           </div>
         );
       })}

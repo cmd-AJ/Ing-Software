@@ -11,7 +11,7 @@ interface Elemento {
   foto: string;
 }
 
-const Notes: React.FC = () => {
+const Notas: React.FC = () => {
   const [elementos, setElementos] = useState<Elemento[]>([
     {
       trabajador: 'Luka Pérez',
@@ -60,8 +60,7 @@ const Notes: React.FC = () => {
     fetchData();
   }, []);
   */
-
-  return (
+  return ( 
     <div className="main">
       <ul className="cards">
         {elementos.map((elemento, index) => (
@@ -81,4 +80,4 @@ const Notes: React.FC = () => {
   );
 };
 
-export default Notes;
+export default Notas;
