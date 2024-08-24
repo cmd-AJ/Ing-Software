@@ -22,6 +22,8 @@ const GridWeek = () => {
     }
   ];
 
+  const daysOfWeek = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
   return (
     <div className="grid-container">
       {Array.from({ length: 40 }).map((_, index) => {
@@ -33,12 +35,14 @@ const GridWeek = () => {
         if (row === 1 && col >= 2 && col <= 8) className += " yellow";
         if (col === 1 && row >= 2 && row <= 5) className += " blue";
 
-        // Agregar Notes solo en celdas fuera de la primera fila y columna
         return (
           <div key={index} className={className}>
-            {index + 1}
-            {row > 1 && col > 1 && notes.length > 0 && (
-              <Notas />
+            {row === 1 && col > 1 && col <= 8 ? (
+              daysOfWeek[col - 2] // Mostrar los nombres de los días
+            ) : (
+              row > 1 && col > 1 && notes.length > 0 && (
+                <Notas />
+              )
             )}
           </div>
         );

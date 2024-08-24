@@ -4,7 +4,7 @@
     background-image: radial-gradient(#31363F 1.3px, transparent 1.3px), radial-gradient(#31363F 1.3px, #222831 1.3px);
     background-size: 52px 52px;
     background-position: 0 0, 26px 26px;
-    height: 100vh; /* Asegúrate de que ocupe toda la altura de la ventana */
+    height: 100%; /* Asegúrate de que ocupe toda la altura de la ventana */
     display: flex;
     flex-direction: column;
     overflow-y: auto; /* Cambia a auto para que solo aparezca el scroll cuando sea necesario */
