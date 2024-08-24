@@ -1,0 +1,17 @@
+.toggle-container {
+    width: 75%;
+    background-color: #DDD;
+    display: flex;
+    justify-content: space-around;
+}
+
+.toggle-element {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+

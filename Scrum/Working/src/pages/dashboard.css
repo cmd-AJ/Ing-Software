@@ -17,9 +17,21 @@
     grid-template-columns: 33.33% 33.33% 33.33%;
 }
 
-.center-element {
+.center-right-element {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.center-center-element {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.center-left-element {
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
 }
 

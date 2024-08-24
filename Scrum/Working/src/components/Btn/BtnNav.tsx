@@ -1,5 +1,4 @@
 import { IonButton, IonIcon } from "@ionic/react"
-import { chatbubbleEllipses } from "ionicons/icons"
 import { useHistory } from 'react-router-dom';
 
 interface ContainerProps {
