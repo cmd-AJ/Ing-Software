@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './notes.css';
-import { getHirings } from '../../controller/ChatController';
+import Note from './Note';
+
 
 interface Elemento {
   trabajador: string;
@@ -39,41 +40,11 @@ const Notas: React.FC = () => {
     },
   ]);
 
-  /*
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getHirings('3834 49898 0101');
-        const formattedData = data.map((item: any) => ({
-          trabajador: item.nombre,
-          dia: item.timestampcita.split(' ')[0],
-          hora: item.timestampcita.split(' ')[1],
-          descripción: item.descripcion,
-          precio: item.description,
-        }));
-        setElementos(formattedData);
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  */
-  return ( 
+  return (
     <div className="main">
       <ul className="cards">
         {elementos.map((elemento, index) => (
-          <li key={index} className="card">
-            <img src={elemento.foto} alt={`Foto de ${elemento.trabajador}`} className="card-image"/>
-            <div className="card-content">
-              <h3 className="card-title">{elemento.descripción}</h3>
-              {/* <p className="card-dia"> {elemento.dia}</p> */}
-              <p className="card-hora">{elemento.hora}</p>
-              <p className="card-descripción">{elemento.trabajador}</p>
-              <p className="card-precio">{elemento.precio}</p>
-            </div>
-          </li>
+          <Note key={index} {...elemento} />
         ))}
       </ul>
     </div>

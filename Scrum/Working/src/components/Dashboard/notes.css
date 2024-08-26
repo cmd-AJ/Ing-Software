@@ -1,108 +1,51 @@
-/* Global Styles */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Main Container */
-.main {
-  max-width: 1200px;
-  max-height: fit-content;
-  margin: 0 auto;
-}
-
-/* Card Styles */
-.card {
-  background-color: #B8D9FF; /* Fondo de la card */
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.slot {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  width: 100%; /* Asegura que ocupe todo el espacio disponible en el grid */
-  max-width: 180px; /* Define un ancho máximo para las cards */
-  height: 200px; /* Define una altura fija para las cards */
-  overflow: hidden; /* Esconde cualquier contenido que se salga de la card */
-  box-sizing: border-box; /* Asegura que padding y border no afecten las dimensiones */
+  justify-content: center; /* Center the card horizontally */
+  align-items: center; /* Center the card vertically */
+  padding: 5px; /* Optional: Add some padding to ensure the card doesn't touch the edges */
 }
 
-/* Añadimos estas propiedades para asegurar dimensiones uniformes */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.note-card {
+  background-color: #e6f7e9; /* Light green background */
+  border: 1px solid #b5d8bb; /* Border similar to the example */
+  border-radius: 10px;
+  padding: 10px;
+  position: relative; /* Required for absolute positioning the image */
+  width: 100%; /* Make the card responsive */
+  height: 100%; /* Make the card responsive */
+  max-width: 200px; /* Optional: Set a maximum width for larger cells */
+  max-height: 150px; /* Optional: Set a maximum height for larger cells */
+  box-sizing: border-box; /* Ensure padding doesn't affect the card's size */
 }
 
-/* Aquí nos aseguramos que las cards tengan la misma dimensión */
-.card-content {
+.note-content {
   flex-grow: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centra el contenido verticalmente */
-  text-align: left;
+  text-align: left; /* Align text to the left */
 }
 
-.card .card-title {
-  font-weight: bold;
-  font-size: large;
-  color: #000;
-  margin: 0 0 25px 0; /* Espacio debajo del título */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.note-title {
+  font-size: 14px;
+  margin: 0;
+  color: #333;
+  /* No need for text alignment, keeping default */
 }
 
-.card p {
-  color: #000;
-  margin: 0 0 8px 0; /* Espacio entre los elementos */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-  overflow: hidden; /* Esconde el texto que se salga del espacio */
-  text-overflow: ellipsis; 
+.note-hora {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+  /* No need for text alignment, keeping default */
 }
 
-.card .card-descripción {
-  color: #000;
-  margin: 0 0 8px 0; /* Espacio debajo del elemento */
-  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-  overflow: hidden; /* Esconde el texto que se salga del espacio */
-  text-overflow: ellipsis; /* Añade "..." al final del texto si es muy largo */
-  max-width: calc(100% - 40px); /* Ajusta el ancho máximo del texto para evitar la foto */
-  padding-right: 10px; /* Añade un padding para crear más espacio entre el texto y la imagen */
-}
-
-
-.card-image {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
+.note-image {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    padding: 12px;
-    max-width: 100%; /* Permite que ocupe todo el ancho disponible en pantallas pequeñas */
-  }
-
-  .card-image {
-    width: 30px;
-    height: 30px;
-  }
+  bottom: 10px;
+  right: 10px;
+  width: 20%; /* Make the image size responsive */
+  height: 20%; /* Make the image size responsive */
+  min-width: 50px; /* Ensure the image doesn't get too small */
+  min-height: 50px; /* Ensure the image doesn't get too small */
+  border-radius: 50%; /* Makes the image circular */
+  border: 2px solid white; /* Optional: adds a white border around the image */
+  object-fit: cover; /* Ensures the image fits within the circle */
 }

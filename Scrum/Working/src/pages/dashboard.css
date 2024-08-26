@@ -1,12 +1,19 @@
 .background {
-    background-color: #222831;
+    background-color: #F3F4F5;
     opacity: 0.9;
-    background-image: radial-gradient(#31363F 1.3px, transparent 1.3px), radial-gradient(#31363F 1.3px, #222831 1.3px);
     background-size: 52px 52px;
     background-position: 0 0, 26px 26px;
-    height: 100%; /* Asegúrate de que ocupe toda la altura de la ventana */
+    height: calc(100% - 15vh); /* Ensure it takes the full height of the viewport */
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Cambia a auto para que solo aparezca el scroll cuando sea necesario */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    margin: 0 20px; /* Add margin on the left and right sides */
+
+    /* Hide the scrollbar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
 
+.background::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
