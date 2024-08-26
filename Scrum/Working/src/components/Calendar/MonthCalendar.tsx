@@ -1,3 +1,4 @@
+import TextND from '../Txt/TextND'
 import './calendar.css'
 
 interface ContainerProps {
@@ -6,63 +7,43 @@ interface ContainerProps {
 
 const MonthCalendar : React.FC<ContainerProps> = ({monthMatrix}) => {
     
-
-    
     return (
-        <>
-        <div className='days-label'>
-            <p>
-                lunes
-            </p>
-            <p>
-                martes
-            </p>
+        <div style={{margin: "25px", marginTop: "0" }}>
+            <div className='days-label'>
+                <b className='day-item' style={{borderRadius: "15px 0 0 0"}}>
+                    <TextND text='Lunes' size='small' hex='#000'/>
+                </b>
+                <b className='day-item'>
+                    <TextND text='Martes' size='small' hex='#000'/>
+                </b>
+                <b className='day-item'>
+                    <TextND text='Miercoles' size='small' hex='#000'/>
+                </b>
+                <b className='day-item'>
+                    <TextND text='Jueves' size='small' hex='#000'/>
+                </b>
+                <b className='day-item'>
+                    <TextND text='Viernes' size='small' hex='#000'/>
+                </b>
+                <b className='day-item'>
+                    <TextND text='Sábado' size='small' hex='#000'/>
+                </b>
+                <b className='day-item' style={{ borderRadius: "0 15px 0 0"}}>
+                    <TextND text='Domingo' size='small' hex='#000'/>
+                </b>
+            </div>
+            <div className="calendar-month">
+                {
+                    monthMatrix.flat().map((day, index) => (
+                        <div key={index} className='grid-item'>
+                            <div style={{display: "flex", width: "100%", justifyContent: 'flex-end', padding: "10px"}}>
+                                {day > 0 ? day : null}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
-        <div className="calendar-month">
-             <div className="grid-item">1</div>
-  <div className="grid-item">2</div>
-  <div className="grid-item">3</div>
-  <div className="grid-item">4</div>
-  <div className="grid-item">5</div>
-  <div className="grid-item">6</div>
-  <div className="grid-item">7</div>
-  <div className="grid-item">8</div>
-  <div className="grid-item">9</div>
-  <div className="grid-item">10</div>
-  <div className="grid-item">11</div>
-  <div className="grid-item">12</div>
-  <div className="grid-item">13</div>
-  <div className="grid-item">14</div>
-  <div className="grid-item">15</div>
-  <div className="grid-item">16</div>
-  <div className="grid-item">17</div>
-  <div className="grid-item">18</div>
-  <div className="grid-item">19</div>
-  <div className="grid-item">20</div>
-  <div className="grid-item">21</div>
-  <div className="grid-item">22</div>
-  <div className="grid-item">23</div>
-  <div className="grid-item">24</div>
-  <div className="grid-item">25</div>
-  <div className="grid-item">26</div>
-  <div className="grid-item">27</div>
-  <div className="grid-item">28</div>
-  <div className="grid-item">29</div>
-  <div className="grid-item">30</div>
-  <div className="grid-item">31</div>
-  <div className="grid-item">32</div>
-  <div className="grid-item">33</div>
-  <div className="grid-item">34</div>
-  <div className="grid-item">35</div>
-  <div className="grid-item">36</div>
-  <div className="grid-item">37</div>
-  <div className="grid-item">38</div>
-  <div className="grid-item">39</div>
-  <div className="grid-item">40</div>
-  <div className="grid-item">41</div>
-  <div className="grid-item">42</div>
-        </div>
-        </>
     )
 }
 
