@@ -1,14 +1,12 @@
 export class Month {
     name: string;
     year: number;
-    day: number;
     numOfDays: number;
     monthNumber: number;
     initialDay: number;
     matrix: number[][];
 
-    constructor(day: number, monthNumber: number, year: number) {
-        this.day = day;
+    constructor(monthNumber: number, year: number) {
         this.monthNumber = monthNumber;
         this.year = year;
         this.name = this.getMonthName();

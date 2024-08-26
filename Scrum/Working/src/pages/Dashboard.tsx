@@ -13,14 +13,14 @@ const Dashboard: React.FC = () => {
 
   const currentDate = new Date();
 
-  const [thisMonth, setThisMonth] = useState<Month>(new Month(0, 0, 0));
+  const [thisMonth, setThisMonth] = useState<Month>(new Month(0, 0));
   const [month, setMonth] = useState(currentDate.getMonth());
   const [year, setYear] = useState(currentDate.getFullYear());
   const [day, setDay] = useState(currentDate.getDay());
   const [week, setWeek] = useState<number>(0);
 
   useEffect(()=>{
-    setThisMonth(new Month(day, month, year));
+    setThisMonth(new Month(month, year));
 
     const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const startDayOfWeek = startOfMonth.getDay()
@@ -31,6 +31,10 @@ const Dashboard: React.FC = () => {
 
     setWeek(weekNumber-1);
   },[])
+
+  useEffect(()=>{
+    setThisMonth(new Month(month, year))
+  },[month,year])
 
   return (
     <IonPage>
@@ -43,7 +47,7 @@ const Dashboard: React.FC = () => {
                 <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
               </div>
               <div className='center-left-element'>
-                <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix}/>
+                <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear}/>
               </div>
             </div>
             {
