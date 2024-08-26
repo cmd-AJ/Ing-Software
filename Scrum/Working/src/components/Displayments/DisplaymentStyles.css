@@ -10,7 +10,7 @@
 }
 
 #center-displayment, #right-displayment {
-    background-color: var(--ion-color-primary-contrast);
+    background-color: var(--white);
     padding: 10px;
 }
 
@@ -30,7 +30,7 @@
     flex-direction: column; 
     border-radius: 25px;
     padding: 10px;
-    background-color: var(--ion-color-primary-contrast);
+    background-color: var(--white);
 }
 
 #info-div-display{

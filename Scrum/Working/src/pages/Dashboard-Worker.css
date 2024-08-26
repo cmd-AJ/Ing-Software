@@ -36,7 +36,7 @@
 .lower-displayment {
     width: 100%;
     height: auto;
-    background-color: var(--ion-color-primary-contrast);
+    background-color: var(--white);
     display: flex;
     flex-direction: row;
     color: var(--ion-color-tertiary);

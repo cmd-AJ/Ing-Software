@@ -3,6 +3,7 @@ import './BtnStyles.css'
 import ModalBtnI from './ModalBtnI'
 import ModalBtnN from './ModalsBtnN'
 import { chatbubbleEllipses, pencilOutline } from 'ionicons/icons'
+import BtnNav from './BtnNav'
 // import BtnNav from './BtnNav'
 
 
@@ -37,7 +38,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
     } else if (owner === 'false'){
         return (
             <div className='btn-header-horizontal'>
-                {/* <BtnNav img={chatbubbleEllipses} direction='chat'/> */}
+                <BtnNav img={chatbubbleEllipses} direction='chat'/>
             </div>
         )
     }

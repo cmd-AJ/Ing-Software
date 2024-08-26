@@ -14,6 +14,35 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.calendar-header {
+    padding: 10px 25px 10px 25px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+}
+
+.center-right-element {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.center-center-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-left-element {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+
 .background::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
 }
+

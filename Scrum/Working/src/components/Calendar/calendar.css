@@ -1,0 +1,55 @@
+.change-button, .daynumbers-display {
+    background-color: #DDD;
+    color: #000;
+    border-radius: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-button {
+    width: 60px;
+}
+
+.change-button:hover {
+    background-color: #999;
+}
+
+.daynumbers-display {
+    padding: 10px;
+}
+
+.calendar-month {
+    min-height: 70vh; /* Ajusta esto según tu preferencia */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 300px 300px 300px 300px 300px 300px;
+    overflow-y: auto; /* Permite desplazamiento vertical en el componente */
+    margin-bottom: 90px;
+}
+
+.days-label {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 100%;
+    border-radius: 15px 15px 0 0;
+}
+
+.day-item {
+    background-color: #DDD;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: #aaa solid 1px;
+}
+
+.grid-item {
+    background-color: white;
+    border: 1px solid #aaa;
+    display: flex;
+    flex-direction: column;
+}
