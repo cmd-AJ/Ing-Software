@@ -9,7 +9,6 @@ import DateChanger from '../components/Calendar/DateChange';
 import MonthCalendar from '../components/Calendar/MonthCalendar';
 
 const Dashboard: React.FC = () => {
-
   const [typeCalendar, setTypeCalendar] = useState('semana')
 
   const currentDate = new Date();
@@ -36,6 +35,33 @@ const Dashboard: React.FC = () => {
     setThisMonth(new Month(month, year))
   },[month,year])
 
+  const elementos = [
+    {
+      trabajador: 'Luka Pérez',
+      dia: '2024-08-12',
+      hora: '10:00 AM',
+      descripción: 'Mantenimiento general',
+      precio: 'Q500',
+      foto: 'https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png'
+    },
+    {
+      trabajador: 'Mario Bros',
+      dia: '2024-08-13',
+      hora: '02:00 PM',
+      descripción: 'Fregadero',
+      precio: 'Q750',
+      foto: 'https://i.pinimg.com/736x/b7/16/ed/b716edbac6fe2846a6db5d88711bacdd.jpg'
+    },
+    {
+      trabajador: 'Carlos Gómez',
+      dia: '2024-08-14',
+      hora: '09:00 AM',
+      descripción: 'Instalación de sistema eléctrico',
+      precio: 'Q1000',
+      foto: 'https://static.vecteezy.com/system/resources/previews/019/900/322/non_2x/happy-young-cute-illustration-face-profile-png.png'
+    },
+  ];
+  
   return (
     <IonPage>
         <div className='background'>
@@ -52,7 +78,7 @@ const Dashboard: React.FC = () => {
             </div>
             {
               typeCalendar === 'semana' &&
-              <GridWeek/>
+              <GridWeek notes={elementos} />
             }
             {
               typeCalendar === 'mes' &&
@@ -64,3 +90,6 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+
+
