@@ -19,3 +19,27 @@
 .daynumbers-display {
     padding: 10px;
 }
+
+.calendar-month {
+    min-height: 70vh; /* Ajusta esto según tu preferencia */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 300px 300px 300px 300px 300px 300px;
+    border: #000 solid 1px;
+    overflow-y: auto; /* Permite desplazamiento vertical en el componente */
+}
+
+.days-label {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 100%;
+    border: #000 solid 1px;
+}
+
+.grid-item {
+    background-color: lightblue;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

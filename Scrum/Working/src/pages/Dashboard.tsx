@@ -6,6 +6,7 @@ import { Month } from '../components/Calendar/MonthStruct';
 import TextND from '../components/Txt/TextND';
 import DoubleToggle from '../components/Miscellaneous/DoubleToggle';
 import DateChanger from '../components/Calendar/DateChange';
+import MonthCalendar from '../components/Calendar/MonthCalendar';
 
 const Dashboard: React.FC = () => {
 
@@ -16,7 +17,6 @@ const Dashboard: React.FC = () => {
   const [thisMonth, setThisMonth] = useState<Month>(new Month(0, 0));
   const [month, setMonth] = useState(currentDate.getMonth());
   const [year, setYear] = useState(currentDate.getFullYear());
-  const [day, setDay] = useState(currentDate.getDay());
   const [week, setWeek] = useState<number>(0);
 
   useEffect(()=>{
@@ -51,8 +51,12 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
             {
-              typeCalendar == 'semana' &&
+              typeCalendar === 'semana' &&
               <GridWeek/>
+            }
+            {
+              typeCalendar === 'mes' &&
+              <MonthCalendar monthMatrix={thisMonth.matrix}/>
             }
         </div>
     </IonPage>
