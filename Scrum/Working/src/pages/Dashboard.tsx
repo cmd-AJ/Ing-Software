@@ -17,10 +17,19 @@ const Dashboard: React.FC = () => {
   const [month, setMonth] = useState(currentDate.getMonth());
   const [year, setYear] = useState(currentDate.getFullYear());
   const [day, setDay] = useState(currentDate.getDay());
-  const [weekDays, setWeekDays] = useState<[Date]>();
+  const [week, setWeek] = useState<number>(0);
 
   useEffect(()=>{
     setThisMonth(new Month(day, month, year));
+
+    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const startDayOfWeek = startOfMonth.getDay()
+    const offset = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+
+    const currentDay = currentDate.getDate();
+    const weekNumber = Math.ceil((currentDay + offset) / 7);
+
+    setWeek(weekNumber-1);
   },[])
 
   return (
@@ -28,13 +37,13 @@ const Dashboard: React.FC = () => {
         <div className='background'>
             <div className='calendar-header'>
               <div className='center-right-element'>
-                <TextND text={thisMonth.matrix[5][6] + ", " + thisMonth.year} size='big' hex='#000'/>
+                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
               </div>
               <div className='center-center-element'>
                 <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
               </div>
               <div className='center-left-element'>
-                <DateChanger/>
+                <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix}/>
               </div>
             </div>
             {
