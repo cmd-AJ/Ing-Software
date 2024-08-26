@@ -14,7 +14,7 @@ const DateChanger: React.FC<ContainerProps> = () => {
                 <IonIcon icon={chevronBackOutline} size="large"/>
             </button>
             <div className="daynumbers-display">
-                <TextND text="18 - 25" hex="#000" size="medium"/>
+                <TextND text="30 - 25" hex="#000" size="medium"/>
             </div>
             <button className="change-button">
                 <IonIcon icon={chevronForwardOutline} size="large"/>

@@ -13,12 +13,14 @@ const Dashboard: React.FC = () => {
 
   const currentDate = new Date();
 
-  const [thisMonth, setThisMonth] = useState<Month>(new Month(0, 0));
+  const [thisMonth, setThisMonth] = useState<Month>(new Month(0, 0, 0));
   const [month, setMonth] = useState(currentDate.getMonth());
   const [year, setYear] = useState(currentDate.getFullYear());
+  const [day, setDay] = useState(currentDate.getDay());
+  const [weekDays, setWeekDays] = useState<[Date]>();
 
   useEffect(()=>{
-    setThisMonth(new Month(month, year));
+    setThisMonth(new Month(day, month, year));
   },[])
 
   return (
@@ -26,7 +28,7 @@ const Dashboard: React.FC = () => {
         <div className='background'>
             <div className='calendar-header'>
               <div className='center-right-element'>
-                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                <TextND text={thisMonth.matrix[5][6] + ", " + thisMonth.year} size='big' hex='#000'/>
               </div>
               <div className='center-center-element'>
                 <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>

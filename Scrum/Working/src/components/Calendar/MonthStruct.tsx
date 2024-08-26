@@ -1,16 +1,20 @@
 export class Month {
     name: string;
     year: number;
+    day: number;
     numOfDays: number;
     monthNumber: number;
-    initialDay: string;
+    initialDay: number;
+    matrix: number[][];
 
-    constructor(monthNumber: number, year: number) {
+    constructor(day: number, monthNumber: number, year: number) {
+        this.day = day;
         this.monthNumber = monthNumber;
-        this.name = this.getMonthName();
         this.year = year;
+        this.name = this.getMonthName();
         this.numOfDays = this.calculateNumOfDays();
         this.initialDay = this.calculateInitialDay();
+        this.matrix = this.getMonthMatrix();
     }
 
     private calculateNumOfDays(): number {
@@ -44,37 +48,72 @@ export class Month {
 
     private getMonthName(): string {
         switch (this.monthNumber) {
-            case 1:
+            case 0:
                 return "Enero";
-            case 2:
+            case 1:
                 return "Febrero";
-            case 3:
+            case 2:
                 return "Marzo";
-            case 4:
+            case 3:
                 return "Abril";
-            case 5:
+            case 4:
                 return "Mayo";
-            case 6:
+            case 5:
                 return "Junio";
-            case 7:
+            case 6:
                 return "Julio";
-            case 8:
+            case 7:
                 return "Agosto";
-            case 9:
+            case 8:
                 return "Septiembre";
-            case 10:
+            case 9:
                 return "Octubre";
-            case 11:
+            case 10:
                 return "Noviembre";
             default:
                 return "Diciembre";
         }
     }
 
-    private calculateInitialDay(): string {
-        const firstDay = new Date(this.year, this.monthNumber - 1, 1);
-        return firstDay.toLocaleDateString('es-ES', { weekday: 'short' }).substring(0, 2).toUpperCase();
+    private calculateInitialDay(): number {
+        const firstDay = new Date(this.year, this.monthNumber, 1);
+        return firstDay.getDay();
     }
 
+    private calculateNumOfDaysInPreviousMonth(): number {
+        const previousMonth = this.monthNumber === 0 ? 11 : this.monthNumber - 1;
+        const previousYear = this.monthNumber === 0 ? this.year - 1 : this.year;
+
+        const daysInPreviousMonth = new Date(previousYear, previousMonth + 1, 0).getDate();
+        return daysInPreviousMonth;
+    }
+
+    private getMonthMatrix(): number[][] {
+        let dayCounter = 1;
+        const firstDay = (this.initialDay + 6) % 7; // Ajusta el primer día para que 0 sea lunes
+        const days = this.numOfDays;
+        const daysInPreviousMonth = this.calculateNumOfDaysInPreviousMonth();
+        let nextMonthDayCounter = 1; // Contador para los días del siguiente mes
+        
+        const month: number[][] = [];
     
+        for (let i = 0; i < 6; i++) { // 6 filas máximo en un mes
+            const week: number[] = [];
+    
+            for (let j = 0; j < 7; j++) { // 7 días en una semana
+                if (i === 0 && j < firstDay) {
+                    week.push(daysInPreviousMonth - (firstDay - j - 1)); // Días del mes anterior
+                } else if (dayCounter <= days) {
+                    week.push(dayCounter);
+                    dayCounter++;
+                } else {
+                    week.push(nextMonthDayCounter++); // Días del siguiente mes
+                }
+            }
+    
+            month.push(week);
+        }
+    
+        return month;
+    }    
 }
