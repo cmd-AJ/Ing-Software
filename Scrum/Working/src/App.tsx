@@ -9,6 +9,8 @@ import About from "./pages/About";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import Help from "./pages/Help"
+
+
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -31,6 +33,7 @@ import "./pages/Login.css";
 import Dashboard_Worker from "./pages/Dashboard-Worker";
 import React from "react";
 import EmployerProfileView from "./pages/employer_view/EmployerProfileView";
+import Login_Admin from "./pages/administration/Login_Admin";
 
 setupIonicReact();
 
@@ -55,6 +58,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/help">
           <Help />
+        </Route>
+        <Route exact path="/admin">
+          <Login_Admin/>
         </Route>
         <Route exact path="/">
           <About />
