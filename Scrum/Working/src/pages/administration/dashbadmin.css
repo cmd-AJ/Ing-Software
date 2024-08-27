@@ -1,0 +1,94 @@
+@import "../../theme/variables.css";
+
+
+.adminhead{
+    background-color:var(--ion-color-primary);
+    height: 10vh;
+    font-size: 200%;
+    color: var(--white);
+}
+
+.subhead{
+    background-color: var(--ion-color-primary);
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: var(--white);
+}
+
+/* button for three action dash sus tickets */
+.ticketing{
+    --box-shadow: none;
+    height: 9vh;
+
+    
+}
+
+.linkref{
+    color: var(--white);
+    text-decoration: none;
+}
+
+.iconic{
+    background-color: var(--ion-color-primary);
+    --box-shadow: none;
+    margin-top: 4.5vh;
+    margin-bottom: 4.5vh;
+}
+
+/* button sabte */
+.dashbutton{
+    --box-shadow: none;
+    margin-left: 0.7%;
+    font-size: 5.4vw;
+    font-family: var(--ion-dynamic-font);
+    background-color: var(--ion-color-primary);
+    text-wrap: wrap;
+}
+
+
+/* iphone */
+@media (min-width:200px) and (max-width:425px){
+
+    .dashbutton{
+        font-size: 100%;
+    }
+
+    .ticketing{
+        width: 10vw;
+    }
+
+
+}
+
+/* tablet */
+@media (min-width:425px) and (max-width:1000px){
+
+    .ticketing{
+        height: 12vh;
+    }
+  
+    .dashbutton{
+        font-size: 5vw;
+    }
+    
+    .subhead{
+        font-size: 3vw;
+    }
+    
+}
+
+
+@media (min-width:1000px){
+
+
+    .dashbutton{
+        font-size: 3.2vw;
+    }
+    
+    .subhead{
+        font-size: 2vw;
+    }
+}
+
+
+

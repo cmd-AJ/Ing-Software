@@ -34,6 +34,7 @@ import Dashboard_Worker from "./pages/Dashboard-Worker";
 import React from "react";
 import EmployerProfileView from "./pages/employer_view/EmployerProfileView";
 import Login_Admin from "./pages/administration/Login_Admin";
+import Mod_Dashboard from "./pages/administration/Mod_Dashboard";
 
 setupIonicReact();
 
@@ -61,6 +62,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/admin">
           <Login_Admin/>
+        </Route>
+        <Route exact path="/dash_admin">
+          <Mod_Dashboard/>
         </Route>
         <Route exact path="/">
           <About />

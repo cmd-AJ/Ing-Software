@@ -1,13 +1,15 @@
+@import "../../theme/variables.css";
+
 .headerl{
-    background-color:var(--secondary);
+    background-color:var(--ion-color-primary);
     height: 10vh;
     font-size: 200%;
+    color: var(--white);
 }
 
 
-
 .footer{
-    background-color: var(--secondary);
+    background-color: var(--ion-color-primary);
     height: 6vh;
 }
 
@@ -131,6 +133,8 @@
         --color: #4b4a50;
         font-size: larger;
     }   
+
+    
     
 }
 

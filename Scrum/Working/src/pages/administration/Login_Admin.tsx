@@ -1,29 +1,19 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import {
   IonHeader,
-  IonToolbar,
   IonTitle,
-  IonButtons,
-  IonButton,
-  IonSegment,
-  IonSegmentButton,
   IonContent,
-  IonCardContent,
   IonPage,
-  IonItem,
+
   IonFooter,
   IonInput,
-  IonText,
+
 } from "@ionic/react";
 import "./loginad.css";
 import "../../theme/variables.css";
 import Inputver from "./Verifinput";
 import Adminbutton from "./Adminbutton";
 
-interface Account{
-  dpi: string;
-  password: string;
-}
 
 const Login_Admin: React.FC = () => {
   const [dpi, setDpi] = useState('')
@@ -58,7 +48,7 @@ const Login_Admin: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonTitle className="headerl">Administración</IonTitle>
+        <IonTitle  className="headerl">Administración</IonTitle>
       </IonHeader>
       <IonContent>
         <div style={{ height: "12vh" }}></div>
