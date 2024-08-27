@@ -5,13 +5,14 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-  "test":"jest",
+    "test": "jest",
     "start": "node main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "neo4j-driver": "^5.20.0",

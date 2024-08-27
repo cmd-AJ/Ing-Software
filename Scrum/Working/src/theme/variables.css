@@ -1,11 +1,30 @@
 
-/* PALETA DE COLORES NO TOCAR Y SIEMPRE USAR */
-
-:root{
-    --primary: #6f9ceb;
-    --secondary: #306BAC;
-    --terciary: #D36135;
-    --blanco: #fff;
-    --negro: #000;
-    --SABTEFONT: 'Times New Roman', Times, serif ;
-}
+:root {
+    /** primary **/
+    --ion-color-primary: #306BAC;
+    
+    /** secondary **/
+    --ion-color-secondary: #6F9CEB;
+    
+    /** tertiary **/
+    --ion-color-tertiary: #D36135;
+    
+    /** success **/
+    --ion-color-success: #2dd36f;
+    
+    /** warning **/
+    --ion-color-warning: #ffc409;
+    
+    /** danger **/
+    --ion-color-danger: #f80627;
+    
+    /** general colors **/
+    --white: #ffffff;
+    --black: #000000;
+  }
+  
+  html {
+    /* For more information on dynamic font scaling, visit the documentation: 
+    https://ionicframework.com/docs/layout/dynamic-font-scaling */
+    --ion-dynamic-font: var(--ion-default-dynamic-font);
+  }

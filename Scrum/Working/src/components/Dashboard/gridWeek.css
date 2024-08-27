@@ -1,37 +1,99 @@
-.grid-container {
+.grid-week {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  gap: 10px;
-  width: calc(100% - 50px);
-  height: calc(100% - 30vh);
-  margin: 15vh auto 0;
-  background-color: aqua;
+  grid-template-rows: auto 1fr;
+  gap: 1px;
+  background-color: #333;
+  height: 100%; /* Ensure it takes the full height of its container */
+  border-radius: 10px;
+  overflow-y: auto; /* Enable vertical scrolling */
+
+  /* Hide the scrollbar */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.gridWeek::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 
+.header-row {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr);
+  background-color: #f5f5f5;
+}
 
-.grid-item {
+.corner {
+  background-color: #333;
+}
+
+.day {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  font-weight: bold;
+  background-color: #ddd;
   padding: 10px;
-  font-size: 14px;
-  text-align: center;
+  border-right: 1px solid #ccc;
 }
 
-.grid-item.black {
-  background-color: black;
-  color: white;
+.time-grid {
+  display: grid;
+  grid-template-rows: repeat(6, minmax(150px, 1fr)); /* Ensure each row can grow or shrink */
+  height: 100%;
+  overflow-y: auto; /* Allow vertical scrolling inside the grid */
+  /* Hide the scrollbar */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
 }
 
-.grid-item.yellow {
-  background-color: yellow;
+.row {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr);
 }
 
-.grid-item.blue {
-  background-color: blue;
-  color: white;
+.hour {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
+
+.slot {
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+}
+
+.note {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.note-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.note-content {
+  overflow: hidden;
+}
+
+.note-title {
+  font-weight: bold;
+}
+
+.note-hora,
+.note-trabajador,
+.note-precio {
+  margin: 2px 0;
+}
+
