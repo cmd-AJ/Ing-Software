@@ -26,10 +26,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
     useEffect(() => {
         const handleResize = () => {
             setWidth(window.innerWidth)
-        }
-
-        console.log(role);
-        
+        }        
 
         window.addEventListener('resize', handleResize)
 

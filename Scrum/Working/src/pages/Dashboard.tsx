@@ -9,6 +9,12 @@ import DateChanger from '../components/Calendar/DateChange';
 import MonthCalendar from '../components/Calendar/MonthCalendar';
 
 const Dashboard: React.FC = () => {
+<<<<<<< Updated upstream
+=======
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+>>>>>>> Stashed changes
   const [typeCalendar, setTypeCalendar] = useState('semana')
 
   const currentDate = new Date();
@@ -29,12 +35,23 @@ const Dashboard: React.FC = () => {
     const weekNumber = Math.ceil((currentDay + offset) / 7);
 
     setWeek(weekNumber-1);
+
+    const handleResize = () => {
+      setWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   },[])
 
   useEffect(()=>{
     setThisMonth(new Month(month, year))
   },[month,year])
 
+<<<<<<< Updated upstream
   const elementos = [
     {
       trabajador: 'Luka Pérez',
@@ -68,10 +85,54 @@ const Dashboard: React.FC = () => {
             <div className='calendar-header'>
               <div className='center-right-element'>
                 <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+=======
+  if (width > 812) {
+    return (
+      <IonPage>
+          <div className='background'>
+              <div className='calendar-header'>
+                <div className='center-right-element'>
+                  <b>
+                    <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                  </b>
+                </div>
+                <div className='center-center-element'>
+                  <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+                </div>
+                <div className='center-left-element'>
+                  <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
+                </div>
+>>>>>>> Stashed changes
               </div>
-              <div className='center-center-element'>
-                <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+              {
+                typeCalendar === 'semana' &&
+                <GridWeek/>
+              }
+              {
+                typeCalendar === 'mes' &&
+                <MonthCalendar monthMatrix={thisMonth.matrix}/>
+              }
+          </div>
+      </IonPage>
+    )
+  } else {
+    return (
+      <IonPage>
+          <div className='background'>
+              <div className='calendar-header'>
+                <div className='center-right-element'>
+                  <b>
+                    <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                  </b>
+                </div>
+                <div className='center-center-element'>
+                  <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+                </div>
+                <div className='center-left-element'>
+                  <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
+                </div>
               </div>
+<<<<<<< Updated upstream
               <div className='center-left-element'>
                 <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
               </div>
@@ -87,6 +148,21 @@ const Dashboard: React.FC = () => {
         </div>
     </IonPage>
   );
+=======
+              {
+                typeCalendar === 'semana' &&
+                <GridWeek/>
+              }
+              {
+                typeCalendar === 'mes' &&
+                <MonthCalendar monthMatrix={thisMonth.matrix}/>
+              }
+          </div>
+      </IonPage>
+    )
+  }
+
+>>>>>>> Stashed changes
 };
 
 export default Dashboard;
