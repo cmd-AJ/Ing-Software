@@ -26,7 +26,6 @@
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 300px 300px 300px 300px 300px 300px;
     overflow-y: auto; /* Permite desplazamiento vertical en el componente */
-    margin-bottom: 90px;
 }
 
 .days-label {
