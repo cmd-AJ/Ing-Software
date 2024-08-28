@@ -9,12 +9,9 @@ import DateChanger from '../components/Calendar/DateChange';
 import MonthCalendar from '../components/Calendar/MonthCalendar';
 
 const Dashboard: React.FC = () => {
-<<<<<<< Updated upstream
-=======
 
   const [width, setWidth] = useState(window.innerWidth);
 
->>>>>>> Stashed changes
   const [typeCalendar, setTypeCalendar] = useState('semana')
 
   const currentDate = new Date();
@@ -51,7 +48,6 @@ const Dashboard: React.FC = () => {
     setThisMonth(new Month(month, year))
   },[month,year])
 
-<<<<<<< Updated upstream
   const elementos = [
     {
       trabajador: 'Luka Pérez',
@@ -79,13 +75,6 @@ const Dashboard: React.FC = () => {
     },
   ];
   
-  return (
-    <IonPage>
-        <div className='background'>
-            <div className='calendar-header'>
-              <div className='center-right-element'>
-                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
-=======
   if (width > 812) {
     return (
       <IonPage>
@@ -102,16 +91,15 @@ const Dashboard: React.FC = () => {
                 <div className='center-left-element'>
                   <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
                 </div>
->>>>>>> Stashed changes
               </div>
               {
-                typeCalendar === 'semana' &&
-                <GridWeek/>
-              }
-              {
-                typeCalendar === 'mes' &&
-                <MonthCalendar monthMatrix={thisMonth.matrix}/>
-              }
+              typeCalendar === 'semana' &&
+              <GridWeek notes={elementos} />
+            }
+            {
+              typeCalendar === 'mes' &&
+              <MonthCalendar monthMatrix={thisMonth.matrix}/>
+            }
           </div>
       </IonPage>
     )
@@ -132,12 +120,7 @@ const Dashboard: React.FC = () => {
                   <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
                 </div>
               </div>
-<<<<<<< Updated upstream
-              <div className='center-left-element'>
-                <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
-              </div>
-            </div>
-            {
+              {
               typeCalendar === 'semana' &&
               <GridWeek notes={elementos} />
             }
@@ -145,25 +128,11 @@ const Dashboard: React.FC = () => {
               typeCalendar === 'mes' &&
               <MonthCalendar monthMatrix={thisMonth.matrix}/>
             }
-        </div>
-    </IonPage>
-  );
-=======
-              {
-                typeCalendar === 'semana' &&
-                <GridWeek/>
-              }
-              {
-                typeCalendar === 'mes' &&
-                <MonthCalendar monthMatrix={thisMonth.matrix}/>
-              }
           </div>
       </IonPage>
     )
-  }
-
->>>>>>> Stashed changes
-};
+  };
+}
 
 export default Dashboard;
 
