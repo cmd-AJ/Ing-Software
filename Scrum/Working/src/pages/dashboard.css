@@ -17,6 +17,15 @@
     grid-template-columns: 33.33% 33.33% 33.33%;
 }
 
+.smaller-calendar-header {
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "left right";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+}
+
 .center-right-element {
     display: flex;
     justify-content: flex-start;
