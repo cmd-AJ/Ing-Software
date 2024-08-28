@@ -173,7 +173,7 @@ export async function getHirings(dpi: string) {
             hiring.hora = hora;
 
             // Add "Q." prefix to precio
-            hiring.precio = `Q. ${hiring.precio}`;
+            hiring.precio = `Q.${hiring.precio}`;
 
             // Optionally remove the original timestampcita if it's no longer needed
             delete hiring.timestampcita;
