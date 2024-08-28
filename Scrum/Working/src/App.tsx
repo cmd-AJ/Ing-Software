@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import Help from "./pages/Help"
+import Threads from "./pages/threads/Threads";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -89,6 +90,11 @@ const App: React.FC = () => (
         <Route exact path="/empleado">
           <MainLayout>
             <Dashboard_Worker />
+          </MainLayout>
+        </Route>
+        <Route exact path="/threads">
+          <MainLayout>
+            < Threads/>
           </MainLayout>
         </Route>
         <Route exact path="/chat">

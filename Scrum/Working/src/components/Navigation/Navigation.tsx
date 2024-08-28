@@ -57,7 +57,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
               <IonCol className="search-bar-col">
                 <SearchBar onRequestChange={handleRequestChange} />
               </IonCol>
-              <IonCol className="ion-text-center">
+              <IonCol className="ion-text-center" onClick={() => history.push('threads')}>
                 <IonText className="custom-text">HILOS</IonText>
               </IonCol>
               <IonCol className="ion-text-center" onClick={() => history.push('/chat')}>
