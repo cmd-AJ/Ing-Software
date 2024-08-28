@@ -1,12 +1,17 @@
 .background {
-    background-color: #FFF;
+    background-color: #F3F4F5;
     opacity: 0.9;
     background-size: 52px 52px;
     background-position: 0 0, 26px 26px;
-    height: 100vh; /* Asegúrate de que ocupe toda la altura de la ventana */
+    height: calc(100% - 15vh); /* Ensure it takes the full height of the viewport */
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* Cambia a auto para que solo aparezca el scroll cuando sea necesario */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    margin: 0 20px; /* Add margin on the left and right sides */
+
+    /* Hide the scrollbar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .calendar-header {
@@ -43,5 +48,10 @@
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+}
+
+
+.background::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 
