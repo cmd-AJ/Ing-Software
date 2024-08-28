@@ -21,7 +21,7 @@
 }
 
 .calendar-month {
-    min-height: 70vh; /* Ajusta esto según tu preferencia */
+    max-height: 70vh; /* Ajusta esto según tu preferencia */
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 300px 300px 300px 300px 300px 300px;
