@@ -105,7 +105,7 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
           <div className='background'>
-              <div className='calendar-header'>
+              <div className=''>
                 <div className='center-right-element'>
                   <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
                 </div>
