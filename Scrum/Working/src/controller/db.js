@@ -294,7 +294,7 @@ export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeS
 export async function getCurrentHirings(dpi) {
     try {
         const query = {
-            text: "SELECT td.dpiempleado, u.nombre || ' ' ||u.apellidos AS trabajador, u.telefono, u.imagen AS foto, td.descripcion, td.timestampcita, td.pago AS precio" +
+            text: "SELECT td.dpiempleado, u.nombre || ' ' ||u.apellidos AS trabajador, u.telefono, u.imagen AS foto, td.descripcion, td.timestampcita, td.pago AS precio " +
                   "FROM trabajodisponible td " +
                   "JOIN usuarios u ON (td.dpiempleado = u.dpi) " +
                   "WHERE td.dpiempleador = $1 ",
