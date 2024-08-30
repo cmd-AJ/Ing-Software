@@ -9,6 +9,9 @@ import DateChanger from '../components/Calendar/DateChange';
 import MonthCalendar from '../components/Calendar/MonthCalendar';
 
 const Dashboard: React.FC = () => {
+
+  const [width, setWidth] = useState(window.innerWidth);
+
   const [typeCalendar, setTypeCalendar] = useState('semana')
 
   const currentDate = new Date();
@@ -29,6 +32,16 @@ const Dashboard: React.FC = () => {
     const weekNumber = Math.ceil((currentDay + offset) / 7);
 
     setWeek(weekNumber-1);
+
+    const handleResize = () => {
+      setWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
   },[])
 
   useEffect(()=>{
@@ -62,21 +75,24 @@ const Dashboard: React.FC = () => {
     },
   ];
   
-  return (
-    <IonPage>
-        <div className='background'>
-            <div className='calendar-header'>
-              <div className='center-right-element'>
-                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+  if (width > 812) {
+    return (
+      <IonPage>
+          <div className='background'>
+              <div className='calendar-header'>
+                <div className='center-right-element'>
+                  <b>
+                    <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                  </b>
+                </div>
+                <div className='center-center-element'>
+                  <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+                </div>
+                <div className='center-left-element'>
+                  <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
+                </div>
               </div>
-              <div className='center-center-element'>
-                <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
-              </div>
-              <div className='center-left-element'>
-                <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
-              </div>
-            </div>
-            {
+              {
               typeCalendar === 'semana' &&
               <GridWeek notes={elementos} />
             }
@@ -84,12 +100,40 @@ const Dashboard: React.FC = () => {
               typeCalendar === 'mes' &&
               <MonthCalendar monthMatrix={thisMonth.matrix}/>
             }
-        </div>
-    </IonPage>
-  );
-};
+          </div>
+      </IonPage>
+    )
+  } else {
+    return (
+      <IonPage>
+          <div className='background'>
+              <div className='calendar-header'>
+                <div className='center-right-element'>
+                  <b>
+                    <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                  </b>
+                </div>
+                <div className='center-center-element'>
+                  <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+                </div>
+                <div className='center-left-element'>
+                  <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
+                </div>
+              </div>
+              {
+              typeCalendar === 'semana' &&
+              <GridWeek notes={elementos} />
+            }
+            {
+              typeCalendar === 'mes' &&
+              <MonthCalendar monthMatrix={thisMonth.matrix}/>
+            }
+          </div>
+      </IonPage>
+    )
+  };
+}
 
 export default Dashboard;
-
 
 

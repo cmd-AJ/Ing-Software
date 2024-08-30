@@ -140,6 +140,7 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
 
 
 export async function getHirings(dpi: string) {
+
     try {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hirings/${dpi}`,{
             headers: {
@@ -149,14 +150,34 @@ export async function getHirings(dpi: string) {
         });
         const data = await response.json();
 
-        // Convert the UTC timestamp to Guatemalan time
+        // Convert the UTC timestamp to Guatemalan time and adjust variables
         const adjustedData = data.map((hiring: any) => {
             const utcDate = new Date(hiring.timestampcita);
-            // Guatemala is UTC-6
             const guatemalaOffset = -6 * 60; // offset in minutes
             const guatemalaTime = new Date(utcDate.getTime() + (guatemalaOffset * 60 * 1000));
-            // Format the date as a string or keep it as a Date object depending on your needs
-            hiring.timestampcita = guatemalaTime.toISOString().replace('T', ' ').substring(0, 19); // This formats the date as 'YYYY-MM-DD HH:MM:SS'
+
+            // Extract the date and time components
+            const dia = guatemalaTime.toISOString().substring(0, 10); // Extracts 'YYYY-MM-DD'
+            
+            // Get hours and minutes for formatting
+            let hours = guatemalaTime.getHours();
+            const minutes = guatemalaTime.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // If hour is 0, convert it to 12
+            const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+            const hora = `${hours}:${minutesStr} ${ampm}`;
+
+            // Assign the new values to the object
+            hiring.dia = dia;
+            hiring.hora = hora;
+
+            // Add "Q." prefix to precio
+            hiring.precio = `Q.${hiring.precio}`;
+
+            // Optionally remove the original timestampcita if it's no longer needed
+            delete hiring.timestampcita;
+
             return hiring;
         });
 
@@ -166,3 +187,4 @@ export async function getHirings(dpi: string) {
         return [];
     }
 }
+
