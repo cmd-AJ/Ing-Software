@@ -10,16 +10,32 @@
     align-content: center;
     z-index: 0;
     background-color: #78a2e6;
+    padding: 20px;
 }
 
 .threads-container {
-    z-index: 1; /* Ensures it is above .threads-space */
+    z-index: 1; 
     background-color: #eaeaeb;
     height: 100%;
-    width: 50%; /* Make the container take up full width */
+    width: 60%; /* Start with a wider width */
+    max-width: 800px; /* Max width to prevent it from getting too large */
+    min-width: 300px; /* Minimum width for small screens */
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
+}
+
+@media (max-width: 768px) {
+    .threads-container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .threads-container {
+        width: 90%;
+    }
 }
