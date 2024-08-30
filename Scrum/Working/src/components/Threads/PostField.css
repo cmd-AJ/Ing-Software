@@ -5,8 +5,7 @@
     padding: 10px;
     border-radius: 10px;
     margin-top: 20px;
-    
-    background-color: aqua;
+    background-color: #fefeff;
     align-items: flex-start;
 }
   
@@ -41,16 +40,23 @@
   }
   
   .post-button {
-    background-color: #3c6898 !important; /* Example style */
-    color: white !important;
-    border-radius: 5px !important;
-    border-radius: 30px !important;
+    background-color: #3a87c6; /* Example style */
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    flex-shrink: 0;  /* Prevents the icons and text from shrinking */
+    cursor: pointer;
+    color: #ecf0f1;
+    font-size: 14px;
+    font-weight: bold;
+    
   }
   
   
   .photo-icon {
     font-size: 24px;
-    color: #007bff;
+    color: #000000;
     cursor: pointer;
   }
   

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonButton, IonItem, IonLabel, IonTextarea, IonIcon } from '@ionic/react';
+import { IonItem, IonLabel, IonTextarea, IonIcon } from '@ionic/react';
 import { camera } from 'ionicons/icons';
 import './PostField.css';
 
@@ -28,12 +28,6 @@ const PostField: React.FC = () => {
       <div className='t-profile-container'></div>
       <form onSubmit={handleSubmit} className="form-container">
         <IonItem className="input-container">
-          <IonIcon
-            icon={camera}
-            slot="start"
-            onClick={() => document.getElementById('uploadPhoto')?.click()}
-            className="photo-icon"
-          />
           <IonLabel position="stacked">Postea</IonLabel>
           <IonTextarea
             value={inputText}
@@ -42,12 +36,13 @@ const PostField: React.FC = () => {
             autoGrow={true}
             className="textarea-input"
           />
-          
         </IonItem>
         <div className="action-container">
-          <IonButton expand="full" type="submit" className="post-button">
-            Post
-            </IonButton>
+          <IonIcon
+            icon={camera}
+            onClick={() => document.getElementById('uploadPhoto')?.click()}
+            className="photo-icon"
+          />
           <input
             type="file"
             id="uploadPhoto"
@@ -55,7 +50,11 @@ const PostField: React.FC = () => {
             style={{ display: 'none' }}
             onChange={handlePhotoChange}
           />
-          
+          {inputText.trim() && (
+            <button type="submit" className="post-button">
+              Post
+            </button>
+          )}
         </div>
       </form>
     </div>
@@ -63,3 +62,4 @@ const PostField: React.FC = () => {
 };
 
 export default PostField;
+
