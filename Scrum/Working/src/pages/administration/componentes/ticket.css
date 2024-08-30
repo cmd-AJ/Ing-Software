@@ -13,11 +13,12 @@
     --detail-icon-color: white;
     --detail-icon-opacity: 1;
     --detail-icon-font-size: 20px;
+    margin: 2%;
 }
 
 .iconbut{
     --background: var(--white);
-
-    --color:var(--black)
+    --color:var(--black);
+    --box-shadow: 0;
 
 }

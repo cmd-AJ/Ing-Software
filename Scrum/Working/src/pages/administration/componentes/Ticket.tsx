@@ -27,15 +27,15 @@ interface Cuenta{
   dpireportuser: string
   fecha: string
   contenido: string
+  link:string
 
 }
 
 
+
 const Supended: React.FC<Cuenta> = ( {idreporte, dpiemisor, dpireportuser, fecha, contenido } ) => {
 
-  const [ cuenta, setcuenta ] = useState<Cuenta>( { idreporte ,dpiemisor, dpireportuser, fecha, contenido } )
-
-
+  const [ cuenta, setcuenta ] = useState( { idreporte ,dpiemisor, dpireportuser, fecha, contenido } )
 
 
   return (

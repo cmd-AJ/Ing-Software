@@ -19,8 +19,11 @@ import {
 } from "@ionic/react";
 import "./dashbadmin.css";
 import "../../theme/variables.css";
-import { exitOutline } from "ionicons/icons";
-import Ticket from "./componentes/ticket";
+import { arrowForwardOutline, exitOutline } from "ionicons/icons";
+import Ticket from "./componentes/Ticket";
+import Desban from "./componentes/Userlist";
+import { useHistory } from "react-router";
+import Topheader from "./componentes/Topheader";
 
 // Rediseno crear un nuevo componente donde menos de 600px se ponga un menu
 
@@ -28,71 +31,68 @@ import Ticket from "./componentes/ticket";
 const Mod_Dashboard: React.FC = () => {
   const [dpi, setDpi] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
+  const [ tickets, setTickets ] = useState([])
 
-  const jhason = {
+  const jhason = [{
     "idreporte": '1',
     "dpiemisor": '15406406',
     "dpireportuser": '2860479',
     "contenido": "This is a sample content",
     "fecha": "2024-08-27T12:34:56Z"
-  }
+  },
+  {
+    "idreporte": '2',
+    "dpiemisor": '15406406',
+    "dpireportuser": '2860479',
+    "contenido": "This is a sample content",
+    "fecha": "2024-08-27T12:34:56Z"
+  }]
 
 
   const [validateDpi, setValidateDpi] = useState(false)
   const [validatePassword, setValidatePassword] = useState(false)
 
-  const handleInputChange = (
-    e: CustomEvent<{ value: string | null }>,
-    field: "dpi" | "password"
-  ) => {
-    const { value } = e.detail;
-    if (field === "dpi") {
-      setDpi(value || '');
-    } else if (field === "password") {
-      setPassword(value || '');
-    }
-  };
+  const history = useHistory();
 
-  React.useEffect(() => {
-    // Effect to run when DPI changes
-    console.log(`DPI changed: ${dpi}`);
-  }, [dpi]);
+  const gotosuspend = () => {
 
-  React.useEffect(() => {
-    // Effect to run when password changes
-    console.log(`Password changed: ${password}`);
-  }, [password]);
+      history.push("mod_suspended")
+  }
 
   return (
     <IonPage>
-      <IonToolbar color={"primary"} >
-      <IonLabel  slot="start" className="dashbutton"><a className="linkref" href="/dash_admin">SABTE</a> </IonLabel>
-      <IonButton slot="end" className="ticketing"> Suspendido </IonButton> 
-      <IonButton slot="end" className="ticketing"> Tickets </IonButton>
-      <IonButton  className="iconic" slot="end">
-            <IonIcon  className="iconic" slot="icon-only" icon={exitOutline}></IonIcon>
-          </IonButton> 
-      </IonToolbar>
+      <Topheader></Topheader>
       <IonContent>
-      <br></br>
       <br></br>
       <IonHeader>
         <IonTitle className="subhead">Bienvenido, Moderador</IonTitle>
       </IonHeader>
       <br></br>
       <br></br>
-      <br></br>
       <IonGrid>
         <IonRow>
-          
           <IonCol>
-            <Ticket idreporte={jhason.idreporte} dpiemisor={jhason.dpiemisor} dpireportuser={jhason.dpireportuser} fecha={jhason.fecha} contenido={jhason.contenido} ></Ticket>
+            <div className="contenedor_tickets" >              
+            <IonTitle className="ticketstit">Tickets Pendientes: {}</IonTitle>
+            {jhason.map((item, index) => (
+                <Ticket key={index} idreporte={item.idreporte} dpiemisor={item.dpiemisor} dpireportuser={item.dpireportuser} fecha={item.fecha} contenido={item.contenido} link="/about" ></Ticket>
+              ))}
+            </div>
           </IonCol>
           <IonCol>
-          <div>
-            <IonItem>Holas</IonItem>
-          </div>
+            <div className="contenedor_tickets2" >              
+            <IonTitle style={{textAlign:"center"}} className="ticketstit">Usuarios por Desbloquear</IonTitle>
+            <br></br>
+            <div className="contenedor_desban">
+            <Desban></Desban>
+            </div>
+            <IonItem className="insertbuttonhere" >
+              <IonButton color={"primary"} className="irsuspend" slot="end"onClick={() => gotosuspend()}> 
+              Ir a suspendido
+              <IonIcon  className="irsuspend" slot="end" icon={arrowForwardOutline}></IonIcon> 
+              </IonButton>
+            </IonItem>
+            </div>
           </IonCol>
         </IonRow>
       </IonGrid>
