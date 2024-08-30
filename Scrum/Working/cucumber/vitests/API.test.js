@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getChatIdWithDPI, getChatMessages, getHirings } from '../../src/controller/ChatController';
+import { getChatIdWithDPI, getChatMessages, getHirings, chatBetweenUsersExist } from '../../src/controller/ChatController';
 import { getLoginUser, conseguirtrabajo, getWorkersByJob, userExists } from '../../src/controller/UserController'
 
 describe('Conseguir a un usuario', () => {
@@ -45,10 +45,16 @@ describe('Quiero buscar un trabajo', () => {
     const data = (await conseguirtrabajo('3833 86608 0102'))
     expect((data[0].nombre_trabajo)).toBe(null) //no tiene trabajo
   });
-
-  
 });
 
+describe('Comprabar si chat eentre 2 usuarios existe', () => {
+  it('Al ingresar 2 dpi que tienen un chat juntos', async () => {
+
+    const chatExists = await chatBetweenUsersExist("3810 35859 0101", "3834 49898 0101")
+    expect(chatExists).toBe(true);
+  });
+  
+});
 
 describe('Quiero buscar a un contacto y sus mensajes', () => {
   it('Soy empleador Ricardo Tapia Y necesito hablar a Jose', async () => {
@@ -67,7 +73,6 @@ describe('Quiero buscar a un contacto y sus mensajes', () => {
 describe('Quiero saber que contrataciones he realizado', () => {
     it('utilizando mi dpi', async () => {
     const data = (await getHirings('3834 49898 0101'))
-    console.log(data)
     expect(Array.isArray(data)).toBe(true) //no tiene trabajo
   });
 });

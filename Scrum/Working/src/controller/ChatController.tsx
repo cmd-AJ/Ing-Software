@@ -73,6 +73,27 @@ export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
     }
 }
 
+export async function chatBetweenUsersExist(dpi1: string, dpi2: string){
+
+    const chatIDResponse = await getChatIdWithDPI(dpi1, dpi2)
+
+    if(chatIDResponse.length == 0 ){
+        return false
+    }
+    
+    return true
+}
+
+export async function createNewChatIfNotExists(dpi1: string, dpi2: string){
+
+    const chatIDResponse = await getChatIdWithDPI(dpi1, dpi2)
+
+    if(chatIDResponse.length == 0 ){
+
+    }
+
+}
+
 export async function insertChatMessage(content: string, chatID: string, dpi: string) {
     try {
         const data = {

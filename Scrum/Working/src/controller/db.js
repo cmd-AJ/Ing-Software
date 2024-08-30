@@ -7,7 +7,7 @@ export async function createNewChat(dpi1, dpi2) {
 
     try {
         const query = {
-            text:"INSER INTO chats (dpireceptor, dpiemisor) VALUES ($1, $2)", 
+            text:"INSERT INTO chats(dpireceptor, dpiemisor) VALUES ($1, $2)", 
             values:[dpi1, dpi2]
         }
 
