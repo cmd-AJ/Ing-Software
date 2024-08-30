@@ -3,6 +3,22 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function createNewChat(dpi1, dpi2) {
+
+    try {
+        const query = {
+            text:"INSER INTO chats (dpireceptor, dpiemisor) VALUES ($1, $2)", 
+            values:[dpi1, dpi2]
+        }
+
+        const result = await client.query(query)
+    } catch (error) {
+        console.error('Error while creating chat:', error);
+        throw error;
+    }
+    
+}
+
 export async function getUsers() {
     try {
         const query = {
