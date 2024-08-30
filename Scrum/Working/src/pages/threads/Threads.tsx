@@ -9,6 +9,7 @@ const Threads: React.FC = () => {
             <div className='threads-space'>
                 <div className="threads-container">
                     {/* TO DO  ALL thread components*/}
+                    <PostField/>
                 </div>
             </div>
         </IonPage>

@@ -23,9 +23,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    
+    align-content: center;
 }
 
 @media (max-width: 768px) {
