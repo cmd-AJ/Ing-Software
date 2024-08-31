@@ -105,16 +105,12 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
           <div className='background'>
-              <div className=''>
-                <div className='center-right-element'>
-                  <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
-                </div>
-                <div className='center-center-element'>
-                  <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
-                </div>
-                <div className='center-left-element'>
-                  <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
-                </div>
+              <div className='header-top-calendar'>
+                <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+              </div>
+              <div className='header-bottom-calendar'>
+                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                <DateChanger week={week} setWeek={setWeek} monthMatrix={thisMonth.matrix} month={month} setMonth={setMonth} year={year} setYear={setYear} typeCalendar={typeCalendar}/>
               </div>
               {
                 typeCalendar === 'semana' &&

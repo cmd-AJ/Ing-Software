@@ -112,7 +112,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
     
     if (typeCalendar === "semana") {
         return (
-            <>
+            <div className="date-changer-display">
                 <button className="change-button" onClick={handleLeftbutton}>
                     <IonIcon icon={chevronBackOutline} size="large" />
                 </button>
@@ -122,18 +122,18 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
                 <button className="change-button" onClick={handleRightbutton}>
                     <IonIcon icon={chevronForwardOutline} size="large" />
                 </button>
-            </>
+            </div>
         );
     } else {
         return (
-            <>
+            <div className="date-changer-display">
                 <button className="change-button" onClick={handleLeftButtonMonth}>
                     <IonIcon icon={chevronBackOutline} size="large" />
                 </button>
                 <button className="change-button" onClick={handleRightButtonMonth}>
                     <IonIcon icon={chevronForwardOutline} size="large" />
                 </button>
-            </>
+            </div>
         )
     }
 
