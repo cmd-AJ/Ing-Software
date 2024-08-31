@@ -1,0 +1,16 @@
+@import '../../../theme/variables.css';
+
+
+.userCOl{
+    text-align: center;
+    font-size: 2vw;
+}
+
+.usuario_mod{
+    border-bottom: 1px solid var(--ion-color-tertiary);
+}
+
+.headermod{
+    font-size: 2vw;
+    text-align: center;
+}

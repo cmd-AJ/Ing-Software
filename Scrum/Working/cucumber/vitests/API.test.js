@@ -67,7 +67,6 @@ describe('Quiero buscar a un contacto y sus mensajes', () => {
 describe('Quiero saber que contrataciones he realizado', () => {
     it('utilizando mi dpi', async () => {
     const data = (await getHirings('3834 49898 0101'))
-    console.log(data)
     expect(Array.isArray(data)).toBe(true) //no tiene trabajo
   });
 });
