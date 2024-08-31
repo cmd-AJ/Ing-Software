@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './gridWeek.css';
 import Note from './Note';
 
@@ -13,15 +13,25 @@ interface NoteData {
 
 interface GridWeekProps {
   notes: NoteData[];
+  weekDays: string[];  // Array con las fechas de los días de la semana actual
 }
 
-const GridWeek: React.FC<GridWeekProps> = ({ notes }) => {
-  const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
   const hours = ['6 am - 9 am', '9 am - 12 pm', '12 pm - 3 pm', '3 pm - 6 pm', '6 pm - 9 pm', '9 pm'];
 
+  const parseDate = (dateString: string): Date => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day);  // Restamos 1 al mes ya que Date() usa 0-index para los meses
+  };
+
+  const getDayName = (dateString: string): string => {
+    const date = parseDate(dateString);
+    const daysOfWeek = ['Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    return date.getDay().toString();
+  };
+
   const getDayIndex = (day: string) => {
-    const date = new Date(day);
-    return date.getDay() === 0 ? 6 : date.getDay() - 1; // Adjusting for Monday start
+    return weekDays.findIndex(weekDay => parseDate(weekDay).toISOString().slice(0, 10) === day); // Encuentra el índice de la fecha en la semana actual
   };
 
   const getHourIndex = (hour: string) => {
@@ -39,19 +49,26 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes }) => {
     return 5;
   };
 
+  useEffect(()=>{
+    console.log(weekDays);
+  },[])
+
   return (
     <div className="grid-week">
       <div className="header-row">
         <div className="corner"></div>
-        {days.map((day, index) => (
-          <div className="day" key={index}>{day}</div>
+        {weekDays.map((day, index) => (
+          <div className="day" key={index}>
+            <div>{getDayName(day)}</div> {/* Nombre del día de la semana */}
+            <div>{day}</div> {/* Fecha en formato yyyy-mm-dd */}
+          </div>
         ))}
       </div>
       <div className="time-grid">
         {hours.map((hour, hourIndex) => (
           <div className="row" key={hourIndex}>
             <div className="hour">{hour}</div>
-            {days.map((_, dayIndex) => (
+            {weekDays.map((day, dayIndex) => (
               <div className="slot" key={`${hourIndex}-${dayIndex}`}>
                 {notes
                   .filter(note => getDayIndex(note.dia) === dayIndex && getHourIndex(note.hora) === hourIndex)

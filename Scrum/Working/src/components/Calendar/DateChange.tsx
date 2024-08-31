@@ -6,27 +6,33 @@ import { useEffect, useState } from "react";
 import { Month } from "./MonthStruct";
 
 interface ContainerProps {
-    typeCalendar: string
-    month: number
-    setMonth: (month: number) => void
-    year: number
-    setYear: (year: number) => void
+    typeCalendar: string;
+    month: number;
+    setMonth: (month: number) => void;
+    year: number;
+    setYear: (year: number) => void;
     week: number;
     setWeek: (week: number) => void;
-    monthMatrix: number[][];
+    monthMatrix: Date[][];
+    setWeekDays: (weekDays: string[]) => void;  // Añadir esta línea
 }
 
-const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, month, setMonth, year, setYear, typeCalendar }) => {
+const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, month, setMonth, year, setYear, typeCalendar, setWeekDays }) => {
 
     const [days, setDays] = useState("");
 
     useEffect(() => {
-        console.log(week);
+        const firstDayOfWeek = monthMatrix[week][0].getDate(); // Changed from 0 to 1
+        const lastDayOfWeek = monthMatrix[week][6].getDate(); // Changed from 6 to 7     
         
-        const firstDayOfWeek = monthMatrix[week][0].toString();
-        const lastDayOfWeek = monthMatrix[week][6].toString();
+        // Calcula las fechas de los días de la semana
+        const weekDates = monthMatrix[week].map(day => { // Added slice(1)            
+            return day.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        });
+    
         setDays(firstDayOfWeek + " - " + lastDayOfWeek);
-    }, [week, monthMatrix]);
+        setWeekDays(weekDates);  // Establece las fechas de la semana actual
+    }, [week, month, year, monthMatrix, setWeekDays]);
 
     const handleRightbutton = () => {
         let newWeek = week + 1;
@@ -51,7 +57,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
         }
 
         setWeek(newWeek);  // Establece la nueva semana
-    }
+    };
 
     const handleLeftbutton = () => {
         let newWeek = week - 1;
@@ -76,7 +82,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
         }
 
         setWeek(newWeek);  // Establece la nueva semana
-    }
+    };
 
     const handleRightButtonMonth = () => {
         let newMonth = month + 1;
@@ -90,7 +96,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
     
         setMonth(newMonth);  // Establece el nuevo mes
         setWeek(0);  // Reinicia la semana a la primera semana del nuevo mes
-    }
+    };
     
     const handleLeftButtonMonth = () => {
         let newMonth = month - 1;
@@ -108,7 +114,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
     
         setMonth(newMonth);  // Establece el nuevo mes
         setWeek(totalWeeksInPreviousMonth - 2); // Establece la semana a la última semana del mes anterior
-    }
+    };
     
     if (typeCalendar === "semana") {
         return (
@@ -139,4 +145,4 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
 
 }
 
-export default DateChanger
+export default DateChanger;

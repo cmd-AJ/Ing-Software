@@ -4,7 +4,7 @@ export class Month {
     numOfDays: number;
     monthNumber: number;
     initialDay: number;
-    matrix: number[][];
+    matrix: Date[][];
 
     constructor(monthNumber: number, year: number) {
         this.monthNumber = monthNumber;
@@ -86,26 +86,26 @@ export class Month {
         return daysInPreviousMonth;
     }
 
-    private getMonthMatrix(): number[][] {
+    private getMonthMatrix(): Date[][] {
         let dayCounter = 1;
         const firstDay = (this.initialDay + 6) % 7; // Ajusta el primer día para que 0 sea lunes
         const days = this.numOfDays;
         const daysInPreviousMonth = this.calculateNumOfDaysInPreviousMonth();
         let nextMonthDayCounter = 1; // Contador para los días del siguiente mes
         
-        const month: number[][] = [];
+        const month: Date[][] = [];
     
         for (let i = 0; i < 6; i++) { // 6 filas máximo en un mes
-            const week: number[] = [];
+            const week: Date[] = [];
     
             for (let j = 0; j < 7; j++) { // 7 días en una semana
                 if (i === 0 && j < firstDay) {
-                    week.push(daysInPreviousMonth - (firstDay - j - 1)); // Días del mes anterior
+                    week.push(new Date(this.year, this.monthNumber,daysInPreviousMonth - (firstDay - j - 1))); // Días del mes anterior
                 } else if (dayCounter <= days) {
-                    week.push(dayCounter);
+                    week.push(new Date(this.year, this.monthNumber, dayCounter));
                     dayCounter++;
                 } else {
-                    week.push(nextMonthDayCounter++); // Días del siguiente mes
+                    week.push(new Date(this.year, this.monthNumber, nextMonthDayCounter++)); // Días del siguiente mes
                 }
             }
     
