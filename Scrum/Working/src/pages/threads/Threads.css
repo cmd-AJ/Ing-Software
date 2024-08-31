@@ -39,3 +39,23 @@
         width: 90%;
     }
 }
+
+
+.thread-scroller {
+    flex: 1; /* Make the scroller take up remaining space in the container */
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding-right: 10px; /* Optional: To avoid content being hidden under scrollbar */
+    margin-bottom: 20px; /* Optional: Add space below the scrollable area */
+    width: 100%;
+    height: auto;
+    display: block; /* Ensures posts are not compressed */
+}
+
+.thread-scroller::-webkit-scrollbar {
+    width: 8px; /* Optional: Custom scrollbar width */
+}
+
+.thread-scroller::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Optional: Custom scrollbar color */
+    border-radius: 4px; /* Optional: Round the scrollbar */
+}
