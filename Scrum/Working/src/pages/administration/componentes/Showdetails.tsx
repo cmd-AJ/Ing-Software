@@ -10,6 +10,9 @@ import {
   IonItem,
   IonIcon,
   useIonModal,
+  IonSelect,
+  IonSelectOption,
+  IonRange,
 } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
 
@@ -70,6 +73,9 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         <IonItem>Estado: {data?.estado}</IonItem>
         <IonItem>Fecha Inicio: {data?.fechainicio}</IonItem>
         <IonItem>Fecha Ban: {data?.fechaban}</IonItem>
+        <IonRange aria-label="Range with ticks" ticks={true} snaps={true} min={0} max={10}></IonRange>
+        <IonButton>Confirmar</IonButton>
+        
       </IonContent>
     </IonPage>
   );
