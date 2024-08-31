@@ -100,12 +100,12 @@ export class Month {
     
             for (let j = 0; j < 7; j++) { // 7 días en una semana
                 if (i === 0 && j < firstDay) {
-                    week.push(new Date(this.year, this.monthNumber,daysInPreviousMonth - (firstDay - j - 1))); // Días del mes anterior
+                    week.push(new Date(this.year, this.monthNumber-1,daysInPreviousMonth - (firstDay - j - 1))); // Días del mes anterior
                 } else if (dayCounter <= days) {
                     week.push(new Date(this.year, this.monthNumber, dayCounter));
                     dayCounter++;
                 } else {
-                    week.push(new Date(this.year, this.monthNumber, nextMonthDayCounter++)); // Días del siguiente mes
+                    week.push(new Date(this.year, this.monthNumber+1, nextMonthDayCounter++)); // Días del siguiente mes
                 }
             }
     

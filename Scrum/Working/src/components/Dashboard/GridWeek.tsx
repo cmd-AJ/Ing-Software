@@ -27,7 +27,7 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
   const getDayName = (dateString: string): string => {
     const date = parseDate(dateString);
     const daysOfWeek = ['Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-    return date.getDay().toString();
+    return daysOfWeek[date.getDay()];
   };
 
   const getDayIndex = (day: string) => {
@@ -59,8 +59,7 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
         <div className="corner"></div>
         {weekDays.map((day, index) => (
           <div className="day" key={index}>
-            <div>{getDayName(day)}</div> {/* Nombre del día de la semana */}
-            <div>{day}</div> {/* Fecha en formato yyyy-mm-dd */}
+            <div>{getDayName(day) + " " + day.slice(-2)}</div> {/* Nombre del día de la semana */}
           </div>
         ))}
       </div>

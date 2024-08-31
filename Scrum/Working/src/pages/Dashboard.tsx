@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
     },
     {
       trabajador: 'Carlos Gómez',
-      dia: '2024-08-14',
+      dia: '2024-08-10',
       hora: '09:00 AM',
       descripción: 'Instalación de sistema eléctrico',
       precio: 'Q1000',
