@@ -20,6 +20,7 @@ interface ContainerProps {
 const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, month, setMonth, year, setYear, typeCalendar, setWeekDays }) => {
 
     const [days, setDays] = useState("");
+    const [sameWeek, setSameWeek] = useState(false)
 
     useEffect(() => {
         const firstDayOfWeek = monthMatrix[week][0].getDate(); // Changed from 0 to 1
@@ -29,10 +30,22 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
         const weekDates = monthMatrix[week].map(day => { // Added slice(1)            
             return day.toISOString().split('T')[0]; // Formato YYYY-MM-DD
         });
-    
+
+        console.log(parseInt(days.slice(2)) === firstDayOfWeek);
+        
+        
+        
         setDays(firstDayOfWeek + " - " + lastDayOfWeek);
+        console.log(days.substring(0,2));
+        
+        if (parseInt(days.substring(0,2)) === firstDayOfWeek) {
+            setSameWeek(true)
+        } else {
+            setSameWeek(false)
+        }
+        
         setWeekDays(weekDates);  // Establece las fechas de la semana actual
-    }, [week, month, year, monthMatrix, setWeekDays]);
+    }, [week, month, year, monthMatrix, setWeekDays, days]);
 
     const handleRightbutton = () => {
         let newWeek = week + 1;
@@ -44,7 +57,11 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
         const totalWeeksInMonth = currentMonthMatrix.length;
 
         if (newWeek >= totalWeeksInMonth - 1) { // Si la semana supera el rango permitido en el mes actual
-            newWeek = 0; // Reinicia la semana a la primera semana del nuevo mes
+            if (sameWeek){
+                newWeek = 1
+            } else {
+                newWeek = 0; // Reinicia la semana a la primera semana del nuevo mes
+            }
             newMonth += 1; // Incrementa el mes
 
             if (newMonth > 11) { // Si el mes supera diciembre
@@ -52,10 +69,9 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
                 newYear += 1; // Incrementa el año
                 setYear(newYear); // Actualiza el año
             }
-
-            setMonth(newMonth);  // Establece el nuevo mes
         }
-
+        
+        setMonth(newMonth);  // Establece el nuevo mes
         setWeek(newWeek);  // Establece la nueva semana
     };
 
