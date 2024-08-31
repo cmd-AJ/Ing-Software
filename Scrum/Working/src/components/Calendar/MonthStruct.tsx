@@ -95,7 +95,7 @@ export class Month {
         
         const month: Date[][] = [];
     
-        for (let i = 0; i < 6; i++) { // 6 filas máximo en un mes
+        for (let i = 0; i < 5; i++) { // 6 filas máximo en un mes
             const week: Date[] = [];
     
             for (let j = 0; j < 7; j++) { // 7 días en una semana
