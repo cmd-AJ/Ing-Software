@@ -60,6 +60,7 @@ const Dashboard: React.FC = () => {
     fetchData();
   }, []);
 
+
   if (width > 812) {
     return (
       <IonPage>
@@ -102,28 +103,20 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
         <div className='background'>
-          <div className='calendar-header'>
-            <div className='center-right-element'>
-              <b>
-                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000' />
-              </b>
-            </div>
-            <div className='center-center-element'>
-              <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar} />
-            </div>
-            <div className='center-left-element'>
-              <DateChanger 
-                week={week} 
-                setWeek={setWeek} 
-                monthMatrix={thisMonth.matrix} 
-                month={month} 
-                setMonth={setMonth} 
-                year={year} 
-                setYear={setYear} 
-                typeCalendar={typeCalendar}
-                setWeekDays={setWeekDays}  // Pasar setWeekDays a DateChanger
-              />
-            </div>
+        <div className='header-top-calendar'>
+                <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+              </div>
+              <div className='header-bottom-calendar'>
+                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                <DateChanger 
+                  week={week} 
+                  setWeek={setWeek} 
+                  monthMatrix={thisMonth.matrix} 
+                  month={month} setMonth={setMonth} 
+                  year={year} setYear={setYear} 
+                  typeCalendar={typeCalendar}
+                  setWeekDays={setWeekDays}
+                />
           </div>
           {
             typeCalendar === 'semana' &&
