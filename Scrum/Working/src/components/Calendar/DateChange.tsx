@@ -30,7 +30,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
             const date = new Date(year, month, day);
             return date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
         });
-        
+        console.log(monthMatrix)
    
         setDays(firstDayOfWeek + " - " + lastDayOfWeek);
         setWeekDays(weekDates);  // Establece las fechas de la semana actual
