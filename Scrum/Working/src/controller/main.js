@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import express from 'express'
 import cors from 'cors'
 import apiKeyAuth from './auth.js'
-import { getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import { createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 
 const app = express()
@@ -190,6 +190,31 @@ app.get('/trustNetwork/:dpi', apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
+
+app.post('/contacts/createChat', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi1, dpi2 } = req.body;
+
+    // Validación de entrada
+    if (!dpi1 || !dpi2) {
+      return res.status(400).json({ error: 'dpi1 and dpi2 are required' });
+    }
+
+    // Intentar crear o recuperar el chat entre los usuarios
+    const chat = await createNewChat(dpi1, dpi2);
+
+    if (chat) {
+      return res.status(200).json({ success: "Successfully created new chat", chat });
+    } else {
+      return res.status(400).json({ error: "Chat creation failed or already exists" });
+    }
+
+  } catch (error) {
+    console.error('Error creating chat:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
   try {
