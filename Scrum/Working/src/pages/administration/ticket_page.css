@@ -1,0 +1,5 @@
+.titulotickets{
+  background-color: var(--ion-color-primary);
+  padding: 0.5%;
+  --color:var(--white)
+}

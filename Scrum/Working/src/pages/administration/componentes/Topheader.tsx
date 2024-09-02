@@ -29,16 +29,24 @@ const Topheader: React.FC = () => {
 
   const history = useHistory();
 
-  const gotosuspend = () => {
-
-      history.push("dash_admin")
+  const gotoadmin = () => {
+    history.push("dash_admin")
   }
+
+  const gotosuspend = () => {
+    history.push("mod_suspended")
+  }
+
+  const gototicket = () => {
+    history.push("mod_ticket")
+  }
+
 
   return (
       <IonToolbar color={"primary"} >
-      <IonLabel  slot="start" className="dashbutton"><a className="linkref" onClick={gotosuspend}>SABTE</a> </IonLabel>
-      <IonButton slot="end" className="ticketing" > Suspendido </IonButton> 
-      <IonButton slot="end" className="ticketing"> Tickets </IonButton>
+      <IonLabel  slot="start" className="dashbutton"><a className="linkref" onClick={gotoadmin}>SABTE</a> </IonLabel>
+      <IonButton slot="end" className="ticketing" onClick={gotosuspend} > Suspendido </IonButton> 
+      <IonButton slot="end" className="ticketing" style={{cursor:'pointer'}} onClick={gototicket}> Tickets </IonButton>
       <IonButton  className="iconic" slot="end">
             <IonIcon  className="iconic" slot="icon-only" icon={exitOutline}></IonIcon>
           </IonButton> 

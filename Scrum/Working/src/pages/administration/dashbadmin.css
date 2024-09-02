@@ -83,6 +83,7 @@
 .linkref{
     color: var(--white);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .iconic{

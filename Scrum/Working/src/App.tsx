@@ -36,6 +36,7 @@ import EmployerProfileView from "./pages/employer_view/EmployerProfileView";
 import Login_Admin from "./pages/administration/Login_Admin";
 import Mod_Dashboard from "./pages/administration/Mod_Dashboard";
 import Suspendido from "./pages/administration/Suspended_page";
+import Tickt_page from "./pages/administration/Tickets_page";
 
 setupIonicReact();
 
@@ -69,6 +70,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/mod_suspended">
         <Suspendido/>
+        </Route>
+        <Route exact path="/mod_ticket">
+          <Tickt_page/>
         </Route>
         <Route exact path="/">
           <About />
