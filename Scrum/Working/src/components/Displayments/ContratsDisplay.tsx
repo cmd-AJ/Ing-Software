@@ -39,7 +39,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue}) => {
         }
 
         fecthData()
-    }, [])
+    }, [dpi])
 
     if (error !== ''){
         return (
