@@ -10,7 +10,7 @@ const Sidebar = () => {
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
-    const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('loggedUserDpi') || '');
+    const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
