@@ -26,7 +26,7 @@ const ContratDisplay: React.FC<ContainerProps> = ({contrat}) => {
         if (contrat.calificacion === null) {
             setRatingNull(false)
         }
-    })
+    },[])
 
     return (
         <>

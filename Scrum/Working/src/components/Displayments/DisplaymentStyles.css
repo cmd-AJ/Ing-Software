@@ -64,6 +64,12 @@
     color: black;
 }
 
+.contrat-employer-display {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
 .job-display {
     width: 100%;
     align-items: flex-start;
@@ -79,6 +85,20 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+}
+
+.contrat-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-contrat-container {
+    background-color: aqua;
+}
+
+.bottom-contrat-container {
+    background-color: blueviolet;
 }
 
 
