@@ -144,7 +144,7 @@ export async function insertChatMessage(content: string, chatID: string, dpi: st
     }
 }
 
-export async function makeHiring(description: string, dpiEmployer: string, dpiEmployee: string, appointmentTimeStamp: string) {
+export async function makeHiring(description: string, dpiEmployer: string, dpiEmployee: string, appointmentTimeStamp: string, payment: number) {
     try {
         // Convert the Guatemalan time (UTC-6) to UTC
         const localTime = new Date(appointmentTimeStamp);
@@ -155,7 +155,8 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
             descripcion: description,
             dpiempleador: dpiEmployer,
             dpiempleado: dpiEmployee,
-            timeStampCita: utcTime.toISOString() // Converts to UTC string
+            timeStampCita: utcTime.toISOString(), // Converts to UTC string
+            pago: payment
         };
 
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hire`, {

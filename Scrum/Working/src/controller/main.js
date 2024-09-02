@@ -326,8 +326,8 @@ app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
 
 app.post('/contacts/hire', apiKeyAuth ,async (req, res) => {
   try {
-    const { descripcion, dpiempleador, dpiempleado, timeStampCita } = req.body;
-     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita)
+    const { descripcion, dpiempleador, dpiempleado, timeStampCita, pago } = req.body;
+     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago)
      res.status(200).json({ Success: 'Contrato realizado'})
   } catch (error) {
     console.error('Error while hiring person:', error)

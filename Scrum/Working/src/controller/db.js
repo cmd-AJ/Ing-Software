@@ -295,11 +295,11 @@ export async function insertChatMessage(contenido, id_chat, dpi) {
     }
 }
 
-export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita) {
+export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago) {
     try {
         const query = {
-            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)",
-            values: [descripcion, dpiempleador, dpiempleado, timeStampCita]
+            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion, pago) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, $5)",
+            values: [descripcion, dpiempleador, dpiempleado, timeStampCita, pago]
         }
         await client.query(query)
 
