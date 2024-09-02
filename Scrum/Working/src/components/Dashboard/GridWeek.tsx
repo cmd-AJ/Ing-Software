@@ -51,6 +51,8 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
 
   useEffect(()=>{
     console.log(weekDays);
+    console.log(notes);
+    
   },[])
 
   return (

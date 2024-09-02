@@ -53,16 +53,11 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const dpi = localStorage.getItem('dpi'); 
-      if (dpi != null) {
-        const hirings = await getHirings(dpi);
-        setElementos(hirings);
-      }
+      const hirings = await getHirings(dpi);
+      setElementos(hirings);    
     };
 
-    fetchData();
-
-    console.log(elementos);
-    
+    fetchData();    
   }, []);
 
 

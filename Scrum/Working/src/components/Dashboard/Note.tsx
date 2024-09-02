@@ -4,17 +4,17 @@ import './notes.css';
 interface NoteProps {
   trabajador: string;
   hora: string;
-  descripción: string;
+  descripcion: string;
   foto: string;
 }
 
-const Note: React.FC<NoteProps> = ({ trabajador, hora, descripción, foto }) => {
+const Note: React.FC<NoteProps> = ({ trabajador, hora, descripcion, foto }) => {
   const [startHour, endHour] = hora.split(' - '); // Split the hour range
 
   return (
     <div className="note-card">
       <div className="note-content">
-        <h3 className="note-title">{descripción}</h3>
+        <h3 className="note-title">{descripcion}</h3>
         <p className="note-hora">
           {startHour} <br /> {endHour ? `- ${endHour}` : ''}
         </p>
