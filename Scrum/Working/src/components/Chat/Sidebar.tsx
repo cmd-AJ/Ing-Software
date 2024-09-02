@@ -10,7 +10,7 @@ const Sidebar = () => {
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
-    const [loggedUserDpi, setLoggedUserDpi] = useState("3834 49898 0101"); // DPI del usuario loggeado Andre Jo
+    const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('loggedUserDpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
