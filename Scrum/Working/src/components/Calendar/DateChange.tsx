@@ -28,8 +28,7 @@ const DateChanger: React.FC<ContainerProps> = ({ week, monthMatrix, setWeek, mon
         // Calcula las fechas de los días de la semana
         const weekDates = monthMatrix[week].map(day => { // Added slice(1)            
             return day.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-        });        
-        
+        });       
         setDays(firstDayOfWeek + " - " + lastDayOfWeek);
         
         setWeekDays(weekDates);  // Establece las fechas de la semana actual
