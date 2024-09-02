@@ -54,7 +54,7 @@
     flex-direction: column;
 }
 
-.contrat-display, .job-display {
+.contrat-display, .job-display, .trust-display {
     width: 35%;
     height: 100%;
     padding: 10px;
@@ -80,6 +80,7 @@
     justify-content: space-between;
     align-content: center;
 }
+
 
 @media (max-width: 814px){
     #rating-display {

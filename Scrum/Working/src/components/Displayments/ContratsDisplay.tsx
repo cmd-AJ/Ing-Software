@@ -54,7 +54,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue}) => {
                     </>
                 }
                 <div style={{minHeight: '280px', width:'100%', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
-                    <TextND text="Sin contratos" size="medium" hex="#888"/>
+                    <TextND text={error} size="medium" hex="#888"/>
                 </div>
             </div>
 

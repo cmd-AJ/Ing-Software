@@ -39,7 +39,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
         if (role === 'Empleador'){
             return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                    <TrustPeople />
+                    <TrustPeople dpi={dpi} selectedValue=""/>
                     <VerticalDivider/>
                 </div>
             )
@@ -56,7 +56,18 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
         if (role === 'Empleador') {
             return (
                 <>
-
+                    <IonSegment value={selectedSegment}>
+                        <IonSegmentButton value="leftsegment" onClick={handleLeftSegment}>
+                            Personas
+                        </IonSegmentButton>
+                        <IonSegmentButton value="rightsegment" onClick={handleRightSegment}>
+                            Contratos
+                        </IonSegmentButton>
+                    </IonSegment>
+                    {
+                        selectedSegment === 'leftSegment' &&
+                        <TrustPeople dpi={dpi} selectedValue={selectedSegment}/>
+                    }
                 </>
             )
         } else {
