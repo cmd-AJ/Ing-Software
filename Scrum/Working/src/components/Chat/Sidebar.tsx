@@ -7,7 +7,7 @@ import Bottom from './Bottom';
 import { getContacts, getChatMessages } from '../../controller/ChatController';
 
 const Sidebar = () => {
-    const [selectedPerson, setSelectedPerson] = useState(null);
+    const [selectedPerson, setSelectedPerson] = useState<string>('');
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
@@ -38,9 +38,12 @@ const Sidebar = () => {
 
     }, []);
 
-    const handlePersonClick = async (dpi) => {
-        const selectedPerson = contacts.find(person => person.dpi === dpi);
+    const handlePersonClick = async (dpi: string) => {
+        const selectedPerson2 = contacts.find(person => person.dpi === dpi)
+        console.log(selectedPerson2);
+        
         setSelectedPerson(selectedPerson);
+        localStorage.setItem('SelectedPerson', selectedPerson2.dpi)
 
         try {
             const chatMessages = await getChatMessages(loggedUserDpi, dpi);
