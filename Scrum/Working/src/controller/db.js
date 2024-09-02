@@ -3,6 +3,24 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function createNewChat(dpi1, dpi2) {
+
+    try {
+        const query = {
+            text:"INSERT INTO chats(dpireceptor, dpiemisor) VALUES ($1, $2)", 
+            values:[dpi1, dpi2]
+        }
+
+        const result = await client.query(query)
+
+        return result;
+    } catch (error) {
+        console.error('Error while creating chat:', error);
+        throw error;
+    }
+    
+}
+
 export async function getUsers() {
     try {
         const query = {
@@ -229,7 +247,7 @@ export async function gettrabajoSABTE(dpi) {
 //Trabajadores en SABTE empleador
 export async function getTrabajoSABTEemple(dpi) { 
 	try {
-		const result = await client.query(`select u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+		const result = await client.query(`select c.titulo , u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo , u.imagen  , fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpitrabajador 
             join trabajador t on t.dpi = c.dpitrabajador
@@ -277,11 +295,11 @@ export async function insertChatMessage(contenido, id_chat, dpi) {
     }
 }
 
-export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita) {
+export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago) {
     try {
         const query = {
-            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)",
-            values: [descripcion, dpiempleador, dpiempleado, timeStampCita]
+            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion, pago) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, $5)",
+            values: [descripcion, dpiempleador, dpiempleado, timeStampCita, pago]
         }
         await client.query(query)
 

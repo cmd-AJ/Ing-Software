@@ -17,6 +17,7 @@ import {
 import "../../../theme/variables.css";
 import "./ticket.css"
 import { arrowForwardOutline, exitOutline } from "ionicons/icons";
+import { useHistory } from "react-router";
 
 interface Cuenta{
 
@@ -33,7 +34,18 @@ interface Cuenta{
 
 
 
+
+
+
+
 const Supended: React.FC<Cuenta> = ( {idreporte, dpiemisor, dpireportuser, fecha, contenido } ) => {
+
+  const history = useHistory();
+
+  const gototicket = (ticket:string) => {
+
+    history.push(`mod_ticket?ticket=`+ticket)
+  }
 
   const [ cuenta, setcuenta ] = useState( { idreporte ,dpiemisor, dpireportuser, fecha, contenido } )
 
@@ -41,7 +53,7 @@ const Supended: React.FC<Cuenta> = ( {idreporte, dpiemisor, dpireportuser, fecha
   return (
     <>
     <IonItem className="componenteticket"><h1>Ticket: #{cuenta.idreporte}</h1>
-    <IonButton slot="end" className="iconbut">
+    <IonButton onClick={() => gototicket(cuenta.idreporte)} slot="end" className="iconbut">
     <IonIcon  className="iconbut" slot="icon-only" icon={arrowForwardOutline}></IonIcon>
     </IonButton>
     </IonItem>

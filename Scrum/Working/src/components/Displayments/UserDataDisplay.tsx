@@ -38,15 +38,16 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
     if (width > 660) {
         if (role === 'Empleador'){
             return (
-                <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                    <TrustPeople />
+                <div style={{display: 'flex', height: '100%', minHeight: '378px', width: '100%'}}>
+                    <TrustPeople dpi={dpi} selectedValue=""/>
                     <VerticalDivider/>
+                    <ContratsDisplay dpi={dpi} selectedValue="" role={role}/>
                 </div>
             )
         } else {
             return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                    <ContratsDisplay dpi={dpi} selectedValue=""/>
+                    <ContratsDisplay dpi={dpi} selectedValue="" role={role}/>
                     <VerticalDivider />
                     <JobsDisplay dpi={dpi} selectedValue=""/>
                 </div>
@@ -56,7 +57,18 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
         if (role === 'Empleador') {
             return (
                 <>
-
+                    <IonSegment value={selectedSegment}>
+                        <IonSegmentButton value="leftsegment" onClick={handleLeftSegment}>
+                            Personas
+                        </IonSegmentButton>
+                        <IonSegmentButton value="rightsegment" onClick={handleRightSegment}>
+                            Contratos
+                        </IonSegmentButton>
+                    </IonSegment>
+                    {
+                        selectedSegment === 'leftSegment' &&
+                        <TrustPeople dpi={dpi} selectedValue={selectedSegment}/>
+                    }
                 </>
             )
         } else {
@@ -72,7 +84,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
                     </IonSegment>
                     {
                         selectedSegment === 'leftSegment' &&
-                        <ContratsDisplay dpi={dpi} selectedValue={selectedSegment}/>
+                        <ContratsDisplay dpi={dpi} selectedValue={selectedSegment} role={role}/>
                     }
                     {
                         selectedSegment === 'rightSegment' &&
