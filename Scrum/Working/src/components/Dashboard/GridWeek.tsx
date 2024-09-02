@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './gridWeek.css';
 import Note from './Note';
 
@@ -19,8 +19,19 @@ interface GridWeekProps {
 const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
   const hours = ['6 am - 9 am', '9 am - 12 pm', '12 pm - 3 pm', '3 pm - 6 pm', '6 pm - 9 pm', '9 pm'];
 
+  const parseDate = (dateString: string): Date => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day);  // Restamos 1 al mes ya que Date() usa 0-index para los meses
+  };
+
+  const getDayName = (dateString: string): string => {
+    const date = parseDate(dateString);
+    const daysOfWeek = ['Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    return daysOfWeek[date.getDay()];
+  };
+
   const getDayIndex = (day: string) => {
-    return weekDays.findIndex(weekDay => weekDay === day); // Encuentra el índice de la fecha en la semana actual
+    return weekDays.findIndex(weekDay => parseDate(weekDay).toISOString().slice(0, 10) === day); // Encuentra el índice de la fecha en la semana actual
   };
 
   const getHourIndex = (hour: string) => {
@@ -38,12 +49,18 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
     return 5;
   };
 
+  useEffect(()=>{
+    console.log(weekDays);
+  },[])
+
   return (
     <div className="grid-week">
       <div className="header-row">
         <div className="corner"></div>
         {weekDays.map((day, index) => (
-          <div className="day" key={index}>{new Date(day).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric' })}</div>
+          <div className="day" key={index}>
+            <div>{getDayName(day) + " " + day.slice(-2)}</div> {/* Nombre del día de la semana */}
+          </div>
         ))}
       </div>
       <div className="time-grid">

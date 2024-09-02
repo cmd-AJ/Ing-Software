@@ -7,6 +7,7 @@ import TextND from '../components/Txt/TextND';
 import DoubleToggle from '../components/Miscellaneous/DoubleToggle';
 import DateChanger from '../components/Calendar/DateChange';
 import MonthCalendar from '../components/Calendar/MonthCalendar';
+import { getHirings } from '../controller/ChatController';
 
 const Dashboard: React.FC = () => {
 
@@ -19,6 +20,7 @@ const Dashboard: React.FC = () => {
   const [year, setYear] = useState(currentDate.getFullYear());
   const [week, setWeek] = useState<number>(0);
   const [weekDays, setWeekDays] = useState<string[]>([]);  // Estado para almacenar las fechas de la semana
+  const [elementos, setElementos] = useState<any[]>([]);  // Estado para almacenar los datos dinámicos
 
   useEffect(() => {
     setThisMonth(new Month(month, year));
@@ -47,32 +49,17 @@ const Dashboard: React.FC = () => {
     setThisMonth(new Month(month, year));
   }, [month, year]);
 
-  const elementos = [
-    {
-      trabajador: 'Luka Pérez',
-      dia: '2024-08-12',
-      hora: '10:00 AM',
-      descripción: 'Mantenimiento general',
-      precio: 'Q500',
-      foto: 'https://cdn.nba.com/headshots/nba/latest/1040x760/1629029.png'
-    },
-    {
-      trabajador: 'Mario Bros',
-      dia: '2024-08-13',
-      hora: '02:00 PM',
-      descripción: 'Fregadero',
-      precio: 'Q750',
-      foto: 'https://i.pinimg.com/736x/b7/16/ed/b716edbac6fe2846a6db5d88711bacdd.jpg'
-    },
-    {
-      trabajador: 'Carlos Gómez',
-      dia: '2024-08-14',
-      hora: '09:00 AM',
-      descripción: 'Instalación de sistema eléctrico',
-      precio: 'Q1000',
-      foto: 'https://static.vecteezy.com/system/resources/previews/019/900/322/non_2x/happy-young-cute-illustration-face-profile-png.png'
-    },
-  ];
+  // Nuevo useEffect para obtener los datos dinámicos
+  useEffect(() => {
+    const fetchData = async () => {
+      const dpi = '3833 86608 0102'; // Aquí puedes reemplazar con el DPI adecuado
+      const hirings = await getHirings(dpi);
+      setElementos(hirings);
+    };
+
+    fetchData();
+  }, []);
+
 
   if (width > 812) {
     return (
@@ -116,28 +103,20 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
         <div className='background'>
-          <div className='calendar-header'>
-            <div className='center-right-element'>
-              <b>
-                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000' />
-              </b>
-            </div>
-            <div className='center-center-element'>
-              <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar} />
-            </div>
-            <div className='center-left-element'>
-              <DateChanger 
-                week={week} 
-                setWeek={setWeek} 
-                monthMatrix={thisMonth.matrix} 
-                month={month} 
-                setMonth={setMonth} 
-                year={year} 
-                setYear={setYear} 
-                typeCalendar={typeCalendar}
-                setWeekDays={setWeekDays}  // Pasar setWeekDays a DateChanger
-              />
-            </div>
+        <div className='header-top-calendar'>
+                <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+              </div>
+              <div className='header-bottom-calendar'>
+                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+                <DateChanger 
+                  week={week} 
+                  setWeek={setWeek} 
+                  monthMatrix={thisMonth.matrix} 
+                  month={month} setMonth={setMonth} 
+                  year={year} setYear={setYear} 
+                  typeCalendar={typeCalendar}
+                  setWeekDays={setWeekDays}
+                />
           </div>
           {
             typeCalendar === 'semana' &&
