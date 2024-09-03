@@ -22,7 +22,7 @@ import "./userlist.css"
 
 interface Cuenta {
   idsuspend: string;
-  dpiban: string;
+  dpi: string;
   estado: string;
   fechainicio: string;
   fechaban: string;
@@ -46,7 +46,7 @@ const Desban: React.FC = (  ) => {
     };
 
     fetchReports();
-}, []); // Empty dependency array
+}, []); 
 
 
 
@@ -64,7 +64,7 @@ const Desban: React.FC = (  ) => {
               </IonRow>
               {cuentas.map((item, index) => (
               <IonRow  key={index}>
-                  <IonCol className="userCOl">{item.idsuspend}</IonCol>
+                  <IonCol className="userCOl">{item.dpi}</IonCol>
                   <IonCol className="userCOl">Pendiente</IonCol>
                 </IonRow>
               ))}

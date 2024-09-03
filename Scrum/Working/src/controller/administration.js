@@ -58,3 +58,21 @@ export async function getbanusersprev() {
         throw error;
     }
 }
+
+
+export async function getbanusersprev() {
+    try {
+        const query = {
+            text: `
+            select dpi, estado, unban from suspendido where estado = false 
+        `
+        };
+
+        const result = await client.query(query);
+        return result.rows;
+        
+    } catch (error) {
+        console.error('Error Looking at moderator:', error);
+        throw error;
+    }
+}

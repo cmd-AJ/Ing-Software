@@ -55,9 +55,6 @@ const Mod_Dashboard: React.FC = () => {
 }, []); // Empty dependency array
 
 
-  const [validateDpi, setValidateDpi] = useState(false)
-  const [validatePassword, setValidatePassword] = useState(false)
-
   const history = useHistory();
 
   const gotosuspend = () => {

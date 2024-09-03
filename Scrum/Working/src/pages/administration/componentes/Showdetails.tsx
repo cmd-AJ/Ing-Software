@@ -34,6 +34,8 @@ interface Persona {
   razon:string;
 }
 
+
+
 const jhason = [
   {
     "idsuspend": '23',
@@ -71,6 +73,25 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [changedate, setchangedate] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+
+    
+//   React.useEffect(() => {
+//     const fetchReports = async () => {
+//         try {
+//             const jhason: Persona[] = await Getbanusers();
+//             if (Array.isArray(jhason) && jhason.length > 0) {
+//               setcuentas(jhason); 
+//             }
+//         } catch (error) {
+//             console.error('Failed to fetch reports:', error);
+//         }
+//     };
+
+//     fetchReports();
+// }, []); 
+
+
 
 
   const handleDateChange = (e: CustomEvent) => {
