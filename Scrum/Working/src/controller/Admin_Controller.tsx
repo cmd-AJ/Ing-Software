@@ -89,3 +89,62 @@ export async function Getallbannedusers() {
         return false;
     }
 }
+
+
+export async function unban(dpi: string) {
+    try {
+        const data = {
+            dpi: dpi
+        };
+
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/unbanuser`, {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to unban user');
+        }
+
+        const responseData = await response.json();
+        return responseData;
+    } catch (error) {
+        console.error("Error while changing state:", error);
+        throw error;
+    }
+}
+
+
+
+export async function extendunban(dpi: string, fecha : string) {
+    try {
+        const data = {
+            dpi: dpi,
+            fecha: fecha
+        };
+
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/extendban`, {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to extend user ban days');
+        }
+
+        const responseData = await response.json();
+        return responseData;
+    } catch (error) {
+        console.error("Error while changing date:", error);
+        throw error;
+    }
+}
+

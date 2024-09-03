@@ -4,7 +4,7 @@ import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
 import {createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
-import { Admin_Exist, getbanusers, getbanusersprev, getreports } from './administration.js';
+import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 
 const app = express()
 const port = 3000
@@ -76,6 +76,28 @@ app.get('/banusers', adminapiKeyAuth , async (req, res) => {
   try {
     const users = await getbanusers()
     res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.put('/extendban' , adminapiKeyAuth ,async (req, res) => {
+  const { DPI, fecha } = req.body; 
+  try {
+    const users = await extendban(DPI, fecha)
+    res.status(200).json({"message":"Update succesfull"})
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.put('/unbanuser', adminapiKeyAuth , async (req, res) => {
+  const { DPI } = req.body; 
+  try {
+    const users = await unban(DPI)
+    res.status(200).json({"message":"Update succesfull"})
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
   }

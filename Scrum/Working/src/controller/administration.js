@@ -78,3 +78,45 @@ export async function getbanusers() {
 }
 
 
+
+
+
+export async function extendban(dpi, fecha) {
+    try {
+        const query = {
+            text: `
+            update suspendido set unban = $2
+            where  dpi = $1
+        `,values: [dpi, fecha],
+        };
+
+        const result = await client.query(query);
+        return result.rows;
+        
+    } catch (error) {
+        console.error('Cant update the ban:', error);
+        throw error;
+    }
+}
+
+
+export async function unban(DPI) {
+    try {
+        const query = {
+            text: `
+            update suspendido set estado = true 
+            where  dpi = $1
+        `   ,values: [DPI],
+        };
+        
+
+        const result = await client.query(query);
+        return result.rows;
+        
+    } catch (error) {
+        console.error('Error Looking at moderator:', error);
+        throw error;
+    }
+}
+
+

@@ -24,7 +24,7 @@ import {
 import { calendar, calendarOutline, closeOutline } from 'ionicons/icons';
 
 import './mod_modaling.css'
-import { Getallbannedusers } from "../../../controller/Admin_Controller";
+import { extendunban, Getallbannedusers, unban } from "../../../controller/Admin_Controller";
 
 interface Persona {
   idsuspend: string;
@@ -46,6 +46,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [changedate, setchangedate] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [dpi, setdpi] = useState(data?.dpi)
 
 
 
@@ -58,8 +59,28 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
 
   };
 
-  const handleButtonClick = () => {
-    console.log('Button clicked!');
+  const handleButtonClickunban = () => {
+
+    if((dpi != '') ){
+      console.log(dpi)
+      unban(dpi+'')
+    }
+
+    
+    // Add other actions you want to perform on click
+  };
+
+
+  const handleButtonClickextend = () => {
+
+    if((dpi != '') && (selectedDate != '') ){
+      console.log(selectedDate);
+      console.log(dpi?.toString)
+  
+      extendunban(dpi+'', selectedDate+'')
+    }
+    
+    
     // Add other actions you want to perform on click
   };
 
@@ -93,7 +114,6 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         > <IonDatetime onIonChange={handleDateChange}></IonDatetime>
       </IonPopover>  
 
-  
 
         <IonLabel className="descprio"><b>Descripción</b></IonLabel>
         <br></br>
@@ -110,13 +130,13 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
           <>
           <br />
           <div style={{display:'flex'}}>
-            <input placeholder="Desbloquear Cuenta" className="botonconfirm" style={{backgroundColor:'var(--white)'}} ></input>
-            <IonButton className="botonconfirm" onClick={handleButtonClick}>Extender Bloqueo</IonButton>
+            <input placeholder="desbloquear Cuenta" className="botonconfirm" style={{backgroundColor:'var(--white)'}} ></input>
+            <IonButton className="botonconfirm" onClick={handleButtonClickextend}>Extender Bloqueo</IonButton>
           </div>
           <p style={{color:'red'}}>Escribir "desbloquear cuenta" para confirmar</p>
           </>
         ) : (
-          <IonButton className="botonDesCuenta" onClick={handleButtonClick}>Desbloquear Cuenta</IonButton>
+          <IonButton className="botonDesCuenta" onClick={handleButtonClickunban}>Desbloquear Cuenta</IonButton>
         )}
 
       </IonContent>
