@@ -1,0 +1,32 @@
+.postedby-card {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #f1f3f5;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .postedby-card:hover {
+    background-color: #e9ecef;
+  }
+  
+  .postedby-header {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .postedby-usuario {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #343a40;
+  }
+  
+  .postedby-time {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 4px;
+  }
+  

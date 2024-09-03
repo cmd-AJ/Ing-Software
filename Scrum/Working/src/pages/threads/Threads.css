@@ -1,4 +1,4 @@
-.threads-space{
+.threads-space {
     left: 0;
     right: 0;
     top: 0;
@@ -11,21 +11,49 @@
     z-index: 0;
     background-color: #78a2e6;
     padding: 20px;
+    overflow: hidden; /* Evita que los elementos se desborden fuera del contenedor */
+    border-radius: 10px;
 }
 
 .threads-container {
     z-index: 1; 
     background-color: #eaeaeb;
     height: 100%;
-    width: 60%; /* Start with a wider width */
-    max-width: 800px; /* Max width to prevent it from getting too large */
-    min-width: 300px; /* Minimum width for small screens */
+    width: 60%;
+    max-width: 800px;
+    min-width: 300px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    align-content: center;
+    overflow: hidden; /* Oculta las barras de desplazamiento */
+}
+
+.thread-scroller {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    -webkit-overflow-scrolling: touch; /* Mejora el scroll en dispositivos táctiles */
+    scrollbar-width: none; /* Oculta la barra de scroll en Firefox */
+    text-align: center; /* Centra los elementos inline y inline-block dentro */
+    padding: 16px;
+    box-sizing: border-box; /* Asegura que el padding se incluya en las dimensiones totales */
+}
+
+.thread-scroller::-webkit-scrollbar {
+    display: none; /* Oculta la barra de scroll en Webkit (Chrome, Safari) */
+}
+
+.thread-scroller > * {
+    margin-bottom: 16px; /* Espacio entre los posts */
+    width: 90%; /* Ajusta para centrar el contenido y dejar márgenes laterales */
+    max-width: 600px; /* Limita el ancho máximo de los posts */
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* Alinea el texto dentro de los posts a la izquierda */
+    display: block; /* Asegura que los elementos ocupen el ancho completo disponible */
 }
 
 @media (max-width: 768px) {
@@ -38,24 +66,4 @@
     .threads-container {
         width: 90%;
     }
-}
-
-
-.thread-scroller {
-    flex: 1; /* Make the scroller take up remaining space in the container */
-    overflow-y: auto; /* Enables vertical scrolling */
-    padding-right: 10px; /* Optional: To avoid content being hidden under scrollbar */
-    margin-bottom: 20px; /* Optional: Add space below the scrollable area */
-    width: 100%;
-    height: auto;
-    display: block; /* Ensures posts are not compressed */
-}
-
-.thread-scroller::-webkit-scrollbar {
-    width: 8px; /* Optional: Custom scrollbar width */
-}
-
-.thread-scroller::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3); /* Optional: Custom scrollbar color */
-    border-radius: 4px; /* Optional: Round the scrollbar */
 }

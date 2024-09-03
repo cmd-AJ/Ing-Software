@@ -1,7 +1,6 @@
-    // src/components/PostByCard.tsx
-
 import React from 'react';
 import { IonCard, IonCardHeader, IonCardSubtitle } from '@ionic/react';
+import './PostedByCards.css';
 
 interface PostByCardProps {
   usuario: string;
@@ -10,14 +9,14 @@ interface PostByCardProps {
 
 const PostByCard: React.FC<PostByCardProps> = ({ usuario, posttime }) => {
   return (
-    <IonCard>
-      <IonCardHeader>
-        {/* {Here will get the user profile by its username and id} */}
-        <IonCardSubtitle>{usuario}</IonCardSubtitle>
-        <p>{new Date(posttime).toLocaleString()}</p>
+    <IonCard className="postedby-card">
+      <IonCardHeader className="postedby-header">
+        <IonCardSubtitle className="postedby-usuario">{usuario}</IonCardSubtitle>
+        <p className="postedby-time">{new Date(posttime).toLocaleString()}</p>
       </IonCardHeader>
     </IonCard>
   );
 };
+
 
 export default PostByCard;
