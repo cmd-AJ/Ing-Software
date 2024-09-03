@@ -14,7 +14,6 @@ const Adminbutton: React.FC<ContainerProps> = ({
     dpi, 
     password, 
 }) => {
-    const [userExist, setUserExist] = useState(false);
     const [message, setMessage] = useState("");
     const [showToast, setShowToast] = useState(false);
     const history = useHistory();
@@ -33,7 +32,6 @@ const Adminbutton: React.FC<ContainerProps> = ({
 
             try {
                 const login = await Existing_admin(dpi, CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex));
-                console.log(login)
                 if (login) {
                     
                     history.push(`/dash_admin?dpi=${dpi}`);
