@@ -60,7 +60,7 @@ export async function getbanusersprev() {
 }
 
 
-export async function getbanusersprev() {
+export async function getbanusers() {
     try {
         const query = {
             text: `
