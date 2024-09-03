@@ -102,7 +102,6 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-
       <IonGrid>
           <IonRow>
             <IonCol><IonItem>Fecha Inicio: <br></br> {data?.fechainicio} </IonItem></IonCol>
@@ -139,26 +138,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         ) : (
           <IonButton className="botonDesCuenta" onClick={handleButtonClick}>Desbloquear Cuenta</IonButton>
         )}
-{/* 
-        <IonPopover
-          style={{ textAlign: 'center' }}
-          isOpen={showPopoverconfirm}
-          onDidDismiss={() => setShowPopoverconfirm(false)}
-        >
-          <p>Estas seguro de extender la fecha?</p>
-          <IonGrid>
-            <IonRow>
-              <IonCol>
-              <IonButton onClick={() => handleCancel()}>No</IonButton>
-              </IonCol>
-              <IonCol>
-                <IonButton onClick={() => handleconfirm}>Si</IonButton>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonPopover> */}
 
-        
       </IonContent>
     </IonPage>
   );
@@ -204,3 +184,25 @@ export default Showsuspend_D;
 {/* <IonButton onClick={() => onDismiss(inputRef.current?.value, 'confirm')} strong={true}>
 Confirm
 </IonButton> */}
+
+
+{/* 
+        <IonPopover
+          style={{ textAlign: 'center' }}
+          isOpen={showPopoverconfirm}
+          onDidDismiss={() => setShowPopoverconfirm(false)}
+        >
+          <p>Estas seguro de extender la fecha?</p>
+          <IonGrid>
+            <IonRow>
+              <IonCol>
+              <IonButton onClick={() => handleCancel()}>No</IonButton>
+              </IonCol>
+              <IonCol>
+                <IonButton onClick={() => handleconfirm}>Si</IonButton>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </IonPopover> */}
+
+        

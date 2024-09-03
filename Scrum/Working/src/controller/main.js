@@ -4,6 +4,7 @@ import cors from 'cors'
 import apiKeyAuth from './auth.js'
 import { getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
+import { Admin_Exist } from './administration.js';
 
 const app = express()
 const port = 3000
@@ -40,6 +41,19 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+// apiKeyAuth,
+app.get('/login_admin/:dpi/:password', async (req, res) => {
+  try {
+    const { dpi, password } = req.params
+    const users = await Admin_Exist(dpi, password)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
 
 app.post('/LoginUser', apiKeyAuth, async (req, res) => {
   try {
