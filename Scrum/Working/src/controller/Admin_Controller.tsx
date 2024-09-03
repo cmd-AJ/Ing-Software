@@ -100,7 +100,7 @@ export async function unban(dpi: string) {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/unbanuser`, {
             method: 'PUT',
             headers: {
-                'api-key': import.meta.env.VITE_API_KEY,
+                'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -130,7 +130,7 @@ export async function extendunban(dpi: string, fecha : string) {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/extendban`, {
             method: 'PUT',
             headers: {
-                'api-key': import.meta.env.VITE_API_KEY,
+                'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
