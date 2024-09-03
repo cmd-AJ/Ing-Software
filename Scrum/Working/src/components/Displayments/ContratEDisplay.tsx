@@ -36,7 +36,9 @@ const ContratEDisplay : React.FC<ContainerProps> = ({contrat}) => {
                 <div className="top-contrat-container">
                     <TextND text={contrat.titulo} size="medium" hex="#000"/>
                     <div id="simple-display">
-                        <TextND text={contrat.fecha + ' - '} size="small" hex="#000"/>
+                        <TextND text={contrat.fecha} size="small" hex="#000"/>
+                        <div style={{color: 'transparent'}}>-</div>
+                        <div>-</div>
                         <div style={{color: 'transparent'}}>-</div>
                         <TextND text={ contrat.fechafin === null ? 'En progreso' : contrat.fechafin } size="small" hex="#000"/>
                     </div>
