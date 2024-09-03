@@ -66,3 +66,26 @@ export async function Getbanusers() {
         return false;
     }
 }
+
+
+//Todos los ussuarios el de arriba es solo los preview
+export async function Getallbannedusers() {
+    try {
+
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/banusers`,{
+            headers: {
+                'api-key': import.meta.env.VITE_ADMIN_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+
+
+        return data;
+
+
+    } catch (error) {
+        console.error('Error fetching contacts:', error);
+        return false;
+    }
+}

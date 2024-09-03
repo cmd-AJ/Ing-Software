@@ -64,7 +64,7 @@ export async function getbanusers() {
     try {
         const query = {
             text: `
-            select dpi, estado, unban from suspendido where estado = false 
+            select * from suspendido where estado = false 
         `
         };
 
@@ -76,3 +76,5 @@ export async function getbanusers() {
         throw error;
     }
 }
+
+

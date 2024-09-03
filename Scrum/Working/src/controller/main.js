@@ -4,7 +4,7 @@ import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
 import {createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
-import { Admin_Exist, getbanusersprev, getreports } from './administration.js';
+import { Admin_Exist, getbanusers, getbanusersprev, getreports } from './administration.js';
 
 const app = express()
 const port = 3000
@@ -70,6 +70,18 @@ app.get('/banprev', adminapiKeyAuth , async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+
+app.get('/banusers', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getbanusers()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
 
 
 

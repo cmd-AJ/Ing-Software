@@ -24,44 +24,17 @@ import {
 import { calendar, calendarOutline, closeOutline } from 'ionicons/icons';
 
 import './mod_modaling.css'
+import { Getallbannedusers } from "../../../controller/Admin_Controller";
 
 interface Persona {
   idsuspend: string;
-  dpiban: string;
-  estado: string;
+  dpi: string;
+  estado: boolean;
   fechainicio: string;
-  fechaban: string;
+  unban: string;
   razon:string;
 }
 
-
-
-const jhason = [
-  {
-    "idsuspend": '23',
-    "dpiban": '12345678912345',
-    "estado": 'Pendiente',
-    "fechainicio": "2024-09-27T12:34:56Z",
-    "fechaban": "2024-08-27T12:34:56Z",
-    "razon": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-  },
-  {
-    "idsuspend": '23',
-    "dpiban": '12345678912345',
-    "estado": 'Pendiente',
-    "fechainicio": "2024-09-27T12:34:56Z",
-    "fechaban": "2024-08-27T12:34:56Z",
-    "razon": "Insulto a otra persona"
-  },
-  {
-    "idsuspend": '25',
-    "dpiban": '12345568912345',
-    "estado": 'Pendiente',
-    "fechainicio": "2024-09-27T12:34:56Z",
-    "fechaban": "2024-08-27T12:34:56Z",
-    "razon": "Insulto a otra persona"
-  }
-];
 
 interface ModalExampleProps {
   onDismiss: (data?: any, role?: string) => void;
@@ -73,24 +46,6 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [changedate, setchangedate] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-
-
-    
-//   React.useEffect(() => {
-//     const fetchReports = async () => {
-//         try {
-//             const jhason: Persona[] = await Getbanusers();
-//             if (Array.isArray(jhason) && jhason.length > 0) {
-//               setcuentas(jhason); 
-//             }
-//         } catch (error) {
-//             console.error('Failed to fetch reports:', error);
-//         }
-//     };
-
-//     fetchReports();
-// }, []); 
-
 
 
 
@@ -114,7 +69,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
       <IonHeader>
         <IonToolbar className="mod-modalToolbar">
           <IonButtons slot="start"></IonButtons>
-          <IonTitle className="showdetail_titulo"> DPI BAN: <b>{data?.dpiban}</b></IonTitle>
+          <IonTitle className="showdetail_titulo"> DPI BAN: <b>{data?.dpi}</b></IonTitle>
           <IonButtons slot="end">
             <IonButton onClick={() => onDismiss(null, 'cancel')}>
               <IonIcon className="closingicono" icon={closeOutline}></IonIcon>
@@ -126,7 +81,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
       <IonGrid>
           <IonRow>
             <IonCol><IonItem>Fecha Inicio: <br></br> {data?.fechainicio} </IonItem></IonCol>
-            <IonCol><IonItem id={data?.dpiban}>Fecha a Desbloquear: <br></br> {selectedDate || data?.fechaban} <IonButton slot="end"  onClick={() => setShowPopover(true)} className="iconodate">
+            <IonCol><IonItem id={data?.dpi}>Fecha a Desbloquear: <br></br> {selectedDate || data?.unban} <IonButton slot="end"  onClick={() => setShowPopover(true)} className="iconodate">
             <IonIcon slot="icon-only" icon={calendar}></IonIcon>  
             </IonButton></IonItem></IonCol>
           </IonRow>
@@ -145,7 +100,11 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         
         <IonItem className="textrazon">{data?.razon}</IonItem>
         <br></br>
-        <IonText>Estado: <b>{data?.estado} </b></IonText>
+        {data?.estado === false ? (
+          <IonText>Estado: <b>Pendiente</b></IonText>
+        ) : (
+          <IonText>Estado: <b>Revisado</b></IonText>
+        )}
         <br></br>
         {changedate ? (
           <>
@@ -172,6 +131,25 @@ function Showsuspend_D() {
     data: selectedItem, // Pass the selected item data
   });
 
+  const [cuentas, setcuentas] = useState<Persona[]>([]);
+
+  React.useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const jhason: Persona[] = await Getallbannedusers();
+        if (Array.isArray(jhason) && jhason.length > 0) {
+          setcuentas(jhason);
+        }
+      } catch (error) {
+        console.error('Failed to fetch reports:', error);
+      }
+    };
+    fetchReports();
+  }, []);
+
+
+
+
   function openModal(item: Persona) {
     setSelectedItem(item); // Set the selected item in state
     present();
@@ -179,7 +157,8 @@ function Showsuspend_D() {
 
   return (
     <>
-      {jhason.map((item, index) => (
+    
+      {cuentas.map((item, index) => (
         <button
           key={index}
           style={{
@@ -190,8 +169,8 @@ function Showsuspend_D() {
           onClick={() => openModal(item)}
         >
           <div className="separacion">
-            <p>{item.dpiban}</p>
-            <p>{item.fechaban}</p>
+            <p>{item.dpi}</p>
+            <p>{item.unban}</p>
           </div>
         </button>
       ))}
