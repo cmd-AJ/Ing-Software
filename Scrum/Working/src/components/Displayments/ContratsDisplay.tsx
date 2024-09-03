@@ -17,6 +17,7 @@ type Contrat = {
 }
 
 type ContratEmple = {
+    titulo: string
     apellidos: string
     calificacion: number
     dpiempleador: string
@@ -122,7 +123,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role}) 
                         <HorizontalDivider/>
                     </>
                 }
-                <div style={{width:'100%'}}>
+                <div style={{width:'100%', display: 'flex', flexDirection: 'column', gap: '10px'}}>
                     {
                         dataEmple.map(contrat => (
                             <ContratEDisplay contrat={contrat}/>
