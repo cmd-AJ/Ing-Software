@@ -18,6 +18,7 @@ jobs:
       VITE_API_HOSTI: ${{ secrets.VITE_API_HOSTI }}
       VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
       VITE_PORTI: ${{ secrets.VITE_PORTI }}
+      VITE_ADMIN_API_KEY: ${{ secrets.VITE_ADMIN_API_KEY }}
       
     permissions:
       contents: read
