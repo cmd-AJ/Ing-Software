@@ -28,7 +28,6 @@ const PostField: React.FC = () => {
       <div className='t-profile-container'></div>
       <form onSubmit={handleSubmit} className="form-container">
         <IonItem className="input-container">
-          <IonLabel position="stacked">Postea</IonLabel>
           <IonTextarea
             value={inputText}
             onIonChange={(e) => setInputText(e.detail.value!)}

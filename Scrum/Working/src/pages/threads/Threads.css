@@ -10,7 +10,6 @@
     align-content: center;
     z-index: 0;
     background-color: #78a2e6;
-    padding: 20px;
     overflow: hidden; /* Evita que los elementos se desborden fuera del contenedor */
     border-radius: 10px;
 }
@@ -19,7 +18,7 @@
     z-index: 1; 
     background-color: #eaeaeb;
     height: 100%;
-    width: 60%;
+    width: 70%;
     max-width: 800px;
     min-width: 300px;
     position: relative;

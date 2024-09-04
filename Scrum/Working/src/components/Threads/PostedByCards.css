@@ -1,32 +1,40 @@
 .postedby-card {
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    background-color: #f1f3f5;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .postedby-card:hover {
-    background-color: #e9ecef;
-  }
-  
-  .postedby-header {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .postedby-usuario {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #343a40;
-  }
-  
-  .postedby-time {
-    font-size: 0.875rem;
-    color: #6c757d;
-    margin-top: 4px;
-  }
-  
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  flex-direction: row;
+  border-radius: 8px;
+  margin-bottom: 10px; /* Ajuste del margen inferior */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.postedby-card:hover {
+  background-color: #a5adb8;
+}
+
+.post-user-profile{
+  border-radius: 50px;
+  background-color: rgb(162, 218, 235);
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.user-info-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.postedby-usuario {
+  font-size: 1rem; /* Tamaño de fuente reducido */
+  font-weight: 600;
+  color: #343a40;
+  margin: 0;  
+}
+
+.postedby-time {
+  font-size: 0.6rem; /* Tamaño de fuente reducido */
+  color: #6c757d;
+  margin: 0;
+}
+

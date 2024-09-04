@@ -14,17 +14,13 @@ const Post: React.FC<PostProps> = ({ idthread, usuario, descripcion, posttime, i
   return (
     <div className="post-card">
       <PostByCard usuario={usuario} posttime={posttime} />
-      <div className="post-header">
-        <h4 className="post-subtitle">{usuario}</h4>
-        <h2 className="post-title">{`Thread ID: ${idthread}`}</h2>
-        <p className="post-time">{new Date(posttime).toLocaleString()}</p>
+      <div className="post-content">
+        <p className="post-description">{ descripcion}</p>
       </div>
 
       {imagen && <img className="post-image" src={imagen} alt="Post image" />}
 
-      <div className="post-content">
-        <p className="post-description">{ }</p>
-      </div>
+      
     </div>
   );
 };
