@@ -204,7 +204,7 @@ app.post('/contacts/createChat', apiKeyAuth, async (req, res) => {
     const chat = await createNewChat(dpi1, dpi2);
 
     if (chat) {
-      return res.status(200).json({ success: "Successfully created new chat", chat });
+      return res.status(200).json({ success: "Successfully created new chat" });
     } else {
       return res.status(400).json({ error: "Chat creation failed or already exists" });
     }
@@ -311,7 +311,7 @@ app.post('/contacts/message', apiKeyAuth ,async (req, res) => {
     res.status(500).json({error: 'Internal Server Error' })
   }
 })
-
+// Endpoint to getChatID
 app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
