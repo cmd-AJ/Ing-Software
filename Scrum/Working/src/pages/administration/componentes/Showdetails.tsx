@@ -47,6 +47,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   const [changedate, setchangedate] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [dpi, setdpi] = useState(data?.dpi)
+  const [confirmar, setconfirmar] = useState('')
 
 
 
@@ -77,20 +78,23 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
 
 
   const handleButtonClickextend = async () => {
-
-    if((dpi != '') && (selectedDate != '') ){
-      console.log(selectedDate);
-      console.log(dpi+'')
-  
-      try {
-            const result = await extendunban(dpi+'', selectedDate+''); // Example date
-            console.log('Ban extended:', result);
-        } catch (error) {
-            console.error("Failed to extend ban:", error);
-        }
+    
+    if( confirmar === 'extender fecha' ){
+      if((dpi != '') && (selectedDate != '') ){
+        console.log(selectedDate);
+        console.log(dpi+'')
+    
+        try {
+              const result = await extendunban(dpi+'', selectedDate+''); // Example date
+              console.log('Ban extended:', result);
+          } catch (error) {
+              console.error("Failed to extend ban:", error);
+          }
+      }
     }
-    
-    
+    else{
+      console.log('No se escribio bien')
+    }
     // Add other actions you want to perform on click
   };
 
@@ -140,10 +144,10 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
           <>
           <br />
           <div style={{display:'flex'}}>
-            <input placeholder="desbloquear Cuenta" className="botonconfirm" style={{backgroundColor:'var(--white)'}} ></input>
+            <input value={confirmar}  onChange={(e) => setconfirmar(e.target.value)} placeholder="extender fecha" className="botonconfirm" style={{backgroundColor:'var(--white)'}} ></input>
             <IonButton className="botonconfirm" onClick={handleButtonClickextend}>Extender Bloqueo</IonButton>
           </div>
-          <p style={{color:'red'}}>Escribir "desbloquear cuenta" para confirmar</p>
+          <p style={{color:'red'}}>Escribir "extender fecha" para confirmar</p>
           </>
         ) : (
           <IonButton className="botonDesCuenta" onClick={handleButtonClickunban}>Desbloquear Cuenta</IonButton>
