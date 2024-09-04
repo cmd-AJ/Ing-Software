@@ -52,12 +52,12 @@ const Dashboard: React.FC = () => {
   // Nuevo useEffect para obtener los datos dinámicos
   useEffect(() => {
     const fetchData = async () => {
-      const dpi = '3833 86608 0102'; // Aquí puedes reemplazar con el DPI adecuado
+      const dpi = localStorage.getItem('dpi'); 
       const hirings = await getHirings(dpi);
-      setElementos(hirings);
+      setElementos(hirings);    
     };
 
-    fetchData();
+    fetchData();    
   }, []);
 
 

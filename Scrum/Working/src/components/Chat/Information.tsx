@@ -53,9 +53,14 @@ const Information: React.FC<InformationProps> = ({ date }) => {
       const payment = parseFloat(amount);
   
       // Obtener los DPI's desde el local storage
-      const dpiEmployer = localStorage.getItem('loggedUserDpi'); // DPI del usuario loggeado
-      const dpiEmployee = localStorage.getItem('selectedPersonDpi'); // DPI de la persona con la que está chateando
+      const dpiEmployer = localStorage.getItem('dpi'); // DPI del usuario loggeado
+      const dpiEmployee = localStorage.getItem('SelectedPerson'); // DPI de la persona con la que está chateando
   
+      console.log(localStorage.getItem('dpi'));
+      console.log(dpiEmployer);
+      
+      
+
       if (!dpiEmployer || !dpiEmployee) {
         console.error('No se pudieron obtener los DPI desde el local storage');
         return;

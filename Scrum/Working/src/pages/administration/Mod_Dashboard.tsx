@@ -24,33 +24,36 @@ import Ticket from "./componentes/Ticket";
 import Desban from "./componentes/Userlist";
 import { useHistory } from "react-router";
 import Topheader from "./componentes/Topheader";
+import { gettingreports } from "../../controller/Admin_Controller";
 
 // Rediseno crear un nuevo componente donde menos de 600px se ponga un menu
 
+interface Report {
+  idreporte: string;
+  dpiemisor: string;
+  dpireportuser: string;
+  contenido: string;
+  fecha: string;
+}
 
 const Mod_Dashboard: React.FC = () => {
-  const [dpi, setDpi] = useState('')
-  const [password, setPassword] = useState('')
-  const [ tickets, setTickets ] = useState([])
+  const [tickets, setTickets] = useState<Report[]>([]);
+  
+  React.useEffect(() => {
+    const fetchReports = async () => {
+        try {
+            const jhason: Report[] = await gettingreports(); 
+            if (Array.isArray(jhason) && jhason.length > 0) {
+                setTickets(jhason); // Store the data in the state
+            } 
+        } catch (error) {
+            console.error('Failed to fetch reports:', error);
+        }
+    };
 
-  const jhason = [{
-    "idreporte": '1',
-    "dpiemisor": '15406406',
-    "dpireportuser": '2860479',
-    "contenido": "This is a sample content",
-    "fecha": "2024-08-27T12:34:56Z"
-  },
-  {
-    "idreporte": '2',
-    "dpiemisor": '15406406',
-    "dpireportuser": '2860479',
-    "contenido": "This is a sample content",
-    "fecha": "2024-08-27T12:34:56Z"
-  }]
+    fetchReports();
+}, []); // Empty dependency array
 
-
-  const [validateDpi, setValidateDpi] = useState(false)
-  const [validatePassword, setValidatePassword] = useState(false)
 
   const history = useHistory();
 
@@ -74,7 +77,7 @@ const Mod_Dashboard: React.FC = () => {
           <IonCol>
             <div className="contenedor_tickets" >              
             <IonTitle className="ticketstit">Tickets Pendientes: {}</IonTitle>
-            {jhason.map((item, index) => (
+            {tickets.map((item, index) => (
                 <Ticket key={index} idreporte={item.idreporte} dpiemisor={item.dpiemisor} dpireportuser={item.dpireportuser} fecha={item.fecha} contenido={item.contenido} link="/about" ></Ticket>
               ))}
             </div>
