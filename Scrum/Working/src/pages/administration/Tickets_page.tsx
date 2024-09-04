@@ -114,7 +114,7 @@ const Tickt_page: React.FC = () => {
         <IonPopover
           isOpen={showPopover}
           onDidDismiss={() => setShowPopover(false)}
-          > <IonDatetime onIonChange={handleDateChange}></IonDatetime>
+          > <IonDatetime presentation="date" onIonChange={handleDateChange}></IonDatetime>
         </IonPopover>  
 
 

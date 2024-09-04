@@ -45,7 +45,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
 
   const [showPopover, setShowPopover] = useState(false);
   const [changedate, setchangedate] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string>('');
   const [dpi, setdpi] = useState(data?.dpi)
 
 
@@ -59,11 +59,16 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
 
   };
 
-  const handleButtonClickunban = () => {
+  const handleButtonClickunban = async ()  => {
 
     if((dpi != '') ){
       console.log(dpi)
-      unban(dpi+'')
+      try {
+          const result = await unban(dpi+''); // Example date
+          console.log('Ban extended:', result);
+      } catch (error) {
+          console.error("Failed to extend ban:", error);
+      }
     }
 
     
@@ -71,13 +76,18 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   };
 
 
-  const handleButtonClickextend = () => {
+  const handleButtonClickextend = async () => {
 
     if((dpi != '') && (selectedDate != '') ){
       console.log(selectedDate);
-      console.log(dpi?.toString)
+      console.log(dpi+'')
   
-      extendunban(dpi+'', selectedDate+'')
+      try {
+            const result = await extendunban(dpi+'', selectedDate+''); // Example date
+            console.log('Ban extended:', result);
+        } catch (error) {
+            console.error("Failed to extend ban:", error);
+        }
     }
     
     
@@ -111,7 +121,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
       <IonPopover
         isOpen={showPopover}
         onDidDismiss={() => setShowPopover(false)}
-        > <IonDatetime onIonChange={handleDateChange}></IonDatetime>
+        > <IonDatetime presentation="date" onIonChange={handleDateChange}></IonDatetime>
       </IonPopover>  
 
 

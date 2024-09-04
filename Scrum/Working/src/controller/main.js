@@ -86,7 +86,7 @@ app.put('/extendban' , adminapiKeyAuth ,async (req, res) => {
   const { DPI, fecha } = req.body; 
   try {
     const users = await extendban(DPI, fecha)
-    res.status(200).json({"message":"Update succesfull"})
+    res.status(200).json(users)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
   }
@@ -97,7 +97,7 @@ app.put('/unbanuser', adminapiKeyAuth , async (req, res) => {
   const { DPI } = req.body; 
   try {
     const users = await unban(DPI)
-    res.status(200).json({"message":"Update succesfull"})
+    res.status(200).json(users)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
   }

@@ -94,7 +94,7 @@ export async function Getallbannedusers() {
 export async function unban(dpi: string) {
     try {
         const data = {
-            dpi: dpi
+            DPI: dpi
         };
 
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/unbanuser`, {
@@ -123,7 +123,7 @@ export async function unban(dpi: string) {
 export async function extendunban(dpi: string, fecha : string) {
     try {
         const data = {
-            dpi: dpi,
+            DPI: dpi,
             fecha: fecha
         };
 
