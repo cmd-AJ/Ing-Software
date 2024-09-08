@@ -36,14 +36,15 @@ const Adminbutton: React.FC<ContainerProps> = ({
                     
                     history.push(`/dash_admin?dpi=${dpi}`);
                 } else {
-                    console.log("Usuario no encontrado");
+                    setMessage("DPI o Contraseña Incorrectos");
+                    setShowToast(true); // Show the toast with the error message
                 }
 
             } catch (error) {
                 console.error("Error:", error);
             }
         } else {
-            setMessage("DPI o Contraseña incorrectos");
+            setMessage("DPI o Contraseña Incorrectos");
             setShowToast(true); // Show the toast with the error message
         }
     };    
