@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './information.css';
 import dayjs from 'dayjs';
+import { makeHiring } from '../../controller/ChatController';
 
 interface InformationProps {
   date: dayjs.Dayjs | null;
@@ -45,12 +46,35 @@ const Information: React.FC<InformationProps> = ({ date }) => {
     setAmount(value);
   };
 
-  const handleConfirmClick = () => {
-    console.log('Fecha:', date ? date.format('YYYY-MM-DD') : '');
-    console.log('Hora:', time);
-    console.log('Titulo:', title);
-    console.log('Monto:', amount);
+  
+  const handleConfirmClick = async () => {
+    try {
+      const appointmentTimeStamp = date ? date.format('YYYY-MM-DD') + 'T' + time : '';
+      const payment = parseFloat(amount);
+  
+      // Obtener los DPI's desde el local storage
+      const dpiEmployer = localStorage.getItem('dpi'); // DPI del usuario loggeado
+      const dpiEmployee = localStorage.getItem('SelectedPerson'); // DPI de la persona con la que está chateando
+  
+      console.log(localStorage.getItem('dpi'));
+      console.log(dpiEmployer);
+      
+      
+
+      if (!dpiEmployer || !dpiEmployee) {
+        console.error('No se pudieron obtener los DPI desde el local storage');
+        return;
+      }
+  
+      const response = await makeHiring(title, dpiEmployer, dpiEmployee, appointmentTimeStamp, payment);
+  
+      console.log('Contratación exitosa:', response);
+    } catch (error) {
+      console.error('Error al contratar:', error);
+    }
   };
+  
+  
 
   return (
     <div className="information-container">

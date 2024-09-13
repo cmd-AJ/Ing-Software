@@ -1,9 +1,10 @@
 import CryptoJS from 'crypto-js';
 import express from 'express'
 import cors from 'cors'
-import apiKeyAuth from './auth.js'
-import { getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
+import {createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
+import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 
 const app = express()
 const port = 3000
@@ -40,6 +41,71 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+// apiKeyAuth,
+app.get('/login_admin/:dpi/:password', apiKeyAuth ,async (req, res) => {
+  try {
+    const { dpi, password } = req.params
+    const users = await Admin_Exist(dpi, password)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.get('/reports', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getreports()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.get('/banprev', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getbanusersprev()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.get('/banusers', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getbanusers()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.put('/extendban' , adminapiKeyAuth ,async (req, res) => {
+  const { DPI, fecha } = req.body; 
+  try {
+    const users = await extendban(DPI, fecha)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.put('/unbanuser', adminapiKeyAuth , async (req, res) => {
+  const { DPI } = req.body; 
+  try {
+    const users = await unban(DPI)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+
+
 
 app.post('/LoginUser', apiKeyAuth, async (req, res) => {
   try {
@@ -191,6 +257,31 @@ app.get('/trustNetwork/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
+app.post('/contacts/createChat', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi1, dpi2 } = req.body;
+
+    // Validación de entrada
+    if (!dpi1 || !dpi2) {
+      return res.status(400).json({ error: 'dpi1 and dpi2 are required' });
+    }
+
+    // Intentar crear o recuperar el chat entre los usuarios
+    const chat = await createNewChat(dpi1, dpi2);
+
+    if (chat) {
+      return res.status(200).json({ success: "Successfully created new chat" });
+    } else {
+      return res.status(400).json({ error: "Chat creation failed or already exists" });
+    }
+
+  } catch (error) {
+    console.error('Error creating chat:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
@@ -286,7 +377,7 @@ app.post('/contacts/message', apiKeyAuth ,async (req, res) => {
     res.status(500).json({error: 'Internal Server Error' })
   }
 })
-
+// Endpoint to getChatID
 app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
@@ -301,8 +392,8 @@ app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
 
 app.post('/contacts/hire', apiKeyAuth ,async (req, res) => {
   try {
-    const { descripcion, dpiempleador, dpiempleado, timeStampCita } = req.body;
-     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita)
+    const { descripcion, dpiempleador, dpiempleado, timeStampCita, pago } = req.body;
+     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago)
      res.status(200).json({ Success: 'Contrato realizado'})
   } catch (error) {
     console.error('Error while hiring person:', error)

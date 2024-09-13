@@ -1,6 +1,6 @@
 export async function getContacts(dpi: String) {
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/${dpi}`,{
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -73,6 +73,48 @@ export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
     }
 }
 
+export async function chatBetweenUsersExist(dpi1: string, dpi2: string) {
+
+    const chatIDResponse = await getChatIdWithDPI(dpi1, dpi2)
+
+    if (chatIDResponse.length == 0) {
+        return false
+    }
+
+    return true
+}
+
+export async function createNewChatIfNotExists(dpi1: string, dpi2: string) {
+
+    const chatExists = await chatBetweenUsersExist(dpi1, dpi2)
+
+    if (!chatExists) {
+        //Create new chat calling the endpoint /contacts/createChat
+        try {
+            const data = {
+                dpi1: dpi1,
+                dpi2: dpi2
+            };
+
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/createChat`, {
+                method: 'POST',
+                headers: {
+                    'api-key': import.meta.env.VITE_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create chat');
+            }
+        } catch (error) {
+            console.error("Error while creating chat:", error);
+            throw error; // Rethrow the error to be handled by the caller
+        }
+    }
+}
+
 export async function insertChatMessage(content: string, chatID: string, dpi: string) {
     try {
         const data = {
@@ -95,14 +137,14 @@ export async function insertChatMessage(content: string, chatID: string, dpi: st
         }
 
         const responseData = await response.json();
-        return responseData; 
+        return responseData;
     } catch (error) {
         console.error("Error while inserting message:", error);
-        throw error; 
+        throw error;
     }
 }
 
-export async function makeHiring(description: string, dpiEmployer: string, dpiEmployee: string, appointmentTimeStamp: string) {
+export async function makeHiring(description: string, dpiEmployer: string, dpiEmployee: string, appointmentTimeStamp: string, payment: number) {
     try {
         // Convert the Guatemalan time (UTC-6) to UTC
         const localTime = new Date(appointmentTimeStamp);
@@ -113,7 +155,8 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
             descripcion: description,
             dpiempleador: dpiEmployer,
             dpiempleado: dpiEmployee,
-            timeStampCita: utcTime.toISOString() // Converts to UTC string
+            timeStampCita: utcTime.toISOString(), // Converts to UTC string
+            pago: payment
         };
 
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hire`, {
@@ -142,7 +185,7 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
 export async function getHirings(dpi: string) {
 
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hirings/${dpi}`,{
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hirings/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -158,7 +201,7 @@ export async function getHirings(dpi: string) {
 
             // Extract the date and time components
             const dia = guatemalaTime.toISOString().substring(0, 10); // Extracts 'YYYY-MM-DD'
-            
+
             // Get hours and minutes for formatting
             let hours = guatemalaTime.getHours();
             const minutes = guatemalaTime.getMinutes();

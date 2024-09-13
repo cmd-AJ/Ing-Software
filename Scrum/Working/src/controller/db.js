@@ -3,6 +3,24 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function createNewChat(dpi1, dpi2) {
+
+    try {
+        const query = {
+            text:"INSERT INTO chats(dpireceptor, dpiemisor) VALUES ($1, $2)", 
+            values:[dpi1, dpi2]
+        }
+
+        const result = await client.query(query)
+
+        return result;
+    } catch (error) {
+        console.error('Error while creating chat:', error);
+        throw error;
+    }
+    
+}
+
 export async function getUsers() {
     try {
         const query = {
@@ -277,11 +295,11 @@ export async function insertChatMessage(contenido, id_chat, dpi) {
     }
 }
 
-export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita) {
+export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago) {
     try {
         const query = {
-            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)",
-            values: [descripcion, dpiempleador, dpiempleado, timeStampCita]
+            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion, pago) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, $5)",
+            values: [descripcion, dpiempleador, dpiempleado, timeStampCita, pago]
         }
         await client.query(query)
 
