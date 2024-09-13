@@ -16,29 +16,38 @@ import {
   IonCol,
 
 } from "@ionic/react";
-
+import { Getbanusers } from '../../../controller/Admin_Controller';
 import "../../../theme/variables.css";
 import "./userlist.css"
+
+interface Cuenta {
+  idsuspend: string;
+  dpi: string;
+  estado: string;
+  fechainicio: string;
+  fechaban: string;
+}
 
 
 const Desban: React.FC = (  ) => {
 
-  const [ cuenta, setcuenta ] = useState( [] )
+  const [ cuentas, setcuentas ] = useState<Cuenta[]>([])
+  
+  React.useEffect(() => {
+    const fetchReports = async () => {
+        try {
+            const jhason: Cuenta[] = await Getbanusers();
+            if (Array.isArray(jhason) && jhason.length > 0) {
+              setcuentas(jhason); 
+            }
+        } catch (error) {
+            console.error('Failed to fetch reports:', error);
+        }
+    };
 
-  const jhason = [{
-    "idsuspend": '23',
-    "dpiban": '15406406',
-    "estado": 'Pendiente',
-    "fechainicio": "2024-09-27T12:34:56Z",
-    "fechaban": "2024-08-27T12:34:56Z"
-  }, 
-  {
-    "idsuspend": '26',
-    "dpiban": '15406406',
-    "estado": 'Pendiente',
-    "fechainicio": "2024-09-27T12:34:56Z",
-    "fechaban": "2024-08-27T12:34:56Z"
-  }]
+    fetchReports();
+}, []); 
+
 
 
 
@@ -53,10 +62,10 @@ const Desban: React.FC = (  ) => {
                   Estado
                 </IonCol>
               </IonRow>
-              {jhason.map((item, index) => (
+              {cuentas.map((item, index) => (
               <IonRow  key={index}>
-                  <IonCol className="userCOl">{item.idsuspend}</IonCol>
-                  <IonCol className="userCOl">{item.estado}</IonCol>
+                  <IonCol className="userCOl">{item.dpi}</IonCol>
+                  <IonCol className="userCOl">Pendiente</IonCol>
                 </IonRow>
               ))}
       </IonGrid>

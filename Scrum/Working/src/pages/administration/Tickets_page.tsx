@@ -19,16 +19,32 @@ import {
   IonModal,
   IonDatetime,
   IonText,
+  IonPopover,
 
 } from "@ionic/react";
 import "./ticket_page.css";
 import "../../theme/variables.css";
 import Ticket from "./componentes/Ticket";
 import Topheader from "./componentes/Topheader";
+import { calendar } from "ionicons/icons";
 // Rediseno crear un nuevo componente donde menos de 600px se ponga un menu
 
 // TICKET PARA VER LOS REPORTES. AHI PODES BANEAR A LA PERSONA
 const Tickt_page: React.FC = () => {
+
+  const [showPopover, setShowPopover] = useState(false);
+  const [changedate, setchangedate] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string | null>('DD-MM-YYYY');
+
+
+  const handleDateChange = (e: CustomEvent) => {
+    
+    const date = e.detail.value;
+    setSelectedDate(date);
+    setShowPopover(false);  // Close the popover after selecting the date
+    setchangedate(true);
+
+  };
 
     const jhason = [{
         "idreporte": '1',
@@ -54,32 +70,56 @@ const Tickt_page: React.FC = () => {
         <IonTitle className="titulotickets">Tickets</IonTitle>
         <IonGrid>
           <IonRow>
-            <IonCol>DPI Reportado</IonCol>
-            <IonCol>No. Ticket </IonCol>
+            <IonCol><IonItem>DPI Reportado</IonItem></IonCol>
+            <IonCol><IonItem>No. Ticket</IonItem></IonCol>
           </IonRow>
 
           <IonRow>
             <IonCol>
           <IonItem>
-          <IonInput></IonInput>
+          <IonInput placeholder="XXXX XXXXX XXXX"></IonInput>
           </IonItem>
           </IonCol>
           <IonCol>
           <IonItem>
-          <IonInput></IonInput>
+          <IonInput placeholder="No. #"></IonInput>
           </IonItem>
           </IonCol>
           </IonRow>
 
           <IonRow>
-          <IonCol>Fecha Rango Inicial</IonCol>
-          <IonCol>Fecha Rango Final</IonCol>
+          <IonCol> Fecha Rango Inicial<br></br>
+            <IonItem>{selectedDate}
+            <IonButton  onClick={() => setShowPopover(true)} slot="end" >
+              <IonIcon icon={calendar}></IonIcon>
+            </IonButton>
+            </IonItem> 
+          </IonCol>
+          <IonCol>Fecha Rango Final <br></br>
+          <IonItem  onClick={() => setShowPopover(true)}>{selectedDate} 
+            <IonButton slot="end" >
+              <IonIcon icon={calendar}></IonIcon>
+            </IonButton>
+            </IonItem> 
+          </IonCol>
           </IonRow>
+          <IonButton>Buscar</IonButton>
+          {jhason.map((item, index) => (
+            <IonItem>
+            <IonText key={index}>{item.contenido}</IonText>
+            </IonItem>
+          ))}
+
+
+        <IonPopover
+          isOpen={showPopover}
+          onDidDismiss={() => setShowPopover(false)}
+          > <IonDatetime presentation="date" onIonChange={handleDateChange}></IonDatetime>
+        </IonPopover>  
+
 
         </IonGrid>
-          <IonItem>
-            <IonText>dawdad</IonText>
-          </IonItem>
+          
         </IonContent>
     </IonPage>
   );
