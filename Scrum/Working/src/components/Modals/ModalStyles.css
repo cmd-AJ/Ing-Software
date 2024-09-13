@@ -15,6 +15,10 @@
     z-index: 11;
 }
 
+.scroll-y {
+    overflow-y: unset;
+}
+
 .modal-position, .modal-position2{
     position: absolute;
     transform: translate(-50%, -50%);
