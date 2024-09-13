@@ -106,7 +106,7 @@
 }
 
 ion-select::part(text) {
-    color: var(--white);
+    color: var(--black);
 }
 
 .alert-radio-inner.sc-ion-alert-md {
