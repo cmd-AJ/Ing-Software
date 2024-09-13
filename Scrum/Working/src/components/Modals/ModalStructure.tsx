@@ -32,9 +32,7 @@ const ModalStructure: React.FC<ContainerProps> = ({setModal, content}) => {
             <div onClick={() => setModal(false)} className="modal-background">
             </div>
             <div className='modal-position'>
-                <div className='modal-container'>
-                    {content}
-                </div>
+                {content}
             </div>
         </>
     )
