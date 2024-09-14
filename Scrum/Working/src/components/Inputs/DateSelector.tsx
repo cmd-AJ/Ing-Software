@@ -2,6 +2,12 @@ import { IonDatetime, IonInput } from "@ionic/react";
 import { useEffect, useState } from "react";
 import './InputStyles.css'
 import React from "react";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import TextND from "../Txt/TextND";
+import dayjs, { Dayjs } from "dayjs";
 
 interface ContainerProps {
     date: string;
@@ -11,11 +17,9 @@ interface ContainerProps {
 
 const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate}) => {
 
-    const [day, setDay] = useState(date);
-    const [datePicker, setDatePicker] = useState(false);
 
     useEffect(() => {
-        const dateC = new Date(day);
+        const dateC = new Date(date);
         const realDate = new Date(dateC.setDate(dateC.getDate() + 1));
 
         const actualDate = new Date();
@@ -26,59 +30,35 @@ const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate
         if (ageYears >= 18) {
             setValidateDate(true);
         }
-    }, [day]);
+    }, [date]);
 
-    const handleClick = () => {
-        setDatePicker(true);
-    };
-
-    const handleDateChange = (event: CustomEvent) => {
-        const selectedValue = event.detail.value;
-        setDate(selectedValue.split('T')[0]);
-        setDay(selectedValue.split('T')[0]);
-        setDatePicker(false); // Close the date picker after selecting a date
-    };
-
-    const handleCancel = () => {
-        setDatePicker(false); // Close the date picker when cancelled
-    };
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        const realDate = new Date(date.setDate(date.getDate() + 1));
-
-        const actualDate = new Date();
-        const difMiliSeconds = actualDate.getTime() - realDate.getTime();
-        const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
-        const ageYears = Math.floor(difMiliSeconds / miliSecondsYear);
-
-        if (ageYears >= 18) {
-            setValidateDate(true);
-            return realDate.toLocaleDateString('es-ES');
-        } else {
-            setValidateDate(false);
-            return 'Fecha inválida';
+    const handleDateChange = (newDate: Dayjs | null) => {
+        if (newDate) {
+            const formattedDate = newDate.format('YYYY-MM-DD')
+            setDate(formattedDate)
+            console.log(formattedDate);
         }
     };
 
     return (
         <div id="singular-input-display">
-            <IonInput 
-                label="Fecha de nacimiento: "
-                onClick={handleClick}
-                value={formatDate(day)}
-                className="inputsModal"></IonInput>
-            {
-                datePicker &&
-                <IonDatetime
-                    presentation="date"
-                    onIonChange={handleDateChange}
-                    onIonCancel={handleCancel}
-                    showDefaultButtons={true}
-                    style={{ position: 'absolute', zIndex: '3', color: 'black', top: '48%', left: '25%', backgroundColor: 'white', border: '1px solid #000' }}
-                    
-                ></IonDatetime>
-            }
+            <TextND text="Fecha de nacimineto:" size="medium-small" hex="#000"/>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={['DatePicker']}>
+                    <DatePicker 
+                        value={dayjs(date)}
+                        className="inputsModal"
+                        views={['day','month','year']}
+                        format="DD/MM/YYYY"
+                        onChange={handleDateChange}
+                        shouldDisableDate={(date)=> {
+                            const today = dayjs()
+                            const eigtheenYearsAgo = today.subtract(18, 'years')
+                            return date.isAfter(eigtheenYearsAgo, 'day');
+                        }}
+                    />
+                </DemoContainer>
+            </LocalizationProvider>
         </div>
     );
 }
