@@ -10,10 +10,13 @@ import React from "react";
 import './profile_struct.css'
 import TextND from "../../Txt/TextND";
 import HorizontalDivider from "../../Dividers/HorizontalDivider";
+import BtnEditUser from "../../Btn/BtnEditUser";
+import { IonButton } from "@ionic/react";
 
 interface ContainerProps {
     user: User
     setEdit: (edit: boolean) => void
+    setUser: (user: User) => void
 }
 
 type User = {
@@ -33,7 +36,7 @@ type User = {
     departamento: string
   };
 
-const Profile : React.FC<ContainerProps> = ({ user, setEdit}) => {
+const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
 
     const [banner , setBanner] = useState(user.banner)
     const [image, setImage] = useState(user.imagen)
@@ -150,20 +153,25 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit}) => {
                     </div>
                 </div>
             </div>
-            {/* <BtnEditUser 
-                user={user} 
-                banner={banner}
-                profpic={image}
-                job=""
-                birthdate={date}
-                validateBirthdate={validateDate}
-                sex={sex}
-                cellphone={cellphone}
-                validatesCell={validatesCell}
-                email={email}
-                validateEmail={validatesEmail}
-                municipio={municipio}
-            /> */}
+            <div id="buttons-display">
+                <IonButton id="button-up" shape="round" color="primary" onClick={() => setEdit(false)}> Cancelar </IonButton>
+                <BtnEditUser 
+                    user={user} 
+                    banner={banner}
+                    profpic={image}
+                    job=""
+                    birthdate={date}
+                    validateBirthdate={validateDate}
+                    sex={sex}
+                    cellphone={cellphone}
+                    validatesCell={validatesCell}
+                    email={email}
+                    validateEmail={validatesEmail}
+                    municipio={municipio}
+                    setUser={setUser}
+                    setEdit={setEdit}
+                />
+            </div>
         </>
     )
 }

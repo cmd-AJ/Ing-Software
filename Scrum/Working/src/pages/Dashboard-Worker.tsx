@@ -84,7 +84,6 @@ const Dashboard_Worker: React.FC = () => {
   }, [owner]);
 
   useEffect(()=> {
-    console.log(myUser.role);
       if (myUser.role === 'Empleador'){
         setUserRole(false)
       }
@@ -118,7 +117,7 @@ const Dashboard_Worker: React.FC = () => {
     <IonPage>
       <IonContent>
         <div className="contentC" ref={contentCRef}>
-          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
+          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           <div className="header-card" ref={headerCardRef}>
             <img
