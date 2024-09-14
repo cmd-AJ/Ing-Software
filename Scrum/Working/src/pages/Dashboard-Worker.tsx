@@ -121,9 +121,9 @@ const Dashboard_Worker: React.FC = () => {
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           <div className="header-card" ref={headerCardRef}>
-            <IonImg
+            <img
               src={myUser.banner}
-              className="feed-img"></IonImg>
+              className="feed-img"></img>
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>

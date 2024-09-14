@@ -68,7 +68,7 @@ const DataList: React.FC<ContainerProps> = ({ label, placeholder, list, value, s
                         fill='outline'
                         onIonChange={handleInputChange} // Manejador de cambio
                         onIonBlur={(event) => { markTouched(); validateJob((event.target as unknown as HTMLInputElement).value); }} // Validar al perder el foco
-                        errorText='Este campo no puede estar vacío'
+                        errorText='Trabajo inválido'
                     />
                 </div>
             ) : (
