@@ -62,7 +62,7 @@ const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate
     };
 
     return (
-        <>
+        <div id="singular-input-display">
             <IonInput 
                 label="Fecha de nacimiento: "
                 onClick={handleClick}
@@ -79,7 +79,7 @@ const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate
                     
                 ></IonDatetime>
             }
-        </>
+        </div>
     );
 }
 

@@ -25,3 +25,11 @@
     color: black;
     font-size: 20px; 
 }
+
+#singular-input-display {
+    display: flex;
+    align-items: center;
+    gap: 10%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

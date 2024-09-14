@@ -38,6 +38,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit}) => {
     const [banner , setBanner] = useState(user.banner)
     const [image, setImage] = useState(user.imagen)
     const [job, setJob] = useState('')
+    const [validateJob, setValidateJob] = useState(true)
     const [sex, setSex] = useState(user.sexo)
     const [date, setDate] = useState(user.fecha_nacimiento)
     const [validateDate, setValidateDate] = useState(false)
@@ -86,7 +87,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit}) => {
                         validateRole &&
                         <div>
                             <HorizontalDivider/>
-                                <DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob}/>
+                                <DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
                             <HorizontalDivider/>
                         </div>
                     }
