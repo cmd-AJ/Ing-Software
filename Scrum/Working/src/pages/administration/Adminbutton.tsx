@@ -22,14 +22,6 @@ const Adminbutton: React.FC<ContainerProps> = ({
 
     const handleClick = async () => {
         if (dpi != "" || password != "") {
-
-            const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-            console.log(`hashed pass: ${hashedPassword}`);
-            console.log(dpi)
-
-
-            
-
             try {
                 const login = await Existing_admin(dpi, CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex));
                 if (login) {
