@@ -1,6 +1,7 @@
 import React from 'react';
 import PostByCard from './PostedByCard';
 import './Post.css';
+import CommentBox from './CommentBox';
 
 interface PostProps {
   idthread: string;
@@ -19,7 +20,7 @@ const Post: React.FC<PostProps> = ({ idthread, usuario, descripcion, posttime, i
       </div>
 
       {imagen && <img className="post-image" src={imagen} alt="Post image" />}
-
+      <CommentBox usuario={usuario} />
       
     </div>
   );
