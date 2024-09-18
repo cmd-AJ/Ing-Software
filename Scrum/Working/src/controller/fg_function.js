@@ -5,6 +5,7 @@ export async function send_fg_password(number, codigo){
 
   try {
       // Con telefono
+    console.log(import.meta.env.NOTI_CLIENTID)
     notificationapi.init(
       import.meta.env.NOTI_CLIENTID+'', // clientId
       import.meta.env.NOTIFAPI_SC+''// clientSecret
