@@ -300,6 +300,7 @@ app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
   try {
     const { telefono } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
+    console.log(import.meta.env.NOTI_CLIENTID)
     const forgotPhone = await send_fg_password(telefono, codigo)
     if (forgotPhone === true){
       res.status(200).json('response:message sended');
