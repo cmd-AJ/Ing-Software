@@ -9,8 +9,8 @@ export async function send_fg_password(number, codigo){
   try {
       // Con telefono
     notificationapi.init(
-      clientid, // clientId
-      verif// clientSecret
+      ''+clientid, // clientId
+      ''+verif// clientSecret
     )
     
     notificationapi.send({
@@ -37,8 +37,8 @@ export async  function send_email_forfg(email, codigo, dpi){
     
 
     notificationapi.init(
-      clientid, // clientId
-      verif// clientSecret
+      ''+clientid, // clientId
+      ''+verif// clientSecret
     )
     
     notificationapi.send({

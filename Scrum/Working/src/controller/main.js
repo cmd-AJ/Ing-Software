@@ -301,12 +301,7 @@ app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
     const { telefono } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
     const forgotPhone = await send_fg_password(telefono, codigo)
-    if (forgotPhone === true){
-      res.status(200).json('response:message sended');
-    }
-    else{
-      res.status(400).json('Bad request');
-    }    
+    res.status(200).json('response:message sended');
 
   } catch (error) {
     console.error('Error getting chat messages:', error);
@@ -320,12 +315,8 @@ app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
     const { email, nombre } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
     const forgotmail = await send_email_forfg(email,codigo, nombre)
-    if (forgotmail){
-      res.status(200).json('response:message sended');
-    }
-    else{
-      res.status(400).json('Bad request');
-    }
+    res.status(200).json('response:message sended');
+    
 
   } catch (error) {
     console.error('Error getting chat messages:', error);
