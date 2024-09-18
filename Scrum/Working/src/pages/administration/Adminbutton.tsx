@@ -22,28 +22,21 @@ const Adminbutton: React.FC<ContainerProps> = ({
 
     const handleClick = async () => {
         if (dpi != "" || password != "") {
-
-            const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-            console.log(`hashed pass: ${hashedPassword}`);
-            console.log(dpi)
-
-
-            
-
             try {
                 const login = await Existing_admin(dpi, CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex));
                 if (login) {
                     
                     history.push(`/dash_admin?dpi=${dpi}`);
                 } else {
-                    console.log("Usuario no encontrado");
+                    setMessage("DPI o Contraseña Incorrectos");
+                    setShowToast(true); // Show the toast with the error message
                 }
 
             } catch (error) {
                 console.error("Error:", error);
             }
         } else {
-            setMessage("DPI o Contraseña incorrectos");
+            setMessage("DPI o Contraseña Incorrectos");
             setShowToast(true); // Show the toast with the error message
         }
     };    

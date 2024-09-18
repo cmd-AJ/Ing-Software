@@ -1,37 +1,39 @@
 
-services:
-  db:
-    image: postgres:16.3
-    container_name: postgres_db
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "${PORT}:${PORT}"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    env_file:
-      - .env
-      
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: node_app
-    env_file:
-      - .env
-    ports:
-      - "${PORTI}:${PORTI}"
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      ADMIN_API_KEY: ${ADMIN_API_KEY}
-      PORT: ${PORT}
-      HOST: db
-      API_KEY: ${API_KEY}
-    depends_on:
-      - db
-volumes:
-  pgdata:
+  services:
+    db:
+      image: postgres:16.3
+      container_name: postgres_db
+      environment:
+        POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      ports:
+        - "${PORT}:${PORT}"
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+      env_file:
+        - .env
+        
+    web:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: node_app
+      env_file:
+        - .env
+      ports:
+        - "${PORTI}:${PORTI}"
+      environment:
+        POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        ADMIN_API_KEY: ${ADMIN_API_KEY}
+        VITE_NOTI_CLIENTID: ${VITE_NOTI_CLIENTID}
+        VITE_NOTIFAPI_SC: = ${VITE_NOTIFAPI_SC}
+        PORT: ${PORT}
+        HOST: db
+        API_KEY: ${API_KEY}
+      depends_on:
+        - db
+  volumes:
+    pgdata:

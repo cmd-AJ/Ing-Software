@@ -37,6 +37,7 @@ import Login_Admin from "./pages/administration/Login_Admin";
 import Mod_Dashboard from "./pages/administration/Mod_Dashboard";
 import Suspendido from "./pages/administration/Suspended_page";
 import Tickt_page from "./pages/administration/Tickets_page";
+import Forgot_Page from "./pages/administration/Fg_pass";
 
 setupIonicReact();
 
@@ -73,6 +74,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/mod_ticket">
           <Tickt_page/>
+        </Route>
+        <Route exact path="/fg_pass">
+          <Forgot_Page/>
         </Route>
         <Route exact path="/">
           <About />

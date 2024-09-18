@@ -5,6 +5,7 @@ import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
 import {createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
+import {send_email_forfg, send_fg_password} from './fg_function.js'
 
 const app = express()
 const port = 3000
@@ -287,6 +288,44 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
     const { dpi1, dpi2 } = req.body;
     const chatMessagges = await getChatBetweenUsers(dpi1, dpi2)
     res.status(200).json(chatMessagges);
+
+  } catch (error) {
+    console.error('Error getting chat messages:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
+  try {
+    const { telefono } = req.body;
+    const codigo = (Math.random() + 1).toString(36).substring(7);
+    const forgotPhone = await send_fg_password(telefono, codigo)
+    if (forgotPhone === true){
+      res.status(200).json('response:message sended');
+    }
+    else{
+      res.status(400).json('Bad request');
+    }    
+
+  } catch (error) {
+    console.error('Error getting chat messages:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
+  try {
+    const { email, nombre } = req.body;
+    const codigo = (Math.random() + 1).toString(36).substring(7);
+    const forgotmail = await send_email_forfg(email,codigo, nombre)
+    if (forgotmail){
+      res.status(200).json('response:message sended');
+    }
+    else{
+      res.status(400).json('Bad request');
+    }
 
   } catch (error) {
     console.error('Error getting chat messages:', error);
