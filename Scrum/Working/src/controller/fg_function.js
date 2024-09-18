@@ -1,13 +1,16 @@
 
 import notificationapi from 'notificationapi-node-server-sdk'
 
+const clientid = process.env.NOTI_CLIENTID
+const verif = process.env.NOTIFAPI_SC
+
 export async function send_fg_password(number, codigo){
 
   try {
       // Con telefono
     notificationapi.init(
-      process.env.NOTI_CLIENTID, // clientId
-      process.env.NOTIFAPI_SC// clientSecret
+      clientid, // clientId
+      verif// clientSecret
     )
     
     notificationapi.send({
@@ -34,8 +37,8 @@ export async  function send_email_forfg(email, codigo, dpi){
     
 
     notificationapi.init(
-      process.env.NOTI_CLIENTID, // clientId
-      process.env.env.NOTIFAPI_SC// clientSecret
+      clientid, // clientId
+      verif// clientSecret
     )
     
     notificationapi.send({
