@@ -1,7 +1,7 @@
 
 import notificationapi from 'notificationapi-node-server-sdk'
 
-export async function send_fg_password(number, codigo, dpi){
+export async function send_fg_password(number, codigo){
 
   try {
       // Con telefono
@@ -13,17 +13,13 @@ export async function send_fg_password(number, codigo, dpi){
     notificationapi.send({
       notificationId: 'pg_password_ph',
       user: {
-        id: {number},
-        email: '',
-        number: {number} // Replace with your phone number
+        id: number,
+        number: number // Replace with your phone number
       },
       mergeTags: {
-        "codigo": {codigo},
-        "dpi": {dpi}
+        "codigo": codigo
       }
     })
-
-    return true
 
   } catch (error) {
 
@@ -33,7 +29,6 @@ export async function send_fg_password(number, codigo, dpi){
 }
 
 export async  function send_email_forfg(email, codigo, dpi){
-
 
   try {
   
@@ -45,17 +40,15 @@ export async  function send_email_forfg(email, codigo, dpi){
     notificationapi.send({
       notificationId: 'sabte_fg_pass',
       user: {
-        id: {email},
-        email: {email},
+        id: email,
+        email: email,
       },
       mergeTags: {
-        "nombre": {dpi},
-        "tokenid": {codigo},
-        "dpi": {dpi}
+        "nombre": dpi,
+        "tokenid": codigo,
+        "dpi": dpi
       }
     })
-
-    return true
     
   } catch (error) {
     

@@ -296,10 +296,11 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
 })
 
 
-app.post('/sendforgot_phone' ,async (req, res) => {
+app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
   try {
-    const { telefono, dpi, codigo } = req.body;
-    const forgotPhone = await send_fg_password(telefono, dpi, codigo)
+    const { telefono } = req.body;
+    const codigo = (Math.random() + 1).toString(36).substring(7);
+    const forgotPhone = await send_fg_password(telefono, codigo)
     if (forgotPhone === true){
       res.status(200).json('response:message sended');
     }
@@ -314,10 +315,11 @@ app.post('/sendforgot_phone' ,async (req, res) => {
 })
 
 
-app.post('/sendforgot_mail' ,async (req, res) => {
+app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
   try {
-    const { telefono, dpi, codigo } = req.body;
-    const forgotmail = await send_email_forfg(telefono, dpi, codigo)
+    const { email, nombre } = req.body;
+    const codigo = (Math.random() + 1).toString(36).substring(7);
+    const forgotmail = await send_email_forfg(email,codigo, nombre)
     if (forgotmail){
       res.status(200).json('response:message sended');
     }
