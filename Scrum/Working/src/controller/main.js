@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import {createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import {createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -452,3 +452,27 @@ app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error'})
   }
 })
+
+app.post('/threads/createPost', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpiUser, postText, postImage } = req.body;
+
+    // Validación de entrada
+    if (!dpiUser || !postText || !postImage) {
+      return res.status(400).json({ error: 'Failed to creat post, empty values are not allowed' });
+    }
+
+    // Creating new threadpost
+    const post = await createThreadPost(dpiUser, postText, postImage);
+
+    if (post) {
+      return res.status(200).json({ success: "Successfully created new post" });
+    } else {
+      return res.status(400).json({ error: "Falied to create post" });
+    }
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
