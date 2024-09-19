@@ -3,6 +3,23 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function getThreadPosts(){
+    try {
+        const query = {
+            text: "SELECT thr.idthreads, usr.nombre || ' ' || usr.apellidos AS usuario, usr.dpi, usr.imagen AS img_usuario, thr.descripcion, post_timestamp AS posttime, thr.image AS imagen " +
+                  "FROM threads thr " +
+                  "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario)"
+        }
+
+        const result = await client.query(query)
+
+        return result
+
+    } catch (error) {
+        console.error('Error while gettin thread posts')
+    }
+}
+
 export async function createThreadPost(usrDpi, postDescription, image) {
 
     try {
