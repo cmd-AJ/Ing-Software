@@ -13,6 +13,8 @@ export async function createThreadPost(usrDpi, postDescription, image) {
 
         const result = await client.query(query)
 
+        return result
+
     } catch (error) {
         console.error('Error while creating thread Post')
     }
