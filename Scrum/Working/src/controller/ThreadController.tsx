@@ -1,3 +1,25 @@
+export async function getThreadPosts() {
+    try {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/threads/getPosts`, {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to get thread posts');
+        }
+
+        return response.json()
+
+    } catch (error) {
+        console.error("Error while creating getting posts:", error);
+        throw error; 
+    }
+}
+
 export async function createThreadPost(user_dpi: string, post_text: string, post_Image: string) {
 
     //Create new chat calling the endpoint /contacts/createChat
@@ -16,9 +38,6 @@ export async function createThreadPost(user_dpi: string, post_text: string, post
             },
             body: JSON.stringify(data)
         });
-
-        console.log(response)
-        
 
         if (!response.ok) {
             throw new Error('Failed to create new post');
