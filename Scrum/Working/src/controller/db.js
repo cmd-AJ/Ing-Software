@@ -1,7 +1,23 @@
-import { text } from 'express';
+import { query, text } from 'express';
 import getClient from './RelationalDatabase.js';
 
 const client = getClient();
+
+export async function createThreadPost(usrDpi, postDescription, image) {
+
+    try {
+        const query = {
+            text:"INSERT INTO threads(dpi_usuario, descripcion, post_timestamp, image) VALUES ($1, $2, CURRENT_TIMESTAMP, $3)",
+            values:[usrDpi, postDescription, image],
+        }
+
+        const result = await client.query(query)
+
+    } catch (error) {
+        console.error('Error while creating thread Post')
+    }
+    
+}
 
 export async function createNewChat(dpi1, dpi2) {
 
