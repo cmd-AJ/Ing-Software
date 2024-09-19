@@ -458,7 +458,7 @@ app.post('/threads/createPost', apiKeyAuth, async (req, res) => {
     const { dpiUser, postText, postImage } = req.body;
 
     // Validación de entrada
-    if (!dpiUser || !postText || !postImage) {
+    if (!dpiUser || !postText ) {
       return res.status(400).json({ error: 'Failed to creat post, empty values are not allowed' });
     }
 
