@@ -11,6 +11,9 @@ import {
   IonLabel,
   IonText,
   IonCheckbox,
+  IonGrid,
+  IonCol,
+  IonRow,
 
 
 } from "@ionic/react";
@@ -18,6 +21,9 @@ import { use } from "chai";
 import '../administration/componentes/fgpass.css'
 import Topheader from "./componentes/Topheader";
 import DpiInput from '../../components/Register/dpiInput'
+import PasswordInput from "../../components/Register/passwordInput";
+import Confirmation from '../../components/Register/Confirmation'
+import { useHistory } from "react-router";
 
 
 interface Cuenta {
@@ -37,13 +43,19 @@ const Forgot_Page: React.FC = () => {
   const [validateDpi, setValidateDpi] = useState(false)
   const [checkboxC, setcheckboxC] = useState(false)
   const [checkboxT, setcheckboxT] = useState(true)
+  const [confirmation, setConfirmation] = useState('')
+  const [validatePassword, setValidatePassword] = useState(false)
+  const [validateConfirmation, setValidateConfirmation] = useState(false)
+  const [password, setPassword] = useState('')
 
    // Create references for each input field
    const input1Ref = useRef(null);
    const input2Ref = useRef(null);
    const input3Ref = useRef(null);
    const input4Ref = useRef(null);
- 
+   const history = useHistory()
+
+   
    // Function to handle input changes
    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, nextInput: React.RefObject<HTMLInputElement>) => {
      const { value } = e.target;
@@ -79,7 +91,7 @@ const Forgot_Page: React.FC = () => {
           <IonContent>
             <IonToolbar color={"primary"}>
               <IonLabel slot="start" className="dashbutton">
-                <a className="linkref">SABTE</a>
+                <a className="linkref" onClick={() => history.push('/about')}>SABTE</a>
               </IonLabel>
             </IonToolbar>
             <div className="inputdpifg">
@@ -122,14 +134,34 @@ const Forgot_Page: React.FC = () => {
                 <a className="linkref">SABTE</a>
               </IonLabel>
             </IonToolbar>
-            <IonItem>
-              <IonInput placeholder="Escribir contrasena"></IonInput>
-              <IonInput placeholder="Escribir nuevamente la contrasena"></IonInput>
-            </IonItem>  
-            <IonButton onClick={() =>handleClick(1)}>SOLO APACHAR CUANDO INGRESO TODOS LOS CARACTERES</IonButton>
+            <IonGrid className="gridconfirmfg">
+              <IonRow>
+              <IonCol></IonCol>
+              <IonCol>
+              <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
+              </IonCol>
+              <IonCol></IonCol>
+              </IonRow>
+              <IonRow>
+              <IonCol></IonCol>
+              <IonCol>                
+              <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password}/>
+              
+              </IonCol>
+              <IonCol></IonCol>
+              </IonRow>
+              
+            <IonRow>
+            <IonCol></IonCol>
+            <IonButton className='cfpass' onClick={() =>handleClick(1)}>Cancelar</IonButton>
+            <IonCol></IonCol>
+            <IonButton >Confirmar</IonButton>
+            <IonCol></IonCol>
+            </IonRow>
+            </IonGrid>
           </IonContent> 
         ) : (
-          // You can either handle a default case here, or leave this empty.
+          
           <IonContent>
             <IonHeader>No Hay contenido</IonHeader>
           </IonContent>
