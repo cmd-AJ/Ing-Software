@@ -1,8 +1,8 @@
-import CryptoJS from 'crypto-js';
+
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import {getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import {getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -296,25 +296,74 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
 })
 
 
+
+
 app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
   try {
-    const { telefono } = req.body;
+    const { telefono, dpi } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
-    const forgotPhone = await send_fg_password(telefono, codigo)
-    res.status(200).json('response:message sended');
+    const changepas = await updataepasscode_phone(codigo, dpi)
+
+    if(changepas){
+      const forgotPhone = await send_fg_password(telefono, codigo)
+      res.status(200).json('response:message sended');
+    }else{
+      res.status(400).json('response:Unable to change code');
+    }
 
   } catch (error) {
-    console.error('Error getting chat messages:', error);
+    console.error('Error trying to send a code to phone:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
+
+
+app.get('/getcode/:dpi', apiKeyAuth ,async (req, res) => {
+  try {
+    const { dpi } = req.params
+    const user = await getpasscode(dpi)
+    if (user) {
+      res.status(200).send(user)
+    } else {
+      res.status(404).json({ error: 'user not found' })
+    }
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.put('/codechange', apiKeyAuth ,async (req, res) => {
+  const [password,dpi] = [req.body.password, req.body.dpi]
+  if (!password || !dpi) {
+    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
+  } else {
+    try {
+      const resp = await changepass(password, dpi)
+      res.send('Updated succesfully')
+    } catch (error) {
+      throw error
+    }
+  }
+})
+
 
 
 app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
   try {
     const { email, nombre } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
-    const forgotmail = await send_email_forfg(email,codigo, nombre)
+
+    const changepas = await updataepasscode_phone(codigo, nombre)
+
+    if(changepas){
+      const forgotmail = await send_email_forfg(email,codigo, nombre)
+      res.status(200).json('response:message sended');
+    }else{
+      res.status(400).json('response:Unable to change code');
+    }
+
+    
     res.status(200).json('response:message sended');
     
 
@@ -323,6 +372,9 @@ app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
+
+
+
 
 
 app.put('/confitrab', apiKeyAuth ,async (req, res) => {
@@ -452,6 +504,7 @@ app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error'})
   }
 })
+
 
 app.post('/threads/createPost', apiKeyAuth, async (req, res) => {
   try {

@@ -361,3 +361,54 @@ export async function getCurrentHirings(dpi) {
         throw error
     }
 }
+
+
+export async function updataepasscode_phone(code, dpi) {
+    try {
+        const query = {
+            text: "update usuarios set code = $1 where  dpi = $2",
+            values: [code, dpi]
+        }
+
+        const result = await client.query(query)
+        return true
+    } catch (error) {
+        console.error("Error al actualizar el codigo con el dpi")
+        throw error
+    }
+}
+
+
+
+export async function getpasscode(dpi) {
+    try {
+        const query = {
+            text: "select code from usuarios where dpi = $1",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+// verificar el codigo
+export async function changepass(password ,dpi) {
+    try {
+        const query = {
+            text: "update usuarios set password = $1 where  dpi = $2",
+            values: [password, dpi]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+

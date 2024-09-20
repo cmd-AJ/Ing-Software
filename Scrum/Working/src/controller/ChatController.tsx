@@ -231,3 +231,111 @@ export async function getHirings(dpi: string) {
     }
 }
 
+
+
+export async function sendmessages(dpi: string, phone: string, correo: string) {
+    try {
+        if (correo != '') {
+            
+            const data = {
+                nombre: dpi,
+                email: correo
+                
+            };
+    
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/sendforgot_mail/`, {
+                method: 'POST',
+                headers: {
+                    'api-key': import.meta.env.VITE_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to send a mail');
+            }
+    
+            const responseData = await response.json();
+            return responseData;
+
+        }
+        if (phone != '') {
+
+            const data = {
+                dpi:dpi,
+                telefono: phone 
+            };
+    
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/sendforgot_phone/`, {
+                method: 'POST',
+                headers: {
+                    'api-key': import.meta.env.VITE_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to send a phone notification');
+            }
+    
+            const responseData = await response.json();
+            return responseData;
+
+
+        }
+
+
+    } catch (error) {
+        console.error("Error while hiring worker:", error);
+        throw error;
+    }
+}
+
+
+export async function getcode(dpi: String, code:string) {
+    try {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/getcode/${dpi}`, {
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+
+        if (data[0].code === code){
+            return true
+        }
+        else{
+            return false
+        }
+
+    } catch (error) {
+        console.error('Error fetching contacts:', error);
+        return false;
+    }
+}
+
+
+export async function cambiarcontra(password: string, dpi: string) {
+    const object = {
+        password: password,
+        dpi: dpi
+    }
+
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/codechange`,
+        {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        })
+    return data
+}
+
+
+
+
