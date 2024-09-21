@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-import BtnCloseModal from '../Btn/BtnCloseModal';
-import HorizontalDivider from '../Dividers/HorizontalDivider';
-import TextND from '../Txt/TextND';
 import './ModalStyles.css'
 
 interface ContainerProps {
@@ -32,9 +29,7 @@ const ModalStructure: React.FC<ContainerProps> = ({setModal, content}) => {
             <div onClick={() => setModal(false)} className="modal-background">
             </div>
             <div className='modal-position'>
-                <div className='modal-container'>
-                    {content}
-                </div>
+                {content}
             </div>
         </>
     )

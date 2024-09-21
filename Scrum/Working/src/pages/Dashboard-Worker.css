@@ -26,7 +26,7 @@
     max-height: 1225px;
     width: 100%;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 15px;
     overflow: unset;
     flex-direction: column;
 }
@@ -35,6 +35,7 @@
     height: 180px; 
     width: 100%;
     object-fit: fill;
+    border-radius: 15px 15px 0 0;
 }
 
 .lower-displayment {

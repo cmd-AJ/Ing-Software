@@ -4,6 +4,7 @@
     margin-right: 8px;
 }
 
+
 .btn-header-horizontal {
     display: flex;
     justify-content: flex-end;
@@ -23,16 +24,8 @@
     width: 50%;
 }
 
-.center-div-btn {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-}
-
 .btn-edit-user{
-    width: 25%;
-    margin-top: auto;
+    width: auto;
     height: 45px;
     margin-bottom: 5%;
 }

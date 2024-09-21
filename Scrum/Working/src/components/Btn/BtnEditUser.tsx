@@ -1,6 +1,7 @@
 import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
 import React from "react";
+import { flash } from "ionicons/icons";
 
 type User = {
     nombre : string;
@@ -32,12 +33,16 @@ interface ContainerProps {
     validateBirthdate: boolean
     validateEmail: boolean
     validatesCell: boolean
+    setUser: (user: User) => void
+    setEdit: (edit: boolean) => void
 }
 
 const BtnEditUser: React.FC<ContainerProps> = ({
     user,
     banner,
     profpic,
+    setUser,
+    setEdit,
     job,
     birthdate,
     sex,
@@ -61,17 +66,20 @@ const BtnEditUser: React.FC<ContainerProps> = ({
             municipio: municipio
         };
 
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+        localStorage.setItem('User', JSON.stringify(updatedUser));
 
-        console.log(user);
+        const actualUser = localStorage.getItem('User')
+        if (actualUser !== null) {
+            setUser(JSON.parse(actualUser));
+        }
+
+        setEdit(false)
     };
 
     return (
-        <div className="center-div-btn">
-            <IonButton shape="round" color="tertiary" className="btn-edit-user" onClick={handleClick}>
-                Editar
-            </IonButton>
-        </div>
+        <IonButton shape="round" color="tertiary" className="btn-edit-user" onClick={handleClick}>
+            Guardar cambios
+        </IonButton>
     );
 };
 
