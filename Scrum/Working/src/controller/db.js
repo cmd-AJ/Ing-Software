@@ -379,6 +379,39 @@ export async function updataepasscode_phone(code, dpi) {
 }
 
 
+export async function getmail(dpi) {
+    try {
+        const query = {
+            text: "select email from usuarios where dpi = $1 limit 1",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+export async function getphone(dpi) {
+    try {
+        const query = {
+            text: "select telefono from usuarios where dpi = $1 limit 1",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
 
 export async function getpasscode(dpi) {
     try {

@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import {getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone} from './db.js'
+import {getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -300,12 +300,13 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
 
 app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
   try {
-    const { telefono, dpi } = req.body;
+    const { dpi } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
     const changepas = await updataepasscode_phone(codigo, dpi)
+    const telefono = await getphone(dpi)
 
     if(changepas){
-      const forgotPhone = await send_fg_password(telefono, codigo)
+      const forgotPhone = await send_fg_password(telefono[0].telefono, codigo)
       res.status(200).json('response:message sended');
     }else{
       res.status(400).json('response:Unable to change code');
@@ -351,13 +352,15 @@ app.put('/codechange', apiKeyAuth ,async (req, res) => {
 
 app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
   try {
-    const { email, nombre } = req.body;
+    const { nombre } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(7);
 
     const changepas = await updataepasscode_phone(codigo, nombre)
 
+    const email = await getmail(nombre)
+
     if(changepas){
-      const forgotmail = await send_email_forfg(email,codigo, nombre)
+      const forgotmail = await send_email_forfg(email[0].email,codigo, nombre)
       res.status(200).json('response:message sended');
     }else{
       res.status(400).json('response:Unable to change code');
