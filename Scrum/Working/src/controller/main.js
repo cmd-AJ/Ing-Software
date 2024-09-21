@@ -298,13 +298,14 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
 
 
 
-app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
+app.post('/sendforgot_phone' ,apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(8, 12);
     const changepas = await updataepasscode_phone(codigo, dpi)
     const telefono = await getphone(dpi)
-    const new_phone = +('+502' + telefono[0].telefono).replace('-')
+    const new_phone = (('+502' + telefono[0].telefono).replace('-', '')).toString()
+
 
     if(changepas){
       const forgotPhone = await send_fg_password(new_phone, codigo)
