@@ -233,14 +233,12 @@ export async function getHirings(dpi: string) {
 
 
 
-export async function sendmessages(dpi: string, phone: string, correo: string) {
+export async function sendmessages(dpi: string, method :string) {
     try {
-        if (correo != '') {
+        if (method === 'correo') {
             
             const data = {
-                nombre: dpi,
-                email: correo
-                
+                nombre: dpi
             };
     
             const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/sendforgot_mail/`, {
@@ -260,11 +258,10 @@ export async function sendmessages(dpi: string, phone: string, correo: string) {
             return responseData;
 
         }
-        if (phone != '') {
+        if (method === 'telefono') {
 
             const data = {
-                dpi:dpi,
-                telefono: phone 
+                dpi:dpi
             };
     
             const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/sendforgot_phone/`, {

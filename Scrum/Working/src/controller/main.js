@@ -304,9 +304,10 @@ app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
     const codigo = (Math.random() + 1).toString(36).substring(7);
     const changepas = await updataepasscode_phone(codigo, dpi)
     const telefono = await getphone(dpi)
+    const new_phone = +('+502' + telefono[0].telefono).replace('-')
 
     if(changepas){
-      const forgotPhone = await send_fg_password(telefono[0].telefono, codigo)
+      const forgotPhone = await send_fg_password(new_phone, codigo)
       res.status(200).json('response:message sended');
     }else{
       res.status(400).json('response:Unable to change code');
