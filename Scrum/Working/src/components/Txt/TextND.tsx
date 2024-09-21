@@ -18,6 +18,11 @@ const TextND : React.FC<ContainerProps> = ({text, size, hex}) => {
             return (
                 <p id='medium-text' style={{color: hex}}>{text}</p>
             )
+
+        case "medium-small":
+            return (
+                <p id='medium-small-text' style={{color: hex}}>{text}</p>
+            )
         
         case "small":
             return (

@@ -1,6 +1,7 @@
 import { IonSelect, IonSelectOption } from "@ionic/react"
 import './InputStyles.css'
 import React from "react"
+import TextND from "../Txt/TextND"
 
 interface ContainerProps {
     label : string
@@ -18,19 +19,25 @@ const InputSelector: React.FC<ContainerProps> = ({label,placeholder,list, value,
     };
 
     return (
-        <IonSelect 
-            label={label} 
-            placeholder={placeholder} 
-            className="inputsModal" 
-            value={value} 
-            onIonChange={handleSelectChange}
-        >
-            {
-                list.map((item)=>(
-                    <IonSelectOption value={item}>{item}</IonSelectOption>
-                ))
-            }
-        </IonSelect>
+        <div id="singular-input-display">
+            <TextND text={label} size="medium-small" hex="#000"/>
+            <IonSelect 
+                placeholder={placeholder} 
+                labelPlacement="floating"
+                interface="action-sheet"
+                fill="outline"
+                className="inputsModal" 
+                value={value} 
+                onIonChange={handleSelectChange}
+            >
+                <IonSelectOption value="" disabled>{placeholder}</IonSelectOption>
+                {
+                    list.map((item)=>(
+                        <IonSelectOption value={item}>{item}</IonSelectOption>
+                    ))
+                }
+            </IonSelect>
+        </div>
     )
 }
 

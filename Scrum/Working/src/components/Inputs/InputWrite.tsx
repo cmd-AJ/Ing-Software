@@ -2,6 +2,7 @@ import { InputChangeEventDetail, IonInput } from "@ionic/react";
 import { useEffect, useState } from "react";
 import './InputStyles.css';
 import React from "react";
+import TextND from "../Txt/TextND";
 
 interface ContainerProps {
     label: string;
@@ -45,26 +46,29 @@ const InputWrite: React.FC<ContainerProps> = ({
     }, [value]);
 
     return (
-        <IonInput 
-            className={`inputsModal ${validatesValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
-            label={label}
-            value={value}
-            errorText={errorText}
-            onIonBlur={(event) => {
-                setIsTouched(true);
-                validate((event.target as unknown as HTMLInputElement).value);
-            }}
-            onIonChange={handleChange}
-            placeholder={placeholder}
-            ref={async (userInput) => {
-                if (userInput && mask != null) {
-                    const input = await userInput.getInputElement();
-                    if (input) {
-                        mask(input);
+        <div id="singular-input-display">
+            <TextND text={label} size='medium-small' hex='#000' />
+            <IonInput 
+                className={`inputsModal ${validatesValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
+                value={value}
+                fill="outline"
+                errorText={errorText}
+                onIonBlur={(event) => {
+                    setIsTouched(true);
+                    validate((event.target as unknown as HTMLInputElement).value);
+                }}
+                onIonChange={handleChange}
+                placeholder={placeholder}
+                ref={async (userInput) => {
+                    if (userInput && mask != null) {
+                        const input = await userInput.getInputElement();
+                        if (input) {
+                            mask(input);
+                        }
                     }
-                }
-            }}
-        ></IonInput>
+                }}
+            ></IonInput>
+        </div>
     );
 };
 

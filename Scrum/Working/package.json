@@ -28,7 +28,7 @@
     "@maskito/core": "^2.2.0",
     "@maskito/react": "^2.2.0",
     "@mui/material": "^5.16.1",
-    "@mui/x-date-pickers": "^7.10.0",
+    "@mui/x-date-pickers": "^7.17.0",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.7",
