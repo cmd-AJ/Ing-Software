@@ -301,7 +301,7 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
 app.post('/sendforgot_phone', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.body;
-    const codigo = (Math.random() + 1).toString(36).substring(7);
+    const codigo = (Math.random() + 1).toString(36).substring(8);
     const changepas = await updataepasscode_phone(codigo, dpi)
     const telefono = await getphone(dpi)
     const new_phone = +('+502' + telefono[0].telefono).replace('-')
@@ -354,7 +354,7 @@ app.put('/codechange', apiKeyAuth ,async (req, res) => {
 app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
   try {
     const { nombre } = req.body;
-    const codigo = (Math.random() + 1).toString(36).substring(7);
+    const codigo = (Math.random() + 1).toString(36).substring(8);
 
     const changepas = await updataepasscode_phone(codigo, nombre)
 
