@@ -2,10 +2,27 @@ import React, { useEffect } from 'react'
 import './BtnStyles.css'
 import ModalBtnI from './ModalBtnI'
 import ModalBtnN from './ModalsBtnN'
-import { chatbubbleEllipses, pencilOutline } from 'ionicons/icons'
+import { chatbubbleEllipses, pencilOutline, personAddOutline } from 'ionicons/icons'
 import BtnNav from './BtnNav'
+import BtnAction from './BtnAction'
+import { getTrustedPeople } from '../../controller/UserController'
 // import BtnNav from './BtnNav'
 
+type NotUser = {
+    sexo: string
+    apellidos: string
+    banner: string
+    departamento: string
+    dpi: string
+    email: string
+    fecha_nacimiento: string
+    imagen: string
+    municipio: string
+    nombre: string
+    rating: string
+    role: string
+    telefono: string
+}
 
 interface ContainerProps {
     setEdit1: (edit1 : boolean) => void
@@ -28,6 +45,28 @@ const BtnDisplayment: React.FC<ContainerProps> = (
         
     },[])
 
+    const handleTrust = async () => {
+        const trustList = await getTrustedPeople("3833 86608 0102")
+
+        const viewUser = localStorage.getItem('notUser')
+
+        if (viewUser != null) {
+            const parsedUser: NotUser = JSON.parse(viewUser)
+            const parsedName = parsedUser.nombre.split(" ")[0] + parsedUser.apellidos.split(" ")[0]
+            
+            
+            trustList.map(trustedPerson => {
+                const name = trustedPerson.nombre + '' + trustedPerson.apellidos
+                if (name === name) {
+
+                }
+            })
+        }
+
+
+        
+    }
+
     if (owner === 'true') {
         return (
             <div className="btn-header-horizontal">
@@ -39,6 +78,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
         return (
             <div className='btn-header-horizontal'>
                 <BtnNav img={chatbubbleEllipses} direction='chat'/>
+                <BtnAction img={personAddOutline} action={handleTrust}/>
             </div>
         )
     }
