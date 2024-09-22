@@ -7,7 +7,7 @@ import InputWrite from "../../Inputs/InputWrite";
 import { useMaskito } from "@maskito/react";
 import { Departamentos, getMunicipios } from "../../../Departamentos/Departamentos";
 import React from "react";
-import './profile_struct.css'
+// import './profile_struct.css'
 import TextND from "../../Txt/TextND";
 import HorizontalDivider from "../../Dividers/HorizontalDivider";
 import BtnEditUser from "../../Btn/BtnEditUser";
