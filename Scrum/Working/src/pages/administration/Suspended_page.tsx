@@ -27,21 +27,6 @@ import Showsuspend_D from "./componentes/Showdetails";
 
 const Suspendido: React.FC = () => {
 
-    const jhason = [{
-        "idreporte": '1',
-        "dpiemisor": '15406406',
-        "dpireportuser": '2860479',
-        "contenido": "This is a sample content",
-        "fecha": "2024-08-27T12:34:56Z"
-      },
-      {
-        "idreporte": '2',
-        "dpiemisor": '15406406',
-        "dpireportuser": '2860479',
-        "contenido": "This is a sample content",
-        "fecha": "2024-08-27T12:34:56Z"
-      }]
-    
 
   return (
     <IonPage>

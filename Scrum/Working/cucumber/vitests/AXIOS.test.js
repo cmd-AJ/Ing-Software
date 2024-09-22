@@ -28,8 +28,8 @@ test('should retrieve contacts for a given user ID', async () => {
     expect(response.data[0]).toHaveProperty('name');
 
     // Verificar que los valores sean los esperados
-    expect(response.data[0].dpi).toBe('3834 49898 0101');
-    expect(response.data[0].name).toBe('Andre Jo');
+    expect(response.data[0].dpi).toBe('3833 86608 0102');
+    expect(response.data[0].name).toBe('Ricardo Tapia');
 
   } catch (error) {
     throw new Error(`Failed with error: ${error.message}`);

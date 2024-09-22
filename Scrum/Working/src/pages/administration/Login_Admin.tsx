@@ -65,7 +65,7 @@ const Login_Admin: React.FC = () => {
           onIonChange={(e) => handleInputChange(e as CustomEvent<{ value: string | null }>, "password")}
         ></IonInput>
         <div className="space"></div>
-        <a className="alink" href="https://neal.fun/password-game/">Contraseña equivocada?</a>
+        <a className="alink" href="http://localhost:8100/fg_pass">Contraseña equivocada?</a>
         <br></br>
         <br></br>
         <Adminbutton dpi={dpi} password={password}/>

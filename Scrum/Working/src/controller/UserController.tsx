@@ -346,6 +346,8 @@ export async function insertartipodetrabajo(trabajo: object) {
     return data
 }
 
+
+
 export async function getUser2(dpi: string) {
     try {
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/users/${dpi}`, {

@@ -1,6 +1,16 @@
 import { describe, it, expect } from 'vitest'
 import { getChatIdWithDPI, getChatMessages, getHirings, chatBetweenUsersExist } from '../../src/controller/ChatController';
 import { getLoginUser, conseguirtrabajo, getWorkersByJob, userExists } from '../../src/controller/UserController'
+import { getThreadPosts } from '../../src/controller/ThreadController'
+
+describe('Obtener los posts', () => {
+  it('deberia de existir al menos un post', async () => {
+    const user = await getThreadPosts();
+    const firstUser = user[0]
+    expect(firstUser).toBeDefined(); // Verifica que se haya obtenido un usuario
+  });
+
+});
 
 describe('Conseguir a un usuario', () => {
   it('Debería iniciar sesión correctamente con credenciales válidas', async () => {

@@ -10,9 +10,6 @@ import {
   IonItem,
   IonIcon,
   useIonModal,
-  IonSelect,
-  IonSelectOption,
-  IonRange,
   IonGrid,
   IonRow,
   IonCol,
@@ -20,11 +17,13 @@ import {
   IonLabel,
   IonPopover,
   IonDatetime,
+  IonToast,
 } from '@ionic/react';
-import { calendar, calendarOutline, closeOutline } from 'ionicons/icons';
+import { calendar, closeOutline } from 'ionicons/icons';
 
 import './mod_modaling.css'
 import { extendunban, Getallbannedusers, unban } from "../../../controller/Admin_Controller";
+import { slitdate } from "./adminfunctions";
 
 interface Persona {
   idsuspend: string;
@@ -32,7 +31,7 @@ interface Persona {
   estado: boolean;
   fechainicio: string;
   unban: string;
-  razon:string;
+  razon: string;
 }
 
 
@@ -48,54 +47,52 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [dpi, setdpi] = useState(data?.dpi)
   const [confirmar, setconfirmar] = useState('')
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState('')
 
 
 
   const handleDateChange = (e: CustomEvent) => {
-    
+
     const date = e.detail.value;
     setSelectedDate(date);
-    setShowPopover(false);  // Close the popover after selecting the date
+    setShowPopover(false);
     setchangedate(true);
 
   };
 
-  const handleButtonClickunban = async ()  => {
+  const handleButtonClickunban = async () => {
 
-    if((dpi != '') ){
-      console.log(dpi)
+    if ((dpi != '')) {
       try {
-          const result = await unban(dpi+''); // Example date
-          console.log('Ban extended:', result);
+        const result = await unban(dpi + ''); 
+        setMessage("EXITO AL DESBLOQUEAR USUARIO")
+        setShowToast(true)
       } catch (error) {
-          console.error("Failed to extend ban:", error);
+        console.error("Failed to extend ban:", error);
       }
     }
 
-    
-    // Add other actions you want to perform on click
   };
 
 
   const handleButtonClickextend = async () => {
-    
-    if( confirmar === 'extender fecha' ){
-      if((dpi != '') && (selectedDate != '') ){
-        console.log(selectedDate);
-        console.log(dpi+'')
-    
+
+    if (confirmar === 'extender fecha') {
+      if ((dpi != '') && (selectedDate != '')) {
         try {
-              const result = await extendunban(dpi+'', selectedDate+''); // Example date
-              console.log('Ban extended:', result);
-          } catch (error) {
-              console.error("Failed to extend ban:", error);
-          }
+          const result = await extendunban(dpi + '', selectedDate + '');
+          setMessage("EXITO AL ACTUALIZAR FECHA")
+          setShowToast(true)
+        } catch (error) {
+          console.error("Failed to extend ban:", error);
+        }
       }
     }
-    else{
-      console.log('No se escribio bien')
+    else {
+      setMessage("ERROR REESCRIBIR CONFIRMACION DE NUEVO")
+      setShowToast(true)
     }
-    // Add other actions you want to perform on click
   };
 
 
@@ -113,25 +110,34 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-      <IonGrid>
+        <IonGrid>
           <IonRow>
             <IonCol><IonItem>Fecha Inicio: <br></br> {data?.fechainicio} </IonItem></IonCol>
-            <IonCol><IonItem id={data?.dpi}>Fecha a Desbloquear: <br></br> {selectedDate || data?.unban} <IonButton slot="end"  onClick={() => setShowPopover(true)} className="iconodate">
-            <IonIcon slot="icon-only" icon={calendar}></IonIcon>  
+            <IonCol><IonItem id={data?.dpi}>Fecha a Desbloquear: <br></br> {selectedDate || data?.unban} <IonButton slot="end" onClick={() => setShowPopover(true)} className="iconodate">
+              <IonIcon slot="icon-only" icon={calendar}></IonIcon>
             </IonButton></IonItem></IonCol>
           </IonRow>
-      </IonGrid>
+        </IonGrid>
 
-      <IonPopover
-        isOpen={showPopover}
-        onDidDismiss={() => setShowPopover(false)}
+        <IonPopover
+          isOpen={showPopover}
+          onDidDismiss={() => setShowPopover(false)}
         > <IonDatetime presentation="date" onIonChange={handleDateChange}></IonDatetime>
-      </IonPopover>  
-
+        </IonPopover>
+        
+        <IonToast
+                className="custom-toast"
+                style={{ textAlign: "center" }}
+                isOpen={showToast}  // Controlled by state
+                onDidDismiss={() => setShowToast(false)} // Reset toast visibility
+                message={message}
+                duration={2000}
+                position="top"
+            />
 
         <IonLabel className="descprio"><b>Descripción</b></IonLabel>
         <br></br>
-        
+
         <IonItem className="textrazon">{data?.razon}</IonItem>
         <br></br>
         {data?.estado === false ? (
@@ -142,12 +148,12 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
         <br></br>
         {changedate ? (
           <>
-          <br />
-          <div style={{display:'flex'}}>
-            <input value={confirmar}  onChange={(e) => setconfirmar(e.target.value)} placeholder="extender fecha" className="botonconfirm" style={{backgroundColor:'var(--white)'}} ></input>
-            <IonButton className="botonconfirm" onClick={handleButtonClickextend}>Extender Bloqueo</IonButton>
-          </div>
-          <p style={{color:'red'}}>Escribir "extender fecha" para confirmar</p>
+            <br />
+            <div style={{ display: 'flex' }}>
+              <input value={confirmar} onChange={(e) => setconfirmar(e.target.value)} placeholder="extender fecha" className="botonconfirm" style={{ backgroundColor: 'var(--white)' }} ></input>
+              <IonButton className="botonconfirm" onClick={handleButtonClickextend}>Extender Bloqueo</IonButton>
+            </div>
+            <p style={{ color: 'red' }}>Escribir "extender fecha" para confirmar</p>
           </>
         ) : (
           <IonButton className="botonDesCuenta" onClick={handleButtonClickunban}>Desbloquear Cuenta</IonButton>
@@ -172,6 +178,11 @@ function Showsuspend_D() {
       try {
         const jhason: Persona[] = await Getallbannedusers();
         if (Array.isArray(jhason) && jhason.length > 0) {
+
+        for (const index in jhason) {
+          jhason[index].fechainicio = slitdate(jhason[index].fechainicio)
+          jhason[index].unban = slitdate(jhason[index].unban)
+        }
           setcuentas(jhason);
         }
       } catch (error) {
@@ -179,19 +190,22 @@ function Showsuspend_D() {
       }
     };
     fetchReports();
+
+
+
   }, []);
 
 
 
 
   function openModal(item: Persona) {
-    setSelectedItem(item); // Set the selected item in state
+    setSelectedItem(item); 
     present();
   }
 
   return (
     <>
-    
+
       {cuentas.map((item, index) => (
         <button
           key={index}
@@ -203,8 +217,8 @@ function Showsuspend_D() {
           onClick={() => openModal(item)}
         >
           <div className="separacion">
-            <p>{item.dpi}</p>
-            <p>{item.unban}</p>
+            <p style={{marginLeft:'1%'}}>{item.dpi}</p>
+            <p style={{marginRight:'8%'}}>{item.unban}</p>
           </div>
         </button>
       ))}
@@ -239,4 +253,3 @@ Confirm
           </IonGrid>
         </IonPopover> */}
 
-        
