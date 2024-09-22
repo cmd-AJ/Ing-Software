@@ -79,7 +79,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
     return (
         <>
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
-                <ImgInput image={banner} setImage={setBanner} type={true}/>
+                <ImgInput image={image} setImage={setBanner} type={true}/>
                 <div id="user-img">
                     <ImgInput image={image} setImage={setImage} type={false}/>
                 </div>
