@@ -7,11 +7,12 @@ import InputWrite from "../../Inputs/InputWrite";
 import { useMaskito } from "@maskito/react";
 import { Departamentos, getMunicipios } from "../../../Departamentos/Departamentos";
 import React from "react";
-// import './profile_struct.css'
+import './profile_struct.css'
 import TextND from "../../Txt/TextND";
 import HorizontalDivider from "../../Dividers/HorizontalDivider";
 import BtnEditUser from "../../Btn/BtnEditUser";
 import { IonButton } from "@ionic/react";
+import BannerInput from "../../Inputs/BannerInput";
 
 interface ContainerProps {
     user: User
@@ -39,7 +40,7 @@ type User = {
 const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
 
     const [banner , setBanner] = useState(user.banner)
-    const [image, setImage] = useState(user.imagen)
+    const [profileImage, setProfileImage] = useState(user.imagen)
     const [job, setJob] = useState('')
     const [validateJob, setValidateJob] = useState(true)
     const [sex, setSex] = useState(user.sexo)
@@ -79,9 +80,10 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
     return (
         <>
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
+
                 <ImgInput image={image} setImage={setBanner} type={true}/>
                 <div id="user-img">
-                    <ImgInput image={image} setImage={setImage} type={false}/>
+                    <ImgInput image={profileImage} setImage={setProfileImage} type={false}/>
                 </div>
                 <div id="input-display">
                     <TextND text="Mi nombre" hex="#000" size="big"/>
@@ -158,7 +160,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
                 <BtnEditUser 
                     user={user} 
                     banner={banner}
-                    profpic={image}
+                    profpic={profileImage}
                     job=""
                     birthdate={date}
                     validateBirthdate={validateDate}
