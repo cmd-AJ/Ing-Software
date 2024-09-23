@@ -8,6 +8,7 @@ interface ContainerProps {
   }
   
   const FileUpload: React.FC<ContainerProps> = ({ image, setImage, type }) => {
+    debugger
       const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
           const files = event.target.files;
           if (files && files.length > 0) {
@@ -31,7 +32,7 @@ interface ContainerProps {
               className='img-input-size'
           >
               {/* Botón con imagen */}
-              <label htmlFor="file-upload" style={{width: '100%', display: 'flex',justifyContent: 'center'}}>
+              <label htmlFor={image} style={{width: '100%', display: 'flex',justifyContent: 'center'}}>
                   <img
                       src={image}
                       alt="Subir archivo"
@@ -40,7 +41,7 @@ interface ContainerProps {
               </label>
               {/* Input de tipo file oculto */}
               <input
-                    id='file-upload'
+                    id={image}
                     type="file"
                     accept="image/*"
                     style={{ display: "none" }}
