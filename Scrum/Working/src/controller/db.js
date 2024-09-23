@@ -465,3 +465,36 @@ export async function changepass(password ,dpi) {
     }
 }
 
+
+export async function getreport_withfecha(fechai, fechafinal ,password, dpi) {
+    try {
+        const query = {
+            text: "select * from reporte where fecha > $1 and fecha < $2 or dpireportuser =  quote_literal($3)  or idreporte = @$4",
+            values: [fechai, fechafinal ,password, dpi]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+export async function getreport_nofecha(dpi, idreporte) {
+    try {
+        const query = {
+            text: "select * from reporte where dpireportuser =  quote_literal($1) or idreporte = @$2",
+            values: [dpi, idreporte]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
