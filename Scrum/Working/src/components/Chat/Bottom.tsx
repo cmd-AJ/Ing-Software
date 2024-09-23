@@ -13,6 +13,14 @@ interface BottomProps {
 const  Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updateMessages, onHireClick }) => {
 
     const [message, setMessage] = useState('');  
+    const user = localStorage.getItem('User');
+    let role = ''
+    try {
+      const jsonparse = JSON.parse(user+'')
+      role = jsonparse.role
+      
+    } catch (error) {
+    }
 
     const sendMessage = async () => {
       try {
@@ -40,7 +48,7 @@ const  Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, upda
           style={{height:'39px'}}
         />
         <button className="send" onClick={sendMessage}>Send</button>
-        <button className="hire" onClick={onHireClick}>Hire</button>
+        <button className="hire" disabled={role === 'Empleado'} onClick={onHireClick}>Hire</button>
       </div>
     );
 }
