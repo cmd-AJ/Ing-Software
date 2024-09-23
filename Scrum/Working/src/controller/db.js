@@ -11,7 +11,7 @@ export async function getCommentsWithThreadID(id) {
                   "JOIN usuarios usr ON (usr.dpi = msg.dpi_emisor) " +
                   "WHERE idthread = $1 " +
                   "ORDER BY msg.mensaje_timestamp ASC",
-            values:[dpi]
+            values:[id]
         }
 
         const result = await client.query(query)

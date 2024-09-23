@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import {getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass} from './db.js'
+import {getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -548,5 +548,22 @@ app.get('/threads/getPosts', apiKeyAuth ,async (req, res) => {
   } catch (error) {
     console.error("Error while getting thread posts:", error)
     res.status(500).json({ error: 'Internal Server Error'})
+  }
+})
+
+app.get('/threads/:threadId/', apiKeyAuth ,async (req, res) => {
+  try {
+    const { threadId } = req.params
+    const comments = await getCommentsWithThreadID(threadId)
+
+    if (comments) {
+      res.status(200).json(comments)
+    } else {
+      res.status(400).json({ error: "Falied to retrieve comments with ID" });
+    }
+    
+  } catch (error) {
+    console.error("Error while getting thread comments:", error)
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 })
