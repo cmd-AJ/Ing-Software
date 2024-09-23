@@ -124,8 +124,7 @@ const Forgot_Page: React.FC = () => {
         setIsOpen(true)
         setmensaje('No ha elegido el metodo para reestablecer la contrasena')
       }else{
-        // const pasa = await sendmessages(dpi, methodos);
-        const pasa = true
+        const pasa = await sendmessages(dpi, methodos);
         if (pasa === true){
          setagreed(numero) 
         }
@@ -147,10 +146,8 @@ const Forgot_Page: React.FC = () => {
 
   const handleClickcheckdigit = async (numero: number, ) => {
 
-    // const data = await getcode(dpi, (inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4))
-
     if ( inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4 != ''){
-      const data = true
+      const data = await getcode(dpi, (inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4))
       if (data) {
         setagreed(numero)
       }
@@ -170,25 +167,13 @@ const Forgot_Page: React.FC = () => {
 
 
   const handleconfirm = async (path: string, ) => {
-    
-    console.log(dpi)
-    console.log(password)
-
-
     if(validateConfirmation){
       const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
       await cambiarcontra(x, dpi)
+      history.push('/home')
     }
 
-    // history.push('/home')
-
   };
-
-
-
-
-
-
 
   return (
     <>
