@@ -1,4 +1,4 @@
-import {IonHeader, IonPage, IonTitle, IonToolbar, IonFooter } from '@ionic/react'
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonToast } from '@ionic/react'
 import UserInput from '../components/Register/userInput'
 import LastnameInput from '../components/Register/lastnameInput'
 import PasswordInput from '../components/Register/passwordInput'
@@ -22,8 +22,8 @@ type User = {
     role: string
 }
 
-const Register: React.FC = () => {    
-    const [name , setName] = useState('')
+const Register: React.FC = () => {
+    const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')
     const [password, setPassword] = useState('')
     const [confirmation, setConfirmation] = useState('')
@@ -31,6 +31,7 @@ const Register: React.FC = () => {
     const [email, setEmail] = useState('')
     const [cell, setCell] = useState('')
     const [role, setRole] = useState('')
+    
 
     //Validation variables
     const [validateName, setValidateName] = useState(false)
@@ -41,8 +42,10 @@ const Register: React.FC = () => {
     const [validateEmail, setValidateEmail] = useState(false)
     const [validateTel, setValidateTel] = useState(false)
 
-    const User : User = {
-        name : name,
+
+
+    const User: User = {
+        name: name,
         lastname: lastname,
         password: password,
         email: email,
@@ -56,31 +59,31 @@ const Register: React.FC = () => {
             <div className='center'>
                 <div className='space'></div>
                 <div className='component'>
-                    <UserInput setName={setName} validateName={validateName} setValidateName={setValidateName}/>
+                    <UserInput setName={setName} validateName={validateName} setValidateName={setValidateName} />
                 </div>
                 <div className='component'>
-                    <LastnameInput setLastname={setLastname} validateLastname={validateLastname} setValidateLastname={setValidateLastname}/>
+                    <LastnameInput setLastname={setLastname} validateLastname={validateLastname} setValidateLastname={setValidateLastname} />
                 </div>
                 <div className='component'>
-                    <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
+                    <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword} />
                 </div>
                 <div className='component'>
-                    <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password}/>
+                    <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password} />
                 </div>
                 <div className='component'>
-                    <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
+                    <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi} />
                 </div>
                 <div className='component'>
-                    <EmailInput setEmail={setEmail} validatesEmail={validateEmail} setValidateEmail={setValidateEmail}/>
+                    <EmailInput setEmail={setEmail} validatesEmail={validateEmail} setValidateEmail={setValidateEmail} />
                 </div>
                 <div className='component'>
-                    <PhoneInput setTel={setCell} validateTel={validateTel} setValidateTel={setValidateTel}/>
+                    <PhoneInput setTel={setCell} validateTel={validateTel} setValidateTel={setValidateTel} />
                 </div>
                 <div className='component'>
                     <RoleInput setRole={setRole} />
                 </div>
-                <div className='component' style={{marginTop:'3vh'}}>
-                    <RegisterButton 
+                <div className='component' style={{ marginTop: '3vh' }}>
+                    <RegisterButton
                         validateName={validateName}
                         validateLastname={validateLastname}
                         validatePassword={validatePassword}
@@ -91,12 +94,14 @@ const Register: React.FC = () => {
                         user={User}
                     />
                 </div>
-                <div style={{margin:'10px', height:'0.5vh'}} className='space'></div>
+                <div style={{ margin: '10px', height: '0.5vh' }} className='space'></div>
                 <div className='component'>
                     <LinkLogin />
                 </div>
                 <div className='space'></div>
             </div>
+
+
 
         </>
     )

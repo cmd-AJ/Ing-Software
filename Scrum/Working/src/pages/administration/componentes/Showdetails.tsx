@@ -229,27 +229,4 @@ function Showsuspend_D() {
 export default Showsuspend_D;
 
 
-{/* <IonButton onClick={() => onDismiss(inputRef.current?.value, 'confirm')} strong={true}>
-Confirm
-</IonButton> */}
-
-
-{/* 
-        <IonPopover
-          style={{ textAlign: 'center' }}
-          isOpen={showPopoverconfirm}
-          onDidDismiss={() => setShowPopoverconfirm(false)}
-        >
-          <p>Estas seguro de extender la fecha?</p>
-          <IonGrid>
-            <IonRow>
-              <IonCol>
-              <IonButton onClick={() => handleCancel()}>No</IonButton>
-              </IonCol>
-              <IonCol>
-                <IonButton onClick={() => handleconfirm}>Si</IonButton>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonPopover> */}
 
