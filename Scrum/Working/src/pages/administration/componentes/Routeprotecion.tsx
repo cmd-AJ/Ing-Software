@@ -8,7 +8,7 @@ interface ProtectedRouteProps extends RouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ render, component: Component, ...rest }) => {
   const user = localStorage.getItem('User');
-
+  // const user = '86068068'
   return (
     <Route
       {...rest}
