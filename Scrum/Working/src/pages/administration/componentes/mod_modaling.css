@@ -1,0 +1,28 @@
+.descprio{
+    font-size: larger;
+}
+
+.showdetail_titulo{
+    font-family: sans-serif;
+    color: var(--white);
+    --background:
+
+}
+
+
+.iconodate{
+    
+    --background: var(--ion-color-tertiary)
+}
+
+
+.botonDesCuenta{
+    margin-left: 61%;
+    margin-top: 2%;
+    --background:var(--ion-color-tertiary)
+}
+
+.botonconfirm{
+    margin-left: 10%;
+    --background:var(--ion-color-tertiary)
+}

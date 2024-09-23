@@ -32,10 +32,17 @@ import "./pages/Login.css";
 import Dashboard_Worker from "./pages/Dashboard-Worker";
 import React from "react";
 import EmployerProfileView from "./pages/employer_view/EmployerProfileView";
+import Login_Admin from "./pages/administration/Login_Admin";
+import Mod_Dashboard from "./pages/administration/Mod_Dashboard";
+import Suspendido from "./pages/administration/Suspended_page";
+import Tickt_page from "./pages/administration/Tickets_page";
+import Forgot_Page from "./pages/administration/Fg_pass";
+import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
 
 setupIonicReact();
 
 const App: React.FC = () => (
+
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
@@ -48,14 +55,29 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
-        <Route exact path="/profile">
+        <Route exact path="/profile">  
           <Dashboard_Worker />
         </Route>
-        <Route exact path="/dashboard">
+        <Route exact path="/dashboard">  
           <Dashboard />
         </Route>
         <Route exact path="/help">
           <Help />
+        </Route>
+        <Route exact path="/admin">
+          <Login_Admin/>
+        </Route>
+        <Route exact path="/dash_admin">
+          <Mod_Dashboard/>
+        </Route>
+        <Route exact path="/mod_suspended">
+        <Suspendido/>
+        </Route>
+        <Route exact path="/mod_ticket">
+          <Tickt_page/>
+        </Route>
+        <Route exact path="/fg_pass">
+          <Forgot_Page/>
         </Route>
         <Route exact path="/">
           <About />
@@ -80,6 +102,9 @@ const App: React.FC = () => (
             exact
           />
         </Route>
+
+
+
 
         <Route exact path = "/employer-view">
             <MainLayout>
@@ -115,6 +140,33 @@ const App: React.FC = () => (
         <Route exact path="/">
           <Redirect to="/about" />
         </Route>
+
+        {/* NO BORRAR ESTO ES PARA REDIRECCIONAR HACIA EL ABOUT */}
+        {/* <ProtectedRoute
+        exact
+        path="/searched"
+        render={({ location }) => {
+          const dpi = new URLSearchParams(location.search).get("dpi");
+          const job = new URLSearchParams(location.search).get("job");
+          return (
+            <MainLayout>
+              <Searched dpi={dpi || ""} job={job || ""} />
+            </MainLayout>
+          );
+        }}
+      />
+      <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
+      <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+      <ProtectedRoute exact path="/help" component={Help} />
+      <ProtectedRoute exact path="/dash_admin" component={Mod_Dashboard} />
+      <ProtectedRoute exact path="/mod_suspended" component={Suspendido} />
+      <ProtectedRoute exact path="/mod_ticket" component={Tickt_page} />
+      <ProtectedRoute exact path="/fg_pass" component={Forgot_Page} />
+
+        <ProtectedRoute exact path="/employer-view" component={EmployerProfileView} />
+        <ProtectedRoute exact path="/empleado" component={Dashboard_Worker} />
+        <ProtectedRoute exact path="/chat" component={Chat} /> */}
+
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

@@ -1,0 +1,131 @@
+@import "../../theme/variables.css";
+
+.headerl{
+    background-color:var(--ion-color-primary);
+    height: 10vh;
+    font-size: 200%;
+    color: var(--white);
+}
+
+
+.footer{
+    background-color: var(--ion-color-primary);
+    height: 6vh;
+}
+
+
+.space{
+    height: 1vh;
+}
+
+/* iphone */
+@media (min-width:200px) and (max-width:425px){
+
+    .inputins{
+        margin-left: 20vw;
+        margin-top: 2vh;
+        width: 60vw;
+    }
+
+    
+    .space{
+        height: 4vh
+    }
+
+    .SABTETITLE{
+        font-size: 7.5vw;
+        text-align: center;
+        margin-bottom: 10%;
+    }
+
+    .buttoning{
+        width: 40vw;
+        height: 6vh;
+        margin-left: 30vw;
+        
+    }
+
+    ion-toast.custom-toast {
+        --background: #f4f4fa;
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+        --color: #4b4a50;
+    }
+}
+
+/* iphone */
+@media (min-width:425px) and (max-width:1000px){
+
+    .inputins{
+        margin-left: 30vw;
+        margin-top: 2vh;
+        width: 40vw;
+        font-size: 2.5vw;
+    }
+
+
+    .space{
+        height: 4vh
+    }
+
+    .SABTETITLE{
+        font-size: 3.5vw;
+        text-align: center;
+        margin-bottom: 4%;
+    }
+
+    .buttoning{
+        width: 20vw;
+        height: 6vh;
+        margin-left: 40vw;
+        font-size: 2vw;
+        
+    }
+
+    ion-toast.custom-toast {
+        --background: #f4f4fa;
+        --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+        --color: #4b4a50;
+    }
+    
+}
+
+
+@media (min-width:1000px){
+
+    .inputins{
+        margin-left: 36vw;
+        margin-top: 2vh;
+        width: 28vw;
+        height: 8vh;
+        font-size: 1.5vw;
+    }
+
+    .SABTETITLE{
+        font-size: 2.5vw;
+        text-align: center;
+        margin-bottom: 3%;
+    }
+
+
+
+    .buttoning{
+        width: 18vw;
+        height: 8vh;
+        margin-left: 41vw;
+        font-size: 1.5vw;
+        
+    }
+
+    ion-toast.custom-toast {
+        --background: #f4f4fa;
+        --box-shadow: 3px 3px 10px 0 rgba(255, 0, 0, 0.2);
+        --color: #4b4a50;
+        font-size: larger;
+    }   
+
+    
+    
+}
+
+
+

@@ -26,14 +26,14 @@ const ContratDisplay: React.FC<ContainerProps> = ({contrat}) => {
         if (contrat.calificacion === null) {
             setRatingNull(false)
         }
-    })
+    },[])
 
     return (
         <>
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
                 <TextND text={contrat.fecha} size="small" hex="#000"/>
                 <TextND text="-" size="small" hex="#000"/>
-                <TextND text={contrat.fechafin === null ? 'Actualidad' : contrat.fechafin } size="small" hex="#000"/>
+                <TextND text={contrat.fechafin === null ? 'En progreso' : contrat.fechafin } size="small" hex="#000"/>
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginLeft: '20px', marginRight: '20px'}}>
                 <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>

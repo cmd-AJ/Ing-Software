@@ -10,6 +10,7 @@
 
 .change-button {
     width: 60px;
+    height: 50px;
 }
 
 .change-button:hover {
@@ -21,7 +22,7 @@
 }
 
 .calendar-month {
-    min-height: 70vh; /* Ajusta esto según tu preferencia */
+    max-height: 70vh; /* Ajusta esto según tu preferencia */
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 300px 300px 300px 300px 300px 300px;
@@ -33,6 +34,11 @@
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 100%;
     border-radius: 15px 15px 0 0;
+}
+
+.date-changer-display {
+    display: flex;
+    gap: 5px;
 }
 
 .day-item {
@@ -52,3 +58,18 @@
     display: flex;
     flex-direction: column;
 }
+
+@media (max-width: 660px){
+    .change-button {
+        height: 35px;
+        width: 30px;
+    }
+
+    .daynumbers-display {
+        height: 35px;
+        width: 100px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+

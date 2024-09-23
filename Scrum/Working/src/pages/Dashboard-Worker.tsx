@@ -15,6 +15,7 @@ import BtnDisplayment from "../components/Btn/BtnDisplayment"
 import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 import { useLocation } from "react-router";
+import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
 
 type User = {
   nombre : string;
@@ -84,7 +85,6 @@ const Dashboard_Worker: React.FC = () => {
   }, [owner]);
 
   useEffect(()=> {
-    console.log(myUser.role);
       if (myUser.role === 'Empleador'){
         setUserRole(false)
       }
@@ -114,16 +114,37 @@ const Dashboard_Worker: React.FC = () => {
     };
   }, [headerCardRef, contentCRef]);
 
+  const items = [
+    {
+      profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
+      name: 'Mario Bros',
+      rating: '★★★★☆',
+      service: 'Arreglar Lavamanos',
+      date: 'Martes, 23 de septiembre, 2024',
+      price: 'Q34.00',
+    },
+    {
+      profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
+      name: 'Luigi Bros',
+      rating: '★★★★★',
+      service: 'Arreglar Tuberías',
+      date: 'Miércoles, 24 de septiembre, 2024',
+      price: 'Q50.00',
+    },
+    // Agrega más elementos si es necesario
+  ];
+
   return (
     <IonPage>
       <IonContent>
+        <PopUpHiringsContainer items={items} />
         <div className="contentC" ref={contentCRef}>
-          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal}/>}/>}
+          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           <div className="header-card" ref={headerCardRef}>
-            <IonImg
+            <img
               src={myUser.banner}
-              className="feed-img"></IonImg>
+              className="feed-img"></img>
               <div className="lower-displayment">
                 <div>
                   <CircleImg reference={myUser.imagen}/>
@@ -164,7 +185,6 @@ const Dashboard_Worker: React.FC = () => {
               </div>
               <HorizontalDivider/>
               <UserDataDisplay role={myUser.role} dpi={myUser.dpi}/>
-            {/* <ProfileDataDisplay user={myUser}/> */}
           </div>
         </div>
       </IonContent>

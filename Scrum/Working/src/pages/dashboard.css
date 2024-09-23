@@ -1,13 +1,12 @@
 .background {
-    background-color: #F3F4F5;
+    background-color: #FFF;
     opacity: 0.9;
     background-size: 52px 52px;
     background-position: 0 0, 26px 26px;
     height: calc(100% - 15vh); /* Ensure it takes the full height of the viewport */
     display: flex;
     flex-direction: column;
-    overflow-y: hidden; /* Hide vertical scrollbar */
-    margin: 0 20px; /* Add margin on the left and right sides */
+    padding: 0 20px; /* Add margin on the left and right sides */
 
     /* Hide the scrollbar */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
@@ -21,6 +20,20 @@
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 33.33% 33.33% 33.33%;
+}
+
+.header-top-calendar {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+}
+
+.header-bottom-calendar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
 }
 
 .smaller-calendar-header {

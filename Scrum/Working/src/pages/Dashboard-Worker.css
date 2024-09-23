@@ -4,6 +4,10 @@
     --size-default: 200px;
 }
 
+.scroll-y {
+    overflow-y: none;
+}
+
 .contentC {
     background-color: var(--ion-color-primary); 
     padding-top: 40px;
@@ -12,7 +16,7 @@
     max-height: 1420px;
     min-height: 100vh;
     height: auto;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .header-card {
@@ -22,8 +26,8 @@
     max-height: 1225px;
     width: 100%;
     background-color: white;
-    border-radius: 30px;
-    overflow: hidden;
+    border-radius: 15px;
+    overflow: unset;
     flex-direction: column;
 }
 
@@ -31,6 +35,7 @@
     height: 180px; 
     width: 100%;
     object-fit: fill;
+    border-radius: 15px 15px 0 0;
 }
 
 .lower-displayment {

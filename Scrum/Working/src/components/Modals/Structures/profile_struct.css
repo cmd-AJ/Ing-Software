@@ -1,0 +1,30 @@
+#user-img {
+    position: absolute;
+    top: 7%;
+    left: 4%;
+    z-index: 3;
+}
+
+#input-display {
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+#single-input-display {
+    display: flex;
+}
+
+#buttons-display {
+    gap: 5px;
+    padding: 20px;
+    height: 25%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#button-up {
+    margin-bottom: 5%;
+}

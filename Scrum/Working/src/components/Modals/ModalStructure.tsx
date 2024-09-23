@@ -1,7 +1,4 @@
-import React from 'react';
-import BtnCloseModal from '../Btn/BtnCloseModal';
-import HorizontalDivider from '../Dividers/HorizontalDivider';
-import TextND from '../Txt/TextND';
+import React, { useEffect } from 'react';
 import './ModalStyles.css'
 
 interface ContainerProps {
@@ -10,14 +7,29 @@ interface ContainerProps {
 }
 
 const ModalStructure: React.FC<ContainerProps> = ({setModal, content}) => {
+
+    useEffect(()=>{
+        const contentcElement = document.querySelector('.contentC') as HTMLElement
+
+        if (contentcElement) {
+            contentcElement.style.minHeight = '0px'
+            contentcElement.style.maxHeight = '100%';
+        }
+
+        return () => {
+            if (contentcElement) {
+                contentcElement.style.minHeight = '100vh'
+                contentcElement.style.maxHeight = '1420px' // Resetea el max-width si es necesario
+            }
+          };
+    },[])
+
     return (
         <>
-        <div onClick={() => setModal(false)} className="modal-background">
-        </div>
+            <div onClick={() => setModal(false)} className="modal-background">
+            </div>
             <div className='modal-position'>
-                <div className='modal-container'>
-                    {content}
-                </div>
+                {content}
             </div>
         </>
     )

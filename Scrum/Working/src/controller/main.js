@@ -1,9 +1,11 @@
-import CryptoJS from 'crypto-js';
+
 import express from 'express'
 import cors from 'cors'
-import apiKeyAuth from './auth.js'
-import { getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings} from './db.js'
+import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
+import {getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
+import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
+import {send_email_forfg, send_fg_password} from './fg_function.js'
 
 const app = express()
 const port = 3000
@@ -40,6 +42,71 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+// apiKeyAuth,
+app.get('/login_admin/:dpi/:password', apiKeyAuth ,async (req, res) => {
+  try {
+    const { dpi, password } = req.params
+    const users = await Admin_Exist(dpi, password)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.get('/reports', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getreports()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.get('/banprev', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getbanusersprev()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.get('/banusers', adminapiKeyAuth , async (req, res) => {
+  try {
+    const users = await getbanusers()
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.put('/extendban' , adminapiKeyAuth ,async (req, res) => {
+  const { DPI, fecha } = req.body; 
+  try {
+    const users = await extendban(DPI, fecha)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+app.put('/unbanuser', adminapiKeyAuth , async (req, res) => {
+  const { DPI } = req.body; 
+  try {
+    const users = await unban(DPI)
+    res.status(200).json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+
+
+
 
 app.post('/LoginUser', apiKeyAuth, async (req, res) => {
   try {
@@ -191,6 +258,31 @@ app.get('/trustNetwork/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
+app.post('/contacts/createChat', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi1, dpi2 } = req.body;
+
+    // Validación de entrada
+    if (!dpi1 || !dpi2) {
+      return res.status(400).json({ error: 'dpi1 and dpi2 are required' });
+    }
+
+    // Intentar crear o recuperar el chat entre los usuarios
+    const chat = await createNewChat(dpi1, dpi2);
+
+    if (chat) {
+      return res.status(200).json({ success: "Successfully created new chat" });
+    } else {
+      return res.status(400).json({ error: "Chat creation failed or already exists" });
+    }
+
+  } catch (error) {
+    console.error('Error creating chat:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
@@ -202,6 +294,92 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 })
+
+
+
+
+app.post('/sendforgot_phone' ,apiKeyAuth ,async (req, res) => {
+  try {
+    const { dpi } = req.body;
+    const codigo = (Math.random() + 1).toString(36).substring(8, 12);
+    const changepas = await updataepasscode_phone(codigo, dpi)
+    const telefono = await getphone(dpi)
+    const new_phone = (('+502' + telefono[0].telefono).replace('-', '')).toString()
+
+
+    if(changepas){
+      const forgotPhone = await send_fg_password(new_phone, codigo)
+      res.status(200).json('response:message sended');
+    }else{
+      res.status(400).json('response:Unable to change code');
+    }
+
+  } catch (error) {
+    console.error('Error trying to send a code to phone:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+app.get('/getcode/:dpi', apiKeyAuth ,async (req, res) => {
+  try {
+    const { dpi } = req.params
+    const user = await getpasscode(dpi)
+    if (user) {
+      res.status(200).send(user)
+    } else {
+      res.status(404).json({ error: 'user not found' })
+    }
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.put('/codechange', apiKeyAuth ,async (req, res) => {
+  const [password,dpi] = [req.body.password, req.body.dpi]
+  if (!password || !dpi) {
+    res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
+  } else {
+    try {
+      const resp = await changepass(password, dpi)
+      res.send('Updated succesfully')
+    } catch (error) {
+      throw error
+    }
+  }
+})
+
+
+
+app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
+  try {
+    const { nombre } = req.body;
+    const codigo = (Math.random() + 1).toString(36).substring(8, 12);
+
+    const changepas = await updataepasscode_phone(codigo, nombre)
+
+    const email = await getmail(nombre)
+
+    if(changepas){
+      const forgotmail = await send_email_forfg(email[0].email,codigo, nombre)
+      res.status(200).json('response:message sended');
+    }else{
+      res.status(400).json('response:Unable to change code');
+    }
+
+    
+    res.status(200).json('response:message sended');
+    
+
+  } catch (error) {
+    console.error('Error getting chat messages:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
+
+
+
 
 
 app.put('/confitrab', apiKeyAuth ,async (req, res) => {
@@ -286,7 +464,7 @@ app.post('/contacts/message', apiKeyAuth ,async (req, res) => {
     res.status(500).json({error: 'Internal Server Error' })
   }
 })
-
+// Endpoint to getChatID
 app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
@@ -301,8 +479,8 @@ app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
 
 app.post('/contacts/hire', apiKeyAuth ,async (req, res) => {
   try {
-    const { descripcion, dpiempleador, dpiempleado, timeStampCita } = req.body;
-     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita)
+    const { descripcion, dpiempleador, dpiempleado, timeStampCita, pago } = req.body;
+     await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago)
      res.status(200).json({ Success: 'Contrato realizado'})
   } catch (error) {
     console.error('Error while hiring person:', error)
@@ -328,6 +506,47 @@ app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
      res.status(200).json({ Success: 'Trusted person was added'})
   } catch (error) {
     console.error('Trusted person could not be added:', error)
+    res.status(500).json({ error: 'Internal Server Error'})
+  }
+})
+
+
+app.post('/threads/createPost', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpiUser, postText, postImage } = req.body;
+
+    // Validación de entrada
+    if (!dpiUser || !postText ) {
+      return res.status(400).json({ error: 'Failed to creat post, empty values are not allowed' });
+    }
+
+    // Creating new threadpost
+    const post = await createThreadPost(dpiUser, postText, postImage);
+
+    if (post) {
+      return res.status(200).json({ success: "Successfully created new post" });
+    } else {
+      return res.status(400).json({ error: "Falied to create post" });
+    }
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/threads/getPosts', apiKeyAuth ,async (req, res) => {
+  try {
+    const posts = await getThreadPosts()
+
+    if (posts) {
+      res.status(200).json(posts)
+    } else {
+      res.status(400).json({ error: "Falied to retrieve posts" });
+    }
+    
+  } catch (error) {
+    console.error("Error while getting thread posts:", error)
     res.status(500).json({ error: 'Internal Server Error'})
   }
 })

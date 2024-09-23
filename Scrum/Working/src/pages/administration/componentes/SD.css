@@ -1,0 +1,38 @@
+
+@import "../../../theme/variables.css";
+
+.usermodal{
+    margin-left: 10vw;
+    width: 80vw;
+    height: 12vh;
+    background-color: var(--ion-color-tertiary);
+    border-bottom: 1px solid black;
+
+}
+
+/* contenido dentro */
+.separacion{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 12%;
+    margin-right: 10%;
+    font-size: 2vw;
+}
+
+.mod_grid{
+    margin-top: 4%;
+    border-bottom: 2px solid black;
+    margin-left: 6%;
+    margin-right: 6%;
+    text-align: center;
+    height: 10vh;
+    font-size: 2.4vw;
+}
+
+.mod-modalToolbar{
+    --background: var(--ion-color-tertiary)
+}
+
+.closingicono{
+    font-size: 2vw;
+}

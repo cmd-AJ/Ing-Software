@@ -2,7 +2,7 @@ import TextND from '../Txt/TextND'
 import './calendar.css'
 
 interface ContainerProps {
-    monthMatrix: number[][]
+    monthMatrix: Date[][]
 }
 
 const MonthCalendar : React.FC<ContainerProps> = ({monthMatrix}) => {
@@ -37,7 +37,7 @@ const MonthCalendar : React.FC<ContainerProps> = ({monthMatrix}) => {
                     monthMatrix.flat().map((day, index) => (
                         <div key={index} className='grid-item'>
                             <div style={{display: "flex", width: "100%", justifyContent: 'flex-end', padding: "10px"}}>
-                                {day > 0 ? day : null}
+                                {day.getDate() > 0 ? day.getDate() : null}
                             </div>
                         </div>
                     ))

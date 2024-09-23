@@ -1,7 +1,60 @@
-import { text } from 'express';
+import { query, text } from 'express';
 import getClient from './RelationalDatabase.js';
 
 const client = getClient();
+
+export async function getThreadPosts(){
+    try {
+        const query = {
+            text: "SELECT thr.idthreads, usr.nombre || ' ' || usr.apellidos AS usuario, usr.dpi, usr.imagen AS img_usuario, thr.descripcion, post_timestamp AS posttime, thr.image AS imagen " +
+                  "FROM threads thr " +
+                  "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario)"
+        }
+
+        const result = await client.query(query)
+
+        return result.rows
+
+    } catch (error) {
+        console.error('Error while gettin thread posts')
+    }
+}
+
+export async function createThreadPost(usrDpi, postDescription, image) {
+
+    try {
+        const query = {
+            text:"INSERT INTO threads(dpi_usuario, descripcion, post_timestamp, image) VALUES ($1, $2, CURRENT_TIMESTAMP, $3)",
+            values:[usrDpi, postDescription, image],
+        }
+
+        const result = await client.query(query)
+
+        return result
+
+    } catch (error) {
+        console.error('Error while creating thread Post')
+    }
+    
+}
+
+export async function createNewChat(dpi1, dpi2) {
+
+    try {
+        const query = {
+            text:"INSERT INTO chats(dpireceptor, dpiemisor) VALUES ($1, $2)", 
+            values:[dpi1, dpi2]
+        }
+
+        const result = await client.query(query)
+
+        return result;
+    } catch (error) {
+        console.error('Error while creating chat:', error);
+        throw error;
+    }
+    
+}
 
 export async function getUsers() {
     try {
@@ -229,7 +282,7 @@ export async function gettrabajoSABTE(dpi) {
 //Trabajadores en SABTE empleador
 export async function getTrabajoSABTEemple(dpi) { 
 	try {
-		const result = await client.query(`select u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+		const result = await client.query(`select c.titulo , u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo , u.imagen  , fecha, fechafin, r.calificacion from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpitrabajador 
             join trabajador t on t.dpi = c.dpitrabajador
@@ -277,11 +330,11 @@ export async function insertChatMessage(contenido, id_chat, dpi) {
     }
 }
 
-export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita) {
+export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago) {
     try {
         const query = {
-            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)",
-            values: [descripcion, dpiempleador, dpiempleado, timeStampCita]
+            text: "INSERT INTO trabajodisponible(descripcion, dpiempleador, dpiempleado, timeStampCita, timestampcontratacion, pago) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, $5)",
+            values: [descripcion, dpiempleador, dpiempleado, timeStampCita, pago]
         }
         await client.query(query)
 
@@ -294,7 +347,7 @@ export async function insertHiring(descripcion, dpiempleador, dpiempleado, timeS
 export async function getCurrentHirings(dpi) {
     try {
         const query = {
-            text: "SELECT td.dpiempleado, u.nombre || ' ' ||u.apellidos AS nombre, u.telefono, u.imagen, td.descripcion, td.timestampcita " +
+            text: "SELECT td.dpiempleado, u.nombre || ' ' ||u.apellidos AS trabajador, u.telefono, u.imagen AS foto, td.descripcion, td.timestampcita, td.pago AS precio " +
                   "FROM trabajodisponible td " +
                   "JOIN usuarios u ON (td.dpiempleado = u.dpi) " +
                   "WHERE td.dpiempleador = $1 ",
@@ -308,3 +361,87 @@ export async function getCurrentHirings(dpi) {
         throw error
     }
 }
+
+
+export async function updataepasscode_phone(code, dpi) {
+    try {
+        const query = {
+            text: "update usuarios set code = $1 where  dpi = $2",
+            values: [code, dpi]
+        }
+
+        const result = await client.query(query)
+        return true
+    } catch (error) {
+        console.error("Error al actualizar el codigo con el dpi")
+        throw error
+    }
+}
+
+
+export async function getmail(dpi) {
+    try {
+        const query = {
+            text: "select email from usuarios where dpi = $1 limit 1",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+export async function getphone(dpi) {
+    try {
+        const query = {
+            text: "select telefono from usuarios where dpi = $1 limit 1",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+export async function getpasscode(dpi) {
+    try {
+        const query = {
+            text: "select code from usuarios where dpi = $1",
+            values: [dpi]
+        }
+
+        const result = await client.query(query)
+        
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+// verificar el codigo
+export async function changepass(password ,dpi) {
+    try {
+        const query = {
+            text: "update usuarios set contrasenia = $1 where  dpi = $2",
+            values: [password, dpi]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+

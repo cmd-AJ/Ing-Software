@@ -1,6 +1,16 @@
 import { describe, it, expect } from 'vitest'
-import { getChatIdWithDPI, getChatMessages, getHirings } from '../../src/controller/ChatController';
+import { getChatIdWithDPI, getChatMessages, getHirings, chatBetweenUsersExist } from '../../src/controller/ChatController';
 import { getLoginUser, conseguirtrabajo, getWorkersByJob, userExists } from '../../src/controller/UserController'
+import { getThreadPosts } from '../../src/controller/ThreadController'
+
+describe('Obtener los posts', () => {
+  it('deberia de existir al menos un post', async () => {
+    const user = await getThreadPosts();
+    const firstUser = user[0]
+    expect(firstUser).toBeDefined(); // Verifica que se haya obtenido un usuario
+  });
+
+});
 
 describe('Conseguir a un usuario', () => {
   it('Debería iniciar sesión correctamente con credenciales válidas', async () => {
@@ -45,10 +55,16 @@ describe('Quiero buscar un trabajo', () => {
     const data = (await conseguirtrabajo('3833 86608 0102'))
     expect((data[0].nombre_trabajo)).toBe(null) //no tiene trabajo
   });
-
-  
 });
 
+describe('Comprabar si chat eentre 2 usuarios existe', () => {
+  it('Al ingresar 2 dpi que tienen un chat juntos', async () => {
+
+    const chatExists = await chatBetweenUsersExist("3810 35859 0101", "3834 49898 0101")
+    expect(chatExists).toBe(true);
+  });
+  
+});
 
 describe('Quiero buscar a un contacto y sus mensajes', () => {
   it('Soy empleador Ricardo Tapia Y necesito hablar a Jose', async () => {
@@ -64,6 +80,12 @@ describe('Quiero buscar a un contacto y sus mensajes', () => {
   });
 });
 
+describe('Quiero saber que contrataciones he realizado', () => {
+    it('utilizando mi dpi', async () => {
+    const data = (await getHirings('3834 49898 0101'))
+    expect(Array.isArray(data)).toBe(true) //no tiene trabajo
+  });
+});
 
 describe('getWorkersByJob', () => {
   it('Deberia de regresar un objecto con los atributos correctos', async () => {
