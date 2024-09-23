@@ -9,7 +9,7 @@ import {
   IonText,
 } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { personOutline, settingsOutline } from 'ionicons/icons';
+import { helpCircleOutline, personOutline, settingsOutline } from 'ionicons/icons';
 import SearchBar from '../Search/SearchBar';
 import './Navigation.css';
 import ModalWithoutBack from '../Modals/ModalWithoutBack';
@@ -73,7 +73,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
               </IonCol>
 
               <IonCol className="ion-text-center" onClick={() => history.push('/help')}>
-                <IonIcon icon={settingsOutline} className="navbar-icon" />
+                <IonIcon icon={helpCircleOutline} className="navbar-icon" />
               </IonCol>
             </IonRow>
           </IonGrid>
