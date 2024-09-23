@@ -3,6 +3,26 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function getCommentsWithThreadID(id) {
+    try {
+        const query = {
+            text: "SELECT msg.idmensaje, msg.idthread, msg.contenido, msg.mensaje_timestamp, msg.dpi_emisor, usr.nombre || ' ' || usr.apellidos AS usuario, usr.imagen AS img_usuario " +
+                  "FROM mensajethreads msg  " +
+                  "JOIN usuarios usr ON (usr.dpi = msg.dpi_emisor) " +
+                  "WHERE idthread = $1 " +
+                  "ORDER BY msg.mensaje_timestamp ASC",
+            values:[dpi]
+        }
+
+        const result = await client.query(query)
+
+        return result.rows
+
+    } catch (error) {
+        console.error('Error while getting thread comments')
+    }
+}
+
 export async function getThreadPosts(){
     try {
         const query = {
@@ -13,7 +33,7 @@ export async function getThreadPosts(){
 
         const result = await client.query(query)
 
-        return result.rows
+        return result
 
     } catch (error) {
         console.error('Error while gettin thread posts')
