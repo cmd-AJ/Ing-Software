@@ -55,6 +55,9 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
+        <Route exact path="/">
+          <Redirect to="/about" />
+        </Route>
         {/* Protected Routes */}
         <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
         <ProtectedRoute exact path="/dashboard" component={Dashboard} />
