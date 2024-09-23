@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { IonIcon } from "@ionic/react";
+import { send } from "ionicons/icons";
 import './CommentBox.css';
 
 interface UserProps {
@@ -15,28 +17,31 @@ const CommentBox: React.FC<UserProps> = ({ usuario }) => {
     }
 
     console.log(`Comentario de ${usuario}: ${comment}`);
-    setComment("");
+    setComment(""); // Clear the input after posting
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handlePost();
     }
   };
 
   return (
     <div className="comment-box">
-      <div className="comment-user-profile">
-      </div>
+      <div className="comment-user-profile"></div>
       <div className="comment-input">
-        <input
-          type="text"
+        <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Escribe un comentario..."
+          maxLength={200} // Limit the input to 200 characters
+          rows={1} // Start with a single row
         />
-        <button onClick={handlePost}>Publicar</button>
+        <button onClick={handlePost} className="send-button">
+          <IonIcon icon={send} />
+        </button>
       </div>
     </div>
   );
