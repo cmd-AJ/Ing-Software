@@ -5,7 +5,7 @@ import ModalBtnN from './ModalsBtnN'
 import { chatbubbleEllipses, pencilOutline, personAddOutline } from 'ionicons/icons'
 import BtnNav from './BtnNav'
 import BtnAction from './BtnAction'
-import { getTrustedPeople } from '../../controller/UserController'
+import { addTrustedPeople, getTrustedPeople } from '../../controller/UserController'
 // import BtnNav from './BtnNav'
 
 type NotUser = {
@@ -46,21 +46,31 @@ const BtnDisplayment: React.FC<ContainerProps> = (
     },[])
 
     const handleTrust = async () => {
+        
         const trustList = await getTrustedPeople("3833 86608 0102")
-
+        
         const viewUser = localStorage.getItem('notUser')
-
-        if (viewUser != null) {
+        const viewOwnUser = localStorage.getItem('User')
+        
+        if (viewUser != null && viewOwnUser != null) {
             const parsedUser: NotUser = JSON.parse(viewUser)
-            const parsedName = parsedUser.nombre.split(" ")[0] + parsedUser.apellidos.split(" ")[0]
+            const parsedName = parsedUser.nombre.split(" ")[0] + " " + parsedUser.apellidos.split(" ")[0]
             
+            const parsedOwnUser = JSON.parse(viewOwnUser)
+            debugger
             
-            trustList.map(trustedPerson => {
-                const name = trustedPerson.nombre + '' + trustedPerson.apellidos
-                if (name === name) {
-
-                }
-            })
+            if (trustList.length > 0) {
+                trustList.map(trustedPerson => {
+                    const name = trustedPerson.nombre + " " + trustedPerson.apellido
+                    debugger
+                    if (name !== parsedName) {
+                        addTrustedPeople( parsedOwnUser.dpi ,parsedUser.dpi)
+                    }
+                })
+            } else {
+                console.log("Hola");
+                addTrustedPeople( parsedOwnUser.dpi ,parsedUser.dpi)
+            }
         }
 
 
