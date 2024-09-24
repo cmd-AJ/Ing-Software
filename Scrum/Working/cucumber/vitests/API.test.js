@@ -1,13 +1,22 @@
 import { describe, it, expect } from 'vitest'
 import { getChatIdWithDPI, getChatMessages, getHirings, chatBetweenUsersExist } from '../../src/controller/ChatController';
 import { getLoginUser, conseguirtrabajo, getWorkersByJob, userExists } from '../../src/controller/UserController'
-import { getThreadPosts } from '../../src/controller/ThreadController'
+import { getThreadComments, getThreadPosts } from '../../src/controller/ThreadController'
 
 describe('Obtener los posts', () => {
   it('deberia de existir al menos un post', async () => {
     const user = await getThreadPosts();
     const firstUser = user[0]
     expect(firstUser).toBeDefined(); // Verifica que se haya obtenido un usuario
+  });
+
+});
+
+describe('Obtener los Comentarios', () => {
+  it('deberia de existir al menos un comentario para el post con ID 6', async () => {
+    const comment = await getThreadComments(6);
+    const firstComment = comment[0]
+    expect(firstComment).toBeDefined(); // Verifica que se haya obtenido un comentario
   });
 
 });

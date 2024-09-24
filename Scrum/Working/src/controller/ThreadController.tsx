@@ -80,3 +80,26 @@ export async function insertCommentToThread(threadIdForComment: string, comment:
         throw error; 
     }
 }
+
+export async function getThreadComments(threadID: string) {
+
+    try {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/threads/${threadID}`, {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to get all thread comments');
+        }
+
+        return response.json()
+
+    } catch (error) {
+        console.error("Error while gettin thread comments:", error);
+        throw error; 
+    }
+}
