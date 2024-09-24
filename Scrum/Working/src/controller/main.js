@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import {getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha} from './db.js'
+import {insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -604,3 +604,27 @@ app.get('/getuserreport/:idreporte/:dpi/:fechai/:fechaf', apiKeyAuth ,async (req
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+app.post('/threads/insertComment', apiKeyAuth, async (req, res) => {
+  try {
+    const { thread_id, content, sender_dpi } = req.body;
+
+    // Validación de entrada
+    if (!thread_id || !content || !sender_dpi) {
+      return res.status(400).json({ error: 'Failed to insert comment to thread, empty values are not allowed' });
+    }
+
+    // Creating new threadpost
+    const response = await insertCommentWithId(dpiUser, postText, postImage);
+
+    if (response) {
+      return res.status(200).json({ success: "Successfully created new thread comment" });
+    } else {
+      return res.status(400).json({ error: "Falied to create thread comment" });
+    }
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
