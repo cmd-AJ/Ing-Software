@@ -12,13 +12,24 @@
   background-color: #a5adb8;
 }
 
-.post-user-profile{
-  border-radius: 50px;
+.post-user-profile {
+  border-radius: 50%; /* Para hacer el contenedor circular */
   background-color: rgb(162, 218, 235);
   width: 40px;
   height: 40px;
   margin-right: 15px;
+  overflow: hidden; /* Asegura que la imagen no sobresalga del contenedor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.post-user-profile img {
+  width: 100%; /* La imagen ocupará todo el ancho del contenedor */
+  height: 100%; /* La imagen ocupará todo el alto del contenedor */
+  object-fit: cover; /* Esto se asegura de que la imagen se recorte correctamente en caso de no ser cuadrada */
+  border-radius: 50%; /* Hace que la imagen también sea circular */
+} 
 
 .user-info-container{
   display: flex;

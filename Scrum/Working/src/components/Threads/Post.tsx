@@ -8,13 +8,14 @@ interface PostProps {
   usuario: string;
   descripcion: string;
   posttime: string;
-  imagen: string; // base64 or URL
+  imagen: string; // base64 or URL4
+  img_usuario: string;
 }
 
-const Post: React.FC<PostProps> = ({ idthread, usuario, descripcion, posttime, imagen }) => {
+const Post: React.FC<PostProps> = ({ idthread, usuario, descripcion, posttime, imagen, img_usuario }) => {
   return (
     <div className="post-card">
-      <PostByCard usuario={usuario} posttime={posttime} />
+      <PostByCard usuario={usuario} posttime={posttime} img_usuario={img_usuario}/>
       <div className="post-content">
         <p className="post-description">{ descripcion}</p>
       </div>
