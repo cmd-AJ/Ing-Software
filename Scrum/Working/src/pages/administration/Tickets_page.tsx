@@ -27,22 +27,40 @@ import "../../theme/variables.css";
 import Ticket from "./componentes/Ticket";
 import Topheader from "./componentes/Topheader";
 import { calendar } from "ionicons/icons";
+import { slitdate } from "./componentes/adminfunctions";
+import { useMaskito } from "@maskito/react";
 // Rediseno crear un nuevo componente donde menos de 600px se ponga un menu
 
 // TICKET PARA VER LOS REPORTES. AHI PODES BANEAR A LA PERSONA
 const Tickt_page: React.FC = () => {
 
   const [showPopover, setShowPopover] = useState(false);
-  const [changedate, setchangedate] = useState(false);
+  const [showPopover2, setShowPopover2] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string | null>('DD-MM-YYYY');
+  const [selectedDatefinal, setSelectedDatefinal] = useState<string | null>('DD-MM-YYYY');
+
+    const dpiMask = useMaskito({
+        options: {
+            mask: [...Array(4).fill(/\d/),' ',...Array(5).fill(/\d/),' ',...Array(4).fill(/\d/)]
+        }
+    })
 
 
   const handleDateChange = (e: CustomEvent) => {
     
     const date = e.detail.value;
-    setSelectedDate(date);
+    setSelectedDate(slitdate(date));
+
     setShowPopover(false);  // Close the popover after selecting the date
-    setchangedate(true);
+
+  };
+
+  const handleDateChangefinal = (e: CustomEvent) => {
+    
+    const date = e.detail.value;
+    setSelectedDatefinal(slitdate(date));
+
+    setShowPopover2(false);  // Close the popover after selecting the date
 
   };
 
@@ -70,14 +88,21 @@ const Tickt_page: React.FC = () => {
         <IonTitle className="titulotickets">Tickets</IonTitle>
         <IonGrid>
           <IonRow>
-            <IonCol><IonItem>DPI Reportado</IonItem></IonCol>
+            <IonCol><IonItem >DPI Reportado</IonItem></IonCol>
             <IonCol><IonItem>No. Ticket</IonItem></IonCol>
           </IonRow>
 
           <IonRow>
             <IonCol>
           <IonItem>
-          <IonInput placeholder="XXXX XXXXX XXXX"></IonInput>
+          <IonInput 
+          ref={async (dpiRef) => {
+            if (dpiRef) {
+                const input = await dpiRef.getInputElement()
+                dpiMask(input)
+            }
+        }}
+          placeholder="XXXX XXXXX XXXX"></IonInput>
           </IonItem>
           </IonCol>
           <IonCol>
@@ -96,7 +121,7 @@ const Tickt_page: React.FC = () => {
             </IonItem> 
           </IonCol>
           <IonCol>Fecha Rango Final <br></br>
-          <IonItem  onClick={() => setShowPopover(true)}>{selectedDate} 
+          <IonItem  onClick={() => setShowPopover2(true)}>{selectedDatefinal} 
             <IonButton slot="end" >
               <IonIcon icon={calendar}></IonIcon>
             </IonButton>
@@ -115,6 +140,13 @@ const Tickt_page: React.FC = () => {
           isOpen={showPopover}
           onDidDismiss={() => setShowPopover(false)}
           > <IonDatetime presentation="date" onIonChange={handleDateChange}></IonDatetime>
+        </IonPopover>  
+
+
+        <IonPopover
+          isOpen={showPopover2}
+          onDidDismiss={() => setShowPopover(false)}
+          > <IonDatetime presentation="date" onIonChange={handleDateChangefinal}></IonDatetime>
         </IonPopover>  
 
 

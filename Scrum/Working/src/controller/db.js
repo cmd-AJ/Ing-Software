@@ -3,6 +3,41 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function insertCommentWithId(id, contenido, dpi_emisor) {
+    try {
+        const query = {
+            text: "INSERT INTO mensajethreads(idthread, contenido, dpi_emisor, mensaje_timestamp) VALUES($1, $2, $3, CURRENT_TIMESTAMP)",
+            values:[id, contenido, dpi_emisor]
+        }
+
+        const result = await client.query(query)
+        return result
+
+    } catch (error) {
+        console.error('Error while inserting thread comments')
+    }
+    
+}
+export async function getCommentsWithThreadID(id) {
+    try {
+        const query = {
+            text: "SELECT msg.idmensaje, msg.idthread, msg.contenido, msg.mensaje_timestamp, msg.dpi_emisor, usr.nombre || ' ' || usr.apellidos AS usuario, usr.imagen AS img_usuario " +
+                  "FROM mensajethreads msg  " +
+                  "JOIN usuarios usr ON (usr.dpi = msg.dpi_emisor) " +
+                  "WHERE idthread = $1 " +
+                  "ORDER BY msg.mensaje_timestamp ASC",
+            values:[id]
+        }
+
+        const result = await client.query(query)
+
+        return result.rows
+
+    } catch (error) {
+        console.error('Error while getting thread comments')
+    }
+}
+
 export async function getThreadPosts(){
     try {
         const query = {
@@ -267,7 +302,7 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion from completado c 
+        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion, pago from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpiempleador  
             where dpitrabajador = '${dpi}'
@@ -444,4 +479,37 @@ export async function changepass(password ,dpi) {
         throw error
     }
 }
+
+
+export async function getreport_withfecha(fechai, fechafinal ,password, dpi) {
+    try {
+        const query = {
+            text: "select * from reporte where fecha > $1 and fecha < $2 or dpireportuser =  quote_literal($3)  or idreporte = @$4",
+            values: [fechai, fechafinal ,password, dpi]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+export async function getreport_nofecha(dpi, idreporte) {
+    try {
+        const query = {
+            text: "select * from reporte where dpireportuser =  quote_literal($1) or idreporte = @$2",
+            values: [dpi, idreporte]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
 

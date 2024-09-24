@@ -44,7 +44,7 @@ const ContratDisplay: React.FC<ContainerProps> = ({contrat}) => {
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
                     <TextND text={contrat.calificacion === null ? '' : contrat.calificacion.toString()} size="small" hex="#000"/>
-                    {ratingNull && <Stars rating={1}/>}
+                    {ratingNull && <Stars rating={contrat.calificacion}/>}
                 </div>
             </div>
             <HorizontalDivider/>

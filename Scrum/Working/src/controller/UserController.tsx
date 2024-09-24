@@ -228,7 +228,7 @@ export async function addTrustedPeople(userDpi: string, newtrusteduserDpi: strin
     try {
 
         const Object = {
-            dp1: userDpi,
+            dpi1: userDpi,
             dpi2: newtrusteduserDpi
         }
 

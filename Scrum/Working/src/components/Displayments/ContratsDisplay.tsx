@@ -5,6 +5,7 @@ import "./DisplaymentStyles.css"
 import { getContratEmployer, getContratWorker } from "../../controller/UserController"
 import ContratDisplay from "./ContratDisplay"
 import ContratEDisplay from "./ContratEDisplay"
+import { IonButton } from "@ionic/react"
 
 type Contrat = {
     apellidos: string
@@ -32,9 +33,10 @@ interface ContainerProps {
     dpi: string
     selectedValue: string
     role : string
+    setDetails: (details: boolean) => void
 }
 
-const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role}) => {
+const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, setDetails}) => {
 
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
@@ -111,6 +113,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role}) 
                         ))
                     }
                 </div>
+                <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>
             </div>
         )
     } else {
@@ -130,6 +133,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role}) 
                         ))
                     }
                 </div>
+                <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>
             </div>
         )
     }
