@@ -607,15 +607,15 @@ app.get('/getuserreport/:idreporte/:dpi/:fechai/:fechaf', apiKeyAuth ,async (req
 
 app.post('/threads/insertComment', apiKeyAuth, async (req, res) => {
   try {
-    const { thread_id, content, sender_dpi } = req.body;
+    const { threadId, content, senderDpi } = req.body;
 
     // Validación de entrada
-    if (!thread_id || !content || !sender_dpi) {
+    if (!threadId || !content || !senderDpi) {
       return res.status(400).json({ error: 'Failed to insert comment to thread, empty values are not allowed' });
     }
 
     // Creating new threadpost
-    const response = await insertCommentWithId(thread_id, content, sender_dpi);
+    const response = await insertCommentWithId(threadId, content, senderDpi);
 
     if (response) {
       return res.status(200).json({ success: "Successfully created new thread comment" });
