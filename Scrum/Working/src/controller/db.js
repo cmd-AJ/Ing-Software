@@ -48,7 +48,7 @@ export async function getThreadPosts(){
 
         const result = await client.query(query)
 
-        return result
+        return result.rows
 
     } catch (error) {
         console.error('Error while gettin thread posts')
