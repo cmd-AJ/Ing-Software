@@ -51,3 +51,32 @@ export async function createThreadPost(user_dpi: string, post_text: string, post
     }
 
 }
+
+export async function insertCommentToThread(threadIdForComment: string, comment: string, commenterDpi: string){
+    try {
+        const data = {
+            threadId: threadIdForComment,
+            content: comment,
+            senderDpi: commenterDpi,
+        }
+
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/threads/insertComment`, {
+            method: 'POST',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to insert comment to thread');
+        }
+
+        return response.json()
+
+    } catch (error) {
+        console.error("Error while inserting new comment to thread:", error);
+        throw error; 
+    }
+}
