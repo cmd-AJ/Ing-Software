@@ -615,7 +615,7 @@ app.post('/threads/insertComment', apiKeyAuth, async (req, res) => {
     }
 
     // Creating new threadpost
-    const response = await insertCommentWithId(dpiUser, postText, postImage);
+    const response = await insertCommentWithId(thread_id, content, sender_dpi);
 
     if (response) {
       return res.status(200).json({ success: "Successfully created new thread comment" });
