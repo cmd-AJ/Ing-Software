@@ -39,7 +39,7 @@ type Contrat = {
   profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'
       name: string
       rating: number
-      service: 'Arreglar Lavamanos'
+      service: string
       initialDate: 'Martes, 23 de septiembre, 2024'
       price: 'Q34.00'
 }
