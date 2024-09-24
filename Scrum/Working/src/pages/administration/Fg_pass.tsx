@@ -29,7 +29,8 @@ import PasswordInput from "../../components/Register/passwordInput";
 import Confirmation from '../../components/Register/Confirmation'
 import { useHistory } from "react-router";
 import dpiInput from "../../components/Register/dpiInput";
-import { sendmessages } from "../../controller/ChatController";
+import { cambiarcontra, getcode, sendmessages } from "../../controller/ChatController";
+import CryptoJS from 'crypto-js';
 
 
 interface Cuenta {
@@ -61,27 +62,56 @@ const Forgot_Page: React.FC = () => {
   const input4Ref = useRef(null);
   const history = useHistory()
 
+ 
+  const [inputValues, setInputValues] = useState({
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: '',
+    });
+  
 
-  // Function to handle input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, nextInput: React.RefObject<HTMLInputElement>) => {
-    const { value } = e.target;
 
-    // If a character is typed, move focus to the next input
-    if (value.length === 1) {
-      nextInput.current?.focus();
-    }
-  };
-
+    const handleInputChange = (
+      e: React.ChangeEvent<HTMLInputElement>,
+      inputName: string,
+      nextInput?: React.RefObject<HTMLInputElement>
+    ) => {
+      const { value } = e.target;
+    
+      // Update the state for the corresponding input
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        [inputName]: value,
+      }));
+    
+      // If a character is typed, move focus to the next input
+      if (value.length === 1 && nextInput?.current) {
+        nextInput.current.focus();
+      }
+    };
+    
+    const handleKeyDown = (
+      e: React.KeyboardEvent<HTMLInputElement>,
+      prevInput?: React.RefObject<HTMLInputElement>
+    ) => {
+      // Check if backspace was pressed and move to the previous input
+      if (e.key === 'Backspace' && prevInput?.current) {
+        const input = e.target as HTMLInputElement;
+    
+        if (input.value === '') {
+          prevInput.current.focus();
+        }
+      }
+    };
+    
 
   React.useEffect(() => {
   }, [agreed]);
     React.useEffect(() => {
   }, [agreed]);
 
-  const handleClick = async (numero: number) => {
-
-    console.log(dpi)
-    console.log(methodos)
+  const handleClicksendmail = async (numero: number) => {
 
     if (dpi === '') {
       setIsOpen(true)
@@ -89,13 +119,16 @@ const Forgot_Page: React.FC = () => {
 
     }
     else{
-      // setagreed(numero)
       if (methodos === ''){
         
         setIsOpen(true)
         setmensaje('No ha elegido el metodo para reestablecer la contrasena')
       }else{
-        await sendmessages(dpi, methodos);
+        const pasa = await sendmessages(dpi, methodos);
+        if (pasa === true){
+         setagreed(numero) 
+        }
+
 
       }
     
@@ -103,11 +136,44 @@ const Forgot_Page: React.FC = () => {
 
   };
 
+  const handleClick = async (numero: number, ) => {
+   setagreed(numero)
+
+  };
 
 
 
 
+  const handleClickcheckdigit = async (numero: number, ) => {
 
+    if ( inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4 != ''){
+      const data = await getcode(dpi, (inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4))
+      if (data) {
+        setagreed(numero)
+      }
+      else{
+        setIsOpen(true)
+        setmensaje('El codigo es incorecto')
+      }
+  
+    }
+    else{
+      setIsOpen(true)
+      setmensaje('El codigo esta vacio')
+    }
+
+  };
+
+
+
+  const handleconfirm = async (path: string, ) => {
+    if(validateConfirmation){
+      const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
+      await cambiarcontra(x, dpi)
+      history.push('/home')
+    }
+
+  };
 
   return (
     <>
@@ -142,7 +208,7 @@ const Forgot_Page: React.FC = () => {
               </IonRadioGroup>
             </div>
             <br></br>
-            <IonButton onClick={() => handleClick(1)}>Aceptar</IonButton>
+            <IonButton onClick={() => handleClicksendmail(1)}>Aceptar</IonButton>
           </div>
         </IonContent>
       ) : (agreed % 3) === 1 ? (
@@ -156,14 +222,14 @@ const Forgot_Page: React.FC = () => {
           <h4 className="what_to_write">Ingresa el codigo enviado a tu correo o telefono</h4>
           <br></br>
           <div className="inputcode">
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input1Ref} onChange={(e) => handleInputChange(e, input2Ref)}></input>
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input2Ref} onChange={(e) => handleInputChange(e, input3Ref)}></input>
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input3Ref} onChange={(e) => handleInputChange(e, input4Ref)}></input>
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input4Ref} onChange={(e) => handleInputChange(e, { current: null })}  ></input>
+            <input className="inputdigit" placeholder="X" maxLength={1} ref={input1Ref} onChange={(e) => handleInputChange(e, 'input1' ,input2Ref)}></input>
+            <input className="inputdigit" placeholder="X" maxLength={1} ref={input2Ref} onChange={(e) => handleInputChange(e, 'input2' ,input3Ref)} onKeyDown={(e) => handleKeyDown(e, input1Ref)}></input>
+            <input className="inputdigit" placeholder="X" maxLength={1} ref={input3Ref} onChange={(e) => handleInputChange(e, 'input3' ,input4Ref)} onKeyDown={(e) => handleKeyDown(e, input2Ref)}></input>
+            <input className="inputdigit" placeholder="X" maxLength={1} ref={input4Ref} onChange={(e) => handleInputChange(e, 'input4' ,{ current: null })}  onKeyDown={(e) => handleKeyDown(e, input3Ref)} ></input>
           </div>
           <div className="positionbuttonsfg">
             <IonButton className="acceptcode" onClick={() => handleClick(0)}>Cancelar</IonButton>
-            <IonButton className="acceptcode" onClick={() => handleClick(2)}>Ingresar</IonButton>
+            <IonButton className="acceptcode" onClick={() => handleClickcheckdigit(2)}>Ingresar</IonButton>
           </div>
         </IonContent>
       )
@@ -193,9 +259,9 @@ const Forgot_Page: React.FC = () => {
 
               <IonRow>
                 <IonCol></IonCol>
-                <IonButton className='cfpass' onClick={() => handleClick(1)}>Cancelar</IonButton>
+                <IonButton className='cfpass' onClick={() => handleClick(0)}>Cancelar</IonButton>
                 <IonCol></IonCol>
-                <IonButton >Confirmar</IonButton>
+                <IonButton onClick={() => handleconfirm('')} >Confirmar</IonButton>
                 <IonCol></IonCol>
               </IonRow>
             </IonGrid>

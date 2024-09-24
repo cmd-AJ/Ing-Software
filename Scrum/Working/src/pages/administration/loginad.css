@@ -26,10 +26,7 @@
         margin-top: 2vh;
         width: 60vw;
     }
-    .alink{
-        margin-left: 55vw;
-        font-size:3.5vw;
-    }
+
     
     .space{
         height: 4vh
@@ -65,10 +62,6 @@
         font-size: 2.5vw;
     }
 
-    .alink{
-        margin-left: 55vw;
-        font-size:2.2vw;
-    }
 
     .space{
         height: 4vh
@@ -113,11 +106,7 @@
         margin-bottom: 3%;
     }
 
-    .alink{
-        margin-left: 54vw;
-        font-size:2.2vw;
-        font-size: 1.2vw;
-    }
+
 
     .buttoning{
         width: 18vw;

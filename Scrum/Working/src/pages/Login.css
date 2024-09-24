@@ -122,3 +122,10 @@ ion-select::part(icon) {
     padding-bottom: 8px;
     background: whitesmoke;
 }
+
+.fgpass_togo{
+    cursor: pointer;
+    margin-top: 0.5%;
+    margin-left: 10vw;
+    color: white;
+}

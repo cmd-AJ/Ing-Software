@@ -252,10 +252,9 @@ export async function sendmessages(dpi: string, method :string) {
     
             if (!response.ok) {
                 throw new Error('Failed to send a mail');
+            }else{
+                return true
             }
-    
-            const responseData = await response.json();
-            return responseData;
 
         }
         if (method === 'telefono') {
@@ -276,10 +275,10 @@ export async function sendmessages(dpi: string, method :string) {
             if (!response.ok) {
                 throw new Error('Failed to send a phone notification');
             }
+            else{
+                return true    
+            }
     
-            const responseData = await response.json();
-            return responseData;
-
 
         }
 
@@ -318,8 +317,9 @@ export async function getcode(dpi: String, code:string) {
 export async function cambiarcontra(password: string, dpi: string) {
     const object = {
         password: password,
-        dpi: dpi
+        dpi: dpi,
     }
+    
 
     const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/codechange`,
         {

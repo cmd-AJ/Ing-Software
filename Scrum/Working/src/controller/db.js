@@ -433,7 +433,7 @@ export async function getpasscode(dpi) {
 export async function changepass(password ,dpi) {
     try {
         const query = {
-            text: "update usuarios set password = $1 where  dpi = $2",
+            text: "update usuarios set contrasenia = $1 where  dpi = $2",
             values: [password, dpi]
         }
 

@@ -38,6 +38,7 @@ import Mod_Dashboard from "./pages/administration/Mod_Dashboard";
 import Suspendido from "./pages/administration/Suspended_page";
 import Tickt_page from "./pages/administration/Tickets_page";
 import Forgot_Page from "./pages/administration/Fg_pass";
+import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
 
 setupIonicReact();
 
@@ -54,86 +55,85 @@ const App: React.FC = () => (
         <Route exact path="/about">
           <About />
         </Route>
-        <Route exact path="/profile">
-          <Dashboard_Worker />
-        </Route>
-        <Route exact path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route exact path="/help">
-          <Help />
-        </Route>
-        <Route exact path="/admin">
-          <Login_Admin/>
-        </Route>
-        <Route exact path="/dash_admin">
-          <Mod_Dashboard/>
-        </Route>
-        <Route exact path="/mod_suspended">
-        <Suspendido/>
-        </Route>
-        <Route exact path="/mod_ticket">
-          <Tickt_page/>
-        </Route>
-        <Route exact path="/fg_pass">
-          <Forgot_Page/>
-        </Route>
-        <Route exact path="/">
-          <About />
-        </Route>
-
-        {/*
-        Single page implementation
-        */}
-
-        <Route exact path="/searched">
-          <Route
-            path="/searched"
-            render={({ location }) => {
-              const dpi = new URLSearchParams(location.search).get("dpi");
-              const job = new URLSearchParams(location.search).get("job");
-              return (
-                <MainLayout>
-                  <Searched dpi={dpi || ""} job={job || ""} />
-                </MainLayout>
-              );
-            }}
-            exact
-          />
-        </Route>
-
-        <Route exact path = "/employer-view">
-            <MainLayout>
-              <EmployerProfileView />
-            </MainLayout>
-        </Route>
-
-        <Route exact path="/empleado">
-          <MainLayout>
-            <Dashboard_Worker />
-          </MainLayout>
-        </Route>
-        <Route exact path="/chat">
-          <MainLayout>
-            <Chat />
-          </MainLayout>
-        </Route>
-        <Route exact path="/dashboard">
-          <MainLayout>
-            <Dashboard />
-          </MainLayout>
-        </Route>
-        <Route exact path="/help">
-          <MainLayout>
-          <Help />
-          </MainLayout>
-        </Route>
         <Route exact path="/">
           <Redirect to="/about" />
         </Route>
+        {/* Protected Routes */}
+        <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
+        <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+        <ProtectedRoute exact path="/help" component={Help} />
+        <ProtectedRoute exact path="/admin" component={Login_Admin} />
+        <ProtectedRoute exact path="/dash_admin" component={Mod_Dashboard} />
+        <ProtectedRoute exact path="/mod_suspended" component={Suspendido} />
+        <ProtectedRoute exact path="/mod_ticket" component={Tickt_page} />
+        <ProtectedRoute exact path="/fg_pass" component={Forgot_Page} />
+
+        {/* Single page implementation with protected access */}
+        <ProtectedRoute
+          exact
+          path="/searched"
+          render={({ location }) => {
+            const dpi = new URLSearchParams(location.search).get("dpi");
+            const job = new URLSearchParams(location.search).get("job");
+            return (
+              <MainLayout>
+                <Searched dpi={dpi || ""} job={job || ""} />
+              </MainLayout>
+            );
+          }}
+        />
+
+        {/* Other protected routes with MainLayout */}
+        <ProtectedRoute
+          exact
+          path="/employer-view"
+          render={(props) => (
+            <MainLayout>
+              <EmployerProfileView {...props} />
+            </MainLayout>
+          )}
+        />
+        <ProtectedRoute
+          exact
+          path="/empleado"
+          render={(props) => (
+            <MainLayout>
+              <Dashboard_Worker {...props} />
+            </MainLayout>
+          )}
+        />
+        <ProtectedRoute
+          exact
+          path="/chat"
+          render={(props) => (
+            <MainLayout>
+              <Chat {...props} />
+            </MainLayout>
+          )}
+        />
+        <ProtectedRoute
+          exact
+          path="/dashboard"
+          render={(props) => (
+            <MainLayout>
+              <Dashboard {...props} />
+            </MainLayout>
+          )}
+        />
+        <ProtectedRoute
+          exact
+          path="/help"
+          render={(props) => (
+            <MainLayout>
+              <Help {...props} />
+            </MainLayout>
+          )}
+        />
+
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
+
 );
 
 export default App;
