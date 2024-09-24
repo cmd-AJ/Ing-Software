@@ -3,6 +3,21 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function insertCommentWithId(id, contenido, dpi_emisor) {
+    try {
+        const query = {
+            text: "INSERT INTO mensajethreads(idthread, contenido, dpi_emisor, mensaje_timestamp) VALUES($1, $2, $3, CURRENT_TIMESTAMP)",
+            values:[id, contenido, dpi_emisor]
+        }
+
+        const result = await client.query(query)
+        return result
+
+    } catch (error) {
+        console.error('Error while inserting thread comments')
+    }
+    
+}
 export async function getCommentsWithThreadID(id) {
     try {
         const query = {
