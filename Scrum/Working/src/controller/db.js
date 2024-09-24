@@ -302,7 +302,7 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion, pago from completado c 
+        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion, pago, c.titulo from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpiempleador  
             where dpitrabajador = '${dpi}'
@@ -479,4 +479,37 @@ export async function changepass(password ,dpi) {
         throw error
     }
 }
+
+
+export async function getreport_withfecha(fechai, fechafinal ,password, dpi) {
+    try {
+        const query = {
+            text: "select * from reporte where fecha > $1 and fecha < $2 or dpireportuser =  quote_literal($3)  or idreporte = @$4",
+            values: [fechai, fechafinal ,password, dpi]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+export async function getreport_nofecha(dpi, idreporte) {
+    try {
+        const query = {
+            text: "select * from reporte where dpireportuser =  quote_literal($1) or idreporte = @$2",
+            values: [dpi, idreporte]
+        }
+
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
 

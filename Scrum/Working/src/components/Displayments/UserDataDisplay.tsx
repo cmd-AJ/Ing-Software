@@ -8,9 +8,10 @@ import { IonSegment, IonSegmentButton } from "@ionic/react";
 interface ContainerProps {
     dpi: string
     role: string
+    setDetails : (showDetails : boolean) => void
 }
 
-const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
+const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
 
     const [width, setWidth] = useState(window.innerWidth)
     const [selectedSegment, setSelectedSegment] = useState('leftSegment')
@@ -41,13 +42,13 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
                 <div style={{display: 'flex', height: '100%', minHeight: '378px', width: '100%'}}>
                     <TrustPeople dpi={dpi} selectedValue=""/>
                     <VerticalDivider/>
-                    <ContratsDisplay dpi={dpi} selectedValue="" role={role}/>
+                    <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
                 </div>
             )
         } else {
             return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                    <ContratsDisplay dpi={dpi} selectedValue="" role={role}/>
+                    <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
                     <VerticalDivider />
                     <JobsDisplay dpi={dpi} selectedValue=""/>
                 </div>
@@ -84,7 +85,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role}) => {
                     </IonSegment>
                     {
                         selectedSegment === 'leftSegment' &&
-                        <ContratsDisplay dpi={dpi} selectedValue={selectedSegment} role={role}/>
+                        <ContratsDisplay dpi={dpi} selectedValue={selectedSegment} role={role} setDetails={setDetails}/>
                     }
                     {
                         selectedSegment === 'rightSegment' &&

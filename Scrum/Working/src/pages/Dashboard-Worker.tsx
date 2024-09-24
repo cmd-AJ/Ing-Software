@@ -16,6 +16,7 @@ import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 import { useLocation } from "react-router";
 import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
+import PopUpHirings from "../components/Modals/PopUpHirings";
 
 type User = {
   nombre : string;
@@ -34,6 +35,15 @@ type User = {
   departamento: string
 };
 
+type Contrat = {
+  profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'
+      name: string
+      rating: number
+      service: string
+      initialDate: 'Martes, 23 de septiembre, 2024'
+      price: 'Q34.00'
+}
+
 const Dashboard_Worker: React.FC = () => {
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
@@ -45,6 +55,7 @@ const Dashboard_Worker: React.FC = () => {
 
   const [ editModal, setEditModal] = useState(false)
   const [editTrabajo, setEditTrabajo] = useState(false)
+  const [showDetails, setShowDetails] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
@@ -137,10 +148,10 @@ const Dashboard_Worker: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <PopUpHiringsContainer items={items} />
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
+          {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={items}/>}/>}
           <div className="header-card" ref={headerCardRef}>
             <img
               src={myUser.banner}
@@ -184,7 +195,7 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
               </div>
               <HorizontalDivider/>
-              <UserDataDisplay role={myUser.role} dpi={myUser.dpi}/>
+              <UserDataDisplay role={myUser.role} dpi={myUser.dpi} setDetails={setShowDetails}/>
           </div>
         </div>
       </IonContent>
