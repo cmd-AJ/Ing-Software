@@ -12,27 +12,31 @@ const Threads: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const fetchedPosts = await getThreadPosts();
-                setPosts(fetchedPosts);  // Save the fetched posts in state
-                setLoading(false);
-            } catch (err) {
-                setError('Failed to fetch posts');
-                setLoading(false);
-            }
-        };
+    const fetchPosts = async () => {
+        try {
+            const fetchedPosts = await getThreadPosts();
+            setPosts(fetchedPosts);  // Save the fetched posts in state
+            setLoading(false);
+        } catch (err) {
+            setError('Failed to fetch posts');
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchPosts();  // Call the function to fetch posts when component mounts
     }, []);
+
+    const handlePostSubmission = async () => {
+        await fetchPosts(); // Re-fetch posts after a new post is submitted
+    };
 
     return (
         <IonPage>
             <div className='threads-space'>
                 <div className="threads-container">
                     <div className='thread-scroller'>
-                        <PostField />
+                        <PostField  onPostSubmit={handlePostSubmission}/>
                         
                         {loading ? (
                             <p>Loading posts...</p>

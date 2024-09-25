@@ -4,36 +4,50 @@ import { camera } from 'ionicons/icons';
 import './PostField.css';
 import { createThreadPost } from '../../controller/ThreadController';
 
-const PostField: React.FC = () => {
+interface PostFieldProps {
+  onPostSubmit: () => void; // Prop type for the function to call after posting
+}
+
+const PostField: React.FC<PostFieldProps> = ({ onPostSubmit }) => {
   const [inputText, setInputText] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
+  const [imageString, setImageString] = useState<string | null>(null); // To hold the base64 string
 
-  const thread_sender = localStorage.getItem('dpi')
   const userProfileData = localStorage.getItem('User');
   const userProfileImg = userProfileData ? JSON.parse(userProfileData) : null;
   const image = userProfileImg ? userProfileImg.image : '';
-  
-  console.log(image);
-  console.log(thread_sender);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const post_sender = localStorage.getItem('dpi'); // DPI del usuario 
-
-    console.log(post_sender);
-    console.log(thread_sender);
-
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const thread_sender = localStorage.getItem('dpi'); // DPI del usuario 
+    console.log('Poster', thread_sender);
     console.log('Posted:', inputText);
+
     if (photo) {
       console.log('Photo:', photo.name);
     }
+
+    await createThreadPost(thread_sender || '', inputText, imageString || '');
+
+    onPostSubmit();
+
     setInputText('');
     setPhoto(null);
+    setImageString(null); // Reset image string after submission
   };
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      setPhoto(event.target.files[0]);
+      const selectedPhoto = event.target.files[0];
+      setPhoto(selectedPhoto);
+
+      // Convert image to base64 string
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageString(reader.result as string); // Store base64 string
+      };
+      reader.readAsDataURL(selectedPhoto); // Read the file as a data URL
     }
   };
 
@@ -69,6 +83,11 @@ const PostField: React.FC = () => {
             style={{ display: 'none' }}
             onChange={handlePhotoChange}
           />
+          {imageString && (
+            <div className="image-preview">
+              <img src={imageString} alt="Preview" className="preview-image" />
+            </div>
+          )}
           {inputText.trim() && (
             <button type="submit" className="post-button">
               Post
@@ -81,4 +100,3 @@ const PostField: React.FC = () => {
 };
 
 export default PostField;
-
