@@ -70,22 +70,29 @@ const App: React.FC = () => (
         <ProtectedRoute exact path="/mod_ticket" component={Tickt_page} />
         <ProtectedRoute exact path="/fg_pass" component={Forgot_Page} />
 
-        {/* Single page implementation with protected access */}
-        <ProtectedRoute
-          exact
-          path="/searched"
-          render={({ location }) => {
-            const dpi = new URLSearchParams(location.search).get("dpi");
-            const job = new URLSearchParams(location.search).get("job");
-            return (
-              <MainLayout>
-                <Searched dpi={dpi || ""} job={job || ""} />
-              </MainLayout>
-            );
-          }}
-        />
+        <Route exact path="/searched">
+          <Route
+            path="/searched"
+            render={({ location }) => {
+              const dpi = new URLSearchParams(location.search).get("dpi");
+              const job = new URLSearchParams(location.search).get("job");
 
+              const user = localStorage.getItem('User');
+
+              // Conditionally render based on the existence of 'User' in localStorage
+              return user ? (
+                <MainLayout>
+                  <Searched dpi={dpi || ""} job={job || ""} />
+                </MainLayout>
+              ) : (
+                <Redirect to="/about" />  // Redirect to /about if no user is found
+              );
+            }}
+            exact
+          />
+        </Route>
         {/* Other protected routes with MainLayout */}
+
         <ProtectedRoute
           exact
           path="/employer-view"
