@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './popUpHiringsContainer.css';
 import PopUpHirings from './PopUpHirings';
 
-// Definir la interfaz de las props para el contenedor
+type Contrat = {
+  nombre: string
+  apellidos: string
+  dpiempleador: string
+  imagen: string
+  fecha: string
+  fechafin: string
+  calificacion: number
+  pago: number
+  titulo: string
+}
+
 interface PopUpHiringsContainerProps {
-  items: {
-    profileImage: string;
-    name: string;
-    rating: string;
-    service: string;
-    date: string;
-    price: string;
-  }[];
+  items: Contrat[]
 }
 
 const PopUpHiringsContainer: React.FC<PopUpHiringsContainerProps> = ({ items }) => {
+
+  const stars = '★★★★☆'
+
   return (
     <div className="popup-hirings-container">
       {items.map((item, index) => (
         <PopUpHirings
           key={index}
-          profileImage={item.profileImage}
-          name={item.name}
-          rating={item.rating}
-          service={item.service}
-          date={item.date}
-          price={item.price}
+          profileImage={item.imagen}
+          name={item.nombre}
+          rating={item.calificacion}
+          service={item.titulo}
+          date={item.fecha}
+          price={item.pago}
         />
       ))}
     </div>

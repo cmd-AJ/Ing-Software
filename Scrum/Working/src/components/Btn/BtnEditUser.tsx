@@ -74,7 +74,7 @@ const BtnEditUser: React.FC<ContainerProps> = ({
             setUser(JSON.parse(actualUser));
         }
 
-        updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, job)
+        updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, job, banner)
         setEdit(false)
 
     };
