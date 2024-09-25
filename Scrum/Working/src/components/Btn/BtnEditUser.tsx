@@ -2,6 +2,7 @@ import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
 import React from "react";
 import { flash } from "ionicons/icons";
+import { updatecuenta } from "../../controller/UserController";
 
 type User = {
     nombre : string;
@@ -73,7 +74,9 @@ const BtnEditUser: React.FC<ContainerProps> = ({
             setUser(JSON.parse(actualUser));
         }
 
+        updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, job)
         setEdit(false)
+
     };
 
     return (
