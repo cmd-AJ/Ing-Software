@@ -43,7 +43,7 @@ const Threads: React.FC = () => {
                         ) : error ? (
                             <p>{error}</p>
                         ) : (
-                            posts.map(post => (
+                            posts.slice().reverse().map(post => (
                                 <Post
                                     key={post.idthreads}
                                     idthread={post.idthreads}
@@ -52,6 +52,7 @@ const Threads: React.FC = () => {
                                     posttime={post.posttime}
                                     imagen={post.imagen}
                                     img_usuario={post.img_usuario}
+
                                 />
                             ))
                         )}
