@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './popUpHirings.css';
 import iconPath from '../../assets/fluent_chat-arrow-back-down-16-regular.svg';
 import { contract } from 'ionicons/icons';
+import { useHistory } from 'react-router';
 
 type Contrat = {
   nombre: string
@@ -16,18 +17,13 @@ type Contrat = {
 }
 
 interface PopUpHiringsProps {
-  profileImage: string;
-  name: string;
-  rating: string;
-  service: string;
-  date: string;
-  price: string;
   contrat: Contrat
 }
 
 const PopUpHirings: React.FC<PopUpHiringsProps> = ({
   contrat
 }) => {
+  const history = useHistory()
 
   const [rating, setRating] = useState("")
   const [date, setDate] = useState("")
@@ -106,7 +102,7 @@ const PopUpHirings: React.FC<PopUpHiringsProps> = ({
 
       {/* Sección 4: Icono */}
       <div className="section-4">
-        <img src={iconPath} alt="Icono" width="40" />
+        <img src={iconPath} alt="Icono" width="40" onClick={() => history.push('chat')} style={{cursor: 'pointer'}}/>
       </div>
     </div>
   );

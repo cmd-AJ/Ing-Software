@@ -25,12 +25,6 @@ const PopUpHiringsContainer: React.FC<PopUpHiringsContainerProps> = ({ items }) 
       {items.map((item, index) => (
         <PopUpHirings
           key={index}
-          profileImage={item.imagen}
-          name={item.nombre}
-          rating={item.calificacion}
-          service={item.titulo}
-          date={item.fecha}
-          price={item.pago}
           contrat={item}
         />
       ))}
