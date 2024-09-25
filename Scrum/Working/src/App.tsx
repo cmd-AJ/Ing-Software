@@ -130,6 +130,15 @@ const App: React.FC = () => (
             </MainLayout>
           )}
         />
+        <ProtectedRoute
+          exact
+          path="/threads"
+          render={(props) => (
+            <MainLayout>
+              <Threads />
+            </MainLayout>
+          )}
+        />
 
       </IonRouterOutlet>
     </IonReactRouter>

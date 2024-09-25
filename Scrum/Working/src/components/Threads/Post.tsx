@@ -13,6 +13,11 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ idthread, usuario, descripcion, posttime, imagen, img_usuario }) => {
+
+  const isValidImage = (img: string) => {
+    return img && (img.startsWith('data:image') || img.startsWith('http'));
+  };
+
   return (
     <div className="post-card">
       <PostByCard usuario={usuario} posttime={posttime} img_usuario={img_usuario}/>
@@ -20,7 +25,7 @@ const Post: React.FC<PostProps> = ({ idthread, usuario, descripcion, posttime, i
         <p className="post-description">{ descripcion}</p>
       </div>
 
-      {imagen && <img className="post-image" src={imagen} alt="Post image" />}
+      {isValidImage(imagen) && <img className="post-image" src={imagen} alt="Post image" />}
       <CommentBox usuario={usuario} />
       
     </div>
