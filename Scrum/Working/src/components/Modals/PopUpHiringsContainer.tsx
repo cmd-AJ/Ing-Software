@@ -20,8 +20,6 @@ interface PopUpHiringsContainerProps {
 
 const PopUpHiringsContainer: React.FC<PopUpHiringsContainerProps> = ({ items }) => {
 
-  const stars = '★★★★☆'
-
   return (
     <div className="popup-hirings-container">
       {items.map((item, index) => (
@@ -33,6 +31,7 @@ const PopUpHiringsContainer: React.FC<PopUpHiringsContainerProps> = ({ items }) 
           service={item.titulo}
           date={item.fecha}
           price={item.pago}
+          contrat={item}
         />
       ))}
     </div>
