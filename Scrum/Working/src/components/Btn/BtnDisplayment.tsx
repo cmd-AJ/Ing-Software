@@ -57,7 +57,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
             const parsedName = parsedUser.nombre.split(" ")[0] + " " + parsedUser.apellidos.split(" ")[0]
             
             const parsedOwnUser = JSON.parse(viewOwnUser)
-            debugger
+            
             
             if (trustList.length > 0) {
                 trustList.map(trustedPerson => {
