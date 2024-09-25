@@ -12,7 +12,6 @@ import TextND from "../../Txt/TextND";
 import HorizontalDivider from "../../Dividers/HorizontalDivider";
 import BtnEditUser from "../../Btn/BtnEditUser";
 import { IonButton } from "@ionic/react";
-import BannerInput from "../../Inputs/BannerInput";
 
 interface ContainerProps {
     user: User
@@ -81,7 +80,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
         <>
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
 
-                <ImgInput image={image} setImage={setBanner} type={true}/>
+                <ImgInput image={banner} setImage={setBanner} type={true}/>
                 <div id="user-img">
                     <ImgInput image={profileImage} setImage={setProfileImage} type={false}/>
                 </div>
