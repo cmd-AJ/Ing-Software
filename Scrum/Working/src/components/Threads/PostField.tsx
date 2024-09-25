@@ -2,12 +2,26 @@ import React, { useState } from 'react';
 import { IonItem, IonLabel, IonTextarea, IonIcon } from '@ionic/react';
 import { camera } from 'ionicons/icons';
 import './PostField.css';
+import { createThreadPost } from '../../controller/ThreadController';
 
 const PostField: React.FC = () => {
   const [inputText, setInputText] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
 
+  const thread_sender = localStorage.getItem('dpi')
+  const userProfileData = localStorage.getItem('User');
+  const userProfileImg = userProfileData ? JSON.parse(userProfileData) : null;
+  const image = userProfileImg ? userProfileImg.image : '';
+  
+  console.log(image);
+  console.log(thread_sender);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const post_sender = localStorage.getItem('dpi'); // DPI del usuario 
+
+    console.log(post_sender);
+    console.log(thread_sender);
+
     event.preventDefault();
     console.log('Posted:', inputText);
     if (photo) {
@@ -25,7 +39,13 @@ const PostField: React.FC = () => {
 
   return (
     <div className='post-field-container'>
-      <div className='t-profile-container'></div>
+      <div className='t-profile-container'>
+        {userProfileImg ? (
+          <img src={image} alt="User Profile" className="profile-image" />
+        ) : (
+          <div className='placeholder-image' />
+        )}
+      </div>
       <form onSubmit={handleSubmit} className="form-container">
         <IonItem className="input-container">
           <IonTextarea
