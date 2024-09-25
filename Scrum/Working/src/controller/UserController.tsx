@@ -147,7 +147,7 @@ async function getWorkersByJob(job: String) {
 }
 
 
-async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol: string, telefono: string, trabajo: string) {
+async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol: string, telefono: string, trabajo: string, banner: string) {
     const object = {
         municipio: municipio,
         imagen: imagen,
@@ -156,7 +156,8 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         telefono: telefono,
         role: rol,
         DPI: DPI,
-        trabajo: trabajo
+        trabajo: trabajo,
+        banner: banner
     }
 
     const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/setsettings`,

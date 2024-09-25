@@ -62,7 +62,6 @@ const BtnDisplayment: React.FC<ContainerProps> = (
             if (trustList.length > 0) {
                 trustList.map(trustedPerson => {
                     const name = trustedPerson.nombre + " " + trustedPerson.apellido
-                    debugger
                     if (name !== parsedName) {
                         addTrustedPeople( parsedOwnUser.dpi ,parsedUser.dpi)
                     }
