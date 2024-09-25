@@ -10,24 +10,30 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ render, component: Comp
   const [user, setUser] = useState<string | null>(localStorage.getItem('User'));
 
   useEffect(() => {
-    // Update state if localStorage changes
+    // Handle changes to localStorage in the current tab
     const handleStorageChange = () => {
       setUser(localStorage.getItem('User'));
     };
 
     window.addEventListener('storage', handleStorageChange);
     
-    // Cleanup event listener on component unmount
+    // Optional: trigger this event when localStorage changes within this tab
+    window.addEventListener('localStorageChanged', handleStorageChange);
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChanged', handleStorageChange);
     };
   }, []);
+
+  // Ensure localStorage is directly checked
+  const currentUser = localStorage.getItem('User');
 
   return (
     <Route
       {...rest}
       render={props =>
-        user !== null && user.trim() !== '' ? (
+        currentUser !== null && currentUser.trim() !== '' ? (
           render ? (
             render(props)
           ) : Component ? (
