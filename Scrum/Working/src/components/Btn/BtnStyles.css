@@ -60,3 +60,11 @@
     }
 }
 
+.alert-head {
+    background-color: #306BAC;
+    color: white;
+}
+
+.alert-title.sc-ion-alert-md {
+    color: white;
+}
