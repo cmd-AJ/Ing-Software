@@ -2,6 +2,8 @@ import React from 'react';
 import './Searched.css';
 import { IonPage } from '@ionic/react';
 import Carrousel from '../components/Searched/Carrousel'; // Assuming correct path
+import List from '../components/Searched/List';
+
 // import Grid from '../components/Searched/Grid'; // Uncomment if Grid also uses job
 
 const Searched: React.FC<{ job: string, dpi: string }> = ({ job }) => {
@@ -12,8 +14,8 @@ const Searched: React.FC<{ job: string, dpi: string }> = ({ job }) => {
           <div className="bg"></div>
           <div className="bg bg2"></div>
           <div className="bg bg3"></div>
-          <Carrousel job={job} />
-          {/* <Grid job={job} /> Uncomment if Grid also uses job */}
+          {/* <Carrousel job={job} /> */}
+          <List job={job}/>
       </div>
     </IonPage>
   );
