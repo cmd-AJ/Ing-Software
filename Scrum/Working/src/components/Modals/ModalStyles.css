@@ -26,7 +26,7 @@
     padding: 5px;
     left: 50%;
     width: 725px;
-    height: 800px;
+    height: auto;
     max-height: 800px;
     background-color: var(--white);
     z-index: 6;

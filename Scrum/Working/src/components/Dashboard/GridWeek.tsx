@@ -14,9 +14,10 @@ interface NoteData {
 interface GridWeekProps {
   notes: NoteData[];
   weekDays: string[];  // Array con las fechas de los días de la semana actual
+  setModal: (modal: boolean) => void
 }
 
-const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
+const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays, setModal }) => {
   const hours = ['6 am - 9 am', '9 am - 12 pm', '12 pm - 3 pm', '3 pm - 6 pm', '6 pm - 9 pm', '9 pm'];
 
   const parseDate = (dateString: string): Date => {
@@ -74,7 +75,7 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays }) => {
                 {notes
                   .filter(note => getDayIndex(note.dia) === dayIndex && getHourIndex(note.hora) === hourIndex)
                   .map((note, noteIndex) => (
-                    <Note key={noteIndex} {...note} />
+                    <Note key={noteIndex} {...note} setModal={setModal}/>
                   ))}
               </div>
             ))}

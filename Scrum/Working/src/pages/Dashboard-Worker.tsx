@@ -17,6 +17,7 @@ import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 import { useLocation } from "react-router";
 import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
 import PopUpHirings from "../components/Modals/PopUpHirings";
+import { getContratWorker } from "../controller/UserController";
 
 type User = {
   nombre : string;
@@ -35,13 +36,17 @@ type User = {
   departamento: string
 };
 
+
 type Contrat = {
-  profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg'
-      name: string
-      rating: number
-      service: string
-      initialDate: 'Martes, 23 de septiembre, 2024'
-      price: 'Q34.00'
+  nombre: string
+  apellidos: string
+  dpiempleador: string
+  imagen: string
+  fecha: string
+  fechafin: string
+  calificacion: number
+  pago: number
+  titulo: string
 }
 
 const Dashboard_Worker: React.FC = () => {
@@ -76,6 +81,8 @@ const Dashboard_Worker: React.FC = () => {
     
   const [image, setImage] = useState(myUser.imagen);
 
+  const [contratsList, setContratsList] = useState<Contrat[]>([])
+
   const [userRole, setUserRole] = useState(true)
 
   const headerCardRef = useRef<HTMLDivElement>(null);
@@ -99,6 +106,14 @@ const Dashboard_Worker: React.FC = () => {
       if (myUser.role === 'Empleador'){
         setUserRole(false)
       }
+
+      const fecthData = async () => {
+        const contratList = await getContratWorker(myUser.dpi)
+
+        setContratsList(contratList)
+      }
+
+      fecthData()
   }, [myUser])
 
   useEffect(() => {
@@ -125,33 +140,13 @@ const Dashboard_Worker: React.FC = () => {
     };
   }, [headerCardRef, contentCRef]);
 
-  const items = [
-    {
-      profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
-      name: 'Mario Bros',
-      rating: '★★★★☆',
-      service: 'Arreglar Lavamanos',
-      date: 'Martes, 23 de septiembre, 2024',
-      price: 'Q34.00',
-    },
-    {
-      profileImage: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
-      name: 'Luigi Bros',
-      rating: '★★★★★',
-      service: 'Arreglar Tuberías',
-      date: 'Miércoles, 24 de septiembre, 2024',
-      price: 'Q50.00',
-    },
-    // Agrega más elementos si es necesario
-  ];
-
   return (
     <IonPage>
       <IonContent>
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
-          {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={items}/>}/>}
+          {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
           <div className="header-card" ref={headerCardRef}>
             <img
               src={myUser.banner}
