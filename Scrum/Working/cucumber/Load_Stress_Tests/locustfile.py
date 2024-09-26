@@ -10,7 +10,7 @@ port = config["VITE_PORTI"]
 key = config["VITE_API_KEY"]
 
 
-class HelloWorldUser(HttpUser):
+class ThreadTesting(HttpUser):
     @task
-    def hello_world(self):
-        self.client.get(f"http://{host}:{port}/threads/6", headers={"api-key": key})
+    def getThreadCommentsWithID(self):
+        self.client.get(f"/threads/6", headers={"api-key": key})
