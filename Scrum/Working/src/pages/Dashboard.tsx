@@ -8,6 +8,15 @@ import DoubleToggle from '../components/Miscellaneous/DoubleToggle';
 import DateChanger from '../components/Calendar/DateChange';
 import MonthCalendar from '../components/Calendar/MonthCalendar';
 import { getHirings } from '../controller/ChatController';
+import ModalStructure from '../components/Modals/ModalStructure';
+import CloseContrat from '../components/Modals/Structures/CloseContrat';
+
+type jobData = {
+  trabajo: string
+  nombre: string
+  hora: string
+  precio: string
+}
 
 const Dashboard: React.FC = () => {
 
@@ -21,6 +30,10 @@ const Dashboard: React.FC = () => {
   const [week, setWeek] = useState<number>(0);
   const [weekDays, setWeekDays] = useState<string[]>([]);  // Estado para almacenar las fechas de la semana
   const [elementos, setElementos] = useState<any[]>([]);  // Estado para almacenar los datos dinámicos
+
+  const [showMessage, setShowMessage] = useState(false) 
+
+  const [jobInfo, setJobInfo] = useState()
 
   useEffect(() => {
     setThisMonth(new Month(month, year));
@@ -65,6 +78,7 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
         <div className='background'>
+          {showMessage && <ModalStructure setModal={setShowMessage} content={<CloseContrat setShow={setShowMessage}/>}/>}
           <div className='calendar-header'>
             <div className='center-right-element'>
               <b>
@@ -90,7 +104,7 @@ const Dashboard: React.FC = () => {
           </div>
           {
             typeCalendar === 'semana' &&
-            <GridWeek notes={elementos} weekDays={weekDays} />  // Usar weekDays en GridWeek
+            <GridWeek notes={elementos} weekDays={weekDays} setModal={setShowMessage}/>  // Usar weekDays en GridWeek
           }
           {
             typeCalendar === 'mes' &&
@@ -103,6 +117,7 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
         <div className='background'>
+        {showMessage && <ModalStructure setModal={setShowMessage} content={<CloseContrat setShow={setShowMessage}/>}/>}
         <div className='header-top-calendar'>
                 <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
               </div>
@@ -120,7 +135,7 @@ const Dashboard: React.FC = () => {
           </div>
           {
             typeCalendar === 'semana' &&
-            <GridWeek notes={elementos} weekDays={weekDays} />  // Usar weekDays en GridWeek
+            <GridWeek notes={elementos} weekDays={weekDays} setModal={setShowMessage}/>  // Usar weekDays en GridWeek
           }
           {
             typeCalendar === 'mes' &&
