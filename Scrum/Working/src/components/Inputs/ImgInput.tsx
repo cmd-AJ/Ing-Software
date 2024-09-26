@@ -8,7 +8,7 @@ interface ContainerProps {
   }
   
   const FileUpload: React.FC<ContainerProps> = ({ image, setImage, type }) => {
-    debugger
+    
       const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
           const files = event.target.files;
           if (files && files.length > 0) {
