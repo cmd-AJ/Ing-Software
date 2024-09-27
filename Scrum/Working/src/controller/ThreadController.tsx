@@ -20,15 +20,15 @@ export async function getThreadPosts() {
     }
 }
 
-export async function createThreadPost(user_dpi: string, post_text: string, post_Image: string) {
+    export async function createThreadPost(user_dpi: string, post_text: string, post_Image: string) {
 
-    //Create new chat calling the endpoint /contacts/createChat
-    try {
-        const data = {
-            "dpiUser": user_dpi,
-            "postText": post_text,
-            "postImage": post_Image
-          };
+        //Create new chat calling the endpoint /contacts/createChat
+        try {
+            const data = {
+                "dpiUser": user_dpi,
+                "postText": post_text,
+                "postImage": post_Image
+            };
 
         const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/threads/createPost`, {
             method: 'POST',
