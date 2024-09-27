@@ -57,6 +57,9 @@ const App: React.FC = () => (
         <Route exact path="/admin">
           <Login_Admin />
         </Route>
+        <Route exact path="/fg_pass">
+          <Forgot_Page />
+        </Route>
         <Route exact path="/">
           <Redirect to="/about" />
         </Route>
@@ -67,7 +70,6 @@ const App: React.FC = () => (
         <ProtectedRoute exact path="/dash_admin" component={Mod_Dashboard} />
         <ProtectedRoute exact path="/mod_suspended" component={Suspendido} />
         <ProtectedRoute exact path="/mod_ticket" component={Tickt_page} />
-        <ProtectedRoute exact path="/fg_pass" component={Forgot_Page} />
 
         <ProtectedRoute
           exact
