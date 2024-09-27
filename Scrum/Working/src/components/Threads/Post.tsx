@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostByCard from "./PostedByCard";
 import "./Post.css";
 import CommentBox from "./CommentBox";
-import CommentsContainer from "./CommmentsContainer";
+import CommentContainer from "./CommmentContainer";
 import { getThreadComments } from "../../controller/ThreadController";
 
 interface PostProps {
@@ -22,7 +22,6 @@ const Post: React.FC<PostProps> = ({
   imagen,
   img_usuario,
 }) => {
-
   const [comments, setComments] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -30,7 +29,7 @@ const Post: React.FC<PostProps> = ({
   const fetchComments = async () => {
     try {
       const fetchedComments = await getThreadComments(idthread);
-      setComments(fetchedComments); 
+      setComments(fetchedComments);
       setLoading(false);
       console.log(fetchedComments);
     } catch (err) {
@@ -45,7 +44,7 @@ const Post: React.FC<PostProps> = ({
 
   const handleCommentSubmission = async () => {
     await fetchComments();
-};
+  };
 
   const isValidImage = (img: string) => {
     return img && (img.startsWith("data:image") || img.startsWith("http"));
@@ -77,21 +76,23 @@ const Post: React.FC<PostProps> = ({
       {/* comments */}
 
       <div className="comments-container">
-      <div className="comments-scroller">
-        {loading ? (
-          <p>Loading comments...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          comments.map((comment) => (
-            <div key={comment.id} className="comment">
-              <strong>{comment.usuario}</strong>: {comment.contenido}
-            </div>
-          ))
-        )}
+        <div className="comments-scroller">
+          {loading ? (
+            <p>Loading comments...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : (
+            comments.map((comment) => (
+              <CommentContainer
+                usuario={comment.usuario}
+                contenido={comment.contenido}
+                mensaje_timestamp={comment.mensaje_timestamp}
+                img_usuario={comment.img_usuario}
+              />
+            ))
+          )}
+        </div>
       </div>
-    </div>
-
     </div>
   );
 };
