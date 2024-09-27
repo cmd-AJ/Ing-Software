@@ -70,3 +70,17 @@
   color: #000000;
   cursor: pointer;
 }
+
+.image-preview {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 200px; /* Adjust width as needed */
+  height: 100px; /* Adjust height as needed */
+  object-fit: cover; /* Ensure the image doesn't distort */
+  border-radius: 8px; /* Optional: add rounded corners */
+  border: 1px solid #ccc; /* Optional: add a border */
+}
