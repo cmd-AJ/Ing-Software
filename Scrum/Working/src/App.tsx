@@ -9,8 +9,7 @@ import About from "./pages/About";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import Help from "./pages/Help"
-
-
+import Threads from "./pages/threads/Threads";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -128,6 +127,15 @@ const App: React.FC = () => (
           render={(props) => (
             <MainLayout>
               <Help {...props} />
+            </MainLayout>
+          )}
+        />
+        <ProtectedRoute
+          exact
+          path="/threads"
+          render={(props) => (
+            <MainLayout>
+              <Threads />
             </MainLayout>
           )}
         />
