@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IonIcon } from "@ionic/react";
 import { send } from "ionicons/icons";
-import './CommentBox.css';
+import "./CommentBox.css";
 import { insertCommentToThread } from "../../controller/ThreadController";
 
 interface UserProps {
@@ -10,9 +10,15 @@ interface UserProps {
   onCommentSubmit: () => void;
 }
 
-const CommentBox: React.FC<UserProps> = ({ usuario , idthread, onCommentSubmit}) => {
+const CommentBox: React.FC<UserProps> = ({
+  usuario,
+  idthread,
+  onCommentSubmit,
+}) => {
   const [comment, setComment] = useState<string>("");
-
+  const userProfileData = localStorage.getItem("User");
+  const userProfileImg = userProfileData ? JSON.parse(userProfileData) : null;
+  const image = userProfileImg ? userProfileImg.image : "";
   const handlePost = async () => {
     if (comment.trim() === "") {
       alert("Por favor, ingresa un comentario.");
@@ -20,13 +26,17 @@ const CommentBox: React.FC<UserProps> = ({ usuario , idthread, onCommentSubmit})
     }
 
     console.log(`Comentario de ${usuario}: ${comment}`);
-    await insertCommentToThread(idthread, comment, localStorage.getItem('dpi') || '');
+    await insertCommentToThread(
+      idthread,
+      comment,
+      localStorage.getItem("dpi") || ""
+    );
     onCommentSubmit();
     setComment(""); // Clear the input after posting
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handlePost();
     }
@@ -34,7 +44,13 @@ const CommentBox: React.FC<UserProps> = ({ usuario , idthread, onCommentSubmit})
 
   return (
     <div className="comment-box">
-      <div className="comment-user-profile"></div>
+      <div className="comment-user-profile">
+        {userProfileImg ? (
+          <img src={image} alt="User Profile" className="profile-image" />
+        ) : (
+          <div className="placeholder-image" />
+        )}
+      </div>
       <div className="comment-input">
         <textarea
           value={comment}
