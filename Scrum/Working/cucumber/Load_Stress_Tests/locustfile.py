@@ -5,12 +5,18 @@ from dotenv import dotenv_values
 #This turns the .env into a dictioarny with the available values
 
 config = dotenv_values("../../.env")
-host = config["VITE_API_HOSTI"]
-port = config["VITE_PORTI"]
 key = config["VITE_API_KEY"]
 
 
 class ThreadTesting(HttpUser):
-    @task
+    @task(1)
     def getThreadCommentsWithID(self):
         self.client.get(f"/threads/6", headers={"api-key": key})
+
+    @task(3)
+    def searchForSpecificJob(self):
+        self.client.get(f"/workers/Carpintero", headers={"api-key": key})
+    
+    @task(2)
+    def getThreadsPosts(self):
+        self.client.get(f"/threads/getPosts", headers={"api-key": key})
