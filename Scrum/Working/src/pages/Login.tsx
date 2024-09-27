@@ -27,7 +27,7 @@ const Login: React.FC = () => {
             <div className='login'>
                 <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
                 <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword}/>
-                <u><a className='fgpass_togo' onClick={() => history.push('/fg_pass')}>Contraseña equivocada?</a></u>
+                <u><a className='fgpass_togo' onClick={() => history.push('/fg_pass')}>Olvidaste tu contraseña?</a></u>
                 <RoleInput setRole={setRole} />
                 <div id='loginCenter'>
                     <LoginButton

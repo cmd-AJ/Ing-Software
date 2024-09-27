@@ -42,7 +42,6 @@ const Sidebar = () => {
         const selectedPerson2 = contacts.find(person => person.dpi === dpi)
         console.log(selectedPerson2);
         console.log(loggedUserDpi)
-        debugger
         setSelectedPerson(selectedPerson);
         localStorage.setItem('SelectedPerson', selectedPerson2.dpi)
 
