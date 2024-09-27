@@ -20,8 +20,8 @@ const CommentBox: React.FC<UserProps> = ({ usuario , idthread, onCommentSubmit})
     }
 
     console.log(`Comentario de ${usuario}: ${comment}`);
-    onCommentSubmit();
     await insertCommentToThread(idthread, comment, localStorage.getItem('dpi') || '');
+    onCommentSubmit();
     setComment(""); // Clear the input after posting
   };
 

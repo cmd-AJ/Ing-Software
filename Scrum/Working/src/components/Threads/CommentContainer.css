@@ -1,11 +1,9 @@
 .comment-card {
     background-color: #fff;
     border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
   }
   
   .comment-header {
@@ -15,8 +13,8 @@
   }
   
   .comment-image {
-    width: 40px;
-    height: 40px;
+    width: 25px;
+    height: 25;
     border-radius: 50%;
     margin-right: 1rem;
     object-fit: cover;
@@ -28,17 +26,17 @@
   }
   
   .comment-username {
-    font-size: 1rem;
+    font-size: 0.75rem;
     font-weight: bold;
   }
   
   .comment-timestamp {
-    font-size: 0.85rem;
+    font-size: 0.65rem;
     color: gray;
   }
   
   .comment-content {
-    font-size: 1rem;
+    font-size: 0.8rem;
     line-height: 1.4;
   }
   

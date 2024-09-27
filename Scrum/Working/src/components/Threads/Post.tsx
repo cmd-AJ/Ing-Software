@@ -76,22 +76,20 @@ const Post: React.FC<PostProps> = ({
       {/* comments */}
 
       <div className="comments-container">
-        <div className="comments-scroller">
-          {loading ? (
-            <p>Loading comments...</p>
-          ) : error ? (
-            <p>{error}</p>
-          ) : (
-            comments.map((comment) => (
-              <CommentContainer
-                usuario={comment.usuario}
-                contenido={comment.contenido}
-                mensaje_timestamp={comment.mensaje_timestamp}
-                img_usuario={comment.img_usuario}
-              />
-            ))
-          )}
-        </div>
+        {loading ? (
+          <p>Loading comments...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          comments.map((comment) => (
+            <CommentContainer
+              usuario={comment.usuario}
+              contenido={comment.contenido}
+              mensaje_timestamp={comment.mensaje_timestamp}
+              img_usuario={comment.img_usuario}
+            />
+          ))
+        )}
       </div>
     </div>
   );
