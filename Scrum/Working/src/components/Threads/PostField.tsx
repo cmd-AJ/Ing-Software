@@ -64,7 +64,7 @@ const PostField: React.FC<PostFieldProps> = ({ onPostSubmit }) => {
         <IonItem className="input-container">
           <IonTextarea
             value={inputText}
-            onIonChange={(e) => setInputText(e.detail.value!)}
+            onIonInput={(e: any) => setInputText(e.target.value)} // Using onIonInput instead of onIonChange
             placeholder="Escribe algo..."
             autoGrow={true}
             className="textarea-input"
@@ -88,7 +88,8 @@ const PostField: React.FC<PostFieldProps> = ({ onPostSubmit }) => {
               <img src={imageString} alt="Preview" className="preview-image" />
             </div>
           )}
-          {inputText.trim() && (
+          {/* Render the Post button as soon as the user types at least one character */}
+          {inputText.length > 0 && (
             <button type="submit" className="post-button">
               Post
             </button>
