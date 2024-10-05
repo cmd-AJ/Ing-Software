@@ -1,5 +1,5 @@
 import React from "react"
-import './DisplaymentStyles.css'
+import './TrustedStyle.css'
 
 interface ContainerProps {
     nombre: string

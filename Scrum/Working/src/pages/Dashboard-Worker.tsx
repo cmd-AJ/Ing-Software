@@ -2,7 +2,6 @@ import "./Dashboard-Worker.css"
 import React, { useEffect, useState, useRef } from "react";
 import {
   IonPage,
-  IonImg,
   IonContent
 } from "@ionic/react";
 import ModalStructure from "../components/Modals/ModalStructure"
@@ -16,8 +15,8 @@ import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 import { useLocation } from "react-router";
 import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
-import PopUpHirings from "../components/Modals/PopUpHirings";
 import { getContratWorker } from "../controller/UserController";
+import TrustPeople from "../components/Modals/Structures/TrustPeople";
 
 type User = {
   nombre : string;
@@ -143,7 +142,7 @@ const Dashboard_Worker: React.FC = () => {
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
-          {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<></>}/>}
+          {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<TrustPeople dpi={myUser.dpi}/>}/>}
           <div className="header-card" ref={headerCardRef}>
             <img
               src={myUser.banner}

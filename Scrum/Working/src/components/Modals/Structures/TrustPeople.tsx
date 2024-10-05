@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react"
-import { getTrustedPeople } from "../../controller/UserController"
+import { getTrustedPeople } from "../../../controller/UserController"
 import TrustPerson from "./TrustPerson"
-import './DisplaymentStyles.css'
-import TextND from "../Txt/TextND"
-import HorizontalDivider from "../Dividers/HorizontalDivider"
+import './TrustedStyle.css'
+import TextND from "../../Txt/TextND"
+import HorizontalDivider from "../../Dividers/HorizontalDivider"
 
 interface ContainerProps { 
     dpi: string
-    selectedValue: string
 }
 
-const TrustPeople: React.FC<ContainerProps> = ({ dpi, selectedValue}) => {
+const TrustPeople: React.FC<ContainerProps> = ({ dpi }) => {
 
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
@@ -34,13 +33,12 @@ const TrustPeople: React.FC<ContainerProps> = ({ dpi, selectedValue}) => {
     if (error !== '') {
         return (
             <div className="trust-display">
-                {
-                    selectedValue !== 'leftSegment' &&
-                    <>
-                        <TextND text="Personas de confianza" hex={tertiaryColor} size="big"/>
-                        <HorizontalDivider/>
-                    </>
-                }
+                
+                <>
+                    <TextND text="Personas de confianza" hex={tertiaryColor} size="big"/>
+                    <HorizontalDivider/>
+                </>
+                
                 <div style={{minHeight: '280px', width:'100%', justifyContent: 'center', display: 'flex', alignItems: 'center'}}>
                     <TextND text={error} size="medium" hex="#888"/>
                 </div>
@@ -52,13 +50,12 @@ const TrustPeople: React.FC<ContainerProps> = ({ dpi, selectedValue}) => {
     return (
         <>
             <div className="trust-display">
-                {
-                    selectedValue !== 'leftSegment' &&
-                    <>
-                        <TextND text="Personas de confianza" hex={tertiaryColor} size="big"/>
-                        <HorizontalDivider/>
-                    </>
-                }
+                
+                <>
+                    <TextND text="Personas de confianza" hex={tertiaryColor} size="big"/>
+                    <HorizontalDivider/>
+                </>
+                
                 {
                     people.map(person => (
                         <TrustPerson nombre={person.nombre} apellido={person.apellido} rating={person.rating} tel={person.telefono} img={person.image}/>

@@ -1,4 +1,3 @@
-import TrustPeople from "./TrustPeople";
 import VerticalDivider from "../Dividers/VerticalDivider";
 import ContratsDisplay from "./ContratsDisplay";
 import JobsDisplay from "./JobsDisplay";
@@ -40,7 +39,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
         if (role === 'Empleador'){
             return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px', width: '100%'}}>
-                    <TrustPeople dpi={dpi} selectedValue=""/>
+                    {/* <TrustPeople dpi={dpi} selectedValue=""/> */}
                     <VerticalDivider/>
                     <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
                 </div>
@@ -66,10 +65,10 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
                             Contratos
                         </IonSegmentButton>
                     </IonSegment>
-                    {
+                    {/* {
                         selectedSegment === 'leftSegment' &&
                         <TrustPeople dpi={dpi} selectedValue={selectedSegment}/>
-                    }
+                    } */}
                 </>
             )
         } else {
