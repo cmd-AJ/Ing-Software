@@ -4,7 +4,7 @@ import { useEffect } from "react"
 interface ContainerProps {
     text : string
     img: string
-    action : () => any
+    action : ( literal: any) => any
     trigger: string
 }
 

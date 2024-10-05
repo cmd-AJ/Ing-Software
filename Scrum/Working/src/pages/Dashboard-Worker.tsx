@@ -61,6 +61,7 @@ const Dashboard_Worker: React.FC = () => {
   const [ editModal, setEditModal] = useState(false)
   const [editTrabajo, setEditTrabajo] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
+  const [showTrustedPeople, setShowTrustedPeople] = useState(false)
   
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
@@ -83,8 +84,6 @@ const Dashboard_Worker: React.FC = () => {
 
   const [contratsList, setContratsList] = useState<Contrat[]>([])
 
-  const [userRole, setUserRole] = useState(true)
-
   const headerCardRef = useRef<HTMLDivElement>(null);
   const contentCRef = useRef<HTMLDivElement>(null);
   
@@ -103,9 +102,6 @@ const Dashboard_Worker: React.FC = () => {
   }, [owner]);
 
   useEffect(()=> {
-      if (myUser.role === 'Empleador'){
-        setUserRole(false)
-      }
 
       const fecthData = async () => {
         const contratList = await getContratWorker(myUser.dpi)
@@ -147,6 +143,7 @@ const Dashboard_Worker: React.FC = () => {
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
+          {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<></>}/>}
           <div className="header-card" ref={headerCardRef}>
             <img
               src={myUser.banner}
@@ -160,7 +157,7 @@ const Dashboard_Worker: React.FC = () => {
                     rating={myUser.rating}
                   />
                 </div>
-                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} userRole={userRole} owner={owner}/>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} owner={owner} setEdit3={setShowTrustedPeople}/>
               </div>
               <HorizontalDivider />
               <div className="dataGrid">
