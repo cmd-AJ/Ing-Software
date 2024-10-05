@@ -69,7 +69,6 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             });
 
 }
-
 export async function getLoginUser(dpi: any, password: any) {
 
     const credentials = {
@@ -170,6 +169,11 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
             body: JSON.stringify(object)
         })
 
+}
+
+export async function updatecuentaNEO4J(municipio: string, imagen: string, DPI: string, telefono: string) {
+
+
     const neoObject = {
         dpi: DPI,
         municipio: municipio,
@@ -187,6 +191,7 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
             body: JSON.stringify(neoObject)
         })
 }
+
 
 export { createUser, userExists, getWorkersByJob, updatecuenta }
 

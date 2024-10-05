@@ -56,6 +56,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
     
         // Verificar que ambos usuarios estén disponibles
         if (viewUser != null && viewOwnUser != null) {
+
             const parsedUser: NotUser = JSON.parse(viewUser);
             const parsedName = parsedUser.nombre.split(" ")[0] + " " + parsedUser.apellidos.split(" ")[0];
     
@@ -63,7 +64,6 @@ const BtnDisplayment: React.FC<ContainerProps> = (
     
             let isTrusted = false;
     
-            // Si la lista de personas confiables tiene elementos
             if (trustList.length > 0) {
                 for (const trustedPerson of trustList) {
                     const name = trustedPerson.nombre + " " + trustedPerson.apellido;
