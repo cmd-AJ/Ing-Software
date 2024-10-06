@@ -133,7 +133,6 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
                         ))
                     }
                 </div>
-                <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>
             </div>
         )
     }

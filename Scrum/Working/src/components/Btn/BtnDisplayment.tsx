@@ -7,6 +7,7 @@ import BtnNav from './BtnNav'
 import BtnAction from './BtnAction'
 import { addTrustedPeople, getTrustedPeople } from '../../controller/UserController'
 import { IonAlert } from '@ionic/react'
+import { peopleOutline } from 'ionicons/icons'
 // import BtnNav from './BtnNav'
 
 type NotUser = {
@@ -28,7 +29,7 @@ type NotUser = {
 interface ContainerProps {
     setEdit1: (edit1 : boolean) => void
     setEdit2: (edit2 : boolean) => void
-    userRole: boolean
+    setEdit3: (edit3 : boolean) => void
     owner: string | null
 }
 
@@ -36,7 +37,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
     {
         setEdit1,
         setEdit2,
-        userRole,
+        setEdit3,
         owner
     }
 ) => {
@@ -97,7 +98,8 @@ const BtnDisplayment: React.FC<ContainerProps> = (
         return (
             <div className="btn-header-horizontal">
                 <ModalBtnI img={pencilOutline} setEdit={setEdit1}/>
-                {userRole && <ModalBtnN label="Añadir trabajo" setEdit={setEdit2} color='tertiary'/>}
+                <BtnAction text='' img={peopleOutline} trigger='' action={setEdit3}/>
+                <ModalBtnN label="Añadir trabajo" setEdit={setEdit2} color='tertiary'/>
             </div>
         )
     } else if (owner === 'false'){
@@ -115,7 +117,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
                 ></IonAlert>
                 <div className='btn-header-horizontal'>
                     <BtnNav img={chatbubbleEllipses} direction='chat'/>
-                    <BtnAction trigger={trigger} img={personAddOutline} action={handleTrust}/>
+                    <BtnAction trigger={trigger} img={personAddOutline} action={handleTrust} text=''/>
                 </div>
             </>
         )

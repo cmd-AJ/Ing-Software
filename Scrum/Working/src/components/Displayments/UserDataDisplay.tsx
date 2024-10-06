@@ -1,4 +1,3 @@
-import TrustPeople from "./TrustPeople";
 import VerticalDivider from "../Dividers/VerticalDivider";
 import ContratsDisplay from "./ContratsDisplay";
 import JobsDisplay from "./JobsDisplay";
@@ -37,42 +36,15 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
     }, [])
 
     if (width > 660) {
-        if (role === 'Empleador'){
-            return (
-                <div style={{display: 'flex', height: '100%', minHeight: '378px', width: '100%'}}>
-                    <TrustPeople dpi={dpi} selectedValue=""/>
-                    <VerticalDivider/>
-                    <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
-                </div>
-            )
-        } else {
-            return (
+        return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
                     <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
                     <VerticalDivider />
                     <JobsDisplay dpi={dpi} selectedValue=""/>
                 </div>
-            )
-        }
+        )
+        
     } else {
-        if (role === 'Empleador') {
-            return (
-                <>
-                    <IonSegment value={selectedSegment}>
-                        <IonSegmentButton value="leftsegment" onClick={handleLeftSegment}>
-                            Personas
-                        </IonSegmentButton>
-                        <IonSegmentButton value="rightsegment" onClick={handleRightSegment}>
-                            Contratos
-                        </IonSegmentButton>
-                    </IonSegment>
-                    {
-                        selectedSegment === 'leftSegment' &&
-                        <TrustPeople dpi={dpi} selectedValue={selectedSegment}/>
-                    }
-                </>
-            )
-        } else {
             return (
                 <>
                     <IonSegment value={selectedSegment}>    
@@ -94,7 +66,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
                 </>
             )
         }
-    }
+
 
 }
 
