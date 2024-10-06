@@ -302,11 +302,13 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select u.nombre , u.apellidos, dpiempleador , u.imagen  , fecha, fechafin, r.calificacion, pago, c.titulo from completado c 
+        const result = await client.query(`select u.nombre , u.apellidos, u.imagen, u2.nombre, u2.apellidos, u2.imagen, 
+            dpiempleador, dpitrabajador, fecha, fechafin, r.calificacion, pago, c.titulo from completado c 
             left join resena r on c.idresena = r.idresena 
             join usuarios u on u.dpi = c.dpiempleador  
+            join usuarios u2 on u2.dpi = c.dpitrabajador
             where dpitrabajador = '${dpi}'
-            and dpiempleador is not null;`)
+            or dpiempleador = '${dpi}';`)
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
