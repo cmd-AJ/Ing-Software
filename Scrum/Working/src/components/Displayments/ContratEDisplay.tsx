@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react"
 import TextND from "../Txt/TextND"
-import { IonImg } from "@ionic/react"
-import Stars from "../Miscellaneous/Stars"
 import HorizontalDivider from "../Dividers/HorizontalDivider"
 
-type ContratEmple = {
-    titulo: string
-    apellidos: string
-    calificacion: number
+type Contrat = {
+    nombree: string
+    apellidoe: string
+    pice: string
+    nombret: string
+    apellidot: string
+    pict: string
     dpiempleador: string
+    dpitrabajador: string
     fecha: string
     fechafin: string
-    imagen: string
-    nombre: string
-    nombre_trabajo: string
-}
+    calificacion: number
+    pago: number
+    titulo: string
+  }
+  
 
 interface ContainerProps {
-    contrat: ContratEmple
+    contrat: Contrat
 }
 
 const ContratEDisplay : React.FC<ContainerProps> = ({contrat}) => {
@@ -38,12 +41,10 @@ const ContratEDisplay : React.FC<ContainerProps> = ({contrat}) => {
                 </div>
                 <div className="bottom-contrat-container">
                     <div id="simple-display">
-                        <IonImg />
-                        <TextND text={contrat.nombre + " " + contrat.apellidos + " (" + contrat.nombre_trabajo +")"} size="small" hex="#000"/>
+                        <TextND text={contrat.nombret + " " + contrat.apellidot} size="small" hex="#000"/>
                     </div>
                     <div id="simple-display">
-                        <TextND text={contrat.calificacion === null ? '' : contrat.calificacion.toString()} size="medium" hex="#000"/>
-                        {ratingNull && <Stars rating={1} />}
+                        <TextND text={contrat.fechafin === null ? '' : contrat.fechafin} size="small" hex="#000"/>
                     </div>
                 </div>
             </div>

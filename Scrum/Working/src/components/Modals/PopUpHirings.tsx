@@ -5,16 +5,21 @@ import { contract } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 
 type Contrat = {
-  nombre: string
-  apellidos: string
+  nombree: string
+  apellidoe: string
+  pice: string
+  nombret: string
+  apellidot: string
+  pict: string
   dpiempleador: string
-  imagen: string
+  dpitrabajador: string
   fecha: string
   fechafin: string
   calificacion: number
   pago: number
   titulo: string
 }
+
 
 interface PopUpHiringsProps {
   contrat: Contrat
@@ -82,13 +87,13 @@ const PopUpHirings: React.FC<PopUpHiringsProps> = ({
     <div className="popup-container">
       {/* Sección 1: Imagen */}
       <div className="section-1">
-        <img src={contrat.imagen} alt="Profile" />
+        <img src={contrat.pict} alt="Profile" />
       </div>
 
       {/* Sección 2: Textos */}
       <div className="section-2">
         <div className="section-2-top">
-          <div>{contrat.nombre.split(" ")[0] + " " + contrat.apellidos.split(" ")[0]}</div>
+          <div>{contrat.nombret.split(" ")[0] + " " + contrat.apellidot.split(" ")[0]}</div>
           <div>{rating}</div>
         </div>
         <div className="section-2-bottom">{contrat.titulo}</div>

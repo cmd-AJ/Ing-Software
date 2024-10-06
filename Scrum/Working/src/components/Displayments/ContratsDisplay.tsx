@@ -3,30 +3,23 @@ import HorizontalDivider from "../Dividers/HorizontalDivider"
 import TextND from "../Txt/TextND"
 import "./DisplaymentStyles.css"
 import { getContratEmployer, getContratWorker } from "../../controller/UserController"
-import ContratDisplay from "./ContratDisplay"
 import ContratEDisplay from "./ContratEDisplay"
 import { IonButton } from "@ionic/react"
 
 type Contrat = {
-    apellidos: string
-    calificacion: number
+    nombree: string
+    apellidoe: string
+    pice: string
+    nombret: string
+    apellidot: string
+    pict: string
     dpiempleador: string
+    dpitrabajador: string
     fecha: string
     fechafin: string
-    imagen: string
-    nombre: string
-}
-
-type ContratEmple = {
+    calificacion: number
+    pago: number
     titulo: string
-    apellidos: string
-    calificacion: number
-    dpiempleador: string
-    fecha: string
-    fechafin: string
-    imagen: string
-    nombre: string
-    nombre_trabajo: string
 }
 
 interface ContainerProps {
@@ -40,8 +33,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
 
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
-    const [dataEmple, setDataEmple] = useState<ContratEmple[]>([])
-    const [data, setData] = useState<Contrat[]>([])
+    const [dataEmple, setDataEmple] = useState<Contrat[]>([])
     const [error, setError] = useState<string>('')
 
     useEffect(()=>{
@@ -49,28 +41,19 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
             let dataEmple = []
             let data = []
 
-            if (role === 'Empleador') {
-                dataEmple = await getContratEmployer(dpi)
 
-                console.log(dataEmple);
+            dataEmple = await getContratWorker(dpi)
+
+            console.log(dataEmple);
                 
 
-                if (dataEmple && dataEmple.length > 0) {
-                    setDataEmple(dataEmple)
-                } else {
-                    setError('Sin contratos')
-                    setDataEmple([])
-                }
+            if (dataEmple && dataEmple.length > 0) {
+                setDataEmple(dataEmple)
             } else {
-                data = await getContratWorker(dpi)
-
-                if (data && data.length > 0){
-                    setData(data)
-                } else {
-                    setError('Sin contratos')
-                    setData([])
-                }
+                setError('Sin contratos')
+                setDataEmple([])
             }
+            
         }
 
         fecthData()
@@ -96,46 +79,26 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
         )
     }
 
-    if (role === 'Empleado') {
-        return (
-            <div className="contrat-display">
+    return (
+        <div className="contrat-employer-display">
+            {
+                selectedValue !== 'leftSegment' &&
+                <>
+                    <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
+                    <HorizontalDivider/>
+                </>
+            }
+            <div style={{width:'100%', display: 'flex', flexDirection: 'column', gap: '10px'}}>
                 {
-                    selectedValue !== 'leftSegment' &&
-                    <>
-                        <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
-                        <HorizontalDivider/>
-                    </>
+                    dataEmple.map(contrat => (
+                        <ContratEDisplay contrat={contrat}/>
+                    ))
                 }
-                <div style={{width:'100%'}}>
-                    {
-                        data.map(contrat => (
-                            <ContratDisplay contrat={contrat}/>
-                        ))
-                    }
-                </div>
-                <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>
             </div>
-        )
-    } else {
-        return (
-            <div className="contrat-employer-display">
-                {
-                    selectedValue !== 'leftSegment' &&
-                    <>
-                        <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
-                        <HorizontalDivider/>
-                    </>
-                }
-                <div style={{width:'100%', display: 'flex', flexDirection: 'column', gap: '10px'}}>
-                    {
-                        dataEmple.map(contrat => (
-                            <ContratEDisplay contrat={contrat}/>
-                        ))
-                    }
-                </div>
-            </div>
-        )
-    }
+            <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>
+        </div>
+    )
 }
+
 
 export default ContratsDisplay
