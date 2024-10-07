@@ -3,10 +3,14 @@ import './popUpHiringsContainer.css';
 import PopUpHirings from './PopUpHirings';
 
 type Contrat = {
-  nombre: string
-  apellidos: string
+  nombree: string
+  apellidoe: string
+  pice: string
+  nombret: string
+  apellidot: string
+  pict: string
   dpiempleador: string
-  imagen: string
+  dpitrabajador: string
   fecha: string
   fechafin: string
   calificacion: number

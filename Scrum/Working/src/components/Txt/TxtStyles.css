@@ -7,6 +7,12 @@
     width: 100%;
 }
 
+#huge-text {
+    margin: 0;
+    font-size: 130px;
+    text-align: center;
+}
+
 #big-text {
     margin: 0;
     font-size: 30px;
@@ -47,5 +53,9 @@
 
     #small-text {
         font-size: 15px;
+    }
+
+    #huge-text {
+        font-size: 5vh;
     }
 }

@@ -7,13 +7,11 @@ interface MainLayoutProps {
     children?: React.ReactNode;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children}) => {
-    const [request, setRequest] = useState('');
-    
+const MainLayout: React.FC<MainLayoutProps> = ({ children}) => {    
 
     return (
       <>
-        <NavigationBar setRequest={setRequest} /> {/* Pass setRequest prop */}
+        <NavigationBar /> {/* Pass setRequest prop */}
         <IonContent>
           {children}
         </IonContent>
