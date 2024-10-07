@@ -46,38 +46,35 @@ const Information: React.FC<InformationProps> = ({ date }) => {
     setAmount(value);
   };
 
-  
   const handleConfirmClick = async () => {
     try {
-      // Si el usuario no cambió la fecha, usa la fecha actual
       const confirmedDate = date || dayjs(); // Fecha actual si no se selecciona nada
       const appointmentTimeStamp = confirmedDate ? confirmedDate.format('YYYY-MM-DD') + 'T' + time : '';
-  
+
       const payment = parseFloat(amount);
-  
-      // Obtener los DPI's desde el local storage
-      const dpiEmployer = localStorage.getItem('dpi'); // DPI del usuario loggeado
-      const dpiEmployee = localStorage.getItem('SelectedPerson'); // DPI de la persona con la que está chateando
-  
+
+      const dpiEmployer = localStorage.getItem('dpi');
+      const dpiEmployee = localStorage.getItem('SelectedPerson');
+
       if (!dpiEmployer || !dpiEmployee) {
         console.error('No se pudieron obtener los DPI desde el local storage');
         return;
       }
-  
-      // Verificar si appointmentTimeStamp es nulo o vacío
+
       const timeStampToUse = appointmentTimeStamp ? appointmentTimeStamp : dayjs().format('YYYY-MM-DD') + 'T' + time;
-  
-      // Llamar a la función makeHiring con el appointmentTimeStamp adecuado
+
       const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
-  
+
       console.log('Contratación exitosa:', response);
     } catch (error) {
       console.error('Error al contratar:', error);
     }
   };
-  
-  
-  
+
+  const handleCancelClick = () => {
+    console.log('Cancelado');
+    // Aquí puedes implementar lo que quieras que haga el botón de "Cancelar"
+  };
 
   return (
     <div className="information-container">
@@ -120,6 +117,12 @@ const Information: React.FC<InformationProps> = ({ date }) => {
         </div>
       </div>
       <div className="button-container">
+        <button 
+          className="cancel-button"
+          onClick={handleCancelClick}
+        >
+          Cancelar
+        </button>
         <button 
           className="confirm-button"
           onClick={handleConfirmClick}

@@ -10,6 +10,7 @@ interface CalendarProps {
   onChange: (date: Dayjs | null) => void;
 }
 
+// Estilo personalizado para ocultar la barra de botones de acción
 const CustomDatePickerToolbar = styled('div')({
   '& .MuiTypography-h4': {
     color: 'black', // Cambia el color del texto del día seleccionado a negro
@@ -19,6 +20,9 @@ const CustomDatePickerToolbar = styled('div')({
   },
   '& .MuiPickersYear-yearButton': {
     color: 'black', // Cambia el color de los botones de los años a negro
+  },
+  '& .MuiDialogActions-root': {
+    display: 'none', // Oculta la barra de botones (OK/Cancel)
   },
 });
 
