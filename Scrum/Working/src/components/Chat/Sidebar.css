@@ -7,6 +7,7 @@
     --light: #e6e6e6;
     --wrapper: 1000px;
     --blue: #00b0ff;
+    --db-blue: #7E90BC; /* Nuevo color para el chat seleccionado y hover */
 }
 
 body {
@@ -116,7 +117,6 @@ body {
 }
 
 .left .people .person {
-    
     display: flex;
     align-items: center;
     position: relative;
@@ -137,8 +137,6 @@ body {
     background-color: var(--light);
     transform: translate(-50%, 0);
 }
-
-
 
 @media (min-width:500px){
     .left .people .person img {
@@ -207,21 +205,40 @@ body {
     color: var(--grey);
 }
 
-.left .people .person.active,
-.left .people .person:hover {
+/* Cuando el chat está seleccionado */
+.left .people .person.active {
     margin-top: -1px;
     padding-top: 13px;
     border: 0;
-    background-color: var(--blue);
-    width: 100%;
+    background-color: var(--db-blue); /* Cambiado a db-blue */
+    width: 100%; /* Selección ocupa todo el ancho */
 }
 
-.left .people .person.active span,
-.left .people .person:hover span {
-    color: var(--white);
+/* Texto en blanco cuando el chat está seleccionado */
+.left .people .person.active span {
+    color: var(--white); /* Cambiado a blanco */
     background: transparent;
 }
 
+/* Cuando se hace hover sobre un chat no seleccionado */
+.left .people .person:hover {
+    background-color: var(--db-blue); /* Cambia a db-blue en hover */
+    width: 100%; /* Hover ocupa un 95% del ancho, no todo */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Texto en blanco cuando se hace hover */
+.left .people .person:hover span {
+    color: var(--white); /* Cambia a blanco en hover */
+}
+
+/* Asegurarse de que el chat seleccionado se mantiene en db-blue incluso en hover */
+.left .people .person.active:hover {
+    background-color: var(--db-blue); /* Mantener el color azul si está seleccionado */
+}
+
+/* Remover la línea divisoria en el chat seleccionado o cuando se hace hover */
 .left .people .person:after {
     display: none;
 }
@@ -260,4 +277,3 @@ body {
     padding: 10px 29px;
     background-color: var(--white);
 }
-

@@ -58,7 +58,7 @@ const Sidebar = () => {
         console.log(selectedPerson2);
         console.log(loggedUserDpi);
 
-        // Update selected person
+        // Actualizar la persona seleccionada
         setSelectedPerson(selectedPerson2); 
         localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
 
@@ -103,7 +103,11 @@ const Sidebar = () => {
                     </div>
                     <ul className="people">
                         {contacts.map((person, index) => (
-                            <li key={index} className="person" onClick={() => handlePersonClick(person.dpi)}> 
+                            <li 
+                                key={index} 
+                                className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`} 
+                                onClick={() => handlePersonClick(person.dpi)}
+                            > 
                                 <img className="imagen" src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>

@@ -52,7 +52,6 @@ const Chat: React.FC<ChatProps> = ({ messages }) => {
             {messages.map((msg, index) => (
                 <ChatBubble key={index} message={msg.message} time={msg.time} sender={msg.sender} />
             ))}
-            {/* Referencia al final del chat */}
             <div ref={messagesEndRef} />
         </div>
     );
