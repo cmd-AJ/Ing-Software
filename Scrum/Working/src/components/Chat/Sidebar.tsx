@@ -39,21 +39,21 @@ const Sidebar = () => {
     }, []);
 
     const handlePersonClick = async (dpi: string) => {
-        const selectedPerson2 = contacts.find(person => person.dpi === dpi)
+        const selectedPerson2 = contacts.find(person => person.dpi === dpi);
         console.log(selectedPerson2);
-        console.log(loggedUserDpi)
-        setSelectedPerson(selectedPerson);
-        localStorage.setItem('SelectedPerson', selectedPerson2.dpi)
-
+        console.log(loggedUserDpi);
+        
+        // Actualizar correctamente el estado con la persona seleccionada
+        setSelectedPerson(selectedPerson2); 
+        localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
+    
         try {
             const chatMessages = await getChatMessages(loggedUserDpi, dpi);
-            
             const formattedMessages = chatMessages.map(msg => ({
                 message: msg.contenido,
                 time: msg.time,
                 sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
             }));
-
             setMessages(formattedMessages);
         } catch (error) {
             console.error('Error fetching chat messages:', error);
@@ -102,7 +102,7 @@ const Sidebar = () => {
                 </div> 
                 <div className="right">
                     <div className="top">
-                        <span>To: <span className="name">{selectedPerson ? selectedPerson.name : "Persona con la que está chateando"}</span></span>
+                        <span><span className="name">{selectedPerson ? selectedPerson.name : "Selecciona un chat"}</span></span>
                     </div>
                     {isDetailsOpen ? (
                         <Details 
