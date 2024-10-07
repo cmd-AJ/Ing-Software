@@ -9,6 +9,12 @@ interface ContainerProps {
 
 const TextND : React.FC<ContainerProps> = ({text, size, hex}) => {
     switch (size) {
+
+        case 'huge':
+            return (
+                <p id='huge-text' style={{color: hex}}>{text}</p>
+            )
+
         case "big":
             return (
                 <p id='big-text' style={{color: hex}}>{text}</p>
@@ -32,3 +38,4 @@ const TextND : React.FC<ContainerProps> = ({text, size, hex}) => {
 }
 
 export default TextND
+

@@ -1,9 +1,9 @@
-
+@import url('/src/theme/variables.css');
 
 @media (min-width: 768px) {
  
   ion-toolbar {
-    --background: #1961af; 
+    --background: var(--ion-color-primary); 
     --ion-color-base: #007bff; 
     height: 80px;
     display: flex;

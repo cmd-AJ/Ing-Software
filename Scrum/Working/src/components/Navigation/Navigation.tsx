@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   IonHeader,
   IonToolbar,
@@ -8,7 +8,7 @@ import {
   IonIcon,
   IonText,
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom'; // Agregamos useLocation
 import { helpCircleOutline, personOutline, settingsOutline } from 'ionicons/icons';
 import SearchBar from '../Search/SearchBar';
 import './Navigation.css';
@@ -16,18 +16,25 @@ import ModalWithoutBack from '../Modals/ModalWithoutBack';
 import Logout from '../Modals/Structures/Logout';
 
 interface NavigationBarProps {
-  setRequest: (value: string) => void;
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({  }) => {
   const history = useHistory();
+  const location = useLocation(); 
+
+  const [searching, setSearching] = useState(location.pathname); 
   const [openLogout, setOpenLogout] = useState(false);
   const [positionX, setPositionX] = useState(0);
   const [positionY, setPositionY] = useState(0);
 
+  // useEffect para actualizar searching cuando la ruta cambie
+  useEffect(() => {
+    const fullPath = location.pathname + location.search
+    setSearching(fullPath);    
+  }, [location]); // Se ejecuta cada vez que la ubicación cambie
+
   const handleRequestChange = (value: string) => {
     if (value.trim() !== '') {
-      setRequest(value);
       history.push(`/searched?job=${encodeURIComponent(value)}`);
     } else {
       console.log("No se ha ingresado nada en la búsqueda.");
@@ -38,9 +45,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
     const position = event.currentTarget.getBoundingClientRect();
     setPositionX(position.left);
     setPositionY(position.top);
-    setOpenLogout(true); // Abre el modal cuando se hace clic
-    console.log(position);
-    
+    setOpenLogout(true); // Abre el modal cuando se hace clic    
   };
 
   return (
@@ -51,12 +56,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ setRequest }) => {
         <IonToolbar>
           <IonGrid>
             <IonRow className="ion-align-items-center responsive-navbar">
-              <IonCol className="ion-text-center" onClick={() => history.push('/searched')}>
+              <IonCol className="ion-text-center" onClick={() => {history.push('/searched'); console.log(location.pathname + location.search);
+              }}>
                 <IonText className="appName-text">SABTE</IonText>
               </IonCol>
-              <IonCol className="search-bar-col">
+              {searching !== "/searched" && <IonCol className="search-bar-col">
                 <SearchBar onRequestChange={handleRequestChange} />
-              </IonCol>
+              </IonCol>}
               <IonCol className="ion-text-center" onClick={() => history.push('threads')}>
                 <IonText className="custom-text">HILOS</IonText>
               </IonCol>
