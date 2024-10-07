@@ -11,23 +11,24 @@ interface CalendarProps {
 }
 
 const CustomDatePickerToolbar = styled('div')({
-    '& .MuiTypography-h4': {
-      color: 'black', // Cambia el color del texto del día seleccionado a negro
-    },
-    '& .MuiPickersCalendarHeader-label': {
-      color: 'black', // Cambia el color del texto del mes y año a negro
-    },
-    '& .MuiPickersYear-yearButton': {
-      color: 'black', // Cambia el color de los botones de los años a negro
-    },
-  });
+  '& .MuiTypography-h4': {
+    color: 'black', // Cambia el color del texto del día seleccionado a negro
+  },
+  '& .MuiPickersCalendarHeader-label': {
+    color: 'black', // Cambia el color del texto del mes y año a negro
+  },
+  '& .MuiPickersYear-yearButton': {
+    color: 'black', // Cambia el color de los botones de los años a negro
+  },
+});
 
 const Calendar: React.FC<CalendarProps> = ({ onChange }) => {
+  // Usa la fecha actual como valor predeterminado
   const [selectedDate, setSelectedDate] = React.useState<Dayjs | null>(dayjs());
 
   const handleDateChange = (date: Dayjs | null) => {
     setSelectedDate(date);
-    onChange(date);
+    onChange(date || dayjs()); // Si la fecha es null, usa la fecha actual
   };
 
   return (
@@ -39,7 +40,8 @@ const Calendar: React.FC<CalendarProps> = ({ onChange }) => {
           value={selectedDate}
           onChange={handleDateChange}
           renderInput={(params) => <TextField {...params} />}
-          showToolbar={false}
+          showToolbar={false} // Ocultar botones de OK/Cancel
+          disablePast={true}
         />
       </CustomDatePickerToolbar>
     </LocalizationProvider>

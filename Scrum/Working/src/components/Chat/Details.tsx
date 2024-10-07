@@ -1,5 +1,5 @@
 import Calendar from './Calendar';
-import Information from './Information'; // Asegúrate de usar la ruta correcta a tu componente Information
+import Information from './Information';
 import React, { useState } from 'react';
 import './details.css';
 import { Dayjs } from 'dayjs';
