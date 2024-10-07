@@ -108,7 +108,7 @@ const Sidebar = () => {
                                 className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`} 
                                 onClick={() => handlePersonClick(person.dpi)}
                             > 
-                                <img className="imagen" src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
+                                <img className="imagen" src={person.image} alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>
                                     <span className="time">{person.time}</span>
@@ -119,8 +119,15 @@ const Sidebar = () => {
                     </ul>
                 </div> 
                 <div className="right">
-                    <div className="top">
-                        <span><span className="name">{selectedPerson ? selectedPerson.name : "Selecciona un chat"}</span></span>
+                    <div className={`top ${selectedPerson ? 'chat-selected' : ''}`}>
+                        {selectedPerson ? (
+                            <div className="chat-info">
+                                <img className="chat-image" src={selectedPerson.image} alt={`${selectedPerson.name}'s avatar`} />
+                                <span className="name">{selectedPerson.name}</span>
+                            </div>
+                        ) : (
+                            <span className="name">Selecciona un chat</span>
+                        )}
                     </div>
                     {isDetailsOpen ? (
                         <Details 

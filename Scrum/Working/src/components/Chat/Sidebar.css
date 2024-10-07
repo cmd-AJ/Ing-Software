@@ -7,7 +7,7 @@
     --light: #e6e6e6;
     --wrapper: 1000px;
     --blue: #00b0ff;
-    --db-blue: #7E90BC; /* Nuevo color para el chat seleccionado y hover */
+    --db-blue: #7E90BC; /* Nuevo color para el chat seleccionado */
 }
 
 body {
@@ -41,13 +41,15 @@ body {
     background-color: var(--white);
 }
 
-
 @media (min-width:600px){
     .left .top {
         position: relative;
         width: 24.8vw;
         height: 18vh;
         padding: 29px;
+        background-color: var(--light-blue); /* Nuevo color de fondo */
+
+        
     }
 }
 
@@ -75,11 +77,9 @@ body {
         font-family: 'Source Sans Pro', sans-serif;
         font-weight: 400;
         outline: none;
-        color: var(--grey)
+        color: var(--grey);
     }
-    
 }
-
 
 .left a.search {
     display: block;
@@ -98,14 +98,13 @@ body {
     .left .people {
         margin-left: -7vw;
     }
-    
 }
+
 @media (max-width:365px){
     .left .people {
         width: 37.8vw;
         margin-left: -13.6vw;
     }
-    
 }
 
 @media (min-width:365px) and (max-width:500px) {
@@ -113,7 +112,6 @@ body {
         width: 31.8vw;
         margin-left: -8.7vw;
     }
-    
 }
 
 .left .people .person {
@@ -148,29 +146,26 @@ body {
         object-fit: cover;
     }
     
-    .searchpeople{
+    .searchpeople {
         height: 0px;
         width: 0px;
-        
     }
 }
+
 @media (max-width:500px){
     .left .people .person img {
         width: 0vw;
         height: 0vh;
         border-radius: 50%;
-
     }
 
-    .searchpeople{
+    .searchpeople {
         font-size: 1.5vw;
         background-color: white;
         color: white;
         border: 0px;
         border-color: white;
-        
     }
-
 }
 
 .left .people .person .text-container {
@@ -223,7 +218,7 @@ body {
 /* Cuando se hace hover sobre un chat no seleccionado */
 .left .people .person:hover {
     background-color: var(--db-blue); /* Cambia a db-blue en hover */
-    width: 100%; /* Hover ocupa un 95% del ancho, no todo */
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -250,22 +245,53 @@ body {
     height: 100%;
 }
 
-.right .top {
+/* Estilo para la parte superior, si el chat está seleccionado */
+.top {
     width: 100%;
     height: 5.2vh;
     padding: 1.5vh 3vw;
     background-color: #eceff1;
 }
 
-.right .top span {
+.top span {
     font-size: 15px;
     color: var(--grey);
 }
 
-.right .top span .name {
+.top .name {
     color: var(--dark);
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
+}
+
+/* Cuando un chat está seleccionado, cambia el fondo y el color del texto */
+.top.chat-selected {
+    background-color: var(--db-blue); /* Fondo azul */
+    color: var(--white); /* Texto blanco */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Estilos para la información del chat seleccionado */
+.chat-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Imagen del usuario seleccionado */
+.chat-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px; /* Separación entre la imagen y el nombre */
+}
+
+/* Estilo para el nombre del usuario en el top */
+.top.chat-selected .name {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--white);
 }
 
 .right .bottom {
