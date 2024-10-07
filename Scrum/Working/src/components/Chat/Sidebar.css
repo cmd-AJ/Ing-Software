@@ -47,7 +47,7 @@ body {
         width: 24.8vw;
         height: 18vh;
         padding: 29px;
-        background-color: var(--light-blue); /* Nuevo color de fondo */
+        background-color: var(--light-blue);
 
         
     }
@@ -71,7 +71,7 @@ body {
         width: 100%;
         height: 42px;
         padding: 0 15px;
-        border: 1px solid var(--light);
+        border: 0px solid var(--light);
         background-color: #eceff1;
         border-radius: 21px;
         font-family: 'Source Sans Pro', sans-serif;
@@ -301,5 +301,5 @@ body {
     width: 100%;
     height: 60px;
     padding: 10px 29px;
-    background-color: var(--white);
+    background-color: var(--db-blue);
 }

@@ -1,15 +1,15 @@
-.bottom{
+.bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     width: 100%;
-    background-color: #f0f0f0;
+    background-color: #7E90BC; /* Fondo db-blue */
     border-top: 1px solid #dbdbdb;
 }
 
-.input-message{
-    width: 90%;
+.input-message {
+    width: 75%; /* Ajustamos el ancho para los iconos */
     height: 42px;
     padding: 0 15px;
     border: 1px solid #dbdbdb;
@@ -21,30 +21,27 @@
     color: #757575;
 }
 
-.send{
-    display: block;
-    float: right;
+.icon {
     width: 42px;
     height: 42px;
     margin-left: 10px;
-    background-color: #168ad7;
-    display: flex;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
+    color: white; /* Los íconos son blancos */
     cursor: pointer;
 }
 
-.hire{
-    display: block;
-    float: right;
-    width: 42px;
-    height: 42px;
-    margin-left: 10px;
-    background-color: #17cf6d;
+.gallery-icon {
+    margin-right: 10px; /* Separación a la derecha del icono de galería */
+}
+
+.send-icon, .hire-icon {
     display: flex;
-    border-radius: 10px;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.send-icon:hover, .hire-icon:hover {
+    color: #ffffffa1; /* Ligero cambio de color al hacer hover */
 }

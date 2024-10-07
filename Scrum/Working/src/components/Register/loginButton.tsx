@@ -42,7 +42,7 @@ const LoginButton: React.FC<ContainerProps> = ({
                     const job = "";  // Esto debe ser dinámico según tus necesidades
 
                     localStorage.setItem('job', job);
-                    history.push(`/searched?dpi=${dpi}&job=${job}`);
+                    history.push(`/searched`);
                     
                 } else {
                     console.log("Usuario no encontrado");
