@@ -14,10 +14,11 @@ interface Message {
 
 const ChatBubble: React.FC<ChatBubbleProps>  = ({ message, time, sender }) => {
     const formattedTime = (timeString: string) => {
-        const timePart = timeString.split('T')[1];
-        const [hour, minute] = timePart.split(':').slice(0, 2);
-        return `${hour}:${minute}`;
-    };
+        const date = new Date(timeString); // Convertir la cadena de tiempo a un objeto Date
+        const hours = date.getHours(); // Obtener la hora en el horario local
+        const minutes = date.getMinutes().toString().padStart(2, '0'); // Asegurar que los minutos siempre tengan 2 dígitos
+        return `${hours}:${minutes}`;
+    };    
     
     return (
         <div className={`chat-bubble ${sender === 'me' ? 'me' : 'you'}`}>
