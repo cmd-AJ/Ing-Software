@@ -7,13 +7,14 @@ import Bottom from './Bottom';
 import { getContacts, getChatMessages } from '../../controller/ChatController';
 
 const Sidebar = () => {
-    const [selectedPerson, setSelectedPerson] = useState<string>('');
+    const [selectedPerson, setSelectedPerson] = useState<any>(null); // Cambié el tipo a `any` para manejar el objeto completo
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    // Fetch contacts on component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,22 +32,37 @@ const Sidebar = () => {
         };
     }, [loggedUserDpi]);
 
+    // Handle window resize
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
 
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Fetch messages every 5 seconds (Polling)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (selectedPerson) {
+                updateMessages();
+            }
+        }, 5000); // Update every 5 seconds
+
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, [selectedPerson, loggedUserDpi]);
 
     const handlePersonClick = async (dpi: string) => {
         const selectedPerson2 = contacts.find(person => person.dpi === dpi);
         console.log(selectedPerson2);
         console.log(loggedUserDpi);
-        
-        // Actualizar correctamente el estado con la persona seleccionada
+
+        // Update selected person
         setSelectedPerson(selectedPerson2); 
         localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
-    
+
+        // Fetch chat messages for selected person
         try {
             const chatMessages = await getChatMessages(loggedUserDpi, dpi);
             const formattedMessages = chatMessages.map(msg => ({
@@ -64,13 +80,11 @@ const Sidebar = () => {
         if (selectedPerson) {
             try {
                 const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi);
-                
                 const formattedMessages = chatMessages.map(msg => ({
                     message: msg.contenido,
                     time: msg.time,
                     sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
-              }));
-
+                }));
                 setMessages(formattedMessages);
             } catch (error) {
                 console.error('Error fetching chat messages:', error);
