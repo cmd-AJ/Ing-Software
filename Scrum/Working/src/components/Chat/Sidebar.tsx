@@ -131,10 +131,10 @@ const Sidebar = () => {
                     </div>
                     {isDetailsOpen ? (
                         <Details 
-                            onClose={() => setIsDetailsOpen(false)} 
+                            onClose={() => setIsDetailsOpen(false)} // Cierra el modal cuando se presiona cancelar o confirmar
                             dpiEmployer={loggedUserDpi} 
                             dpiEmployee={selectedPerson ? selectedPerson.dpi : null} 
-                        />
+                            />
                     ) : (
                         <Chat messages={messages} />
                     )}

@@ -5,9 +5,10 @@ import { makeHiring } from '../../controller/ChatController';
 
 interface InformationProps {
   date: dayjs.Dayjs | null;
+  onClose: () => void; // Nueva prop para cerrar el modal
 }
 
-const Information: React.FC<InformationProps> = ({ date }) => {
+const Information: React.FC<InformationProps> = ({ date, onClose }) => {
   const [title, setTitle] = useState('');
   const [time, setTime] = useState('');
   const [amount, setAmount] = useState('');
@@ -61,19 +62,22 @@ const Information: React.FC<InformationProps> = ({ date }) => {
         return;
       }
 
-      const timeStampToUse = appointmentTimeStamp ? appointmentTimeStamp : dayjs().format('YYYY-MM-DD') + 'T' + time;
+      const timeStampToUse = appointmentTimeStamp || dayjs().format('YYYY-MM-DD') + 'T' + time;
 
       const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
 
       console.log('Contratación exitosa:', response);
+
+      // Cerrar el modal después de confirmar
+      onClose();
     } catch (error) {
       console.error('Error al contratar:', error);
     }
   };
 
   const handleCancelClick = () => {
-    console.log('Cancelado');
-    // Aquí puedes implementar lo que quieras que haga el botón de "Cancelar"
+    // Cerrar el modal al cancelar
+    onClose();
   };
 
   return (
