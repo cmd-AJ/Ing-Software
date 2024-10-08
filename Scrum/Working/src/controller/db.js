@@ -3,11 +3,11 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
-export async function insertSurveyToCompletedJob(idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador) {
+export async function insertSurveyToCompletedJob(idtrabajo, calificacion, descripcion, dpi_trabajador) {
     try {
         const query= {
-            text: "INSERT INTO resena(idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador) VALUES ($1, $2, $3, $4, $5)",
-            values: [idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador]
+            text: "INSERT INTO resena(idtrabajo, calificacion, descripcion, dpi_trabajador) VALUES ($1, $2, $3, $4)",
+            values: [idtrabajo, calificacion, descripcion, dpi_trabajador]
         } 
 
         const result = await client.query(query)
