@@ -1,5 +1,5 @@
 import Calendar from './Calendar';
-import Information from './Information'; // Asegúrate de usar la ruta correcta a tu componente Information
+import Information from './Information';
 import React, { useState } from 'react';
 import './details.css';
 import { Dayjs } from 'dayjs';
@@ -24,7 +24,7 @@ const Details: React.FC<DetailsProps> = ({ onClose, dpiEmployer, dpiEmployee }) 
         <Calendar onChange={handleDateChange} />
       </div>
       <div className="information-container">
-        <Information date={selectedDate} />
+        <Information date={selectedDate} onClose={onClose} />
       </div>
     </div>
   );

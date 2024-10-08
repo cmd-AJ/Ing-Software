@@ -66,20 +66,41 @@
 
 .button-container {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  justify-content: center; /* Centrar los botones horizontalmente */
+  align-items: center; /* Asegurarse de que estén centrados verticalmente */
+  gap: 20px; /* Espaciado horizontal entre los botones */
+  margin-top: -10px;
 }
 
 .confirm-button {
-  background-color: #4caf50;
+  background-color: #305BAC;
+  color: white;
+  width: 125px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.confirm-button:hover {
+  background-color: #3b74dc;
+}
+
+.cancel-button {
+  background-color: #C0C0C0;
+  width: 125px;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   font-size: 1rem;
+  text-align: center;
 }
 
-.confirm-button:hover {
-  background-color: #45a049;
+.cancel-button:hover {
+  background-color: #7c7c7c;
 }
+

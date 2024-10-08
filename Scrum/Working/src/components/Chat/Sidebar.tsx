@@ -7,13 +7,14 @@ import Bottom from './Bottom';
 import { getContacts, getChatMessages } from '../../controller/ChatController';
 
 const Sidebar = () => {
-    const [selectedPerson, setSelectedPerson] = useState<string>('');
+    const [selectedPerson, setSelectedPerson] = useState<any>(null); // Cambié el tipo a `any` para manejar el objeto completo
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
-    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false); // Controla si Details está abierto
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    // Fetch contacts on component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,29 +32,50 @@ const Sidebar = () => {
         };
     }, [loggedUserDpi]);
 
+    // Handle window resize
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
 
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const handlePersonClick = async (dpi: string) => {
-        const selectedPerson2 = contacts.find(person => person.dpi === dpi)
-        console.log(selectedPerson2);
-        console.log(loggedUserDpi)
-        setSelectedPerson(selectedPerson);
-        localStorage.setItem('SelectedPerson', selectedPerson2.dpi)
+    // Fetch messages every 5 seconds (Polling)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (selectedPerson) {
+                updateMessages();
+            }
+        }, 5000); // Update every 5 seconds
 
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, [selectedPerson, loggedUserDpi]);
+
+    // Manejo del clic en una persona/contacto
+    const handlePersonClick = async (dpi: string) => {
+        const selectedPerson2 = contacts.find(person => person.dpi === dpi);
+        console.log(selectedPerson2);
+        console.log(loggedUserDpi);
+
+        // Si ya hay una persona seleccionada (y es diferente), cierra el componente Details (Information)
+        if (selectedPerson && selectedPerson.dpi !== selectedPerson2.dpi && isDetailsOpen) {
+            setIsDetailsOpen(false); // Cierra el modal de información si cambia de chat
+        }
+
+        // Actualizar la persona seleccionada
+        setSelectedPerson(selectedPerson2); 
+        localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
+
+        // Fetch chat messages for selected person
         try {
             const chatMessages = await getChatMessages(loggedUserDpi, dpi);
-            
             const formattedMessages = chatMessages.map(msg => ({
                 message: msg.contenido,
                 time: msg.time,
                 sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
             }));
-
             setMessages(formattedMessages);
         } catch (error) {
             console.error('Error fetching chat messages:', error);
@@ -64,13 +86,11 @@ const Sidebar = () => {
         if (selectedPerson) {
             try {
                 const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi);
-                
                 const formattedMessages = chatMessages.map(msg => ({
                     message: msg.contenido,
                     time: msg.time,
                     sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
-              }));
-
+                }));
                 setMessages(formattedMessages);
             } catch (error) {
                 console.error('Error fetching chat messages:', error);
@@ -89,8 +109,12 @@ const Sidebar = () => {
                     </div>
                     <ul className="people">
                         {contacts.map((person, index) => (
-                            <li key={index} className="person" onClick={() => handlePersonClick(person.dpi)}> 
-                                <img className="imagen" src='https://www.anmosugoi.com/wp-content/uploads/2019/07/konosubaaqua.jpg' alt="" />
+                            <li 
+                                key={index} 
+                                className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`} 
+                                onClick={() => handlePersonClick(person.dpi)}
+                            > 
+                                <img className="imagen" src={person.image} alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>
                                     <span className="time">{person.time}</span>
@@ -101,8 +125,15 @@ const Sidebar = () => {
                     </ul>
                 </div> 
                 <div className="right">
-                    <div className="top">
-                        <span>To: <span className="name">{selectedPerson ? selectedPerson.name : "Persona con la que está chateando"}</span></span>
+                    <div className={`top ${selectedPerson ? 'chat-selected' : ''}`}>
+                        {selectedPerson ? (
+                            <div className="chat-info">
+                                <img className="chat-image" src={selectedPerson.image} alt={`${selectedPerson.name}'s avatar`} />
+                                <span className="name">{selectedPerson.name}</span>
+                            </div>
+                        ) : (
+                            <span className="name">Selecciona un chat</span>
+                        )}
                     </div>
                     {isDetailsOpen ? (
                         <Details 

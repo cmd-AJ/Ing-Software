@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Bottom.css';
 import { getChatIdWithDPI, insertChatMessage } from '../../controller/ChatController';
-
+import { FaHandshake, FaImages } from 'react-icons/fa';
+import { IoSend } from "react-icons/io5";
 
 interface BottomProps {
   loggedUserDpi: string;
@@ -16,8 +17,8 @@ const  Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, upda
     const user = localStorage.getItem('User');
     let role = ''
     try {
-      const jsonparse = JSON.parse(user+'')
-      role = jsonparse.role
+      const jsonparse = JSON.parse(user+'');
+      role = jsonparse.role;
       
     } catch (error) {
     }
@@ -40,15 +41,16 @@ const  Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, upda
 
     return (
       <div className="bottom">
+        <FaImages className="icon gallery-icon" /> {/* Icono de galería a la izquierda */}
         <textarea
           className="input-message"
           placeholder="Type a message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          style={{height:'39px'}}
+          style={{ height: '39px' }}
         />
-        <button className="send" onClick={sendMessage}>Send</button>
-        <button className="hire" disabled={role === 'Empleado'} onClick={onHireClick}>Hire</button>
+        <IoSend className="icon send-icon" onClick={sendMessage} /> {/* Icono de enviar */}
+        <FaHandshake className="icon hire-icon" onClick={onHireClick} disabled={role === 'Empleado'} /> {/* Icono de handshake */}
       </div>
     );
 }
