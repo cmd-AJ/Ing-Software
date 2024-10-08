@@ -30,3 +30,4 @@ const Searched: React.FC<{ job: string, dpi: string }> = ({ job }) => {
 }
 
 export default Searched;
+

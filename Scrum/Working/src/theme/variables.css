@@ -5,11 +5,20 @@
     --ion-color-primary: #6F9CEB;
     
     /** secondary **/
-    --ion-color-secondary: #6F9CEB;
+    --ion-color-secondary: #7E90BC;
     
     /** tertiary **/
     --ion-color-tertiary: #305BAC;
     
+    /** quaternary **/
+    --ion-color-quaternary: #E8EFFF;
+
+    /** quintary **/
+    --ion-color-quintary: #EEE8A9;
+
+    /** sextarian **/
+    --ion-color-sextarian: #EBD26E;
+
     /** success **/
     --ion-color-success: #2dd36f;
     
