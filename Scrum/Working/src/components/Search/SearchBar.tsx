@@ -28,3 +28,4 @@ function SearchBar({ onRequestChange }: SearchBarProps) {
 }
 
 export default SearchBar;
+
