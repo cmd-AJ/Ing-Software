@@ -3,6 +3,22 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function insertSurveyToCompletedJob(idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador) {
+    try {
+        const query= {
+            text: "INSERT INTO resena(idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador) VALUES ($1, $2, $3, $4, $5)",
+            values: [idtrabajo, calificacion, descripcion, dpi_trabajador, dpi_empleador]
+        } 
+
+        const result = await client.query(query)
+
+        return result
+    } catch (error) {
+
+        console.error('Error while inserting the survey for the completed Job')
+    }
+}
+
 export async function insertCommentWithId(id, contenido, dpi_emisor) {
     try {
         const query = {
