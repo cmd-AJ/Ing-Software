@@ -14,7 +14,7 @@ export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, 
 
         const result = client.query(query)
 
-        return result.rows[0]
+        return result.rows
     } catch (error) {
         console.error('Error while inserting job to completed')
     }    

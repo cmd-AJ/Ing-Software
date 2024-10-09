@@ -696,12 +696,12 @@ app.post('/contacts/hire/complete', apiKeyAuth ,async (req, res) => {
      
     const insertedObject = await insertJobToCompleted(dpitrabajador, dpiempleador, titulo, fecha, pago)
     
-    if (insertedObject){
-      res.status(200).json(insertedObject)
-    }
-    else{
+    if (insertedObject.rows.length === 0){
       return res.status(400).json({ error: "Failed to mark job as competed" });
     }
+    
+    return res.status(200).json(insertedObject.rows[0])
+
   } catch (error) {
     console.error('Error while marking job as completed:', error)
     res.status(500).json({ error: 'Internal Server Error'})
