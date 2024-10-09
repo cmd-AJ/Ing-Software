@@ -434,3 +434,29 @@ export async function sendSatisfactionSurvey(jobId: Number, rating: Number, dpi_
         throw error;
     }
 }
+
+
+export async function get_contrat_by_month(dpi: string, mes: string) {
+    try {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/getcontrat_bymonth/${dpi}/${mes}`, {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error(`Error fetching user: ${response.status} ${response.statusText}`);
+        }
+
+        // Parsear la respuesta JSON
+        const userData = await response.json();
+        return userData
+    } catch (error) {
+        console.error('Error fetching user by DPI:', error);
+        throw error;
+    }
+}
+
