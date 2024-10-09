@@ -7,12 +7,16 @@
   margin-top: 20px;
   background-color: #fefeff;
   align-items: flex-start;
+  border: 1px solid #cecece; /* Light gray border */
+
 }
 
 .t-profile-container {
+  margin-top: 5px;
+  margin-left: 5px;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   overflow: hidden;
   margin-right: 10px;
   background-color: rgba(128, 128, 128, 0);
@@ -36,37 +40,49 @@
   flex: 1;
 }
 
-.input-container {
-  flex: 1;
-  width: 100%;
-}
 
-.textarea-input {
-  width: 100%;
-}
 
 .action-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 10px;
 }
 
+/* Post Button */
 .post-button {
-  background-color: #3a87c6; /* Example style */
-  color: white;
+  background-color: #fefeff;
+  color: rgb(47, 0, 255);
   border-radius: 10px;
-  width: 100px;
+  width: 40px;
   height: 40px;
-  flex-shrink: 0; /* Prevents the icons and text from shrinking */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
   cursor: pointer;
-  color: #ecf0f1;
-  font-size: 14px;
-  font-weight: bold;
+  border: none;
+  opacity: 0; /* Start hidden */
+  transform: translateY(10px); /* Start with a small downward position */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation for opacity and position */
+}
+
+/* Animation for the button */
+.post-button.show {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Move to normal position */
+}
+
+
+
+/* Optional: style the IonIcon for the send icon */
+.post-button:hover ion-icon {
+  color: #000000; /* Lighter color on hover */
+  transform: scale(1.1); /* Slightly increase the icon size */
 }
 
 .photo-icon {
-  font-size: 24px;
+  font-size: 20px;
   color: #000000;
   cursor: pointer;
 }
@@ -83,4 +99,50 @@
   object-fit: cover; /* Ensure the image doesn't distort */
   border-radius: 8px; /* Optional: add rounded corners */
   border: 1px solid #ccc; /* Optional: add a border */
+}
+
+.input-container {
+  width: 100%; /* Make it responsive to its container's width */
+  background-color: #ffffff; /* Fully white background */
+  padding: 10px; /* Add some padding for better aesthetics */
+  border-radius: 10px; /* Rounded corners for a softer look */
+  display: flex;
+  flex-direction: row;
+}
+
+.textarea-input {
+  width: 100%; 
+  font-size: 14px; 
+  line-height: 1.5; 
+  border: none;
+  resize: none;
+  outline: none; 
+  background-color: transparent; 
+  overflow: hidden; 
+  font-family: Arial, sans-serif; 
+}
+
+.textarea-input:focus {
+  outline: none; /* No outline when focused */
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box; /* Make sure padding and border don't affect width */
+}
+
+/* Optional: If you want to disable the scrollbar */
+.textarea-input::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit browsers */
+}
+
+.textarea-input {
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+
+.photo-icon:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.1); /* Slightly increase size on hover */
 }
