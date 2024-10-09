@@ -3,6 +3,7 @@ import { getWorkersByJob } from '../../controller/UserController';
 import './List.css'
 import { Trabajador } from './type';
 import Information from './Information';
+import TextND from '../Txt/TextND';
 
 interface ContainerProps {
     job: string
@@ -28,13 +29,18 @@ const List: React.FC<ContainerProps> = ({job}) => {
 
     return (
         <div id="list-job-container">
+          <>
             {
-                workers.map((worker, index) => (
-                    <div key={index}>
-                        <Information trabajador={worker}/>
-                    </div>
-                ))
+              workers.map((worker, index) => (
+                  <div key={index}>
+                      <Information trabajador={worker}/>
+                  </div>
+              ))
             }
+            <div id='text-results'>
+              <TextND size='small' text='Esos son todos los resultados' hex='#000'/>
+            </div>
+          </>
         </div>
     )
 }
