@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './information.css';
 import dayjs from 'dayjs';
 import { makeHiring } from '../../controller/ChatController';
+import Swal from 'sweetalert2'
 
 interface InformationProps {
   date: dayjs.Dayjs | null;
@@ -66,7 +67,34 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
 
       const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
 
-      console.log('Contratación exitosa:', response);
+      console.log('Contratación exitosa:', response.Success);
+
+      if (response.Success === 'Contrato realizado') {
+
+        Swal.fire({
+          title: "Contratación realizada",
+          text: "Has realizado una contratación con éxito",
+          icon: "success",
+          heightAuto: false,
+          timer: 2500,
+          timerProgressBar: true,
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+
+      } else {
+
+        Swal.fire({
+          title: "Contratacion Fallida",
+          text: "No se ha podido realizar la contratación ",
+          icon: "error",
+          heightAuto: false,
+          timer: 2500,
+          timerProgressBar: true, // Optional: show a progress bar
+          showCloseButton: false, // Hide the close button
+          showConfirmButton: false // Hide the OK button
+        });
+      }
 
       // Cerrar el modal después de confirmar
       onClose();
@@ -86,10 +114,10 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
         <div className="number">01.</div>
         <div className="text-input">
           <label>Titulo *</label>
-          <input 
-            type="text" 
-            value={title} 
-            onChange={handleTitleChange} 
+          <input
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
           />
         </div>
       </div>
@@ -97,10 +125,10 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
         <div className="number">02.</div>
         <div className="text-input">
           <label>Hora *</label>
-          <input 
-            type="time" 
-            value={time} 
-            onChange={handleTimeChange} 
+          <input
+            type="time"
+            value={time}
+            onChange={handleTimeChange}
           />
         </div>
       </div>
@@ -110,24 +138,24 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
           <label>Monto *</label>
           <div className="currency-input">
             <span className="currency-symbol">Q</span>
-            <input 
-              type="text" 
-              value={amount} 
-              onKeyDown={handleKeyDown} 
-              onChange={handleAmountChange} 
+            <input
+              type="text"
+              value={amount}
+              onKeyDown={handleKeyDown}
+              onChange={handleAmountChange}
             />
             <span className="decimal-suffix">.00</span>
           </div>
         </div>
       </div>
       <div className="button-container">
-        <button 
+        <button
           className="cancel-button"
           onClick={handleCancelClick}
         >
           Cancelar
         </button>
-        <button 
+        <button
           className="confirm-button"
           onClick={handleConfirmClick}
         >

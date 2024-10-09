@@ -548,4 +548,20 @@ export async function getreport_nofecha(dpi, idreporte) {
     }
 }
 
+export async function getcontrataciones_por_mes(dpi, mes) {
+    try {
+        const query = {
+            text: "select idtrabajo, descripcion, dpiempleador, timestampcita, pago from trabajodisponible where EXTRACT(MONTH FROM timestampcita) = @$2 and dpiempleador = REPLACE(quote_literal($1), '''', '');",
+            values: [dpi, mes]
+        }
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error getting the code from dpi")
+        throw error
+    }
+}
+
+
+
 

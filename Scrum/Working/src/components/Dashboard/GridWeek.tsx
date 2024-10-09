@@ -75,7 +75,7 @@ const GridWeek: React.FC<GridWeekProps> = ({ notes, weekDays, setModal }) => {
                 {notes
                   .filter(note => getDayIndex(note.dia) === dayIndex && getHourIndex(note.hora) === hourIndex)
                   .map((note, noteIndex) => (
-                    <Note key={noteIndex} {...note} setModal={setModal}/>
+                    <Note key={noteIndex} {...note} setModal={setModal} foto={note.foto}/>
                   ))}
               </div>
             ))}

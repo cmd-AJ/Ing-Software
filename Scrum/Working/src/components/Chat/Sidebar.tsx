@@ -5,14 +5,25 @@ import Details from './Details';
 import Bottom from './Bottom';
 
 import { getContacts, getChatMessages } from '../../controller/ChatController';
+import { useLocation } from 'react-router';
+
+type chatUser = {
+    dpi: string
+    img: string
+    name: string
+}
 
 const Sidebar = () => {
-    const [selectedPerson, setSelectedPerson] = useState<any>(null); // Cambié el tipo a `any` para manejar el objeto completo
+    const [selectedPerson, setSelectedPerson] = useState<chatUser | null>(null); // Cambié el tipo a `any` para manejar el objeto completo
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false); // Controla si Details está abierto
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const dpiChat = queryParams.get('chat')
 
     // Fetch contacts on component mount
     useEffect(() => {
@@ -34,6 +45,20 @@ const Sidebar = () => {
 
     // Handle window resize
     useEffect(() => {
+        const user = localStorage.getItem('notUser')
+
+        if (dpiChat && user) {
+            const parsedUser = JSON.parse(user)
+
+            if (parsedUser.dpi === dpiChat) {
+                setSelectedPerson({
+                    name: parsedUser.nombre.split(" ")[0] + " " + parsedUser.apellidos.split(" ")[0],
+                    img: parsedUser.imagen,
+                    dpi: parsedUser.dpi
+                })
+            }
+        }
+
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
@@ -114,7 +139,7 @@ const Sidebar = () => {
                                 className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`} 
                                 onClick={() => handlePersonClick(person.dpi)}
                             > 
-                                <img className="imagen" src={person.image} alt="" />
+                                <img className="imagen" src={person.img} alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>
                                     <span className="time">{person.time}</span>

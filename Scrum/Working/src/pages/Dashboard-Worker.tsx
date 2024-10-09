@@ -155,7 +155,7 @@ const Dashboard_Worker: React.FC = () => {
               className="feed-img"></img>
               <div className="lower-displayment">
                 <div>
-                  <CircleImg reference={myUser.imagen}/>
+                  <CircleImg reference={image}/>
                   <UserText 
                     text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
                     text2={myUser.role}
