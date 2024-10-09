@@ -3,11 +3,12 @@ import './BtnStyles.css'
 import ModalBtnI from './ModalBtnI'
 import ModalBtnN from './ModalsBtnN'
 import { chatbubbleEllipses, pencilOutline, personAddOutline } from 'ionicons/icons'
-import BtnNav from './BtnNav'
 import BtnAction from './BtnAction'
 import { addTrustedPeople, getTrustedPeople } from '../../controller/UserController'
 import { IonAlert } from '@ionic/react'
 import { peopleOutline } from 'ionicons/icons'
+import { useHistory } from 'react-router'
+import { createNewChatIfNotExists } from '../../controller/ChatController'
 // import BtnNav from './BtnNav'
 
 type NotUser = {
@@ -43,12 +44,25 @@ const BtnDisplayment: React.FC<ContainerProps> = (
 ) => {
 
     const [trigger, setTrigger] = useState('present-alert-exist')
+    
+    const history = useHistory()
+    
+    const handleChatDirection = async () => {
+        const myUser = localStorage.getItem('User')
+        const externalUser = localStorage.getItem('notUser')
 
-    useEffect(() => {
-        console.log(owner);
-        
-    },[])
+        if (myUser && externalUser) {
+            try {
+                await createNewChatIfNotExists(JSON.parse(myUser).dpi, JSON.parse(externalUser).dpi)
+            } catch (error) {
+                console.error("Error during chat creation:", error);
+                return;
+            }
+            history.push('/chat?chat=' + JSON.parse(externalUser).dpi)
+        }
 
+    }
+    
     const handleTrust = async () => {
         // Obtener la lista de personas confiables
         const trustList = await getTrustedPeople("3833 86608 0102");
@@ -88,10 +102,9 @@ const BtnDisplayment: React.FC<ContainerProps> = (
                 setTrigger('present-alert');
                 addTrustedPeople(parsedOwnUser.dpi, parsedUser.dpi);
             }
-        }
-        console.log(trigger);
-        
+        }        
     }
+
     
 
     if (owner === 'true') {
@@ -116,7 +129,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
                     trigger='present-alert'
                 ></IonAlert>
                 <div className='btn-header-horizontal'>
-                    <BtnNav img={chatbubbleEllipses} direction='chat'/>
+                    <BtnAction trigger='' img={chatbubbleEllipses} text='' action={handleChatDirection}/>
                     <BtnAction trigger={trigger} img={personAddOutline} action={handleTrust} text=''/>
                 </div>
             </>
