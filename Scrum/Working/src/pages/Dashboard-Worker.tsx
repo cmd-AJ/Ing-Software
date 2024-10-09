@@ -15,7 +15,7 @@ import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 import { useLocation } from "react-router";
 import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
-import { getContratWorker } from "../controller/UserController";
+import { getContratEmployer, getContratWorker } from "../controller/UserController";
 import TrustPeople from "../components/Modals/Structures/TrustPeople";
 
 type User = {
@@ -37,10 +37,14 @@ type User = {
 
 
 type Contrat = {
-  nombre: string
-  apellidos: string
+  nombree: string
+  apellidoe: string
+  pice: string
+  nombret: string
+  apellidot: string
+  pict: string
   dpiempleador: string
-  imagen: string
+  dpitrabajador: string
   fecha: string
   fechafin: string
   calificacion: number
@@ -106,6 +110,8 @@ const Dashboard_Worker: React.FC = () => {
         const contratList = await getContratWorker(myUser.dpi)
 
         setContratsList(contratList)
+        console.log(contratList);
+        
       }
 
       fecthData()

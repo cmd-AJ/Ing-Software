@@ -56,3 +56,6 @@
     color: black;
   }
 
+  .MuiDialogActions-root MuiDialogActions-spacing MuiPickersLayout-actionBar css-knqc4i-MuiDialogActions-root{
+    display: none;
+  }

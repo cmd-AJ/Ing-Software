@@ -3,6 +3,39 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function deleteHiringFromAvailable(hiringID){
+    try {
+        const query = {
+            text: "DELETE FROM trabajodisponible WHERE idtrabajo = $1 RETURNING * ",
+            values: [hiringID]
+        }
+
+        const result = client.query(query)
+
+        return result
+
+    } catch (error){
+
+        console.error("Could not delete job from avaialable jobs")
+    }
+}
+
+export async function insertSurveyToCompletedJob(idtrabajo, calificacion, descripcion, dpi_trabajador) {
+    try {
+        const query= {
+            text: "INSERT INTO resena(idtrabajo, calificacion, descripcion, dpi_trabajador) VALUES ($1, $2, $3, $4)",
+            values: [idtrabajo, calificacion, descripcion, dpi_trabajador]
+        } 
+
+        const result = await client.query(query)
+
+        return result
+    } catch (error) {
+
+        console.error('Error while inserting the survey for the completed Job')
+    }
+}
+
 export async function insertCommentWithId(id, contenido, dpi_emisor) {
     try {
         const query = {
@@ -43,7 +76,9 @@ export async function getThreadPosts(){
         const query = {
             text: "SELECT thr.idthreads, usr.nombre || ' ' || usr.apellidos AS usuario, usr.dpi, usr.imagen AS img_usuario, thr.descripcion, post_timestamp AS posttime, thr.image AS imagen " +
                   "FROM threads thr " +
-                  "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario)"
+                  "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario) " +
+                  "ORDER BY post_timestamp DESC "
+                  
         }
 
         const result = await client.query(query)

@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import {insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha} from './db.js'
+import { deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -628,3 +628,44 @@ app.post('/threads/insertComment', apiKeyAuth, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.post('/survey', apiKeyAuth, async (req, res) => {
+  try {
+    const { idtrabajo, calificacion, dpi_trabajador, descripcion } = req.body;
+
+    // Basic validation
+    if (!idtrabajo || !calificacion || !dpi_trabajador) {
+      return res.status(400).json({ error: "Missing required fields. 'idtrabajo', 'calificacion', 'dpi_trabajador', are required." });
+    }
+
+    // Proceed with survey creation
+    const response = await insertSurveyToCompletedJob(idtrabajo, calificacion, descripcion, dpi_trabajador);
+
+    if (response) {
+      return res.status(200).json({ success: "Successfully created new survey for job" });
+    } else {
+      return res.status(400).json({ error: "Failed to create survey for job" });
+    }
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.delete('/contacts/hirings/delete/:hiringID', apiKeyAuth ,async (req, res) => {
+  try {
+    const { hiringID } = req.params;
+    const deletedHiring = await deleteHiringFromAvailable(hiringID)
+
+    if (deletedHiring.rows.length === 0){
+      return res.status(404).json({error: 'hiring not found'})
+    }
+
+    return res.status(200).json(deletedHiring.rows[0])
+
+  } catch (error) {
+    console.error("Error while getting hirings:", error)
+    res.status(500).json({ error: 'Internal Server Error'})
+  }
+})

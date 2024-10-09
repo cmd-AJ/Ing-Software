@@ -403,3 +403,34 @@ export async function getUserName(dpi: string) {
         throw error;
     }
 }
+
+
+export async function sendSatisfactionSurvey(jobId: Number, rating: Number, dpi_worker: string, description?: string) {
+    try {
+
+        const survey_data = {
+            idtrabajo: jobId,
+            calificacion: rating,
+            dpi_trabajador: dpi_worker,
+            descripcion: description
+        }
+
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/survey`, {
+            method: 'POST',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(survey_data)
+        });
+
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error(`Error while sending survey`);
+        }
+
+    } catch (error) {
+        console.error('Error sending satisfaction survey:', error);
+        throw error;
+    }
+}

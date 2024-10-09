@@ -59,14 +59,18 @@ export async function getWorkers(trabajo) {
     const session = createSession();
 
     try {
-        const query = `MATCH p=(usr:Usuario)-[:trabaja_de]->(tr:Trabajo) WHERE tr.nombre_trabajo = '${trabajo}' RETURN usr LIMIT 25`;
-        const result = await session.run(query);
+        // Using parameterized query and Levenshtein distance for fuzzy matching
+        const query = `
+            MATCH (usr:Usuario)-[:trabaja_de]->(tr:Trabajo)
+            WHERE apoc.text.levenshteinDistance(toLower(tr.nombre_trabajo), toLower($trabajo)) <= 3
+            RETURN usr LIMIT 25
+        `;
+        const result = await session.run(query, { trabajo });
 
-        // Transformar los registros obtenidos en un arreglo de objetos JSON
         const workers = result.records.map(record => {
             const worker = record.get('usr');
             return {
-                nombre: worker.properties.nombre, // Obtener el nombre del trabajo
+                nombre: worker.properties.nombre,
                 telefono: worker.properties.telefono,
                 municipio: worker.properties.municipio,
                 rating: worker.properties.rating,
@@ -83,6 +87,7 @@ export async function getWorkers(trabajo) {
         await session.close();
     }
 }
+
 
 
 export async function getTrustedUsersByDpi(dpi) {

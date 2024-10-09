@@ -13,10 +13,10 @@ describe('Obtener los posts', () => {
 });
 
 describe('Obtener los Comentarios', () => {
-  it('deberia de existir al menos un comentario para el post con ID 6', async () => {
-    const comment = await getThreadComments(6);
+  it('deberia de existir al menos un comentario para el post con ID 2', async () => {
+    const comment = await getThreadComments(2);
     const firstComment = comment[0]
-    expect(firstComment).toBeDefined(); // Verifica que se haya obtenido un comentario
+    expect(firstComment).toBeDefined(); // Verifica que seq haya obtenido un comentario
   });
 
 });

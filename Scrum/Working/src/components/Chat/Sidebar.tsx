@@ -11,7 +11,7 @@ const Sidebar = () => {
     const [contacts, setContacts] = useState([]);
     const [messages, setMessages] = useState([]);
     const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
-    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false); // Controla si Details está abierto
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     // Fetch contacts on component mount
@@ -53,10 +53,16 @@ const Sidebar = () => {
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, [selectedPerson, loggedUserDpi]);
 
+    // Manejo del clic en una persona/contacto
     const handlePersonClick = async (dpi: string) => {
         const selectedPerson2 = contacts.find(person => person.dpi === dpi);
         console.log(selectedPerson2);
         console.log(loggedUserDpi);
+
+        // Si ya hay una persona seleccionada (y es diferente), cierra el componente Details (Information)
+        if (selectedPerson && selectedPerson.dpi !== selectedPerson2.dpi && isDetailsOpen) {
+            setIsDetailsOpen(false); // Cierra el modal de información si cambia de chat
+        }
 
         // Actualizar la persona seleccionada
         setSelectedPerson(selectedPerson2); 
