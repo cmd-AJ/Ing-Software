@@ -11,15 +11,16 @@ import { getHirings } from '../controller/ChatController';
 import ModalStructure from '../components/Modals/ModalStructure';
 import CloseContrat from '../components/Modals/Structures/CloseContrat';
 
-type jobData = {
-  trabajo: string
-  nombre: string
-  hora: string
-  precio: string
+interface NoteData {
+  trabajador: string;
+  dia: string;
+  hora: string;
+  descripcion: string;
+  precio: string;
+  foto: string;
 }
 
 const Dashboard: React.FC = () => {
-
   const [width, setWidth] = useState(window.innerWidth);
   const [typeCalendar, setTypeCalendar] = useState('semana');
   const currentDate = new Date();
@@ -28,12 +29,11 @@ const Dashboard: React.FC = () => {
   const [month, setMonth] = useState(currentDate.getMonth());
   const [year, setYear] = useState(currentDate.getFullYear());
   const [week, setWeek] = useState<number>(0);
-  const [weekDays, setWeekDays] = useState<string[]>([]);  // Estado para almacenar las fechas de la semana
-  const [elementos, setElementos] = useState<any[]>([]);  // Estado para almacenar los datos dinámicos
+  const [weekDays, setWeekDays] = useState<string[]>([]);  // Estado para almacenar las fechas de la semana actual
+  const [elementos, setElementos] = useState<NoteData[]>([]);  // Estado para almacenar los datos dinámicos
 
-  const [showMessage, setShowMessage] = useState(false) 
-
-  const [jobInfo, setJobInfo] = useState()
+  const [showMessage, setShowMessage] = useState(false);
+  const [selectedNote, setSelectedNote] = useState<NoteData | null>(null);  // Estado para la Note seleccionada
 
   useEffect(() => {
     setThisMonth(new Month(month, year));
@@ -78,7 +78,21 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
         <div className='background'>
-          {showMessage && <ModalStructure setModal={setShowMessage} content={<CloseContrat setShow={setShowMessage}/>}/>}
+          {showMessage && selectedNote && (
+            <ModalStructure 
+              setModal={setShowMessage} 
+              content={
+                <CloseContrat 
+                  setShow={setShowMessage} 
+                  trabajo={selectedNote.trabajador} 
+                  pago={selectedNote.precio} 
+                  foto={selectedNote.foto} 
+                  descripcion={selectedNote.descripcion}
+
+                />
+              } 
+            />
+          )}
           <div className='calendar-header'>
             <div className='center-right-element'>
               <b>
@@ -104,7 +118,12 @@ const Dashboard: React.FC = () => {
           </div>
           {
             typeCalendar === 'semana' &&
-            <GridWeek notes={elementos} weekDays={weekDays} setModal={setShowMessage}/>  // Usar weekDays en GridWeek
+            <GridWeek 
+              notes={elementos} 
+              weekDays={weekDays} 
+              setModal={setShowMessage} 
+              setSelectedNote={setSelectedNote}  // Pasar setSelectedNote a GridWeek
+            />  
           }
           {
             typeCalendar === 'mes' &&
@@ -117,25 +136,45 @@ const Dashboard: React.FC = () => {
     return (
       <IonPage>
         <div className='background'>
-        {showMessage && <ModalStructure setModal={setShowMessage} content={<CloseContrat setShow={setShowMessage}/>}/>}
-        <div className='header-top-calendar'>
-                <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
-              </div>
-              <div className='header-bottom-calendar'>
-                <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
-                <DateChanger 
-                  week={week} 
-                  setWeek={setWeek} 
-                  monthMatrix={thisMonth.matrix} 
-                  month={month} setMonth={setMonth} 
-                  year={year} setYear={setYear} 
-                  typeCalendar={typeCalendar}
-                  setWeekDays={setWeekDays}
+          {showMessage && selectedNote && (
+            <ModalStructure 
+              setModal={setShowMessage} 
+              content={
+                <CloseContrat 
+                  setShow={setShowMessage} 
+                  trabajo={selectedNote.trabajador} 
+                  pago={selectedNote.precio} 
+                  foto={selectedNote.foto} 
+                  descripcion={selectedNote.descripcion}
                 />
+              } 
+            />
+          )}
+          <div className='header-top-calendar'>
+            <DoubleToggle typeCalendar={typeCalendar} setTypeCalendar={setTypeCalendar}/>
+          </div>
+          <div className='header-bottom-calendar'>
+            <TextND text={thisMonth.name + ", " + thisMonth.year} size='big' hex='#000'/>
+            <DateChanger 
+              week={week} 
+              setWeek={setWeek} 
+              monthMatrix={thisMonth.matrix} 
+              month={month} 
+              setMonth={setMonth} 
+              year={year} 
+              setYear={setYear} 
+              typeCalendar={typeCalendar}
+              setWeekDays={setWeekDays}
+            />
           </div>
           {
             typeCalendar === 'semana' &&
-            <GridWeek notes={elementos} weekDays={weekDays} setModal={setShowMessage}/>  // Usar weekDays en GridWeek
+            <GridWeek 
+              notes={elementos} 
+              weekDays={weekDays} 
+              setModal={setShowMessage} 
+              setSelectedNote={setSelectedNote}  // Pasar setSelectedNote a GridWeek
+            />  
           }
           {
             typeCalendar === 'mes' &&
@@ -144,7 +183,7 @@ const Dashboard: React.FC = () => {
         </div>
       </IonPage>
     );
-  };
+  }
 }
 
 export default Dashboard;
