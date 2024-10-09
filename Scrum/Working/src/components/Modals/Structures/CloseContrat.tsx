@@ -1,18 +1,20 @@
 import { IonButton } from '@ionic/react';
 import BtnAction from '../../Btn/BtnAction';
 import './close_struct.css';
+import { moveJobFromAvailableIntoComplete } from '../../../controller/HireControler';
 
 // Interfaz de las props
 interface ContainerProps {
     setShow: (show: boolean) => void;
     trabajo: string;
-    pago: string | number;  // Puede ser string o number
+    pago: string | number;
     foto: string;
     descripcion: string;
+    idtrabajo: string;  // Nuevo campo para el id del trabajo
 }
 
-const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, descripcion }) => {
-    // Función para obtener la fecha actual en el formato requerido
+const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, descripcion, idtrabajo }) => {
+    // Función para obtener la fecha actual
     const obtenerFechaActual = (): string => {
         const fecha = new Date();
         const opciones: Intl.DateTimeFormatOptions = {
@@ -23,15 +25,27 @@ const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, 
         return fecha.toLocaleDateString('es-ES', opciones);
     };
 
-    // Función para obtener la hora actual en formato 12 horas con AM/PM
+    // Función para obtener la hora actual
     const obtenerHoraActual = (): string => {
         const fecha = new Date();
         const hora = fecha.getHours();
         const minutos = fecha.getMinutes();
         const ampm = hora >= 12 ? 'PM' : 'AM';
-        const horaFormato12 = hora % 12 || 12; // Ajusta para formato 12 horas
-        const minutosFormateados = minutos < 10 ? `0${minutos}` : minutos; // Asegura dos dígitos
+        const horaFormato12 = hora % 12 || 12;
+        const minutosFormateados = minutos < 10 ? `0${minutos}` : minutos;
         return `${horaFormato12}:${minutosFormateados}${ampm}`;
+    };
+
+    // Función que se ejecuta al confirmar
+    const handleConfirm = () => {
+        // Agregar console.log para verificar el idtrabajo
+        console.log(`El id del trabajo es: ${idtrabajo}`);
+        
+        // Llama a la función con el idtrabajo
+        moveJobFromAvailableIntoComplete(idtrabajo);  
+        
+        // Luego cierra el modal
+        setShow(false);  
     };
 
     return (
@@ -53,7 +67,7 @@ const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, 
                     <span>TRABAJO: {descripcion || 'Descripción no disponible'}</span> 
                     <span>FECHA: {obtenerFechaActual()}</span>
                     <span>HORA: {obtenerHoraActual()}</span>
-                    <span>PAGO: {pago}.00</span> {/* Mostrar el pago con dos decimales */}
+                    <span>PAGO: {pago}.00</span>
                 </div>
 
                 {/* Columna derecha: Imagen redonda recibida por prop */}
@@ -68,7 +82,7 @@ const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, 
                     Cancelar
                 </button>
 
-                <button className="confirm-button" onClick={() => setShow(false)}>
+                <button className="confirm-button" onClick={handleConfirm}>
                     Confirmar
                 </button>
             </div>

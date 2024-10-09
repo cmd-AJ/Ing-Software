@@ -6,14 +6,14 @@ interface NoteProps {
   hora: string;
   descripcion: string;
   foto: string;
-  setModal: (modal: boolean) => void
+  setModal: (modal: boolean) => void;  // Asegurarse de que setModal sea parte de las props
 }
 
 const Note: React.FC<NoteProps> = ({ trabajador, hora, descripcion, foto, setModal }) => {
-  const [startHour, endHour] = hora.split(' - '); // Split the hour range
+  const [startHour, endHour] = hora.split(' - '); // Dividir el rango de horas
 
   return (
-    <div className="note-card" onClick={() => setModal(true)} style={{cursor: 'pointer'}}>
+    <div className="note-card" onClick={() => setModal(true)} style={{ cursor: 'pointer' }}>
       <div className="note-content">
         <h3 className="note-title">{descripcion}</h3>
         <p className="note-hora">

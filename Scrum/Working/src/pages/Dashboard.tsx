@@ -12,6 +12,7 @@ import ModalStructure from '../components/Modals/ModalStructure';
 import CloseContrat from '../components/Modals/Structures/CloseContrat';
 
 interface NoteData {
+  idtrabajo: string;
   trabajador: string;
   dia: string;
   hora: string;
@@ -88,7 +89,7 @@ const Dashboard: React.FC = () => {
                   pago={selectedNote.precio} 
                   foto={selectedNote.foto} 
                   descripcion={selectedNote.descripcion}
-
+                  idtrabajo={selectedNote.idtrabajo}  // Pasar el idtrabajo
                 />
               } 
             />
@@ -146,6 +147,7 @@ const Dashboard: React.FC = () => {
                   pago={selectedNote.precio} 
                   foto={selectedNote.foto} 
                   descripcion={selectedNote.descripcion}
+                  idtrabajo={selectedNote.idtrabajo}  // Pasar el idtrabajo
                 />
               } 
             />
