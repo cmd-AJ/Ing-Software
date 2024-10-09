@@ -656,7 +656,7 @@ app.post('/survey', apiKeyAuth, async (req, res) => {
 app.delete('/contacts/hirings/delete/:hiringID', apiKeyAuth ,async (req, res) => {
   try {
     const { hiringID } = req.params;
-    const deletedHiring = await deleteHiringFromAvailable(dpi)
+    const deletedHiring = await deleteHiringFromAvailable(hiringID)
 
     if (deletedHiring.rows.length === 0){
       return res.status(404).json({error: 'hiring not found'})
