@@ -38,7 +38,7 @@
   resize: none;
   overflow: hidden; /* Hide the scrollbar until necessary */
   width: 100%;
-  background-color: transparent; /* Transparent background */
+  background-color: transparenst; /* Transparent background */
   border: 1px solid transparent; /* No visible border */
 
 }
@@ -57,18 +57,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease-in-out; /* Smooth transition for scaling */
+    transition: transform 0.2s ease-in-out;
 }
 
 .comment-input button ion-icon {
-    font-size: 1.5em; /* Default icon size */
-    color: #444cbf; /* Default icon color */
-    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for size and color change */
+    font-size: 1.5em;
+    color: #444cbf; 
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; 
 }
 
 .comment-input button:hover ion-icon {
-    color: #000000; /* Change icon color on hover */
-    transform: scale(1.1); /* Slightly increase the icon size */
+    color: #000000; 
+    transform: scale(1.1); 
 }
 
 
