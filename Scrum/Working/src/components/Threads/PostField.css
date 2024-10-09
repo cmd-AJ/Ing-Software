@@ -5,7 +5,7 @@
   padding: 10px;
   border-radius: 10px;
   margin-top: 20px;
-  background-color: #fefeff;
+  background-color: #f9f8f9;
   align-items: flex-start;
   border: 1px solid #cecece; /* Light gray border */
 
@@ -103,7 +103,7 @@
 
 .input-container {
   width: 100%; /* Make it responsive to its container's width */
-  background-color: #ffffff; /* Fully white background */
+  background-color: #f9f8f9; /* Fully white background */
   padding: 10px; /* Add some padding for better aesthetics */
   border-radius: 10px; /* Rounded corners for a softer look */
   display: flex;
@@ -111,6 +111,7 @@
 }
 
 .textarea-input {
+
   width: 100%; 
   font-size: 14px; 
   line-height: 1.5; 

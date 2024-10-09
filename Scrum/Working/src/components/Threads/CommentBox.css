@@ -1,21 +1,22 @@
 .comment-box {
   width: 100%;
-  background-color: #f9f8f8;
-  border-radius: 5px;
+  background-color: #f9f8f9;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 3px;
-  border: 1px solid #ffffff;
   border: 1px solid transparent; /* No visible border */
   margin-top: 5px;
+  border: 1px solid #8c8d8d; 
 
 }
 
 .comment-user-profile {
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
   overflow: hidden;
   margin-right: 10px;
   background-color: rgba(128, 128, 128, 0);
@@ -38,7 +39,7 @@
   resize: none;
   overflow: hidden; /* Hide the scrollbar until necessary */
   width: 100%;
-  background-color: transparent; /* Transparent background */
+  background-color: transparenst; /* Transparent background */
   border: 1px solid transparent; /* No visible border */
 
 }
@@ -57,18 +58,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease-in-out; /* Smooth transition for scaling */
+    transition: transform 0.2s ease-in-out;
 }
 
 .comment-input button ion-icon {
-    font-size: 1.5em; /* Default icon size */
-    color: #444cbf; /* Default icon color */
-    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition for size and color change */
+    font-size: 1.5em;
+    color: #444cbf; 
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; 
 }
 
 .comment-input button:hover ion-icon {
-    color: #000000; /* Change icon color on hover */
-    transform: scale(1.1); /* Slightly increase the icon size */
+    color: #000000; 
+    transform: scale(1.1); 
 }
 
 
