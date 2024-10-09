@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import {apiKeyAuth, adminapiKeyAuth} from './auth.js'
-import { insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha} from './db.js'
+import { deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple,insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha} from './db.js'
 import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson} from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import {send_email_forfg, send_fg_password} from './fg_function.js'
@@ -652,3 +652,20 @@ app.post('/survey', apiKeyAuth, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.delete('/contacts/hirings/delete/:hiringID', apiKeyAuth ,async (req, res) => {
+  try {
+    const { hiringID } = req.params;
+    const deletedHiring = await deleteHiringFromAvailable(dpi)
+
+    if (deletedHiring.rows.length === 0){
+      return res.status(404).json({error: 'hiring not found'})
+    }
+
+    return res.status(200).json(deletedHiring.rows[0])
+
+  } catch (error) {
+    console.error("Error while getting hirings:", error)
+    res.status(500).json({ error: 'Internal Server Error'})
+  }
+})
