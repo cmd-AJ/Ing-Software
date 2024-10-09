@@ -36,6 +36,19 @@ const Dashboard: React.FC = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [selectedNote, setSelectedNote] = useState<NoteData | null>(null);  // Estado para la Note seleccionada
 
+  // Función para obtener los datos de hirings
+  const fetchHirings = async () => {
+    const dpi = localStorage.getItem('dpi'); 
+    const hirings = await getHirings(dpi);
+    setElementos(hirings);    
+  };
+  
+  // Callback para actualizar hirings después de completar la acción en CloseContrat
+  const handleUpdateHirings = () => {
+    fetchHirings();  // Llama a la función que actualiza los datos dinámicos
+  };
+  
+
   useEffect(() => {
     setThisMonth(new Month(month, year));
 
@@ -63,15 +76,9 @@ const Dashboard: React.FC = () => {
     setThisMonth(new Month(month, year));
   }, [month, year]);
 
-  // Nuevo useEffect para obtener los datos dinámicos
+  // useEffect para obtener los datos dinámicos
   useEffect(() => {
-    const fetchData = async () => {
-      const dpi = localStorage.getItem('dpi'); 
-      const hirings = await getHirings(dpi);
-      setElementos(hirings);    
-    };
-
-    fetchData();    
+    fetchHirings();    
   }, []);
 
 
@@ -89,7 +96,8 @@ const Dashboard: React.FC = () => {
                   pago={selectedNote.precio} 
                   foto={selectedNote.foto} 
                   descripcion={selectedNote.descripcion}
-                  idtrabajo={selectedNote.idtrabajo}  // Pasar el idtrabajo
+                  idtrabajo={selectedNote.idtrabajo}  
+                  updateHirings={handleUpdateHirings}  // Pasar el callback para actualizar los hirings
                 />
               } 
             />
@@ -113,7 +121,7 @@ const Dashboard: React.FC = () => {
                 year={year} 
                 setYear={setYear} 
                 typeCalendar={typeCalendar}
-                setWeekDays={setWeekDays}  // Pasar setWeekDays a DateChanger
+                setWeekDays={setWeekDays}  
               />
             </div>
           </div>
@@ -123,7 +131,7 @@ const Dashboard: React.FC = () => {
               notes={elementos} 
               weekDays={weekDays} 
               setModal={setShowMessage} 
-              setSelectedNote={setSelectedNote}  // Pasar setSelectedNote a GridWeek
+              setSelectedNote={setSelectedNote}  
             />  
           }
           {
@@ -147,7 +155,8 @@ const Dashboard: React.FC = () => {
                   pago={selectedNote.precio} 
                   foto={selectedNote.foto} 
                   descripcion={selectedNote.descripcion}
-                  idtrabajo={selectedNote.idtrabajo}  // Pasar el idtrabajo
+                  idtrabajo={selectedNote.idtrabajo}  
+                  updateHirings={handleUpdateHirings}  // Pasar el callback para actualizar los hirings
                 />
               } 
             />
@@ -175,7 +184,7 @@ const Dashboard: React.FC = () => {
               notes={elementos} 
               weekDays={weekDays} 
               setModal={setShowMessage} 
-              setSelectedNote={setSelectedNote}  // Pasar setSelectedNote a GridWeek
+              setSelectedNote={setSelectedNote}  
             />  
           }
           {

@@ -12,9 +12,10 @@ interface ContainerProps {
     foto: string;
     descripcion: string;
     idtrabajo: string;
+    updateHirings: () => void;  // Nueva prop para actualizar hirings en Dashboard
 }
 
-const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, descripcion, idtrabajo }) => {
+const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, descripcion, idtrabajo, updateHirings }) => {
     // Estado para controlar si se muestra el RatingModal o el CloseContrat
     const [showRatingModal, setShowRatingModal] = useState(false);
 
@@ -41,9 +42,12 @@ const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, 
     const handleConfirm = () => {
         console.log(`El id del trabajo es: ${idtrabajo}`);
         
-        // Llama a la función con el idtrabajo
+        // Llama a la función con el idtrabajo para moverlo a completado
         moveJobFromAvailableIntoComplete(idtrabajo);
         
+        // Actualiza los hirings en el Dashboard después de la confirmación
+        updateHirings();
+
         // Oculta el contenido de CloseContrat y muestra el RatingModal
         setShowRatingModal(true);
     };
@@ -69,7 +73,7 @@ const CloseContrat: React.FC<ContainerProps> = ({ setShow, trabajo, pago, foto, 
                             <span>TRABAJO: {descripcion || 'Descripción no disponible'}</span>
                             <span>FECHA: {obtenerFechaActual()}</span>
                             <span>HORA: {obtenerHoraActual()}</span>
-                            <span>PAGO: Q{pago}.00</span>
+                            <span>PAGO: {pago}.00</span>
                         </div>
 
                         <div className='info-image'>
