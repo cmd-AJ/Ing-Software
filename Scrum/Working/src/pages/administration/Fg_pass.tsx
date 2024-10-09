@@ -18,6 +18,8 @@ import {
   IonRadioGroup,
   IonItemSliding,
   IonToast,
+  IonModal,
+  IonButtons,
 
 
 } from "@ionic/react";
@@ -44,7 +46,7 @@ interface Cuenta {
 
 const Forgot_Page: React.FC = () => {
 
-  const [agreed, setagreed] = useState(3)
+  const [agreed, setagreed] = useState(2)
   const [dpi, setDpi] = useState('')
   const [validateDpi, setValidateDpi] = useState(false)
   const [methodos, setmethodos] = useState('')
@@ -53,6 +55,7 @@ const Forgot_Page: React.FC = () => {
   const [validateConfirmation, setValidateConfirmation] = useState(false)
   const [password, setPassword] = useState('')
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenmodal, setIsOpenmodal] = useState(false);
   const [mensaje, setmensaje] = useState('Error al cargar la pagina ')
 
   // Create references for each input field
@@ -62,53 +65,53 @@ const Forgot_Page: React.FC = () => {
   const input4Ref = useRef(null);
   const history = useHistory()
 
- 
+
   const [inputValues, setInputValues] = useState({
-      input1: '',
-      input2: '',
-      input3: '',
-      input4: '',
-    });
-  
+    input1: '',
+    input2: '',
+    input3: '',
+    input4: '',
+  });
 
 
-    const handleInputChange = (
-      e: React.ChangeEvent<HTMLInputElement>,
-      inputName: string,
-      nextInput?: React.RefObject<HTMLInputElement>
-    ) => {
-      const { value } = e.target;
-    
-      // Update the state for the corresponding input
-      setInputValues((prevValues) => ({
-        ...prevValues,
-        [inputName]: value,
-      }));
-    
-      // If a character is typed, move focus to the next input
-      if (value.length === 1 && nextInput?.current) {
-        nextInput.current.focus();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    inputName: string,
+    nextInput?: React.RefObject<HTMLInputElement>
+  ) => {
+    const { value } = e.target;
+
+    // Update the state for the corresponding input
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [inputName]: value,
+    }));
+
+    // If a character is typed, move focus to the next input
+    if (value.length === 1 && nextInput?.current) {
+      nextInput.current.focus();
+    }
+  };
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    prevInput?: React.RefObject<HTMLInputElement>
+  ) => {
+    // Check if backspace was pressed and move to the previous input
+    if (e.key === 'Backspace' && prevInput?.current) {
+      const input = e.target as HTMLInputElement;
+
+      if (input.value === '') {
+        prevInput.current.focus();
       }
-    };
-    
-    const handleKeyDown = (
-      e: React.KeyboardEvent<HTMLInputElement>,
-      prevInput?: React.RefObject<HTMLInputElement>
-    ) => {
-      // Check if backspace was pressed and move to the previous input
-      if (e.key === 'Backspace' && prevInput?.current) {
-        const input = e.target as HTMLInputElement;
-    
-        if (input.value === '') {
-          prevInput.current.focus();
-        }
-      }
-    };
-    
+    }
+  };
+
 
   React.useEffect(() => {
   }, [agreed]);
-    React.useEffect(() => {
+  React.useEffect(() => {
   }, [agreed]);
 
   const handleClicksendmail = async (numero: number) => {
@@ -118,46 +121,47 @@ const Forgot_Page: React.FC = () => {
       setmensaje('DPI NO INGRESADO')
 
     }
-    else{
-      if (methodos === ''){
-        
+    else {
+      if (methodos === '') {
+
         setIsOpen(true)
         setmensaje('No ha elegido el metodo para reestablecer la contrasena')
-      }else{
-        const pasa = await sendmessages(dpi, methodos);
-        if (pasa === true){
-         setagreed(numero) 
+      } else {
+        // const pasa = await sendmessages(dpi, methodos);
+        const pasa = true
+        if (pasa === true) {
+          setIsOpenmodal(true)
         }
 
 
       }
-    
+
     }
 
   };
 
-  const handleClick = async (numero: number, ) => {
-   setagreed(numero)
+  const handleClick = async (numero: number,) => {
+    setagreed(numero)
 
   };
 
 
 
 
-  const handleClickcheckdigit = async (numero: number, ) => {
+  const handleClickcheckdigit = async (numero: number,) => {
 
-    if ( inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4 != ''){
-      const data = await getcode(dpi, (inputValues.input1+inputValues.input2+inputValues.input3+inputValues.input4))
+    if (inputValues.input1 + inputValues.input2 + inputValues.input3 + inputValues.input4 != '') {
+      const data = await getcode(dpi, (inputValues.input1 + inputValues.input2 + inputValues.input3 + inputValues.input4))
       if (data) {
         setagreed(numero)
       }
-      else{
+      else {
         setIsOpen(true)
         setmensaje('El codigo es incorecto')
       }
-  
+
     }
-    else{
+    else {
       setIsOpen(true)
       setmensaje('El codigo esta vacio')
     }
@@ -166,9 +170,9 @@ const Forgot_Page: React.FC = () => {
 
 
 
-  const handleconfirm = async (path: string, ) => {
-    if(validateConfirmation){
-      const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
+  const handleconfirm = async (path: string,) => {
+    if (validateConfirmation) {
+      const x = CryptoJS.SHA256(password + '').toString(CryptoJS.enc.Hex)
       await cambiarcontra(x, dpi)
       history.push('/home')
     }
@@ -177,64 +181,63 @@ const Forgot_Page: React.FC = () => {
 
   return (
     <>
-      {(agreed % 3) === 0 ? ( //TOMAR NOTA EN COSAS DE IONIC EL RESPONSIVE NO SIRVE CUANDO HAY MIX DE DIV O P
-        <IonContent>
-          <IonToolbar color={"primary"}>
-            <IonLabel slot="start" className="dashbutton">
-              <a className="linkref" onClick={() => history.push('/about')}>SABTE</a>
-            </IonLabel>
-          </IonToolbar>
-          <div className="inputdpifg">
-            <p className="paragrapghexplafg">Por favor ingrese su dpi para enviar codigo de verificacion</p>
-            <IonItem className="dpiinputfg" lines="none">
-              <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}></DpiInput>
-            </IonItem>
-            <br></br>
-            <div className="optionforfg">
-              <IonRadioGroup value={methodos} onIonChange={e => setmethodos(e.detail.value)}>
-                <IonGrid>
-                  <IonCol>
-                    <IonRadio value='telefono' className="chheckboxfg" labelPlacement="end">Telefono</IonRadio>
-                  </IonCol>
-                  <IonCol></IonCol>
-                  <IonCol></IonCol>
-                  <IonCol></IonCol>
-                  <IonCol></IonCol>
-                  <IonCol>
-                    <IonRadio value='correo' className="chheckboxfg" labelPlacement="end">Correo</IonRadio>
-                  </IonCol>
+      <link href='https://fonts.googleapis.com/css?family=Proza Libre' rel='stylesheet'></link>
+      {(agreed % 2) === 0 ? ( //TOMAR NOTA EN COSAS DE IONIC EL RESPONSIVE NO SIRVE CUANDO HAY MIX DE DIV O P
+        <IonContent className="maincontentfgpass">
 
-                </IonGrid>
-              </IonRadioGroup>
+          <div className="inputdpifg">
+            <div className="fotoheader">
+              <img src="/Handshake.png"></img>
+              <div style={{ width: '2vw' }}></div>
+              <div className="linefgpass"></div>
+              <div style={{ width: '5vw' }}></div>
+              <b>
+                <h2 className="TitleContrato">CONTRATO-GT</h2>
+              </b>
+            </div>
+            <div >
+              <h2 className="olvidar_headline">¿Olvidaste tu contraseña?</h2>
             </div>
             <br></br>
-            <IonButton onClick={() => handleClicksendmail(1)}>Aceptar</IonButton>
+            <div className="enterdpifg">
+              Ingresa TU DPI registrado para restablecer tu contraseña
+            </div>
+            <input className="inputdpi_fg" placeholder="INGRESA TU DPI"></input>
+            <div className="enterdpifg">
+              Selecciona la vía donde deseas recibir el código de recuperación
+              <form>
+                <input className="radiobuttonfg" type="radio" id="telefono" value={"telefono"} /><label >Mensaje de texto (SMS)</label>
+                <br></br>
+                <input className="radiobuttonfg" type="radio" id="correo" value={"correo"} /><label >CORREO ELECTRÓNICO</label>
+              </form>
+            </div>
+            <div className="buttoncontainerfg">
+              <button className="getcodefg" onClick={() => handleClicksendmail(1)}><b>RECIBIR CÓDIGO</b></button>
+            </div>
           </div>
-        </IonContent>
-      ) : (agreed % 3) === 1 ? (
-        <IonContent>
-          <IonToolbar color={"primary"}>
-            <IonLabel slot="start" className="dashbutton">
-              <a className="linkref">SABTE</a>
-            </IonLabel>
-          </IonToolbar>
-          <div className="spacebetfg"></div>
-          <h4 className="what_to_write">Ingresa el codigo enviado a tu correo o telefono</h4>
-          <br></br>
-          <div className="inputcode">
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input1Ref} onChange={(e) => handleInputChange(e, 'input1' ,input2Ref)}></input>
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input2Ref} onChange={(e) => handleInputChange(e, 'input2' ,input3Ref)} onKeyDown={(e) => handleKeyDown(e, input1Ref)}></input>
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input3Ref} onChange={(e) => handleInputChange(e, 'input3' ,input4Ref)} onKeyDown={(e) => handleKeyDown(e, input2Ref)}></input>
-            <input className="inputdigit" placeholder="X" maxLength={1} ref={input4Ref} onChange={(e) => handleInputChange(e, 'input4' ,{ current: null })}  onKeyDown={(e) => handleKeyDown(e, input3Ref)} ></input>
-          </div>
-          <div className="positionbuttonsfg">
-            <IonButton className="acceptcode" onClick={() => handleClick(0)}>Cancelar</IonButton>
-            <IonButton className="acceptcode" onClick={() => handleClickcheckdigit(2)}>Ingresar</IonButton>
-          </div>
+          <IonModal isOpen={isOpenmodal}>
+            <IonHeader>
+              <IonToolbar>
+                <IonTitle>Modal</IonTitle>
+                <IonButtons slot="end">
+                  <IonButton onClick={() => setIsOpenmodal(false)}>Close</IonButton>
+                </IonButtons>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent className="ion-padding">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
+                reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui.
+                Eaque, dicta.
+              </p>
+            </IonContent>
+          </IonModal>
+
+
         </IonContent>
       )
-        : (agreed % 3) === 2 ? (
-          <IonContent>
+        : (agreed % 2) === 1 ? (
+          <IonContent className="maincontentfgpass">
             <IonToolbar color={"primary"}>
               <IonLabel slot="start" className="dashbutton">
                 <a className="linkref">SABTE</a>
@@ -279,7 +282,7 @@ const Forgot_Page: React.FC = () => {
         message={mensaje}
         onDidDismiss={() => setIsOpen(false)}
         duration={5000}
-        style={{textAlign:'center'}}
+        style={{ textAlign: 'center' }}
       ></IonToast>
 
 
