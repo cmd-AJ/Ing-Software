@@ -43,7 +43,7 @@ const Threads: React.FC = () => {
                         ) : error ? (
                             <p>{error}</p>
                         ) : (
-                            posts.slice().reverse().map(post => (
+                            posts.map(post => (
                                 <Post
                                     key={post.idthreads}
                                     idthread={post.idthreads}
