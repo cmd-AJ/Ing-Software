@@ -1,21 +1,22 @@
 .comment-box {
   width: 100%;
-  background-color: #f9f8f8;
-  border-radius: 5px;
+  background-color: #f9f8f9;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 3px;
-  border: 1px solid #ffffff;
   border: 1px solid transparent; /* No visible border */
   margin-top: 5px;
+  border: 1px solid #8c8d8d; 
 
 }
 
 .comment-user-profile {
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
   overflow: hidden;
   margin-right: 10px;
   background-color: rgba(128, 128, 128, 0);
