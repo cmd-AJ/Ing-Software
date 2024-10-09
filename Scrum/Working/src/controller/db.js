@@ -3,6 +3,23 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, fecha, pago) {
+    try {
+        const query = {
+            text: "INSERT INTO	completado(dpitrabajador, dpiempleador, titulo, estado, fecha, fechafin, pago) " + 
+                  "VALUES ($1, $2, $3, 'Contratación y trabajo realizado por medio de ContratoGT', $4, TO_CHAR(CURRENT_DATE, 'DD/MM/YYYY'), $5) " + 
+                  "RETURNING *",
+            values: [dpitrabajador, dpiempleador, titulo, fecha, pago]
+        }
+
+        const result = client.query(query)
+
+        return result.rows[0]
+    } catch (error) {
+        console.error('Error while inserting job to completed')
+    }    
+}
+
 export async function deleteHiringFromAvailable(hiringID){
     try {
         const query = {
@@ -16,7 +33,7 @@ export async function deleteHiringFromAvailable(hiringID){
 
     } catch (error){
 
-        console.error("Could not delete job from avaialable jobs")
+        ocnsole.error("Could not delete job from avaialable jobs")
     }
 }
 
