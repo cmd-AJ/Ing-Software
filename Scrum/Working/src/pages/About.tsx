@@ -28,7 +28,7 @@ const About: React.FC = () => {
     <>
       <IonHeader>
         <IonToolbar>
-          <IonHeader className="titleheader">SABTE</IonHeader>
+          <IonHeader className="titleheader">CONTRATOGT</IonHeader>
           <IonButtons slot="end">
             <IonButton routerLink="/register" className="colorheader">
               Registrarse
@@ -59,7 +59,7 @@ const About: React.FC = () => {
         <section id="about">
           <section className="background-image">
             <IonCardContent id="aboutContent">
-              <h1 className="apptitle">Acerca de SABTE</h1>
+              <h1 className="apptitle">Acerca de Contratogt</h1>
             </IonCardContent>
           </section>
           <section id="nextSection">
@@ -71,14 +71,14 @@ const About: React.FC = () => {
           </section>
           <InfoCard
             title="Misión"
-            content="En el corazón de nuestra misión en SABTE se encuentra el compromiso de transformar y optimizar la manera en que los profesionales especializados y los empleadores se conectan en el mercado laboral. Nuestra visión es desarrollar una plataforma digital innovadora que no solo facilite un encuentro eficiente entre la oferta y demanda de servicios especializados, sino que también promueva un entorno de confianza y transparencia. Aspiramos a eliminar las barreras que actualmente dificultan la contratación de talentos especializados, ofreciendo una solución accesible e integral que responda a las necesidades de ambos sectores.
+            content="En el corazón de nuestra misión en Contratogt se encuentra el compromiso de transformar y optimizar la manera en que los profesionales especializados y los empleadores se conectan en el mercado laboral. Nuestra visión es desarrollar una plataforma digital innovadora que no solo facilite un encuentro eficiente entre la oferta y demanda de servicios especializados, sino que también promueva un entorno de confianza y transparencia. Aspiramos a eliminar las barreras que actualmente dificultan la contratación de talentos especializados, ofreciendo una solución accesible e integral que responda a las necesidades de ambos sectores.
 
               "
             imageUrl="https://procesa.es/wp-content/uploads/2019/12/bsqueda-empleo.jpg"
           />
           <InfoCard
             title="Visión"
-            content="Nuestra visión se extiende a construir una comunidad en donde cada miembro, sin importar el nivel de habilidades tecnológicas, pueda encontrar oportunidades de crecimiento y desarrollo profesional. Estamos dedicados a hacer que cada interacción en nuestra plataforma no solo sea posible, sino excepcional, asegurando que cada profesional pueda demostrar su valía y cada empleador pueda hallar el talento ideal. En SABTE, creemos en el poder de unir a las personas a través de la tecnología para crear un futuro más inclusivo y próspero para todos los profesionales especializados.
+            content="Nuestra visión se extiende a construir una comunidad en donde cada miembro, sin importar el nivel de habilidades tecnológicas, pueda encontrar oportunidades de crecimiento y desarrollo profesional. Estamos dedicados a hacer que cada interacción en nuestra plataforma no solo sea posible, sino excepcional, asegurando que cada profesional pueda demostrar su valía y cada empleador pueda hallar el talento ideal. En Contratogt, creemos en el poder de unir a las personas a través de la tecnología para crear un futuro más inclusivo y próspero para todos los profesionales especializados.
               "
             imageUrl="https://c8.alamy.com/compes/2cb921p/adicta-a-la-tecnologia-joven-carrera-mixta-femenino-hombre-personas-utilizar-smartphones-chat-en-redes-sociales-comunicarse-en-linea-tipo-enviar-mensajes-de-correo-electronico-concepto-de-vida-virtual-dibujos-animados-vector-ilustracion-2cb921p.jpg"
           />
