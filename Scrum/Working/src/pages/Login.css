@@ -1,11 +1,54 @@
+@import url('../theme/variables.css');
+
 .login {
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #306CAB;
+    background-color: var(--ion-color-primary);
     background-size: cover;
+}
+
+.displayment-login-elements {
+    background-color: var(--white);
+    color: black;
+    width: 75%;
+    max-width: 900px;
+    min-width: 400px;
+    height: auto;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    font-family: var(--proza-font);
+}
+
+.top-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.middle-center {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+.bottom-center {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 60px;
+    margin-top: 30px;
 }
 
 #loginCenter {
@@ -125,7 +168,5 @@ ion-select::part(icon) {
 
 .fgpass_togo{
     cursor: pointer;
-    margin-top: 0.5%;
-    margin-left: 10vw;
-    color: white;
+    color: var(--black);
 }

@@ -1,3 +1,5 @@
+@import url('../../theme/variables.css');
+
 .input-top-display {
     display: flex;
     flex-direction: column;
@@ -6,4 +8,9 @@
 
 .inputs-rl {
     color: black;
+}
+
+.icon-password {
+    color: var(--ion-color-tertiary); 
+    cursor: pointer;
 }

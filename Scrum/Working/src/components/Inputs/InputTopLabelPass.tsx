@@ -1,24 +1,24 @@
-import { InputChangeEventDetail, IonInput } from "@ionic/react"
+import { InputChangeEventDetail, IonButton, IonIcon, IonInput } from "@ionic/react"
 import TextND from "../Txt/TextND"
 import './InputTopLabel.css'
 import { useEffect, useState } from "react"
 import { eye, eyeOff } from "ionicons/icons"
 
 interface ContainerProps {
-    value : string
+    value: string
     setValue: (value: string) => void
     label: string
     placeholder: string
-    validateValue : boolean
-    setValidatesValue: (validateValue : boolean) => void
-    validation: (validate : string) => boolean
-    mask: ((value: HTMLInputElement) => void) | null;
+    validateValue: boolean
+    setValidatesValue: (validateValue: boolean) => void
+    validation: (validate: string) => boolean
+    mask: ((value: HTMLInputElement) => void) | null
     errorText: string
 }
 
-const InputTopLabelPass : React.FC<ContainerProps> = (
+const InputTopLabelPass: React.FC<ContainerProps> = (
     {
-        label, 
+        label,
         placeholder,
         value,
         setValue,
@@ -30,7 +30,6 @@ const InputTopLabelPass : React.FC<ContainerProps> = (
     }
 ) => {
     const [isTouched, setIsTouched] = useState(false)
-
     const [showPass, setShowPass] = useState(false)
     const [showIcon, setShowIcon] = useState(false)
 
@@ -39,8 +38,14 @@ const InputTopLabelPass : React.FC<ContainerProps> = (
     }
 
     const handleInputChange = (event: CustomEvent<InputChangeEventDetail>) => {
-        const value = (event.target as HTMLInputElement).value
-        setValue(value)
+        const inputValue = (event.target as HTMLInputElement).value
+        setValue(inputValue)
+
+        setShowIcon(true)
+    }
+
+    const handleShowPassword = (visibility: boolean) => {
+        setShowPass(!visibility)
     }
 
     const validate = (value: string) => {
@@ -54,15 +59,15 @@ const InputTopLabelPass : React.FC<ContainerProps> = (
 
     return (
         <div className="input-top-display">
-            <TextND text={label} size="small" hex="#000"/>
-            <IonInput 
+            <TextND text={label} size="small" hex="#000" />
+            <IonInput
                 className={`inputs-rl ${validateValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
-                type="text"
+                type={showPass ? 'text' : 'password'}
                 fill="outline"
                 placeholder={placeholder}
                 color='primary'
                 errorText={errorText}
-                onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value);}}
+                onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }}
                 onIonChange={handleInputChange}
                 ref={async (userInput) => {
                     if (userInput && mask != null) {
@@ -71,10 +76,25 @@ const InputTopLabelPass : React.FC<ContainerProps> = (
                             mask(input)
                         }
                     }
-                }
-
-                }
-            />
+                }}
+            >
+                {/* Solo muestra el botón con el ícono si showIcon es true */}
+                {showIcon && (
+                    <IonButton
+                        fill="clear"
+                        slot="end"
+                        aria-label="Show/hide"
+                        onClick={() => handleShowPassword(showPass)}
+                    >
+                        <IonIcon
+                            slot="icon-only"
+                            icon={showPass ? eye : eyeOff}
+                            aria-hidden='true'
+                            className="icon-password"
+                        />
+                    </IonButton>
+                )}
+            </IonInput>
         </div>
     )
 }

@@ -24,7 +24,6 @@
 .icon {
     width: 42px;
     height: 42px;
-    margin-left: 10px;
     color: white; /* Los íconos son blancos */
     cursor: pointer;
 }
