@@ -1,7 +1,7 @@
 export async function Existing_admin(dpi: string, password: string) {
     try {
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/login_admin/${dpi}/${password}`,{
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/login_admin/${dpi}/${password}`,{
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export async function Existing_admin(dpi: string, password: string) {
 export async function gettingreports() {
     try {
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/reports`,{
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/reports`,{
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export async function gettingreports() {
 export async function Getbanusers() {
     try {
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/banprev`,{
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/banprev`,{
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ export async function Getbanusers() {
 export async function Getallbannedusers() {
     try {
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/banusers`,{
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/banusers`,{
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ export async function unban(dpi: string) {
             DPI: dpi
         };
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/unbanuser`, {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/unbanuser`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
@@ -127,7 +127,7 @@ export async function extendunban(dpi: string, fecha : string) {
             fecha: fecha
         };
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/extendban`, {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/extendban`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
