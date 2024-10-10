@@ -42,8 +42,8 @@
     width: 100%;
     height: 100%;
     background-color: var(--ion-color-primary);
-    padding-top: 85px;
-    padding-bottom: 85px;
+    padding-top: 75px;
+    padding-bottom: 75px;
     overflow-y:auto;
     display: flex;
     justify-content: center;        
