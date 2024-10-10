@@ -1,0 +1,9 @@
+.input-top-display {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputs-rl {
+    color: black;
+}

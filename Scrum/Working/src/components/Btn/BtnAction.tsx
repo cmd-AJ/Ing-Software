@@ -6,12 +6,13 @@ interface ContainerProps {
     img: string
     action : ( literal: any) => any
     trigger: string
+    rounded: boolean
 }
 
-const BtnAction: React.FC<ContainerProps> = ({img, action, trigger, text}) => {
+const BtnAction: React.FC<ContainerProps> = ({img, action, trigger, text, rounded}) => {
 
     return (
-        <IonButton id={trigger} shape="round" className="roundedButton" color='tertiary' onClick={action}>
+        <IonButton id={trigger} shape={rounded ? "round" : undefined} className="roundedButton" color='tertiary' onClick={action}>
             { img !== "" && <IonIcon icon={img} size="large"/>}
             { text !== "" && text}
         </IonButton>

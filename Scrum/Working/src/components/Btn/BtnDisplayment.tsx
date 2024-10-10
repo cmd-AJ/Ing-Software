@@ -111,7 +111,7 @@ const BtnDisplayment: React.FC<ContainerProps> = (
         return (
             <div className="btn-header-horizontal">
                 <ModalBtnI img={pencilOutline} setEdit={setEdit1}/>
-                <BtnAction text='' img={peopleOutline} trigger='' action={setEdit3}/>
+                <BtnAction rounded={true} text='' img={peopleOutline} trigger='' action={setEdit3}/>
                 <ModalBtnN label="Añadir trabajo" setEdit={setEdit2} color='tertiary'/>
             </div>
         )
@@ -129,8 +129,8 @@ const BtnDisplayment: React.FC<ContainerProps> = (
                     trigger='present-alert'
                 ></IonAlert>
                 <div className='btn-header-horizontal'>
-                    <BtnAction trigger='' img={chatbubbleEllipses} text='' action={handleChatDirection}/>
-                    <BtnAction trigger={trigger} img={personAddOutline} action={handleTrust} text=''/>
+                    <BtnAction rounded={true} trigger='' img={chatbubbleEllipses} text='' action={handleChatDirection}/>
+                    <BtnAction rounded={true} trigger={trigger} img={personAddOutline} action={handleTrust} text=''/>
                 </div>
             </>
         )

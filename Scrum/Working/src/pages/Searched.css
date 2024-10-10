@@ -1,13 +1,21 @@
+@import url('../theme/variables.css');
+
 .searched {
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow-y: auto;
     flex-wrap: nowrap;
     background-color: #FBFBFB;
+}
+
+#searched-message {
+  width: 73%;
+  opacity: 0.5;
+  font-family: var(--nunito-font);
 }
 
 .cards-container {

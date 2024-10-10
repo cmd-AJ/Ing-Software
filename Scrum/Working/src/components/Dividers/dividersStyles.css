@@ -2,12 +2,14 @@
 
 .horizontal {
     width: 100%;
-    background-color: var(--ion-color-tertiary);
+    background-color: var(--black);
     height: 1px;
+    opacity: 0.3;
 }
 
 .vertical {
     height: auto;
-    background-color: var(--ion-color-tertiary);
+    background-color: var(--black);
     width: 1.5px;
+    opacity: 0.3;
 }

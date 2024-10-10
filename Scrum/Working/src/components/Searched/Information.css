@@ -1,20 +1,32 @@
+@import url('../../theme/variables.css');
+
 #contrat-display {
   display: grid;
   grid-template-columns: 25% 50% 25%;
   grid-template-rows: 100%;
   width: 100%;
   padding: 15px;
+  font-family: var(--nunito-font);
+}
+
+#centered-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #centered-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 5px;
+  padding-top: 30px;
 }
 
 #centered-button {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
   
 

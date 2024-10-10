@@ -130,7 +130,8 @@ ion-select::part(text) {
 
 .a {
     background-color: transparent;
-    color: var(--white, white);
+    color: var(--black);
+    font-family: var(--proza-font);
 }
 
 .input-fill-outline.sc-ion-input-md-h {
