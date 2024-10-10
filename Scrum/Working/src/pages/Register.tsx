@@ -20,16 +20,6 @@ import { createUser } from '../controller/UserController'
 import { useHistory } from 'react-router'
 import CryptoJS from 'crypto-js'
 
-type User = {
-    name: string,
-    lastname: string,
-    password: string,
-    email: string,
-    dpi: string,
-    tel: string,
-    role: string
-}
-
 const Register: React.FC = () => {
     const [name, setName] = useState('')
     const [lastname, setLastname] = useState('')

@@ -7,7 +7,7 @@ interface ContainerProps { }
 const LinkRegister: React.FC<ContainerProps> = () => {
     return (
         <Link to='/register' className='a'>
-        <b>Registarse</b>        
+            ¿No tienes cuenta? Registrate        
         </Link>
     )
 }

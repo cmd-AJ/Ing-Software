@@ -15,6 +15,11 @@ const TextND : React.FC<ContainerProps> = ({text, size, hex}) => {
                 <p id='huge-text' style={{color: hex}}>{text}</p>
             )
 
+        case 'big-huge':
+            return (
+                <p id="big-huge-text" style={{color: hex}}>{text}</p>
+            )
+
         case "big":
             return (
                 <p id='big-text' style={{color: hex}}>{text}</p>
