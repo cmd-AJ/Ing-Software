@@ -15,7 +15,7 @@ export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, 
         const result = client.query(query)
 
         return result
-        
+
     } catch (error) {
         console.error('Error while inserting job to completed')
     }    
@@ -34,7 +34,7 @@ export async function deleteHiringFromAvailable(hiringID){
 
     } catch (error){
 
-        ocnsole.error("Could not delete job from avaialable jobs")
+        console.error("Could not delete job from avaialable jobs")
     }
 }
 
