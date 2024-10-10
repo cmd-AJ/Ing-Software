@@ -102,7 +102,6 @@ const Register: React.FC = () => {
                     <InputTopLabel value={email} label='Correo electrónico (opcional)' placeholder='Ingresa tu correo electrónico' setValue={setEmail} validateValue={validateEmail} setValidatesValue={setValidateEmail} mask={null} validation={emailValidation} errorText='Correo inválido'/>
                     <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='Contraseña inválida'/>
                     <InputTopLabelPass value={confirmation} label='Confirmar contraseña' placeholder='Ingresa nuevamente tu contraseña' setValue={setConfirmation} validateValue={validateConfirmation} setValidatesValue={setValidateConfirmation} mask={null} validation={confirmPasswordValidation} errorText='Las contraseñas no coinciden'/>
-                    <div style={{margin: '5px'}}></div>
                     <BtnAction text='Confirmar' img='' trigger='' rounded={false} action={handleClickRegister}/>
                     <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
                         <LinkLogin/>
