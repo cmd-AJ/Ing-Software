@@ -23,9 +23,9 @@
         - .env
       ports:
         - "${PORTI}:${PORTI}"
-      networks:
-        - api-contratogt  # Use a custom network
-      
+      network_mode: "host"
+
+
       environment:
         POSTGRES_DB: ${POSTGRES_DB}
         POSTGRES_USER: ${POSTGRES_USER}
@@ -41,7 +41,3 @@
   volumes:
     pgdata:
 
-  
-  networks:
-    api-contratogt:
-      driver: bridge  # Specify bridge network driver
