@@ -1,6 +1,6 @@
 export async function getContacts(dpi: String) {
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ export async function getChatMessages(dpi1: string, dpi2: string) {
             dpi2: dpi2
         };
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/messages`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/messages`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -51,7 +51,7 @@ export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
             dpi2: dpi2
         };
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/chatID`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/chatID`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -96,7 +96,7 @@ export async function createNewChatIfNotExists(dpi1: string, dpi2: string) {
                 dpi2: dpi2
             };
 
-            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/createChat`, {
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/createChat`, {
                 method: 'POST',
                 headers: {
                     'api-key': import.meta.env.VITE_API_KEY,
@@ -123,7 +123,7 @@ export async function insertChatMessage(content: string, chatID: string, dpi: st
             dpi: dpi
         };
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/message`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/message`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -159,7 +159,7 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
             pago: payment
         };
 
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hire`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/hire`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -185,7 +185,7 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
 export async function getHirings(dpi: string) {
 
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hirings/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/contacts/hirings/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -241,7 +241,7 @@ export async function sendmessages(dpi: string, method :string) {
                 nombre: dpi
             };
     
-            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/sendforgot_mail/`, {
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/sendforgot_mail/`, {
                 method: 'POST',
                 headers: {
                     'api-key': import.meta.env.VITE_API_KEY,
@@ -263,7 +263,7 @@ export async function sendmessages(dpi: string, method :string) {
                 dpi:dpi
             };
     
-            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/sendforgot_phone/`, {
+            const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/sendforgot_phone/`, {
                 method: 'POST',
                 headers: {
                     'api-key': import.meta.env.VITE_API_KEY,
@@ -292,7 +292,7 @@ export async function sendmessages(dpi: string, method :string) {
 
 export async function getcode(dpi: String, code:string) {
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/getcode/${dpi}`, {
+        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/getcode/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -321,7 +321,7 @@ export async function cambiarcontra(password: string, dpi: string) {
     }
     
 
-    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/codechange`,
+    const data = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/api/codechange`,
         {
             method: 'PUT',
             headers: {
