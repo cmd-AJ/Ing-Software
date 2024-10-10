@@ -6,7 +6,7 @@ interface ContainerProps { }
 const LinkLogin: React.FC<ContainerProps> = () => {
     return (
         <Link to='/home' className='a'>
-        <b>Iniciar Sesión</b>        
+        ¿Ya tienes cuenta? Iniciar sesión    
         </Link>
     )
 }

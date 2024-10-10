@@ -34,7 +34,7 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
           </div>
         </div>
         <div id='centered-button'>
-          <BtnAction img='' text='Ver perfil' trigger='' action={handleClick}/>
+          <BtnAction rounded={true} img='' text='Ver perfil' trigger='' action={handleClick}/>
         </div>
       </div>   
       <HorizontalDivider /> 
