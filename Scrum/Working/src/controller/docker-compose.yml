@@ -23,7 +23,6 @@
         - .env
       ports:
         - "${PORTI}:${PORTI}"
-      network_mode: "host"
 
 
       environment:
