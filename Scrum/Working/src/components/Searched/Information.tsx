@@ -12,9 +12,24 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
   const history = useHistory();
 
   const handleClick = async () => {
+    debugger
+    let userDPI = ''
+    const user = localStorage.getItem('User')
+    if (user != null) {
+      const parsedUser = JSON.parse(user)
+      userDPI = parsedUser.dpi
+    }
+    
     const data = await getUser2(trabajador.dpi)
     localStorage.setItem('notUser', JSON.stringify(data[0]))
-    history.push('/empleado?ownerUser=false')
+
+    if (userDPI != '' && userDPI === data[0].dpi) {
+      history.push('/empleado?ownerUser=true')
+    } else {
+      history.push('/empleado?ownerUser=false')
+    }
+    
+    
   }
 
   return (

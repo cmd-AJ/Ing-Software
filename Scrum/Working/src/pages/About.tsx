@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonHeader,
   IonToolbar,
@@ -24,6 +24,19 @@ const About: React.FC = () => {
     }
   };
 
+  const [route, setRoute] = useState('/home');
+
+useEffect(() => {
+  const userData = localStorage.getItem('User');
+  console.log(userData);
+  
+  // Cambiar a '/searched' solo si `userData` no es nulo y no está vacío
+  if (userData !== '' && userData !== null) {
+    setRoute('/searched');
+  }
+}, []);
+
+
   return (
     <>
       <IonHeader>
@@ -33,7 +46,7 @@ const About: React.FC = () => {
             <IonButton routerLink="/register" className="colorheader">
               Registrarse
             </IonButton>
-            <IonButton routerLink="/home" className="colorheader">
+            <IonButton routerLink={route} className="colorheader">
               Iniciar Sesión
             </IonButton>
           </IonButtons>
