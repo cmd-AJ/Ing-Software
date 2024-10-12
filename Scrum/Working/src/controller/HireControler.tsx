@@ -2,7 +2,7 @@ async function deleteJobFromAvailableWithID(hiringId: Number | string) {
     //This deletes and returns a hiring from the avaialable table, using its ID"
 
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hirings/delete/${hiringId}`, {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/hirings/delete/${hiringId}`, {
             method: 'DELETE',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -39,7 +39,7 @@ async function insertHiringIntoFinishedJobs(deletedJob: any) {
     }
 
     try {
-        const response = await fetch(`http://${import.meta.env.VITE_API_HOSTI}:${import.meta.env.VITE_PORTI}/contacts/hire/complete`, {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/hire/complete`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,

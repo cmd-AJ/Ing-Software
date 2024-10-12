@@ -24,7 +24,7 @@ app.get('/api/', (req, res) => {
   res.send('Trying the API in order to know if it works or not')
 })
 
-app.get('/test', apiKeyAuth ,async (req, res) => {
+app.get('/api/test', apiKeyAuth ,async (req, res) => {
   try {
     res.send('Auth works')
 
@@ -34,7 +34,7 @@ app.get('/test', apiKeyAuth ,async (req, res) => {
 })
 
 
-app.get('/users',apiKeyAuth ,async (req, res) => {
+app.get('/api/users',apiKeyAuth ,async (req, res) => {
   try {
       const users = await getUsers()
       res.status(200).json(users)
@@ -44,7 +44,7 @@ app.get('/users',apiKeyAuth ,async (req, res) => {
 })
 
 // apiKeyAuth,
-app.get('/login_admin/:dpi/:password', apiKeyAuth ,async (req, res) => {
+app.get('/api/login_admin/:dpi/:password', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi, password } = req.params
     const users = await Admin_Exist(dpi, password)
@@ -54,7 +54,7 @@ app.get('/login_admin/:dpi/:password', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/reports', adminapiKeyAuth , async (req, res) => {
+app.get('/api/reports', adminapiKeyAuth , async (req, res) => {
   try {
     const users = await getreports()
     res.status(200).json(users)
@@ -63,7 +63,7 @@ app.get('/reports', adminapiKeyAuth , async (req, res) => {
   }
 })
 
-app.get('/banprev', adminapiKeyAuth , async (req, res) => {
+app.get('/api/banprev', adminapiKeyAuth , async (req, res) => {
   try {
     const users = await getbanusersprev()
     res.status(200).json(users)
@@ -73,7 +73,7 @@ app.get('/banprev', adminapiKeyAuth , async (req, res) => {
 })
 
 
-app.get('/banusers', adminapiKeyAuth , async (req, res) => {
+app.get('/api/banusers', adminapiKeyAuth , async (req, res) => {
   try {
     const users = await getbanusers()
     res.status(200).json(users)
@@ -83,7 +83,7 @@ app.get('/banusers', adminapiKeyAuth , async (req, res) => {
 })
 
 
-app.put('/extendban' , adminapiKeyAuth ,async (req, res) => {
+app.put('/api/extendban' , adminapiKeyAuth ,async (req, res) => {
   const { DPI, fecha } = req.body; 
   try {
     const users = await extendban(DPI, fecha)
@@ -94,7 +94,7 @@ app.put('/extendban' , adminapiKeyAuth ,async (req, res) => {
 })
 
 
-app.put('/unbanuser', adminapiKeyAuth , async (req, res) => {
+app.put('/api/unbanuser', adminapiKeyAuth , async (req, res) => {
   const { DPI } = req.body; 
   try {
     const users = await unban(DPI)
@@ -108,7 +108,7 @@ app.put('/unbanuser', adminapiKeyAuth , async (req, res) => {
 
 
 
-app.post('/LoginUser', apiKeyAuth, async (req, res) => {
+app.post('/api/LoginUser', apiKeyAuth, async (req, res) => {
   try {
     const { dpi, password } = req.body;
 
@@ -133,7 +133,7 @@ app.post('/LoginUser', apiKeyAuth, async (req, res) => {
 
 
 
-app.post('/users', apiKeyAuth ,async (req, res) => {
+app.post('/api/users', apiKeyAuth ,async (req, res) => {
   try {
     const {
       dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio
@@ -146,7 +146,7 @@ app.post('/users', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/usersNeo', apiKeyAuth ,async (req, res) => {
+app.post('/api/usersNeo', apiKeyAuth ,async (req, res) => {
   try {
     const {
       nombre, apellidos, municipio, rating, imagen, dpi, telefono
@@ -159,7 +159,7 @@ app.post('/usersNeo', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/users/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/users/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.params
     const user = await getUserbyDPI(dpi)
@@ -175,7 +175,7 @@ app.get('/users/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/workers/:job', apiKeyAuth ,async (req, res) => {
+app.get('/api/workers/:job', apiKeyAuth ,async (req, res) => {
   try {
     const { job } = req.params
     const workers = await getWorkers(job);
@@ -189,7 +189,7 @@ app.listen(port, () => {
   console.log(`Server listening at http://127.0.0.1:${port}`)
 })
 
-app.put('/setsettings', apiKeyAuth ,async (req, res) => {
+app.put('/api/setsettings', apiKeyAuth ,async (req, res) => {
   const { municipio, imagen, sexo, fecha_nacimiento, DPI, role, telefono, trabajo, banner } = req.body; 
   if (!municipio || !imagen || !sexo || !fecha_nacimiento || !DPI || !role || !telefono || !trabajo || !banner) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
@@ -204,7 +204,7 @@ app.put('/setsettings', apiKeyAuth ,async (req, res) => {
   }
 });
 
-app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
+app.put('/api/setNeoSettings', apiKeyAuth ,async (req, res) => {
   const { dpi, municipio, imagen, telefono } = req.body; 
   if (!dpi || !municipio || !imagen || !telefono ) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' });
@@ -220,7 +220,7 @@ app.put('/setNeoSettings', apiKeyAuth ,async (req, res) => {
 });
 
 
-app.get('/ctrabajo/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/ctrabajo/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.params
     const user = await gettrabajo(dpi)
@@ -235,7 +235,7 @@ app.get('/ctrabajo/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/contacts/:dpi', async (req, res) => {
+app.get('/api/contacts/:dpi', async (req, res) => {
   try {
     const { dpi } = req.params;
     const contacts = await getContactsByUserDPI(dpi);
@@ -246,7 +246,7 @@ app.get('/contacts/:dpi', async (req, res) => {
   }
 });
 
-app.get('/trustNetwork/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/trustNetwork/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.params;
     const trustedUsers = await getTrustedUsersByDpi(dpi)
@@ -258,7 +258,7 @@ app.get('/trustNetwork/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/contacts/createChat', apiKeyAuth, async (req, res) => {
+app.post('/api/contacts/createChat', apiKeyAuth, async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
 
@@ -283,7 +283,7 @@ app.post('/contacts/createChat', apiKeyAuth, async (req, res) => {
 });
 
 
-app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
+app.post('/api/contacts/messages', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
     const chatMessagges = await getChatBetweenUsers(dpi1, dpi2)
@@ -298,7 +298,7 @@ app.post('/contacts/messages', apiKeyAuth ,async (req, res) => {
 
 
 
-app.post('/sendforgot_phone' ,apiKeyAuth ,async (req, res) => {
+app.post('/api/sendforgot_phone' ,apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(8, 12);
@@ -321,7 +321,7 @@ app.post('/sendforgot_phone' ,apiKeyAuth ,async (req, res) => {
 })
 
 
-app.get('/getcode/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/getcode/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.params
     const user = await getpasscode(dpi)
@@ -336,7 +336,7 @@ app.get('/getcode/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.put('/codechange', apiKeyAuth ,async (req, res) => {
+app.put('/api/codechange', apiKeyAuth ,async (req, res) => {
   const [password,dpi] = [req.body.password, req.body.dpi]
   if (!password || !dpi) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
@@ -352,7 +352,7 @@ app.put('/codechange', apiKeyAuth ,async (req, res) => {
 
 
 
-app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
+app.post('/api/sendforgot_mail', apiKeyAuth ,async (req, res) => {
   try {
     const { nombre } = req.body;
     const codigo = (Math.random() + 1).toString(36).substring(8, 12);
@@ -382,7 +382,7 @@ app.post('/sendforgot_mail', apiKeyAuth ,async (req, res) => {
 
 
 
-app.put('/confitrab', apiKeyAuth ,async (req, res) => {
+app.put('/api/confitrab', apiKeyAuth ,async (req, res) => {
   const [dpi, trabajo] = [req.body.dpi, req.body.trabajo]
   if (!trabajo || !dpi) {
     res.status(400).json({ error: 'Datos incompletos en el cuerpo de la solicitud' })
@@ -396,7 +396,7 @@ app.put('/confitrab', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/trabajoanterior/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/trabajoanterior/:dpi', apiKeyAuth ,async (req, res) => {
 //Tomar nota el dpi es del trabajador osea el que esta haciendo el trabajo 
   try {
     const { dpi } = req.params;
@@ -409,7 +409,7 @@ app.get('/trabajoanterior/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.params;
     const trabjant = await gettrabajoSABTE(dpi)
@@ -421,7 +421,7 @@ app.get('/trabajoanteriorSABTE/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
+app.get('/api/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
   try {
     const { dpi } = req.params;
     if (!dpi) {
@@ -435,7 +435,7 @@ app.get('/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => {
   }
 });
 
-app.post('/trabajaoanterior', apiKeyAuth ,async (req, res) => {
+app.post('/api/trabajaoanterior', apiKeyAuth ,async (req, res) => {
   try {
     const [ dpitrabajador, dpiempleador, titulo, estado, imagen ] = [  req.body.dpitrabajador, req.body.dpiempleador, req.body.titulo, req.body.estado, req.body.imagen]
     const result = await insertartrabant(dpitrabajador, dpiempleador, titulo, estado, imagen)
@@ -445,7 +445,7 @@ app.post('/trabajaoanterior', apiKeyAuth ,async (req, res) => {
 })
 
 
-app.post('/instipotrabajo', apiKeyAuth ,async (req, res) => {
+app.post('/api/instipotrabajo', apiKeyAuth ,async (req, res) => {
   try {
     const [ nombre_trabajo, descripcion ] = [ req.body.nombre_trabajo, req.body.descripcion]
     const result = await insertartipotrabajo(nombre_trabajo, descripcion)
@@ -454,7 +454,7 @@ app.post('/instipotrabajo', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/contacts/message', apiKeyAuth ,async (req, res) => {
+app.post('/api/contacts/message', apiKeyAuth ,async (req, res) => {
   try {
     const { contenido, id_chat, dpi} = req.body;
     await insertChatMessage(contenido, id_chat, dpi) 
@@ -465,7 +465,7 @@ app.post('/contacts/message', apiKeyAuth ,async (req, res) => {
   }
 })
 // Endpoint to getChatID
-app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
+app.post('/api/contacts/chatID', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
     const chatMessagges = await getChatID(dpi1, dpi2)
@@ -477,7 +477,7 @@ app.post('/contacts/chatID', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/contacts/hire', apiKeyAuth ,async (req, res) => {
+app.post('/api/contacts/hire', apiKeyAuth ,async (req, res) => {
   try {
     const { descripcion, dpiempleador, dpiempleado, timeStampCita, pago } = req.body;
      await insertHiring(descripcion, dpiempleador, dpiempleado, timeStampCita, pago)
@@ -488,7 +488,7 @@ app.post('/contacts/hire', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/contacts/hirings/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/contacts/hirings/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi } = req.params;
     const hirings = await getCurrentHirings(dpi)
@@ -499,7 +499,7 @@ app.get('/contacts/hirings/:dpi', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
+app.post('/api/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi1, dpi2 } = req.body;
      await addUserAsTrustedPerson(dpi1, dpi2)
@@ -511,7 +511,7 @@ app.post('/trustNetwork/addTrust', apiKeyAuth ,async (req, res) => {
 })
 
 
-app.post('/threads/createPost', apiKeyAuth, async (req, res) => {
+app.post('/api/threads/createPost', apiKeyAuth, async (req, res) => {
   try {
     const { dpiUser, postText, postImage } = req.body;
 
@@ -535,7 +535,7 @@ app.post('/threads/createPost', apiKeyAuth, async (req, res) => {
   }
 });
 
-app.get('/threads/getPosts', apiKeyAuth ,async (req, res) => {
+app.get('/api/threads/getPosts', apiKeyAuth ,async (req, res) => {
   try {
     const posts = await getThreadPosts()
 
@@ -551,7 +551,7 @@ app.get('/threads/getPosts', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/threads/:threadId/', apiKeyAuth ,async (req, res) => {
+app.get('/api/threads/:threadId/', apiKeyAuth ,async (req, res) => {
   try {
     const { threadId } = req.params
     const comments = await getCommentsWithThreadID(threadId)
@@ -570,7 +570,7 @@ app.get('/threads/:threadId/', apiKeyAuth ,async (req, res) => {
 
 
 
-app.get('/getuserreport/:idreporte/:dpi', apiKeyAuth ,async (req, res) => {
+app.get('/api/getuserreport/:idreporte/:dpi', apiKeyAuth ,async (req, res) => {
   try {
     const { idreporte, dpi } = req.params
     const reportex = await getreport_nofecha(dpi, idreporte)
@@ -588,7 +588,7 @@ app.get('/getuserreport/:idreporte/:dpi', apiKeyAuth ,async (req, res) => {
 
 
 
-app.get('/getuserreport/:idreporte/:dpi/:fechai/:fechaf', apiKeyAuth ,async (req, res) => {
+app.get('/api/getuserreport/:idreporte/:dpi/:fechai/:fechaf', apiKeyAuth ,async (req, res) => {
   try {
     const { idreporte, dpi, fechai, fechaf } = req.params
     const reportex = await getreport_withfecha(fechai, fechaf,dpi, idreporte)
@@ -605,7 +605,7 @@ app.get('/getuserreport/:idreporte/:dpi/:fechai/:fechaf', apiKeyAuth ,async (req
   }
 })
 
-app.get('/getcontrat_bymonth/:dpi/:mes', apiKeyAuth ,async (req, res) => {
+app.get('/api/getcontrat_bymonth/:dpi/:mes', apiKeyAuth ,async (req, res) => {
   try {
     const { dpi, mes } = req.params
     const reportex = await getcontrataciones_por_mes(dpi, mes)
@@ -623,7 +623,7 @@ app.get('/getcontrat_bymonth/:dpi/:mes', apiKeyAuth ,async (req, res) => {
 
 
 
-app.post('/threads/insertComment', apiKeyAuth, async (req, res) => {
+app.post('/api/threads/insertComment', apiKeyAuth, async (req, res) => {
   try {
     const { threadId, content, senderDpi } = req.body;
 
@@ -647,7 +647,7 @@ app.post('/threads/insertComment', apiKeyAuth, async (req, res) => {
   }
 });
 
-app.post('/survey', apiKeyAuth, async (req, res) => {
+app.post('/api/survey', apiKeyAuth, async (req, res) => {
   try {
     const { idtrabajo, calificacion, dpi_trabajador, descripcion } = req.body;
 
@@ -671,7 +671,7 @@ app.post('/survey', apiKeyAuth, async (req, res) => {
   }
 });
 
-app.delete('/contacts/hirings/delete/:hiringID', apiKeyAuth ,async (req, res) => {
+app.delete('/api/contacts/hirings/delete/:hiringID', apiKeyAuth ,async (req, res) => {
   try {
     const { hiringID } = req.params;
     const deletedHiring = await deleteHiringFromAvailable(hiringID)
@@ -690,7 +690,7 @@ app.delete('/contacts/hirings/delete/:hiringID', apiKeyAuth ,async (req, res) =>
 
 
 
-app.post('/contacts/hire/complete', apiKeyAuth ,async (req, res) => {
+app.post('/api/contacts/hire/complete', apiKeyAuth ,async (req, res) => {
   try {
     const { dpitrabajador, dpiempleador, titulo, fecha, pago } = req.body;
      
