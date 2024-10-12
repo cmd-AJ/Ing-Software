@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { getWorkersByJob } from '../../controller/UserController';
-import './List.css';
-import { Trabajador } from './type';
-import Information from './Information';
-import TextND from '../Txt/TextND';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import { useState, useEffect } from "react";
+import { getWorkersByJob } from "../../controller/UserController";
+import "./List.css";
+import { Trabajador } from "./type";
+import Information from "./Information";
+import TextND from "../Txt/TextND";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface ContainerProps {
   job: string;
@@ -18,13 +18,16 @@ const List: React.FC<ContainerProps> = ({ job }) => {
   useEffect(() => {
     const fetchWorkers = async () => {
       try {
-        setIsLoading(true); // Start loading
+        setIsLoading(true);
         const fetchedWorkers = await getWorkersByJob(job);
-        setWorkers(fetchedWorkers);
-        setIsLoading(false); // Data fetched, stop loading
+        // Simulate a delay (e.g., 500ms) to improve user experience
+        setTimeout(() => {
+          setWorkers(fetchedWorkers);
+          setIsLoading(false);
+        }, 500);
       } catch (error) {
-        console.error('Error fetching workers:', error);
-        setIsLoading(false); // Stop loading even if there's an error
+        console.error("Error fetching workers:", error);
+        setIsLoading(false);
       }
     };
 
@@ -37,7 +40,12 @@ const List: React.FC<ContainerProps> = ({ job }) => {
         // Show skeletons while loading
         <div>
           {/* Skeleton placeholder for worker cards */}
-          <Skeleton height={100} count={3} />
+          <Skeleton
+            height={150}
+            width={`99%`}
+            count={3}
+            className="custom-skeleton"
+          />
         </div>
       ) : (
         <>
@@ -47,7 +55,11 @@ const List: React.FC<ContainerProps> = ({ job }) => {
             </div>
           ))}
           <div id="text-results">
-            <TextND size="small" text="Esos son todos los resultados" hex="#000" />
+            <TextND
+              size="small"
+              text="Esos son todos los resultados"
+              hex="#000"
+            />
           </div>
         </>
       )}
