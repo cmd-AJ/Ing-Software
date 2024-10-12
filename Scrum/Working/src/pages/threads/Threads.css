@@ -66,3 +66,26 @@
         width: 90%;
     }
 }
+
+/* Custom skeleton animation */
+@keyframes skeletonLoading {
+    0% {
+      background-color: #e0e0e0;
+      transform: scale(1);
+    }
+    50% {
+      background-color: #d3d3d3;
+      transform: scale(1.02);
+    }
+    100% {
+      background-color: #e0e0e0;
+      transform: scale(1);
+    }
+  }
+  
+  .custom-skeleton {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    animation: skeletonLoading 1.5s ease-in-out infinite;
+  }
+  
