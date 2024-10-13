@@ -580,20 +580,22 @@ export async function getcontrataciones_por_mes(dpi, mes) {
     }
 }
 
-export async function getDpiByCompleted(idtrabajo) {
+export async function getDpiByTrabajo(idtrabajo) {
     try {
-        const query = {
-            text: "select dpitrabajador from completado where idtrabajo = $1;",
-            values: [idtrabajo]
-        }
-        const result = await client.query(query)
-        return result.rows
+      const query = {
+        text: "SELECT dpitrabajador FROM completado WHERE idtrabajo = $1",
+        values: [idtrabajo],
+      };
+  
+      const result = await client.query(query);
+  
+      return result.rows;
     } catch (error) {
-        console.error("Error getting the code from dpi")
-        throw error
+      console.error('Error while getting DPI by idtrabajo:', error);
+      throw error;
     }
-}
-
+  }
+  
 
 
 

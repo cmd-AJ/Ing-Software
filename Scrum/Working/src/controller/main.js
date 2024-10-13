@@ -708,17 +708,18 @@ app.post('/api/contacts/hire/complete', apiKeyAuth ,async (req, res) => {
   }
 })
 
-app.get('/api/getdpibycompleted/:idtrabajo', apiKeyAuth ,async (req, res) => {
+app.get('/api/threads/getDpiByTrabajo/:idtrabajo', apiKeyAuth, async (req, res) => {
   try {
     const { idtrabajo } = req.params;
-    const dpi = await getDpiByCompleted(idtrabajo);
+    const dpi = await getDpiByTrabajo(idtrabajo);
     if (dpi) {
       res.status(200).json(dpi);
     } else {
-      res.status(400).json({ error: "Failed to get contracts for the specified job ID" });
+      res.status(400).json({ error: "Failed to retrieve DPI for the given idtrabajo" });
     }
     
   } catch (error) {
-    console.error("Error while getting contracts by job ID:", error);
-    res.st
-}})
+    console.error("Error while getting DPI by idtrabajo:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
