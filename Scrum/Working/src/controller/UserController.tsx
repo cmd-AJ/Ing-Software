@@ -436,7 +436,7 @@ export async function sendSatisfactionSurvey(jobId: Number, rating: Number, dpi_
 }
 
 
-export async function get_contrat_by_month(dpi: string, mes: string) {
+export async function get_contrat_by_moventh(dpi: string, mes: string) {
     try {
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/getcontrat_bymonth/${dpi}/${mes}`, {
             method: 'GET',
