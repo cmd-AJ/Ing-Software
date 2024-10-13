@@ -18,8 +18,8 @@ const Threads: React.FC = () => {
       const fetchedPosts = await getThreadPosts();
 
       setTimeout(() => {
-        setPosts(fetchedPosts); 
-        setLoading(false); 
+        setPosts(fetchedPosts);
+        setLoading(false);
       }, 500); // Delay 1s (1000ms)
     } catch (err) {
       setError("Failed to fetch posts");
@@ -28,7 +28,7 @@ const Threads: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchPosts(); 
+    fetchPosts();
   }, []);
 
   const handlePostSubmission = async () => {

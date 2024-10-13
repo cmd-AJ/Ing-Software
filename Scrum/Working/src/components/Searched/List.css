@@ -18,30 +18,13 @@
   opacity: 0.5;
 }
 
-.skeleton-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Animation for the skeleton */
-@keyframes skeletonLoading {
-  0% {
-    background-color: #e0e0e0;
-    transform: scale(0.97);
-  }
-  50% {
-    background-color: #d3d3d3; /* Slightly darker shade */
-    transform: scale(0.99); /* Slight increase in size */
-  }
-  100% {
-    background-color: #e0e0e0;
-    transform: scale(1);
-  }
-}
-
 .custom-skeleton {
-  margin: 10px;
+  margin: 15px;
   border-radius: 4px;
-  animation: skeletonLoading 20s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 95%;
+  flex: 1
 }

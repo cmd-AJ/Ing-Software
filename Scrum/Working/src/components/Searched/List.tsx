@@ -24,7 +24,7 @@ const List: React.FC<ContainerProps> = ({ job }) => {
         setTimeout(() => {
           setWorkers(fetchedWorkers);
           setIsLoading(false);
-        }, 500);
+        }, 1250);
       } catch (error) {
         console.error("Error fetching workers:", error);
         setIsLoading(false);
@@ -42,9 +42,16 @@ const List: React.FC<ContainerProps> = ({ job }) => {
           {/* Skeleton placeholder for worker cards */}
           <Skeleton
             height={150}
-            width={`99%`}
-            count={3}
+            count={5}
             className="custom-skeleton"
+            width={`95%`}
+            style={{
+              marginBottom: "auto", 
+              display: "block",
+              marginLeft: "auto", 
+              marginRight: "auto", 
+              maxWidth: "100%", 
+            }}
           />
         </div>
       ) : (
