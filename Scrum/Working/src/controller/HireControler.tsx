@@ -74,4 +74,6 @@ export async function moveJobFromAvailableIntoComplete(jobID: Number | string) {
     const result = await insertHiringIntoFinishedJobs(deletedData)
 
     console.log("This job was added to the completed table: ", result)
+
+    return result;
 }
