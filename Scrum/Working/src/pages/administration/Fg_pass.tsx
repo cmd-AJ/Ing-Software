@@ -20,6 +20,7 @@ import {
   IonToast,
   IonModal,
   IonButtons,
+  IonIcon,
 
 
 } from "@ionic/react";
@@ -33,6 +34,10 @@ import { useHistory } from "react-router";
 import dpiInput from "../../components/Register/dpiInput";
 import { cambiarcontra, getcode, sendmessages } from "../../controller/ChatController";
 import CryptoJS from 'crypto-js';
+import { useMaskito } from "@maskito/react";
+import { cuiValido } from "../../Departamentos/Departamentos";
+import { closeOutline } from "ionicons/icons";
+
 
 
 interface Cuenta {
@@ -111,16 +116,16 @@ const Forgot_Page: React.FC = () => {
 
   React.useEffect(() => {
   }, [agreed]);
-  React.useEffect(() => {
-  }, [agreed]);
 
   const handleClicksendmail = async (numero: number) => {
+
 
     if (dpi === '') {
       setIsOpen(true)
       setmensaje('DPI NO INGRESADO')
 
     }
+
     else {
       if (methodos === '') {
 
@@ -132,8 +137,6 @@ const Forgot_Page: React.FC = () => {
         if (pasa === true) {
           setIsOpenmodal(true)
         }
-
-
       }
 
     }
@@ -145,7 +148,16 @@ const Forgot_Page: React.FC = () => {
 
   };
 
+  const handleChangemethod = (method: string) => {
+    if (method === 'telefono') {
+      setmethodos('telefono')
 
+    } else if (method === 'correo') {
+
+      setmethodos('telefono')
+
+    }
+  };
 
 
   const handleClickcheckdigit = async (numero: number,) => {
@@ -179,6 +191,28 @@ const Forgot_Page: React.FC = () => {
 
   };
 
+
+  const handleInputChangeDPI = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
+
+    // Add spaces based on the length of newValue
+    if (newValue.length > 4) {
+      newValue = newValue.slice(0, 4) + ' ' + newValue.slice(4);
+    }
+
+    if (newValue.length > 10) {
+      newValue = newValue.slice(0, 10) + ' ' + newValue.slice(10);
+    }
+
+    // Ensure the final value does not exceed the expected length
+    if (newValue.length > 15) {
+      newValue = newValue.slice(0, 15);
+    }
+
+    setDpi(newValue); // Update state with the modified input value
+  };
+
+
   return (
     <>
       <link href='https://fonts.googleapis.com/css?family=Proza Libre' rel='stylesheet'></link>
@@ -195,41 +229,63 @@ const Forgot_Page: React.FC = () => {
                 <h2 className="TitleContrato">CONTRATO-GT</h2>
               </b>
             </div>
-            <div >
+            <div>
               <h2 className="olvidar_headline">¿Olvidaste tu contraseña?</h2>
             </div>
             <br></br>
             <div className="enterdpifg">
               Ingresa TU DPI registrado para restablecer tu contraseña
             </div>
-            <input className="inputdpi_fg" placeholder="INGRESA TU DPI"></input>
+
+            <input
+              className="inputdpi_fg" placeholder="INGRESA TU DPI"
+              onChange={handleInputChangeDPI}
+              value={dpi}
+            ></input>
+            {!cuiValido(dpi) && dpi ? (
+              <>
+                <p className="error-message">DPI no válido</p>
+              </>
+            ) : (
+              <p></p>
+            )}
+
             <div className="enterdpifg">
               Selecciona la vía donde deseas recibir el código de recuperación
               <form>
-                <input className="radiobuttonfg" type="radio" id="telefono" value={"telefono"} /><label >Mensaje de texto (SMS)</label>
-                <br></br>
-                <input className="radiobuttonfg" type="radio" id="correo" value={"correo"} /><label >CORREO ELECTRÓNICO</label>
+                <input onChange={() => handleChangemethod('telefono')} className="radiobuttonfg" type="radio" id="telefono" name="contactMethod" value="telefono" />
+                <label htmlFor="telefono">MENSAJE DE TEXTO (SMS)</label>
+                <br />
+                <input onChange={() => handleChangemethod('correo')} className="radiobuttonfg" type="radio" id="correo" name="contactMethod" value="correo" />
+                <label htmlFor="correo">CORREO ELECTRÓNICO</label>
+
               </form>
             </div>
             <div className="buttoncontainerfg">
               <button className="getcodefg" onClick={() => handleClicksendmail(1)}><b>RECIBIR CÓDIGO</b></button>
             </div>
           </div>
-          <IonModal isOpen={isOpenmodal}>
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Modal</IonTitle>
+
+          <IonModal isOpen={isOpenmodal} className="wholemodal">
+            <IonHeader >
+              <IonToolbar className="modalfg" >
+                <IonTitle>CODIGO DE VERIFICACIÓN</IonTitle>
                 <IonButtons slot="end">
-                  <IonButton onClick={() => setIsOpenmodal(false)}>Close</IonButton>
+                  <IonButton onClick={() => setIsOpenmodal(false)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
                 </IonButtons>
               </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
-                reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui.
-                Eaque, dicta.
-              </p>
+              <div className="inputcode">
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input1Ref} onChange={(e) => handleInputChange(e, 'input1', input2Ref)}></input>
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input2Ref} onChange={(e) => handleInputChange(e, 'input2', input3Ref)} onKeyDown={(e) => handleKeyDown(e, input1Ref)}></input>
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input3Ref} onChange={(e) => handleInputChange(e, 'input3', input4Ref)} onKeyDown={(e) => handleKeyDown(e, input2Ref)}></input>
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input4Ref} onChange={(e) => handleInputChange(e, 'input4', { current: null })} onKeyDown={(e) => handleKeyDown(e, input3Ref)} ></input>
+              </div>
+              <div className="positionbuttonsfg">
+                <IonButton className="acceptcode" onClick={() => handleClick(0)}>Cancelar</IonButton>
+                <IonButton className="acceptcode" onClick={() => handleClickcheckdigit(2)}>Ingresar</IonButton>
+              </div>
             </IonContent>
           </IonModal>
 

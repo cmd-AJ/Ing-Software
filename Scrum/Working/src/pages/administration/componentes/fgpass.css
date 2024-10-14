@@ -12,14 +12,11 @@
     text-align: center;
 }
 
-.inputdigit {
-    background-color: var(--ion-color-secondary);
-    border: 4px solid var(--ion-color-tertiary);
-    margin-left: 1%;
-    width: 10vw;
-    height: 20vh;
-    font-size: 10vh;
-    text-align: center;
+
+.inputcode{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .inputdpifg {
@@ -31,6 +28,8 @@
     margin-right: 5%;
     border: 1px solid var(--white);
     border-radius: 35px;
+
+
 }
 
 .fotoheader{
@@ -69,9 +68,18 @@
     width: 80vw;
     height: 6vh;
     margin-top: 2%;
-    margin-bottom: 4%;
+    margin-bottom: 0%;
+
+    padding-left: 2%;
 
 
+
+}
+
+.error-message{
+    color: red;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 /* Apply styles to the custom radio button */
@@ -148,14 +156,12 @@
         text-align: center;
     }
     
-    .inputdigit {
-        background-color: var(--ion-color-secondary);
-        border: 4px solid var(--ion-color-tertiary);
-        margin-left: 1%;
-        width: 10vw;
-        height: 20vh;
-        font-size: 10vh;
-        text-align: center;
+
+
+    .inputcode{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .inputdpifg {
@@ -167,6 +173,8 @@
         margin-right: 5%;
         border: 1px solid var(--white);
         border-radius: 35px;
+
+
     }
     
     .fotoheader{
@@ -205,9 +213,17 @@
         width: 80vw;
         height: 6vh;
         margin-top: 2%;
-        margin-bottom: 4%;
-    
-    
+        margin-bottom: 0%;
+
+        padding-left: 2%;
+        
+
+    }
+
+    .error-message{
+        color: red;
+        margin-top: 2%;
+        margin-bottom: 2%;
     }
     
     /* Apply styles to the custom radio button */
@@ -291,7 +307,7 @@
         margin-left: 1%;
         width: 10vw;
         height: 20vh;
-        font-size: 10vh;
+        font-size: 7rem;
         text-align: center;
     }
     
@@ -304,6 +320,14 @@
         margin-right: 5%;
         border: 1px solid var(--white);
         border-radius: 35px;
+        
+
+    }
+
+    .inputcode{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .fotoheader{
@@ -343,11 +367,19 @@
         width: 80vw;
         height: 6vh;
         margin-top: 2%;
-        margin-bottom: 4%;
+        margin-bottom: 0%;
     
+        padding-left: 2%;
     
     }
+
+
     
+    .error-message{
+        color: red;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
     /* Apply styles to the custom radio button */
     .radiobuttonfg {
         margin-left: 1%;
@@ -427,13 +459,20 @@
         background-color: var(--ion-color-secondary);
         border: 4px solid var(--ion-color-tertiary);
         margin-left: 1%;
-        width: 10vw;
-        height: 20vh;
-        font-size: 10vh;
+        width: 8vw;
+        height: 18vh;
+        font-size: 8rem;
         text-align: center;
+
+    }
+
+    .inputcode{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
-    .inputdpifg {
+    .inputdpifg{
         
         background-color: var(--white);
         margin-top: 5vh;
@@ -443,6 +482,7 @@
         margin-right: 25%;
         border: 1px solid var(--white);
         border-radius: 35px;
+
     }
     
     .fotoheader{
@@ -482,11 +522,18 @@
         width: 40vw;
         height: 6vh;
         margin-top: 2%;
-        margin-bottom: 4%;
-    
-    
+        margin-bottom: 0%;
+
+        padding-left: 2%;
+
     }
     
+    .error-message{
+        color: red;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
     /* Apply styles to the custom radio button */
     .radiobuttonfg {
         margin-left: 1%;
@@ -543,3 +590,46 @@
     
     
     }
+
+
+
+.modalfg{
+    --background: var(--white)
+    
+}
+
+.wholemodal{
+    --border-radius: 20px
+}
+
+
+@media (min-width:200px) and (max-width:768px){
+    .inputdigit {
+        background-color: var(--ion-color-secondary);
+        border: 4px solid var(--ion-color-tertiary);
+        margin-left: 1%;
+        width: 20vw;
+        height: 20vh;
+        font-size: 10vh;
+        text-align: center;
+    }
+
+
+    
+}
+
+@media (min-width:768px) and (max-width:850px){
+    .inputdigit {
+        background-color: var(--white);
+        border: 4px solid var(#BEBEBE);
+        border-radius: 20px;
+        margin-left: 1%;
+        width: 15vw;
+        height: 20vh;
+        font-size: 10vh;
+        text-align: center;
+    }
+
+
+    
+}
