@@ -1,5 +1,6 @@
 import React from "react"
 import './TrustedStyle.css'
+import TextND from "../../Txt/TextND"
 
 interface ContainerProps {
     nombre: string
@@ -12,16 +13,14 @@ interface ContainerProps {
 const TrustPerson: React.FC<ContainerProps> = ({nombre, apellido, rating, img, tel}) => {
     return (
         <div className="persondatadisplay">
-            <div style={{display: 'flex', height: '100%'}}>
-                <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt="" style={{borderRadius: '50%', width: '15%', height: '20%', position: 'unset'}}/>
+            <div style={{display: 'flex', height: '100%', width: '50%'}}>
+                <img src={img} alt="" style={{borderRadius: '50%', width: '15%', height: '20%', position: 'unset'}}/>
                 <div style={{display: 'flex', alignItems: 'center', marginLeft: '5px', flexDirection: 'column'}}>
-                   <p>{nombre + '' + apellido}</p>
-                   <p>{tel}</p> 
+                   <TextND text={`${nombre} ${apellido}`} hex="#000" size="medium"/>
+                   <TextND text={tel} hex="#000" size="medium"/> 
                 </div>
             </div>
-            <p style={{ fontSize: '30px'}}>
-                {rating}
-            </p>
+            <TextND text={rating.toString()} hex="#000" size="medium"/>
         </div>
     )
 }
