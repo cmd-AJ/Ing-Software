@@ -28,8 +28,6 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
     } else {
       history.push('/empleado?ownerUser=false')
     }
-    
-    
   }
 
   return (
