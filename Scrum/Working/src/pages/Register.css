@@ -26,12 +26,16 @@
     border-radius: 35px;
     padding-left: 10vw;
     padding-right: 10vw;
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 30px;
     color: black;
     box-shadow: 0 0 5mm rgba(120, 120, 120, 0.5);
     font-family: var(--proza-font);
+    overflow: auto;
+}
 
+.displayment-register-elements::-webkit-scrollbar {
+    display: none;
 }
 
 .divs-name {
@@ -46,8 +50,8 @@
     display: flex;
     justify-content: center;     
     align-items: center;   
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 @media (max-width: 660px){

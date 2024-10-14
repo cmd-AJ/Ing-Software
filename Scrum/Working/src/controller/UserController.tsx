@@ -436,7 +436,7 @@ export async function sendSatisfactionSurvey(jobId: Number, rating: Number, dpi_
 }
 
 
-export async function get_contrat_by_month(dpi: string, mes: string) {
+export async function get_contrat_by_moventh(dpi: string, mes: string) {
     try {
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/getcontrat_bymonth/${dpi}/${mes}`, {
             method: 'GET',
@@ -460,3 +460,24 @@ export async function get_contrat_by_month(dpi: string, mes: string) {
     }
 }
 
+export async function getDpiByTrabajo(idtrabajo : string) {
+    try {
+      const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/getDpiByTrabajo/${idtrabajo}`, {
+        method: 'GET',
+        headers: {
+          'api-key': import.meta.env.VITE_API_KEY,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to get DPI for the given idtrabajo');
+      }
+  
+      return response.json();
+    } catch (error) {
+      console.error('Error fetching DPI by idtrabajo:', error);
+      throw error;
+    }
+  }
+  
