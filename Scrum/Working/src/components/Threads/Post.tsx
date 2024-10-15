@@ -47,7 +47,7 @@ const Post: React.FC<PostProps> = ({
   };
 
   const isValidImage = (img: string) => {
-    return img && (img.startsWith("data:image") || img.startsWith("http"));
+    return img && (img.startsWith("data:image") || img.startsWith("http") || img.startsWith("https"));
   };
   console.log(usuario);
   console.log(img_usuario);
