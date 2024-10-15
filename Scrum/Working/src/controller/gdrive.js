@@ -23,6 +23,7 @@ export async function uploadFile(picturename, basedon64) {
   } else if (fileExtension === 'jpg' || fileExtension === 'jpeg') {
     mimeType = 'image/jpeg';
   } else {
+    console.log(fileExtension)
     throw new Error('Unsupported file type. Only .png and .jpg/.jpeg are allowed.');
   }
 
