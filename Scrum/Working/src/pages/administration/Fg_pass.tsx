@@ -35,9 +35,12 @@ import dpiInput from "../../components/Register/dpiInput";
 import { cambiarcontra, getcode, sendmessages } from "../../controller/ChatController";
 import CryptoJS from 'crypto-js';
 import { useMaskito } from "@maskito/react";
+<<<<<<< Updated upstream
 import { cuiValido } from "../../Departamentos/Departamentos";
 import { closeOutline } from "ionicons/icons";
 
+=======
+>>>>>>> Stashed changes
 
 
 interface Cuenta {
@@ -98,6 +101,9 @@ const Forgot_Page: React.FC = () => {
       nextInput.current.focus();
     }
   };
+
+
+  
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -191,6 +197,7 @@ const Forgot_Page: React.FC = () => {
 
   };
 
+<<<<<<< Updated upstream
 
   const handleInputChangeDPI = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
@@ -212,6 +219,13 @@ const Forgot_Page: React.FC = () => {
     setDpi(newValue); // Update state with the modified input value
   };
 
+=======
+  const dpiMask = useMaskito({
+    options: {
+        mask: [...Array(4).fill(/\d/), ' ', ...Array(5).fill(/\d/), ' ', ...Array(4).fill(/\d/)]
+    }
+});
+>>>>>>> Stashed changes
 
   return (
     <>
@@ -236,6 +250,7 @@ const Forgot_Page: React.FC = () => {
             <div className="enterdpifg">
               Ingresa TU DPI registrado para restablecer tu contraseña
             </div>
+<<<<<<< Updated upstream
 
             <input
               className="inputdpi_fg" placeholder="INGRESA TU DPI"
@@ -250,6 +265,9 @@ const Forgot_Page: React.FC = () => {
               <p></p>
             )}
 
+=======
+            <input ref={dpiMask}    className="inputdpi_fg" placeholder="INGRESA TU DPI"></input>
+>>>>>>> Stashed changes
             <div className="enterdpifg">
               Selecciona la vía donde deseas recibir el código de recuperación
               <form>
