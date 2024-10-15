@@ -28,6 +28,7 @@ function imageToBase64(imagePath) {
     // Optional: Determine the MIME type based on the file extension
 
     const extension = imagePath.split('.').pop().toLowerCase();
+    let mimeType;
     if (extension === 'png') {
       mimeType = 'image/png';
     } else if (extension === 'jpg' || extension === 'jpeg') {
