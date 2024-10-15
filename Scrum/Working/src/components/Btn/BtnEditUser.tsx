@@ -2,7 +2,7 @@ import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
 import React from "react";
 import { flash } from "ionicons/icons";
-import { updatecuenta } from "../../controller/UserController";
+import { updatecuenta, updatecuentaNEO4J } from "../../controller/UserController";
 
 type User = {
     nombre : string;
@@ -68,18 +68,9 @@ const BtnEditUser: React.FC<ContainerProps> = ({
 
         localStorage.setItem('User', JSON.stringify(updatedUser));
         setUser(updatedUser);
-
-        console.log(municipio);
-        console.log(profpic)
-        console.log(sex);
-        console.log(birthdate);
-        console.log(user.dpi);
-        console.log(user.role);
-        console.log(cellphone);
-        console.log(job);
-        console.log(banner);
         
         updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, "Carpintero", banner)
+        updatecuentaNEO4J(municipio, profpic, user.dpi, cellphone)
         setEdit(false)
 
     };
