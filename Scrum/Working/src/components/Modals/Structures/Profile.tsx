@@ -27,14 +27,13 @@ type User = {
     fecha_nacimiento: string;
     municipio: string;
     telefono: string;
-    correo: string;
+    email: string;
     imagen: string;
     dpi: string;
     role: string;
-    edad: string;
     banner: string;
     departamento: string
-  };
+};
 
 const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
 
@@ -48,7 +47,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
     const [municipio, setMunicipio] = useState(user.municipio) 
     const [cellphone, setCellphone] = useState(user.telefono)
     const [validatesCell, setValidatesCell] = useState(false)
-    const [email, setEmail] = useState(user.correo)
+    const [email, setEmail] = useState(user.email)
     const [validatesEmail, setValidatesEmail] = useState(false)
 
     const [validateRole, setValidateRole] = useState(false)
@@ -81,20 +80,19 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
 
                 <ImgInput image={banner} setImage={setBanner} type={true}/>
-                <div id="user-img">
-                    <ImgInput image={profileImage} setImage={setProfileImage} type={false}/>
-                </div>
-                <div id="input-display">
-                    <TextND text="Mi nombre" hex="#000" size="big"/>
-                    <HorizontalDivider/>
-                    {
-                        validateRole &&
-                        <div>
-                            <HorizontalDivider/>
-                                <DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
-                            <HorizontalDivider/>
-                        </div>
-                    }
+                    <div id="user-img">
+                        <ImgInput image={profileImage} setImage={setProfileImage} type={false}/>
+                    </div>
+                    <div id="input-display">
+                        <TextND text="Mi nombre" hex="#000" size="big"/>
+                        <HorizontalDivider/>
+
+                    <div>
+                        <HorizontalDivider/>
+                            <DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
+                        <HorizontalDivider/>
+                    </div>
+                    
                     <div>
                         <HorizontalDivider/>
                             <DateSelector date={date} setDate={setDate} setValidateDate={setValidateDate}/>

@@ -12,11 +12,10 @@ type User = {
     fecha_nacimiento: string;
     municipio: string;
     telefono: string;
-    correo: string;
+    email: string;
     imagen: string;
     dpi: string;
     role: string;
-    edad: string;
     banner: string;
     departamento: string
   };
@@ -59,22 +58,28 @@ const BtnEditUser: React.FC<ContainerProps> = ({
         const updatedUser = {
             ...user,
             banner: banner,
-            image: profpic,
+            imagen: profpic,
             fecha_nacimiento: birthdate,
             sexo: sex,
-            tel: cellphone,
-            correo: email,
+            telefono: cellphone,
+            email: email,
             municipio: municipio
         };
 
         localStorage.setItem('User', JSON.stringify(updatedUser));
+        setUser(updatedUser);
 
-        const actualUser = localStorage.getItem('User')
-        if (actualUser !== null) {
-            setUser(JSON.parse(actualUser));
-        }
-
-        updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, job, banner)
+        console.log(municipio);
+        console.log(profpic)
+        console.log(sex);
+        console.log(birthdate);
+        console.log(user.dpi);
+        console.log(user.role);
+        console.log(cellphone);
+        console.log(job);
+        console.log(banner);
+        
+        updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, "Carpintero", banner)
         setEdit(false)
 
     };
