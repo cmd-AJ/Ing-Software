@@ -151,7 +151,9 @@ app.post('/api/users', apiKeyAuth, async (req, res) => {
 
 
 
-    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio, imagens, banner)
+
+
+    const result = await insertUser(dpi, name, lastnames, password, email, phoneNumber, role, departamento, municipio, 'https://contratogt.com/api/image/'+imagens, 'https://contratogt.com/api/image/'+banner)
     res.status(200).json({ Succes: 'User inserted' })
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -752,7 +754,7 @@ app.get('/api/threads/getDpiByTrabajo/:idtrabajo', apiKeyAuth, async (req, res) 
 
 
 
-app.get('/api/image/:fileID', apiKeyAuth, async (req, res) => {
+app.get('/api/image/:fileID', async (req, res) => {
   const { fileID } = req.params;
   if (!fileID) {
     return res.status(400).send('File ID is required');
@@ -771,7 +773,7 @@ app.get('/api/image/:fileID', apiKeyAuth, async (req, res) => {
 
 
 
-app.post('/api/insertimage/', async (req, res) => {
+app.post('/api/insertimage/', apiKeyAuth ,async (req, res) => {
   try {
     const { imagename, base64code } = req.body;
 
