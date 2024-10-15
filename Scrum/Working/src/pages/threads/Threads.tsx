@@ -40,7 +40,7 @@ const Threads: React.FC = () => {
       <div className="threads-space">
         <div className="threads-container">
           <div className="thread-scroller">
-            <PostField onPostSubmit={handlePostSubmission} />
+            <PostField onPostSubmit={handlePostSubmission} img_usuario={""} />
 
             {loading ? (
               <div>
