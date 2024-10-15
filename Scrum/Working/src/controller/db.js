@@ -191,7 +191,7 @@ export async function getUserbyDPI(dpi) {
     }
 }
 
-export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio) {
+export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio, imagen, banner) {
     try {
 
         const query = {
@@ -204,12 +204,12 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
             VALUES (
                 $1, $2, $3, $4, $5, $6, $7, 
                 '', '', 0, 
-                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 
-                'https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg',
+                $10, 
+                $11,
                 $8, $9
             )
         `,
-        values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio],
+        values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio, imagen, banner],
         };
 
         const result = await client.query(query);
