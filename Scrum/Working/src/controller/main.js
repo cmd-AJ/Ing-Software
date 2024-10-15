@@ -540,21 +540,26 @@ app.post('/api/threads/createPost', apiKeyAuth, async (req, res) => {
 
     // Validación de entrada
     if (!dpiUser || !postText) {
-      return res.status(400).json({ error: 'Failed to creat post, empty values are not allowed' });
+      return res.status(400).json({ error: 'Failed to create post, empty values are not allowed' });
     }
 
+    let imageUrl = null;
 
-    const parts = postImage.split(/[;/]+/);
-    const randoms = Math.floor(Math.random() * (14 - 1 + 1)) + 1;
-    const respuesta = await uploadFile(randoms + '.' + parts[1], postImage)
+    // Si se proporciona una imagen, sube el archivo
+    if (postImage) {
+      const parts = postImage.split(/[;/]+/);
+      const randoms = Math.floor(Math.random() * (14 - 1 + 1)) + 1;
+      const respuesta = await uploadFile(randoms + '.' + parts[1], postImage);
+      imageUrl = 'https://contratogt.com/api/image/' + respuesta;
+    }
 
-    // Creating new threadpost
-    const post = await createThreadPost(dpiUser, postText, 'https://contratogt.com/api/image/' + respuesta);
+    // Crear nuevo threadpost, incluyendo imageUrl solo si hay una imagen
+    const post = await createThreadPost(dpiUser, postText, imageUrl);
 
     if (post) {
       return res.status(200).json({ success: "Successfully created new post" });
     } else {
-      return res.status(400).json({ error: "Falied to create post" });
+      return res.status(400).json({ error: "Failed to create post" });
     }
 
   } catch (error) {
