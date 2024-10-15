@@ -46,8 +46,10 @@ const Dashboard: React.FC = () => {
   // Callback para actualizar hirings después de completar la acción en CloseContrat
   const handleUpdateHirings = () => {
     fetchHirings();  // Llama a la función que actualiza los datos dinámicos
+
   };
   
+  useEffect(() =>  {})
 
   useEffect(() => {
     setThisMonth(new Month(month, year));
