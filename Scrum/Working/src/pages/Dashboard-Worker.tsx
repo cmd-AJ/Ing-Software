@@ -26,11 +26,10 @@ type User = {
   fecha_nacimiento: string;
   municipio: string;
   telefono: string;
-  correo: string;
+  email: string;
   imagen: string;
   dpi: string;
   role: string;
-  edad: string;
   banner: string;
   departamento: string
 };
@@ -74,16 +73,16 @@ const Dashboard_Worker: React.FC = () => {
     fecha_nacimiento: '',
     municipio: '',
     telefono: '',
-    correo: '',
+    email: '',
     imagen: '',
     dpi: '',
     role: '',
-    edad: '',
     banner: '',
     departamento: ''
   });
     
-  const [image, setImage] = useState(myUser.imagen);
+  const [image, setImage] = useState(myUser.imagen)
+  const [age, setAge] = useState(0)
 
   const [contratsList, setContratsList] = useState<Contrat[]>([])
 
@@ -97,11 +96,12 @@ const Dashboard_Worker: React.FC = () => {
     } else {
       user = localStorage.getItem("notUser");
     }
-    if (user != null) {
+    if (user) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
-      setImage(parsedUser.imagen);
     }
+
+
   }, [owner]);
 
   useEffect(()=> {
@@ -110,11 +110,25 @@ const Dashboard_Worker: React.FC = () => {
         const contratList = await getContratWorker(myUser.dpi)
 
         setContratsList(contratList)
-        console.log(contratList);
         
       }
 
       fecthData()
+
+    const user = localStorage.getItem('User')
+    if (user) {
+      const parsedUser: User = JSON.parse(user)
+      setImage(parsedUser.imagen) 
+      const dateC = new Date(myUser.fecha_nacimiento);
+      const realDate = new Date(dateC.setDate(dateC.getDate() + 1));
+
+      const actualDate = new Date();
+      const difMiliSeconds = actualDate.getTime() - realDate.getTime();
+      const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
+      const ageYears = Math.floor(difMiliSeconds / miliSecondsYear);
+
+      setAge(ageYears)
+    }
   }, [myUser])
 
   useEffect(() => {
@@ -168,7 +182,7 @@ const Dashboard_Worker: React.FC = () => {
               <div className="dataGrid">
                 <div className="dataDisplay">
                   <TextND text="Edad:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={myUser.edad} size="medium" hex={secondaryContrast}/>
+                  <TextND text={age.toString()} size="medium" hex={secondaryContrast}/>
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Departamento:" size="medium" hex={tertiaryColor}/>
@@ -188,7 +202,7 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={myUser.correo} size="medium" hex={secondaryContrast}/>
+                  <TextND text={myUser.email} size="medium" hex={secondaryContrast}/>
                 </div>
               </div>
               <HorizontalDivider/>
