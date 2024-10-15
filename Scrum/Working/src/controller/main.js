@@ -26,7 +26,18 @@ function imageToBase64(imagePath) {
     const base64Image = data.toString('base64');
 
     // Optional: Determine the MIME type based on the file extension
-    const mimeType = path.extname(imagePath).toLowerCase() === '.png' ? 'image/png' : 'image/jpeg';
+
+    const extension = imagePath.split('.').pop().toLowerCase();
+    if (extension === 'png') {
+      mimeType = 'image/png';
+    } else if (extension === 'jpg' || extension === 'jpeg') {
+      mimeType = 'image/jpeg';
+    } else if (extension === 'gif') {
+      mimeType = 'image/gif';
+    } else {
+      mimeType = 'application/octet-stream'; // Default for unsupported types
+    }
+
 
     // Format the Base64 string with the data URL prefix
     const base64String = `data:${mimeType};base64,${base64Image}`;
