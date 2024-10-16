@@ -58,7 +58,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({  }) => {
             <IonRow className="ion-align-items-center responsive-navbar">
               <IonCol className="ion-text-center" onClick={() => {history.push('/searched'); console.log(location.pathname + location.search);
               }}>
-                <IonText className="appName-text">SABTE</IonText>
+                <IonText className="appName-text">Contrato-gt</IonText>
               </IonCol>
               {searching !== "/searched" && <IonCol className="search-bar-col">
                 <SearchBar onRequestChange={handleRequestChange} />
