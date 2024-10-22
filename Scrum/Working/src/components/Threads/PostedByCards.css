@@ -8,9 +8,9 @@
   transition: background-color 0.3s ease-in-out; 
 }
 
-.postedby-card:hover {
+/* .postedby-card:hover {
   background-color: #a5adb8;
-}
+} */
 
 .post-user-profile {
   border-radius: 50%; /* Para hacer el contenedor circular */

@@ -65,6 +65,7 @@ const Threads: React.FC = () => {
                   posttime={post.posttime}
                   imagen={post.imagen}
                   img_usuario={post.img_usuario}
+                  dpi={post.dpi}
                 />
               ))
             )}
