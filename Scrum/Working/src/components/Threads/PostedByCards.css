@@ -5,7 +5,7 @@
   flex-direction: row;
   border-radius: 8px;
   margin-bottom: 10px; /* Ajuste del margen inferior */
-  transition: background-color 0.3s ease-in-out; 
+  transition: background-color 0.3s ease-in-out;
 }
 
 /* .postedby-card:hover {
@@ -29,9 +29,9 @@
   height: 100%; /* La imagen ocupará todo el alto del contenedor */
   object-fit: cover; /* Esto se asegura de que la imagen se recorte correctamente en caso de no ser cuadrada */
   border-radius: 50%; /* Hace que la imagen también sea circular */
-} 
+}
 
-.user-info-container{
+.user-info-container {
   display: flex;
   flex-direction: column;
 }
@@ -40,7 +40,13 @@
   font-size: 1rem; /* Tamaño de fuente reducido */
   font-weight: 600;
   color: #343a40;
-  margin: 0;  
+  margin: 0;
+  cursor: pointer;
+  transition: text-decoration 0.2s ease-in-out; /* Smooth transition */
+}
+
+.postedby-usuario:hover {
+  text-decoration: underline; /* Add underline on hover */
 }
 
 .postedby-time {
@@ -48,4 +54,3 @@
   color: #6c757d;
   margin: 0;
 }
-
