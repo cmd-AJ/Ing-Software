@@ -47,26 +47,7 @@ const Login: React.FC = () => {
     const handleClickLogin = async () => {
          // ELIMINAR AL VER SI APROBARON
 
-         let persona = {
-            "nombre": "Ricardo",
-            "apellidos": "Tapia",
-            "email": "",
-            "dpi": "3833 86608 0102",
-            "telefono": "3083-6966",
-            "role": "Empleador",
-            "departamento": null,
-            "municipio": "",
-            "imagen": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-            "sexo": "",
-            "fecha_nacimiento": "",
-            "rating": 0,
-            "banner": "https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg"
-          };
 
-        history.push(`/searched`);
-        localStorage.setItem('User', JSON.stringify(persona))
-        localStorage.setItem('dpi', '3833 86608 0102');
-        
         if ((dpi != '') && (password != '')) {
            
             const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
