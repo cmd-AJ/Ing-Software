@@ -38,6 +38,7 @@ import Suspendido from "./pages/administration/Suspended_page";
 import Tickt_page from "./pages/administration/Tickets_page";
 import Forgot_Page from "./pages/administration/Fg_pass";
 import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
+import Contrato from "./pages/contrato/Contrato";
 
 setupIonicReact();
 
@@ -62,6 +63,11 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/">
           <Redirect to="/about" />
+        </Route>
+
+        {/* landing v2*/}
+        <Route exact path="/contratogt">
+          <Contrato />
         </Route>
         {/* Protected Routes */}
         <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
