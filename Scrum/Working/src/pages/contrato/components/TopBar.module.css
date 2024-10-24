@@ -1,0 +1,32 @@
+.topBar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #333;
+    padding: 1rem;
+  }
+  
+  .topBarButton {
+    background-color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .topBarButton:hover {
+    background-color: #ddd;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .topBar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .topBarButton {
+      width: 100%;
+    }
+  }

@@ -1,5 +1,49 @@
 .contratoPage {
-  background-color: aqua;
-  height: 100px;
-  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  max-width: 1200px;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.section1{
+    background-color: aqua;
+    display: flex;
+}
+
+.descriptionContainer{
+    background-color: blueviolet;
+    width: 100px;
+    height: 100px;
+}
+
+.productIdea{ 
+    background-color: chartreuse;
+    width: 100px;
+    height: 100px;
+}
+
+/*Section 2 */
+
+.section2{
+    background-color: aqua;
+    display: flex;
+
+}
+
+.aboutDisplayer{
+    background-color: rgb(226, 43, 43);
+    width: 100px;
+    height: 100px;
+}
+
+.productAssets{ 
+    background-color: rgb(255, 230, 0);
+    width: 100px;
+    height: 100px;
 }
