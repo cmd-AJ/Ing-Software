@@ -3,10 +3,6 @@ import {
 } from '@ionic/react';
 import './Login.css';
 
-import DpiInput from '../components/Register/dpiInput'
-import PasswordInput from '../components/Register/passwordInput'
-import RoleInput from '../components/Register/roleInput'
-import LoginButton from '../components/Register/loginButton'
 import LinkRegister from '../components/Register/LinkRegister';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
@@ -26,6 +22,7 @@ const Login: React.FC = () => {
     const [dpi, setDpi] = useState('')
     const [password, setPassword] = useState('')
     const [userExist, setUserExist] = useState(false)
+    const [msgError, setMsgError] = useState(false) 
 
     const [validateDpi, setValidateDpi] = useState(false)
     const [validatePassword, setValidatePassword] = useState(false)
@@ -45,17 +42,12 @@ const Login: React.FC = () => {
     })
 
     const handleClickLogin = async () => {
-         // ELIMINAR AL VER SI APROBARON
+        if (dpi != '' && validateDpi && validatePassword) {
 
-
-        if ((dpi != '') && (password != '')) {
-           
-            const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
                     const data = await getUser2(dpi)
-                    console.log(data);
                     
                     localStorage.setItem('User', JSON.stringify(data[0]))
                     
@@ -69,12 +61,14 @@ const Login: React.FC = () => {
                     history.push(`/searched`);
                     
                 } else {
-                    console.log("Usuario no encontrado");
+                   setMsgError(true)
                 }
             } catch (error) {
                 console.error("Error:", error);
             }
-        }
+        } else {
+	    setMsgError(true)
+	}
     }
 
 
@@ -87,9 +81,9 @@ const Login: React.FC = () => {
                         <TextND text='Introduce tu DPI y contraseña para acceder a tu cuenta' hex='#000' size='small'/>
                     </div>
                     <div className='middle-center'>
-                        <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI inválido'/>
+                        <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI incorrecto' msgError={msgError}/>
                         <div>
-                            <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='Contraseña inválida'/>
+                            <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='Contraseña incorrecta' msgError={msgError}/>
                             <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
                                 <u><a className='fgpass_togo' onClick={() => history.push('/fg_pass')}>¿Olvidaste tu contraseña?</a></u>
                             </div>
@@ -97,6 +91,12 @@ const Login: React.FC = () => {
                     </div>
                     <div className='bottom-center'>
                         <BtnAction trigger='' img='' text='Confirmar' action={handleClickLogin} rounded={false}/>
+			{
+				msgError &&
+				<div style={{ display: 'flex', justifyContent: 'center'}}>
+					<TextND text="DPI o contraseña inválidos" hex="#FF0000" size="small"/>
+				</div>
+			}
                         <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
                             <LinkRegister/>
                         </div>
@@ -109,3 +109,4 @@ const Login: React.FC = () => {
 }
 
 export default Login;
+

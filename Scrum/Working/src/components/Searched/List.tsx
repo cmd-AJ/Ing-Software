@@ -12,11 +12,9 @@ interface ContainerProps {
     setTotal: (total: number) => void
 }
 
-const List: React.FC<ContainerProps> = ({ job }) => {
+const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
   const [workers, setWorkers] = useState<Trabajador[]>([]);
   const [isLoading, setIsLoading] = useState(true); // New state to track loading status
-
-const List: React.FC<ContainerProps> = ({job, setTotal}) => {
 
     useEffect(() => {
         const fetchWorkers = async () => {
