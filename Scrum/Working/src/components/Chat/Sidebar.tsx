@@ -13,10 +13,24 @@ type chatUser = {
     name: string
 }
 
+type ChatMessage = {
+    contenido: string;
+    time: string;
+    dpi: string;
+};
+
+type FormattedMessage = {
+    message: string;
+    time: string;
+    sender: "me" | "you"; // Cambia el tipo a "me" | "you"
+};
+
+
+
 const Sidebar = () => {
     const [selectedPerson, setSelectedPerson] = useState<chatUser | null>(null); // Cambié el tipo a `any` para manejar el objeto completo
-    const [contacts, setContacts] = useState([]);
-    const [messages, setMessages] = useState([]);
+    const [contacts, setContacts] = useState<chatUser[]>([]); // Define el tipo de contacts como chatUser[]
+    const [messages, setMessages] = useState<FormattedMessage[]>([]); // Especifica el tipo de messages
     const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false); // Controla si Details está abierto
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -81,47 +95,52 @@ const Sidebar = () => {
     // Manejo del clic en una persona/contacto
     const handlePersonClick = async (dpi: string) => {
         const selectedPerson2 = contacts.find(person => person.dpi === dpi);
-        console.log(selectedPerson2);
-        console.log(loggedUserDpi);
 
         // Si ya hay una persona seleccionada (y es diferente), cierra el componente Details (Information)
-        if (selectedPerson && selectedPerson.dpi !== selectedPerson2.dpi && isDetailsOpen) {
+        if (selectedPerson && selectedPerson.dpi !== selectedPerson2?.dpi && isDetailsOpen) {
             setIsDetailsOpen(false); // Cierra el modal de información si cambia de chat
         }
 
         // Actualizar la persona seleccionada
-        setSelectedPerson(selectedPerson2); 
-        localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
+        // Actualizar la persona seleccionada solo si selectedPerson2 no es undefined
+        if (selectedPerson2) {
+            setSelectedPerson(selectedPerson2); 
+            localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
+        } else {
+            setSelectedPerson(null); // Si no se encuentra, se asigna null
+        }
+
 
         // Fetch chat messages for selected person
         try {
-            const chatMessages = await getChatMessages(loggedUserDpi, dpi);
-            const formattedMessages = chatMessages.map(msg => ({
+            const chatMessages = await getChatMessages(loggedUserDpi, dpi) as ChatMessage[];
+            const formattedMessages = chatMessages.map((msg: ChatMessage) => ({
                 message: msg.contenido,
                 time: msg.time,
-                sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
+                sender: msg.dpi === loggedUserDpi ? 'me' as const : 'you' as const // Aseguramos el tipo aquí
             }));
             setMessages(formattedMessages);
         } catch (error) {
             console.error('Error fetching chat messages:', error);
         }
+    
     };
 
     const updateMessages = async () => {
         if (selectedPerson) {
             try {
-                const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi);
-                const formattedMessages = chatMessages.map(msg => ({
+                const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi) as ChatMessage[];
+                const formattedMessages = chatMessages.map((msg: ChatMessage) => ({ // Especifica el tipo para msg
                     message: msg.contenido,
                     time: msg.time,
-                    sender: msg.dpi === loggedUserDpi ? 'me' : 'you'
-                }));
+                    sender: msg.dpi === loggedUserDpi ? 'me' as const : 'you' as const                }));
                 setMessages(formattedMessages);
             } catch (error) {
                 console.error('Error fetching chat messages:', error);
             }
         }
     };
+    
 
     return (
         <div className={`wrapper ${isDetailsOpen ? 'blur' : ''}`}>
@@ -143,8 +162,6 @@ const Sidebar = () => {
                                 <img className="imagen" src={person.img} alt="" />
                                 <div className="text-container">
                                     <span className="name">{person.name}</span>
-                                    <span className="time">{person.time}</span>
-                                    <span className="preview">{person.preview}</span>
                                 </div>
                             </li>
                         ))}
@@ -155,7 +172,7 @@ const Sidebar = () => {
                     <div className={`top ${selectedPerson ? 'chat-selected' : ''}`}>
                         {selectedPerson ? (
                             <div className="chat-info">
-                                <img className="chat-image" src={selectedPerson.image} alt={`${selectedPerson.name}'s avatar`} />
+                                <img className="chat-image" src={selectedPerson.img} alt={`${selectedPerson.name}'s avatar`} />
                                 <span className="name">{selectedPerson.name}</span>
                             </div>
                         ) : (
@@ -166,7 +183,7 @@ const Sidebar = () => {
                         <Details 
                             onClose={() => setIsDetailsOpen(false)} 
                             dpiEmployer={loggedUserDpi} 
-                            dpiEmployee={selectedPerson ? selectedPerson.dpi : null} 
+                            dpiEmployee={selectedPerson ? selectedPerson.dpi : ""} 
                         />
                     ) : (
                         <Chat messages={messages} />
@@ -174,7 +191,7 @@ const Sidebar = () => {
                     <div className="bottom">
                         <Bottom 
                             loggedUserDpi={loggedUserDpi} 
-                            selectedPersonDpi={selectedPerson ? selectedPerson.dpi : null} 
+                            selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
                             updateMessages={updateMessages} 
                             onHireClick={() => setIsDetailsOpen(true)} 
                         /> 
