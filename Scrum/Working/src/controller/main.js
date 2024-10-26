@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
 import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes } from './db.js'
-import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson } from './neo.js'
+import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
 import { getImageFromDrive, updatePhoto, uploadFile } from './gdrive.js'
@@ -235,6 +235,21 @@ app.put('/api/setNeoSettings', apiKeyAuth, async (req, res) => {
   }
 });
 
+app.put('/api/neo/WorkList', apiKeyAuth, async (req, res) => {
+  try {
+      // Fetch all trabajos from Neo4j
+      const trabajos = await getAllTrabajos();
+
+      // Send the trabajos as the response
+      res.status(200).json(trabajos);
+
+  } catch (error) {
+      console.error('Error fetching trabajos:', error);
+
+      // Send an error response
+      res.status(500).json({ message: 'Error fetching trabajos' });
+  }
+});
 
 app.get('/api/ctrabajo/:dpi', apiKeyAuth, async (req, res) => {
   try {
