@@ -18,14 +18,12 @@ const CommentBox: React.FC<UserProps> = ({
   const [comment, setComment] = useState<string>("");
   const userProfileData = localStorage.getItem("User");
   const userProfileImg = userProfileData ? JSON.parse(userProfileData) : null;
-  const image = userProfileImg ? userProfileImg.image : "";
+  const image = userProfileImg ? userProfileImg.imagen : "";
   const handlePost = async () => {
     if (comment.trim() === "") {
       alert("Por favor, ingresa un comentario.");
       return;
     }
-
-    console.log(`Comentario de ${usuario}: ${comment}`);
     await insertCommentToThread(
       idthread,
       comment,

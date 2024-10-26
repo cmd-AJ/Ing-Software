@@ -7,16 +7,18 @@ import { send } from "ionicons/icons";
 
 interface PostFieldProps {
   onPostSubmit: () => void; // Prop type for the function to call after posting
+  img_usuario: string;
 }
 
-const PostField: React.FC<PostFieldProps> = ({ onPostSubmit }) => {
+const PostField: React.FC<PostFieldProps> = ({ onPostSubmit, img_usuario }) => {
   const [inputText, setInputText] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [imageString, setImageString] = useState<string | null>(null); // To hold the base64 string
 
   const userProfileData = localStorage.getItem("User");
   const userProfileImg = userProfileData ? JSON.parse(userProfileData) : null;
-  const image = userProfileImg ? userProfileImg.image : "";
+  const image = userProfileImg ? userProfileImg.imagen : "";
+
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
     e.target.style.height = "auto"; // Reset the height to auto

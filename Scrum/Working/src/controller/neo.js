@@ -63,12 +63,13 @@ export async function getWorkers(trabajo) {
         const query = `
             MATCH (usr:Usuario)-[:trabaja_de]->(tr:Trabajo)
             WHERE apoc.text.levenshteinDistance(toLower(tr.nombre_trabajo), toLower($trabajo)) <= 3
-            RETURN usr LIMIT 25
+            RETURN usr, tr.nombre_trabajo AS nombre_trabajo LIMIT 25
         `;
         const result = await session.run(query, { trabajo });
 
         const workers = result.records.map(record => {
             const worker = record.get('usr');
+            const nombreTrabajo = record.get('nombre_trabajo');
             return {
                 nombre: worker.properties.nombre,
                 telefono: worker.properties.telefono,
@@ -76,7 +77,8 @@ export async function getWorkers(trabajo) {
                 rating: worker.properties.rating,
                 apellidos: worker.properties.apellidos,
                 imagen: worker.properties.imagen,
-                dpi: worker.properties.dpi
+                dpi: worker.properties.dpi,
+                nombre_trabajo: nombreTrabajo
             };
         });
         return workers;
@@ -87,7 +89,6 @@ export async function getWorkers(trabajo) {
         await session.close();
     }
 }
-
 
 
 export async function getTrustedUsersByDpi(dpi) {

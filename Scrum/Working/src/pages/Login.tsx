@@ -45,7 +45,11 @@ const Login: React.FC = () => {
     })
 
     const handleClickLogin = async () => {
+         // ELIMINAR AL VER SI APROBARON
+
+
         if ((dpi != '') && (password != '')) {
+           
             const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
