@@ -7,10 +7,11 @@ import TextND from '../Txt/TextND';
 
 interface ContainerProps {
     job: string
+    setTotal: (total: number) => void
 }
 
 
-const List: React.FC<ContainerProps> = ({job}) => {
+const List: React.FC<ContainerProps> = ({job, setTotal}) => {
 
     const [workers, setWorkers] = useState<Trabajador[]>([]);
 
@@ -19,12 +20,14 @@ const List: React.FC<ContainerProps> = ({job}) => {
           try {
             const fetchedWorkers = await getWorkersByJob(job);
             setWorkers(fetchedWorkers);
+	    setTotal(fetchedWorkers.length)
           } catch (error) {
             console.error("Error fetching workers:", error);
           }
         };
     
         fetchWorkers();
+
       }, [job]);
 
     return (
