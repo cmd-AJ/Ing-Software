@@ -3,10 +3,6 @@ import {
 } from '@ionic/react';
 import './Login.css';
 
-import DpiInput from '../components/Register/dpiInput'
-import PasswordInput from '../components/Register/passwordInput'
-import RoleInput from '../components/Register/roleInput'
-import LoginButton from '../components/Register/loginButton'
 import LinkRegister from '../components/Register/LinkRegister';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
@@ -26,6 +22,7 @@ const Login: React.FC = () => {
     const [dpi, setDpi] = useState('')
     const [password, setPassword] = useState('')
     const [userExist, setUserExist] = useState(false)
+    const [msgError, setMsgError] = useState(false) 
 
     const [validateDpi, setValidateDpi] = useState(false)
     const [validatePassword, setValidatePassword] = useState(false)
@@ -45,13 +42,11 @@ const Login: React.FC = () => {
     })
 
     const handleClickLogin = async () => {
-        if ((dpi != '') && (password != '')) {
-            const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
+        if (dpi != '' && validateDpi && validatePassword) {
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
                     const data = await getUser2(dpi)
-                    console.log(data);
                     
                     localStorage.setItem('User', JSON.stringify(data[0]))
                     
@@ -65,12 +60,14 @@ const Login: React.FC = () => {
                     history.push(`/searched`);
                     
                 } else {
-                    console.log("Usuario no encontrado");
+                   setMsgError(true)
                 }
             } catch (error) {
                 console.error("Error:", error);
             }
-        }
+        } else {
+	    setMsgError(true)
+	}
     }
 
 
@@ -93,6 +90,12 @@ const Login: React.FC = () => {
                     </div>
                     <div className='bottom-center'>
                         <BtnAction trigger='' img='' text='Confirmar' action={handleClickLogin} rounded={false}/>
+			{
+				msgError &&
+				<div style={{ display: 'flex', justifyContent: 'center'}}>
+					<TextND text="DPI o contraseña inválidos" hex="#FF0000" size="small"/>
+				</div>
+			}
                         <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
                             <LinkRegister/>
                         </div>
@@ -105,3 +108,4 @@ const Login: React.FC = () => {
 }
 
 export default Login;
+
