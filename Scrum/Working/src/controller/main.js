@@ -235,7 +235,7 @@ app.put('/api/setNeoSettings', apiKeyAuth, async (req, res) => {
   }
 });
 
-app.put('/api/neo/WorkList', apiKeyAuth, async (req, res) => {
+app.get('/api/neo/WorkList', apiKeyAuth, async (req, res) => {
   try {
       // Fetch all trabajos from Neo4j
       const trabajos = await getAllTrabajos();
