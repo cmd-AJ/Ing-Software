@@ -126,12 +126,13 @@ const Sidebar = () => {
     return (
         <div className={`wrapper ${isDetailsOpen ? 'blur' : ''}`}>
             <div className="container1">
-                <div className="left">
-                    <div className="top">
-                        {windowWidth >= 600 && (
-                            <input className='searchpeople' type="text" placeholder="Search" />
-                        )}
-                    </div>
+            <div className="left">
+                <div className="top">
+                    {windowWidth >= 600 && (
+                        <input className='searchpeople' type="text" placeholder="Search" />
+                    )}
+                </div>
+                <div className="scrollable-content"> {/* Contenedor interno para el scroll */}
                     <ul className="people">
                         {contacts.map((person, index) => (
                             <li 
@@ -148,7 +149,8 @@ const Sidebar = () => {
                             </li>
                         ))}
                     </ul>
-                </div> 
+                </div>
+            </div>
                 <div className="right">
                     <div className={`top ${selectedPerson ? 'chat-selected' : ''}`}>
                         {selectedPerson ? (
