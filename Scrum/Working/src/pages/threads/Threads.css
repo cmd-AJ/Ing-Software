@@ -18,8 +18,8 @@
     z-index: 1; 
     background-color: #f9f8f9;
     height: 100%;
-    width: 60%;
-    max-width: 800px;
+    width: 95%;
+    max-width: 1000px;
     min-width: 300px;
     position: relative;
     display: flex;
@@ -46,8 +46,8 @@
 
 .thread-scroller > * {
     margin-bottom: 16px; /* Espacio entre los posts */
-    width: 90%; /* Ajusta para centrar el contenido y dejar márgenes laterales */
-    max-width: 600px; /* Limita el ancho máximo de los posts */
+    width: 100%; /* Ajusta para centrar el contenido y dejar márgenes laterales */
+    max-width: 700px; /* Limita el ancho máximo de los posts */
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
@@ -66,3 +66,26 @@
         width: 90%;
     }
 }
+
+/* Custom skeleton animation */
+@keyframes skeletonLoading {
+    0% {
+      background-color: #e0e0e0;
+      transform: scale(1);
+    }
+    50% {
+      background-color: #d3d3d3;
+      transform: scale(1.02);
+    }
+    100% {
+      background-color: #e0e0e0;
+      transform: scale(1);
+    }
+  }
+  
+  .custom-skeleton {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    animation: skeletonLoading 1.5s ease-in-out infinite;
+  }
+  

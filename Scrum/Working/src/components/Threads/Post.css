@@ -4,7 +4,7 @@
   background-color: #f9f8f9;
   margin-bottom: 20px;
   padding: 16px;
-  width: 90%;
+  width: 130%;
   border: 1px solid #cecece; 
 }
 
@@ -41,7 +41,7 @@
 }
 
 .post-description {
-  margin: 0;
+  margin: 10px;
 }
 
 .comments-container{

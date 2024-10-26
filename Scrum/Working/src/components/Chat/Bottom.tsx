@@ -11,48 +11,53 @@ interface BottomProps {
   onHireClick: () => void;
 }
 
-const  Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updateMessages, onHireClick }) => {
+const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updateMessages, onHireClick }) => {
+  const [message, setMessage] = useState('');  
+  const user = localStorage.getItem('User');
+  let role = '';
+  try {
+    const jsonparse = JSON.parse(user+'');
+    role = jsonparse.role;
+  } catch (error) {}
 
-    const [message, setMessage] = useState('');  
-    const user = localStorage.getItem('User');
-    let role = ''
+  const sendMessage = async () => {
     try {
-      const jsonparse = JSON.parse(user+'');
-      role = jsonparse.role;
-      
-    } catch (error) {
-    }
-
-    const sendMessage = async () => {
-      try {
-        const response = await getChatIdWithDPI(loggedUserDpi, selectedPersonDpi);
-        const idchat = response[0]?.idchat;
-        if (idchat !== undefined) {
-          await insertChatMessage(message, idchat.toString(), loggedUserDpi);
-          setMessage('');
-          updateMessages();
-        } else {
-          console.error("Chat ID not found");
-        }
-      } catch (error) {
-        console.error("Error while sending message:", error);
+      const response = await getChatIdWithDPI(loggedUserDpi, selectedPersonDpi);
+      const idchat = response[0]?.idchat;
+      if (idchat !== undefined) {
+        await insertChatMessage(message, idchat.toString(), loggedUserDpi);
+        setMessage('');
+        updateMessages();
+      } else {
+        console.error("Chat ID not found");
       }
-    };
+    } catch (error) {
+      console.error("Error while sending message:", error);
+    }
+  };
 
-    return (
-      <div className="bottom">
-        <FaImages className="icon gallery-icon" /> {/* Icono de galería a la izquierda */}
-        <textarea
-          className="input-message"
-          placeholder="Type a message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          style={{ height: '39px' }}
-        />
-        <IoSend className="icon send-icon" onClick={sendMessage} /> {/* Icono de enviar */}
-        <FaHandshake className="icon hire-icon" onClick={onHireClick} disabled={role === 'Empleado'} /> {/* Icono de handshake */}
-      </div>
-    );
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault(); // Evita el salto de línea
+      sendMessage();
+    }
+  };
+
+  return (
+    <div className="bottom">
+      <FaImages className="icon gallery-icon" />
+      <textarea
+        className="input-message"
+        placeholder="Type a message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        onKeyPress={handleKeyPress}
+        style={{ height: '39px' }}
+      />
+      <IoSend className="icon send-icon" onClick={sendMessage} /> 
+      <FaHandshake className="icon hire-icon" onClick={onHireClick} disabled={role === 'Empleado'} />
+    </div>
+  );
 }
 
 export default Bottom;

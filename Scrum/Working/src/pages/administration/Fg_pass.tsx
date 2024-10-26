@@ -5,54 +5,30 @@ import {
   IonContent,
 
   IonButton,
-  IonInput,
-  IonItem,
   IonToolbar,
-  IonLabel,
-  IonText,
-  IonCheckbox,
-  IonGrid,
-  IonCol,
-  IonRow,
-  IonRadio,
-  IonRadioGroup,
-  IonItemSliding,
   IonToast,
   IonModal,
   IonButtons,
+  IonIcon,
 
 
 } from "@ionic/react";
-import { use } from "chai";
+
 import '../administration/componentes/fgpass.css'
-import Topheader from "./componentes/Topheader";
-import DpiInput from '../../components/Register/dpiInput'
-import PasswordInput from "../../components/Register/passwordInput";
-import Confirmation from '../../components/Register/Confirmation'
 import { useHistory } from "react-router";
-import dpiInput from "../../components/Register/dpiInput";
 import { cambiarcontra, getcode, sendmessages } from "../../controller/ChatController";
 import CryptoJS from 'crypto-js';
-
-
-interface Cuenta {
-  idsuspend: string;
-  dpi: string;
-  estado: string;
-  fechainicio: string;
-  fechaban: string;
-}
+import { cuiValido } from "../../Departamentos/Departamentos";
+import { closeOutline } from "ionicons/icons";
+import Swal from "sweetalert2";
 
 
 const Forgot_Page: React.FC = () => {
 
   const [agreed, setagreed] = useState(2)
   const [dpi, setDpi] = useState('')
-  const [validateDpi, setValidateDpi] = useState(false)
   const [methodos, setmethodos] = useState('')
   const [confirmation, setConfirmation] = useState('')
-  const [validatePassword, setValidatePassword] = useState(false)
-  const [validateConfirmation, setValidateConfirmation] = useState(false)
   const [password, setPassword] = useState('')
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenmodal, setIsOpenmodal] = useState(false);
@@ -75,6 +51,7 @@ const Forgot_Page: React.FC = () => {
 
 
 
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     inputName: string,
@@ -94,6 +71,11 @@ const Forgot_Page: React.FC = () => {
     }
   };
 
+
+
+
+
+
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     prevInput?: React.RefObject<HTMLInputElement>
@@ -111,15 +93,11 @@ const Forgot_Page: React.FC = () => {
 
   React.useEffect(() => {
   }, [agreed]);
-  React.useEffect(() => {
-  }, [agreed]);
 
   const handleClicksendmail = async (numero: number) => {
-
     if (dpi === '') {
       setIsOpen(true)
       setmensaje('DPI NO INGRESADO')
-
     }
     else {
       if (methodos === '') {
@@ -127,25 +105,26 @@ const Forgot_Page: React.FC = () => {
         setIsOpen(true)
         setmensaje('No ha elegido el metodo para reestablecer la contrasena')
       } else {
-        // const pasa = await sendmessages(dpi, methodos);
-        const pasa = true
+        const pasa = await sendmessages(dpi, methodos);
         if (pasa === true) {
           setIsOpenmodal(true)
         }
-
-
       }
 
     }
 
   };
 
-  const handleClick = async (numero: number,) => {
-    setagreed(numero)
+  const handleChangemethod = (method: string) => {
+    if (method === 'telefono') {
+      setmethodos('telefono')
 
+    } else if (method === 'correo') {
+
+      setmethodos('correo')
+
+    }
   };
-
-
 
 
   const handleClickcheckdigit = async (numero: number,) => {
@@ -170,14 +149,78 @@ const Forgot_Page: React.FC = () => {
 
 
 
-  const handleconfirm = async (path: string,) => {
-    if (validateConfirmation) {
+  const handleconfirm = async () => {
+    if (password === confirmation) {
       const x = CryptoJS.SHA256(password + '').toString(CryptoJS.enc.Hex)
-      await cambiarcontra(x, dpi)
-      history.push('/home')
+      const response = await cambiarcontra(x, dpi)
+
+      if (response){
+        Swal.fire({
+          title: "Cambio de contraseña con éxito",
+          icon: "success",
+          heightAuto: false,
+          timer: 2500,
+          timerProgressBar: true,
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        history.push('/fg_pass')
+  
+      }
+      else{
+
+        Swal.fire({
+          title: "error no se pudo cambiar contraseña",
+          icon: "error",
+          heightAuto: false,
+          timer: 2500,
+          timerProgressBar: true,
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        history.push('/fg_pass')
+      }
+
     }
 
   };
+
+
+  const handleInputChangeDPI = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
+
+    // Add spaces based on the length of newValue
+    if (newValue.length > 4) {
+      newValue = newValue.slice(0, 4) + ' ' + newValue.slice(4);
+    }
+
+    if (newValue.length > 10) {
+      newValue = newValue.slice(0, 10) + ' ' + newValue.slice(10);
+    }
+
+    // Ensure the final value does not exceed the expected length
+    if (newValue.length > 15) {
+      newValue = newValue.slice(0, 15);
+    }
+
+    setDpi(newValue); // Update state with the modified input value
+  };
+
+
+  const handleInputChangepass = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = event.target.value
+    setConfirmation(newValue)
+
+  };
+
+
+
+  const handleInputChangepassconfirm = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = event.target.value
+    setPassword(newValue)
+
+  };
+
 
   return (
     <>
@@ -195,41 +238,65 @@ const Forgot_Page: React.FC = () => {
                 <h2 className="TitleContrato">CONTRATO-GT</h2>
               </b>
             </div>
-            <div >
+            <div>
               <h2 className="olvidar_headline">¿Olvidaste tu contraseña?</h2>
             </div>
             <br></br>
             <div className="enterdpifg">
               Ingresa TU DPI registrado para restablecer tu contraseña
             </div>
-            <input className="inputdpi_fg" placeholder="INGRESA TU DPI"></input>
+
+            <input
+              className="inputdpi_fg" placeholder="INGRESA TU DPI"
+              onChange={handleInputChangeDPI}
+              value={dpi}
+            ></input>
+            {!cuiValido(dpi) && dpi ? (
+              <>
+                <p className="error-message">DPI no válido</p>
+              </>
+            ) : (
+              <p></p>
+            )}
+
             <div className="enterdpifg">
               Selecciona la vía donde deseas recibir el código de recuperación
               <form>
-                <input className="radiobuttonfg" type="radio" id="telefono" value={"telefono"} /><label >Mensaje de texto (SMS)</label>
-                <br></br>
-                <input className="radiobuttonfg" type="radio" id="correo" value={"correo"} /><label >CORREO ELECTRÓNICO</label>
+                <input onChange={() => handleChangemethod('telefono')} className="radiobuttonfg" type="radio" id="telefono" name="contactMethod" value="telefono" />
+                <label htmlFor="telefono">MENSAJE DE TEXTO (SMS)</label>
+                <br />
+                <input onChange={() => handleChangemethod('correo')} className="radiobuttonfg" type="radio" id="correo" name="contactMethod" value="correo" />
+                <label htmlFor="correo">CORREO ELECTRÓNICO</label>
+
               </form>
             </div>
             <div className="buttoncontainerfg">
               <button className="getcodefg" onClick={() => handleClicksendmail(1)}><b>RECIBIR CÓDIGO</b></button>
             </div>
           </div>
-          <IonModal isOpen={isOpenmodal}>
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Modal</IonTitle>
+
+          <IonModal isOpen={isOpenmodal} className="wholemodal"
+            onDidDismiss={() => setIsOpenmodal(false)}>
+            <IonHeader >
+              <IonToolbar className="modalfg" >
+                <IonTitle>CODIGO DE VERIFICACIÓN</IonTitle>
                 <IonButtons slot="end">
-                  <IonButton onClick={() => setIsOpenmodal(false)}>Close</IonButton>
+                  <IonButton onClick={() => setIsOpenmodal(false)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
                 </IonButtons>
               </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni illum quidem recusandae ducimus quos
-                reprehenderit. Veniam, molestias quos, dolorum consequuntur nisi deserunt omnis id illo sit cum qui.
-                Eaque, dicta.
-              </p>
+
+              <p className="disclaim_fg">REVISA TU {methodos.toUpperCase()} E INGRESA EL CÓDIGO RECIBIDO</p>
+              <div className="inputcode">
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input1Ref} onChange={(e) => handleInputChange(e, 'input1', input2Ref)}></input>
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input2Ref} onChange={(e) => handleInputChange(e, 'input2', input3Ref)} onKeyDown={(e) => handleKeyDown(e, input1Ref)}></input>
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input3Ref} onChange={(e) => handleInputChange(e, 'input3', input4Ref)} onKeyDown={(e) => handleKeyDown(e, input2Ref)}></input>
+                <input className="inputdigit" placeholder="X" maxLength={1} ref={input4Ref} onChange={(e) => handleInputChange(e, 'input4', { current: null })} onKeyDown={(e) => handleKeyDown(e, input3Ref)} ></input>
+              </div>
+              <div className="positionbuttonsfg">
+                <button className="getcodefg" style={{ width: '20vw' }} onClick={() => handleClickcheckdigit(1)}><b>ENVIAR</b></button>
+              </div>
             </IonContent>
           </IonModal>
 
@@ -238,36 +305,54 @@ const Forgot_Page: React.FC = () => {
       )
         : (agreed % 2) === 1 ? (
           <IonContent className="maincontentfgpass">
-            <IonToolbar color={"primary"}>
-              <IonLabel slot="start" className="dashbutton">
-                <a className="linkref">SABTE</a>
-              </IonLabel>
-            </IonToolbar>
-            <IonGrid className="gridconfirmfg">
-              <IonRow>
-                <IonCol></IonCol>
-                <IonCol>
-                  <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword} />
-                </IonCol>
-                <IonCol></IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol></IonCol>
-                <IonCol>
-                  <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password} />
 
-                </IonCol>
-                <IonCol></IonCol>
-              </IonRow>
 
-              <IonRow>
-                <IonCol></IonCol>
-                <IonButton className='cfpass' onClick={() => handleClick(0)}>Cancelar</IonButton>
-                <IonCol></IonCol>
-                <IonButton onClick={() => handleconfirm('')} >Confirmar</IonButton>
-                <IonCol></IonCol>
-              </IonRow>
-            </IonGrid>
+            <div className="inputdpifg">
+              <div className="fotoheader">
+                <img src="/Handshake.png"></img>
+                <div style={{ width: '2vw' }}></div>
+                <div className="linefgpass"></div>
+                <div style={{ width: '5vw' }}></div>
+                <b>
+                  <h2 className="TitleContrato">CONTRATO-GT</h2>
+                </b>
+              </div>
+              <div>
+                <h2 className="reestablecer_headline">RESTABLECER CONTRASEÑA</h2>
+              </div>
+              <br></br>
+              <div className="enterdpifg">
+                INGRESA TU NUEVA CONTRASEÑA
+              </div>
+
+              <input
+                className="inputdpi_fg"
+                placeholder="INGRESA TU NUEVA CONTRASEÑA"
+                onChange={handleInputChangepassconfirm}
+                value={password}
+              />
+              <br></br> <br></br>
+              <div className="enterdpifg">
+                CONFIRMA TU NUEVA CONTRASEÑA
+              </div>
+
+              <input
+                className="inputdpi_fg"
+                placeholder="INGRESA TU NUEVA CONTRASEÑA"
+                onChange={handleInputChangepass}
+                value={confirmation}
+              />
+              {confirmation != password ? (
+                <p className="error-message">NO COINCIDEN LAS CONTRASEÑAS</p>
+              ) : (
+                <p></p>
+              )}
+              <div className="buttoncontainerfg">
+                <button className="getcodefg" onClick={() => handleconfirm()}><b>CONFIRMAR</b></button>
+              </div>
+            </div>
+
+
           </IonContent>
         ) : (
 

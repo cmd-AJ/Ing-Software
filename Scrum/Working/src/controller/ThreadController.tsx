@@ -1,6 +1,8 @@
 export async function getThreadPosts() {
     try {
+        console.log(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/getPosts`)
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/getPosts`, {
+            
             method: 'GET',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
