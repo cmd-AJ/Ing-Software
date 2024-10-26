@@ -1,14 +1,4 @@
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonToast } from '@ionic/react'
-import UserInput from '../components/Register/userInput'
-import LastnameInput from '../components/Register/lastnameInput'
-import PasswordInput from '../components/Register/passwordInput'
-import Confirmation from '../components/Register/Confirmation'
-import EmailInput from '../components/Register/emailInput'
-import PhoneInput from '../components/Register/phoneInput'
-import RoleInput from '../components/Register/roleInput'
-import RegisterButton from '../components/Register/registerButton'
 import LinkLogin from '../components/Register/LinkLogin'
-import DpiInput from '../components/Register/dpiInput'
 import React, { useState } from 'react'
 import './Register.css'
 import InputTopLabel from '../components/Inputs/InputTopLabel'
@@ -107,52 +97,7 @@ const Register: React.FC = () => {
                         <LinkLogin/>
                     </div>
                 </div>
-                {/* <div className='space'></div> */}
-                {/* <div className='component'>
-                    <UserInput setName={setName} validateName={validateName} setValidateName={setValidateName} />
-                </div>
-                <div className='component'>
-                    <LastnameInput setLastname={setLastname} validateLastname={validateLastname} setValidateLastname={setValidateLastname} />
-                </div>
-                <div className='component'>
-                    <PasswordInput setPassword={setPassword} validatePassword={validatePassword} setValidatePassword={setValidatePassword} />
-                </div>
-                <div className='component'>
-                    <Confirmation setConfirmation={setConfirmation} validateConfirmation={validateConfirmation} setValidateConfirmation={setValidateConfirmation} password={password} />
-                </div>
-                <div className='component'>
-                    <DpiInput setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi} />
-                </div>
-                <div className='component'>
-                    <EmailInput setEmail={setEmail} validatesEmail={validateEmail} setValidateEmail={setValidateEmail} />
-                </div>
-                <div className='component'>
-                    <PhoneInput setTel={setCell} validateTel={validateTel} setValidateTel={setValidateTel} />
-                </div>
-                <div className='component'>
-                    <RoleInput setRole={setRole} />
-                </div>
-                <div className='component' style={{ marginTop: '3vh' }}>
-                    <RegisterButton
-                        validateName={validateName}
-                        validateLastname={validateLastname}
-                        validatePassword={validatePassword}
-                        validateConfirmation={validateConfirmation}
-                        validateDpi={validateDpi}
-                        validateEmail={validateEmail}
-                        validateTel={validateTel}
-                        user={User}
-                    />
-                </div>
-                <div style={{ margin: '10px', height: '0.5vh' }} className='space'></div>
-                <div className='component'>
-                    <LinkLogin />
-                </div> */}
-                {/* <div className='space'></div> */}
             </div>
-
-
-
         </>
     )
 }

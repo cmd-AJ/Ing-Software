@@ -8,31 +8,37 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 interface ContainerProps {
-  job: string;
+    job: string
+    setTotal: (total: number) => void
 }
 
 const List: React.FC<ContainerProps> = ({ job }) => {
   const [workers, setWorkers] = useState<Trabajador[]>([]);
   const [isLoading, setIsLoading] = useState(true); // New state to track loading status
 
-  useEffect(() => {
-    const fetchWorkers = async () => {
-      try {
-        setIsLoading(true);
-        const fetchedWorkers = await getWorkersByJob(job);
-        // Simulate a delay (e.g., 500ms) to improve user experience
-        setTimeout(() => {
+const List: React.FC<ContainerProps> = ({job, setTotal}) => {
+
+    useEffect(() => {
+        const fetchWorkers = async () => {
+          try {
+            setIsLoading(true);
+            const fetchedWorkers = await getWorkersByJob(job);
+            setWorkers(fetchedWorkers);
+	          setTotal(fetchedWorkers.length)
+            
+            setTimeout(() => {
           setWorkers(fetchedWorkers);
           setIsLoading(false);
         }, 1250);
-      } catch (error) {
-        console.error("Error fetching workers:", error);
-        setIsLoading(false);
-      }
-    };
+          } catch (error) {
+            console.error("Error fetching workers:", error);
+            setIsLoading(false);
+          }
+        };
+    
+        fetchWorkers();
 
-    fetchWorkers();
-  }, [job]);
+      }, [job]);
 
   return (
     <div id="list-job-container">
@@ -74,4 +80,4 @@ const List: React.FC<ContainerProps> = ({ job }) => {
   );
 };
 
-export default List;
+export default List
