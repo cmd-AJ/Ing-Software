@@ -14,6 +14,7 @@ interface ContainerProps {
     validation: (validate: string) => boolean
     mask: ((value: HTMLInputElement) => void) | null
     errorText: string
+    msgError: boolean
 }
 
 const InputTopLabelPass: React.FC<ContainerProps> = (
@@ -26,7 +27,8 @@ const InputTopLabelPass: React.FC<ContainerProps> = (
         setValidatesValue,
         validation,
         mask,
-        errorText
+        errorText,
+	msgError,
     }
 ) => {
     const [isTouched, setIsTouched] = useState(false)
@@ -61,12 +63,12 @@ const InputTopLabelPass: React.FC<ContainerProps> = (
         <div className="input-top-display">
             <TextND text={label} size="small" hex="#000" />
             <IonInput
-                className={`inputs-rl ${validateValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
+                className={`inputs-rl ${validateValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''} ${msgError ? 'ion-invalid' : ''}`}
                 type={showPass ? 'text' : 'password'}
                 fill="outline"
                 placeholder={placeholder}
                 color='primary'
-                errorText={errorText}
+                errorText={msgError ? '' : errorText}
                 onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }}
                 onIonChange={handleInputChange}
                 ref={async (userInput) => {

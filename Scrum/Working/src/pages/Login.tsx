@@ -81,9 +81,9 @@ const Login: React.FC = () => {
                         <TextND text='Introduce tu DPI y contraseña para acceder a tu cuenta' hex='#000' size='small'/>
                     </div>
                     <div className='middle-center'>
-                        <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI inválido'/>
+                        <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI incorrecto' msgError={msgError}/>
                         <div>
-                            <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='Contraseña inválida'/>
+                            <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='Contraseña incorrecta' msgError={msgError}/>
                             <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
                                 <u><a className='fgpass_togo' onClick={() => history.push('/fg_pass')}>¿Olvidaste tu contraseña?</a></u>
                             </div>
