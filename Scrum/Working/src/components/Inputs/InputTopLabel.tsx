@@ -45,8 +45,13 @@ const InputTopLabel : React.FC<ContainerProps> = (
     }
 
     const validate = (value: string) => {
-        const isValid = value === '' || validation(value)
-        setValidatesValue(isValid)
+    	if (label === "Correo electrónico (opcional)") {
+    		const isValid = value === '' || validation(value)
+		setValidatesValue(isValid)
+    	} else {
+        	const isValid = value.trim() !== '' || validation(value)
+        	setValidatesValue(isValid)
+	}
     }
 
     useEffect(() => {
