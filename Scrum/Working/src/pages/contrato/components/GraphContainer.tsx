@@ -28,7 +28,6 @@ const GraphContainer: React.FC = () => {
         {
           data: {
             id: "node3",
-            label: "Kotlin",
             imageUrl:
               "https://images4.fanpop.com/image/photos/23900000/Felicia-Day-Random-Portrait-felicia-day-23983020-1131-1599.jpg",
           },
