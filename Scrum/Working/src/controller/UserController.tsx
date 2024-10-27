@@ -12,9 +12,7 @@ async function createUser(
 	departamento: 
 	string, 
 	municipio: string, 
-	setMsgError: (msgError: boolean) => void
 ) {
-	setMsgError(true)
     const data = {
         "dpi": dpi,
         "name": name,
@@ -39,8 +37,7 @@ async function createUser(
     
     	if (!response.ok) {
 		console.log("There was an error on the response")
-		setMsgError(true)
-    		return; 
+    		return false 
     	}
 
 	console.log("User saved");
@@ -68,15 +65,14 @@ async function createUser(
 
 	if (!neoResponse.ok) {
 		console.log("There was an error on the Neo4j response")
-		setMsgError(true)
-		return;
+		return false
 	}
 
 	console.log("Neo User Saved");
-	setMsgError(false)
+	return true
     } catch (error) {
 	console.log("Could not create User or Neo User");
-	setMsgError(true)
+	return false
     }
 
 }
