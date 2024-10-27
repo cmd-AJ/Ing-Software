@@ -14,6 +14,7 @@ interface ContainerProps {
     mask: ((value: HTMLInputElement) => void) | null;
     errorText: string
     msgError: boolean
+    errorText2: string
 }
 
 const InputTopLabel : React.FC<ContainerProps> = (
@@ -28,6 +29,7 @@ const InputTopLabel : React.FC<ContainerProps> = (
         mask,
         errorText,
 	msgError,
+	errorText2
     }
 ) => {
     const [isTouched, setIsTouched] = useState(false)
@@ -60,7 +62,7 @@ const InputTopLabel : React.FC<ContainerProps> = (
                 fill="outline"
                 placeholder={placeholder}
                 color='primary'
-                errorText={msgError ? '' : errorText}
+                errorText={msgError ? errorText2 : errorText}
                 onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value);}}
                 onIonChange={handleInputChange}
                 ref={async (userInput) => {
