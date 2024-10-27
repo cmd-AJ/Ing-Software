@@ -1,4 +1,5 @@
 import { Trabajador } from "../components/Searched/type";
+import { Departamentos } from "../Departamentos/Departamentos";
 
 function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
 
@@ -144,6 +145,9 @@ async function getWorkersByJob(job: String, usrDpi: string) {
             const workerTrustedpeople = await getTrustedPeople(worker.dpi);
             const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
 
+            // Get the departamento using the worker's DPI
+            const departamento = Departamentos(worker.dpi);
+
             return {
                 nombre: `${worker.nombre} ${worker.apellidos}`,
                 telefono: worker.telefono,
@@ -152,7 +156,8 @@ async function getWorkersByJob(job: String, usrDpi: string) {
                 rating: worker.rating,
                 imagen: worker.imagen,
                 trabajo: worker.nombre_trabajo,
-                contactos_en_comun: sharedContacts
+                contactos_en_comun: sharedContacts,
+                direccion: `${departamento}, ${worker.municipio}`
             };
         }));
 
