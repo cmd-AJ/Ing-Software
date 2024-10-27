@@ -152,7 +152,6 @@ async function getWorkersByJob(job: String, usrDpi: string) {
                 nombre: `${worker.nombre} ${worker.apellidos}`,
                 telefono: worker.telefono,
                 dpi: worker.dpi,
-                municipio: worker.municipio,
                 rating: worker.rating,
                 imagen: worker.imagen,
                 trabajo: worker.nombre_trabajo,
