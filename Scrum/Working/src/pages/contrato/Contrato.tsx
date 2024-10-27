@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./contrato.module.css"; // CSS module for page-specific styles
 import TopBar from "./components/TopBar";
 import LandingSearchBar from "./components/LadingSearchBar";
-import { Padding } from "@mui/icons-material";
+import GraphContainer from "./components/GraphContainer";
 
 const Contrato: React.FC = () => {
   const buttons = [
@@ -26,8 +26,8 @@ const Contrato: React.FC = () => {
                 Conectate Con Profesionales De Confianza Recomendados Por Tu
                 Propia Red.
               </p>
-              
-              <p className={styles.quieres} >{text}</p>
+
+              <p className={styles.quieres}>{text}</p>
               <LandingSearchBar
                 onRequestChange={() => {}}
                 onSearch={() => {}}
@@ -35,7 +35,7 @@ const Contrato: React.FC = () => {
             </div>
 
             <div className={styles.productIdea}>
-              <p>Nodes</p>
+              <GraphContainer />
             </div>
           </div>
         </section>
