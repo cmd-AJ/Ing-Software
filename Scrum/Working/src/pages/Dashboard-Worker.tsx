@@ -101,7 +101,6 @@ const Dashboard_Worker: React.FC = () => {
       setMyUser(parsedUser);
     }
 
-
   }, [owner]);
 
   useEffect(()=> {
@@ -127,8 +126,10 @@ const Dashboard_Worker: React.FC = () => {
       const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
       const ageYears = Math.floor(difMiliSeconds / miliSecondsYear);
 
+    console.log(parsedUser);
       setAge(ageYears)
     }
+    
   }, [myUser])
 
   useEffect(() => {
@@ -182,7 +183,7 @@ const Dashboard_Worker: React.FC = () => {
               <div className="dataGrid">
                 <div className="dataDisplay">
                   <TextND text="Edad:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={age.toString()} size="medium" hex={secondaryContrast}/>
+                  <TextND text={myUser.fecha_nacimiento !== '' ? age.toString() : 'Por configurar'} size="medium" hex={secondaryContrast}/>
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Departamento:" size="medium" hex={tertiaryColor}/>
@@ -194,7 +195,7 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Sexo:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={myUser.sexo} size="medium" hex={secondaryContrast}/>
+                  <TextND text={myUser.sexo !== '' ? myUser.sexo : 'Indefinido'} size="medium" hex={secondaryContrast}/>
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Municipio:" size="medium" hex={tertiaryColor}/>
@@ -202,7 +203,7 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
                 <div className="dataDisplay">
                   <TextND text="Correo electrónico:" size="medium" hex={tertiaryColor}/>
-                  <TextND text={myUser.email} size="medium" hex={secondaryContrast}/>
+                  <TextND text={myUser.email !== '' ? myUser.email : '-'} size="medium" hex={secondaryContrast}/>
                 </div>
               </div>
               <HorizontalDivider/>

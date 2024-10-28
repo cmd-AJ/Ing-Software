@@ -113,11 +113,9 @@
 
 .all-contrats-display{
 	width: 100%; 
-	height: 100%;
 	display: flex; 
 	flex-direction: column; 
 	gap: 10px;
-	overflow: scroll;
 }
 
 @media (max-width: 814px){
