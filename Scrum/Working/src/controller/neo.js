@@ -1,5 +1,22 @@
 import { createSession } from './GraphDataBase.js';
 
+export async function insertNewJob(job, description) {
+    const session = createSession();
+
+    try {
+        const query = `CREATE (:Trabajo {nombre_trabajo:'${job}', descripcion:'${description}})`;
+
+        const result = await session.run(query);
+
+        return result
+    } catch (error) {
+        console.error("Error while adding new job", error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
 export async function getAllTrabajos() {
     const session = createSession();
 
