@@ -89,24 +89,26 @@ export async function getCommentsWithThreadID(id) {
     }
 }
 
-export async function getThreadPosts(){
+export async function getThreadPosts() {
     try {
         const query = {
             text: "SELECT thr.idthreads, usr.nombre || ' ' || usr.apellidos AS usuario, usr.dpi, usr.imagen AS img_usuario, thr.descripcion, post_timestamp AS posttime, thr.image AS imagen " +
                   "FROM threads thr " +
                   "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario) " +
-                  "ORDER BY post_timestamp DESC "
-                  
-        }
+                  "ORDER BY post_timestamp DESC " +
+                  "LIMIT $1", // Use a parameter for the limit
+            values: [15] // Set the limit value to 15
+        };
 
-        const result = await client.query(query)
-
-        return result.rows
+        const result = await client.query(query);
+        return result.rows;
 
     } catch (error) {
-        console.error('Error while gettin thread posts')
+        console.error('Error while getting thread posts:', error);
+        throw error; // Rethrow the error after logging it
     }
 }
+
 
 export async function createThreadPost(usrDpi, postDescription, image) {
 
@@ -191,7 +193,7 @@ export async function getUserbyDPI(dpi) {
     }
 }
 
-export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio) {
+export async function insertUser(DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio, imagen, banner) {
     try {
 
         const query = {
@@ -204,12 +206,12 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
             VALUES (
                 $1, $2, $3, $4, $5, $6, $7, 
                 '', '', 0, 
-                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 
-                'https://ohcbrands.com/wp-content/uploads/2018/04/69648590-header-wallpapers.jpg',
+                $10, 
+                $11,
                 $8, $9
             )
         `,
-        values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio],
+        values: [DPI, name, lastnames, password, email, phoneNumber, role, departamento, municipio, imagen, banner],
         };
 
         const result = await client.query(query);

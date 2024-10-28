@@ -1,8 +1,19 @@
+import { logDOM } from "@testing-library/dom";
 import { Trabajador } from "../components/Searched/type";
 import { Departamentos } from "../Departamentos/Departamentos";
 
-function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
-
+async function createUser(
+	dpi: string, 
+	name: string, 
+	lastnames: string, 
+	password: string, 
+	email: string, 
+	phoneNumber: string, 
+	role: string, 
+	departamento: 
+	string, 
+	municipio: string, 
+) {
     const data = {
         "dpi": dpi,
         "name": name,
@@ -15,28 +26,24 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
         "municipio": municipio
     }
 
-    fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'api-key': import.meta.env.VITE_API_KEY
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (!response.ok) {
-                console.log("There was an error on the response")
-            }
-            return response.json()
-        })
-        .then(data => {
-            console.log("User Saved")
-        })
-        .catch(error => {
-            console.log("Could not create User");
-        });
+    try {
+	const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users`, {
+        	method: 'POST',
+        	headers: {
+            		'Content-Type': 'application/json',
+            		'api-key': import.meta.env.VITE_API_KEY
+        	},
+        	body: JSON.stringify(data)
+	})
+    
+    	if (!response.ok) {
+		console.log("There was an error on the response")
+    		return false 
+    	}
 
-        //Neo 4j post
+	console.log("User saved");
+	
+	//Neo 4j post
 
         const NeoData = {
             "nombre": name,
@@ -48,7 +55,7 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             "telefono": phoneNumber
         }
     
-        fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/usersNeo`, {
+        const neoResponse = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/usersNeo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,20 +63,21 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             },
             body: JSON.stringify(NeoData)
         })
-            .then(response => {
-                if (!response.ok) {
-                    console.log("There was an error on the response")
-                }
-                return response.json()
-            })
-            .then(NeoData => {
-                console.log("Neo User Saved")
-            })
-            .catch(error => {
-                console.log("Could not create Neo User");
-            });
+
+	if (!neoResponse.ok) {
+		console.log("There was an error on the Neo4j response")
+		return false
+	}
+
+	console.log("Neo User Saved");
+	return true
+    } catch (error) {
+	console.log("Could not create User or Neo User");
+	return false
+    }
 
 }
+
 export async function getLoginUser(dpi: any, password: any) {
 
     const credentials = {

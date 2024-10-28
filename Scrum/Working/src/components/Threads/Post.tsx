@@ -12,6 +12,7 @@ interface PostProps {
   posttime: string;
   imagen: string; // base64 or URL4
   img_usuario: string;
+  dpi: string;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -21,6 +22,7 @@ const Post: React.FC<PostProps> = ({
   posttime,
   imagen,
   img_usuario,
+  dpi
 }) => {
   const [comments, setComments] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -58,6 +60,7 @@ const Post: React.FC<PostProps> = ({
         usuario={usuario}
         posttime={posttime}
         img_usuario={img_usuario}
+        dpi={dpi}
       />
       <div className="post-content">
         <p className="post-description">{descripcion}</p>

@@ -1,169 +1,183 @@
-@media (max-width: 425px){
+@media (max-width: 425px) {
 
-.maincontentfgpass{
-    --background: var(--ion-color-primary);
-}
-
-.spacebetfg {
-    margin-top: 20vh;
-}
-
-.what_to_write {
-    text-align: center;
-}
-
-
-.inputcode{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.inputdpifg {
-    background-color: var(--white);
-    margin-top: 15vh;
-    padding: 4%;
-    height: 62vh;
-    margin-left: 5%;
-    margin-right: 5%;
-    border: 1px solid var(--white);
-    border-radius: 35px;
-
-
-}
-
-.fotoheader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-.linefgpass{
-    height: 10vh;
-    width: 1vw;
-    background-color: var(--black);
-}
-
-.TitleContrato{
-    font-family: 'Proza Libre';
-    font-size: 5vw;
-    font-weight:bolder;
-}
-
-.olvidar_headline{
-    font-size: 3.5vw;
-}
-
-.enterdpifg{
-    font-size: 3.3vw;
-    font-weight: 350;
-}
-
-
-.inputdpi_fg{
-    background-color: #E4E4E4;
-    border-radius: 10px;
-    border: solid var(--white);
-    width: 80vw;
-    height: 6vh;
-    margin-top: 2%;
-    margin-bottom: 0%;
-
-    padding-left: 2%;
-
-
-
-}
-
-.error-message{
-    color: red;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-
-/* Apply styles to the custom radio button */
-.radiobuttonfg {
-    margin-left: 1%;
-    appearance: none; /* Remove default browser styling */
-    
-    transform: scale(2); /* Scale the radio button */
-    width: 16px; /* Size of the radio button (before scaling) */
-    height: 16px;
-    border: 2px solid #E4E4E4; /* Outer ring color for unselected state */
-    border-radius: 50%;
-    background-color: #E4E4E4; /* Background color for unselected state */
-    margin-top: 5%;
-    margin-right: 3vw;
-    cursor: pointer;
-    transition: 0.2s all linear;
-  }
-  
-  /* Styling for the checked state of the custom radio button */
-  .radiobuttonfg:checked {
-    background-color: #E4E4E4; /* Inner circle color when selected */
-    border: 6px solid #E4E4E4; /* Thicker outer ring when selected */
-  }
-  
-  .radiobuttonfg:checked::after {
-    content: "";
-    display: block;
-    width: 10px; /* Size of the inner dot */
-    height: 10px;
-    background-color: var(--black); /* Color of the inner dot when selected */
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-
-  .getcodefg{
-    background-color: #305BAC;
-    width: 30vw;
-    height: 5vh;
-    font-family: 'Proza Libre';
-    font-size: 2.5vw;
-    border-radius: 14px;
-    margin-top:4%;
-
-  }
-
-  .buttoncontainerfg{
-    display: flex;
-    justify-content: end;
-  }
-
-
-
-}
-
-
-@media (min-width: 425px ) and (max-width: 850px ) {
-
-
-
-    .maincontentfgpass{
+    .maincontentfgpass {
         --background: var(--ion-color-primary);
     }
-    
+
     .spacebetfg {
         margin-top: 20vh;
     }
-    
+
     .what_to_write {
         text-align: center;
     }
-    
 
 
-    .inputcode{
+    .inputcode {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
+    .inputdpifg {
+        background-color: var(--white);
+        margin-top: 15vh;
+        padding: 4%;
+        height: 62vh;
+        margin-left: 5%;
+        margin-right: 5%;
+        border: 1px solid var(--white);
+        border-radius: 35px;
+
+
+    }
+
+    .fotoheader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .linefgpass {
+        height: 10vh;
+        width: 1vw;
+        background-color: var(--black);
+    }
+
+    .TitleContrato {
+        font-family: 'Proza Libre';
+        font-size: 5vw;
+        font-weight: bolder;
+    }
+
+    .olvidar_headline {
+        font-size: 3.5vw;
+    }
+
+    .reestablecer_headline{
+        margin-top: 6%;
+        font-size: 4vw;
+    }
+
+    .enterdpifg {
+        font-size: 3.3vw;
+        font-weight: 350;
+    }
+
+
+    .inputdpi_fg {
+        background-color: #E4E4E4;
+        border-radius: 10px;
+        border: solid var(--white);
+        width: 80vw;
+        height: 6vh;
+        margin-top: 2%;
+        margin-bottom: 0%;
+
+        padding-left: 2%;
+
+
+
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    /* Apply styles to the custom radio button */
+    .radiobuttonfg {
+        margin-left: 1%;
+        appearance: none;
+        /* Remove default browser styling */
+
+        transform: scale(2);
+        /* Scale the radio button */
+        width: 16px;
+        /* Size of the radio button (before scaling) */
+        height: 16px;
+        border: 2px solid #E4E4E4;
+        /* Outer ring color for unselected state */
+        border-radius: 50%;
+        background-color: #E4E4E4;
+        /* Background color for unselected state */
+        margin-top: 5%;
+        margin-right: 3vw;
+        cursor: pointer;
+        transition: 0.2s all linear;
+    }
+
+    /* Styling for the checked state of the custom radio button */
+    .radiobuttonfg:checked {
+        background-color: #E4E4E4;
+        /* Inner circle color when selected */
+        border: 6px solid #E4E4E4;
+        /* Thicker outer ring when selected */
+    }
+
+    .radiobuttonfg:checked::after {
+        content: "";
+        display: block;
+        width: 10px;
+        /* Size of the inner dot */
+        height: 10px;
+        background-color: var(--black);
+        /* Color of the inner dot when selected */
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+    .getcodefg {
+        background-color: #305BAC;
+        width: 30vw;
+        height: 5vh;
+        font-family: 'Proza Libre';
+        font-size: 2.5vw;
+        border-radius: 14px;
+        margin-top: 4%;
+
+    }
+
+    .buttoncontainerfg {
+        display: flex;
+        justify-content: end;
+    }
+
+
+
+}
+
+
+@media (min-width: 425px) and (max-width: 850px) {
+
+
+
+    .maincontentfgpass {
+        --background: var(--ion-color-primary);
+    }
+
+    .spacebetfg {
+        margin-top: 20vh;
+    }
+
+    .what_to_write {
+        text-align: center;
+    }
+
+
+
+    .inputcode {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .inputdpifg {
         background-color: var(--white);
         margin-top: 10vh;
@@ -176,37 +190,42 @@
 
 
     }
-    
-    .fotoheader{
+
+    .fotoheader {
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
     }
-    
-    .linefgpass{
+
+    .linefgpass {
         height: 10vh;
         width: 1vw;
         background-color: var(--black);
     }
-    
-    .TitleContrato{
+
+    .TitleContrato {
         font-family: 'Proza Libre';
         font-size: 6vw;
-        font-weight:bolder;
+        font-weight: bolder;
     }
-    
-    .olvidar_headline{
+
+    .olvidar_headline {
         font-size: 3.5vw;
     }
-    
-    .enterdpifg{
+
+    .reestablecer_headline{
+        margin-top: 3%;
+        font-size: 3.5vw;
+    }
+
+    .enterdpifg {
         font-size: 2vw;
         font-weight: 350;
     }
-    
-    
-    .inputdpi_fg{
+
+
+    .inputdpi_fg {
         background-color: #E4E4E4;
         border-radius: 10px;
         border: solid var(--white);
@@ -216,101 +235,112 @@
         margin-bottom: 0%;
 
         padding-left: 2%;
-        
+
 
     }
 
-    .error-message{
+    .error-message {
         color: red;
         margin-top: 2%;
         margin-bottom: 2%;
     }
-    
+
     /* Apply styles to the custom radio button */
     .radiobuttonfg {
         margin-left: 1%;
-        appearance: none; /* Remove default browser styling */
-        
-        transform: scale(2); /* Scale the radio button */
-        width: 16px; /* Size of the radio button (before scaling) */
+        appearance: none;
+        /* Remove default browser styling */
+
+        transform: scale(2);
+        /* Scale the radio button */
+        width: 16px;
+        /* Size of the radio button (before scaling) */
         height: 16px;
-        border: 2px solid #E4E4E4; /* Outer ring color for unselected state */
+        border: 2px solid #E4E4E4;
+        /* Outer ring color for unselected state */
         border-radius: 50%;
-        background-color: #E4E4E4; /* Background color for unselected state */
+        background-color: #E4E4E4;
+        /* Background color for unselected state */
         margin-top: 5%;
         margin-right: 3vw;
         cursor: pointer;
         transition: 0.2s all linear;
-      }
-      
-      /* Styling for the checked state of the custom radio button */
-      .radiobuttonfg:checked {
-        background-color: #E4E4E4; /* Inner circle color when selected */
-        border: 6px solid #E4E4E4; /* Thicker outer ring when selected */
-      }
-      
-      .radiobuttonfg:checked::after {
+    }
+
+    /* Styling for the checked state of the custom radio button */
+    .radiobuttonfg:checked {
+        background-color: #E4E4E4;
+        /* Inner circle color when selected */
+        border: 6px solid #E4E4E4;
+        /* Thicker outer ring when selected */
+    }
+
+    .radiobuttonfg:checked::after {
         content: "";
         display: block;
-        width: 10px; /* Size of the inner dot */
+        width: 10px;
+        /* Size of the inner dot */
         height: 10px;
-        background-color: var(--black); /* Color of the inner dot when selected */
+        background-color: var(--black);
+        /* Color of the inner dot when selected */
         border-radius: 50%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-      }
-      
-    
-      .getcodefg{
+    }
+
+
+    .getcodefg {
         background-color: #305BAC;
         width: 15vw;
         height: 5vh;
         font-family: 'Proza Libre';
         font-size: 1.4vw;
         border-radius: 14px;
-        margin-top:4%;
-    
-      }
-    
-      .buttoncontainerfg{
+        margin-top: 4%;
+
+    }
+
+    .buttoncontainerfg {
         display: flex;
         justify-content: end;
-      }
-    
-    
-    
     }
 
 
 
-@media (min-width: 850px ) and (max-width: 1024px ) {
+}
 
 
 
-    .maincontentfgpass{
+@media (min-width: 850px) and (max-width: 1024px) {
+
+
+
+    .maincontentfgpass {
         --background: var(--ion-color-primary);
     }
-    
+
     .spacebetfg {
         margin-top: 20vh;
     }
-    
+
     .what_to_write {
         text-align: center;
     }
-    
+
     .inputdigit {
-        background-color: var(--ion-color-secondary);
-        border: 4px solid var(--ion-color-tertiary);
+        background-color: var(--white);
+        border: 4px solid #BEBEBE;
+        color: var(--black);
+        border-radius: 10%;
         margin-left: 1%;
         width: 10vw;
         height: 20vh;
         font-size: 7rem;
         text-align: center;
     }
-    
+
     .inputdpifg {
         background-color: var(--white);
         margin-top: 10vh;
@@ -320,47 +350,53 @@
         margin-right: 5%;
         border: 1px solid var(--white);
         border-radius: 35px;
-        
+
 
     }
 
-    .inputcode{
+    .inputcode {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
-    .fotoheader{
+
+    .fotoheader {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 9vh;
-        
+
     }
-    
-    .linefgpass{
+
+    .linefgpass {
         height: 10vh;
         width: 1vw;
         background-color: var(--black);
     }
-    
-    .TitleContrato{
+
+    .TitleContrato {
         font-family: 'Proza Libre';
         font-size: 6vw;
-        font-weight:bolder;
+        font-weight: bolder;
     }
-    
-    .olvidar_headline{
+
+    .olvidar_headline {
         font-size: 3.5vw;
     }
-    
-    .enterdpifg{
+
+
+    .reestablecer_headline{
+        margin-top: 3%;
+        font-size: 3vw;
+    }
+
+    .enterdpifg {
         font-size: 2vw;
         font-weight: 350;
     }
-    
-    
-    .inputdpi_fg{
+
+
+    .inputdpi_fg {
         background-color: #E4E4E4;
         border-radius: 10px;
         border: solid var(--white);
@@ -368,112 +404,125 @@
         height: 6vh;
         margin-top: 2%;
         margin-bottom: 0%;
-    
+
         padding-left: 2%;
-    
+
     }
 
 
-    
-    .error-message{
+
+    .error-message {
         color: red;
         margin-top: 2%;
         margin-bottom: 2%;
     }
+
     /* Apply styles to the custom radio button */
     .radiobuttonfg {
         margin-left: 1%;
-        appearance: none; /* Remove default browser styling */
-        
-        transform: scale(2); /* Scale the radio button */
-        width: 16px; /* Size of the radio button (before scaling) */
+        appearance: none;
+        /* Remove default browser styling */
+
+        transform: scale(2);
+        /* Scale the radio button */
+        width: 16px;
+        /* Size of the radio button (before scaling) */
         height: 16px;
-        border: 2px solid #E4E4E4; /* Outer ring color for unselected state */
+        border: 2px solid #E4E4E4;
+        /* Outer ring color for unselected state */
         border-radius: 50%;
-        background-color: #E4E4E4; /* Background color for unselected state */
+        background-color: #E4E4E4;
+        /* Background color for unselected state */
         margin-top: 5%;
         margin-right: 3vw;
         cursor: pointer;
         transition: 0.2s all linear;
-      }
-      
-      /* Styling for the checked state of the custom radio button */
-      .radiobuttonfg:checked {
-        background-color: #E4E4E4; /* Inner circle color when selected */
-        border: 6px solid #E4E4E4; /* Thicker outer ring when selected */
-      }
-      
-      .radiobuttonfg:checked::after {
+    }
+
+    /* Styling for the checked state of the custom radio button */
+    .radiobuttonfg:checked {
+        background-color: #E4E4E4;
+        /* Inner circle color when selected */
+        border: 6px solid #E4E4E4;
+        /* Thicker outer ring when selected */
+    }
+
+    .radiobuttonfg:checked::after {
         content: "";
         display: block;
-        width: 10px; /* Size of the inner dot */
+        width: 10px;
+        /* Size of the inner dot */
         height: 10px;
-        background-color: var(--black); /* Color of the inner dot when selected */
+        background-color: var(--black);
+        /* Color of the inner dot when selected */
         border-radius: 50%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-      }
-      
-    
-      .getcodefg{
+    }
+
+
+    .getcodefg {
         background-color: #305BAC;
         width: 15vw;
         height: 5vh;
         font-family: 'Proza Libre';
         font-size: 1.4vw;
         border-radius: 14px;
-        margin-top:4%;
-    
-      }
-    
-      .buttoncontainerfg{
+        margin-top: 4%;
+
+    }
+
+    .buttoncontainerfg {
         display: flex;
         justify-content: end;
-      }
-    
-    
-    
     }
 
 
 
-@media (min-width: 1024px ) and (max-width: 2600px ) {
+}
 
 
 
-    .maincontentfgpass{
+@media (min-width: 1024px) and (max-width: 2600px) {
+
+
+
+    .maincontentfgpass {
         --background: var(--ion-color-primary);
     }
-    
+
     .spacebetfg {
         margin-top: 20vh;
     }
-    
+
     .what_to_write {
         text-align: center;
     }
-    
+
     .inputdigit {
-        background-color: var(--ion-color-secondary);
-        border: 4px solid var(--ion-color-tertiary);
+        background-color: var(--white);
+        border: 4px solid #BEBEBE;
+        color: var(--black);
+        border-radius: 10%;
         margin-left: 1%;
-        width: 8vw;
+        margin-top: 5%;
+        width: 7.5vw;
         height: 18vh;
-        font-size: 8rem;
+        font-size: 4rem;
         text-align: center;
 
     }
 
-    .inputcode{
+    .inputcode {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
-    .inputdpifg{
-        
+
+    .inputdpifg {
+
         background-color: var(--white);
         margin-top: 5vh;
         padding: 5%;
@@ -484,38 +533,43 @@
         border-radius: 35px;
 
     }
-    
-    .fotoheader{
+
+    .fotoheader {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 9vh;
-        
+
     }
-    
-    .linefgpass{
+
+    .linefgpass {
         height: 10vh;
         width: 1vw;
         background-color: var(--black);
     }
-    
-    .TitleContrato{
+
+    .TitleContrato {
         font-family: 'Proza Libre';
         font-size: 3vw;
-        font-weight:bolder;
+        font-weight: bolder;
     }
-    
-    .olvidar_headline{
+
+    .olvidar_headline {
         font-size: 2.5vw;
     }
-    
-    .enterdpifg{
+
+    .reestablecer_headline{
+        font-size: 1.5vw;
+        margin-top: 5%;
+    }
+
+    .enterdpifg {
         font-size: 1.2vw;
         font-weight: 350;
     }
-    
-    
-    .inputdpi_fg{
+
+
+    .inputdpi_fg {
         background-color: #E4E4E4;
         border-radius: 10px;
         border: solid var(--white);
@@ -527,8 +581,8 @@
         padding-left: 2%;
 
     }
-    
-    .error-message{
+
+    .error-message {
         color: red;
         margin-top: 2%;
         margin-bottom: 2%;
@@ -537,76 +591,93 @@
     /* Apply styles to the custom radio button */
     .radiobuttonfg {
         margin-left: 1%;
-        appearance: none; /* Remove default browser styling */
-        
-        transform: scale(2); /* Scale the radio button */
-        width: 16px; /* Size of the radio button (before scaling) */
+        appearance: none;
+        /* Remove default browser styling */
+
+        transform: scale(2);
+        /* Scale the radio button */
+        width: 16px;
+        /* Size of the radio button (before scaling) */
         height: 16px;
-        border: 2px solid #E4E4E4; /* Outer ring color for unselected state */
+        border: 2px solid #E4E4E4;
+        /* Outer ring color for unselected state */
         border-radius: 50%;
-        background-color: #E4E4E4; /* Background color for unselected state */
+        background-color: #E4E4E4;
+        /* Background color for unselected state */
         margin-top: 5%;
         margin-right: 3vw;
         cursor: pointer;
         transition: 0.2s all linear;
-      }
-      
-      /* Styling for the checked state of the custom radio button */
-      .radiobuttonfg:checked {
-        background-color: #E4E4E4; /* Inner circle color when selected */
-        border: 6px solid #E4E4E4; /* Thicker outer ring when selected */
-      }
-      
-      .radiobuttonfg:checked::after {
+    }
+
+    /* Styling for the checked state of the custom radio button */
+    .radiobuttonfg:checked {
+        background-color: #E4E4E4;
+        /* Inner circle color when selected */
+        border: 6px solid #E4E4E4;
+        /* Thicker outer ring when selected */
+    }
+
+    .radiobuttonfg:checked::after {
         content: "";
         display: block;
-        width: 10px; /* Size of the inner dot */
+        width: 10px;
+        /* Size of the inner dot */
         height: 10px;
-        background-color: var(--black); /* Color of the inner dot when selected */
+        background-color: var(--black);
+        /* Color of the inner dot when selected */
         border-radius: 50%;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-      }
-      
-    
-      .getcodefg{
+    }
+
+
+    .getcodefg {
         background-color: #305BAC;
         width: 15vw;
         height: 5vh;
         font-family: 'Proza Libre';
         font-size: 1.1vw;
         border-radius: 14px;
-        margin-top:5%;
-    
-      }
-    
-      .buttoncontainerfg{
+        margin-top: 5%;
+
+    }
+
+    .buttoncontainerfg {
         display: flex;
         justify-content: end;
-      }
-    
-    
-    
+    }
+
+
+    .disclaim_fg {
+        text-align: center;
+        font-weight: 300;
+        font-size: 1.1vw;
     }
 
 
 
-.modalfg{
-    --background: var(--white)
-    
 }
 
-.wholemodal{
+
+
+.modalfg {
+    --background: var(--white)
+}
+
+.wholemodal {
     --border-radius: 20px
 }
 
 
-@media (min-width:200px) and (max-width:768px){
+@media (min-width:200px) and (max-width:768px) {
     .inputdigit {
-        background-color: var(--ion-color-secondary);
-        border: 4px solid var(--ion-color-tertiary);
+        background-color: var(--white);
+        border: 4px solid #BEBEBE;
+        color: var(--black);
+        border-radius: 10%;
         margin-left: 1%;
         width: 20vw;
         height: 20vh;
@@ -615,14 +686,16 @@
     }
 
 
-    
+
+
 }
 
-@media (min-width:768px) and (max-width:850px){
+@media (min-width:768px) and (max-width:850px) {
     .inputdigit {
         background-color: var(--white);
-        border: 4px solid var(#BEBEBE);
-        border-radius: 20px;
+        border: 4px solid #BEBEBE;
+        color: var(--black);
+        border-radius: 10%;
         margin-left: 1%;
         width: 15vw;
         height: 20vh;
@@ -631,5 +704,17 @@
     }
 
 
-    
+
+}
+
+.disclaim_fg {
+    text-align: center;
+    font-weight: 300;
+}
+
+.positionbuttonsfg {
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+
 }

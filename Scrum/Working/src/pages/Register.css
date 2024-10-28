@@ -17,7 +17,6 @@
 .displayment-register-elements {
     display: flex;
     flex-direction: column;
-    gap: 10px;
     width: 75%;
     max-width: 900px;
     min-width: 400px;
@@ -32,6 +31,7 @@
     box-shadow: 0 0 5mm rgba(120, 120, 120, 0.5);
     font-family: var(--proza-font);
     overflow: auto;
+    justify-content: space-evenly;
 }
 
 .displayment-register-elements::-webkit-scrollbar {
@@ -66,6 +66,12 @@
     .center {
         padding-top: 25px;
         padding-bottom: 25px;
+    }
+
+    .displayment-register-elements {
+		justify-content: flex-start;
+		padding-bottom: 30px;
+		padding-top: 30px;
     }
 }
  
