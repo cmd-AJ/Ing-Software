@@ -4,7 +4,7 @@ export async function insertNewJob(job, description) {
     const session = createSession();
 
     try {
-        const query = `CREATE (:Trabajo {nombre_trabajo:'${job}', descripcion:'${description}})`;
+        const query = `CREATE (:Trabajo {nombre_trabajo:'${job}', descripcion:'${description}'})`;
 
         const result = await session.run(query);
 
