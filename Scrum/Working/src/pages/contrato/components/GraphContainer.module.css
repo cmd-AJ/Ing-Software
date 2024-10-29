@@ -7,3 +7,10 @@
     padding: 25px;
   }
   
+
+  @media (max-width: 1450px) {
+    .cyContainer {
+      pointer-events: none; /* Disable interactions */
+    }
+  }
+  
