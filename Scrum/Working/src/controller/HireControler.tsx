@@ -1,3 +1,22 @@
+
+export async function getJobsList() {
+    try {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/WorkList`, {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+            },
+        });
+        const result = await response.json()
+
+        console.log(result)
+        return result
+    } catch (error) {
+        console.error("An error occured while getting jobs list")
+        throw error;
+    }
+}
+
 async function deleteJobFromAvailableWithID(hiringId: Number | string) {
     //This deletes and returns a hiring from the avaialable table, using its ID"
 

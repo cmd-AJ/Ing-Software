@@ -37,6 +37,8 @@ export async function getChatMessages(dpi1: string, dpi2: string) {
         }
 
         const responseData = await response.json();
+        console.log(responseData);
+
         return responseData;
     } catch (error) {
         console.error("Error while getting chat messages:", error);

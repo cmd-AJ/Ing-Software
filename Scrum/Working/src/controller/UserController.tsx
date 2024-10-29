@@ -1,5 +1,6 @@
 import { logDOM } from "@testing-library/dom";
 import { Trabajador } from "../components/Searched/type";
+import { Departamentos } from "../Departamentos/Departamentos";
 
 async function createUser(
 	dpi: string, 
@@ -126,24 +127,45 @@ async function userExists(dpi: String, password: String) {
     }
 }
 
-async function getWorkersByJob(job: String) {
-    try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/workers/${job}`,{
+function countSharedContacts(userContacts: any[], workerContacts: any[]): number {
+    const userDpiSet = new Set(userContacts.map(contact => contact.dpi));
+    const sharedContacts = workerContacts.filter(contact => userDpiSet.has(contact.dpi));
+    return sharedContacts.length;
+}
 
+
+async function getWorkersByJob(job: String, usrDpi: string) {
+    try {
+        // Obtain the trusted people of the user
+        const usrTrustedpeople = await getTrustedPeople(usrDpi);
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/workers/${job}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
             }
         });
+
         const data = await response.json();
 
-        const trabajadores: Trabajador[] = data.map((worker: any) => ({
-            nombre: `${worker.nombre} ${worker.apellidos}`,
-            telefono: worker.telefono,
-            dpi: worker.dpi,
-            municipio: worker.municipio,
-            rating: worker.rating,
-            imagen: worker.imagen
+        // For each worker, find their trusted people and calculate shared contacts
+        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+            const workerTrustedpeople = await getTrustedPeople(worker.dpi);
+            const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
+
+            // Get the departamento using the worker's DPI
+            const departamento = Departamentos(worker.dpi);
+
+            return {
+                nombre: `${worker.nombre} ${worker.apellidos}`,
+                telefono: worker.telefono,
+                dpi: worker.dpi,
+                rating: worker.rating,
+                imagen: worker.imagen,
+                trabajo: worker.nombre_trabajo,
+                contactos_en_comun: sharedContacts,
+                direccion: `${departamento}, ${worker.municipio}`
+            };
         }));
 
         return trabajadores;
@@ -152,6 +174,7 @@ async function getWorkersByJob(job: String) {
         return [];
     }
 }
+
 
 
 async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol: string, telefono: string, trabajo: string, banner: string) {
