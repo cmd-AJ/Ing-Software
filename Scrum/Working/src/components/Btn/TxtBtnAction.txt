@@ -1,8 +1,0 @@
-interface ContainerProps {
-}
-
-const TxtBtnAction : React.FC<ContainerProps> = () => {
-
-}
-
-export default TxtBtnAction
