@@ -44,6 +44,15 @@
     box-shadow: none;
 }
 
+.txt-button {
+	margin: 0;
+	color: #777;
+	cursor: pointer;
+}
+
+.txt-button:hover {
+	color: #000;
+}
 @media (max-width: 660px){
     .btn-header-horizontal{
         flex-direction: row;

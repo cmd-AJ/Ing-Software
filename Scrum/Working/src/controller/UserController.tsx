@@ -512,3 +512,22 @@ export async function getDpiByTrabajo(idtrabajo : string) {
     }
   }
   
+export async function setWorking(dpi : string) {
+	try {
+		const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setWorking/${dpi}}`, {
+        method: 'PUT',
+        headers: {
+          'api-key': import.meta.env.VITE_API_KEY,
+          'Content-Type': 'application/json',
+        },
+	})
+
+	if (!response.ok) {
+		throw new Error('Failed to update isWorking for the dpi')
+	}
+
+	} catch (error) {
+		console.error('Error updating isWorking by dpi:', error);
+		throw error;
+	}
+}

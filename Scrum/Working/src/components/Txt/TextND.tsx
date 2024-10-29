@@ -2,7 +2,7 @@ import React from "react"
 import './TxtStyles.css'
 
 interface ContainerProps {
-    text: string
+    text: string | JSX.Element
     size: string
     hex: string
 }

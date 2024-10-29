@@ -133,7 +133,7 @@ const BtnDisplayment: React.FC<ContainerProps> = ({
         <div className="btn-header-horizontal">
             <ModalBtnI img={pencilOutline} setEdit={setEdit1} />
             <BtnAction rounded={true} text='' img={peopleOutline} trigger='' action={setEdit3} />
-            <ModalBtnN label="Añadir trabajo" setEdit={setEdit2} color='tertiary' />
+            <ModalBtnN label="¿Quiero trabajar?" setEdit={setEdit2} color='tertiary' />
         </div>
     ) : owner === 'false' ? (
         <div className='btn-header-horizontal'>

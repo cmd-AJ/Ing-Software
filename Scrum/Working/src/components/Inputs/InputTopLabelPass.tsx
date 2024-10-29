@@ -51,7 +51,7 @@ const InputTopLabelPass: React.FC<ContainerProps> = (
     }
 
     const validate = (value: string) => {
-        const isValid = value.trim() !== '' || validation(value)
+        const isValid = validation(value)
         setValidatesValue(isValid)
     }
 
