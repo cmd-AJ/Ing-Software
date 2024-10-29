@@ -1,4 +1,4 @@
-import { query, text } from 'express';
+import { query, query, text } from 'express';
 import getClient from './RelationalDatabase.js';
 
 const client = getClient();
@@ -598,6 +598,21 @@ export async function getDpiByTrabajo(idtrabajo) {
     }
   }
   
+export async function setWorkingState(dpi) {
+	try {
+		const query = {
+			text: `update usuarios 
+				set isworking = true
+				where dpi = $1`,
+			values: [dpi],
+		}
+
+		await client.query(query);
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
 
 
 
