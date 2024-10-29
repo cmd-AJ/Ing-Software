@@ -26,6 +26,19 @@
     position: relative;
 }
 
+.date-divider {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 14px;
+    color: #888;
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
 .chat-bubble.me {
     background-color: #1961af; 
     color: white;

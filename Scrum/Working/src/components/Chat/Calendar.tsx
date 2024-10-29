@@ -3,7 +3,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-import TextField from '@mui/material/TextField';
 import { styled } from '@mui/system';
 
 interface CalendarProps {
@@ -43,8 +42,6 @@ const Calendar: React.FC<CalendarProps> = ({ onChange }) => {
           openTo="day"
           value={selectedDate}
           onChange={handleDateChange}
-          renderInput={(params) => <TextField {...params} />}
-          showToolbar={false} // Ocultar botones de OK/Cancel
           disablePast={true}
         />
       </CustomDatePickerToolbar>

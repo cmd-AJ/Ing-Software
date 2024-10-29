@@ -10,6 +10,7 @@ interface ChatBubbleProps {
 interface Message {
     message: string;
     time: string;
+    date: string;
     sender: 'me' | 'you';
 }
 
@@ -32,6 +33,20 @@ interface ChatProps {
     messages: Message[];
 }
 
+const formatDateDivider = (date: string) => {
+    const messageDate = new Date(date);
+    const today = new Date();
+
+    // Comparar si la fecha es hoy
+    if (messageDate.toDateString() === today.toDateString()) {
+        return "Hoy";
+    }
+
+    // Formatear la fecha si no es hoy
+    const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+    return messageDate.toLocaleDateString('es-ES', options);
+};
+
 const Chat: React.FC<ChatProps> = ({ messages }) => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -47,11 +62,25 @@ const Chat: React.FC<ChatProps> = ({ messages }) => {
         scrollToBottom();
     }, [messages]);
 
+    let lastDate = ""; // Controla la última fecha para el divisor
+
     return (
         <div className="chat-container">
-            {messages.map((msg, index) => (
-                <ChatBubble key={index} message={msg.message} time={msg.time} sender={msg.sender} />
-            ))}
+            {messages.map((msg, index) => {
+                const showDateDivider = msg.date !== lastDate;
+                lastDate = msg.date;
+
+                return (
+                    <React.Fragment key={index}>
+                        {showDateDivider && (
+                            <div className="date-divider">
+                                {` ${formatDateDivider(msg.date)} `}
+                            </div>
+                        )}
+                        <ChatBubble message={msg.message} time={msg.time} sender={msg.sender} />
+                    </React.Fragment>
+                );
+            })}
             <div ref={messagesEndRef} />
         </div>
     );

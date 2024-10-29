@@ -252,6 +252,27 @@ app.get('/api/neo/WorkList', apiKeyAuth, async (req, res) => {
   }
 });
 
+app.post('/api/neo/addJob', apiKeyAuth, async (req, res) => {
+  try {
+    const { job, description } = req.body
+
+    if (!job || !description){
+      res.status(400).json({error: 'All values are required'})
+    }
+
+    const result = await insertNewJob(job, description)
+
+    if (result){
+      res.status(200).json({Succes: 'Job inserted'})
+    } else {
+      res.status(404).json({error: 'Could not add new job'})
+    }
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
 app.get('/api/ctrabajo/:dpi', apiKeyAuth, async (req, res) => {
   try {
     const { dpi } = req.params
