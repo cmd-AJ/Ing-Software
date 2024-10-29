@@ -813,7 +813,7 @@ app.post('/api/insertimage/', apiKeyAuth ,async (req, res) => {
   }
 });
 
-app.put('/api/setWorking/', apiKeyAuth, async (req, res) => {
+app.put('/api/setWorking/:dpi', apiKeyAuth, async (req, res) => {
 	try {
 		const { dpi } = req.params;
 
