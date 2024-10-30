@@ -607,7 +607,9 @@ export async function setWorkingState(dpi) {
 			values: [dpi],
 		}
 
-		await client.query(query);
+		const result = await client.query(query);
+
+		return result.rowCount > 0
 	} catch (error) {
 		console.error('Error while setting the working state:', error)
 		throw error
