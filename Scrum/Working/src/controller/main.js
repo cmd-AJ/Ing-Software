@@ -834,23 +834,19 @@ app.post('/api/insertimage/', apiKeyAuth ,async (req, res) => {
   }
 });
 
-app.put('/api/setWorking/:dpi', apiKeyAuth, async (req, res) => {
-	try {
-		const { dpi } = req.params;
+app.put('/api/setWorking/', apiKeyAuth, async (req, res) => {
+	const { dpi } = req.body;
 
-		if (!dpi) {
-			return res.status(400).json({ error: 'Failed to update working state, missing dpi in body' })	
-		}
-
-		const response = await setWorkingState(dpi);
-
-		if (response) {
-			res.status(200).json({ success: 'Succesfully updated working state for user'})
+	if (!dpi) {
+		return res.status(400).json({ error: 'Failed to update working state, missing dpi in body' })	
 		} else {
-			res.status(404).json({ error: 'Failed to update working state'})	
-		}
+	try {
+		await setWorkingState(dpi);
+		res.send('Updated working state')
+
 	} catch (error) {
-		console.log('Error put:', error)
+		console.log('Error updating state:', error)
 		res.status(500).json({ error: 'Internal Server Error'})
+	}
 	}
 })
