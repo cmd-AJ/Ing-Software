@@ -20,7 +20,7 @@ const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
         const fetchWorkers = async () => {
           try {
             setIsLoading(true);
-            const fetchedWorkers = await getWorkersByJob(job);
+            const fetchedWorkers = await getWorkersByJob(job, '3833 86608 0102');
             setWorkers(fetchedWorkers);
 	          setTotal(fetchedWorkers.length)
             
