@@ -1,3 +1,32 @@
+export async function addNewJobToNeo(jobName: string, jobDescription: string) {
+    try {
+
+        const data = {
+            job: jobName,
+            description: jobDescription 
+        };
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/addJob`, {
+            method: 'POST',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed to insert new job")
+        }
+
+        const responseData = await response.json();
+        return responseData;
+
+    } catch (error) {
+        console.error('Error adding new job:', error);
+    }
+}
+
 export async function Existing_admin(dpi: string, password: string) {
     try {
 

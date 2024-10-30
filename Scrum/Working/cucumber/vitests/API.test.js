@@ -97,12 +97,13 @@ describe('Quiero saber que contrataciones he realizado', () => {
 });
 
 describe('getWorkersByJob', () => {
-  it('Deberia de regresar un objecto con los atributos correctos', async () => {
+  it('Debería regresar un objeto con los atributos correctos', async () => {
     const job = 'Carpintero'; // Asegúrate de que esto coincida con los datos que estás probando
-    const workers = await getWorkersByJob(job);
+    const workers = await getWorkersByJob(job, '3833 86608 0102'); // DPI de ejemplo
 
     // Verifica que la respuesta sea un array y tenga al menos un elemento
-    expect(workers).not.toHaveLength(0); // Asegúrate de que hay al menos un trabajador
+    expect(workers).toBeInstanceOf(Array); // Verifica que sea un array
+    expect(workers.length).toBeGreaterThan(0); // Asegúrate de que hay al menos un trabajador
 
     // Enfócate solo en el primer trabajador
     const firstWorker = workers[0];
@@ -114,16 +115,20 @@ describe('getWorkersByJob', () => {
     expect(firstWorker).toHaveProperty('rating');
     expect(firstWorker).toHaveProperty('imagen');
     expect(firstWorker).toHaveProperty('dpi');
+    expect(firstWorker).toHaveProperty('contactos_en_comun');
+    expect(firstWorker).toHaveProperty('direccion');
+    expect(firstWorker).toHaveProperty('trabajo');
 
     // Verifica que el primer objeto tenga los tipos correctos
-    expect(firstWorker).toEqual({
-      nombre: expect.any(String),
-      telefono: expect.any(String),
-      municipio: expect.any(String),
-      rating: expect.anything(), // Permite valores null o vacíos
-      imagen: expect.any(String),
-      dpi: expect.any(String)
-    });
+    expect(firstWorker.nombre).toEqual(expect.any(String));
+    expect(firstWorker.telefono).toEqual(expect.any(String));
+    expect(firstWorker.municipio).toEqual(expect.any(String));
+    expect(firstWorker.rating).toEqual(expect.anything()); // Permite valores null o números
+    expect(firstWorker.imagen).toEqual(expect.any(String));
+    expect(firstWorker.dpi).toEqual(expect.any(String));
+    expect(firstWorker.contactos_en_comun).toEqual(expect.any(Number)); // Debería ser un número
+    expect(firstWorker.direccion).toEqual(expect.any(String)); // Validamos que dirección sea una cadena
+    expect(firstWorker.trabajo).toEqual(expect.any(String));
   });
 });
 

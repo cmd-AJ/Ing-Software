@@ -41,6 +41,11 @@
     outline: none;
 }
 
+.icon.hire-icon.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
 .send-icon:hover, .hire-icon:hover {
     color: #ffffffa1; /* Ligero cambio de color al hacer hover */
 }

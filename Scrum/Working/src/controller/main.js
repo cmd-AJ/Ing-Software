@@ -2,8 +2,8 @@
 import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
-import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, getreviewone } from './db.js'
-import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson } from './neo.js'
+import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone } from './db.js'
+import { getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
 import { getImageFromDrive, updatePhoto, uploadFile } from './gdrive.js'
@@ -209,6 +209,42 @@ app.put('/api/setNeoSettings', apiKeyAuth, async (req, res) => {
   }
 });
 
+app.get('/api/neo/WorkList', apiKeyAuth, async (req, res) => {
+  try {
+      // Fetch all trabajos from Neo4j
+      const trabajos = await getAllTrabajos();
+
+      // Send the trabajos as the response
+      res.status(200).json(trabajos);
+
+  } catch (error) {
+      console.error('Error fetching trabajos:', error);
+
+      // Send an error response
+      res.status(500).json({ message: 'Error fetching trabajos' });
+  }
+});
+
+app.post('/api/neo/addJob', apiKeyAuth, async (req, res) => {
+  try {
+    const { job, description } = req.body
+
+    if (!job || !description){
+      res.status(400).json({error: 'All values are required'})
+    }
+
+    const result = await insertNewJob(job, description)
+
+    if (result){
+      res.status(200).json({Succes: 'Job inserted'})
+    } else {
+      res.status(404).json({error: 'Could not add new job'})
+    }
+
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
 
 app.get('/api/ctrabajo/:dpi', apiKeyAuth, async (req, res) => {
   try {
@@ -749,9 +785,6 @@ app.get('/api/image/:fileID', async (req, res) => {
   }
 });
 
-
-
-
 app.post('/api/insertimage/', apiKeyAuth ,async (req, res) => {
   try {
     const { imagename, base64code } = req.body;
@@ -791,6 +824,27 @@ app.get('/api/review/:id/', apiKeyAuth, async (req, res) => {
   }
 })
 
+
+app.put('/api/setWorking/:dpi', apiKeyAuth, async (req, res) => {
+	try {
+		const { dpi } = req.params;
+
+		if (!dpi) {
+			return res.status(400).json({ error: 'Failed to update working state, missing dpi in body' })	
+		}
+
+		const response = await setWorkingState(dpi);
+
+		if (response) {
+			res.status(200).json({ success: 'Succesfully updated working state for user'})
+		} else {
+			res.status(404).json({ error: 'Failed to update working state'})	
+		}
+	} catch (error) {
+		console.log('Error put:', error)
+		res.status(500).json({ error: 'Internal Server Error'})
+	}
+})
 
 app.post('/api/users', apiKeyAuth, async (req, res) => {
   try {

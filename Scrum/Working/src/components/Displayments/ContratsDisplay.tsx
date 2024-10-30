@@ -39,16 +39,11 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
     useEffect(()=>{
         const fecthData = async () => {
             let dataEmple = []
-            let data = []
-
 
             dataEmple = await getContratWorker(dpi)
 
-            console.log(dataEmple);
-                
-
             if (dataEmple && dataEmple.length > 0) {
-                setDataEmple(dataEmple)
+                setDataEmple(dataEmple.slice(0,3))
             } else {
                 setError('Sin contratos')
                 setDataEmple([])
@@ -88,7 +83,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
                     <HorizontalDivider/>
                 </>
             }
-            <div style={{width:'100%', display: 'flex', flexDirection: 'column', gap: '10px'}}>
+            <div className="all-contrats-display">
                 {
                     dataEmple.map(contrat => (
                         <ContratEDisplay contrat={contrat}/>

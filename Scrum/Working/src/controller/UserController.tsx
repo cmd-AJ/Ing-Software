@@ -1,7 +1,19 @@
+import { logDOM } from "@testing-library/dom";
 import { Trabajador } from "../components/Searched/type";
+import { Departamentos, Municipios } from "../Departamentos/Departamentos";
 
-function createUser(dpi: string, name: string, lastnames: string, password: string, email: string, phoneNumber: string, role: string, departamento: string, municipio: string) {
-
+async function createUser(
+	dpi: string, 
+	name: string, 
+	lastnames: string, 
+	password: string, 
+	email: string, 
+	phoneNumber: string, 
+	role: string, 
+	departamento: 
+	string, 
+	municipio: string, 
+) {
     const data = {
         "dpi": dpi,
         "name": name,
@@ -14,28 +26,24 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
         "municipio": municipio
     }
 
-    fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'api-key': import.meta.env.VITE_API_KEY
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (!response.ok) {
-                console.log("There was an error on the response")
-            }
-            return response.json()
-        })
-        .then(data => {
-            console.log("User Saved")
-        })
-        .catch(error => {
-            console.log("Could not create User");
-        });
+    try {
+	const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users`, {
+        	method: 'POST',
+        	headers: {
+            		'Content-Type': 'application/json',
+            		'api-key': import.meta.env.VITE_API_KEY
+        	},
+        	body: JSON.stringify(data)
+	})
+    
+    	if (!response.ok) {
+		console.log("There was an error on the response")
+    		return false 
+    	}
 
-        //Neo 4j post
+	console.log("User saved");
+	
+	//Neo 4j post
 
         const NeoData = {
             "nombre": name,
@@ -47,7 +55,7 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             "telefono": phoneNumber
         }
     
-        fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/usersNeo`, {
+        const neoResponse = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/usersNeo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,20 +63,21 @@ function createUser(dpi: string, name: string, lastnames: string, password: stri
             },
             body: JSON.stringify(NeoData)
         })
-            .then(response => {
-                if (!response.ok) {
-                    console.log("There was an error on the response")
-                }
-                return response.json()
-            })
-            .then(NeoData => {
-                console.log("Neo User Saved")
-            })
-            .catch(error => {
-                console.log("Could not create Neo User");
-            });
+
+	if (!neoResponse.ok) {
+		console.log("There was an error on the Neo4j response")
+		return false
+	}
+
+	console.log("Neo User Saved");
+	return true
+    } catch (error) {
+	console.log("Could not create User or Neo User");
+	return false
+    }
 
 }
+
 export async function getLoginUser(dpi: any, password: any) {
 
     const credentials = {
@@ -118,24 +127,46 @@ async function userExists(dpi: String, password: String) {
     }
 }
 
-async function getWorkersByJob(job: String) {
-    try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/workers/${job}`,{
+function countSharedContacts(userContacts: any[], workerContacts: any[]): number {
+    const userDpiSet = new Set(userContacts.map(contact => contact.dpi));
+    const sharedContacts = workerContacts.filter(contact => userDpiSet.has(contact.dpi));
+    return sharedContacts.length;
+}
 
+
+async function getWorkersByJob(job: String, usrDpi: string) {
+    try {
+        // Obtain the trusted people of the user
+        const usrTrustedpeople = await getTrustedPeople(usrDpi);
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/workers/${job}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
             }
         });
+
         const data = await response.json();
 
-        const trabajadores: Trabajador[] = data.map((worker: any) => ({
-            nombre: `${worker.nombre} ${worker.apellidos}`,
-            telefono: worker.telefono,
-            dpi: worker.dpi,
-            municipio: worker.municipio,
-            rating: worker.rating,
-            imagen: worker.imagen
+        // For each worker, find their trusted people and calculate shared contacts
+        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+            const workerTrustedpeople = await getTrustedPeople(worker.dpi);
+            const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
+
+            // Get the departamento using the worker's DPI
+            const departamento = Departamentos(worker.dpi);
+
+            return {
+                nombre: `${worker.nombre} ${worker.apellidos}`,
+                telefono: worker.telefono,
+                dpi: worker.dpi,
+                rating: worker.rating,
+                imagen: worker.imagen,
+                trabajo: worker.nombre_trabajo,
+                contactos_en_comun: sharedContacts,
+                municipio: worker.municipio,
+                direccion: `${departamento}, ${worker.municipio}`
+            };
         }));
 
         return trabajadores;
@@ -144,6 +175,7 @@ async function getWorkersByJob(job: String) {
         return [];
     }
 }
+
 
 
 async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol: string, telefono: string, trabajo: string, banner: string) {
@@ -481,3 +513,22 @@ export async function getDpiByTrabajo(idtrabajo : string) {
     }
   }
   
+export async function setWorking(dpi : string) {
+	try {
+		const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setWorking/${dpi}}`, {
+        method: 'PUT',
+        headers: {
+          'api-key': import.meta.env.VITE_API_KEY,
+          'Content-Type': 'application/json',
+        },
+	})
+
+	if (!response.ok) {
+		throw new Error('Failed to update isWorking for the dpi')
+	}
+
+	} catch (error) {
+		console.error('Error updating isWorking by dpi:', error);
+		throw error;
+	}
+}

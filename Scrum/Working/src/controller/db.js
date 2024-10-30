@@ -1,4 +1,4 @@
-import { query, text } from 'express';
+import { query, query, text } from 'express';
 import getClient from './RelationalDatabase.js';
 
 const client = getClient();
@@ -89,24 +89,26 @@ export async function getCommentsWithThreadID(id) {
     }
 }
 
-export async function getThreadPosts(){
+export async function getThreadPosts() {
     try {
         const query = {
             text: "SELECT thr.idthreads, usr.nombre || ' ' || usr.apellidos AS usuario, usr.dpi, usr.imagen AS img_usuario, thr.descripcion, post_timestamp AS posttime, thr.image AS imagen " +
                   "FROM threads thr " +
                   "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario) " +
-                  "ORDER BY post_timestamp DESC "
-                  
-        }
+                  "ORDER BY post_timestamp DESC " +
+                  "LIMIT $1", // Use a parameter for the limit
+            values: [15] // Set the limit value to 15
+        };
 
-        const result = await client.query(query)
-
-        return result.rows
+        const result = await client.query(query);
+        return result.rows;
 
     } catch (error) {
-        console.error('Error while gettin thread posts')
+        console.error('Error while getting thread posts:', error);
+        throw error; // Rethrow the error after logging it
     }
 }
+
 
 export async function createThreadPost(usrDpi, postDescription, image) {
 
@@ -609,4 +611,22 @@ export async function getDpiByTrabajo(idtrabajo) {
         console.error("Error whil getting hirings")
         throw error
     }
+}
+
+export async function setWorkingState(dpi) {
+	try {
+		const query = {
+			text: `update usuarios 
+				set isworking = true
+				where dpi = $1`,
+			values: [dpi],
+		}
+
+		const result = await client.query(query);
+
+		return result.rowCount > 0
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
 }
