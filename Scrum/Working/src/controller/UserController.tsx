@@ -1,6 +1,6 @@
 import { logDOM } from "@testing-library/dom";
 import { Trabajador } from "../components/Searched/type";
-import { Departamentos } from "../Departamentos/Departamentos";
+import { Departamentos, Municipios } from "../Departamentos/Departamentos";
 
 async function createUser(
 	dpi: string, 
@@ -164,6 +164,7 @@ async function getWorkersByJob(job: String, usrDpi: string) {
                 imagen: worker.imagen,
                 trabajo: worker.nombre_trabajo,
                 contactos_en_comun: sharedContacts,
+                municipio: worker.municipio,
                 direccion: `${departamento}, ${worker.municipio}`
             };
         }));
