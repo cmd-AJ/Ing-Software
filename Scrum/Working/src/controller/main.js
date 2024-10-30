@@ -839,7 +839,7 @@ app.put('/api/setWorking/:dpi', apiKeyAuth, async (req, res) => {
 		const { dpi } = req.params;
 
 		if (!dpi) {
-			res.status(400).json({ error: 'Failed to update working state, missing dpi in body' })	
+			return res.status(400).json({ error: 'Failed to update working state, missing dpi in body' })	
 		}
 
 		const response = await setWorkingState(dpi);
@@ -847,7 +847,7 @@ app.put('/api/setWorking/:dpi', apiKeyAuth, async (req, res) => {
 		if (response) {
 			res.status(200).json({ success: 'Succesfully updated working state for user'})
 		} else {
-			res-status(400).json({ error: 'Failed to update working state'})	
+			res.status(404).json({ error: 'Failed to update working state'})	
 		}
 	} catch (error) {
 		console.log('Error put:', error)
