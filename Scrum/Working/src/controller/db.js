@@ -596,6 +596,17 @@ export async function getDpiByTrabajo(idtrabajo) {
     }
   }
   
+  export async function getreviewone(id) {
+    try {
+        const query = {
+            text: "SELECT td.idtrabajo, td.dpiempleado, u.nombre || ' ' ||u.apellidos AS trabajador, u.telefono, u.imagen AS foto, td.descripcion, td.timestampcita, td.pago AS precio FROM trabajodisponible td JOIN usuarios u ON (td.dpiempleado = u.dpi)  WHERE idtrabajo = $1",
+            values: [id]
+        }
 
-
-
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error whil getting hirings")
+        throw error
+    }
+}

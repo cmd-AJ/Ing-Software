@@ -9,6 +9,7 @@ const dbConfig = {
     database: process.env.POSTGRES_DB,
 };
 
+
 // Establishing the connection to the db
 const client = new Client(dbConfig);
 client.connect()

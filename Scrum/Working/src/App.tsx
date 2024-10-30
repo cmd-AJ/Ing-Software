@@ -38,6 +38,7 @@ import Suspendido from "./pages/administration/Suspended_page";
 import Tickt_page from "./pages/administration/Tickets_page";
 import Forgot_Page from "./pages/administration/Fg_pass";
 import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
+import CloseContrat from "./components/Modals/Structures/CloseContrat";
 
 setupIonicReact();
 
@@ -140,6 +141,35 @@ const App: React.FC = () => (
               <Threads />
             </MainLayout>
           )}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/review/:id"
+          render={(props) => {
+            // Extract search parameters from the URL
+            const { id } = props.match.params;
+
+            
+
+            return (
+              <MainLayout>
+                <CloseContrat
+                  setShow={(show) => {
+                    false
+                  }}
+                  trabajo={""}
+                  pago={""}
+                  foto={""}
+                  descripcion={""}
+                  idtrabajo={""}
+                  updateHirings={() => {
+                    false
+                  }}
+                />
+              </MainLayout>
+            );
+          }}
         />
 
       </IonRouterOutlet>
