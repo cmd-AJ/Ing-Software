@@ -39,6 +39,9 @@ import Tickt_page from "./pages/administration/Tickets_page";
 import Forgot_Page from "./pages/administration/Fg_pass";
 import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
 import CloseContrat from "./components/Modals/Structures/CloseContrat";
+import ModalStructure from "./components/Modals/ModalStructure";
+import { getreview } from "./controller/ChatController";
+import Reviewed from "./pages/review";
 
 setupIonicReact();
 
@@ -150,23 +153,9 @@ const App: React.FC = () => (
             // Extract search parameters from the URL
             const { id } = props.match.params;
 
-            
-
             return (
               <MainLayout>
-                <CloseContrat
-                  setShow={(show) => {
-                    false
-                  }}
-                  trabajo={""}
-                  pago={""}
-                  foto={""}
-                  descripcion={""}
-                  idtrabajo={""}
-                  updateHirings={() => {
-                    false
-                  }}
-                />
+               <Reviewed id={id} ></Reviewed>
               </MainLayout>
             );
           }}

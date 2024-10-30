@@ -337,4 +337,23 @@ export async function cambiarcontra(password: string, dpi: string) {
 
 
 
-
+export async function getreview(id : string) {
+    try {
+      const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/review/${id}`, {
+        method: 'GET',
+        headers: {
+          'api-key': import.meta.env.VITE_API_KEY,
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to get DPI for the given idtrabajo');
+      }
+  
+      return response.json();
+    } catch (error) {
+      console.error('Error fetching DPI by idtrabajo:', error);
+      throw error;
+    }
+}

@@ -1,4 +1,4 @@
-import { query, query, text } from 'express';
+import { query, text } from 'express';
 import getClient from './RelationalDatabase.js';
 
 const client = getClient();
