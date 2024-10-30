@@ -59,8 +59,6 @@ const CloseContrat: React.FC<ContainerProps> = ({
 
       // Update hirings in the Dashboard after confirmation
       updateHirings();
-        
-      
       
       setShowRatingModal(true);
     } catch (error) {

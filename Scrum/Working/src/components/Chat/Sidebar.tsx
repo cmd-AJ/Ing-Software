@@ -27,6 +27,9 @@ type FormattedMessage = {
 };
 
 const Sidebar = () => {
+
+    const [tempcontacts, settempcontact] = useState(new Set())
+    const [findbar, setfindbar] = useState('');
     const [selectedPerson, setSelectedPerson] = useState<chatUser | null>(null);
     const [contacts, setContacts] = useState<chatUser[]>([]);
     const [messages, setMessages] = useState<FormattedMessage[]>([]);
@@ -40,10 +43,20 @@ const Sidebar = () => {
 
     // Fetch contacts on component mount
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 const contactsData = await getContacts(loggedUserDpi);
                 setContacts(contactsData);
+                const newTempContacts = new Set();
+
+                // Add logic to include indices from the fetched data
+                for (let index = 0; index < contactsData.length; index++) {
+                    newTempContacts.add(index); // Include all indices for demonstration
+                }
+
+                settempcontact(newTempContacts);
+
             } catch (error) {
                 console.error('Error fetching contacts:', error);
             }
@@ -51,10 +64,26 @@ const Sidebar = () => {
 
         fetchData();
 
+
         return () => {
             setContacts([]);
+            settempcontact(new Set());
         };
+
+
     }, [loggedUserDpi]);
+
+
+    useEffect(() => {
+        const newTempContacts = new Set();
+        contacts.forEach((contact, index) => {
+            if (contact.name.toLowerCase().includes(findbar.toLowerCase())) {
+                newTempContacts.add(index);
+            }
+        });
+        settempcontact(newTempContacts); // Update tempcontacts based on the search
+    }, [findbar, contacts]); // Runs when findbar or contacts change
+
 
     // Handle window resize
     useEffect(() => {
@@ -136,30 +165,82 @@ const Sidebar = () => {
         }
     };
 
+
+    const handleClick = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        setfindbar(event.target.value)
+
+        const contactsleng = contacts.length
+        const deben = (new Set(Array.from({ length: contactsleng }, (_, index) => index)))
+
+
+        for (let index = 0; index < contacts.length; index++) {
+
+            const dato = contacts[index].name + ''
+
+            if (!dato.includes(findbar)) {
+                deben.delete(index)
+
+            }
+        }
+
+        settempcontact(deben)
+    }
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Backspace') {
+            const deben = (new Set(Array.from({ length: contacts.length }, (_, index) => index)))
+
+            if (findbar != '') {
+
+                for (let index = 0; index < contacts.length; index++) {
+
+                    const dato = contacts[index].name + ''
+
+                    if (!dato.includes(findbar)) {
+                        deben.delete(index)
+
+
+                    }
+
+
+                }
+            }
+
+            console.log(contacts)
+
+            settempcontact(deben)
+        }
+
+    };
+
+
     return (
         <div className={`wrapper ${isDetailsOpen ? 'blur' : ''}`}>
             <div className="container1">
                 <div className="left">
                     <div className="top">
                         {windowWidth >= 600 && (
-                            <input className='searchpeople' type="text" placeholder="Search" />
+                            <input className='searchpeople' type="text" placeholder="Search" onChange={handleClick} onKeyDown={handleKeyDown} value={findbar} />
                         )}
                     </div>
                     <div className="scrollable-content">
-                        <ul className="people">
-                            {contacts.map((person, index) => (
-                                <li 
-                                    key={index} 
-                                    className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`} 
+                    <ul className="people">
+                        {contacts
+                            .filter((_, index) => tempcontacts.has(index)) // Filter based on the Set
+                            .map((person, index) => (
+                                <li
+                                    key={index}
+                                    className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`}
                                     onClick={() => handlePersonClick(person.dpi)}
-                                > 
+                                >
                                     <img className="imagen" src={person.img} alt="" />
                                     <div className="text-container">
                                         <span className="name">{person.name}</span>
+                                        <span className="preview">{person.preview}</span>
                                     </div>
                                 </li>
                             ))}
-                        </ul>
+                    </ul>
                     </div>
                 </div>
                 <div className="right">
