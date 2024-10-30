@@ -180,7 +180,7 @@ export async function getLoginUser(dpi) {
 export async function getUserbyDPI(dpi) {
     try {
         const query = {
-            text: 'SELECT nombre, apellidos, email, dpi,telefono, role,departamento, municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
+            text: 'SELECT nombre, apellidos, email, dpi,telefono, role,departamento, municipio, imagen, sexo, fecha_nacimiento, rating, banner, isWorking FROM Usuarios Where dpi = $1',
             values: [dpi]
         };
 
