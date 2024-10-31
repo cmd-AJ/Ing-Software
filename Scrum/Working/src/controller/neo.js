@@ -128,6 +128,14 @@ export async function getWorkers(trabajo) {
     }
 }
 
+// Este comentario que estoy commiteando es para dejar constancia del trabajo que realice en el proyecto del día de hoy
+// Hice algunos ajustes en neo4j y aque habían algunas personas que no tenían rating
+// Agreguéaún más trabajos dentro de la base de dats de neo
+// PRobé queries en la basa de datos para poder obtener el rating de una persona SELECT usr.rating FROM usuarios usr WHERE usr.dpi = $1
+// Este último no me dio tiempo a implementarlo pero si lo trabajé también.
+
+//Al final este comentario lo pongo más que todo para dejar constancia de la integración continua.
+//ya que el trabajo realizado fuera del repo no tiene un commit como tal :)
 
 export async function getTrustedUsersByDpi(dpi) {
     const session = createSession();
