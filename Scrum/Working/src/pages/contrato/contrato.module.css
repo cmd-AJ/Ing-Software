@@ -10,38 +10,30 @@
   background-color: #f5f5f5;
 }
 
-
-
 .content {
   /* flex: 1; */
   width: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
-
-
 }
 
 .section1 {
   /* flex: 1; */
-    width: 100%;
+  width: 100%;
   background-color: #c59595;
   display: flex;
   flex-direction: column;
 }
 
-
 .innerContainer {
   /* flex: 1; */
   display: flex;
   flex-direction: row;
-  
-
 }
 
 .descriptionContainer,
 .productIdea {
-
   background-color: #f5f5f5; /* Light blue for visibility */
   flex: 1; /* Equal width */
   min-width: 150px;
@@ -50,21 +42,20 @@
   justify-content: center;
   /* text-align: center; */
   min-height: 95vh;
-
 }
 
 .descriptionContainer {
-  background-color: #fbfbfb;
+  background-color: #ff2a2a;
   display: flex;
   flex-direction: column;
 }
 
 .productIdea {
-  background-color: rgb(94, 126, 136);
+  background-color: rgb(60, 184, 222);
 }
 
 .mainSlogan {
-  color:black;
+  color: black;
   font-style: 'Proza Libre", sans-serif';
   font-weight: bold;
   font-size: 54px;
@@ -74,7 +65,7 @@
   margin-bottom: 1rem;
 }
 
-.conectaCon{
+.conectaCon {
   text-align: start;
   color: black;
   font-size: 16px;
@@ -83,8 +74,7 @@
   padding-right: 40px;
 }
 
-
-.quieres{
+.quieres {
   text-align: start;
   color: black;
   font-size: 16px;
@@ -96,20 +86,33 @@
 /*Section 2 */
 
 .section2 {
-  background-color: aqua;
+  width: 100%;
+  background-color: #111A28;
+  /* display: flex; */
+  flex-direction: row;
+}
+
+.aboutDisplayer,
+.productAssets {
+  background-color: #f5f5f5; 
+  flex: 1;
+  min-width: 150px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .aboutDisplayer {
   background-color: rgb(226, 43, 43);
-  width: 100px;
-  height: 100px;
+  height: 200px;
+  width: 200px;
 }
 
 .productAssets {
   background-color: rgb(255, 230, 0);
-  width: 100px;
-  height: 100px;
+  height: 200px;
+  width: 200px;
 }
 
 @media (max-width: 1450px) {
@@ -125,12 +128,12 @@
     min-height: 150px; /* Adjust height for smaller screens */
   }
 
-  .conectaCon{
+  .conectaCon {
     padding-left: 50px;
     padding-right: 10px;
   }
 
-  .quieres{
+  .quieres {
     white-space: nowrap;
     padding-left: 50px;
     padding-right: 300px;
@@ -138,7 +141,7 @@
     text-align: center;
   }
 
-  .mainSlogan{
+  .mainSlogan {
     padding-left: 50px;
     padding-right: 10px;
   }

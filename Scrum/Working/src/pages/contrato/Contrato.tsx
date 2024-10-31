@@ -39,11 +39,14 @@ const Contrato: React.FC = () => {
             </div>
           </div>
         </section>
+        {/* Section 2 */}
 
-        {/* <section className={styles.section2}>
-          <div className={styles.aboutDisplayer}></div>
-          <div className={styles.productAssets}></div>
-        </section> */}
+        <section className={styles.section2}>
+          <div className={styles.innerContainer}>
+            <div className={styles.aboutDisplayer}></div>
+            <div className={styles.productAssets}></div>
+          </div>
+        </section>
       </div>
     </div>
   );
