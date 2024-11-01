@@ -25,7 +25,7 @@
 
 #medium-text {
     margin: 0;
-    font-size: 25px;
+    font-size: 23px;
 }
 
 #small-text {
@@ -65,6 +65,6 @@
     }
 
     #big-huge-text {
-	font-size: 7vh;
+	    font-size: 7vh;
     }
 }

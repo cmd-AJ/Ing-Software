@@ -76,8 +76,9 @@
 }
 
 #job-individual-displayment {
-    padding-left: 150px;
-    padding-right: 150px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #cecece; 
 }
 
 .persondatadisplay {

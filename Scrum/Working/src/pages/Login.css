@@ -26,7 +26,7 @@
     padding-left: 10vw;
     padding-right: 10vw;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     font-family: var(--proza-font);
     overflow-y: scroll;
 }
