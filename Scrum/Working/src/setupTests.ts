@@ -6,7 +6,10 @@ import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom/extend-expect';
 import { vi } from 'vitest';
 
-global.document = global.document || {};
+global.document = global.document || {
+  createElement: vi.fn(),
+  getElementById: vi.fn(),
+};
 
 window.matchMedia = window.matchMedia || function() {
   return {
@@ -19,4 +22,16 @@ window.matchMedia = window.matchMedia || function() {
 vi.stubGlobal('console', {
   ...console,
   error: vi.fn(), 
+});
+
+vi.mock('@ionic/core/components/dir', () => ({
+  isRTL: vi.fn().mockReturnValue(false),
+}));
+
+vi.mock('@ionic/core/components/swipe-back', () => ({
+  createSwipeBackGesture: vi.fn(),
+}));
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
