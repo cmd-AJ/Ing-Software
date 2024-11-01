@@ -63,4 +63,8 @@
     #huge-text {
         font-size: 5vh;
     }
+
+    #big-huge-text {
+        font-size: 50px;
+    }
 }
