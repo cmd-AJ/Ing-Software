@@ -73,9 +73,9 @@ const App: React.FC = () => (
         </Route>
 
         {/* landing v2*/}
-        {/* <Route exact path="/contratogt">
-          <Contrato />
-        </Route> */}
+        <Route exact path="/oldabout">
+          <About />
+        </Route>
         {/* Protected Routes */}
         <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
         <ProtectedRoute exact path="/dashboard" component={Dashboard} />
