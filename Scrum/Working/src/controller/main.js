@@ -173,7 +173,7 @@ app.get('/api/workers/:job', apiKeyAuth, async (req, res) => {
   }
 });
 
-app.get('/api/workers/:name', apiKeyAuth, async (req, res) => {
+app.get('/api/nameSearch/:name', apiKeyAuth, async (req, res) => {
   try {
     const { name } = req.params
     const workers = await getWorkersByFlexibleName(name);
