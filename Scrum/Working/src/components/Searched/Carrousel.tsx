@@ -11,7 +11,7 @@ const Carrousel: React.FC<{ job: string }> = ({ job }) => {
   useEffect(() => {
     const fetchWorkers = async () => {
       try {
-        const fetchedWorkers = await getWorkersByJob(job);
+        const fetchedWorkers = await getWorkersByJob(job, '3833 86608 0102');
         setWorkers(fetchedWorkers);
       } catch (error) {
         console.error("Error fetching workers:", error);

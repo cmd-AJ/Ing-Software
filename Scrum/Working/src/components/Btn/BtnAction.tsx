@@ -1,5 +1,4 @@
 import { IonButton, IonIcon } from "@ionic/react"
-import { useEffect } from "react"
 
 interface ContainerProps {
     text : string

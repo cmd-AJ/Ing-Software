@@ -1,4 +1,43 @@
 import { createSession } from './GraphDataBase.js';
+import { getUserRatingWithDPI } from './db.js';
+
+export async function insertNewJob(job, description) {
+    const session = createSession();
+
+    try {
+        const query = `CREATE (:Trabajo {nombre_trabajo:'${job}', descripcion:'${description}'})`;
+
+        const result = await session.run(query);
+
+        return result
+    } catch (error) {
+        console.error("Error while adding new job", error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
+export async function getAllTrabajos() {
+    const session = createSession();
+
+    try {
+        const query = `MATCH (n:Trabajo) RETURN n`;
+
+        const result = await session.run(query);
+
+        // Extracting and formatting the data
+        const trabajos = result.records.map(record => record.get('n').properties);
+        
+        return trabajos;
+
+    } catch (error) {
+        console.error('Error retrieving trabajos:', error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
 
 export async function addUserAsTrustedPerson(dpi1, dpi2) {
     const session = createSession();
@@ -90,27 +129,33 @@ export async function getWorkers(trabajo) {
     }
 }
 
-
 export async function getTrustedUsersByDpi(dpi) {
     const session = createSession();
 
     try {
-        const query = `MATCH p=(usr1:Usuario {dpi: '${dpi}'})-[:confia_en]->(usr2:Usuario) RETURN usr2 ORDER BY usr2.Rating DESC`;
+        const query = `
+            MATCH p=(usr1:Usuario {dpi: '${dpi}'})-[:confia_en]->(usr2:Usuario) 
+            RETURN usr2 
+            ORDER BY usr2.rating DESC
+        `;
         const result = await session.run(query);
 
         // Transformar los registros obtenidos en un arreglo de objetos JSON
-        const users = result.records.map(record => {
+        const users = await Promise.all(result.records.map(async record => {
             const user = record.get('usr2');
+            const ratingFromPostgres = await getUserRatingWithDPI(user.properties.dpi); // Obtener el rating postgre
+
             return {
-                nombre: user.properties.nombre, // Obtener el nombre del trabajo
+                nombre: user.properties.nombre,
                 telefono: user.properties.telefono,
                 municipio: user.properties.municipio,
-                rating: user.properties.rating,
+                rating: ratingFromPostgres || user.properties.rating, // Usa el rating de PostgreSQL si existe
                 apellido: user.properties.apellidos,
                 dpi: user.properties.dpi,
                 imagen: user.properties.imagen
             };
-        });
+        }));
+
         return users;
     } catch (error) {
         console.error('Error getting trusted users:', error);
@@ -118,5 +163,4 @@ export async function getTrustedUsersByDpi(dpi) {
     } finally {
         await session.close();
     }
-
 }

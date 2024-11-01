@@ -38,6 +38,10 @@ import Suspendido from "./pages/administration/Suspended_page";
 import Tickt_page from "./pages/administration/Tickets_page";
 import Forgot_Page from "./pages/administration/Fg_pass";
 import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
+import CloseContrat from "./components/Modals/Structures/CloseContrat";
+import ModalStructure from "./components/Modals/ModalStructure";
+import { getreview } from "./controller/ChatController";
+import Reviewed from "./pages/review";
 import Contrato from "./pages/contrato/Contrato";
 
 setupIonicReact();
@@ -146,6 +150,21 @@ const App: React.FC = () => (
               <Threads />
             </MainLayout>
           )}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/review/:id"
+          render={(props) => {
+            // Extract search parameters from the URL
+            const { id } = props.match.params;
+
+            return (
+              <MainLayout>
+               <Reviewed id={id} ></Reviewed>
+              </MainLayout>
+            );
+          }}
         />
 
       </IonRouterOutlet>

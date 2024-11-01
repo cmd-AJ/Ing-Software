@@ -4,6 +4,11 @@
     justify-content: center;
 }
 
+.element-center-input{
+	display: flex;
+	align-items: center;
+}
+
 .circular-image-upload, .rectangular-image-upload {
     height: 125px;
     cursor: pointer;
@@ -27,11 +32,7 @@
 }
 
 #singular-input-display {
-    display: flex;
-    align-items: center;
-    gap: 10%;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
 }
 
 .input-label-placement-start.sc-ion-input-md-h .label-text-wrapper.sc-ion-input-md {

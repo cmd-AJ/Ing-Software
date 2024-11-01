@@ -3,6 +3,23 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function getUserRatingWithDPI(dpi) {
+    try {
+        const query = {
+            text: "SELECT rating FROM usuarios WHERE dpi = $1",
+            values: [dpi]
+        };
+
+        const result = await client.query(query);
+        return result.rows.length > 0 ? result.rows[0].rating : null;
+
+    } catch (error) {
+        console.error("Error while getting rating:", error);
+        throw error; 
+    }
+}
+
+
 export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, fecha, pago) {
     try {
         const query = {
@@ -12,7 +29,7 @@ export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, 
             values: [dpitrabajador, dpiempleador, titulo, fecha, pago]
         }
 
-        const result = client.query(query)
+        const result = await client.query(query)
 
         return result
 
@@ -89,24 +106,26 @@ export async function getCommentsWithThreadID(id) {
     }
 }
 
-export async function getThreadPosts(){
+export async function getThreadPosts() {
     try {
         const query = {
             text: "SELECT thr.idthreads, usr.nombre || ' ' || usr.apellidos AS usuario, usr.dpi, usr.imagen AS img_usuario, thr.descripcion, post_timestamp AS posttime, thr.image AS imagen " +
                   "FROM threads thr " +
                   "JOIN usuarios usr ON (usr.dpi = thr.dpi_usuario) " +
-                  "ORDER BY post_timestamp DESC "
-                  
-        }
+                  "ORDER BY post_timestamp DESC " +
+                  "LIMIT $1", // Use a parameter for the limit
+            values: [15] // Set the limit value to 15
+        };
 
-        const result = await client.query(query)
-
-        return result.rows
+        const result = await client.query(query);
+        return result.rows;
 
     } catch (error) {
-        console.error('Error while gettin thread posts')
+        console.error('Error while getting thread posts:', error);
+        throw error; // Rethrow the error after logging it
     }
 }
+
 
 export async function createThreadPost(usrDpi, postDescription, image) {
 
@@ -178,7 +197,7 @@ export async function getLoginUser(dpi) {
 export async function getUserbyDPI(dpi) {
     try {
         const query = {
-            text: 'SELECT nombre, apellidos, email, dpi,telefono, role,departamento, municipio, imagen, sexo, fecha_nacimiento, rating, banner FROM Usuarios Where dpi = $1',
+            text: 'SELECT nombre, apellidos, email, dpi,telefono, role,departamento, municipio, imagen, sexo, fecha_nacimiento, rating, banner, isWorking FROM Usuarios Where dpi = $1',
             values: [dpi]
         };
 
@@ -596,6 +615,35 @@ export async function getDpiByTrabajo(idtrabajo) {
     }
   }
   
+  export async function getreviewone(id) {
+    try {
+        const query = {
+            text: "SELECT td.idtrabajo, td.dpiempleado, u.nombre || ' ' ||u.apellidos AS trabajador, u.telefono, u.imagen AS foto, td.descripcion, td.timestampcita, td.pago AS precio FROM trabajodisponible td JOIN usuarios u ON (td.dpiempleado = u.dpi)  WHERE idtrabajo = $1",
+            values: [id]
+        }
 
+        const result = await client.query(query)
+        return result.rows
+    } catch (error) {
+        console.error("Error whil getting hirings")
+        throw error
+    }
+}
 
+export async function setWorkingState(dpi) {
+	try {
+		const query = {
+			text: `update usuarios 
+				set isworking = true
+				where dpi = $1`,
+			values: [dpi],
+		}
 
+		const result = await client.query(query);
+
+		return result.rowCount > 0
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
