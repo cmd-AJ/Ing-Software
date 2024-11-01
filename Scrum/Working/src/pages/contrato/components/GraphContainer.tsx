@@ -5,8 +5,6 @@ import styles from "./GraphContainer.module.css"; // CSS module for additional s
 const GraphContainer: React.FC = () => {
   // cytoscape-extensions.d.ts
 
-    
-
   const cyRef = useRef<HTMLDivElement>(null); // Ref for the Cytoscape container
 
   useEffect(() => {
@@ -136,7 +134,7 @@ const GraphContainer: React.FC = () => {
         zoomingEnabled: false,
         panningEnabled: false,
       });
-     
+
       cy.nodes().grabify();
 
       cy.on("drag", "node", (e) => {
@@ -149,7 +147,7 @@ const GraphContainer: React.FC = () => {
         const halfNodeWidth = nodeWidth / 2;
         const halfNodeHeight = nodeHeight / 2;
 
-        const extent = cy.extent(); 
+        const extent = cy.extent();
 
         const minX = extent.x1 + halfNodeWidth;
         const minY = extent.y1 + halfNodeHeight;
@@ -159,7 +157,6 @@ const GraphContainer: React.FC = () => {
         let x = position.x;
         let y = position.y;
 
-        // Adjust node position if it's outside the allowed boundaries
         if (x < minX) x = minX;
         if (x > maxX) x = maxX;
         if (y < minY) y = minY;
