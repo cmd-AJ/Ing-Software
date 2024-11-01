@@ -81,10 +81,12 @@ const Contrato: React.FC = () => {
         <section className={styles.section2}>
           <div className={styles.innerContainer}>
             <div className={styles.aboutDisplayer}>
-              <h2>Construye Tu Propia</h2>
-              <h1>RED</h1>
-              <h1>DE</h1>
-              <h1>CONFIANZA</h1>
+              <h2 style={{
+          
+              }}>Construye Tu Propia</h2>
+              <h1 className={styles.sec2Tittles}>RED</h1>
+              <h1 className={styles.sec2Tittles}>DE</h1>
+              <h1 className={styles.sec2Tittles}>CONFIANZA</h1>
               <div className={styles.cardsContainer}>
                 {cardsData.map((card, index) => (
                   <div
@@ -104,7 +106,7 @@ const Contrato: React.FC = () => {
                 <img
                   src={hoveredImage}
                   alt="Product Asset"
-                  className={styles.hoveredImage}
+                  className={styles.landHoveredImage}
                 />
               )}
             </div>

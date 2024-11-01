@@ -34,7 +34,7 @@
 
 .descriptionContainer,
 .productIdea {
-  background-color: #f5f5f5; /* Light blue for visibility */
+  background-color: #FFFFFF; /* Light blue for visibility */
   flex: 1; /* Equal width */
   min-width: 150px;
   display: flex;
@@ -45,7 +45,7 @@
 }
 
 .descriptionContainer {
-  background-color: #ff2a2a;
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
 }
@@ -94,7 +94,7 @@
 
 .aboutDisplayer,
 .productAssets {
-  background-color: #f5f5f5; 
+  background-color: #111A28; 
   flex: 1;
   min-width: 150px;
   display: flex;
@@ -111,9 +111,7 @@
 }
 
 .productAssets {
-  background-color: rgb(255, 230, 0);
-  height: 200px;
-  width: 200px;
+  background-color: #111A28;
 }
 
 @media (max-width: 1450px) {
@@ -147,3 +145,60 @@
     padding-right: 10px;
   }
 }
+
+/* Cards related */
+
+.cardsContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.landAssetCard{
+  border-radius: 6px; 
+  border: solid white 1px;
+  margin: 1.5rem;
+  padding: 0.5rem;
+  width: 40%;
+  height: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  cursor: pointer;
+}
+
+.landAssetCard:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5); /* White box shadow on hover */
+  transform: scale(1.02); 
+}
+
+.landHoveredImage{
+  width: 85%;
+  height: 45%;
+  object-fit: cover;
+  margin-top: 7rem;
+}
+
+.aboutDisplayer h2{
+  font-family: 'Proza Libre';
+  font-size: 36px;
+  text-align: left;
+  display: flex;
+  width: 100%;
+  margin-left: 22%;
+  font-weight: bolder;
+}
+
+.sec2Tittles{
+  font-family: 'Proza Libre';
+  font-size: 50px;
+  text-align: left;
+  display: flex;
+  width: 100%;
+  margin-left: 22%;
+  font-weight: bolder;
+  margin-top: 0px;
+  margin-bottom: 2px;
+  
+}
+
