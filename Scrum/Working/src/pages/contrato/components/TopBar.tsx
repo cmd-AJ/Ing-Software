@@ -18,6 +18,18 @@ const TopBar: React.FC<TopBarProps> = ({ buttons }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
+  const [route, setRoute] = useState("/home");
+
+  useEffect(() => {
+    const userData = localStorage.getItem("User");
+    console.log(userData);
+
+    // Cambiar a '/searched' solo si `userData` no es nulo y no está vacío
+    if (userData !== "" && userData !== null) {
+      setRoute("/searched");
+    }
+  }, []);
+
   const history = useHistory();
 
   // Toggle the menu open/close state
@@ -87,7 +99,7 @@ const TopBar: React.FC<TopBarProps> = ({ buttons }) => {
           <button
             className={styles.landLogInButton}
             onClick={() => {
-              history.push("/home");
+              history.push(route);
             }}
             aria-label="Iniciar Sesión"
           >
