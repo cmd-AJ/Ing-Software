@@ -2,7 +2,6 @@ import { InputChangeEventDetail, IonInput } from "@ionic/react";
 import { useEffect, useState } from "react";
 import './InputStyles.css';
 import React from "react";
-import TextND from "../Txt/TextND";
 
 interface ContainerProps {
     value: string;

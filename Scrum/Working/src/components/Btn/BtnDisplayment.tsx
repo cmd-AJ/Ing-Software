@@ -35,6 +35,7 @@ interface ContainerProps {
     setIsWorking: (isWorking: boolean) => void
     dpi: string
     working: boolean
+    userRole: boolean
 }
 
 const BtnDisplayment: React.FC<ContainerProps> = ({
@@ -45,7 +46,8 @@ const BtnDisplayment: React.FC<ContainerProps> = ({
     setModal,
     working,
     setIsWorking,
-    dpi
+    dpi,
+    userRole
 }) => {
     const [trigger, setTrigger] = useState('')
     const history = useHistory()
@@ -159,7 +161,22 @@ const BtnDisplayment: React.FC<ContainerProps> = ({
         <div className="btn-header-horizontal">
             <ModalBtnI img={pencilOutline} setEdit={setEdit1} />
             <BtnAction rounded={true} text='' img={peopleOutline} trigger='' action={setEdit3} />
-            {!working && <BtnAction text="¿Quiero trabajar?" rounded={true} img='' trigger='' action={handleWorkAction} />}
+            {!working && 
+	    <BtnAction 
+	    	text="¿Quiero trabajar?" 
+		rounded={true} 
+		img='' 
+		trigger='' 
+		action={handleWorkAction} 
+	     />}
+	    {userRole && 
+	    <BtnAction
+		text="Añadir trabajo"
+		rounded={true}
+		img=''
+		trigger=''
+		action={()=> setEdit2(true)}
+	    />}
         </div>
     ) : owner === 'false' ? (
         <div className='btn-header-horizontal'>

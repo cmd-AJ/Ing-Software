@@ -20,6 +20,7 @@ import TrustPeople from "../components/Modals/Structures/TrustPeople";
 import TxtBtnAction from "../components/Btn/TxtBtnAction";
 import BtnAction from "../components/Btn/BtnAction";
 import changeIcon from "../assets/change-svgrepo-com.svg"
+import WorkAdd from "../components/Modals/Structures/WorkAdd";
 
 type User = {
   nombre : string;
@@ -178,7 +179,7 @@ const Dashboard_Worker: React.FC = () => {
       <IonContent>
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser} working={working}/>}/>}
-          {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
+          {editTrabajo && <ModalStructure setModal={setEditTrabajo} content={<WorkAdd/>}/>}
           {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
           {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<TrustPeople dpi={myUser.dpi}/>}/>}
           <div className="header-card" ref={headerCardRef}>
@@ -198,7 +199,17 @@ const Dashboard_Worker: React.FC = () => {
 		    userRole={userRole} 
                   />
                 </div>
-                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} owner={owner} setEdit3={setShowTrustedPeople} setModal={setEditModal} setIsWorking={setWorking} dpi={myUser.dpi} working={working}/>
+                  <BtnDisplayment 
+		  	setEdit1={setEditModal} 
+			setEdit2={setEditTrabajo} 
+			owner={owner} 
+			setEdit3={setShowTrustedPeople} 
+			setModal={setEditModal} 
+			setIsWorking={setWorking} 
+			dpi={myUser.dpi} 
+			working={working}
+			userRole={userRole}
+		  />
               </div>
               <HorizontalDivider />
               <div className="dataGrid">

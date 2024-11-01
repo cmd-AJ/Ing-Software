@@ -1,0 +1,18 @@
+#grid-components-work {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 5px;
+	align-items: center;
+}
+
+#buttons-display-work {
+	display: flex;
+	justify-content: flex-end;
+}
+
+@media (max-width: 800px) {
+    #buttons-display-work {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+}
