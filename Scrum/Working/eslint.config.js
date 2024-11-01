@@ -21,7 +21,7 @@ export default [
     rules: {
       // Define your custom rules here or use recommended ones
       '@typescript-eslint/explicit-module-boundary-types': 'off', // Example rule override
-      '@typescript-eslint/no-unused-vars': 'warn', // Example custom rule
+      '@typescript-eslint/no-unused-vars': 'error', // Example custom rule
     },
   },
 ];

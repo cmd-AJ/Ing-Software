@@ -38,9 +38,6 @@ import Suspendido from "./pages/administration/Suspended_page";
 import Tickt_page from "./pages/administration/Tickets_page";
 import Forgot_Page from "./pages/administration/Fg_pass";
 import ProtectedRoute from "./pages/administration/componentes/Routeprotecion";
-import CloseContrat from "./components/Modals/Structures/CloseContrat";
-import ModalStructure from "./components/Modals/ModalStructure";
-import { getreview } from "./controller/ChatController";
 import Reviewed from "./pages/review";
 import Newjobs from "./pages/administration/componentes/Trabajos";
 import { Suspense, lazy } from "react";
@@ -150,7 +147,7 @@ const App: React.FC = () => (
         <ProtectedRoute
           exact
           path="/threads"
-          render={(props) => (
+          render={() => (
             <MainLayout>
               <Threads />
             </MainLayout>

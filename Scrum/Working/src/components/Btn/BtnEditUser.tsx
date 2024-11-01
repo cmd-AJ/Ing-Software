@@ -43,7 +43,6 @@ const BtnEditUser: React.FC<ContainerProps> = ({
     profpic,
     setUser,
     setEdit,
-    job,
     birthdate,
     sex,
     cellphone,

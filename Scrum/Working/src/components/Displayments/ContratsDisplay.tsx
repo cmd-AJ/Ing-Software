@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import HorizontalDivider from "../Dividers/HorizontalDivider"
 import TextND from "../Txt/TextND"
 import "./DisplaymentStyles.css"
-import { getContratEmployer, getContratWorker } from "../../controller/UserController"
+import { getContratWorker } from "../../controller/UserController"
 import ContratEDisplay from "./ContratEDisplay"
 import { IonButton } from "@ionic/react"
 
@@ -29,7 +29,7 @@ interface ContainerProps {
     setDetails: (details: boolean) => void
 }
 
-const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, setDetails}) => {
+const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, setDetails}) => {
 
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 

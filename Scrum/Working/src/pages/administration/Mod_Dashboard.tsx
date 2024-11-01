@@ -4,22 +4,17 @@ import {
   IonTitle,
   IonContent,
   IonPage,
-
   IonFooter,
-  IonInput,
   IonGrid,
   IonRow,
   IonCol,
   IonItem,
-  IonToolbar,
   IonButton,
   IonIcon,
-  IonLabel,
-
 } from "@ionic/react";
 import "./dashbadmin.css";
 import "../../theme/variables.css";
-import { arrowForwardOutline, exitOutline } from "ionicons/icons";
+import { arrowForwardOutline } from "ionicons/icons";
 import Ticket from "./componentes/Ticket";
 import Desban from "./componentes/Userlist";
 import { useHistory } from "react-router";

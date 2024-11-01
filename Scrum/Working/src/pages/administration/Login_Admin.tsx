@@ -34,12 +34,11 @@ const Login_Admin: React.FC = () => {
 
   React.useEffect(() => {
     // Effect to run when DPI changes
-    console.log(`DPI changed: ${dpi}`);
+
   }, [dpi]);
 
   React.useEffect(() => {
     // Effect to run when password changes
-    console.log(`Password changed: ${password}`);
   }, [password]);
 
   return (

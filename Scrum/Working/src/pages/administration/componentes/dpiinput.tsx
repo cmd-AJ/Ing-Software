@@ -81,7 +81,7 @@ const DpiInput: React.FC<ContainerProps> = ({ dpi, setDpi, validateDpi, setValid
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-        console.log(value)
+
         // Validate before updating the parent state
         if (validate(value)) {
             setDpi(value); // Update parent state only if valid

@@ -28,7 +28,7 @@ const About: React.FC = () => {
 
 useEffect(() => {
   const userData = localStorage.getItem('User');
-  console.log(userData);
+
   
   // Cambiar a '/searched' solo si `userData` no es nulo y no está vacío
   if (userData !== '' && userData !== null) {

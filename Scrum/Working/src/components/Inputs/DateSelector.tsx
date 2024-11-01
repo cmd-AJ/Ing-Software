@@ -34,7 +34,6 @@ const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate
         if (newDate) {
             const formattedDate = newDate.format('YYYY-MM-DD')
             setDate(formattedDate)
-            console.log(formattedDate);
         }
     };
 

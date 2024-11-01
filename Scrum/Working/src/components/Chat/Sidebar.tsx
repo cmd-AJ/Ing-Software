@@ -33,7 +33,7 @@ const Sidebar = () => {
     const [selectedPerson, setSelectedPerson] = useState<chatUser | null>(null);
     const [contacts, setContacts] = useState<chatUser[]>([]);
     const [messages, setMessages] = useState<FormattedMessage[]>([]);
-    const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
+    const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 

@@ -12,7 +12,7 @@ import "../../../theme/variables.css";
 import "./jobs.css"
 import { slitdate } from './adminfunctions'
 import Topheader from "./Topheader";
-import { checkmark, checkmarkOutline, close } from "ionicons/icons";
+import { checkmark, close } from "ionicons/icons";
 
 interface Cuenta {
   idsuspend: string;

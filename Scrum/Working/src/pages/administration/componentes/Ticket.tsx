@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 import {
-  IonHeader,
-  IonTitle,
-  IonContent,
-  IonPage,
-
-  IonFooter,
-  IonInput,
-  IonLabel,
   IonItem,
   IonButton,
   IonIcon,
@@ -16,7 +8,7 @@ import {
 
 import "../../../theme/variables.css";
 import "./ticket.css"
-import { arrowForwardOutline, exitOutline } from "ionicons/icons";
+import { arrowForwardOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 
 interface Cuenta{
@@ -47,7 +39,7 @@ const Supended: React.FC<Cuenta> = ( {idreporte, dpiemisor, dpireportuser, fecha
     history.push(`mod_ticket?ticket=`+ticket)
   }
 
-  const [ cuenta, setcuenta ] = useState( { idreporte ,dpiemisor, dpireportuser, fecha, contenido } )
+  const [ cuenta ] = useState( { idreporte ,dpiemisor, dpireportuser, fecha, contenido } )
 
 
   return (

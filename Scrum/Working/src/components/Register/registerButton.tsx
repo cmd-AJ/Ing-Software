@@ -48,6 +48,7 @@ const RegisterButton: React.FC<ContainerProps> = ({ validateName,
         const departamento = Departamentos(user.dpi)
         const municipio = Municipios(user.dpi)
         if (validateName && validateLastname && validatePassword && validateConfirmation && (validateEmail || user.email == '') && validateDpi && validateTel && (user.role != "")) {
+            userExist
             setUserExist(true)
             createUser(user.dpi, user.name, user.lastname, CryptoJS.SHA256(user.password + '').toString(CryptoJS.enc.Hex), user.email, user.tel, user.role, departamento, municipio)
             history.push('/home')

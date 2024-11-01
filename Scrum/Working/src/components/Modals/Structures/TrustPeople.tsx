@@ -28,7 +28,6 @@ const TrustPeople: React.FC<ContainerProps> = ({ dpi }) => {
         const fetchData = async () => {
             try {
                 const data = await getTrustedPeople(dpi)
-                console.log(data);
                 
                 if (data && data.length > 0) {
                     setPeople(data)

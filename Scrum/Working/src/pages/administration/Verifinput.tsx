@@ -111,11 +111,6 @@ const Inputver: React.FC<ContainerProps> = ({setDpi, validateDpi, setValidateBoo
         setDpi(value);
     }
 
-    const [focus, setFocus] = useState(false)
-
-    const handleFocus = () => {
-        setFocus(true)
-    }
 
     return (
         <IonInput 
@@ -131,8 +126,7 @@ const Inputver: React.FC<ContainerProps> = ({setDpi, validateDpi, setValidateBoo
                 }
             }}
             onIonBlur={(event) => { markTouched(); validate((event.target as unknown as HTMLInputElement).value); }} // Ejecuta markTouched() y validate() cuando se desenfoca
-            onIonChange={handleInputChange}
-            onFocus={handleFocus}    
+            onIonChange={handleInputChange}  
         ></IonInput>
     )
 }
