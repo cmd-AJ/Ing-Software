@@ -3,6 +3,8 @@ import cytoscape from "cytoscape";
 import styles from "./GraphContainer.module.css"; // CSS module for additional styling
 
 const GraphContainer: React.FC = () => {
+  // cytoscape-extensions.d.ts
+
   const cyRef = useRef<HTMLDivElement>(null); // Ref for the Cytoscape container
 
   useEffect(() => {
@@ -89,8 +91,8 @@ const GraphContainer: React.FC = () => {
               "background-clip": "node",
               "border-color": "black",
               "border-width": 3,
-              width: 70,
-              height: 70,
+              width: 80,
+              height: 80,
               label: "data(label)",
               "text-valign": "bottom",
               color: "black",
@@ -104,8 +106,8 @@ const GraphContainer: React.FC = () => {
           {
             selector: "node:hover",
             style: {
-              width: 125,
-              height: 125,
+              width: 130,
+              height: 130,
               "border-color": "black",
               opacity: 0.8,
               // You can add shadow properties here if needed
@@ -127,15 +129,43 @@ const GraphContainer: React.FC = () => {
           animate: true,
           animationDuration: 1000,
         },
-        userZoomingEnabled: true,
-        userPanningEnabled: true,
+        userZoomingEnabled: false,
+        userPanningEnabled: false,
+        zoomingEnabled: false,
+        panningEnabled: false,
       });
 
-      // Ensure nodes are draggable
       cy.nodes().grabify();
+
+      cy.on("drag", "node", (e) => {
+        const node = e.target;
+        const position = node.position();
+
+        const nodeWidth = node.width();
+        const nodeHeight = node.height();
+
+        const halfNodeWidth = nodeWidth / 2;
+        const halfNodeHeight = nodeHeight / 2;
+
+        const extent = cy.extent();
+
+        const minX = extent.x1 + halfNodeWidth;
+        const minY = extent.y1 + halfNodeHeight;
+        const maxX = extent.x2 - halfNodeWidth;
+        const maxY = extent.y2 - halfNodeHeight;
+
+        let x = position.x;
+        let y = position.y;
+
+        if (x < minX) x = minX;
+        if (x > maxX) x = maxX;
+        if (y < minY) y = minY;
+        if (y > maxY) y = maxY;
+
+        node.position({ x, y });
+      });
     } // Closing brace for if (cyRef.current)
 
-    // Clean up Cytoscape instance on component unmount
     return () => {
       if (cy) {
         cy.destroy();
