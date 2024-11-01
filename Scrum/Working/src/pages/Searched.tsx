@@ -5,7 +5,6 @@ import List from '../components/Searched/List';
 import Searcher from '../components/Searched/Searcher';
 import { useLocation } from 'react-router';
 import TextND from '../components/Txt/TextND';
-import { use } from 'chai';
 
 // import Grid from '../components/Searched/Grid'; // Uncomment if Grid also uses job
 

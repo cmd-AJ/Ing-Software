@@ -1,12 +1,10 @@
-import { IonDatetime, IonInput } from "@ionic/react";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import './InputStyles.css'
 import React from "react";
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import TextND from "../Txt/TextND";
 import dayjs, { Dayjs } from "dayjs";
 
 interface ContainerProps {
@@ -42,7 +40,6 @@ const DateSelector: React.FC<ContainerProps> = ({ date, setDate, setValidateDate
 
     return (
         <div id="singular-input-display">
-            <TextND text="Fecha de nacimineto:" size="medium-small" hex="#000"/>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
                     <DatePicker 

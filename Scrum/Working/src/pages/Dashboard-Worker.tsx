@@ -18,6 +18,8 @@ import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
 import { getContratEmployer, getContratWorker } from "../controller/UserController";
 import TrustPeople from "../components/Modals/Structures/TrustPeople";
 import TxtBtnAction from "../components/Btn/TxtBtnAction";
+import BtnAction from "../components/Btn/BtnAction";
+import changeIcon from "../assets/change-svgrepo-com.svg"
 
 type User = {
   nombre : string;
@@ -32,7 +34,8 @@ type User = {
   dpi: string;
   role: string;
   banner: string;
-  departamento: string
+  departamento: string;
+  isworking: boolean;
 };
 
 
@@ -57,6 +60,7 @@ const Dashboard_Worker: React.FC = () => {
   const queryParams = new URLSearchParams(location.search)
 
   const owner = queryParams.get('ownerUser')
+  const roleUser = queryParams.get('role')
 
   const secondaryContrast = getComputedStyle(document.documentElement).getPropertyValue('--black').trim()
   const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
@@ -65,6 +69,8 @@ const Dashboard_Worker: React.FC = () => {
   const [editTrabajo, setEditTrabajo] = useState(false)
   const [showDetails, setShowDetails] = useState(false)
   const [showTrustedPeople, setShowTrustedPeople] = useState(false)
+  const [working, setWorking] = useState(false)
+  const [userRole, setUserRole] = useState(false) //false -> empleador / true -> empleado
   
   const [myUser, setMyUser] = useState<User>({
     nombre : '',
@@ -79,7 +85,8 @@ const Dashboard_Worker: React.FC = () => {
     dpi: '',
     role: '',
     banner: '',
-    departamento: ''
+    departamento: '',
+    isworking: false,
   });
     
   const [image, setImage] = useState(myUser.imagen)
@@ -91,6 +98,14 @@ const Dashboard_Worker: React.FC = () => {
   const contentCRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    if (roleUser == 'empleador'){
+	setUserRole(false)
+    } else {
+	setUserRole(true)
+    }
+  },[])
+
+  useEffect(() => {
     let user = null;
     if (owner == 'true'){
       user = localStorage.getItem("User");
@@ -100,6 +115,8 @@ const Dashboard_Worker: React.FC = () => {
     if (user) {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
+      setWorking(parsedUser.isworking);
+
     }
 
   }, [owner]);
@@ -127,7 +144,6 @@ const Dashboard_Worker: React.FC = () => {
       const miliSecondsYear = 1000 * 60 * 60 * 24 * 365;
       const ageYears = Math.floor(difMiliSeconds / miliSecondsYear);
 
-    console.log(parsedUser);
       setAge(ageYears)
     }
     
@@ -161,11 +177,15 @@ const Dashboard_Worker: React.FC = () => {
     <IonPage>
       <IonContent>
         <div className="contentC" ref={contentCRef}>
-          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser}/>}/>}
+          {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser} working={working}/>}/>}
           {editTrabajo && <ModalStructure setModal={setEditTrabajo} modalE={editModal} />}
           {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
           {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<TrustPeople dpi={myUser.dpi}/>}/>}
           <div className="header-card" ref={headerCardRef}>
+	  	{working && <div className="change-role-profile-btn">
+			<BtnAction text='' img={changeIcon} rounded={true} trigger='' action={() => setUserRole(!userRole)}/>
+		</div>
+		}
             <img
               src={myUser.banner}
               className="feed-img"></img>
@@ -174,11 +194,11 @@ const Dashboard_Worker: React.FC = () => {
                   <CircleImg reference={image}/>
                   <UserText 
                     text1={myUser.nombre.split(' ')[0] + ' ' + myUser.apellidos.split(' ')[0] }
-                    text2={myUser.role}
                     rating={myUser.rating}
+		    userRole={userRole} 
                   />
                 </div>
-                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} owner={owner} setEdit3={setShowTrustedPeople}/>
+                  <BtnDisplayment setEdit1={setEditModal} setEdit2={setEditTrabajo} owner={owner} setEdit3={setShowTrustedPeople} setModal={setEditModal} setIsWorking={setWorking} dpi={myUser.dpi} working={working}/>
               </div>
               <HorizontalDivider />
               <div className="dataGrid">
@@ -208,7 +228,7 @@ const Dashboard_Worker: React.FC = () => {
                 </div>
               </div>
               <HorizontalDivider/>
-              <UserDataDisplay role={myUser.role} dpi={myUser.dpi} setDetails={setShowDetails}/>
+              <UserDataDisplay role={myUser.role} dpi={myUser.dpi} setDetails={setShowDetails} userRole={userRole}/>
           </div>
         </div>
       </IonContent>
