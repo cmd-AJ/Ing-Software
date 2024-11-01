@@ -41,13 +41,22 @@ const Topheader: React.FC = () => {
     history.push("mod_ticket")
   }
 
+  const gotojib = () => {
+    history.push("new_job")
+  }
+
+  const logout = () => {
+    history.push("admin")
+  }
+
 
   return (
       <IonToolbar color={"primary"} >
-      <IonLabel  slot="start" className="dashbutton"><a className="linkref" onClick={gotoadmin}>SABTE</a> </IonLabel>
+      <IonLabel  slot="start" className="dashbutton"><a className="linkref" onClick={gotoadmin}>Contrato GT</a> </IonLabel>
       <IonButton slot="end" className="ticketing" onClick={gotosuspend} > Suspendido </IonButton> 
       <IonButton slot="end" className="ticketing" style={{cursor:'pointer'}} onClick={gototicket}> Tickets </IonButton>
-      <IonButton  className="iconic" slot="end">
+      <IonButton slot="end" className="ticketing" style={{cursor:'pointer'}} onClick={gotojib}> Trabajos </IonButton>
+      <IonButton  className="iconic" slot="end" onClick={logout}>
             <IonIcon  className="iconic" slot="icon-only" icon={exitOutline}></IonIcon>
           </IonButton> 
       </IonToolbar>

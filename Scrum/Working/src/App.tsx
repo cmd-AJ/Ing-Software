@@ -42,6 +42,7 @@ import CloseContrat from "./components/Modals/Structures/CloseContrat";
 import ModalStructure from "./components/Modals/ModalStructure";
 import { getreview } from "./controller/ChatController";
 import Reviewed from "./pages/review";
+import Newjobs from "./pages/administration/componentes/Trabajos";
 
 setupIonicReact();
 
@@ -74,6 +75,7 @@ const App: React.FC = () => (
         <ProtectedRoute exact path="/dash_admin" component={Mod_Dashboard} />
         <ProtectedRoute exact path="/mod_suspended" component={Suspendido} />
         <ProtectedRoute exact path="/mod_ticket" component={Tickt_page} />
+        <ProtectedRoute exact path="/new_job" component={Newjobs} />
 
         <ProtectedRoute
           exact
