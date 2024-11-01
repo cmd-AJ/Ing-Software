@@ -1,17 +1,15 @@
 import { IonSelect, IonSelectOption } from "@ionic/react"
 import './InputStyles.css'
 import React from "react"
-import TextND from "../Txt/TextND"
 
 interface ContainerProps {
-    label : string
     placeholder: string
     list: Array<string>
     value: string
     setValue: (value: string) => void
 }
 
-const InputSelector: React.FC<ContainerProps> = ({label,placeholder,list, value, setValue}) => {
+const InputSelector: React.FC<ContainerProps> = ({placeholder,list, value, setValue}) => {
 
     const handleSelectChange = (e: CustomEvent) => {
         const value = e.detail.value;
@@ -20,7 +18,6 @@ const InputSelector: React.FC<ContainerProps> = ({label,placeholder,list, value,
 
     return (
         <div id="singular-input-display">
-            <TextND text={label} size="medium-small" hex="#000"/>
             <IonSelect 
                 placeholder={placeholder} 
                 labelPlacement="floating"

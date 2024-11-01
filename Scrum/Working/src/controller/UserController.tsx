@@ -514,13 +514,17 @@ export async function getDpiByTrabajo(idtrabajo : string) {
   }
   
 export async function setWorking(dpi : string) {
+	const data = {
+		dpi: dpi
+	}
 	try {
-		const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setWorking/${dpi}}`, {
+		const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setWorking/`, {
         method: 'PUT',
         headers: {
           'api-key': import.meta.env.VITE_API_KEY,
           'Content-Type': 'application/json',
         },
+	body: JSON.stringify(data)
 	})
 
 	if (!response.ok) {
