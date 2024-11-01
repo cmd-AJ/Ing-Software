@@ -28,6 +28,13 @@
   .comment-username {
     font-size: 0.75rem;
     font-weight: bold;
+    cursor: pointer;
+    transition: text-decoration 0.2s ease-in-out; /* Smooth transition */
+
+  }
+
+  .comment-username:hover {
+    text-decoration: underline; /* Add underline on hover */
   }
   
   .comment-timestamp {

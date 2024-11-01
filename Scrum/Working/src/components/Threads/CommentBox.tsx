@@ -24,8 +24,6 @@ const CommentBox: React.FC<UserProps> = ({
       alert("Por favor, ingresa un comentario.");
       return;
     }
-
-    console.log(`Comentario de ${usuario}: ${comment}`);
     await insertCommentToThread(
       idthread,
       comment,

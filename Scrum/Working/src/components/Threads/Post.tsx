@@ -4,6 +4,7 @@ import "./Post.css";
 import CommentBox from "./CommentBox";
 import CommentContainer from "./CommmentContainer";
 import { getThreadComments } from "../../controller/ThreadController";
+import Skeleton from "react-loading-skeleton";
 
 interface PostProps {
   idthread: string;
@@ -12,6 +13,7 @@ interface PostProps {
   posttime: string;
   imagen: string; // base64 or URL4
   img_usuario: string;
+  dpi: string;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -21,10 +23,12 @@ const Post: React.FC<PostProps> = ({
   posttime,
   imagen,
   img_usuario,
+  dpi,
 }) => {
   const [comments, setComments] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
 
   const fetchComments = async () => {
     try {
@@ -47,7 +51,12 @@ const Post: React.FC<PostProps> = ({
   };
 
   const isValidImage = (img: string) => {
-    return img && (img.startsWith("data:image") || img.startsWith("http") || img.startsWith("https"));
+    return (
+      img &&
+      (img.startsWith("data:image") ||
+        img.startsWith("http") ||
+        img.startsWith("https"))
+    );
   };
   console.log(usuario);
   console.log(img_usuario);
@@ -58,13 +67,31 @@ const Post: React.FC<PostProps> = ({
         usuario={usuario}
         posttime={posttime}
         img_usuario={img_usuario}
+        dpi={dpi}
       />
       <div className="post-content">
         <p className="post-description">{descripcion}</p>
       </div>
 
       {isValidImage(imagen) && (
-        <img className="post-image" src={imagen} alt="Post image" />
+        <div className="post-image-container">
+          {imageLoading && (
+            <Skeleton
+              height={300} // Adjust height based on your design
+              width="100%"
+              className="post-image-skeleton"
+              borderRadius={10}
+            />
+          )}
+          <img
+            className="post-image"
+            src={imagen}
+            alt="Post image"
+            onLoad={() => setImageLoading(false)}
+            onError={() => setImageLoading(false)} // Handle load errors
+            style={imageLoading ? { display: "none" } : {}}
+          />
+        </div>
       )}
 
       <CommentBox

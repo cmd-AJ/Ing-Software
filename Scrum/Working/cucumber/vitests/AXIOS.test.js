@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config(); // Carga las variables de entorno desde .env
 
 const api = axios.create({
-  baseURL: `http://${process.env.VITE_API_HOSTI}:${process.env.VITE_PORTI}`,
+  baseURL: `https://${process.env.VITE_API_HOSTI}/api`,
 });
 
 test('should retrieve contacts for a given user ID', async () => {

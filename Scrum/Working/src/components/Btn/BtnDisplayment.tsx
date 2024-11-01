@@ -4,7 +4,7 @@ import ModalBtnI from './ModalBtnI'
 import ModalBtnN from './ModalsBtnN'
 import { chatbubbleEllipses, pencilOutline, personAddOutline } from 'ionicons/icons'
 import BtnAction from './BtnAction'
-import { addTrustedPeople, getTrustedPeople } from '../../controller/UserController'
+import { addTrustedPeople, getTrustedPeople, setWorking } from '../../controller/UserController'
 import { peopleOutline } from 'ionicons/icons'
 import { useHistory } from 'react-router'
 import { createNewChatIfNotExists } from '../../controller/ChatController'
@@ -31,17 +31,43 @@ interface ContainerProps {
     setEdit2: (edit2: boolean) => void
     setEdit3: (edit3: boolean) => void
     owner: string | null
+    setModal: (modal : boolean) => void 
+    setIsWorking: (isWorking: boolean) => void
+    dpi: string
+    working: boolean
 }
 
 const BtnDisplayment: React.FC<ContainerProps> = ({
     setEdit1,
     setEdit2,
     setEdit3,
-    owner
+    owner,
+    setModal,
+    working,
+    setIsWorking,
+    dpi
 }) => {
     const [trigger, setTrigger] = useState('')
     const history = useHistory()
 
+    const handleWorkAction = () => {
+			Swal.fire({
+                            title: "Comenzar a trabajar",
+                            text: "Esta añadiendo la función de empleado a su perfil, con esta función podrá configurar los oficios que es capaz de realizar y otros usuarios podrán buscarlo para contratarlo)",
+                            icon: "info",
+                            heightAuto: false,
+                            timerProgressBar: true,
+                            showCancelButton: true,
+                            showConfirmButton: true, 
+			    reverseButtons: true,
+                        }).then((result) => {
+				if (result.isConfirmed) {
+					setModal(true)
+					setIsWorking(true)
+					setWorking(dpi)
+				}
+			})
+    }
     const handleChatDirection = async () => {
         const myUser = localStorage.getItem('User')
         const externalUser = localStorage.getItem('notUser')
@@ -133,7 +159,7 @@ const BtnDisplayment: React.FC<ContainerProps> = ({
         <div className="btn-header-horizontal">
             <ModalBtnI img={pencilOutline} setEdit={setEdit1} />
             <BtnAction rounded={true} text='' img={peopleOutline} trigger='' action={setEdit3} />
-            <ModalBtnN label="Añadir trabajo" setEdit={setEdit2} color='tertiary' />
+            {!working && <BtnAction text="¿Quiero trabajar?" rounded={true} img='' trigger='' action={handleWorkAction} />}
         </div>
     ) : owner === 'false' ? (
         <div className='btn-header-horizontal'>

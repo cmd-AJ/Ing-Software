@@ -38,7 +38,7 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault(); // Evita el salto de línea
+      event.preventDefault();
       sendMessage();
     }
   };
@@ -55,7 +55,10 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
         style={{ height: '39px' }}
       />
       <IoSend className="icon send-icon" onClick={sendMessage} /> 
-      <FaHandshake className="icon hire-icon" onClick={onHireClick} disabled={role === 'Empleado'} />
+      <FaHandshake
+        className={`icon hire-icon ${role === 'Empleado' ? 'disabled' : ''}`}
+        onClick={role === 'Empleado' ? undefined : onHireClick}
+      />
     </div>
   );
 }

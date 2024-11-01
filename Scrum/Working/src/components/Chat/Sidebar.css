@@ -39,7 +39,21 @@ body {
     height: 100%;
     border: 1px solid var(--light);
     background-color: var(--white);
+    overflow: hidden; /* Oculta el overflow visible en .left */
 }
+
+/* Contenedor interno para permitir el desplazamiento */
+.scrollable-content {
+    height: 100%;
+    overflow-y: auto; /* Permite el scroll solo en este contenedor interno */
+    padding-right: 15px; /* Espacio opcional para evitar que el contenido se corte */
+}
+
+/* Oculta la barra de desplazamiento en navegadores basados en Webkit */
+.scrollable-content::-webkit-scrollbar {
+    display: none;
+}
+
 
 @media (min-width:600px){
     .left .top {

@@ -34,21 +34,18 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
     const tertiaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-tertiary').trim()
 
     const [dataEmple, setDataEmple] = useState<Contrat[]>([])
+    const [realData, setRealData] = useState<Contrat[]>([])
     const [error, setError] = useState<string>('')
 
     useEffect(()=>{
         const fecthData = async () => {
             let dataEmple = []
-            let data = []
-
 
             dataEmple = await getContratWorker(dpi)
 
-            console.log(dataEmple);
-                
-
             if (dataEmple && dataEmple.length > 0) {
-                setDataEmple(dataEmple)
+                setDataEmple(dataEmple.slice(0,4))
+		setRealData(dataEmple)
             } else {
                 setError('Sin contratos')
                 setDataEmple([])
@@ -65,7 +62,7 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
                 {
                     selectedValue !== 'leftSegment' &&
                     <>
-                        <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
+                        <TextND size="big" text="Contrataciones anteriores" hex={tertiaryColor}/>
                         <div style={{width: '100%'}}>
                             <HorizontalDivider/>
                         </div>
@@ -84,18 +81,19 @@ const ContratsDisplay : React.FC<ContainerProps> = ({dpi, selectedValue, role, s
             {
                 selectedValue !== 'leftSegment' &&
                 <>
-                    <TextND size="big" text="Contrataciones SABTE" hex={tertiaryColor}/>
+                    <TextND size="big" text="Contrataciones anteriores" hex={tertiaryColor}/>
                     <HorizontalDivider/>
                 </>
             }
-            <div style={{width:'100%', display: 'flex', flexDirection: 'column', gap: '10px'}}>
+            <div className="all-contrats-display">
                 {
                     dataEmple.map(contrat => (
                         <ContratEDisplay contrat={contrat}/>
                     ))
                 }
             </div>
-            <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>
+            {realData.length > 4 &&
+	    <IonButton style={{width: '100%'}} color='tertiary' onClick={() => setDetails(true)}>Ver detalles</IonButton>}
         </div>
     )
 }

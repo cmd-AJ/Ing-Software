@@ -25,7 +25,7 @@ const Details: React.FC<DetailsProps> = ({ onClose, dpiEmployer, dpiEmployee }) 
       </div>
       <div className="information-container">
         <Information date={selectedDate} onClose={onClose} />
-      </div>
+      </div>    
     </div>
   );
 };

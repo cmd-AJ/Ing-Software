@@ -12,6 +12,13 @@ const Searched: React.FC<{ job: string, dpi: string }> = ({ job }) => {
   const location = useLocation()
 
   const [searching, setSearching] = useState(location.pathname)
+  const [total, setTotal] = useState(0)
+
+  const queryParams = new URLSearchParams(location.search)
+
+  const wordSearch = queryParams.get('job')
+
+
 
   useEffect(() => {
     if (searching != '/searched') {
@@ -25,11 +32,11 @@ const Searched: React.FC<{ job: string, dpi: string }> = ({ job }) => {
       <div className='searched'>
         {searching.includes('?') &&
           <div id='searched-message'>
-            <TextND text='Encontrados X resultados para X' size='small' hex='#000'/>
+            <TextND text={'Encontrados ' + total.toString() + ' resultados para ' + wordSearch} size='small' hex='#000'/>
           </div>
         }
         { !searching.includes('?') && <Searcher setPath={setSearching}/>}
-        { searching !== '/searched' && <List job={job}/>}
+        { searching !== '/searched' && <List job={job} setTotal={setTotal}/>}
       </div>
     </IonPage>
   );

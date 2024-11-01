@@ -27,3 +27,8 @@
 #button-up {
     margin-bottom: 5%;
 }
+
+#grid-components {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
