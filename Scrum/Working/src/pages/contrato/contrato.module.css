@@ -12,16 +12,16 @@
 
 .content {
   /* flex: 1; */
-  width: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-top: 108px;
 }
 
 .section1 {
   /* flex: 1; */
   width: 100%;
-  background-color: #c59595;
+  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
 }
@@ -34,18 +34,18 @@
 
 .descriptionContainer,
 .productIdea {
-  background-color: #FFFFFF; /* Light blue for visibility */
+  background-color: #ffffff; /* Light blue for visibility */
   flex: 1; /* Equal width */
   min-width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   /* text-align: center; */
-  min-height: 95vh;
+  min-height: 90vh;
 }
 
 .descriptionContainer {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
 }
@@ -87,31 +87,99 @@
 
 .section2 {
   width: 100%;
-  background-color: #111A28;
+  background-color: #111a28;
   /* display: flex; */
   flex-direction: row;
 }
 
 .aboutDisplayer,
 .productAssets {
-  background-color: #111A28; 
+  background-color: #111a28;
   flex: 1;
   min-width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 90vh;
   flex-direction: column;
 }
 
 .aboutDisplayer {
-  background-color: #111A28;
-  height: 200px;
-  width: 200px;
+  background-color: #111a28;
 }
 
 .productAssets {
-  background-color: #111A28;
+  background-color: #111a28;
+}
+
+/* Cards related */
+
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.landAssetCard {
+  border-radius: 6px;
+  border: solid white 1px;
+  margin: 1.5rem;
+  padding: 0.5rem;
+  width: 40%;
+  height: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  cursor: pointer;
+}
+
+.landAssetCard:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5); /* White box shadow on hover */
+}
+
+.landHoveredImage {
+  width: 850px;
+  height: 449px;
+  object-fit: cover;
+  margin-top: 7rem;
+  transition: opacity 0.5s ease-in-out; 
+  /* opacity: 0;  */
+}
+
+/*  */
+.aboutDisplayer h2 {
+  font-family: "Proza Libre";
+  font-size: 36px;
+  text-align: left;
+  display: flex;
+  width: 100%;
+  margin-left: 22%;
+  font-weight: bolder;
+  margin-top: 15px;
+}
+
+.sec2Tittles {
+  font-family: "Proza Libre";
+  font-size: 50px;
+  text-align: left;
+  display: flex;
+  width: 100%;
+  margin-left: 22%;
+  font-weight: bolder;
+  margin-top: 0px;
+  margin-bottom: 2px;
+}
+
+.cardsContainer h1 {
+  font-family: "Nunito sans", sans-serif;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.cardsContainer p {
+  font-family: "Nunito sans", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
 }
 
 @media (max-width: 1450px) {
@@ -144,61 +212,8 @@
     padding-left: 50px;
     padding-right: 10px;
   }
+
+  .landAssetCard {
+    height: 300px;
+  }
 }
-
-/* Cards related */
-
-.cardsContainer{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
-.landAssetCard{
-  border-radius: 6px; 
-  border: solid white 1px;
-  margin: 1.5rem;
-  padding: 0.5rem;
-  width: 40%;
-  height: 200px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-  cursor: pointer;
-}
-
-.landAssetCard:hover {
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5); /* White box shadow on hover */
-  transform: scale(1.02); 
-}
-
-.landHoveredImage{
-  width: 85%;
-  height: 45%;
-  object-fit: cover;
-  margin-top: 7rem;
-}
-
-.aboutDisplayer h2{
-  font-family: 'Proza Libre';
-  font-size: 36px;
-  text-align: left;
-  display: flex;
-  width: 100%;
-  margin-left: 22%;
-  font-weight: bolder;
-}
-
-.sec2Tittles{
-  font-family: 'Proza Libre';
-  font-size: 50px;
-  text-align: left;
-  display: flex;
-  width: 100%;
-  margin-left: 22%;
-  font-weight: bolder;
-  margin-top: 0px;
-  margin-bottom: 2px;
-  
-}
-

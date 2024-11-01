@@ -2,13 +2,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
 
 .topBar {
-  width: 100%;
+  width: 99.1%;
   height: 108px;
   display: flex;
   justify-content: center;
-  background-color: #6f9cef; /* Solid background color */
-  position: relative; /* For positioning overlay */
-  z-index: 1000; /* Ensure top bar is above other elements */
+  background-color: #6f9cef;
+  position: fixed;
+  z-index: 1000;
 }
 
 .stylesWrapper {
@@ -16,8 +16,8 @@
   width: 100%;
   height: 100%;
   align-items: center;
-  justify-content: space-between; 
-  padding: 0 1rem; 
+  justify-content: space-between;
+  padding: 0 1rem;
 }
 
 /* Title Container */
@@ -29,7 +29,7 @@
 .landBarTittleContainer h1 {
   font-family: "Proza Libre", sans-serif;
   font-size: 40px;
-  color: #fff; 
+  color: #fff;
   font-weight: bold;
 }
 
@@ -39,7 +39,6 @@
   align-items: center;
   width: 35%;
   padding: 0;
-
 }
 
 .lanBarActionsContainer button {
@@ -50,9 +49,9 @@
   color: #fff;
   border: 1px solid #fff;
   border-radius: 10px;
-  padding: 10px 15px; 
+  padding: 10px 15px;
   cursor: pointer;
-  margin: 0 5px; 
+  margin: 0 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -65,7 +64,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 25%; 
+  width: 25%;
   padding: 0;
 }
 
@@ -74,11 +73,11 @@
   font-size: 16px;
   white-space: nowrap;
   border-radius: 10px;
-  padding: 0.6rem 2rem; 
+  padding: 0.6rem 2rem;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin: 0 5px; 
+  margin: 0 5px;
 }
 
 .landLogInButton {
@@ -104,7 +103,7 @@
 }
 
 .menuIcon {
-  display: none; 
+  display: none;
   font-size: 24px;
   color: #fff;
   cursor: pointer;
@@ -120,7 +119,6 @@
   background-color: rgba(0, 0, 0, 0);
   z-index: 99; /* Below the top bar */
 }
-
 
 .lanBarActionsContainer.active,
 .landBarJoinContainer.active {
@@ -139,7 +137,6 @@
   margin: 0.5rem auto;
   width: 80%;
   cursor: pointer;
-
 }
 
 /* Responsive Design */
