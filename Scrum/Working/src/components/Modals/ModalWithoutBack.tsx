@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react"
-import TextND from "../Txt/TextND"
-import { IonList } from "@ionic/react"
+import React, { useEffect, useRef } from "react"
+
 
 interface ContainerProps {
     x: number

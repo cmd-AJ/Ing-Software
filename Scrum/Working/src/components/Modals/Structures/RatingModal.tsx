@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./ratingmodal.css";
 import { Rating, Box } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import {
-  getDpiByTrabajo,
   sendSatisfactionSurvey,
 } from "../../../controller/UserController";
 
@@ -40,16 +39,10 @@ const RatingModal: React.FC<RatingModalProps> = ({
 }) => {
   const [value, setValue] = useState<number | null>(null); // Iniciar con 0 estrellas
   const [hover, setHover] = useState(-1);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleConfirm = async () => {
     try {
-      console.log(`job id -> ${jobId}`);
-      console.log(`description-> ${description}`);
-      console.log(`dpi trabajador -> ${dpitrabajador}`);
 
-      console.log("Satisfaction survey sent successfully!");
       sendSatisfactionSurvey(Number(jobId), Number(value), dpitrabajador, description);
       setShow(false); // Close the modal after successful submission
     } catch (err) {

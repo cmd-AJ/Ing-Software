@@ -18,10 +18,7 @@ import Adminbutton from "./Adminbutton";
 const Login_Admin: React.FC = () => {
   const [dpi, setDpi] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
-
   const [validateDpi, setValidateDpi] = useState(false)
-  const [validatePassword, setValidatePassword] = useState(false)
 
   const handleInputChange = (
     e: CustomEvent<{ value: string | null }>,
@@ -37,12 +34,11 @@ const Login_Admin: React.FC = () => {
 
   React.useEffect(() => {
     // Effect to run when DPI changes
-    console.log(`DPI changed: ${dpi}`);
+
   }, [dpi]);
 
   React.useEffect(() => {
     // Effect to run when password changes
-    console.log(`Password changed: ${password}`);
   }, [password]);
 
   return (
@@ -52,7 +48,7 @@ const Login_Admin: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div style={{ height: "12vh" }}></div>
-        <IonTitle className="SABTETITLE">SABTE</IonTitle>
+        <IonTitle className="SABTETITLE">Contrato GT</IonTitle>
         <Inputver setDpi={setDpi} validateDpi={validateDpi} setValidateBoolean={setValidateDpi}/>
         <br></br>
         <IonInput

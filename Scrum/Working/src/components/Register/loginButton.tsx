@@ -14,8 +14,8 @@ interface ContainerProps {
 }
 
 const LoginButton: React.FC<ContainerProps> = ({ 
-    dpi, validateDpi, 
-    password, validatePassword, 
+    dpi, 
+    password, 
     role 
 
 }) => {
@@ -25,18 +25,16 @@ const LoginButton: React.FC<ContainerProps> = ({
     const handleClick = async () => {
         if ((dpi != "") && (password != '') && (role !== "")) {  
 
-            const x = CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex)
-            console.log(`hashed pass: ${x}`)
+       
             try {
                 const login = await userExists(dpi, CryptoJS.SHA256(password+'').toString(CryptoJS.enc.Hex));
                 if (login) {
                     const data = await getUser2(dpi)
-                    console.log(data);
+
                     
                     localStorage.setItem('User', JSON.stringify(data[0]))
                     
                     setUserExist(true)
-                    console.log("Has iniciado sesion correctamente");
                     localStorage.setItem('dpi', dpi);
 
                     const job = "";  // Esto debe ser dinámico según tus necesidades
@@ -44,8 +42,6 @@ const LoginButton: React.FC<ContainerProps> = ({
                     localStorage.setItem('job', job);
                     history.push(`/searched`);
                     
-                } else {
-                    console.log("Usuario no encontrado");
                 }
             } catch (error) {
                 console.error("Error:", error);

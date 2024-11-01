@@ -1,6 +1,5 @@
-import { logDOM } from "@testing-library/dom";
 import { Trabajador } from "../components/Searched/type";
-import { Departamentos, Municipios } from "../Departamentos/Departamentos";
+import { Departamentos } from "../Departamentos/Departamentos";
 
 async function createUser(
 	dpi: string, 
@@ -233,7 +232,7 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         banner: banner
     }
 
-    const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setsettings`,
+    await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setsettings`,
         {
             method: 'PUT',
             headers: {
@@ -255,7 +254,7 @@ export async function updatecuentaNEO4J(municipio: string, imagen: string, DPI: 
         telefono: telefono,
     }
 
-    const NeoData = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setNeoSettings`,
+    await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setNeoSettings`,
         {
             method: 'PUT',
             headers: {

@@ -14,7 +14,7 @@ interface TopBarProps {
   buttons: Button[];
 }
 
-const TopBar: React.FC<TopBarProps> = ({ buttons }) => {
+const TopBar: React.FC<TopBarProps> = ({ }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
@@ -22,7 +22,6 @@ const TopBar: React.FC<TopBarProps> = ({ buttons }) => {
 
   useEffect(() => {
     const userData = localStorage.getItem("User");
-    console.log(userData);
 
     // Cambiar a '/searched' solo si `userData` no es nulo y no está vacío
     if (userData !== "" && userData !== null) {

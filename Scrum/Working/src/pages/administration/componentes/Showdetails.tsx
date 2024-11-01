@@ -45,7 +45,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [changedate, setchangedate] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string>('');
-  const [dpi, setdpi] = useState(data?.dpi)
+  const [dpi] = useState(data?.dpi)
   const [confirmar, setconfirmar] = useState('')
   const [showToast, setShowToast] = useState(false);
   const [message, setMessage] = useState('')
@@ -65,7 +65,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
 
     if ((dpi != '')) {
       try {
-        const result = await unban(dpi + ''); 
+        await unban(dpi + ''); 
         setMessage("EXITO AL DESBLOQUEAR USUARIO")
         setShowToast(true)
       } catch (error) {
@@ -81,7 +81,7 @@ const ModalExample: React.FC<ModalExampleProps> = ({ onDismiss, data }) => {
     if (confirmar === 'extender fecha') {
       if ((dpi != '') && (selectedDate != '')) {
         try {
-          const result = await extendunban(dpi + '', selectedDate + '');
+          await extendunban(dpi + '', selectedDate + '');
           setMessage("EXITO AL ACTUALIZAR FECHA")
           setShowToast(true)
         } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import SearchBar from '../Search/SearchBar';
 import TextND from '../Txt/TextND';
 import './Searcher.css';
@@ -15,8 +15,6 @@ const Searcher: React.FC<ContainerProps> = ({ setPath }) => {
   const handleRequestChange = (value: string) => {
     if (value.trim() !== '') {
       history.push(`/searched?job=${encodeURIComponent(value)}`);
-    } else {
-      console.log('No se ha ingresado nada en la búsqueda.');
     }
   };
 
