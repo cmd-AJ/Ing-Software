@@ -59,6 +59,7 @@ const JobsDisplay:React.FC<ContainerProps> = ({dpi, selectedValue}) => {
                     <>
                         <TextND text="Trabajos realizados" size="big" hex={tertiaryColor}/>
                         <HorizontalDivider/>
+                        <div style={{marginBottom: '5px'}}></div>
                     </>
                 }
                 {
