@@ -1,5 +1,5 @@
 import ImgInput from "../../Inputs/ImgInput"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DataList from "../../Inputs/DataList";
 import InputSelector from "../../Inputs/InputSelector";
 import DateSelector from "../../Inputs/DateSelector";

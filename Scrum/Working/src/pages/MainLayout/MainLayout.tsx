@@ -1,6 +1,5 @@
 import { IonContent } from '@ionic/react';
 import NavigationBar from '../../components/Navigation/Navigation';
-import { useState } from 'react';
 
 
 interface MainLayoutProps {

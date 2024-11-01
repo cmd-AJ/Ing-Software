@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonItem, IonLabel, IonTextarea, IonIcon } from "@ionic/react";
+import { IonIcon } from "@ionic/react";
 import { camera } from "ionicons/icons";
 import "./PostField.css";
 import { createThreadPost } from "../../controller/ThreadController";
@@ -10,7 +10,7 @@ interface PostFieldProps {
   img_usuario: string;
 }
 
-const PostField: React.FC<PostFieldProps> = ({ onPostSubmit, img_usuario }) => {
+const PostField: React.FC<PostFieldProps> = ({ onPostSubmit }) => {
   const [inputText, setInputText] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [imageString, setImageString] = useState<string | null>(null); // To hold the base64 string
@@ -29,8 +29,6 @@ const PostField: React.FC<PostFieldProps> = ({ onPostSubmit, img_usuario }) => {
     event.preventDefault();
 
     const thread_sender = localStorage.getItem("dpi"); // DPI del usuario
-    console.log("Poster", thread_sender);
-    console.log("Posted:", inputText);
 
     if (photo) {
       console.log("Photo:", photo.name);

@@ -22,7 +22,6 @@ interface ContainerProps {
             };
             reader.readAsDataURL(file);
         
-            console.log("Archivo seleccionado:", file);
             // Aquí puedes manejar el archivo seleccionado, como cargarlo a un servidor o procesarlo de alguna manera
           }
       };

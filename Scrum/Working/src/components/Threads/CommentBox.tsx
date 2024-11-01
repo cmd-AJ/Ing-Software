@@ -11,7 +11,6 @@ interface UserProps {
 }
 
 const CommentBox: React.FC<UserProps> = ({
-  usuario,
   idthread,
   onCommentSubmit,
 }) => {

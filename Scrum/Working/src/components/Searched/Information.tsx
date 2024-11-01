@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Information.css';
 import { Trabajador } from './type' 
 import { useHistory } from 'react-router-dom';

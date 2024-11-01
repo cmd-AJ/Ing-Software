@@ -33,7 +33,7 @@ const Sidebar = () => {
     const [selectedPerson, setSelectedPerson] = useState<chatUser | null>(null);
     const [contacts, setContacts] = useState<chatUser[]>([]);
     const [messages, setMessages] = useState<FormattedMessage[]>([]);
-    const [loggedUserDpi, setLoggedUserDpi] = useState(localStorage.getItem('dpi') || '');
+    const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -41,8 +41,24 @@ const Sidebar = () => {
     const queryParams = new URLSearchParams(location.search);
     const dpiChat = queryParams.get('chat');
 
+
+    const requestNotificationPermission = async () => {
+        if (Notification.permission !== 'granted') {
+            await Notification.requestPermission();
+        }
+    };
+
+    const playNotificationSound = () => {
+        const audio = new Audio('/notisound.wav');
+        audio.play();
+    };
+
+
+
     // Fetch contacts on component mount
     useEffect(() => {
+
+        requestNotificationPermission();  
 
         const fetchData = async () => {
             try {
@@ -131,6 +147,8 @@ const Sidebar = () => {
 
     // Manejo del clic en una persona/contacto
     const handlePersonClick = async (dpi: string) => {
+        
+
         const selectedPerson2 = contacts.find(person => person.dpi === dpi);
 
         if (selectedPerson && selectedPerson.dpi !== selectedPerson2?.dpi && isDetailsOpen) {
@@ -158,12 +176,17 @@ const Sidebar = () => {
             try {
                 const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi) as ChatMessage[];
                 const formattedMessages = formatMessagesWithDateDividers(chatMessages);
+                if (formattedMessages.length > messages.length) {
+                    playNotificationSound();
+                }
                 setMessages(formattedMessages);
             } catch (error) {
                 console.error('Error fetching chat messages:', error);
             }
         }
     };
+
+    
 
 
     const handleClick = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -206,12 +229,13 @@ const Sidebar = () => {
                 }
             }
 
-            console.log(contacts)
+          
 
             settempcontact(deben)
         }
 
     };
+
 
 
     return (

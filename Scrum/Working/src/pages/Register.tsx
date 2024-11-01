@@ -1,5 +1,5 @@
 import LinkLogin from '../components/Register/LinkLogin'
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import './Register.css'
 import InputTopLabel from '../components/Inputs/InputTopLabel'
 import { useMaskito } from '@maskito/react'
@@ -43,11 +43,11 @@ const Register: React.FC = () => {
         return (value.length === 9) ? true : false;
     }
 
-    const emailValidation = (value: string) => {
+    const emailValidation = () => {
         return (email.match(/^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/)) ? true : false;
     } 
 
-    const passwordValidation = (value: string) => {            
+    const passwordValidation = () => {            
         return (password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/)) ? true : false;
     }
 

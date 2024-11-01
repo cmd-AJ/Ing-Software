@@ -9,7 +9,6 @@ export async function getJobsList() {
         });
         const result = await response.json()
 
-        console.log(result)
         return result
     } catch (error) {
         console.error("An error occured while getting jobs list")
@@ -39,9 +38,7 @@ async function deleteJobFromAvailableWithID(hiringId: Number | string) {
 }
 
 async function insertHiringIntoFinishedJobs(deletedJob: any) {
-    console.log("This will take the deleted objecto from the available jobs and insert it into the  completed jobs table")
 
-    console.log("The deleted job is: ", deletedJob)
 
     const citaDate = new Date(deletedJob.timestampcita);
 
@@ -80,7 +77,7 @@ async function insertHiringIntoFinishedJobs(deletedJob: any) {
 
 
 export async function moveJobFromAvailableIntoComplete(jobID: Number | string) {
-    console.log("This method will call the last 2 functions so its called on the front end more easily.")
+    // console.log("This method will call the last 2 functions so its called on the front end more easily.")
     const response = await deleteJobFromAvailableWithID(jobID)
 
     if (!response.ok) {
@@ -92,7 +89,7 @@ export async function moveJobFromAvailableIntoComplete(jobID: Number | string) {
 
     const result = await insertHiringIntoFinishedJobs(deletedData)
 
-    console.log("This job was added to the completed table: ", result)
+    // console.log("This job was added to the completed table: ", result)
 
     return result;
 }

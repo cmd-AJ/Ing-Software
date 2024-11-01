@@ -1,4 +1,4 @@
-import { IonButton } from "@ionic/react";
+
 import { useState } from "react";
 import "./close_struct.css";
 import RatingModal from "./RatingModal";
@@ -50,7 +50,6 @@ const CloseContrat: React.FC<ContainerProps> = ({
   };
 
   const handleConfirm = async () => {
-    console.log(`El id del trabajo es: ${idtrabajo}`);
 
     try {
       // Call the function to move the job to complete and store the entire job data
