@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./TopBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing menu icons
+import { useHistory } from "react-router";
 
 interface Button {
   label: string;
@@ -17,6 +18,7 @@ const TopBar: React.FC<TopBarProps> = ({ buttons }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
+  const history = useHistory();
 
   // Toggle the menu open/close state
   const toggleMenu = () => {
@@ -84,14 +86,16 @@ const TopBar: React.FC<TopBarProps> = ({ buttons }) => {
         >
           <button
             className={styles.landLogInButton}
-            onClick={handleNavItemClick}
+            onClick={() => {
+              history.push("/home");
+            }}
             aria-label="Iniciar Sesión"
           >
             INICIAR SESION
           </button>
           <button
             className={styles.landSignInButton}
-            onClick={handleNavItemClick}
+            onClick={() => history.push("/register")}
             aria-label="Registrar"
           >
             REGISTRAR
