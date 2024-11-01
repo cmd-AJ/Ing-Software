@@ -8,7 +8,7 @@ import MainLayout from "./pages/MainLayout/MainLayout";
 import About from "./pages/About";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
-import Help from "./pages/Help"
+import Help from "./pages/Help";
 import Threads from "./pages/threads/Threads";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -42,8 +42,10 @@ import CloseContrat from "./components/Modals/Structures/CloseContrat";
 import ModalStructure from "./components/Modals/ModalStructure";
 import { getreview } from "./controller/ChatController";
 import Reviewed from "./pages/review";
+import { Suspense, lazy } from "react";
 
 setupIonicReact();
+const Contrato = lazy(() => import("./pages/contrato/Contrato"));
 
 const App: React.FC = () => (
   <IonApp>
@@ -56,7 +58,9 @@ const App: React.FC = () => (
           <Register />
         </Route>
         <Route exact path="/about">
-          <About />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Contrato />
+          </Suspense>
         </Route>
         <Route exact path="/admin">
           <Login_Admin />
@@ -66,6 +70,11 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/">
           <Redirect to="/about" />
+        </Route>
+
+        {/* landing v2*/}
+        <Route exact path="/oldabout">
+          <About />
         </Route>
         {/* Protected Routes */}
         <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
@@ -155,16 +164,14 @@ const App: React.FC = () => (
 
             return (
               <MainLayout>
-               <Reviewed id={id} ></Reviewed>
+                <Reviewed id={id}></Reviewed>
               </MainLayout>
             );
           }}
         />
-
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-
 );
 
 export default App;
