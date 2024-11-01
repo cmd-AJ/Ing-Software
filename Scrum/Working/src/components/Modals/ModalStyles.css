@@ -22,15 +22,22 @@
 .modal-position, .modal-position2{
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 46%;
+    top: 45.5%;
     padding: 5px;
     left: 50%;
     width: 725px;
     height: auto;
-    max-height: 800px;
+    max-height: 650px;
     background-color: var(--white);
     z-index: 6;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto   ;
+}
+
+.modal-position::-webkit-scrollbar{
+    display: none;
 }
 
 .modal-position2 {
@@ -73,6 +80,5 @@
 @media (max-width: 740px){
     .modal-position {
         width: 350px;
-        height: 770px;
     }
 }

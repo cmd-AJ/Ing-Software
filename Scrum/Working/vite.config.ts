@@ -17,3 +17,4 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, 'node_modules/**']
   }
 })
+

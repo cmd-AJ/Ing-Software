@@ -5,7 +5,6 @@ import React from "react";
 import TextND from "../Txt/TextND";
 
 interface ContainerProps {
-    label: string;
     value: string;
     placeholder: string;
     validatesValue: boolean;
@@ -17,7 +16,6 @@ interface ContainerProps {
 }
 
 const InputWrite: React.FC<ContainerProps> = ({
-    label,
     value,
     placeholder,
     setValue,
@@ -47,7 +45,6 @@ const InputWrite: React.FC<ContainerProps> = ({
 
     return (
         <div id="singular-input-display">
-            <TextND text={label} size='medium-small' hex='#000' />
             <IonInput 
                 className={`inputsModal ${validatesValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
                 value={value}

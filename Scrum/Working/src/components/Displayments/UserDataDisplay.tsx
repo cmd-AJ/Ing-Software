@@ -8,9 +8,10 @@ interface ContainerProps {
     dpi: string
     role: string
     setDetails : (showDetails : boolean) => void
+    userRole: boolean
 }
 
-const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
+const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails, userRole}) => {
 
     const [width, setWidth] = useState(window.innerWidth)
     const [selectedSegment, setSelectedSegment] = useState('leftSegment')
@@ -39,8 +40,11 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails}) => {
         return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
                     <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
-                    <VerticalDivider />
-                    <JobsDisplay dpi={dpi} selectedValue=""/>
+		    { userRole && <>
+                    	<div style={{height: 'auto', width: 'auto'}}>
+				<VerticalDivider />
+			</div>
+                    <JobsDisplay dpi={dpi} selectedValue=""/></>}
                 </div>
         )
         

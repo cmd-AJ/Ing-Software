@@ -17,6 +17,7 @@ interface ContainerProps {
     user: User
     setEdit: (edit: boolean) => void
     setUser: (user: User) => void
+    working: boolean
 }
 
 type User = {
@@ -32,10 +33,11 @@ type User = {
     dpi: string;
     role: string;
     banner: string;
-    departamento: string
+    departamento: string;
+    isworking: boolean;
 };
 
-const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
+const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) => {
 
     const [banner , setBanner] = useState(user.banner)
     const [profileImage, setProfileImage] = useState(user.imagen)
@@ -49,8 +51,6 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
     const [validatesCell, setValidatesCell] = useState(false)
     const [email, setEmail] = useState(user.email)
     const [validatesEmail, setValidatesEmail] = useState(false)
-
-    const [validateRole, setValidateRole] = useState(false)
 
     const phoneMask = useMaskito({
         options: {
@@ -69,12 +69,6 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
     const jobarray = ['Carpintero','Albañil','Pintor','Otro']
     const sexos : Array<string> = ['Masculino', 'Femenino']
 
-    useEffect(()=>{
-        if (user.role != 'Empleador') {
-            setValidateRole(true)
-        } 
-    },[])
-
     return (
         <>
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
@@ -84,71 +78,67 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser}) => {
                         <ImgInput image={profileImage} setImage={setProfileImage} type={false}/>
                     </div>
                     <div id="input-display">
-                        <TextND text="Mi nombre" hex="#000" size="big"/>
+                        <TextND text={user.nombre + ' ' + user.apellidos} hex="#000" size="big"/>
                         <HorizontalDivider/>
+			{working && <>
+			<DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
+                 	<HorizontalDivider/></>}
+			<div id="grid-components">
+				<div className="element-center-input">
+					<TextND text="Fecha de nacimiento:" size="medium-small" hex="#000"/>
+				</div>
+                        	<DateSelector date={date} setDate={setDate} setValidateDate={setValidateDate}/>
+				<div className="element-center-input">
+					<TextND text="Sexo:" size="medium-small" hex="#000"/>
+				</div>
+				<InputSelector 
+                                	placeholder="Seleccione su sexo" 
+                                	list={sexos}
+                                	value={sex}
+                                	setValue={setSex}
+				/>
+				<div className="element-center-input">
+					<TextND text="Teléfono:" size="medium-small" hex="#000"/>
+				</div>
+				<InputWrite 
+                                	value={cellphone} 
+	                                setValue={setCellphone} 
+        	                        placeholder="Ingrese su telefono" 
+	                                mask={phoneMask}
+        	                        validatesValue={validatesCell}
+                	                setValidatesValue={setValidatesCell}
+                        	        validation={validatePhone}
+                                	errorText="Número inválido"
+                            	/>
+				<div className="element-center-input">
+					<TextND text="Correo electrónico:" size="medium-small" hex="#000"/>
+				</div>
 
+                            	<InputWrite 
+                               	 	value={email} 
+	                                setValue={setEmail} 
+        	                        placeholder="Ingrese su correo electrónico" 
+                	                mask={null}    
+                        	        validatesValue={validatesEmail}
+	                                setValidatesValue={setValidatesEmail}
+        	                        validation={validateEmail}
+                	                errorText="Correo inválido"
+                        	/>
+				<div className="element-center-input">
+					<TextND text="Municipio:" size="medium-small" hex="#000"/>
+				</div>
+				<InputSelector
+                                	value={municipio}
+	                                setValue={setMunicipio}
+                	                placeholder="Seleccione su municipio"
+                        	        list={getMunicipios(Departamentos(user.dpi))}
+	                        />
+
+			</div>
+				
                     <div>
                         <HorizontalDivider/>
-                            <DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
-                        <HorizontalDivider/>
-                    </div>
-                    
-                    <div>
-                        <HorizontalDivider/>
-                            <DateSelector date={date} setDate={setDate} setValidateDate={setValidateDate}/>
-                        <HorizontalDivider/>
-                    </div>
-                    <div>
-                        <HorizontalDivider/>
-                            <InputSelector 
-                                label="Sexo:" 
-                                placeholder="Seleccione su sexo" 
-                                list={sexos}
-                                value={sex}
-                                setValue={setSex}/>
-                        <HorizontalDivider/>
-                    </div>
-                    <div>
-                        <HorizontalDivider/>
-                            <InputWrite 
-                                label="Teléfono:" 
-                                value={cellphone} 
-                                setValue={setCellphone} 
-                                placeholder="Ingrese su telefono" 
-                                mask={phoneMask}
-                                validatesValue={validatesCell}
-                                setValidatesValue={setValidatesCell}
-                                validation={validatePhone}
-                                errorText="Número inválido"
-                            />
-                        <HorizontalDivider/>
-                    </div>
-                    <div>
-                        <HorizontalDivider/>
-                            <InputWrite 
-                                label="Correo electrónico:" 
-                                value={email} 
-                                setValue={setEmail} 
-                                placeholder="Ingrese su correo electrónico" 
-                                mask={null}    
-                                validatesValue={validatesEmail}
-                                setValidatesValue={setValidatesEmail}
-                                validation={validateEmail}
-                                errorText="Correo inválido"
-                            />
-                        <HorizontalDivider/>
-                    </div>
-                    <div>
-                        <HorizontalDivider/>
-                            <InputSelector
-                                value={municipio}
-                                setValue={setMunicipio}
-                                label="Municipio: "
-                                placeholder="Seleccione su municipio"
-                                list={getMunicipios(Departamentos(user.dpi))}
-                            />
-                        <HorizontalDivider/>
-                        <HorizontalDivider/>
+                                   <HorizontalDivider/>
                     </div>
                 </div>
             </div>

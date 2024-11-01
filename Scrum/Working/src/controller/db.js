@@ -3,6 +3,23 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function getUserRatingWithDPI(dpi) {
+    try {
+        const query = {
+            text: "SELECT rating FROM usuarios WHERE dpi = $1",
+            values: [dpi]
+        };
+
+        const result = await client.query(query);
+        return result.rows.length > 0 ? result.rows[0].rating : null;
+
+    } catch (error) {
+        console.error("Error while getting rating:", error);
+        throw error; 
+    }
+}
+
+
 export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, fecha, pago) {
     try {
         const query = {
@@ -12,7 +29,7 @@ export async function insertJobToCompleted(dpitrabajador, dpiempleador, titulo, 
             values: [dpitrabajador, dpiempleador, titulo, fecha, pago]
         }
 
-        const result = client.query(query)
+        const result = await client.query(query)
 
         return result
 

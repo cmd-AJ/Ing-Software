@@ -1,7 +1,6 @@
 import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
 import React from "react";
-import { flash } from "ionicons/icons";
 import { updatecuenta, updatecuentaNEO4J } from "../../controller/UserController";
 
 type User = {
@@ -17,7 +16,8 @@ type User = {
     dpi: string;
     role: string;
     banner: string;
-    departamento: string
+    departamento: string;
+    isworking: boolean;
   };
 
 interface ContainerProps {
@@ -68,11 +68,11 @@ const BtnEditUser: React.FC<ContainerProps> = ({
 
         localStorage.setItem('User', JSON.stringify(updatedUser));
         setUser(updatedUser);
-        
-        updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, "Carpintero", banner)
-        updatecuentaNEO4J(municipio, profpic, user.dpi, cellphone)
-        setEdit(false)
-
+        if (validateBirthdate && validateEmail && validatesCell ) {
+        	updatecuenta(municipio, profpic, sex, birthdate, user.dpi, user.role, cellphone, "Carpintero", banner)
+        	updatecuentaNEO4J(municipio, profpic, user.dpi, cellphone)
+     	   setEdit(false)	
+        }
     };
 
     return (

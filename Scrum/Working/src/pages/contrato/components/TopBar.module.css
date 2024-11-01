@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Honk&family=Jersey+10&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
+
+.topBar {
+  width: 100vw; /* 100% of the viewport width */
+  height: 108px;
+  display: flex;
+  justify-content: center;
+  background-color: #6f9cef;
+  position: fixed;
+  z-index: 1000;
+}
+
+.stylesWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+/* Title Container */
+.landBarTittleContainer {
+  padding-left: 0;
+  margin-right: 2rem;
+}
+
+.landBarTittleContainer h1 {
+  font-family: "Proza Libre", sans-serif;
+  font-size: 40px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.lanBarActionsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 35%;
+  padding: 0;
+}
+
+.lanBarActionsContainer button {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lanBarActionsContainer button:hover {
+  background-color: #fff;
+  color: #6f9cef;
+}
+
+.landBarJoinContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 25%;
+  padding: 0;
+}
+
+.landBarJoinContainer button {
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 16px;
+  white-space: nowrap;
+  border-radius: 10px;
+  padding: 0.6rem 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0 5px;
+}
+
+.landLogInButton {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.landLogInButton:hover {
+  background-color: #fff;
+  color: #6f9cef;
+}
+
+.landSignInButton {
+  background-color: #fff;
+  color: #535d75;
+  border: 1px solid #fff;
+}
+
+.landSignInButton:hover {
+  background-color: #6f9cef;
+  color: #fff;
+}
+
+.menuIcon {
+  display: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Overlay for Mobile Menu */
+.overlay {
+  position: fixed;
+  top: 108px; /* Below the top bar */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 108x);
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 99; /* Below the top bar */
+}
+
+.lanBarActionsContainer.active,
+.landBarJoinContainer.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 108px;
+  left: 0;
+  width: 100%;
+  background-color: #6f9cef;
+  padding: 1rem 0;
+}
+
+.lanBarActionsContainer.active button,
+.landBarJoinContainer.active button {
+  margin: 0.5rem auto;
+  width: 80%;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 1450px) {
+  .stylesWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem;
+  }
+
+  .landBarTittleContainer {
+    padding-left: 0;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .lanBarActionsContainer,
+  .landBarJoinContainer {
+    display: none; /* Hide navigation and join containers */
+  }
+
+  .menuIcon {
+    display: block; /* Show menu icon on small screens */
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  /* Active Menu */
+  .lanBarActionsContainer.active,
+  .landBarJoinContainer.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 0;
+    align-items: flex-start;
+  }
+
+  .lanBarActionsContainer.active button,
+  .landBarJoinContainer.active button {
+    margin: 0.5rem auto;
+    width: 60%;
+  }
+}
