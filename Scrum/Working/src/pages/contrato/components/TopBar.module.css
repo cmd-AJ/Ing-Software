@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
 
 .topBar {
-  width: 99.1%;
+  width: 100vw; /* 100% of the viewport width */
   height: 108px;
   display: flex;
   justify-content: center;
