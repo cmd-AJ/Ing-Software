@@ -1,6 +1,7 @@
 import pkg from 'pg';
 const { Client } = pkg;
 import dotenv from 'dotenv';
+import notificationapi from 'notificationapi-node-server-sdk'
 
 dotenv.config();
 
@@ -13,21 +14,23 @@ const dbConfig = {
 };
 
 
-// Establishing the connection to the db
-const client = new Client(dbConfig);
-client.connect()
-    .then(() => {
-        console.log('Connected to PostgreSQL database');
-    })
-    .catch((err) => {
-        console.error('Error connecting to PostgreSQL database', err);
-    });
 
 
 export async function recievedisp() {
+
+
+  const client = new Client(dbConfig);
+  client.connect()
+    .then(() => {
+      console.log('Connected to PostgreSQL database');
+    })
+    .catch((err) => {
+      console.error('Error connecting to PostgreSQL database', err);
+    });
+
   try {
     const query = {
-      text: "SELECT idtrabajo, us.nombre, usuarios.nombre ,usuarios.apellidos, us.telefono FROM trabajodisponible LEFT JOIN usuarios ON dpiempleado = dpi left join usuarios as us on us.dpi = dpiempleador WHERE timestampcita < NOW()"
+      text: "SELECT idtrabajo, us.nombre, usuarios.nombre ,usuarios.apellidos, us.telefono FROM trabajodisponible LEFT JOIN usuarios ON dpiempleado = dpi left join usuarios as us on us.dpi = dpiempleador WHERE timestampcita < NOW() and avisado = false"
     };
 
     const result = await client.query(query); // Await the result of the query
@@ -43,9 +46,17 @@ export async function recievedisp() {
 
 
 export async function removcitas() {
+  const client = new Client(dbConfig);
+  client.connect()
+    .then(() => {
+      console.log('Connected to PostgreSQL database');
+    })
+    .catch((err) => {
+      console.error('Error connecting to PostgreSQL database', err);
+    });
   try {
     const query = {
-      text: "delete * from trabajodisponible WHERE timestampcita < NOW()",
+      text: "update trabajodisponible set avisado = true where timestampcita < NOW()",
     }
 
     const result = client.query(query)
@@ -61,8 +72,8 @@ export async function send_reminder(nombre, link, numero) {
 
   try {
     notificationapi.init(
-      '' + clientid, // clientId
-      '' + verif// clientSecret
+      '' + process.env.NOTI_CLIENTID, // clientId
+      '' + process.env.NOTIFAPI_SC// clientSecret
     )
 
     notificationapi.send({
@@ -89,35 +100,35 @@ export async function send_reminder(nombre, link, numero) {
 }
 
 
-//   Hola, solo un recordatorio para completar y calificar el trabajo de {{nombre}}. Puedes hacerlo en el siguiente enlace: {{link}}.
-
 
 async function main() {
   try {
     const result = await recievedisp(); // Call the function and await the result
 
-    
-    try {
+    if (result != []) {
+      try {
+        let pasa = false
+        for (const item of result) {
+          if (item.telefono != '0000-0000') {
+            const link = 'contratogt.com/review/' + item.idtrabajo
+            const newtel = (item.telefono + '').replace('-', '')
+            pasa = await send_reminder(item.nombre + ' ' + item.apellidos, link, newtel)
 
-      let pasa = false
-      for (const item of result) {
-        if (item.telefono != '0000-0000') {
-          const link = 'contratogt.com/review/' + item.idtrabajo
-          pasa = send_reminder(item.nombre + ' ' + item.apellidos, link, item.telefono)
-
+          }
         }
-      }
-      if (pasa === true) {
-        try {
-          const quitar = await removcitas();
-        } catch (error) {
-          console.error('Error eliminating trabajos disponibles', error)
+        if (pasa === true) {
+          try {
+            const quitar = await removcitas();
+            return
+          } catch (error) {
+            console.error('Error eliminating trabajos disponibles', error)
+          }
         }
+
+
+      } catch (error) {
+        console.error('Error sending sms', error)
       }
-
-
-    } catch (error) {
-      console.error('Error sending sms', error)
     }
 
 

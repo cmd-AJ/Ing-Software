@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './popUpHirings.css';
 import iconPath from '../../assets/fluent_chat-arrow-back-down-16-regular.svg';
-import { contract } from 'ionicons/icons';
 import { useHistory } from 'react-router';
 
 type Contrat = {

@@ -1,6 +1,5 @@
-import { logDOM } from "@testing-library/dom";
 import { Trabajador } from "../components/Searched/type";
-import { Departamentos, Municipios } from "../Departamentos/Departamentos";
+import { Departamentos } from "../Departamentos/Departamentos";
 
 async function createUser(
 	dpi: string, 
@@ -176,6 +175,48 @@ async function getWorkersByJob(job: String, usrDpi: string) {
     }
 }
 
+async function getWorkersByName(name: String, usrDpi: string) {
+    try {
+        // Obtain the trusted people of the user
+        const usrTrustedpeople = await getTrustedPeople(usrDpi);
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/nameSearch/${name}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            }
+        });
+
+        const data = await response.json();
+
+        // For each worker, find their trusted people and calculate shared contacts
+        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+            const workerTrustedpeople = await getTrustedPeople(worker.dpi);
+            const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
+
+            // Get the departamento using the worker's DPI
+            const departamento = Departamentos(worker.dpi);
+
+            return {
+                nombre: `${worker.nombre} ${worker.apellidos}`,
+                telefono: worker.telefono,
+                dpi: worker.dpi,
+                rating: worker.rating,
+                imagen: worker.imagen,
+                trabajo: worker.nombre_trabajo,
+                contactos_en_comun: sharedContacts,
+                municipio: worker.municipio,
+                direccion: `${departamento}, ${worker.municipio}`
+            };
+        }));
+
+        return trabajadores;
+    } catch (error) {
+        console.error('Error fetching workers:', error);
+        return [];
+    }
+}
+
 
 
 async function updatecuenta(municipio: string, imagen: string, sexo: string, fecha_nacimiento: string, DPI: string, rol: string, telefono: string, trabajo: string, banner: string) {
@@ -191,7 +232,7 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         banner: banner
     }
 
-    const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setsettings`,
+    await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setsettings`,
         {
             method: 'PUT',
             headers: {
@@ -213,7 +254,7 @@ export async function updatecuentaNEO4J(municipio: string, imagen: string, DPI: 
         telefono: telefono,
     }
 
-    const NeoData = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setNeoSettings`,
+    await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setNeoSettings`,
         {
             method: 'PUT',
             headers: {

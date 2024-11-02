@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import {
-  IonHeader,
   IonTitle,
   IonContent,
   IonPage,
 
-  IonFooter,
   IonInput,
   IonGrid,
   IonRow,
   IonCol,
   IonItem,
-  IonToolbar,
   IonButton,
   IonIcon,
-  IonLabel,
-  IonDatetimeButton,
-  IonModal,
   IonDatetime,
   IonText,
   IonPopover,
@@ -24,7 +18,6 @@ import {
 } from "@ionic/react";
 import "./ticket_page.css";
 import "../../theme/variables.css";
-import Ticket from "./componentes/Ticket";
 import Topheader from "./componentes/Topheader";
 import { calendar } from "ionicons/icons";
 import { slitdate } from "./componentes/adminfunctions";

@@ -30,9 +30,10 @@ const FileUpload: React.FC<ContainerProps> = ({ image, setImage, type }) => {
                 }
             };
             reader.readAsDataURL(file);
+
         }
     };
-  
+
     return (
         <div className='img-input-size'>
            { img && <label htmlFor="file-input" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>

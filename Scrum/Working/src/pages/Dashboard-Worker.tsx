@@ -15,7 +15,7 @@ import '../theme/variables.css';
 import UserDataDisplay from "../components/Displayments/UserDataDisplay";
 import { useLocation } from "react-router";
 import PopUpHiringsContainer from "../components/Modals/PopUpHiringsContainer";
-import { getContratEmployer, getContratWorker } from "../controller/UserController";
+import { getContratWorker } from "../controller/UserController";
 import TrustPeople from "../components/Modals/Structures/TrustPeople";
 import TxtBtnAction from "../components/Btn/TxtBtnAction";
 import BtnAction from "../components/Btn/BtnAction";

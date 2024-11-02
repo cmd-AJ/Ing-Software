@@ -67,7 +67,7 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
 
       const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
 
-      console.log('Contratación exitosa:', response.Success);
+
 
       if (response.Success === 'Contrato realizado') {
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './BtnStyles.css'
 import ModalBtnI from './ModalBtnI'
-import ModalBtnN from './ModalsBtnN'
 import { chatbubbleEllipses, pencilOutline, personAddOutline } from 'ionicons/icons'
 import BtnAction from './BtnAction'
 import { addTrustedPeople, getTrustedPeople, setWorking } from '../../controller/UserController'
@@ -40,7 +39,6 @@ interface ContainerProps {
 
 const BtnDisplayment: React.FC<ContainerProps> = ({
     setEdit1,
-    setEdit2,
     setEdit3,
     owner,
     setModal,
@@ -49,7 +47,7 @@ const BtnDisplayment: React.FC<ContainerProps> = ({
     dpi,
     userRole
 }) => {
-    const [trigger, setTrigger] = useState('')
+    const [trigger] = useState('')
     const history = useHistory()
 
     const handleWorkAction = () => {

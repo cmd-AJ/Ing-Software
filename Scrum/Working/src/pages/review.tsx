@@ -45,12 +45,12 @@ const Reviewed: React.FC<{ id: string }> = ({ id }) => {
 
   return (
     <ModalStructure
-    setModal={(show) => {
+    setModal={() => {
       true
     }}
     content={
       <CloseContrat
-      setShow={(show) => {
+      setShow={() => {
         false
       }}
       trabajo={id}

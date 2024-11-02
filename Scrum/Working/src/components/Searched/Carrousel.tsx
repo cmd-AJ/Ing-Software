@@ -22,6 +22,7 @@ const Carrousel: React.FC<{ job: string }> = ({ job }) => {
   }, [job]);
 
   const handleItemClick = (itemNumber: number) => {
+    selectedItem
     setSelectedItem(itemNumber);
   };
   return (

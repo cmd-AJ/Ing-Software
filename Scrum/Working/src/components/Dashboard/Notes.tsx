@@ -13,7 +13,7 @@ interface Elemento {
 }
 
 const Notas: React.FC = () => {
-  const [elementos, setElementos] = useState<Elemento[]>([
+  const [elementos] = useState<Elemento[]>([
     {
       idtrabajo: '1',  // Agregar id del trabajo
       trabajador: 'Luka Pérez',
