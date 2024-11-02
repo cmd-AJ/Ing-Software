@@ -364,7 +364,14 @@ export async function gettrabajoanterior(dpi: string) {
 }
 
 //DPI y Estado (Descripcion)
-export async function insertrabajoanterior(trabajo: object) {
+export async function insertrabajoanterior(dpiTrabajador: string, titulo: string, estado: string, imagen: string) {
+
+    const trabajo = {
+        dpiTrabajador: dpiTrabajador,
+        titulo: titulo,
+        estado: estado,
+        imagen: imagen
+    }
 
     const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trabajaoanterior/`,
         {

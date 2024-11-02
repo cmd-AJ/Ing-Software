@@ -406,7 +406,7 @@ export async function getTrabajoSABTEemple(dpi) {
 //Estado es la descripcion eg. Se termino con aticipio o lo mejor de todo
 export async function insertartrabant(dpitrabajador, dpiempleador, titulo, estado, imagen) {
 	try {
-	const result = await client.query(`insert into completado(estado, dpitrabajador, dpiempleador, titulo, imagen) values( '${estado}', '${dpitrabajador}','${dpiempleador}', '${titulo}', '${imagen}')`);
+	const result = await client.query(`insert into completado(estado, dpitrabajador, titulo, imagen) values( '${estado}', '${dpitrabajador}','${dpiempleador}', '${titulo}', '${imagen}')`);
 	console.log('Data inserted successfully');
 	} catch (error) {
 		console.error('Error inserting user:',error);

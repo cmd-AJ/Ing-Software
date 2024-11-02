@@ -37,6 +37,6 @@
 @media (max-width: 800px) {
     #buttons-display {
         flex-direction: column-reverse;
-        align-items: flex-start;
+        align-items: flex-end;
     }
 }
