@@ -34,7 +34,7 @@ const InputWrite: React.FC<ContainerProps> = ({
     };
 
     const validate = (value: string) => {
-        const isValid = value === '' || validation(value);
+        const isValid = validation(value);
         setValidatesValue(isValid);
     };
 

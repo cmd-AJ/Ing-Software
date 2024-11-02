@@ -464,7 +464,7 @@ app.get('/api/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => 
 //prince
 app.post('/api/trabajaoanterior', apiKeyAuth, async (req, res) => {
   try {
-    const [dpitrabajador, dpiempleador, titulo, estado, imagen] = [req.body.dpitrabajador, req.body.dpiempleador, req.body.titulo, req.body.estado, req.body.imagen]
+    const [dpitrabajador, titulo, estado, imagen] = [req.body.dpitrabajador, req.body.titulo, req.body.estado, req.body.imagen]
 
     const parts = imagen.split(/[;/]+/);
     const randoms = Math.floor(Math.random() * (14 - 1 + 1)) + 1;
