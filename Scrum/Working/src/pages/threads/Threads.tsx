@@ -6,6 +6,7 @@ import Post from "../../components/Threads/Post";
 import { getThreadPosts } from "../../controller/ThreadController";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import AdsenseInFeedAd from "../../ADS/In-feedthread";
 
 const Threads: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -37,6 +38,7 @@ const Threads: React.FC = () => {
 
   return (
     <IonPage>
+
       <div className="threads-space">
         <div className="threads-container">
           <div className="thread-scroller">
@@ -56,17 +58,21 @@ const Threads: React.FC = () => {
             ) : error ? (
               <p>{error}</p>
             ) : (
-              posts.map((post) => (
-                <Post
-                  key={post.idthreads}
-                  idthread={post.idthreads}
-                  usuario={post.usuario}
-                  descripcion={post.descripcion}
-                  posttime={post.posttime}
-                  imagen={post.imagen}
-                  img_usuario={post.img_usuario}
-                  dpi={post.dpi}
-                />
+              posts.map((post, index) => (
+                <React.Fragment key={post.idthreads}>
+                  <Post
+                    idthread={post.idthreads}
+                    usuario={post.usuario}
+                    descripcion={post.descripcion}
+                    posttime={post.posttime}
+                    imagen={post.imagen}
+                    img_usuario={post.img_usuario}
+                    dpi={post.dpi}
+                  />
+              
+                  {/* Insert an ad every 3 posts with a unique key */}
+                  {(index + 1) % 3 === 0 && <AdsenseInFeedAd key={`ad-${post.idthreads}`} />}
+                </React.Fragment>
               ))
             )}
           </div>
