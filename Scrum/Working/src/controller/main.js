@@ -479,7 +479,7 @@ app.post('/api/trabajaoanterior', apiKeyAuth, async (req, res) => {
     const respuesta = await uploadFile(randoms + '.' + parts[1], imagen)
 
 
-    const result = await insertartrabant(dpitrabajador, dpiempleador, titulo, estado, 'https://contratogt.com/api/image/' + respuesta)
+    const result = await insertartrabant(dpitrabajador, titulo, estado, 'https://contratogt.com/api/image/' + respuesta)
     res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
   } catch (error) {
   }
