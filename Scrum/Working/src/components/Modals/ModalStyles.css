@@ -27,7 +27,7 @@
     left: 50%;
     width: 725px;
     height: auto;
-    max-height: 650px;
+    max-height: 750px;
     background-color: var(--white);
     z-index: 6;
     border-radius: 10px;
@@ -80,5 +80,6 @@
 @media (max-width: 740px){
     .modal-position {
         width: 350px;
+	max-height: 650px
     }
 }

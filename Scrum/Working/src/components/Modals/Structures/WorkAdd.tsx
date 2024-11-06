@@ -7,12 +7,15 @@ import ImgInput from "../../Inputs/ImgInput"
 import './WorkAdd.css'
 import { IonButton } from "@ionic/react"
 import BtnAction from "../../Btn/BtnAction"
+import { insertrabajoanterior } from "../../../controller/UserController"
+import { post } from "jquery"
 
 interface ContainerProps {
+	dpiTrabajador: string
 	setModal: (modal: boolean) => void
 }
 
-const WorkAdd: React.FC<ContainerProps> = ({setModal}) => {
+const WorkAdd: React.FC<ContainerProps> = ({dpiTrabajador, setModal}) => {
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
 	const [image, setImage] = useState('')
@@ -22,6 +25,17 @@ const WorkAdd: React.FC<ContainerProps> = ({setModal}) => {
 
 	const validation = (title: string) => {
 		return title !== ''
+	}
+
+	const handleAddJob = () => {
+		const postData = async () => {
+			if (title !== '' && description !== '') {
+				await insertrabajoanterior(dpiTrabajador, title, description, image)
+			}
+		}
+
+		postData()
+		setModal(false)
 	}
 
 	return (
@@ -91,7 +105,7 @@ const WorkAdd: React.FC<ContainerProps> = ({setModal}) => {
 				img=""
 				trigger=""
 				rounded={true}
-				action={() => console.log("")}
+				action={handleAddJob}
 			/>
 
 		</div>
