@@ -29,6 +29,7 @@ const ContratEDisplay : React.FC<ContainerProps> = ({contrat}) => {
 
     useEffect(() => {
         if (contrat.calificacion === null) {
+            ratingNull
             setRatingNull(false)
         }
     },[])

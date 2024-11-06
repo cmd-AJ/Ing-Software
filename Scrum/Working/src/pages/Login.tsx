@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
     const [dpi, setDpi] = useState('')
     const [password, setPassword] = useState('')
-    const [userExist, setUserExist] = useState(false)
+    const [ setUserExist] = useState(false)
     const [msgError, setMsgError] = useState(false) 
 
     const [validateDpi, setValidateDpi] = useState(false)
@@ -52,7 +52,6 @@ const Login: React.FC = () => {
                     localStorage.setItem('User', JSON.stringify(data[0]))
                     
                     setUserExist(true)
-                    console.log("Has iniciado sesion correctamente");
                     localStorage.setItem('dpi', dpi);
 
                     const job = "";  // Esto debe ser dinámico según tus necesidades

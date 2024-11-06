@@ -10,12 +10,11 @@ interface DetailsProps {
   dpiEmployee: string;
 }
 
-const Details: React.FC<DetailsProps> = ({ onClose, dpiEmployer, dpiEmployee }) => {
+const Details: React.FC<DetailsProps> = ({ onClose }) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   const handleDateChange = (date: Dayjs | null) => {
     setSelectedDate(date);
-    console.log(date);
   };
 
   return (

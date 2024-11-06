@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Information.css';
 import { useHistory } from 'react-router-dom';
 import { getUser2 } from '../../controller/UserController';

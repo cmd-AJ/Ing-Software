@@ -94,7 +94,7 @@ const Forgot_Page: React.FC = () => {
   React.useEffect(() => {
   }, [agreed]);
 
-  const handleClicksendmail = async (numero: number) => {
+  const handleClicksendmail = async () => {
     if (dpi === '') {
       setIsOpen(true)
       setmensaje('DPI NO INGRESADO')
@@ -271,7 +271,7 @@ const Forgot_Page: React.FC = () => {
               </form>
             </div>
             <div className="buttoncontainerfg">
-              <button className="getcodefg" onClick={() => handleClicksendmail(1)}><b>RECIBIR CÓDIGO</b></button>
+              <button className="getcodefg" onClick={() => handleClicksendmail()}><b>RECIBIR CÓDIGO</b></button>
             </div>
           </div>
 

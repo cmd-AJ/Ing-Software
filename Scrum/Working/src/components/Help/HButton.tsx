@@ -1,6 +1,5 @@
 import React from 'react';
 import './HButton.css';
-import { IonIcon } from '@ionic/react';
 
 interface HButtonProps {
   icon: React.ReactNode;

@@ -129,6 +129,50 @@ export async function getWorkers(trabajo) {
     }
 }
 
+export async function getWorkersByFlexibleName(nombreCompleto) {
+    const session = createSession();
+
+    try {
+        // Separar el nombre completo en palabras y enviar como parámetro a Neo4j
+        const palabras = nombreCompleto.toLowerCase().split(" ");
+
+        // Query en Neo4j para realizar coincidencias flexibles en cada palabra
+        const query = `
+            WITH $palabras AS palabras
+            MATCH (usr:Usuario)
+            WHERE ANY(palabra IN palabras WHERE 
+                apoc.text.levenshteinDistance(palabra, toLower(usr.nombre)) <= 3 OR 
+                apoc.text.levenshteinDistance(palabra, toLower(usr.apellidos)) <= 3
+            )
+            RETURN usr LIMIT 25
+        `;
+
+        // Ejecutar la consulta y enviar el array de palabras como parámetro
+        const result = await session.run(query, { palabras });
+
+        const workers = result.records.map(record => {
+            const worker = record.get('usr');
+            return {
+                nombre: worker.properties.nombre,
+                apellidos: worker.properties.apellidos,
+                telefono: worker.properties.telefono,
+                municipio: worker.properties.municipio,
+                rating: worker.properties.rating,
+                dpi: worker.properties.dpi,
+                imagen: worker.properties.imagen
+            };
+        });
+
+        return workers;
+    } catch (error) {
+        console.error('Error getting workers by flexible name:', error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
+
 export async function getTrustedUsersByDpi(dpi) {
     const session = createSession();
 

@@ -9,7 +9,7 @@ import {
   IonText,
 } from '@ionic/react';
 import { useHistory, useLocation } from 'react-router-dom'; // Agregamos useLocation
-import { helpCircleOutline, personOutline, settingsOutline } from 'ionicons/icons';
+import { helpCircleOutline, personOutline } from 'ionicons/icons';
 import SearchBar from '../Search/SearchBar';
 import './Navigation.css';
 import ModalWithoutBack from '../Modals/ModalWithoutBack';
@@ -37,7 +37,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({  }) => {
     if (value.trim() !== '') {
       history.push(`/searched?job=${encodeURIComponent(value)}`);
     } else {
-      console.log("No se ha ingresado nada en la búsqueda.");
+
     }
   };
 

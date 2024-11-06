@@ -35,7 +35,6 @@ const Post: React.FC<PostProps> = ({
       const fetchedComments = await getThreadComments(idthread);
       setComments(fetchedComments);
       setLoading(false);
-      console.log(fetchedComments);
     } catch (err) {
       setError("Failed to fetch comments");
       setLoading(false);
@@ -58,8 +57,6 @@ const Post: React.FC<PostProps> = ({
         img.startsWith("https"))
     );
   };
-  console.log(usuario);
-  console.log(img_usuario);
 
   return (
     <div className="post-card">

@@ -33,7 +33,6 @@ const InputTopLabel : React.FC<ContainerProps> = (
     }
 ) => {
     const [isTouched, setIsTouched] = useState(false)
-
     const markTouched = () => {
         setIsTouched(true)
     }
