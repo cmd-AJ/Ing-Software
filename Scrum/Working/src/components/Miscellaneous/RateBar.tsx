@@ -27,7 +27,7 @@ const RateBar: React.FC<ContainerProps> = ({ rating }) => {
     }, [rating]);
 
     return (
-        <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
             {rateArray.map((rate, index) => (
                 <Stars key={index} rating={rate} />
             ))}

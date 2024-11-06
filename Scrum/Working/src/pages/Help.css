@@ -1,8 +1,11 @@
+@import url('../theme/variables.css');
+
 .help-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh; 
-  background-color: #255990; 
+  background-color: var(--white); 
   padding: 20px;
+  font-family: var(--nunito-font)
 }

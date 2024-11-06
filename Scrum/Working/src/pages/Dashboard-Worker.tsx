@@ -117,7 +117,6 @@ const Dashboard_Worker: React.FC = () => {
       const parsedUser: User = JSON.parse(user);
       setMyUser(parsedUser);
       setWorking(parsedUser.isworking);
-
     }
 
   }, [owner]);
@@ -183,7 +182,7 @@ const Dashboard_Worker: React.FC = () => {
           {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
           {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<TrustPeople dpi={myUser.dpi}/>}/>}
           <div className="header-card" ref={headerCardRef}>
-	  	{working && <div className="change-role-profile-btn">
+	  	{working && owner == 'true' && <div className="change-role-profile-btn">
 			<BtnAction text='' img={changeIcon} rounded={true} trigger='' action={() => setUserRole(!userRole)}/>
 		</div>
 		}

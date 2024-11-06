@@ -1,13 +1,24 @@
 import React, { useEffect } from 'react';
 import './Information.css';
-import { Trabajador } from './type' 
 import { useHistory } from 'react-router-dom';
 import { getUser2 } from '../../controller/UserController';
 import TextND from '../Txt/TextND';
 import BtnAction from '../Btn/BtnAction';
 import HorizontalDivider from '../Dividers/HorizontalDivider';
+import RateBar from '../Miscellaneous/RateBar';
 
-const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
+type Worker = {
+	nombre: string,
+	telefono: string,
+	dpi: string,
+	contactos_en_comun: number,
+	direccion: string,
+	imagen: string,
+	rating: string,
+	trabajo: string,
+}
+
+const Information: React.FC<{ trabajador: Worker }> = ({ trabajador }) => {
 
   const history = useHistory();
 
@@ -34,16 +45,19 @@ const Information: React.FC<{ trabajador: Trabajador }> = ({ trabajador }) => {
     <>
       <div id="contrat-display">
         <div id='centered-image'>
-          <img style={{borderRadius: '50%', height: '120px'}} src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png' height={150}/>    
+          <img style={{borderRadius: '50%', height: '120px'}} src={trabajador.imagen} height={150}/>   
         </div>
         <div id='centered-info'>
-          <b>
-            <TextND size='medium' hex='#000' text={trabajador.nombre}/>
-          </b>
-          <TextND size='medium' hex='#000' text={"DPI: " + trabajador.dpi}/>
+	  <div style={{display: 'grid', width: '100%', alignItems: 'center', gap: '0px', gridTemplateColumns: '1fr 1fr'}}> 
+		<b>
+	            <TextND size='medium' hex='#000' text={trabajador.nombre}/>
+	        </b>
+		<RateBar rating={Number(trabajador.rating)}/>
+	  </div>
+          <TextND size='medium' hex='#000' text={trabajador.trabajo}/>
           <div style={{opacity: '0.6'}}>
-            <TextND size='medium' hex='#000' text={"Tel:" + trabajador.telefono}/>
-            <TextND size='medium' hex='#000' text={"Municipio: " +trabajador.municipio}/>
+            <TextND size='medium' hex='#000' text={trabajador.contactos_en_comun + " contactos en común"}/>
+            <TextND size='medium' hex='#000' text={trabajador.direccion}/>
           </div>
         </div>
         <div id='centered-button'>

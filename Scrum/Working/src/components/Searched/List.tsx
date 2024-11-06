@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getWorkersByJob } from "../../controller/UserController";
 import "./List.css";
-import { Trabajador } from "./type";
 import Information from "./Information";
 import TextND from "../Txt/TextND";
 import Skeleton from "react-loading-skeleton";
@@ -12,22 +11,42 @@ interface ContainerProps {
     setTotal: (total: number) => void
 }
 
+type Worker = {
+	nombre: string,
+	telefono: string,
+	dpi: string,
+	contactos_en_comun: number,
+	direccion: string,
+	imagen: string,
+	rating: string,
+	trabajo: string,
+}
+
 const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
-  const [workers, setWorkers] = useState<Trabajador[]>([]);
+  const [workers, setWorkers] = useState<Worker[]>([]);
   const [isLoading, setIsLoading] = useState(true); // New state to track loading status
 
     useEffect(() => {
         const fetchWorkers = async () => {
           try {
-            setIsLoading(true);
-            const fetchedWorkers = await getWorkersByJob(job, '3833 86608 0102');
+	    const user = localStorage.getItem("User")
+
+	    if (user) {
+	    
+	    const dpiUser = JSON.parse(user).dpi
+	    setIsLoading(true);
+            const fetchedWorkers = await getWorkersByJob(job, dpiUser);
             setWorkers(fetchedWorkers);
-	          setTotal(fetchedWorkers.length)
+	    setTotal(fetchedWorkers.length)
+
+	    console.log(fetchedWorkers);
+	    
             
             setTimeout(() => {
           setWorkers(fetchedWorkers);
           setIsLoading(false);
         }, 1250);
+	    }
           } catch (error) {
             console.error("Error fetching workers:", error);
             setIsLoading(false);
