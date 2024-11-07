@@ -18,9 +18,14 @@
     font-size: 80px;
 }
 
+#big-big-text {
+	margin: 0;
+	font-size: 50px;
+}
+
 #big-text {
     margin: 0;
-    font-size: 30px;
+    font-size: 34px;
 }
 
 #medium-text {
@@ -66,5 +71,9 @@
 
     #big-huge-text {
 	    font-size: 7vh;
+    }
+
+    #big-big-text {
+	font-size: 35px;
     }
 }

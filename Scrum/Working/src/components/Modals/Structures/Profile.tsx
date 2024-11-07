@@ -66,7 +66,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
         return /^\d{4}-\d{4}$/.test(phone)
     }
 
-    const jobarray = ['Carpintero','Albañil','Pintor','Otro']
+    const jobarray = ['Carpintero','Albañil','Pintor',]
     const sexos : Array<string> = ['Masculino', 'Femenino']
 
     return (

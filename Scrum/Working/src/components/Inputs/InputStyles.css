@@ -31,6 +31,12 @@
     font-size: 20px; 
 }
 
+#jobs-grid {
+	display: grid;
+	grid-template-columns: 5fr 0.5fr 0.25fr;
+	gap: 10px;
+}
+
 #singular-input-display {
     padding-bottom: 7px;
 }

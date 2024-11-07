@@ -47,7 +47,7 @@ const InputTopLabel : React.FC<ContainerProps> = (
     		const isValid = value === '' || validation(value)
 		setValidatesValue(isValid)
     	} else {
-        	const isValid = value.trim() !== '' || validation(value)
+        	const isValid = value.trim() === '' || validation(value)
         	setValidatesValue(isValid)
 	}
     }

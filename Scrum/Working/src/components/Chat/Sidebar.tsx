@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Sidebar.css';
 import Chat from './Chat';
 import Details from './Details';
@@ -29,8 +29,10 @@ type FormattedMessage = {
 const Sidebar = () => {
 
     const [tempcontacts, settempcontact] = useState(new Set())
+    const defaultChatUser: chatUser = { dpi: '', name: '',img:'' }
     const [findbar, setfindbar] = useState('');
-    const [selectedPerson, setSelectedPerson] = useState<chatUser | null>(null);
+    const [selectedPerson, setSelectedPerson] = useState<chatUser>(defaultChatUser);
+    const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(null);
     const [contacts, setContacts] = useState<chatUser[]>([]);
     const [messages, setMessages] = useState<FormattedMessage[]>([]);
     const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
@@ -40,6 +42,18 @@ const Sidebar = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const dpiChat = queryParams.get('chat');
+
+    const messagesRef = useRef(messages);
+    const selectedPersonRef = useRef(selectedPerson);
+
+    useEffect(() => {
+        messagesRef.current = messages;
+    }, [messages]);
+
+    useEffect(() => {
+        selectedPersonRef.current = selectedPerson;
+    }, [selectedPerson]);
+
 
 
     const requestNotificationPermission = async () => {
@@ -58,7 +72,7 @@ const Sidebar = () => {
     // Fetch contacts on component mount
     useEffect(() => {
 
-        requestNotificationPermission();  
+        requestNotificationPermission();
 
         const fetchData = async () => {
             try {
@@ -147,8 +161,8 @@ const Sidebar = () => {
 
     // Manejo del clic en una persona/contacto
     const handlePersonClick = async (dpi: string) => {
-        
 
+        setSelectedPersonbef(selectedPerson)
         const selectedPerson2 = contacts.find(person => person.dpi === dpi);
 
         if (selectedPerson && selectedPerson.dpi !== selectedPerson2?.dpi && isDetailsOpen) {
@@ -159,7 +173,7 @@ const Sidebar = () => {
             setSelectedPerson(selectedPerson2);
             localStorage.setItem('SelectedPerson', selectedPerson2.dpi);
         } else {
-            setSelectedPerson(null);
+            setSelectedPerson(defaultChatUser);
         }
 
         try {
@@ -176,7 +190,13 @@ const Sidebar = () => {
             try {
                 const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi) as ChatMessage[];
                 const formattedMessages = formatMessagesWithDateDividers(chatMessages);
-                if (formattedMessages.length > messages.length) {
+
+                console.log(chatMessages.length)
+                console.log(messagesRef.current.length)
+                console.log(selectedPersonbef?.dpi)
+                console.log(selectedPersonRef.current.dpi)
+
+                if (chatMessages.length > messagesRef.current.length) {
                     playNotificationSound();
                 }
                 setMessages(formattedMessages);
@@ -186,7 +206,7 @@ const Sidebar = () => {
         }
     };
 
-    
+
 
 
     const handleClick = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -229,7 +249,7 @@ const Sidebar = () => {
                 }
             }
 
-          
+
 
             settempcontact(deben)
         }
@@ -248,23 +268,23 @@ const Sidebar = () => {
                         )}
                     </div>
                     <div className="scrollable-content">
-                    <ul className="people">
-                        {contacts
-                            .filter((_, index) => tempcontacts.has(index)) // Filter based on the Set
-                            .map((person, index) => (
-                                <li
-                                    key={index}
-                                    className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`}
-                                    onClick={() => handlePersonClick(person.dpi)}
-                                >
-                                    <img className="imagen" src={person.img} alt="" />
-                                    <div className="text-container">
-                                        <span className="name">{person.name}</span>
-                                        <span className="preview">{person.preview}</span>
-                                    </div>
-                                </li>
-                            ))}
-                    </ul>
+                        <ul className="people">
+                            {contacts
+                                .filter((_, index) => tempcontacts.has(index)) // Filter based on the Set
+                                .map((person, index) => (
+                                    <li
+                                        key={index}
+                                        className={`person ${selectedPerson && selectedPerson.dpi === person.dpi ? 'active' : ''}`}
+                                        onClick={() => handlePersonClick(person.dpi)}
+                                    >
+                                        <img className="imagen" src={person.img} alt="" />
+                                        <div className="text-container">
+                                            <span className="name">{person.name}</span>
+                                            <span className="preview">{person.preview}</span>
+                                        </div>
+                                    </li>
+                                ))}
+                        </ul>
                     </div>
                 </div>
                 <div className="right">
@@ -279,21 +299,21 @@ const Sidebar = () => {
                         )}
                     </div>
                     {isDetailsOpen ? (
-                        <Details 
-                            onClose={() => setIsDetailsOpen(false)} 
-                            dpiEmployer={loggedUserDpi} 
-                            dpiEmployee={selectedPerson ? selectedPerson.dpi : ""} 
+                        <Details
+                            onClose={() => setIsDetailsOpen(false)}
+                            dpiEmployer={loggedUserDpi}
+                            dpiEmployee={selectedPerson ? selectedPerson.dpi : ""}
                         />
                     ) : (
                         <Chat messages={messages} />
                     )}
                     <div className="bottom">
-                        <Bottom 
-                            loggedUserDpi={loggedUserDpi} 
+                        <Bottom
+                            loggedUserDpi={loggedUserDpi}
                             selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
-                            updateMessages={updateMessages} 
-                            onHireClick={() => setIsDetailsOpen(true)} 
-                        /> 
+                            updateMessages={updateMessages}
+                            onHireClick={() => setIsDetailsOpen(true)}
+                        />
                     </div>
                 </div>
             </div>

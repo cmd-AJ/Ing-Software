@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
     const [dpi, setDpi] = useState('')
     const [password, setPassword] = useState('')
-    const [ setUserExist] = useState(false)
+    const [userExist, setUserExist] = useState(false)
     const [msgError, setMsgError] = useState(false) 
 
     const [validateDpi, setValidateDpi] = useState(false)
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
                     const data = await getUser2(dpi)
                     
                     localStorage.setItem('User', JSON.stringify(data[0]))
-                    
+                    userExist
                     setUserExist(true)
                     localStorage.setItem('dpi', dpi);
 
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
                         <TextND text='Introduce tu DPI y contraseña para acceder a tu cuenta' hex='#000' size='small'/>
                     </div>
                     <div className='middle-center'>
-                        <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI incorrecto' msgError={msgError}/>
+                        <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI incorrecto' msgError={msgError} errorText2={''}/>
                         <div>
                             <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='Contraseña incorrecta' msgError={msgError}/>
                             <div style={{display: 'flex', width: '100%', justifyContent: 'flex-end' }}>

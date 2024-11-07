@@ -9,6 +9,12 @@ const compat = new FlatCompat({
 export default [
   {
     files: ['**/*.ts', '**/*.tsx'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'public/**',
+      'src/controller/**',
+    ],
     languageOptions: {
       parser: parser,
       parserOptions: {
@@ -19,9 +25,12 @@ export default [
       '@typescript-eslint': ts,
     },
     rules: {
-      // Define your custom rules here or use recommended ones
-      '@typescript-eslint/explicit-module-boundary-types': 'off', // Example rule override
-      '@typescript-eslint/no-unused-vars': 'error', // Example custom rule
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-unused-vars': 'error',
+      'no-console': [
+        'warn', 
+        { allow: ['warn', 'error', 'info', 'debug'] }
+      ],
     },
   },
 ];

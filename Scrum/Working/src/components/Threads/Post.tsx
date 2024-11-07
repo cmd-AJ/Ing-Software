@@ -107,6 +107,7 @@ const Post: React.FC<PostProps> = ({
         ) : (
           comments.map((comment) => (
             <CommentContainer
+            key={comment.idmensaje}
               usuario={comment.usuario}
               contenido={comment.contenido}
               mensaje_timestamp={comment.mensaje_timestamp}

@@ -494,14 +494,14 @@ app.get('/api/trabajoanteriorSABTEemploy/:dpi', apiKeyAuth, async (req, res) => 
 //prince
 app.post('/api/trabajaoanterior', apiKeyAuth, async (req, res) => {
   try {
-    const [dpitrabajador, dpiempleador, titulo, estado, imagen] = [req.body.dpitrabajador, req.body.dpiempleador, req.body.titulo, req.body.estado, req.body.imagen]
+    const [dpitrabajador, titulo, estado, imagen] = [req.body.dpitrabajador, req.body.titulo, req.body.estado, req.body.imagen]
 
     const parts = imagen.split(/[;/]+/);
     const randoms = Math.floor(Math.random() * (14 - 1 + 1)) + 1;
     const respuesta = await uploadFile(randoms + '.' + parts[1], imagen)
 
 
-    const result = await insertartrabant(dpitrabajador, dpiempleador, titulo, estado, 'https://contratogt.com/api/image/' + respuesta)
+    const result = await insertartrabant(dpitrabajador, titulo, estado, 'https://contratogt.com/api/image/' + respuesta)
     res.status(200).json({ Succes: 'Trabajo anterior se inserto' })
   } catch (error) {
   }
