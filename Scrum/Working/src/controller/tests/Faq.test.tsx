@@ -4,6 +4,6 @@ import Faq from '../../components/Help/Faq';
 
 test('renders Faq component', () => {
   render(<Faq />);
-  expect(screen.getByText('Product Info')).toBeInTheDocument();
+  expect(screen.getByText('Preguntas frecuentes')).toBeInTheDocument();
   expect(screen.getByText('¿Puedo desactivar mi cuenta?')).toBeInTheDocument();
 });

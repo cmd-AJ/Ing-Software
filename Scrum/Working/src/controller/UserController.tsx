@@ -1,4 +1,3 @@
-import { Trabajador } from "../components/Searched/type";
 import { Departamentos } from "../Departamentos/Departamentos";
 
 async function createUser(
@@ -148,7 +147,7 @@ async function getWorkersByJob(job: String, usrDpi: string) {
         const data = await response.json();
 
         // For each worker, find their trusted people and calculate shared contacts
-        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+        const trabajadores = await Promise.all(data.map(async (worker: any) => {
             const workerTrustedpeople = await getTrustedPeople(worker.dpi);
             const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
 
@@ -190,7 +189,7 @@ async function getWorkersByName(name: String, usrDpi: string) {
         const data = await response.json();
 
         // For each worker, find their trusted people and calculate shared contacts
-        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+        const trabajadores = await Promise.all(data.map(async (worker: any) => {
             const workerTrustedpeople = await getTrustedPeople(worker.dpi);
             const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
 
