@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Bottom.css';
 import { getChatIdWithDPI, insertChatMessage } from '../../controller/ChatController';
 import { FaHandshake, FaImages } from 'react-icons/fa';
@@ -13,6 +13,8 @@ interface BottomProps {
 
 const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updateMessages, onHireClick }) => {
   const [message, setMessage] = useState('');  
+  const textareaRef = useRef<HTMLTextAreaElement>(null); // Referencia al <textarea>
+
   const user = localStorage.getItem('User');
   let role = '';
   try {
@@ -21,6 +23,7 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
   } catch (error) {}
 
   const sendMessage = async () => {
+    if (!message.trim()) return;
     try {
       const response = await getChatIdWithDPI(loggedUserDpi, selectedPersonDpi);
       const idchat = response[0]?.idchat;
@@ -37,9 +40,17 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (event.key === 'Enter' && !event.shiftKey && message.trim()) {
       event.preventDefault();
       sendMessage();
+    }
+  };
+
+  const adjustTextareaHeight = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto'; // Resetea la altura
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`; // Ajusta la altura, máximo 200px
     }
   };
 
@@ -47,14 +58,21 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
     <div className="bottom">
       <FaImages className="icon gallery-icon" />
       <textarea
+        ref={textareaRef} // Añadir referencia al <textarea>
         className="input-message"
         placeholder="Type a message"
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={(e) => {
+          setMessage(e.target.value);
+          adjustTextareaHeight();
+        }}
         onKeyPress={handleKeyPress}
-        style={{ height: '39px' }}
+        style={{ height: '39px', overflow: 'hidden' }} // Oculta el scroll interno
       />
-      <IoSend className="icon send-icon" onClick={sendMessage} /> 
+      <IoSend
+        className={`icon send-icon ${!message.trim() ? 'disabled' : ''}`}
+        onClick={message.trim() ? sendMessage : undefined}
+      /> 
       <FaHandshake
         className={`icon hire-icon ${role === 'Empleado' ? 'disabled' : ''}`}
         onClick={role === 'Empleado' ? undefined : onHireClick}
