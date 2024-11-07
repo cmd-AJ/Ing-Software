@@ -1,6 +1,35 @@
 import { createSession } from './GraphDataBase.js';
 import { getUserRatingWithDPI } from './db.js';
 
+export async function getJobsOfWorkerWithDPI(userDpi) {
+    const session = createSession();
+
+    try {
+        // Realiza la consulta
+        const query = `
+            MATCH (usr {dpi: $userDpi})-[:trabaja_de]->(trabajo)
+            RETURN trabajo.descripcion AS descripcion, trabajo.nombre_trabajo AS nombre_trabajo;
+        `;
+
+        const result = await session.run(query, { userDpi });
+
+        // Lista de trabajos
+        const jobs = result.records.map(record => ({
+            descripcion: record.get('descripcion'),
+            nombre_trabajo: record.get('nombre_trabajo')
+        }));
+
+        return jobs;
+
+    } catch (error) {
+        console.error("Error while getting user's jobs", error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
+
 export async function insertNewJob(job, description) {
     const session = createSession();
 
