@@ -1,6 +1,27 @@
 import { createSession } from './GraphDataBase.js';
 import { getUserRatingWithDPI } from './db.js';
 
+export async function deleteRelationUserTojob(userDpi, jobName) {
+    const session = createSession();
+
+    try {
+        const query = `
+            MATCH (usr:Usuario {dpi: $userDpi})-[r:trabaja_de]->(tr:Trabajo {nombre_trabajo: $jobName}) 
+            DELETE r
+        `;
+
+        const result = await session.run(query, { userDpi, jobName });
+        return result;
+
+    } catch (error) {
+        console.error("Error while deleting job relation", error); 
+        throw error; 
+
+    } finally {
+        await session.close();
+    }
+}
+
 export async function addRelationUserToJob(userDpi, jobName) {
     const session = createSession();
 
