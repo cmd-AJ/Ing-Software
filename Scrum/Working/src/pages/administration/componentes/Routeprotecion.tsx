@@ -11,8 +11,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ render, component: Comp
     <Route
       {...rest}
       render={props => {
-        // const currentUser = localStorage.getItem('User');
-        const currentUser = 'hablitado temporalmente'
+        const currentUser = localStorage.getItem('User');
 
         // Check for user in localStorage
         return currentUser !== null && currentUser.trim() !== '' ? (
