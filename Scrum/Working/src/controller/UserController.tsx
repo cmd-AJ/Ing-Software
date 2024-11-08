@@ -1,5 +1,46 @@
-import { Trabajador } from "../components/Searched/type";
 import { Departamentos } from "../Departamentos/Departamentos";
+
+export async function addJobToWorker(dpi: string, job: string) {
+    try {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/AddJobToWorker`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            },
+            body: JSON.stringify({ dpi, job })
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to add job to user");
+        }
+
+        const result = await response.json();
+        return result;
+
+    } catch (error) {
+        console.error("Error while adding job to worker:", error);
+        return null;
+    }
+}
+
+export async function getJobsWithDpi(dpi:string) {
+    try {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/WorkerJobList/${dpi}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            }
+        });
+
+        const result = await response.json() 
+        return result
+
+    } catch (error) {
+        console.error("Error while getting user jobs", error)
+        return null;
+    }   
+}
 
 async function createUser(
 	dpi: string, 
@@ -148,7 +189,7 @@ async function getWorkersByJob(job: String, usrDpi: string) {
         const data = await response.json();
 
         // For each worker, find their trusted people and calculate shared contacts
-        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+        const trabajadores = await Promise.all(data.map(async (worker: any) => {
             const workerTrustedpeople = await getTrustedPeople(worker.dpi);
             const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
 
@@ -190,7 +231,7 @@ async function getWorkersByName(name: String, usrDpi: string) {
         const data = await response.json();
 
         // For each worker, find their trusted people and calculate shared contacts
-        const trabajadores: Trabajador[] = await Promise.all(data.map(async (worker: any) => {
+        const trabajadores = await Promise.all(data.map(async (worker: any) => {
             const workerTrustedpeople = await getTrustedPeople(worker.dpi);
             const sharedContacts = countSharedContacts(usrTrustedpeople, workerTrustedpeople);
 

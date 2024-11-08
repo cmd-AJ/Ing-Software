@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { IonSelect, IonSelectOption, IonInput } from "@ionic/react";
+import { IonInput, InputChangeEventDetail, IonIcon, IonPopover } from "@ionic/react";
 import './InputStyles.css';
 import TextND from '../Txt/TextND';
+import BtnAction from '../Btn/BtnAction';
+import { trash, informationCircle } from 'ionicons/icons';
+import { Popover, Typography } from '@mui/material';
 
 interface ContainerProps {
     label: string;
@@ -9,88 +12,134 @@ interface ContainerProps {
     list: Array<string>;
     value: string;
     setValue: (value: string) => void;
-    validatesJob: boolean;
-    setValidatesJob: (validatesJob: boolean) => void;
+    validatesValue: boolean;
+    setValidatesValue: (validatesJob: boolean) => void;
+    errorText: string;
+    validation: (input: string) => boolean;
 }
 
-const DataList: React.FC<ContainerProps> = ({ label, placeholder, list, value, setValue, validatesJob, setValidatesJob }) => {
-    const [selectedValue, setSelectedValue] = useState<string | null>(null);
-    const [inputValue, setInputValue] = useState<string>(""); // Estado para el valor del input
-    const [isTouched, setIsTouched] = useState(false); // Estado para saber si el campo fue tocado
+const DataList: React.FC<ContainerProps> = ({ 
+    label, 
+    placeholder, 
+    list, 
+    value, 
+    setValue, 
+    validatesValue, 
+    setValidatesValue, 
+    errorText, 
+    validation 
+}) => {
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
 
-    // Manejar el cambio en el Select
-    const handleSelectChange = (e: CustomEvent) => {
-        const value = e.detail.value;
-
-        if (value !== "") {
-            setValue(value);
-            setSelectedValue(value);
-        }
-
-        if (value === 'Otro') {
-            setSelectedValue(value);
-        }
-    };
-
-    // Validar el valor del campo input
-    const validateJob = (value: string) => {
-        if (value.trim() === '') {
-            setValidatesJob(false);  // Marca error si está vacío
-        } else {
-            setValidatesJob(true);   // Marca válido si tiene texto
-        }
-    };
-
-    const markTouched = () => {
-        setIsTouched(true);  // Marca que el campo fue tocado
-    };
-
-    // Manejar el cambio en el input
-    const handleInputChange = (e: CustomEvent) => {
-        const value = (e.target as HTMLInputElement).value;
-        setInputValue(value);  // Actualiza el valor del input
-        validateJob(value);    // Valida en tiempo real
-    };
+    const [myJobs, setMyJobs] = useState<Array<string>>(list);
+    const [length, setLength] = useState(0);
+    const [isTouched, setIsTouched] = useState(false);
 
     useEffect(() => {
-        setSelectedValue(value); // Sincroniza el valor inicial
-    }, [value]);
+        setLength(myJobs.length);
+    }, [myJobs]);
+
+    const handleAddJob = () => {
+        setMyJobs([...myJobs, ""]);
+    };
+
+    const validate = (value: string) => {
+        const isValid = validation(value);
+        setValidatesValue(isValid);
+    };
+
+    const handleChange = (event: CustomEvent<InputChangeEventDetail>, index: number) => {
+        const value = (event.target as HTMLInputElement).value;
+        const updatedJobs = [...myJobs];
+        updatedJobs[index] = value;
+        setMyJobs(updatedJobs);
+	console.log(myJobs);
+	
+    };
+
+    const handleDelete = (index: number) => {
+	const jobs = [...myJobs]
+	jobs.splice(index, 1)
+	setMyJobs(jobs)
+    }
+
+    const handlePopoverClose = () => {
+	setAnchorEl(null)
+    }
+
+    const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+	setAnchorEl(event.currentTarget)
+    }
+
+    const open = Boolean(anchorEl)
 
     return (
         <>
-            {selectedValue === 'Otro' ? (
-                <div id='singular-input-display'>
-                    <TextND text={label} size='medium-small' hex='#000' />
-                    <IonInput
-                        value={inputValue} // El valor del input
-                        placeholder={placeholder}
-                        className={`inputsModal ${validatesJob === false ? 'ion-invalid' : ''} ${isTouched ? 'ion-touched' : ''}`} // Clases de error y touched
-                        fill='outline'
-                        onIonChange={handleInputChange} // Manejador de cambio
-                        onIonBlur={(event) => { markTouched(); validateJob((event.target as unknown as HTMLInputElement).value); }} // Validar al perder el foco
-                        errorText='Trabajo inválido'
+            <TextND text={label} hex="#000" size="medium"/> 
+            <div id="jobs-grid">
+                {myJobs.map((item, index) => (
+		<>
+                    <div key={index}>
+
+                        <IonInput
+                            className={`inpustModal ${validatesValue ? '' : 'ion-invalid'} ${isTouched ? 'ion-touched' : ''}`}
+                            value={item}
+                            placeholder={placeholder}
+                            fill="outline"
+                            onIonInput={(event) => handleChange(event, index)}
+                            onIonBlur={(event) => {
+                                setIsTouched(true);
+                                validate((event.target as unknown as HTMLInputElement).value);
+                            }}
+                        ></IonInput>
+                    </div>
+			<BtnAction 
+				img={trash} 
+				text="" 
+				trigger="" 
+				rounded={true}
+				action={()=>handleDelete(index)}
+			/>
+			<div style={{display: 'flex', width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
+				<IonIcon 
+					icon={informationCircle} 
+					size="large" 
+					color="warning"
+					onMouseEnter={handlePopoverOpen}
+					onMouseLeave={handlePopoverClose}
+				/>
+
+			</div>
+			<Popover
+				id="mouse-over-popover"
+				sx={{ pointerEvents: "none" }}
+				open={open}
+				anchorEl={anchorEl}
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'left',
+				}}
+				transformOrigin={{
+					vertical: 'top',
+					horizontal: 'left',
+				}}
+				onClose={handlePopoverClose}
+				disableRestoreFocus
+			>
+				<Typography sx={{ p: 1 }}>Oficio en revisión</Typography>
+			</Popover>
+			</>
+                ))}
+            </div>
+            {length < 5 && (
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                    <BtnAction 
+                        text="Añadir Oficio"
+                        rounded={false}
+                        trigger=""
+                        img=""
+                        action={handleAddJob}
                     />
-                </div>
-            ) : (
-                <div id='singular-input-display'>
-                    <TextND text={label} size='medium-small' hex='#000' />
-                    <IonSelect
-                        labelPlacement='floating'
-                        justify='space-between'
-                        placeholder={placeholder}
-                        value={selectedValue}
-                        onIonChange={handleSelectChange}
-                        className='inputsModal'
-                        interface='action-sheet'
-                        fill='outline'
-                    >
-                        <IonSelectOption value="" disabled>{placeholder}</IonSelectOption>
-                        {list.map((item, index) => (
-                            <IonSelectOption key={index} value={item}>
-                                {item}
-                            </IonSelectOption>
-                        ))}
-                    </IonSelect>
                 </div>
             )}
         </>
@@ -98,3 +147,4 @@ const DataList: React.FC<ContainerProps> = ({ label, placeholder, list, value, s
 };
 
 export default DataList;
+

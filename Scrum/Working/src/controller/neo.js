@@ -1,6 +1,63 @@
 import { createSession } from './GraphDataBase.js';
 import { getUserRatingWithDPI } from './db.js';
 
+export async function addRelationUserToJob(userDpi, jobName) {
+    const session = createSession();
+
+    try {
+        const query = `
+            MATCH (usr:Usuario {dpi: $userDpi}), (tr:Trabajo {nombre_trabajo: $jobName})
+            CREATE (usr)-[:trabaja_de]->(tr)
+            RETURN usr, tr
+        `;
+
+        const result = await session.run(query, { userDpi, jobName });
+
+        // Optional: Check if the result has records (confirming both nodes were found and linked)
+        if (result.records.length === 0) {
+            throw new Error(`No matching user or job found for DPI: ${userDpi} and Job: ${jobName}`);
+        }
+
+        return result.records[0].toObject();
+    } catch (error) {
+        console.error(`Error while adding job ${jobName} to user with DPI ${userDpi}`, error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
+
+
+export async function getJobsOfWorkerWithDPI(userDpi) {
+    const session = createSession();
+
+    try {
+        // Realiza la consulta
+        const query = `
+            MATCH (usr {dpi: $userDpi})-[:trabaja_de]->(trabajo)
+            RETURN trabajo.descripcion AS descripcion, trabajo.nombre_trabajo AS nombre_trabajo;
+        `;
+
+        const result = await session.run(query, { userDpi });
+
+        // Lista de trabajos
+        const jobs = result.records.map(record => ({
+            descripcion: record.get('descripcion'),
+            nombre_trabajo: record.get('nombre_trabajo')
+        }));
+
+        return jobs;
+
+    } catch (error) {
+        console.error("Error while getting user's jobs", error);
+        throw error;
+    } finally {
+        await session.close();
+    }
+}
+
+
 export async function insertNewJob(job, description) {
     const session = createSession();
 
