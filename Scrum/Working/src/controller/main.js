@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
 import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone } from './db.js'
-import { getJobsOfWorkerWithDPI,getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos, insertNewJob, getWorkersByFlexibleName } from './neo.js'
+import { addRelationUserToJob, getJobsOfWorkerWithDPI,getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos, insertNewJob, getWorkersByFlexibleName } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
 import { getImageFromDrive, updatePhoto, uploadFile } from './gdrive.js'
@@ -277,6 +277,29 @@ app.post('/api/neo/addJob', apiKeyAuth, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+app.post('/api/neo/AddJobToWorker', apiKeyAuth, async (req, res) => {
+  try {
+    const { dpi, job } = req.body;
+
+    if (!dpi || !job) {
+      return res.status(400).json({ error: 'Both DPI and job name are required' });
+    }
+
+    const result = await addRelationUserToJob(dpi, job);
+
+    if (result) {
+      res.status(200).json({ success: `Job "${job}" added to user with DPI ${dpi}` });
+    } else {
+      res.status(404).json({ error: `Could not add job "${job}" to user with DPI ${dpi}` });
+    }
+
+  } catch (error) {
+    console.error('Error adding job to user:', error);
+    res.status(500).json({ error: 'Internal Server Error while adding job to user' });
+  }
+});
+
 
 app.get('/api/ctrabajo/:dpi', apiKeyAuth, async (req, res) => {
   try {
