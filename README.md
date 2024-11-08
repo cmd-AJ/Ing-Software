@@ -30,3 +30,9 @@ Para esta fase se estara atacando la problematica planteada en el corte 1 utiliz
 
 [Corte 2](https://github.com/MrAndrewlol/Ing-Software/tree/main/Corte%202)
 Para este corte del proyecto lo que se busca es poder definir y especificar los caracteristicas generales del sistema que se desea realizar.
+
+
+
+
+Ahora con ustedes presentamos nuestro proyecto 
+https://contratogt.com/
