@@ -1,12 +1,15 @@
 import pkg from 'pg';
 const { Client } = pkg;
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const dbConfig = {
-    user: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    host: process.env.HOST,
-    port: process.env.PORT,
-    database: process.env.POSTGRES_DB,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  host: process.env.HOST,
+  port: process.env.PORT,
+  database: process.env.POSTGRES_DB,
 };
 
 // Establishing the connection to the db
