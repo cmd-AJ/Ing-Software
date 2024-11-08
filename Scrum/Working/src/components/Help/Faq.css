@@ -56,3 +56,22 @@
   margin-left: 10px;
   margin-right: 10px; /* Añadir margen derecho para separar el icono */
 }
+
+.button-message {
+  width: 100%; /* Ocupa el 100% del ancho de su contenedor */
+  border: 1px solid #000;
+  padding: 10px; /* Ajusta el padding si es necesario */
+  background-color: #fff; /* Cambia el color de fondo si quieres */
+  color: #666; /* Color de texto */
+  font-size: 34px;
+  font-family: var(--nunito-font);
+  font-weight: bold;
+  border-radius: 10px; 
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-message:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
