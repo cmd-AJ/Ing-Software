@@ -9,8 +9,8 @@
 }
 
 .input-message {
-    width: 75%; /* Ajustamos el ancho para los iconos */
-    height: 42px;
+    width: 75%;
+    max-height: 50px;
     padding: 0 15px;
     border: 1px solid #dbdbdb;
     background-color: #eceff1;
@@ -19,7 +19,10 @@
     font-weight: 400;
     outline: none;
     color: #757575;
+    resize: none;
+    overflow-y: auto;
 }
+
 
 .icon {
     width: 42px;
@@ -41,10 +44,11 @@
     outline: none;
 }
 
-.icon.hire-icon.disabled {
+.icon.send-icon.disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
+}
+
   
 .send-icon:hover, .hire-icon:hover {
     color: #ffffffa1; /* Ligero cambio de color al hacer hover */
