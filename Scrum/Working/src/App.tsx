@@ -156,6 +156,15 @@ const App: React.FC = () => (
 
         <ProtectedRoute
           exact
+          path="/red"
+          render={() => (
+            <MainLayout>
+            </MainLayout>
+          )}
+        />
+
+        <ProtectedRoute
+          exact
           path="/review/:id"
           render={(props) => {
             // Extract search parameters from the URL
