@@ -1,5 +1,29 @@
 import { Departamentos } from "../Departamentos/Departamentos";
 
+export async function deleteJobToWorker(dpi: string, job: string) {
+    try {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/DeleteJobToWorker`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'api-key': import.meta.env.VITE_API_KEY
+            },
+            body: JSON.stringify({ dpi, job })
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to add job to user");
+        }
+
+        const result = await response.json();
+        return result;
+
+    } catch (error) {
+        console.error("Error while adding job to worker:", error);
+        return null;
+    } 
+}
+
 export async function addJobToWorker(dpi: string, job: string) {
     try {
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/AddJobToWorker`, {

@@ -71,10 +71,7 @@ const Contrato: React.FC = () => {
               </p>
 
               <p className={styles.quieres}>{text}</p>
-              <LandingSearchBar
-                onRequestChange={() => {}}
-                onSearch={() => {}}
-              />
+            
             </div>
 
             <div className={styles.productIdea}>

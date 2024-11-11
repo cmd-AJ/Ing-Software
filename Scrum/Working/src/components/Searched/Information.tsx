@@ -16,7 +16,7 @@ type Worker = {
 	imagen: string,
 	rating: string,
 	trabajo: string,
-}
+} 
 
 const Information: React.FC<{ trabajador: Worker }> = ({ trabajador }) => {
 
