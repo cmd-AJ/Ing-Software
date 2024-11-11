@@ -17,7 +17,10 @@ interface ConnectionsGraph {
   currentdpi: string | null;
 }
 
-const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi }) => {
+const ConnectionsGraph: React.FC<ConnectionsGraph> = ({
+  connections,
+  currentdpi,
+}) => {
   const cyRef = useRef<HTMLDivElement>(null);
   const userDataString = localStorage.getItem("User");
   const userData = userDataString ? JSON.parse(userDataString) : null;
@@ -28,15 +31,18 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
     const resizeGraph = () => {
       if (cy) {
         const windowWidth = window.innerWidth;
-        const nodeSize = windowWidth < 768 ? 50 : windowWidth < 1024 ? 150 : 150;
-        
+        const nodeSize =
+          windowWidth < 768 ? 50 : windowWidth < 1024 ? 150 : 150;
+        cy.fit();
+        cy.center();
+
         cy.nodes().forEach((node) => {
           node.style({
             width: nodeSize,
             height: nodeSize,
           });
         });
-        
+
         cy.fit(cy.elements(), 20);
         cy.center();
       }
@@ -46,9 +52,9 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
       const centralNode = {
         data: {
           id: currentdpi,
-          label: userData.nombre +" " +userData.apellidos,
-          imageUrl: userData?.imagen  || null
-        }
+          label: userData.nombre + " " + userData.apellidos,
+          imageUrl: userData?.imagen || null,
+        },
       };
 
       const nodes = [
@@ -89,7 +95,6 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
               "font-weight": "bold",
               "text-margin-y": 10, // Adds vertical margin
               "text-margin-x": 10, // Adds horizontal margin
-
             },
           },
           {
@@ -116,13 +121,14 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
           name: "circle",
           animate: true,
           animationDuration: 1000,
-          
         },
         userZoomingEnabled: false,
         userPanningEnabled: false,
         zoomingEnabled: false,
         panningEnabled: false,
       });
+      cy.fit();
+      cy.center();
 
       resizeGraph();
       window.addEventListener("resize", resizeGraph);
