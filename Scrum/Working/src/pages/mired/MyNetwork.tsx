@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getTrustedPeople } from "../../controller/UserController";
+import ConnectionsGraph from "./ConnectionsGraph";
+import "./MyNetwork.css";
 
 type Worker = {
   nombre: string;
@@ -13,6 +15,7 @@ type Worker = {
 
 const MyNetwork: React.FC = () => {
   const currentdpi = localStorage.getItem("dpi");
+  console.log(currentdpi)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +23,7 @@ const MyNetwork: React.FC = () => {
       if (currentdpi) {
         try {
           const data = await getTrustedPeople(currentdpi);
+          console.log(data)
           setConnections(data);
         } catch (error) {
           console.error("Error fetching trusted people:", error);
@@ -36,27 +40,11 @@ const MyNetwork: React.FC = () => {
 
   return (
     <>
-      <div>
+      <div className="myNetworkContainer">
         {loading ? (
           <p>Loading...</p>
         ) : connections.length > 0 ? (
-          <ul>
-            {connections.map((worker) => (
-              <li key={worker.dpi}>
-                <img
-                  src={worker.imagen}
-                  alt={`${worker.nombre} ${worker.apellido}`}
-                  width="50"
-                />
-                <p>
-                  {worker.nombre} {worker.apellido}
-                </p>
-                <p>Phone: {worker.telefono}</p>
-                <p>City: {worker.municipio}</p>
-                <p>Rating: {worker.rating}</p>
-              </li>
-            ))}
-          </ul>
+          <ConnectionsGraph connections={connections} currentdpi={currentdpi} />
         ) : (
           <p>No connections found.</p>
         )}
