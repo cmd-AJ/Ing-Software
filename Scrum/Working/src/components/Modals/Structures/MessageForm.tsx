@@ -20,7 +20,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ onClose }) => {
       message: form.current?.message.value || '',
     };
   
-    emailjs.send("service_4x12v4l", "template_706hhg9", formData, "dM1cUDoKgsER5yeoD")
+    emailjs.send("service_cv5ofyb", "template_f7urocu", formData, "xxpkOxScq1JFDzFJ6")
       .then(
         () => {
           console.log('Mensaje enviado con éxito');
