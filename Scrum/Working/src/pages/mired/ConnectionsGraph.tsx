@@ -19,6 +19,8 @@ interface ConnectionsGraph {
 
 const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi }) => {
   const cyRef = useRef<HTMLDivElement>(null);
+  const userDataString = localStorage.getItem("User");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
 
   useEffect(() => {
     let cy: cytoscape.Core;
@@ -26,7 +28,7 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
     const resizeGraph = () => {
       if (cy) {
         const windowWidth = window.innerWidth;
-        const nodeSize = windowWidth < 768 ? 50 : windowWidth < 1024 ? 100 : 120;
+        const nodeSize = windowWidth < 768 ? 50 : windowWidth < 1024 ? 150 : 150;
         
         cy.nodes().forEach((node) => {
           node.style({
@@ -44,8 +46,8 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
       const centralNode = {
         data: {
           id: currentdpi,
-          label: "You",
-        //   imageUrl: localStorage.getItem('image')
+          label: userData.nombre +" " +userData.apellidos,
+          imageUrl: userData?.imagen  || null
         }
       };
 
@@ -77,20 +79,24 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
               "background-clip": "node",
               "border-color": "black",
               "border-width": 3,
-              width: 80,
-              height: 80,
+              width: 100,
+              height: 100,
               label: "data(label)",
               "text-valign": "bottom",
               color: "black",
-              "font-size": "14px",
+              "font-size": "18px",
               shape: "ellipse",
+              "font-weight": "bold",
+              "text-margin-y": 10, // Adds vertical margin
+              "text-margin-x": 10, // Adds horizontal margin
+
             },
           },
           {
             selector: "node:hover",
             style: {
-              width: 130,
-              height: 130,
+              width: 150,
+              height: 150,
               "border-color": "black",
               opacity: 0.8,
             },
@@ -110,7 +116,12 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({ connections, currentdpi 
           name: "circle",
           animate: true,
           animationDuration: 1000,
+          
         },
+        userZoomingEnabled: false,
+        userPanningEnabled: false,
+        zoomingEnabled: false,
+        panningEnabled: false,
       });
 
       resizeGraph();
