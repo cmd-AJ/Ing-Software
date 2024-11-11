@@ -10,6 +10,25 @@ const GraphContainer: React.FC = () => {
   useEffect(() => {
     let cy: cytoscape.Core; // Declare cy variable here so it's accessible in cleanup
 
+    const resizeGraph = () => {
+      if (cy) {
+        const windowWidth = window.innerWidth;
+
+        // Adjust node sizes based on screen width
+        const nodeSize = windowWidth < 768 ? 50 : windowWidth < 1024 ? 100 : 100;
+
+        cy.nodes().forEach((node) => {
+          node.style({
+            width: nodeSize,
+            height: nodeSize,
+          });
+        });
+
+        // Refit the graph to center it within the container
+        cy.fit(cy.elements(), 20);
+        cy.center();
+      }
+    };
     if (cyRef.current) {
       // Create nodes with image URLs
       const nodes = [
@@ -134,6 +153,8 @@ const GraphContainer: React.FC = () => {
         zoomingEnabled: false,
         panningEnabled: false,
       });
+      resizeGraph();
+      window.addEventListener("resize", resizeGraph);
 
       cy.nodes().grabify();
 
@@ -169,6 +190,7 @@ const GraphContainer: React.FC = () => {
     return () => {
       if (cy) {
         cy.destroy();
+        window.removeEventListener("resize", resizeGraph);
       }
     };
   }, []);
