@@ -10,6 +10,7 @@ import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import Help from "./pages/Help";
 import Threads from "./pages/threads/Threads";
+import MyNetwork from "./pages/mired/MyNetwork";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -150,6 +151,16 @@ const App: React.FC = () => (
           render={() => (
             <MainLayout>
               <Threads />
+            </MainLayout>
+          )}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/red"
+          render={() => (
+            <MainLayout>
+              <MyNetwork />
             </MainLayout>
           )}
         />

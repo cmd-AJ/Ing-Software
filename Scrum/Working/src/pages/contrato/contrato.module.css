@@ -48,10 +48,22 @@
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 100px; 
+
 }
 
 .productIdea {
   background-color: rgb(60, 184, 222);
+}
+
+.mainSlogan,
+.conectaCon,
+.quieres {
+  margin: 0 0 10px 0; 
+  text-align: start; 
+  width: 100%;
 }
 
 .mainSlogan {
@@ -59,10 +71,8 @@
   font-style: 'Proza Libre", sans-serif';
   font-weight: bold;
   font-size: 54px;
-  padding-left: 150px;
-  padding-right: 145px;
   text-align: start;
-  margin-bottom: 1rem;
+  margin-bottom: 75px;
 }
 
 .conectaCon {
@@ -71,7 +81,6 @@
   font-size: 16px;
   font-weight: bold;
   font-style: "Nunito Sans", sans-serif;
-  padding-right: 40px;
 }
 
 .quieres {
@@ -80,9 +89,8 @@
   font-size: 16px;
   font-weight: bold;
   font-style: "Nunito Sans", sans-serif;
-  padding-right: 485px;
-  padding-bottom: 50px;
 }
+
 /*Section 2 */
 
 .section2 {
@@ -142,7 +150,7 @@
   height: 449px;
   object-fit: cover;
   margin-top: 7rem;
-  transition: opacity 0.5s ease-in-out; 
+  transition: opacity 0.5s ease-in-out;
   /* opacity: 0;  */
 }
 
@@ -187,6 +195,11 @@
     flex-direction: column;
   }
 
+  .landAssetCard {
+    width: 80%;
+    height: 175px;
+  }
+
   .descriptionContainer,
   .productIdea,
   .aboutDisplayer,
@@ -194,26 +207,22 @@
     width: 100%;
     min-height: 150px; /* Adjust height for smaller screens */
   }
+  
+  
+
+  .descriptionContainer{
+    padding: 50px;
+  }
 
   .conectaCon {
-    padding-left: 50px;
-    padding-right: 10px;
   }
 
-  .quieres {
-    white-space: nowrap;
-    padding-left: 50px;
-    padding-right: 300px;
-    width: 100%;
-    text-align: center;
+ 
+
+  .mainSlogan{
+    margin-bottom: 25px;
+
   }
 
-  .mainSlogan {
-    padding-left: 50px;
-    padding-right: 10px;
-  }
-
-  .landAssetCard {
-    height: 300px;
-  }
+  
 }
