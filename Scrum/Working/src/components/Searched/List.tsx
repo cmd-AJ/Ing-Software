@@ -92,13 +92,7 @@ const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
             </div>
           ))}
 
-          <div id="text-results">
-            <TextND
-              size="small"
-              text="Esos son todos los resultados"
-              hex="#000"
-            />
-          </div>
+         
 
           {/* Display workers by name */}
           {workersByName.length > 0 ? (
@@ -110,11 +104,13 @@ const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
               ))}
             </>
           ) : (
+            <div id="text-results">
             <TextND
               size="small"
-              text="No persons found with that name"
+              text="Esos son todos los resultados"
               hex="#000"
             />
+          </div>
           )}
         </>
       )}
