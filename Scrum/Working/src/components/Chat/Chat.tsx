@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './chat.css';
+import { IonButton } from '@ionic/react';
+import Swal from 'sweetalert2';
+import { makeHiring } from '../../controller/ChatController';
+import dayjs from 'dayjs';
 
 interface ChatBubbleProps {
     message: string;
     time: string;
     sender: 'me' | 'you';
+    dpiEmployer: string
+    dpiEmployee: string
 }
 
 interface Message {
@@ -14,16 +20,77 @@ interface Message {
     sender: 'me' | 'you';
 }
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ message, time, sender }) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ message, time, sender, dpiEmployee, dpiEmployer }) => {
+    const [title, setTitle] = useState("")
+    const [hour, setHour] = useState("")
+    const [date, setDate] = useState("")
+    const [amount, setAmount] = useState("")
+
     const formattedTime = (timeString: string) => {
         const timePart = timeString.split('T')[1];
         const [hour, minute] = timePart.split(':').slice(0, 2);
         return `${hour}:${minute}`;
     };
 
+    useEffect(()=>{
+        const data = localStorage.getItem("contratData")
+        if (data != null){
+            const formattedData = JSON.parse(data)
+            setTitle(formattedData.title)
+            setDate(formattedData.date)
+            setHour(formattedData.time)
+            setAmount(formattedData.amount)
+        }
+    },[])
+
+    const handleAccept = async () => {
+
+        const timeStampToUse = date || dayjs().format('YYYY-MM-DD') + 'T' + time;
+
+        const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, Number(amount));
+        try {
+            if (response.Success === 'Contrato realizado') {
+
+                Swal.fire({
+                title: "Contratación realizada",
+                text: "Has realizado una contratación con éxito",
+                icon: "success",
+                heightAuto: false,
+                timer: 2500,
+                timerProgressBar: true,
+                showCloseButton: false,
+                showConfirmButton: false
+                });
+
+            } else {
+
+                Swal.fire({
+                title: "Contratacion Fallida",
+                text: "No se ha podido realizar la contratación ",
+                icon: "error",
+                heightAuto: false,
+                timer: 2500,
+                timerProgressBar: true, // Optional: show a progress bar
+                showCloseButton: false, // Hide the close button
+                showConfirmButton: false // Hide the OK button
+                });
+            }
+        } catch (error) {
+            console.error('Error al contratar:', error);
+        }
+        
+    }
+
+    const formattedMessage = message.replace(/\n/g, '<br />');
+
     return (
         <div className={`chat-bubble ${sender === 'me' ? 'me' : 'you'}`}>
-            <div className="message-content">{message}</div>
+            <div 
+                className="message-content"
+                dangerouslySetInnerHTML={{__html: formattedMessage}}/>
+                {(formattedMessage.includes("-----------------------------") && (!formattedMessage.includes("Propuesta aceptada") || !formattedMessage.includes("Propuesta rechazada")))&& <>
+                <IonButton color="danger">Rechazar</IonButton>
+                <IonButton color="success" onClick={handleAccept}>Aceptar</IonButton></>}
             <div className="message-time">{formattedTime(time)}</div>
         </div>
     );
@@ -63,6 +130,9 @@ const Chat: React.FC<ChatProps> = ({ messages }) => {
     }, [messages]);
 
     let lastDate = ""; // Controla la última fecha para el divisor
+    
+    const dpiEmployer = localStorage.getItem('dpi');
+    const dpiEmployee = localStorage.getItem('SelectedPerson');
 
     return (
         <div className="chat-container">
@@ -77,7 +147,7 @@ const Chat: React.FC<ChatProps> = ({ messages }) => {
                                 {` ${formatDateDivider(msg.date)} `}
                             </div>
                         )}
-                        <ChatBubble message={msg.message} time={msg.time} sender={msg.sender} />
+                        <ChatBubble message={msg.message} time={msg.time} sender={msg.sender} dpiEmployee={dpiEmployee ? dpiEmployee : ""} dpiEmployer={dpiEmployer ? dpiEmployer : ""}/>
                     </React.Fragment>
                 );
             })}

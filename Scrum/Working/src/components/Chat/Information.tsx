@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import './information.css';
 import dayjs from 'dayjs';
-import { makeHiring } from '../../controller/ChatController';
+import { getChatIdWithDPI, insertChatMessage, makeHiring } from '../../controller/ChatController';
 import Swal from 'sweetalert2'
 
 interface InformationProps {
   date: dayjs.Dayjs | null;
   onClose: () => void; // Nueva prop para cerrar el modal
+  setFirstInteraction : (firstInteraction : string) => void
+  loggedUserDpi: string;
+  selectedPersonDpi: string;
+
 }
 
-const Information: React.FC<InformationProps> = ({ date, onClose }) => {
+const Information: React.FC<InformationProps> = ({ date, onClose, setFirstInteraction, loggedUserDpi, selectedPersonDpi }) => {
   const [title, setTitle] = useState('');
   const [time, setTime] = useState('');
   const [amount, setAmount] = useState('');
+  const [message, setMessage] = useState('')
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (
@@ -32,6 +37,34 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
     }
   };
 
+  const sendMessage = async (message: string) => {
+    if (!message.trim()) return;
+    try {
+      const response = await getChatIdWithDPI(loggedUserDpi, selectedPersonDpi);
+      const idchat = response[0]?.idchat;
+      if (idchat !== undefined) {
+        await insertChatMessage(message, idchat.toString(), loggedUserDpi);
+        setMessage('');
+        updateMessages();
+      } else {
+        console.error("Chat ID not found");
+      }
+    } catch (error) {
+      console.error("Error while sending message:", error);
+    }
+  };
+
+  const createMsg = () => {
+    const confirmedDate = date || dayjs();
+    return `Propuesta de contratación
+      -----------------------------
+      ${title}
+      Fecha: ${confirmedDate.format('DD/MM/YYYY') }
+      Hora: ${time}
+      Precio: Q.${amount}
+      -----------------------------`;
+  }
+
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
@@ -49,7 +82,7 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
   };
 
   const handleConfirmClick = async () => {
-    try {
+    // try {
       const confirmedDate = date || dayjs(); // Fecha actual si no se selecciona nada
       const appointmentTimeStamp = confirmedDate ? confirmedDate.format('YYYY-MM-DD') + 'T' + time : '';
 
@@ -63,47 +96,61 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
         return;
       }
 
+      await sendMessage(createMsg())
+      
+
       const timeStampToUse = appointmentTimeStamp || dayjs().format('YYYY-MM-DD') + 'T' + time;
 
-      const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
-
-
-
-      if (response.Success === 'Contrato realizado') {
-
-        Swal.fire({
-          title: "Contratación realizada",
-          text: "Has realizado una contratación con éxito",
-          icon: "success",
-          heightAuto: false,
-          timer: 2500,
-          timerProgressBar: true,
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-
-      } else {
-
-        Swal.fire({
-          title: "Contratacion Fallida",
-          text: "No se ha podido realizar la contratación ",
-          icon: "error",
-          heightAuto: false,
-          timer: 2500,
-          timerProgressBar: true, // Optional: show a progress bar
-          showCloseButton: false, // Hide the close button
-          showConfirmButton: false // Hide the OK button
-        });
+      const contratData = {
+        title: title,
+        date: timeStampToUse,
+        time: time,
+        amount: amount
       }
 
-      // Cerrar el modal después de confirmar
-      onClose();
-    } catch (error) {
-      console.error('Error al contratar:', error);
-    }
+      localStorage.setItem("contratData", JSON.stringify(contratData))
+      localStorage.setItem("firstInteraction","false")
+      setFirstInteraction("false")
+
+      //const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
+
+    //   if (response.Success === 'Contrato realizado') {
+
+    //     Swal.fire({
+    //       title: "Contratación realizada",
+    //       text: "Has realizado una contratación con éxito",
+    //       icon: "success",
+    //       heightAuto: false,
+    //       timer: 2500,
+    //       timerProgressBar: true,
+    //       showCloseButton: false,
+    //       showConfirmButton: false
+    //     });
+
+    //   } else {
+
+    //     Swal.fire({
+    //       title: "Contratacion Fallida",
+    //       text: "No se ha podido realizar la contratación ",
+    //       icon: "error",
+    //       heightAuto: false,
+    //       timer: 2500,
+    //       timerProgressBar: true, // Optional: show a progress bar
+    //       showCloseButton: false, // Hide the close button
+    //       showConfirmButton: false // Hide the OK button
+    //     });
+    //   }
+
+    //   // Cerrar el modal después de confirmar
+    // } catch (error) {
+    //   console.error('Error al contratar:', error);
+    // }
+    onClose();
   };
 
   const handleCancelClick = () => {
+    localStorage.setItem("firstInteraction","false")
+    setFirstInteraction("false")
     // Cerrar el modal al cancelar
     onClose();
   };
@@ -167,3 +214,7 @@ const Information: React.FC<InformationProps> = ({ date, onClose }) => {
 };
 
 export default Information;
+function updateMessages() {
+  throw new Error('Function not implemented.');
+}
+
