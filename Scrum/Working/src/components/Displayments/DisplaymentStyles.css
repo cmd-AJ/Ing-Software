@@ -110,6 +110,8 @@
 
 #simple-display {
     display: flex;
+    height: 100%;
+    align-items: center;
 }
 
 .all-contrats-display{
