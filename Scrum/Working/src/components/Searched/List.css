@@ -6,6 +6,13 @@
   height: 85%;
   border-radius: 20px;
   box-shadow: 0 0 2mm rgba(120, 120, 120, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden; 
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+
 }
 
 #text-results {
@@ -26,5 +33,12 @@
   justify-content: center;
   width: 100%;
   max-width: 95%;
-  flex: 1
+  flex: 1;
+}
+
+#list-content {
+  flex: 1; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
