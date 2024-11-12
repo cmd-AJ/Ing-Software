@@ -23,15 +23,15 @@
     height: 100%;
     background-color: var(--white);
     border-radius: 35px;
-    padding-left: 10vw;
-    padding-right: 10vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
     padding-top: 40px;
     padding-bottom: 30px;
     color: black;
     box-shadow: 0 0 5mm rgba(120, 120, 120, 0.5);
     font-family: var(--proza-font);
     overflow: auto;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .displayment-register-elements::-webkit-scrollbar {
@@ -54,6 +54,21 @@
     padding-bottom: 70px;
 }
 
+.two-colums {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.one-column {
+    display: flex;
+    flex-direction: column;
+}
+
+#space{
+    margin-bottom: 70px;
+}
+
 @media (max-width: 660px){
     .name-lastname-display {
         flex-direction: column;
@@ -72,6 +87,14 @@
 		justify-content: flex-start;
 		padding-bottom: 30px;
 		padding-top: 30px;
+    }
+
+    .two-colums{
+        flex-direction: column;
+    }
+
+    #space {
+        margin-bottom: 20px;
     }
 }
  
