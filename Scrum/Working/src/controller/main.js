@@ -575,19 +575,24 @@ app.post('/api/contacts/message', apiKeyAuth, async (req, res) => {
 app.put('/api/contacts/editMessage', apiKeyAuth, async (req, res) => {
   try {
     const { contenido, id_chat, id_msg } = req.body;
-    const result = await editChatMessage(id_chat, id_msg, contenido)
-    if (result){
-      res.status(200).json({ Succes: 'Mensaje modificado' })
+
+    if (!contenido || !id_chat || !id_msg) {
+      return res.status(400).json({ error: 'contenido, id_chat, and id_msg are required and cannot be empty' });
     }
 
-    else {
-      res.status(404).json({ Error: 'No se modificó el mensaje'})
+    const result = await editChatMessage(id_chat, id_msg, contenido);
+
+    if (result) {
+      res.status(200).json({ success: 'Mensaje modificado' });
+    } else {
+      res.status(404).json({ error: 'No se modificó el mensaje' });
     }
   } catch (error) {
-    console.error('Error editing  message:', error)
-    res.status(500).json({ error: 'Internal Server Error' })
+    console.error('Error editing message:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
+
 
 // Endpoint to getChatID
 app.post('/api/contacts/chatID', apiKeyAuth, async (req, res) => {
