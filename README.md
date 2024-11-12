@@ -34,5 +34,5 @@ Para este corte del proyecto lo que se busca es poder definir y especificar los 
 
 
 
-Ahora con ustedes presentamos nuestro proyecto 
+Ahora con ustedes presentamos nuestro proyecto:
 https://contratogt.com/
