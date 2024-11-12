@@ -30,19 +30,17 @@ type FormattedMessage = {
 const Sidebar = () => {
   const history = useHistory();
 
-  const [tempcontacts, settempcontact] = useState(new Set());
-  const defaultChatUser: chatUser = { dpi: "", name: "", img: "" };
-  const [findbar, setfindbar] = useState("");
-  const [selectedPerson, setSelectedPerson] =
-    useState<chatUser>(defaultChatUser);
-  const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(
-    null
-  );
-  const [contacts, setContacts] = useState<chatUser[]>([]);
-  const [messages, setMessages] = useState<FormattedMessage[]>([]);
-  const [loggedUserDpi] = useState(localStorage.getItem("dpi") || "");
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [firstInteraction, setFirstInteraction] = useState(localStorage.getItem("firstInteraction"))
+    const [tempcontacts, settempcontact] = useState(new Set())
+    const defaultChatUser: chatUser = { dpi: '', name: '',img:'' }
+    const [findbar, setfindbar] = useState('');
+    const [selectedPerson, setSelectedPerson] = useState<chatUser>(defaultChatUser);
+    const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(null);
+    const [contacts, setContacts] = useState<chatUser[]>([]);
+    const [messages, setMessages] = useState<FormattedMessage[]>([]);
+    const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -65,88 +63,10 @@ const Sidebar = () => {
     }
   };
 
-
-    const [firstInteraction, setFirstInteraction] = useState(localStorage.getItem("firstInteraction"))
-    const [tempcontacts, settempcontact] = useState(new Set())
-    const defaultChatUser: chatUser = { dpi: '', name: '',img:'' }
-    const [findbar, setfindbar] = useState('');
-    const [selectedPerson, setSelectedPerson] = useState<chatUser>(defaultChatUser);
-    const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(null);
-    const [contacts, setContacts] = useState<chatUser[]>([]);
-    const [messages, setMessages] = useState<FormattedMessage[]>([]);
-    const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
-    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const dpiChat = queryParams.get('chat');
-
-    const messagesRef = useRef(messages);
-    const selectedPersonRef = useRef(selectedPerson);
-
-    useEffect(() => {
-        messagesRef.current = messages;
-    }, [messages]);
-
-    useEffect(() => {
-        selectedPersonRef.current = selectedPerson;
-    }, [selectedPerson]);
-
-
-
-    const requestNotificationPermission = async () => {
-        if (Notification.permission !== 'granted') {
-            await Notification.requestPermission();
-        }
-    };
-
-    const playNotificationSound = () => {
-        const audio = new Audio('/notisound.wav');
-        audio.play();
-    };
-
-
-
-    // Fetch contacts on component mount
-    useEffect(() => {
-
-        requestNotificationPermission();
-
-        const fetchData = async () => {
-            try {
-                const contactsData = await getContacts(loggedUserDpi);
-                setContacts(contactsData);
-                const newTempContacts = new Set();
-
-                // Add logic to include indices from the fetched data
-                for (let index = 0; index < contactsData.length; index++) {
-                    newTempContacts.add(index); // Include all indices for demonstration
-                }
-
-                settempcontact(newTempContacts);
-
-            } catch (error) {
-                console.error('Error fetching contacts:', error);
-            }
-        };
-
-        fetchData();
-
-
-        return () => {
-            setContacts([]);
-            settempcontact(new Set());
-        };
-
-
-    }, [loggedUserDpi]);
-
   const playNotificationSound = () => {
     const audio = new Audio("/notisound.wav");
     audio.play();
   };
-
 
   // Fetch contacts on component mount
   useEffect(() => {
@@ -170,20 +90,6 @@ const Sidebar = () => {
     };
 
     fetchData();
-
-
-        try {
-            const chatMessages = await getChatMessages(loggedUserDpi, dpi) as ChatMessage[];
-            const formattedMessages = formatMessagesWithDateDividers(chatMessages);
-            setMessages(formattedMessages);
-        } catch (error) {
-            console.error('Error fetching chat messages:', error);
-        }
-
-        const firts =localStorage.setItem("firstInteraction", "false")
-        if (firts != null) {
-            setFirstInteraction(firts)
-        }
 
     return () => {
       setContacts([]);
@@ -220,25 +126,8 @@ const Sidebar = () => {
       }
     }
 
-
-    const updateMessages = async () => {
-        if (selectedPerson) {
-            try {
-                const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi) as ChatMessage[];
-                const formattedMessages = formatMessagesWithDateDividers(chatMessages);
-
-                if (chatMessages.length > messagesRef.current.length) {
-                    playNotificationSound();
-                }
-                setMessages(formattedMessages);
-            } catch (error) {
-                console.error('Error fetching chat messages:', error);
-            }
-        }
-
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
-
     };
 
     window.addEventListener("resize", handleResize);
@@ -355,6 +244,7 @@ const Sidebar = () => {
           }
         }
       }
+
       settempcontact(deben);
     }
   };
@@ -443,8 +333,9 @@ const Sidebar = () => {
           {isDetailsOpen ? (
             <Details
               onClose={() => setIsDetailsOpen(false)}
-              dpiEmployer={loggedUserDpi}
-              dpiEmployee={selectedPerson ? selectedPerson.dpi : ""}
+              setFirstInteraction={setFirstInteraction}
+              loggedUserDpi={loggedUserDpi}
+              selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
             />
           ) : (
             <Chat messages={messages} />
