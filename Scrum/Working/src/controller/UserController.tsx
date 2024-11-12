@@ -240,7 +240,7 @@ async function getWorkersByJob(job: String, usrDpi: string) {
     }
 }
 
-async function getWorkersByName(name: String, usrDpi: string) {
+export async function getWorkersByName(name: String, usrDpi: string) {
     try {
         // Obtain the trusted people of the user
         const usrTrustedpeople = await getTrustedPeople(usrDpi);
