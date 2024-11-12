@@ -71,7 +71,7 @@ const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
           {/* Skeleton placeholder for worker cards */}
           <Skeleton
             height={150}
-            count={5}
+            count={3}
             className="custom-skeleton"
             width={`95%`}
             style={{
@@ -85,33 +85,40 @@ const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
         </div>
       ) : (
         <>
-          {/* Display workers by job */}
-          {workers.map((worker, index) => (
-            <div key={index}>
-              <Information trabajador={worker} />
-            </div>
-          ))}
+          <div id="list-content">
+            {/* Display workers by job */}
+            {workers.map((worker, index) => (
+              <div key={index}>
+                <Information trabajador={worker} />
+              </div>
+            ))}
 
-         
-
-          {/* Display workers by name */}
-          {workersByName.length > 0 ? (
-            <>
-              {workersByName.map((worker, index) => (
-                <div key={`name-${index}`}>
-                  <Information trabajador={worker} />
-                </div>
-              ))}
-            </>
-          ) : (
+            {/* Display workers by name */}
+            {workersByName.length > 0 ? (
+              <>
+                {workersByName.map((worker, index) => (
+                  <div key={`name-${index}`}>
+                    <Information trabajador={worker} />
+                  </div>
+                ))}
+              </>
+            ) : (
+              <div id="text-results">
+                <TextND
+                  size="small"
+                  text="Esos son todos los resultados"
+                  hex="#000"
+                />
+              </div>
+            )}
             <div id="text-results">
-            <TextND
-              size="small"
-              text="Esos son todos los resultados"
-              hex="#000"
-            />
+                <TextND
+                  size="small"
+                  text="Esos son todos los resultados"
+                  hex="#000"
+                />
+              </div>
           </div>
-          )}
         </>
       )}
     </div>
