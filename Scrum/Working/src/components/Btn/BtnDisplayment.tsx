@@ -39,6 +39,7 @@ interface ContainerProps {
 
 const BtnDisplayment: React.FC<ContainerProps> = ({
     setEdit1,
+    setEdit2,
     setEdit3,
     owner,
     setModal,
@@ -78,6 +79,7 @@ const BtnDisplayment: React.FC<ContainerProps> = ({
                     JSON.parse(myUser).dpi,
                     JSON.parse(externalUser).dpi
                 )
+                localStorage.setItem("firstInteraction", "true")
                 history.push('/chat?chat=' + JSON.parse(externalUser).dpi)
             } catch (error) {
                 console.error("Error during chat creation:", error)

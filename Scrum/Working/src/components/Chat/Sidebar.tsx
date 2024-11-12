@@ -28,6 +28,7 @@ type FormattedMessage = {
 
 const Sidebar = () => {
 
+    const [firstInteraction, setFirstInteraction] = useState(localStorage.getItem("firstInteraction"))
     const [tempcontacts, settempcontact] = useState(new Set())
     const defaultChatUser: chatUser = { dpi: '', name: '',img:'' }
     const [findbar, setfindbar] = useState('');
@@ -183,6 +184,11 @@ const Sidebar = () => {
         } catch (error) {
             console.error('Error fetching chat messages:', error);
         }
+
+        const firts =localStorage.setItem("firstInteraction", "false")
+        if (firts != null) {
+            setFirstInteraction(firts)
+        }
     };
 
     const updateMessages = async () => {
@@ -190,11 +196,6 @@ const Sidebar = () => {
             try {
                 const chatMessages = await getChatMessages(loggedUserDpi, selectedPerson.dpi) as ChatMessage[];
                 const formattedMessages = formatMessagesWithDateDividers(chatMessages);
-
-                console.log(chatMessages.length)
-                console.log(messagesRef.current.length)
-                console.log(selectedPersonbef?.dpi)
-                console.log(selectedPersonRef.current.dpi)
 
                 if (chatMessages.length > messagesRef.current.length) {
                     playNotificationSound();
@@ -298,11 +299,12 @@ const Sidebar = () => {
                             <span className="name">Selecciona un chat</span>
                         )}
                     </div>
-                    {isDetailsOpen ? (
+                    {isDetailsOpen || firstInteraction === "true" ? (
                         <Details
                             onClose={() => setIsDetailsOpen(false)}
-                            dpiEmployer={loggedUserDpi}
-                            dpiEmployee={selectedPerson ? selectedPerson.dpi : ""}
+                            setFirstInteraction={setFirstInteraction}
+                            loggedUserDpi={loggedUserDpi}
+                            selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
                         />
                     ) : (
                         <Chat messages={messages} />
