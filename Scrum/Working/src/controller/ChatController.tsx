@@ -1,3 +1,34 @@
+export async function editMessageFromChat(new_msg: string, chatId: string, msgId: string) {
+    try {
+        const data = {
+            contenido: new_msg,
+            id_chat: chatId,
+            id_msg: msgId
+        };
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/editMessage`, {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error("Failed to edit message");
+        }
+
+        const result = await response.json();
+        return result;
+
+    } catch (error) {
+        console.error("Error while editing message:", error);
+        throw error;
+    }
+}
+
+
 export async function getContacts(dpi: String) {
     try {
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/${dpi}`, {
