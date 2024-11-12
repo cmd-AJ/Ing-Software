@@ -3,6 +3,21 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function editChatMessage(chatID, messageID, newMessage) {
+    try {
+        const query = {
+            text: "UPDATE mensaje SET contenido = $1 WHERE id_chat = $2 AND id_mensaje = $3",
+            values: [newMessage, chatID, messageID]
+        }
+
+        const result = await client.query(query);
+        return result
+
+    } catch (error) {
+        console.error("Error while editing message")
+    }
+}
+
 export async function getUserRatingWithDPI(dpi) {
     try {
         const query = {

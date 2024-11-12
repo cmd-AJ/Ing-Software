@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
-import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos } from './db.js'
+import { editChatMessage, insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos } from './db.js'
 import { deleteRelationUserTojob, addRelationUserToJob, getJobsOfWorkerWithDPI,getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos, insertNewJob, getWorkersByFlexibleName } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
@@ -571,6 +571,24 @@ app.post('/api/contacts/message', apiKeyAuth, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+app.put('/api/contacts/editMessage', apiKeyAuth, async (req, res) => {
+  try {
+    const { contenido, id_chat, id_msg } = req.body;
+    const result = await editChatMessage(id_chat, id_msg, contenido)
+    if (result){
+      res.status(200).json({ Succes: 'Mensaje modificado' })
+    }
+
+    else {
+      res.status(404).json({ Error: 'No se modificó el mensaje'})
+    }
+  } catch (error) {
+    console.error('Error editing  message:', error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
 // Endpoint to getChatID
 app.post('/api/contacts/chatID', apiKeyAuth, async (req, res) => {
   try {
