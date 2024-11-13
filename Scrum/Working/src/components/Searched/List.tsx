@@ -103,21 +103,9 @@ const List: React.FC<ContainerProps> = ({ job, setTotal }) => {
                 ))}
               </>
             ) : (
-              <div id="text-results">
-                <TextND
-                  size="small"
-                  text="Esos son todos los resultados"
-                  hex="#000"
-                />
-              </div>
+              <></>
             )}
-            <div id="text-results">
-                <TextND
-                  size="small"
-                  text="Esos son todos los resultados"
-                  hex="#000"
-                />
-              </div>
+            
           </div>
         </>
       )}
