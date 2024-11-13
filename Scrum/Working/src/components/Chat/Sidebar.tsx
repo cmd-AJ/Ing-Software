@@ -30,19 +30,17 @@ type FormattedMessage = {
 const Sidebar = () => {
   const history = useHistory();
 
-  const [tempcontacts, settempcontact] = useState(new Set());
-  const defaultChatUser: chatUser = { dpi: "", name: "", img: "" };
-  const [findbar, setfindbar] = useState("");
-  const [selectedPerson, setSelectedPerson] =
-    useState<chatUser>(defaultChatUser);
-  const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(
-    null
-  );
-  const [contacts, setContacts] = useState<chatUser[]>([]);
-  const [messages, setMessages] = useState<FormattedMessage[]>([]);
-  const [loggedUserDpi] = useState(localStorage.getItem("dpi") || "");
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [firstInteraction, setFirstInteraction] = useState(localStorage.getItem("firstInteraction"))
+    const [tempcontacts, settempcontact] = useState(new Set())
+    const defaultChatUser: chatUser = { dpi: '', name: '',img:'' }
+    const [findbar, setfindbar] = useState('');
+    const [selectedPerson, setSelectedPerson] = useState<chatUser>(defaultChatUser);
+    const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(null);
+    const [contacts, setContacts] = useState<chatUser[]>([]);
+    const [messages, setMessages] = useState<FormattedMessage[]>([]);
+    const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -335,8 +333,9 @@ const Sidebar = () => {
           {isDetailsOpen ? (
             <Details
               onClose={() => setIsDetailsOpen(false)}
-              dpiEmployer={loggedUserDpi}
-              dpiEmployee={selectedPerson ? selectedPerson.dpi : ""}
+              setFirstInteraction={setFirstInteraction}
+              loggedUserDpi={loggedUserDpi}
+              selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
             />
           ) : (
             <Chat messages={messages} />

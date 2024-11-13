@@ -14,7 +14,7 @@ type trustPerson = {
     apellido: string
     rating: number
     telefono: string
-    image: string
+    imagen: string
 }
 
 const TrustPeople: React.FC<ContainerProps> = ({ dpi }) => {
@@ -31,6 +31,8 @@ const TrustPeople: React.FC<ContainerProps> = ({ dpi }) => {
                 
                 if (data && data.length > 0) {
                     setPeople(data)
+                    console.log(data);
+                    
                 } else {
                     setError('Sin personas de confianza')
                     setPeople([])
@@ -53,7 +55,7 @@ const TrustPeople: React.FC<ContainerProps> = ({ dpi }) => {
                 </div>
             ) : (
                 people.map(person => (
-                    <TrustPerson nombre={person.nombre} apellido={person.apellido} rating={person.rating} tel={person.telefono} img={person.image} />
+                    <TrustPerson nombre={person.nombre} apellido={person.apellido} rating={person.rating} tel={person.telefono} img={person.imagen} />
                 ))
             )}
         </div>
