@@ -603,7 +603,7 @@ export async function getreport_nofecha(dpi, idreporte) {
 export async function getcontrataciones_por_mes(dpi, mes) {
     try {
         const query = {
-            text: "select idtrabajo, descripcion, dpiempleador, timestampcita, pago from trabajodisponible where EXTRACT(MONTH FROM timestampcita) = @$2 and dpiempleador = REPLACE(quote_literal($1), '''', '');",
+            text: "select idtrabajo, descripcion, dpiempleador, imagen, concat(nombre,' ',apellidos) as nombre  ,dpiempleado,timestampcita, pago from trabajodisponible left join usuarios on dpiempleado  = dpi where EXTRACT(MONTH FROM timestampcita) = @$2 and dpiempleador = REPLACE(quote_literal($1), '''', '');",
             values: [dpi, mes]
         }
         const result = await client.query(query)
