@@ -39,7 +39,7 @@ const UserDataDisplay: React.FC<ContainerProps> = ({dpi, role, setDetails, userR
     if (width > 660) {
         return (
                 <div style={{display: 'flex', height: '100%', minHeight: '378px'}}>
-                    <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>
+                    { !userRole && <ContratsDisplay dpi={dpi} selectedValue="" role={role} setDetails={setDetails}/>}
 		    { userRole && <>
                     	<div style={{height: 'auto', width: 'auto'}}>
 				<VerticalDivider />

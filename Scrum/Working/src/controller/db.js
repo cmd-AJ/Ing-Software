@@ -3,6 +3,21 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function editChatMessage(chatID, messageID, newMessage) {
+    try {
+        const query = {
+            text: "UPDATE mensaje SET contenido = $1 WHERE id_chat = $2 AND id_mensaje = $3",
+            values: [newMessage, chatID, messageID]
+        }
+
+        const result = await client.query(query);
+        return result
+
+    } catch (error) {
+        console.error("Error while editing message")
+    }
+}
+
 export async function getUserRatingWithDPI(dpi) {
     try {
         const query = {
@@ -647,3 +662,77 @@ export async function setWorkingState(dpi) {
 		throw error
 	}
 }
+
+
+
+export async function setnewtrabajoperfil(trabajo, dpi) {
+	try {
+		const query = {
+			text: `call add_employee($1, $2)`,
+			values: [trabajo,dpi],
+		}
+
+		const result = await client.query(query);
+
+		return result.rowCount > 0
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
+
+export async function removenew_trabajo(trabajo) {
+	try {
+		const query = {
+			text: `call remove_employee($1)`,
+			values: [trabajo],
+		}
+
+		const result = await client.query(query);
+
+		return result.rowCount > 0
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
+
+
+export async function chworkdescription(trabajo, descripcion) {
+	try {
+		const query = {
+			text: `update tipotrabajo set descripcion = $1 where nombre_trabajo = $2`,
+			values: [descripcion, trabajo],
+		}
+        
+		const result = await client.query(query);
+
+
+		return result.rowCount > 0
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
+
+export async function gettrabajos() {
+	try {
+		const query = {
+			text: `select  * from tipotrabajo where descripcion is null`,
+			
+		}
+
+		const result = await client.query(query);
+
+		return result.rows
+        
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
+

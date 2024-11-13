@@ -177,3 +177,125 @@ export async function extendunban(dpi: string, fecha : string) {
     }
 }
 
+
+
+export async function removeJob(trabajo: string, dpi: string) {
+    try {
+
+        const data = {
+            trabajo: trabajo,
+            dpi: dpi 
+        };
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/removework`, {
+            method: 'DELETE',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed to insert new job")
+        }
+
+        const responseData = await response.json();
+        return responseData;
+
+    } catch (error) {
+        console.error('Error adding new job:', error);
+    }
+}
+
+
+
+export async function addjob_toprofile(trabajo: string, dpi: string) {
+    try {
+
+        const data = {
+            trabajo: trabajo,
+            dpi: dpi 
+        };
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/pfnework`, {
+            method: 'POST',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed to insert new job")
+        }
+
+        const responseData = await response.json();
+        return responseData;
+
+    } catch (error) {
+        console.error('Error adding new job:', error);
+    }
+}
+
+
+export async function update_descripcion(trabajo: string, descripcion: string) {
+    try {
+
+        const data = {
+            trabajo: trabajo,
+            descripcion: descripcion 
+        };
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/changedescription`, {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed to insert new job")
+        }
+
+        const responseData = await response.json();
+        return responseData;
+
+    } catch (error) {
+        console.error('Error adding new job:', error);
+    }
+}
+
+
+
+export async function gettrabajosnuevos(trabajo: string, descripcion: string) {
+    try {
+
+        const data = {
+            trabajo: trabajo,
+            descripcion: descripcion 
+        };
+
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/gettrabajos`, {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            throw new Error("Failed to insert new job")
+        }
+
+        const responseData = await response.json();
+        return responseData;
+
+    } catch (error) {
+        console.error('Error adding new job:', error);
+    }
+}

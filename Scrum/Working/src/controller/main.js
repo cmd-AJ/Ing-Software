@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
-import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone } from './db.js'
+import { editChatMessage, insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos } from './db.js'
 import { deleteRelationUserTojob, addRelationUserToJob, getJobsOfWorkerWithDPI,getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos, insertNewJob, getWorkersByFlexibleName } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
@@ -571,6 +571,29 @@ app.post('/api/contacts/message', apiKeyAuth, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+app.put('/api/contacts/editMessage', apiKeyAuth, async (req, res) => {
+  try {
+    const { contenido, id_chat, id_msg } = req.body;
+
+    if (!contenido || !id_chat || !id_msg) {
+      return res.status(400).json({ error: 'contenido, id_chat, and id_msg are required and cannot be empty' });
+    }
+
+    const result = await editChatMessage(id_chat, id_msg, contenido);
+
+    if (result) {
+      res.status(200).json({ success: 'Mensaje modificado' });
+    } else {
+      res.status(404).json({ error: 'No se modificó el mensaje' });
+    }
+  } catch (error) {
+    console.error('Error editing message:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 // Endpoint to getChatID
 app.post('/api/contacts/chatID', apiKeyAuth, async (req, res) => {
   try {
@@ -914,6 +937,91 @@ app.put('/api/setWorking/', apiKeyAuth, async (req, res) => {
 	}
 	}
 })
+
+app.post('/api/pfnework/', apiKeyAuth ,async (req, res) => {
+  try {
+    const { trabajo, dpi } = req.body;
+
+    const response = await setnewtrabajoperfil(trabajo, dpi);
+
+    if (response) {
+      return res.status(200).json({ success: "Successfully inserted a petition for work" + response });
+    } else {
+      return res.status(400).json({ error: "Falied to create a new work maybe exists?" });
+    }
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+app.post('/api/pfnework/', apiKeyAuth ,async (req, res) => {
+  try {
+    const { trabajo, dpi } = req.body;
+
+    const response = await setnewtrabajoperfil(trabajo, dpi);
+
+    if (response) {
+      return res.status(200).json({ success: "Successfully inserted a petition for work" + response });
+    } else {
+      return res.status(400).json({ error: "Falied to create a new work maybe exists?" });
+    }
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+app.delete('/api/removework/', apiKeyAuth ,async (req, res) => {
+  try {
+    const { trabajo, dpi } = req.body;
+
+   await removenew_trabajo(trabajo, dpi);
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+app.get('/api/gettrabajos/' ,async (req, res) => {
+  try {
+
+   const result = await gettrabajos();
+
+   return res.status(200).json(result);
+   
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+app.put('/api/changedescription/', apiKeyAuth ,async (req, res) => {
+  try {
+    const { trabajo, descripcion} = req.body;
+
+    const result = await chworkdescription(trabajo, descripcion);
+
+    res.status(200).json(result)
+
+  } catch (error) {
+    console.error('Error post:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
 
 app.post('/api/users', apiKeyAuth, async (req, res) => {
   try {
