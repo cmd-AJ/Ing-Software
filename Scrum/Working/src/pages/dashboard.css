@@ -10,7 +10,7 @@
 
     /* Hide the scrollbar */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    overflow-y: auto; /* Scroll for y axis*/
+    overflow-y: none; /* Scroll for y axis*/
     scrollbar-width: none;  /* Firefox */
 }
 

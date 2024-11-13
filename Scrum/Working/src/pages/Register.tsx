@@ -9,6 +9,7 @@ import BtnAction from '../components/Btn/BtnAction'
 import { createUser } from '../controller/UserController'
 import { useHistory } from 'react-router'
 import CryptoJS from 'crypto-js'
+import VerticalDivider from '../components/Dividers/VerticalDivider'
 
 const Register: React.FC = () => {
     const [name, setName] = useState<string>('')
@@ -94,24 +95,26 @@ const Register: React.FC = () => {
         <>
             <div className='center'>
                 <div className='displayment-register-elements'>
-                    <div className='name-lastname-display'>
-                        <div className='divs-name'>
+                    <div className='two-colums'>
+                        <div className='one-column'>
                             <InputTopLabel value={name} label='Nombre' placeholder='Ingresa tu nombre' setValue={setName} validateValue={validateName} setValidatesValue={setValidateName} mask={null} validation={namesValidation} errorText='Nombre inválido' msgError={false} errorText2=''/>
-                        </div>
-                        <div className='divs-name'>
                             <InputTopLabel value={lastname} label='Apellido' placeholder='Ingresa tu apellido' setValue={setLastname} validateValue={validateLastname} setValidatesValue={setValidateLastname} mask={null} validation={namesValidation} errorText='Apellido inválido' msgError={false}errorText2=''/>
+                            <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='La contraseña debe tener al menos 8 caracteres y contener una letra mayúscula, una minúscula y un número' msgError={false}/>
+                            <InputTopLabelPass value={confirmation} label='Confirmar contraseña' placeholder='Ingresa nuevamente tu contraseña' setValue={setConfirmation} validateValue={validateConfirmation} setValidatesValue={setValidateConfirmation} mask={null} validation={confirmPasswordValidation} errorText='Las contraseñas no coinciden' msgError={false}/>
+                        </div>
+                        <VerticalDivider/>
+                        <div className='one-column'>
+                            <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI inválido. Por favor pruebe con otro DPI' msgError={msgError}errorText2='DPI inválido. Por favor pruebe con otro DPI'/>
+                            <InputTopLabel value={cell} label='Número de teléfono' placeholder='Ingresa tu teléfono' setValue={setCell} validateValue={validateTel} setValidatesValue={setValidateTel} mask={phoneMask} validation={phoneValidation} errorText='Teléfono inválido' msgError={false}errorText2=''/>
+                            <InputTopLabel value={email} label='Correo electrónico (opcional)' placeholder='Ingresa tu correo electrónico' setValue={setEmail} validateValue={validateEmail} setValidatesValue={setValidateEmail} mask={null} validation={emailValidation} errorText='Correo inválido' msgError={false}errorText2=''/>
                         </div>
                     </div>
-                    <InputTopLabel value={dpi} label='DPI' placeholder='Ingresa tu DPI' setValue={setDpi} validateValue={validateDpi} setValidatesValue={setValidateDpi} mask={dpiMask} validation={dpiValidation} errorText='DPI inválido. Por favor pruebe con otro DPI' msgError={msgError}errorText2='DPI inválido. Por favor pruebe con otro DPI'/>
-                    <InputTopLabel value={cell} label='Número de teléfono' placeholder='Ingresa tu teléfono' setValue={setCell} validateValue={validateTel} setValidatesValue={setValidateTel} mask={phoneMask} validation={phoneValidation} errorText='Teléfono inválido' msgError={false}errorText2=''/>
-                    <InputTopLabel value={email} label='Correo electrónico (opcional)' placeholder='Ingresa tu correo electrónico' setValue={setEmail} validateValue={validateEmail} setValidatesValue={setValidateEmail} mask={null} validation={emailValidation} errorText='Correo inválido' msgError={false}errorText2=''/>
-                    <InputTopLabelPass value={password} label='Contraseña' placeholder='Ingresa tu contraseña' setValue={setPassword} validateValue={validatePassword} setValidatesValue={setValidatePassword} mask={null} validation={passwordValidation} errorText='La contraseña debe tener al menos 8 caracteres y contener una letra mayúscula, una minúscula y un número' msgError={false}/>
-                    <InputTopLabelPass value={confirmation} label='Confirmar contraseña' placeholder='Ingresa nuevamente tu contraseña' setValue={setConfirmation} validateValue={validateConfirmation} setValidatesValue={setValidateConfirmation} mask={null} validation={confirmPasswordValidation} errorText='Las contraseñas no coinciden' msgError={false}/>
+                    <div id='space'></div>
                     <BtnAction text='Confirmar' img='' trigger='' rounded={false} action={handleClickRegister}/>
                     <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
                         <LinkLogin/>
                     </div>
-		    </div>
+		        </div>
             </div>
         </>
     )
