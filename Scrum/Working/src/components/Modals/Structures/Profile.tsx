@@ -1,5 +1,5 @@
 import ImgInput from "../../Inputs/ImgInput"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DataList from "../../Inputs/DataList";
 import InputSelector from "../../Inputs/InputSelector";
 import DateSelector from "../../Inputs/DateSelector";
@@ -12,12 +12,18 @@ import TextND from "../../Txt/TextND";
 import HorizontalDivider from "../../Dividers/HorizontalDivider";
 import BtnEditUser from "../../Btn/BtnEditUser";
 import { IonButton } from "@ionic/react";
+import { getJobsWithDpi } from "../../../controller/UserController";
 
 interface ContainerProps {
     user: User
     setEdit: (edit: boolean) => void
     setUser: (user: User) => void
     working: boolean
+}
+
+type Trabajo = {
+    descripcion: string
+    nombre_trabajo: string
 }
 
 type User = {
@@ -52,6 +58,8 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
     const [email, setEmail] = useState(user.email)
     const [validatesEmail, setValidatesEmail] = useState(false)
 
+    const [jobArray, setJobArray] = useState<Trabajo[]>([]) 
+
     const phoneMask = useMaskito({
         options: {
             mask: [...Array(4).fill(/\d/),'-',...Array(4).fill(/\d/)]
@@ -66,8 +74,20 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
         return /^\d{4}-\d{4}$/.test(phone)
     }
 
-    const jobarray = ['Carpintero','Albañil','Pintor',]
     const sexos : Array<string> = ['Masculino', 'Femenino']
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            const jobs = await getJobsWithDpi(user.dpi)
+            console.log(jobs);
+            
+            setJobArray(jobs)
+        }
+
+        fetchJobs()
+        console.log(jobArray);
+        
+    },[user.dpi])
 
     return (
         <>
@@ -81,7 +101,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
                         <TextND text={user.nombre + ' ' + user.apellidos} hex="#000" size="big"/>
                         <HorizontalDivider/>
 			{working && <>
-			<DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobarray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
+			<DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobArray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
                  	<HorizontalDivider/></>}
 			<div id="grid-components">
 				<div className="element-center-input">
