@@ -9,7 +9,8 @@ const MonthCalendar : React.FC<ContainerProps> = ({monthMatrix}) => {
     
     return (
         <div style={{margin: "25px", marginTop: "0" }}>
-            <div className='days-label'>
+            
+            <div className="calendar-month">
                 <b className='day-item' style={{borderRadius: "15px 0 0 0"}}>
                     <TextND text='Lunes' size='small' hex='#000'/>
                 </b>
@@ -31,8 +32,6 @@ const MonthCalendar : React.FC<ContainerProps> = ({monthMatrix}) => {
                 <b className='day-item' style={{ borderRadius: "0 15px 0 0"}}>
                     <TextND text='Domingo' size='small' hex='#000'/>
                 </b>
-            </div>
-            <div className="calendar-month">
                 {
                     monthMatrix.flat().map((day, index) => (
                         <div key={index} className='grid-item'>

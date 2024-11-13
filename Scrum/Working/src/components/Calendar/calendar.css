@@ -18,15 +18,22 @@
 }
 
 .daynumbers-display {
+    display: grid;
+    grid-template-rows: 300px 300px 300px 300px 300px 300px;
     padding: 10px;
+    overflow: auto;
 }
 
 .calendar-month {
     max-height: 70vh; /* Ajusta esto según tu preferencia */
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 300px 300px 300px 300px 300px 300px;
-    overflow-y: auto; /* Permite desplazamiento vertical en el componente */
+    grid-template-rows: 50px 200px 200px 200px 200px 200px;
+    overflow-y: auto;
+}
+
+.calendar-month::-webkit-scrollbar{
+    display: none;
 }
 
 .days-label {
@@ -57,6 +64,7 @@
     border: 1px solid #aaa;
     display: flex;
     flex-direction: column;
+    min-width: 100px;
 }
 
 @media (max-width: 660px){
