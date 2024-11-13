@@ -754,13 +754,11 @@ app.get('/api/getcontrat_bymonth/:dpi/:mes', apiKeyAuth, async (req, res) => {
     } else {
       res.status(400).json({ error: "Falied to get users from reports" });
     }
-
   } catch (error) {
     console.error("Error while getting contratos by month:", error)
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
-
 
 
 app.post('/api/threads/insertComment', apiKeyAuth, async (req, res) => {
@@ -863,8 +861,6 @@ app.get('/api/threads/getDpiByTrabajo/:idtrabajo', apiKeyAuth, async (req, res) 
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 app.get('/api/image/:fileID', async (req, res) => {
   const { fileID } = req.params;
@@ -978,9 +974,9 @@ app.post('/api/pfnework/', apiKeyAuth ,async (req, res) => {
 
 app.delete('/api/removework/', apiKeyAuth ,async (req, res) => {
   try {
-    const { trabajo, dpi } = req.body;
+    const { trabajo} = req.body;
 
-   await removenew_trabajo(trabajo, dpi);
+   await removenew_trabajo(trabajo);
 
   } catch (error) {
     console.error('Error post:', error);
@@ -990,7 +986,7 @@ app.delete('/api/removework/', apiKeyAuth ,async (req, res) => {
 
 
 
-app.get('/api/gettrabajos/' ,async (req, res) => {
+app.get('/api/gettrabajos/', apiKeyAuth ,async (req, res) => {
   try {
 
    const result = await gettrabajos();

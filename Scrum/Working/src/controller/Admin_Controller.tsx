@@ -179,12 +179,11 @@ export async function extendunban(dpi: string, fecha : string) {
 
 
 
-export async function removeJob(trabajo: string, dpi: string) {
+export async function removeJob(trabajo: string) {
     try {
 
         const data = {
-            trabajo: trabajo,
-            dpi: dpi 
+            trabajo: trabajo
         };
 
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/removework`, {
@@ -271,13 +270,9 @@ export async function update_descripcion(trabajo: string, descripcion: string) {
 
 
 
-export async function gettrabajosnuevos(trabajo: string, descripcion: string) {
+export async function gettrabajosnuevos() {
     try {
 
-        const data = {
-            trabajo: trabajo,
-            descripcion: descripcion 
-        };
 
         const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/gettrabajos`, {
             method: 'GET',
@@ -285,7 +280,6 @@ export async function gettrabajosnuevos(trabajo: string, descripcion: string) {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
         })
 
         if (!response.ok) {
