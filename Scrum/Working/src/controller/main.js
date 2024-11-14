@@ -1033,6 +1033,23 @@ app.get('/api/messageID/', async (req, res) => {
   }
 });
 
+app.get('/api/chatID/', async (req, res) => {
+  const { dpi1, dpi2 } = req.query; 
+
+  if (!dpi1 || !dpi2) {
+    return res.status(400).json({ error: 'Missing attributes in query' });
+  }
+
+  try {
+    const result = await getChatID2(dpi1, dpi2);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error('Error fetching message ID:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 app.put('/api/changedescription/', apiKeyAuth ,async (req, res) => {
   try {
