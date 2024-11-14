@@ -4,16 +4,14 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./TopBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing menu icons
 import { useHistory } from "react-router";
-import logo from "../../../assets/contratoGT_logo.svg"
-
+import logo from "../../../assets/contratoGT_logo.svg";
 
 interface TopBarProps {
   goWantToWork(): void;
   goWantToHire(): void;
-
 }
 
-const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
+const TopBar: React.FC<TopBarProps> = ({ goWantToWork, goWantToHire }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
@@ -66,8 +64,11 @@ const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
     <div className={styles.topBar}>
       <div className={styles.stylesWrapper}>
         {/* Title Container */}
-        <div className={styles.landBarTittleContainer} style={{display: 'flex'}}>
-          <img src={logo} style={{width: '110px'}}/> 
+        <div
+          className={styles.landBarTittleContainer}
+          style={{ display: "flex" }}
+        >
+          <img src={logo} style={{ width: "110px" }} />
           <h1>CONTRATO-GT</h1>
         </div>
 
@@ -77,14 +78,11 @@ const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
             isMenuOpen ? styles.active : ""
           }`}
         >
-          <button
-            onClick={goWantToHire}
-            ref={firstNavButtonRef}
-            aria-label="Quiero Contratar"
-          >
+          <button className={styles.hireButton} onClick={goWantToHire}>
             QUIERO CONTRATAR
           </button>
-          <button onClick={goWantToWork} aria-label="Quiero Trabajar">
+
+          <button className={styles.workButton} onClick={goWantToWork}>
             QUIERO TRABAJAR
           </button>
         </div>
