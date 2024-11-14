@@ -6,6 +6,7 @@ import Note from '../Dashboard/Note'
 import dayjs from 'dayjs'
 
 interface ContainerProps {
+    notes: NoteData[];
     monthMatrix: Date[][]
     monthNumber: number
     setModal: (modal: boolean) => void;
@@ -27,7 +28,7 @@ interface NoteData {
     nombre: string
 }
 
-const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, setModal, setSelectedNote }) => {
+const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, setModal, setSelectedNote, notes }) => {
     
     const [hiringsMonth, setHiringsMonth] = useState<NoteData[]>([])
 
@@ -83,7 +84,7 @@ const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, se
                             <div key={index} className='grid-item'>
                                 <div style={{ display: "flex", width: "100%", justifyContent: 'flex-end', padding: "10px", flexDirection: 'column' }}>
                                     <div>{day.getDate() > 0 ? day.getDate() : null}</div>
-                                    {hiringsMonth.map((hiring, i) => (
+                                    {notes.map((hiring, i) => (
                                         
                                         <>
                                         {
