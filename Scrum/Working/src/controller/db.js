@@ -751,4 +751,23 @@ export async function setHiringState(idChat, state) {
 	}
 }
 
+export async function getMessageID(chatID, time) {
+    try {
+		const query = {
+			text: `select id_mensaje from mensaje 
+                where id_chat = $1
+                and to_char("time", 'HH24:MI') = $2`,
+			values: [chatID, time]
+		}
+
+		const result = await client.query(query);
+
+		return result.rows[0]
+        
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
 

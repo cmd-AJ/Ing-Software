@@ -412,3 +412,26 @@ export async function setHiringState(chatID: string, state: boolean) {
         throw error;
     }
 }
+
+export async function getMessageID(chatID: string, time: string) {
+    const url = `https://${import.meta.env.VITE_API_HOSTI}/api/messageID/?chatID=${chatID}&time=${time}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json',
+            }
+        });
+    
+        if (!response.ok) {
+            throw new Error('Failed to get message ID for the given chatID and time');
+        }
+    
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching message ID:', error);
+        throw error;
+    }
+}
