@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './chat.css';
 import { IonButton } from '@ionic/react';
 import Swal from 'sweetalert2';
-import { makeHiring } from '../../controller/ChatController';
+import { editMessageFromChat, getChatIdWithDPI, getMessageID, makeHiring } from '../../controller/ChatController';
 import dayjs from 'dayjs';
 
 interface ChatBubbleProps {
@@ -44,39 +44,68 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, time, sender, dpiEmplo
     },[])
 
     const handleAccept = async () => {
+        const dpi = localStorage.getItem('User')
+        const dpi2 = localStorage.getItem('SelectedPerson')
 
-        const timeStampToUse = date || dayjs().format('YYYY-MM-DD') + 'T' + time;
-
-        const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, Number(amount));
-        try {
-            if (response.Success === 'Contrato realizado') {
-
-                Swal.fire({
-                title: "Contratación realizada",
-                text: "Has realizado una contratación con éxito",
-                icon: "success",
-                heightAuto: false,
-                timer: 2500,
-                timerProgressBar: true,
-                showCloseButton: false,
-                showConfirmButton: false
-                });
-
-            } else {
-
-                Swal.fire({
-                title: "Contratacion Fallida",
-                text: "No se ha podido realizar la contratación ",
-                icon: "error",
-                heightAuto: false,
-                timer: 2500,
-                timerProgressBar: true, // Optional: show a progress bar
-                showCloseButton: false, // Hide the close button
-                showConfirmButton: false // Hide the OK button
-                });
+        if (dpi != null && dpi2 != null) {
+            const hour = dayjs(time).format('HH:mm')
+            const dpi1 = JSON.parse(dpi).dpi
+            const msg = message + "\nContratación aceptada"
+            const chatID = await getChatIdWithDPI(dpi1, dpi2)
+            const msgID = await getMessageID(chatID, hour)
+    
+            const timeStampToUse = date || dayjs().format('YYYY-MM-DD') + 'T' + time;
+    
+            await editMessageFromChat(msg, chatID, msgID)
+            const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, Number(amount));
+            try {
+                if (response.Success === 'Contrato realizado') {
+    
+                    Swal.fire({
+                    title: "Contratación realizada",
+                    text: "Has realizado una contratación con éxito",
+                    icon: "success",
+                    heightAuto: false,
+                    timer: 2500,
+                    timerProgressBar: true,
+                    showCloseButton: false,
+                    showConfirmButton: false
+                    });
+    
+                } else {
+    
+                    Swal.fire({
+                    title: "Contratacion Fallida",
+                    text: "No se ha podido realizar la contratación ",
+                    icon: "error",
+                    heightAuto: false,
+                    timer: 2500,
+                    timerProgressBar: true, // Optional: show a progress bar
+                    showCloseButton: false, // Hide the close button
+                    showConfirmButton: false // Hide the OK button
+                    });
+                }
+            } catch (error) {
+                console.error('Error al contratar:', error);
             }
-        } catch (error) {
-            console.error('Error al contratar:', error);
+        }
+    }
+
+    const handleReject = async () => {
+        const dpi = localStorage.getItem('User')
+        const dpi2 = localStorage.getItem('SelectedPerson')
+
+        if (dpi != null && dpi2 != null) {
+            const hour = dayjs(time).format('HH:mm')
+            const dpi1 = JSON.parse(dpi).dpi
+            const msg = message + "\nContratación rechazada"
+            
+            const chatID = await getChatIdWithDPI(dpi1, dpi2)
+            const msgID = await getMessageID(chatID, hour)
+    
+            const timeStampToUse = date || dayjs().format('YYYY-MM-DD') + 'T' + time;
+    
+            await editMessageFromChat(msg, chatID, msgID.id_mensaje)
         }
         
     }
@@ -89,7 +118,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, time, sender, dpiEmplo
                 className="message-content"
                 dangerouslySetInnerHTML={{__html: formattedMessage}}/>
                 {(formattedMessage.includes("-----------------------------") && (!formattedMessage.includes("Propuesta aceptada") || !formattedMessage.includes("Propuesta rechazada")))&& <>
-                <IonButton color="danger">Rechazar</IonButton>
+                <IonButton color="danger" onClick={handleReject}>Rechazar</IonButton>
                 <IonButton color="success" onClick={handleAccept}>Aceptar</IonButton></>}
             <div className="message-time">{formattedTime(time)}</div>
         </div>

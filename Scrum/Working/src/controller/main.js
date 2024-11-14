@@ -1041,7 +1041,7 @@ app.get('/api/chatID/', async (req, res) => {
   }
 
   try {
-    const result = await getChatID(dpi1, dpi2);
+    const result = await getChatID2(dpi1, dpi2);
 
     return res.status(200).json(result);
   } catch (error) {

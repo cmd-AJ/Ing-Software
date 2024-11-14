@@ -281,7 +281,7 @@ export async function gettrabajo(dpi) {
     }
 }
 
-export async function getChatID(dpi1, dpi2) {
+export async function getChatID2(dpi1, dpi2) {
     try {
         // search de chat id corresponding to both dpi
         const query = {
