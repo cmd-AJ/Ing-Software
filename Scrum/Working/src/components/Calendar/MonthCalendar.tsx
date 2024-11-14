@@ -3,6 +3,7 @@ import TextND from '../Txt/TextND'
 import './calendar.css'
 import { get_contrat_by_moventh } from '../../controller/UserController'
 import Note from '../Dashboard/Note'
+import dayjs from 'dayjs'
 
 interface ContainerProps {
     monthMatrix: Date[][]
@@ -22,6 +23,8 @@ interface NoteData {
     foto: string;
     timestampcita: string
     pago: string
+    imagen: string
+    nombre: string
 }
 
 const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, setModal, setSelectedNote }) => {
@@ -93,10 +96,10 @@ const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, se
                                                        
                                                 }}>
                                                 <Note 
-                                                    trabajador={hiring.trabajador}
-                                                    hora=''
+                                                    trabajador={hiring.nombre}
+                                                    hora={dayjs(hiring.timestampcita).format('h:mm A')}
                                                     descripcion={hiring.descripcion}
-                                                    foto=''
+                                                    foto={hiring.imagen}
                                                 />
                                             </div>
                                         }

@@ -21,6 +21,8 @@ interface NoteData {
   foto: string;
   timestampcita: string
   pago: string
+  imagen: string
+  nombre: string
 }
 
 const Dashboard: React.FC = () => {
@@ -45,7 +47,9 @@ const Dashboard: React.FC = () => {
     precio: "",
     foto: "",
     timestampcita: "",
-    pago: ""
+    pago: "",
+    imagen: "",
+    nombre: ""
   });  // Estado para la Note seleccionada
 
   // Función para obtener los datos de hirings
