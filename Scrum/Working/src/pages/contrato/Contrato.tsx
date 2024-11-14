@@ -18,7 +18,7 @@ const Contrato: React.FC = () => {
     "https://img.freepik.com/foto-gratis/primer-plano-carpintero-masculino-que-mide-tablon-madera-largo-regla_23-2147945070.jpg?t=st=1730428246~exp=1730431846~hmac=6d2c22cbe30a912f8f2249e2be04384b934c76eccfd289a52c692c9b58440861&w=1380"
   );
   const [imageLoaded] = useState<boolean>(false);
-  const [section, setSection] = useState("work");
+  const [section, setSection] = useState("hire");
   const buttons = [
     { label: "Iniciar sesion", onClick: () => {} },
     { label: "Iniciar sesion", onClick: () => {} },
@@ -72,7 +72,7 @@ const Contrato: React.FC = () => {
     <div className={styles.contratoPage}>
       <TopBar goWantToHire={goWantToHire} goWantToWork={goWantToWork} />
       <div className={styles.content}>
-        {section == "work" ? (
+        {section == "hire" ? (
           // work section
           <section>
             <section className={styles.section1}>
