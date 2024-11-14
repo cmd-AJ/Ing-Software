@@ -285,7 +285,7 @@ export async function getChatID(dpi1, dpi2) {
     try {
         // search de chat id corresponding to both dpi
         const query = {
-            text: "SELECT idchat " +
+            text: "SELECT idchat, hiring " +
                 "FROM chats " +
                 "WHERE (dpireceptor = $1 AND dpiemisor = $2) " +
                 "OR (dpireceptor = $2 AND dpiemisor = $1)",
@@ -758,25 +758,6 @@ export async function getMessageID(chatID, time) {
                 where id_chat = $1
                 and to_char("time", 'HH24:MI') = $2`,
 			values: [chatID, time]
-		}
-
-		const result = await client.query(query);
-
-		return result.rows[0]
-        
-	} catch (error) {
-		console.error('Error while setting the working state:', error)
-		throw error
-	}
-}
-
-export async function getChatID2(dpi1, dpi2) {
-    try {
-		const query = {
-			text: `select idchat, hiring from chats c 
-            where (dpireceptor = $1 and dpiemisor = $2)
-            or (dpireceptor = $2 and dpiemisor = $1`,
-			values: [dpi1, dpi2]
 		}
 
 		const result = await client.query(query);

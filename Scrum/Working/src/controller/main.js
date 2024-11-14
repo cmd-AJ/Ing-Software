@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
-import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos, setHiringState, getMessageID, getChatID2 } from './db.js'
+import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos, setHiringState, getMessageID } from './db.js'
 import { deleteRelationUserTojob, addRelationUserToJob, getJobsOfWorkerWithDPI,getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos, insertNewJob, getWorkersByFlexibleName } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
@@ -1032,24 +1032,6 @@ app.get('/api/messageID/', async (req, res) => {
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-app.get('/api/chatID/', async (req, res) => {
-  const { dpi1, dpi2 } = req.query; 
-
-  if (!dpi1 || !dpi2) {
-    return res.status(400).json({ error: 'Missing attributes in query' });
-  }
-
-  try {
-    const result = await getChatID2(dpi1, dpi2);
-
-    return res.status(200).json(result);
-  } catch (error) {
-    console.error('Error fetching message ID:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
 
 app.put('/api/changedescription/', apiKeyAuth ,async (req, res) => {
   try {
