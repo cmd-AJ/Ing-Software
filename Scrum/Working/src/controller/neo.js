@@ -176,7 +176,6 @@ export async function getWorkers(trabajo) {
     const session = createSession();
 
     try {
-        // Using parameterized query and Levenshtein distance for fuzzy matching
         const query = `
             MATCH (usr:Usuario)-[:trabaja_de]->(tr:Trabajo)
             WHERE apoc.text.levenshteinDistance(toLower(tr.nombre_trabajo), toLower($trabajo)) <= 3
@@ -184,20 +183,23 @@ export async function getWorkers(trabajo) {
         `;
         const result = await session.run(query, { trabajo });
 
-        const workers = result.records.map(record => {
+        const workers = await Promise.all(result.records.map(async record => {
             const worker = record.get('usr');
             const nombreTrabajo = record.get('nombre_trabajo');
+            const ratingFromPostgres = await getUserRatingWithDPI(worker.properties.dpi);
+
             return {
                 nombre: worker.properties.nombre,
                 telefono: worker.properties.telefono,
                 municipio: worker.properties.municipio,
-                rating: worker.properties.rating,
+                rating: ratingFromPostgres || worker.properties.rating,
                 apellidos: worker.properties.apellidos,
                 imagen: worker.properties.imagen,
                 dpi: worker.properties.dpi,
                 nombre_trabajo: nombreTrabajo
             };
-        });
+        }));
+        
         return workers;
     } catch (error) {
         console.error('Error getting workers:', error);
@@ -211,10 +213,8 @@ export async function getWorkersByFlexibleName(nombreCompleto) {
     const session = createSession();
 
     try {
-        // Separar el nombre completo en palabras y enviar como parámetro a Neo4j
         const palabras = nombreCompleto.toLowerCase().split(" ");
-
-        // Query en Neo4j para realizar coincidencias flexibles en cada palabra
+        
         const query = `
             WITH $palabras AS palabras
             MATCH (usr:Usuario)
@@ -225,22 +225,23 @@ export async function getWorkersByFlexibleName(nombreCompleto) {
             RETURN usr LIMIT 25
         `;
 
-        // Ejecutar la consulta y enviar el array de palabras como parámetro
         const result = await session.run(query, { palabras });
 
-        const workers = result.records.map(record => {
+        const workers = await Promise.all(result.records.map(async record => {
             const worker = record.get('usr');
+            const ratingFromPostgres = await getUserRatingWithDPI(worker.properties.dpi);
+
             return {
                 nombre: worker.properties.nombre,
                 apellidos: worker.properties.apellidos,
                 telefono: worker.properties.telefono,
                 municipio: worker.properties.municipio,
-                rating: worker.properties.rating,
+                rating: ratingFromPostgres || worker.properties.rating,
                 dpi: worker.properties.dpi,
                 imagen: worker.properties.imagen
             };
-        });
-
+        }));
+        
         return workers;
     } catch (error) {
         console.error('Error getting workers by flexible name:', error);
@@ -249,6 +250,7 @@ export async function getWorkersByFlexibleName(nombreCompleto) {
         await session.close();
     }
 }
+
 
 
 export async function getTrustedUsersByDpi(dpi) {

@@ -46,7 +46,7 @@ const MyNetwork: React.FC = () => {
         ) : connections.length > 0 ? (
           <ConnectionsGraph connections={connections} currentdpi={currentdpi} />
         ) : (
-          <p>No connections found.</p>
+          <p>Conecta con personas para comenzar tu red</p>
         )}
       </div>
     </>

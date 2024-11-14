@@ -571,6 +571,29 @@ app.post('/api/contacts/message', apiKeyAuth, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
+
+app.put('/api/contacts/editMessage', apiKeyAuth, async (req, res) => {
+  try {
+    const { contenido, id_chat, id_msg } = req.body;
+
+    if (!contenido || !id_chat || !id_msg) {
+      return res.status(400).json({ error: 'contenido, id_chat, and id_msg are required and cannot be empty' });
+    }
+
+    const result = await editChatMessage(id_chat, id_msg, contenido);
+
+    if (result) {
+      res.status(200).json({ success: 'Mensaje modificado' });
+    } else {
+      res.status(404).json({ error: 'No se modificó el mensaje' });
+    }
+  } catch (error) {
+    console.error('Error editing message:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 // Endpoint to getChatID
 app.post('/api/contacts/chatID', apiKeyAuth, async (req, res) => {
   try {
@@ -731,13 +754,11 @@ app.get('/api/getcontrat_bymonth/:dpi/:mes', apiKeyAuth, async (req, res) => {
     } else {
       res.status(400).json({ error: "Falied to get users from reports" });
     }
-
   } catch (error) {
     console.error("Error while getting contratos by month:", error)
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })
-
 
 
 app.post('/api/threads/insertComment', apiKeyAuth, async (req, res) => {
@@ -840,8 +861,6 @@ app.get('/api/threads/getDpiByTrabajo/:idtrabajo', apiKeyAuth, async (req, res) 
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
 
 app.get('/api/image/:fileID', async (req, res) => {
   const { fileID } = req.params;
@@ -955,9 +974,9 @@ app.post('/api/pfnework/', apiKeyAuth ,async (req, res) => {
 
 app.delete('/api/removework/', apiKeyAuth ,async (req, res) => {
   try {
-    const { trabajo, dpi } = req.body;
+    const { trabajo} = req.body;
 
-   await removenew_trabajo(trabajo, dpi);
+   await removenew_trabajo(trabajo);
 
   } catch (error) {
     console.error('Error post:', error);
@@ -967,7 +986,7 @@ app.delete('/api/removework/', apiKeyAuth ,async (req, res) => {
 
 
 
-app.get('/api/gettrabajos/' ,async (req, res) => {
+app.get('/api/gettrabajos/', apiKeyAuth ,async (req, res) => {
   try {
 
    const result = await gettrabajos();

@@ -3,6 +3,21 @@ import getClient from './RelationalDatabase.js';
 
 const client = getClient();
 
+export async function editChatMessage(chatID, messageID, newMessage) {
+    try {
+        const query = {
+            text: "UPDATE mensaje SET contenido = $1 WHERE id_chat = $2 AND id_mensaje = $3",
+            values: [newMessage, chatID, messageID]
+        }
+
+        const result = await client.query(query);
+        return result
+
+    } catch (error) {
+        console.error("Error while editing message")
+    }
+}
+
 export async function getUserRatingWithDPI(dpi) {
     try {
         const query = {
@@ -588,7 +603,7 @@ export async function getreport_nofecha(dpi, idreporte) {
 export async function getcontrataciones_por_mes(dpi, mes) {
     try {
         const query = {
-            text: "select idtrabajo, descripcion, dpiempleador, timestampcita, pago from trabajodisponible where EXTRACT(MONTH FROM timestampcita) = @$2 and dpiempleador = REPLACE(quote_literal($1), '''', '');",
+            text: "select idtrabajo, descripcion, dpiempleador, imagen, concat(nombre,' ',apellidos) as nombre  ,dpiempleado,timestampcita, pago from trabajodisponible left join usuarios on dpiempleado  = dpi where EXTRACT(MONTH FROM timestampcita) = @$2 and dpiempleador = REPLACE(quote_literal($1), '''', '');",
             values: [dpi, mes]
         }
         const result = await client.query(query)
