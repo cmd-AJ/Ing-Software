@@ -64,76 +64,77 @@ const Contrato: React.FC = () => {
   const text = "Quieres trabajar? ->";
   return (
     <div className={styles.contratoPage}>
-      <TopBar goWantToHire={goWantToHire} goWantToWork={goWantToWork}/>
+      <TopBar goWantToHire={goWantToHire} goWantToWork={goWantToWork} />
       <div className={styles.content}>
+        {section == "work" ? (
+          // work section
+          <section>
+            <section className={styles.section1}>
+              <div className={styles.innerContainer}>
+                <div className={styles.descriptionContainer}>
+                  <p className={styles.mainSlogan}>
+                    Encuentra El experto Que tus amigos ya Confian.
+                  </p>
+                  <p className={styles.conectaCon}>
+                    Conectate Con Profesionales De Confianza Recomendados Por Tu
+                    Propia Red.
+                  </p>
 
-        {section == "work" 
-        ?
+                  <p className={styles.quieres}>{text}</p>
+                </div>
 
-         <section>
-          <section className={styles.section1}>
-          <div className={styles.innerContainer}>
-            <div className={styles.descriptionContainer}>
-              <p className={styles.mainSlogan}>
-                Encuentra El experto Que tus amigos ya Confian.
-              </p>
-              <p className={styles.conectaCon}>
-                Conectate Con Profesionales De Confianza Recomendados Por Tu
-                Propia Red.
-              </p>
-
-              <p className={styles.quieres}>{text}</p>
-            </div>
-
-            <div className={styles.productIdea}>
-              <GraphContainer />
-            </div>
-          </div>
-        </section>
-        <section className={styles.section2}>
-          <div className={styles.innerContainer}>
-            <div className={styles.aboutDisplayer}>
-              <h2 className={styles.sec2Tittles}>Construye Tu Propia</h2>
-              <h1 className={styles.sec2Tittles}>RED</h1>
-              <h1 className={styles.sec2Tittles}>DE</h1>
-              <h1 className={styles.sec2Tittles}>CONFIANZA</h1>
-              <div className={styles.cardsContainer}>
-                {cardsData.map((card, index) => (
-                  <div
-                    key={index}
-                    className={styles.landAssetCard}
-                    onMouseEnter={() => setHoveredImage(card.imageUrl)}
-                    onMouseLeave={() =>
-                      setHoveredImage(
-                        "https://img.freepik.com/foto-gratis/primer-plano-carpintero-masculino-que-mide-tablon-madera-largo-regla_23-2147945070.jpg?t=st=1730428246~exp=1730431846~hmac=6d2c22cbe30a912f8f2249e2be04384b934c76eccfd289a52c692c9b58440861&w=1380"
-                      )
-                    }
-                  >
-                    <h1>{card.title}</h1>
-                    <p>{card.content}</p>
-                  </div>
-                ))}
+                <div className={styles.productIdea}>
+                  <GraphContainer />
+                </div>
               </div>
-            </div>
-            <div className={styles.productAssets}>
-              {hoveredImage && (
-                <img
-                  src={hoveredImage}
-                  alt="Product Asset"
-                  className={`${styles.landHoveredImage} ${
-                    imageLoaded ? styles.visible : ""
-                  }`}
-                />
-              )}
-            </div>
-          </div>
-        </section>
-         </section> 
-         : 
+            </section>
+            <section className={styles.section2}>
+              <div className={styles.innerContainer}>
+                <div className={styles.aboutDisplayer}>
+                  <h2 className={styles.sec2Tittles}>Construye Tu Propia</h2>
+                  <h1 className={styles.sec2Tittles}>RED</h1>
+                  <h1 className={styles.sec2Tittles}>DE</h1>
+                  <h1 className={styles.sec2Tittles}>CONFIANZA</h1>
+                  <div className={styles.cardsContainer}>
+                    {cardsData.map((card, index) => (
+                      <div
+                        key={index}
+                        className={styles.landAssetCard}
+                        onMouseEnter={() => setHoveredImage(card.imageUrl)}
+                        onMouseLeave={() =>
+                          setHoveredImage(
+                            "https://img.freepik.com/foto-gratis/primer-plano-carpintero-masculino-que-mide-tablon-madera-largo-regla_23-2147945070.jpg?t=st=1730428246~exp=1730431846~hmac=6d2c22cbe30a912f8f2249e2be04384b934c76eccfd289a52c692c9b58440861&w=1380"
+                          )
+                        }
+                      >
+                        <h1>{card.title}</h1>
+                        <p>{card.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.productAssets}>
+                  {hoveredImage && (
+                    <img
+                      src={hoveredImage}
+                      alt="Product Asset"
+                      className={`${styles.landHoveredImage} ${
+                        imageLoaded ? styles.visible : ""
+                      }`}
+                    />
+                  )}
+                </div>
+              </div>
+            </section>
+          </section>
+        ) : (
+          // hire section
 
-         <section>hire</section>}
-
-        
+          <section className={styles.hireSection}>
+            <div className={styles.hireTextContainer}></div>
+            <div className={styles.hireImageContainer}></div>
+          </section>
+        )}
       </div>
     </div>
   );
