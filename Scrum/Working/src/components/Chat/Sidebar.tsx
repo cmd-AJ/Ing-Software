@@ -296,7 +296,11 @@ const Sidebar = () => {
                         ? "active"
                         : ""
                     }`}
-                    onClick={() => handlePersonClick(person.dpi)}
+                    onClick={() => {handlePersonClick(person.dpi)
+                      localStorage.setItem('firstInteraction', 'false')
+                      setFirstInteraction(localStorage.getItem('firstInteraction'))
+                    }
+                    }
                   >
                     <img className="imagen" src={person.img} alt="" />
                     <div className="text-container">
@@ -330,7 +334,7 @@ const Sidebar = () => {
               <span className="name">Selecciona un chat</span>
             )}
           </div>
-          {isDetailsOpen ? (
+          {isDetailsOpen || firstInteraction === "true" ? (
             <Details
               onClose={() => setIsDetailsOpen(false)}
               setFirstInteraction={setFirstInteraction}
