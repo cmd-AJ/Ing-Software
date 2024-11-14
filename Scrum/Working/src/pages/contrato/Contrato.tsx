@@ -5,6 +5,8 @@ import LandingSearchBar from "./components/LadingSearchBar";
 import GraphContainer from "./components/GraphContainer";
 import { Card } from "@mui/material";
 
+import { useHistory, useLocation } from "react-router-dom"; // Agregamos useLocation
+
 interface Card {
   title: string;
   content: string;
@@ -21,6 +23,8 @@ const Contrato: React.FC = () => {
     { label: "Iniciar sesion", onClick: () => {} },
     { label: "Iniciar sesion", onClick: () => {} },
   ];
+
+  const history = useHistory();
 
   const goWantToWork = () => {
     setSection("work");
@@ -153,7 +157,7 @@ const Contrato: React.FC = () => {
                 </p>
                 <p
                   className={styles.quieres}
-                  style={{ marginLeft: "9%", textAlign: "center"}}
+                  style={{ marginLeft: "9%", textAlign: "center" }}
                 >
                   Trabaja de manera independiente para las personas que desees.
                   ¡Sé tu propio jefe!
@@ -164,12 +168,18 @@ const Contrato: React.FC = () => {
                 >
                   {text2}
                 </p>
-                <button className={styles.startNowButton}>
+                <button
+                  onClick={() => history.push("/register")}
+                  className={styles.startNowButton}
+                >
                   ¡EMPEZAR AHORA!
                 </button>
               </div>
               <div className={styles.hireImageContainer}>
-                <img className={styles.hireImg} src="https://st.depositphotos.com/1000816/3025/i/450/depositphotos_30251097-stock-photo-business-people-shaking-hands.jpg"></img>
+                <img
+                  className={styles.hireImg}
+                  src="https://st.depositphotos.com/1000816/3025/i/450/depositphotos_30251097-stock-photo-business-people-shaking-hands.jpg"
+                ></img>
               </div>
             </div>
           </section>
