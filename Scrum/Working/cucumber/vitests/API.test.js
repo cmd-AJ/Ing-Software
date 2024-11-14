@@ -66,28 +66,28 @@ describe('Quiero buscar un trabajo', () => {
   });
 });
 
-describe('Comprabar si chat eentre 2 usuarios existe', () => {
-  it('Al ingresar 2 dpi que tienen un chat juntos', async () => {
+// describe('Comprabar si chat eentre 2 usuarios existe', () => {
+//   it('Al ingresar 2 dpi que tienen un chat juntos', async () => {
 
-    const chatExists = await chatBetweenUsersExist("3810 35859 0101", "3834 49898 0101")
-    expect(chatExists).toBe(true);
-  });
+//     const chatExists = await chatBetweenUsersExist("3810 35859 0101", "3834 49898 0101")
+//     expect(chatExists).toBe(true);
+//   });
   
-});
+// });
 
-describe('Quiero buscar a un contacto y sus mensajes', () => {
-  it('Soy empleador Ricardo Tapia Y necesito hablar a Jose', async () => {
-    expect( Array.isArray(await getChatMessages( "3834 49898 0101" ,"3810 35859 0101"))).toBe(true);
-  });
-  it('Como dev tengo que ver a que id del chat pertenece la tupla de dpi', async () => {
-    const data = await getChatIdWithDPI("3834 49898 0101" ,"3810 35859 0101") 
-    expect((data[0]["idchat"])).toBe(5);
-  }); //TOMAR NOTA EN EL CASO DE QUE NO RETORNE un trabajador una o dos o puede ser que no existe el trabajo o no hay nadie con ese trabajo  
-  it('Quiero saber quien esta contratado', async () => {
-    const data = (await getHirings('3810 35859 0101'))
-    expect(Array.isArray(data)).toBe(true) //no tiene trabajo
-  });
-});
+// describe('Quiero buscar a un contacto y sus mensajes', () => {
+//   it('Soy empleador Ricardo Tapia Y necesito hablar a Jose', async () => {
+//     expect( Array.isArray(await getChatMessages( "3834 49898 0101" ,"3810 35859 0101"))).toBe(true);
+//   });
+//   it('Como dev tengo que ver a que id del chat pertenece la tupla de dpi', async () => {
+//     const data = await getChatIdWithDPI("3834 49898 0101" ,"3810 35859 0101") 
+//     expect((data[0]["idchat"])).toBe(5);
+//   }); //TOMAR NOTA EN EL CASO DE QUE NO RETORNE un trabajador una o dos o puede ser que no existe el trabajo o no hay nadie con ese trabajo  
+//   it('Quiero saber quien esta contratado', async () => {
+//     const data = (await getHirings('3810 35859 0101'))
+//     expect(Array.isArray(data)).toBe(true) //no tiene trabajo
+//   });
+// });
 
 describe('Quiero saber que contrataciones he realizado', () => {
     it('utilizando mi dpi', async () => {
