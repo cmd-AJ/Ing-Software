@@ -11,6 +11,7 @@ interface ContainerProps {
     label: string;
     placeholder: string;
     list: Array<Trabajo>;
+    setList : (list : Array<Trabajo>) => void
     value: string;
     setValue: (value: string) => void;
     validatesValue: boolean;
@@ -33,7 +34,8 @@ const DataList: React.FC<ContainerProps> = ({
     validatesValue,
     setValidatesValue,
     errorText,
-    validation
+    validation,
+    setList
 }) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const [popoverContent, setPopoverContent] = useState<string>("Oficio en revisión");
@@ -44,9 +46,8 @@ const DataList: React.FC<ContainerProps> = ({
 
     useEffect(() => {
         setMyJobs(list);
-        setFilteredJobs(Array(list.length).fill([]));  // Initialize filteredJobs for each input
     }, [list]);
-
+    
     useEffect(() => {
         const fetchAllJobs = async () => {
             const jobs = await getJobsList();
@@ -54,6 +55,10 @@ const DataList: React.FC<ContainerProps> = ({
         };
         fetchAllJobs();
     }, []);
+
+    useEffect(() => {
+        setList(myJobs)
+    },[myJobs])
 
     const handleAddJob = useCallback(() => {
         setMyJobs((prevJobs) => [...prevJobs, { nombre_trabajo: "", descripcion: "" }]);

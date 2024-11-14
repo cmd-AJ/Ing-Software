@@ -89,6 +89,12 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
         
     },[user.dpi])
 
+    useEffect(() => {
+        console.log(jobArray);
+        
+    },[jobArray])
+    
+
     return (
         <>
             <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
@@ -101,7 +107,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
                         <TextND text={user.nombre + ' ' + user.apellidos} hex="#000" size="big"/>
                         <HorizontalDivider/>
 			{working && <>
-			<DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobArray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob}/>
+			<DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobArray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob} setList={setJobArray}/>
                  	<HorizontalDivider/></>}
 			<div id="grid-components">
 				<div className="element-center-input">
@@ -179,6 +185,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
                     municipio={municipio}
                     setUser={setUser}
                     setEdit={setEdit}
+                    list={jobArray}
                 />
             </div>
         </>
