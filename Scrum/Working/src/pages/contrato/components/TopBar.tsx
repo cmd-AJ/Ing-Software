@@ -5,16 +5,14 @@ import styles from "./TopBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing menu icons
 import { useHistory } from "react-router";
 
-interface Button {
-  label: string;
-  onClick: () => void;
-}
 
 interface TopBarProps {
-  buttons: Button[];
+  goWantToWork(): void;
+  goWantToHire(): void;
+
 }
 
-const TopBar: React.FC<TopBarProps> = ({ }) => {
+const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
@@ -78,13 +76,13 @@ const TopBar: React.FC<TopBarProps> = ({ }) => {
           }`}
         >
           <button
-            onClick={handleNavItemClick}
+            onClick={goWantToHire}
             ref={firstNavButtonRef}
             aria-label="Quiero Contratar"
           >
             QUIERO CONTRATAR
           </button>
-          <button onClick={handleNavItemClick} aria-label="Quiero Trabajar">
+          <button onClick={goWantToWork} aria-label="Quiero Trabajar">
             QUIERO TRABAJAR
           </button>
         </div>
