@@ -2,7 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import { apiKeyAuth, adminapiKeyAuth } from './auth.js'
-import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos } from './db.js'
+import { insertJobToCompleted, deleteHiringFromAvailable, insertSurveyToCompletedJob, insertCommentWithId, getCommentsWithThreadID, getThreadPosts, createThreadPost, createNewChat, getUsers, getLoginUser, insertUser, gettrabajo, getUserbyDPI, setsettings, getContactsByUserDPI, getChatBetweenUsers, updatetrab, gettrabajoant, insertartrabant, insertartipotrabajo, gettrabajoSABTE, getTrabajoSABTEemple, insertChatMessage, getChatID, insertHiring, getCurrentHirings, getpasscode, updataepasscode_phone, getmail, getphone, changepass, getreport_nofecha, getreport_withfecha, getcontrataciones_por_mes, setWorkingState ,getreviewone, setnewtrabajoperfil, removenew_trabajo, chworkdescription, gettrabajos, setHiringState } from './db.js'
 import { deleteRelationUserTojob, addRelationUserToJob, getJobsOfWorkerWithDPI,getWorkers, getTrustedUsersByDpi, creatNeoUser, updateNeoUser, addUserAsTrustedPerson, getAllTrabajos, insertNewJob, getWorkersByFlexibleName } from './neo.js'
 import { Admin_Exist, extendban, getbanusers, getbanusersprev, getreports, unban } from './administration.js';
 import { send_email_forfg, send_fg_password } from './fg_function.js'
@@ -980,6 +980,22 @@ app.get('/api/gettrabajos/' ,async (req, res) => {
   }
 });
 
+app.put('/api/setHiringState/', async (req, res) => {
+  const { chatID, state } = req.body; // Accedemos correctamente al body
+
+  // Validación de parámetros
+  if (!chatID || typeof state !== 'boolean') {
+    return res.status(400).json({ error: 'Invalid input. chatID is required and state must be a boolean.' });
+  }
+
+  try {
+    await setHiringState(chatID, state);
+    return res.status(200).json({ success: "Successfully changed hiring state" }); // Corregido el mensaje de éxito
+  } catch (error) {
+    console.error('Error in POST:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
