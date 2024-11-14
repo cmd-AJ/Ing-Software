@@ -107,7 +107,7 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
                         <TextND text={user.nombre + ' ' + user.apellidos} hex="#000" size="big"/>
                         <HorizontalDivider/>
 			{working && <>
-			<DataList label="Oficio:" placeholder="Ingresa tu oficio" list={jobArray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob} setList={setJobArray}/>
+			<DataList dpi={user.dpi} label="Oficio:" placeholder="Ingresa tu oficio" list={jobArray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob} setList={setJobArray}/>
                  	<HorizontalDivider/></>}
 			<div id="grid-components">
 				<div className="element-center-input">

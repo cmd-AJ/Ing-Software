@@ -6,6 +6,7 @@ import BtnAction from '../Btn/BtnAction';
 import { trash, informationCircle } from 'ionicons/icons';
 import { Popover, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { getJobsList } from '../../controller/HireControler';
+import { deleteJobToWorker } from '../../controller/UserController';
 
 interface ContainerProps {
     label: string;
@@ -18,6 +19,7 @@ interface ContainerProps {
     setValidatesValue: (validatesJob: boolean) => void;
     errorText: string;
     validation: (input: string) => boolean;
+    dpi: string
 }
 
 type Trabajo = {
@@ -35,7 +37,8 @@ const DataList: React.FC<ContainerProps> = ({
     setValidatesValue,
     errorText,
     validation,
-    setList
+    setList,
+    dpi
 }) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const [popoverContent, setPopoverContent] = useState<string>("Oficio en revisión");
@@ -118,6 +121,12 @@ const DataList: React.FC<ContainerProps> = ({
     };
 
     const handleDelete = useCallback((index: number) => {
+        const jobToDelete = myJobs[index]
+
+        if (allJobs.some((job) => job.nombre_trabajo === jobToDelete.nombre_trabajo)) {
+            deleteJobToWorker(dpi, jobToDelete.nombre_trabajo)
+        }
+
         setMyJobs((prevJobs) => prevJobs.filter((_, i) => i !== index));
         setFilteredJobs((prevFilteredJobs) => prevFilteredJobs.filter((_, i) => i !== index));
     }, []);
