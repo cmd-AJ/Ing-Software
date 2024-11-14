@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from 'emailjs-com';
+import Swal from 'sweetalert2'
+
 
 import './messageForm.css';
 
@@ -12,28 +14,44 @@ const MessageForm: React.FC<MessageFormProps> = ({ onClose }) => {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     const formData = {
       user_name: form.current?.user_name.value || 'No proporcionado',
       user_email: form.current?.user_email.value || 'No proporcionado',
       user_phone: form.current?.user_phone.value || 'No proporcionado',
       message: form.current?.message.value || '',
     };
-  
+
     emailjs.send("service_cv5ofyb", "template_f7urocu", formData, "xxpkOxScq1JFDzFJ6")
       .then(
         () => {
-          console.log('Mensaje enviado con éxito');
+          Swal.fire({
+            title: "Mensaje enviado con éxito",
+            icon: "success",
+            heightAuto: false,
+            timer: 2500,
+            timerProgressBar: true,
+            showCloseButton: false,
+            showConfirmButton: false
+          });
           alert("Mensaje enviado con éxito");
           form.current?.reset();
         },
         (error) => {
           console.error('Error al enviar el mensaje:', error.text);
-          alert("Hubo un error al enviar el mensaje");
+          Swal.fire({
+            title: 'Uh Oh',
+            text: 'Error al enviar el mensaje',
+            heightAuto: false,
+            timer: 2500,
+            timerProgressBar: true,
+            showCloseButton: false,
+            showConfirmButton: false
+          })
         }
       );
   };
-  
+
 
   return (
     <div className="message-form-container">
