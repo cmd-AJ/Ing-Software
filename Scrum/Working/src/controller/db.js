@@ -770,4 +770,24 @@ export async function getMessageID(chatID, time) {
 	}
 }
 
+export async function getChatID(dpi1, dpi2) {
+    try {
+		const query = {
+			text: `select idchat, hiring from chats c 
+            where (dpireceptor = $1 and dpiemisor = $2)
+            or (dpireceptor = $2 and dpiemisor = $1`,
+			values: [dpi1, dpi2]
+		}
+
+		const result = await client.query(query);
+
+		return result.rows[0]
+        
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
+
 
