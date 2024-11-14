@@ -36,7 +36,7 @@ const Contrato: React.FC = () => {
 
   const cardsData: Card[] = [
     {
-      title: "¿Qué Es?",
+      title: "¿Qué es?",
       content:
         "Una red de contactos es un grupo de personas conectadas entre sí, con quienes puedes hablar acerca trabajadores  para garantizar servicios de calidad.",
       imageUrl:

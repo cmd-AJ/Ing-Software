@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./TopBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing menu icons
 import { useHistory } from "react-router";
+import logo from "../../../assets/contratoGT_logo.svg"
 
 
 interface TopBarProps {
@@ -65,8 +66,9 @@ const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
     <div className={styles.topBar}>
       <div className={styles.stylesWrapper}>
         {/* Title Container */}
-        <div className={styles.landBarTittleContainer}>
-          <h1>CONTRATOGT</h1>
+        <div className={styles.landBarTittleContainer} style={{display: 'flex'}}>
+          <img src={logo} style={{width: '110px'}}/> 
+          <h1>CONTRATO-GT</h1>
         </div>
 
         {/* Navigation Actions */}
