@@ -18,8 +18,7 @@
 }
 
 .daynumbers-display {
-    display: grid;
-    grid-template-rows: 300px 300px 300px 300px 300px 300px;
+    display: flex;
     padding: 10px;
     overflow: auto;
 }

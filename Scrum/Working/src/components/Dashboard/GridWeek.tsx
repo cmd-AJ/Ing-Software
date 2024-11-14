@@ -3,12 +3,15 @@ import './gridWeek.css';
 import Note from './Note';
 
 interface NoteData {
+  idtrabajo: string
   trabajador: string;
   dia: string;
   hora: string;
   descripcion: string;  // Cambiar de 'descripción' a 'descripcion'
   precio: string;
   foto: string;
+  timestampcita: string
+  pago: string
 }
 
 
