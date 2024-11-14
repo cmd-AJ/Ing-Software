@@ -60,7 +60,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({}) => {
       )}
       <IonHeader>
         <IonToolbar>
-          <IonGrid>
+          <IonGrid className="ion-grid">
             <IonRow className="ion-align-items-center responsive-navbar">
               <IonCol
                 className="ion-text-center"
