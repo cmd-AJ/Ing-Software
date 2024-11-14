@@ -5,7 +5,7 @@ import Details from "./Details";
 import Bottom from "./Bottom";
 import { useHistory } from "react-router-dom";
 import { getUser2 } from "../../controller/UserController";
-import { getContacts, getChatMessages } from "../../controller/ChatController";
+import { getContacts, getChatMessages, getChatIdWithDPI } from "../../controller/ChatController";
 import { useLocation } from "react-router";
 
 type chatUser = {
@@ -41,6 +41,8 @@ const Sidebar = () => {
     const [loggedUserDpi] = useState(localStorage.getItem('dpi') || '');
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [chatID, setChatID] = useState("")
+    const [hiring, setHiring] = useState(false)
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -55,6 +57,17 @@ const Sidebar = () => {
 
   useEffect(() => {
     selectedPersonRef.current = selectedPerson;
+    const fecthChat = async () => {
+      const data = await getChatIdWithDPI(loggedUserDpi, selectedPerson.dpi)        
+      setChatID(data[0].idchat)
+      setHiring(data[0].hiring)
+        
+    }
+
+    console.log(chatID);
+    
+
+    fecthChat()
   }, [selectedPerson]);
 
   const requestNotificationPermission = async () => {
@@ -342,7 +355,7 @@ const Sidebar = () => {
               selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
             />
           ) : (
-            <Chat messages={messages} />
+            <Chat messages={messages} hiring={hiring} setHiring={setHiring} idChat={chatID}/>
           )}
           <div className="bottom">
             <Bottom
