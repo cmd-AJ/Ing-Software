@@ -387,3 +387,28 @@ export async function getreview(id : string) {
       throw error;
     }
 }
+
+export async function setHiringState(chatID: string, state: boolean) {
+    const object = {
+        chatID: chatID,
+        state: state,
+    };
+    
+    try {
+        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setHiringState/`, {
+            method: 'PUT',
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to update hiring state: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error('Error in controller:', error);
+        throw error;
+    }
+}

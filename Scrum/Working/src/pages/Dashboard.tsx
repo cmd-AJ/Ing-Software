@@ -19,6 +19,8 @@ interface NoteData {
   descripcion: string;
   precio: string;
   foto: string;
+  timestampcita: string
+  pago: string
 }
 
 const Dashboard: React.FC = () => {
@@ -34,7 +36,17 @@ const Dashboard: React.FC = () => {
   const [elementos, setElementos] = useState<NoteData[]>([]);  // Estado para almacenar los datos dinámicos
 
   const [showMessage, setShowMessage] = useState(false);
-  const [selectedNote, setSelectedNote] = useState<NoteData | null>(null);  // Estado para la Note seleccionada
+  const [selectedNote, setSelectedNote] = useState<NoteData>({
+    idtrabajo: "",
+    trabajador: "",
+    dia: "",
+    hora: "",
+    descripcion: "",
+    precio: "",
+    foto: "",
+    timestampcita: "",
+    pago: ""
+  });  // Estado para la Note seleccionada
 
   // Función para obtener los datos de hirings
   const fetchHirings = async () => {
@@ -95,7 +107,7 @@ const Dashboard: React.FC = () => {
                 <CloseContrat 
                   setShow={setShowMessage} 
                   trabajo={selectedNote.trabajador} 
-                  pago={selectedNote.precio} 
+                  pago={selectedNote.pago != undefined ? selectedNote.pago : selectedNote.precio} 
                   foto={selectedNote.foto} 
                   descripcion={selectedNote.descripcion}
                   idtrabajo={selectedNote.idtrabajo}  
@@ -138,7 +150,12 @@ const Dashboard: React.FC = () => {
           }
           {
             typeCalendar === 'mes' &&
-            <MonthCalendar monthMatrix={thisMonth.matrix} />
+            <MonthCalendar 
+              monthMatrix={thisMonth.matrix} 
+              monthNumber={thisMonth.monthNumber+1}
+              setModal={setShowMessage}
+              setSelectedNote={setSelectedNote}  
+            />
           }
         </div>
       </IonPage>
@@ -191,7 +208,12 @@ const Dashboard: React.FC = () => {
           }
           {
             typeCalendar === 'mes' &&
-            <MonthCalendar monthMatrix={thisMonth.matrix} />
+            <MonthCalendar 
+              monthMatrix={thisMonth.matrix} 
+              monthNumber={thisMonth.monthNumber+1} 
+              setModal={setShowMessage}
+              setSelectedNote={setSelectedNote}
+            />
           }
         </div>
       </IonPage>

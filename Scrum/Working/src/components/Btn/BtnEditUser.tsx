@@ -1,7 +1,9 @@
 import { IonButton } from "@ionic/react";
 import './BtnStyles.css';
-import React from "react";
-import { updatecuenta, updatecuentaNEO4J } from "../../controller/UserController";
+import React, { useEffect, useState } from "react";
+import { addJobToWorker, getJobsWithDpi, updatecuenta, updatecuentaNEO4J } from "../../controller/UserController";
+import { getJobsList } from "../../controller/HireControler";
+import { addjob_toprofile } from "../../controller/Admin_Controller";
 
 type User = {
     nombre : string;
@@ -20,6 +22,11 @@ type User = {
     isworking: boolean;
   };
 
+  type Trabajo = {
+    descripcion: string
+    nombre_trabajo: string
+}
+
 interface ContainerProps {
     user: User;
     banner: string;
@@ -35,6 +42,7 @@ interface ContainerProps {
     validatesCell: boolean
     setUser: (user: User) => void
     setEdit: (edit: boolean) => void
+    list : Array<Trabajo>
 }
 
 const BtnEditUser: React.FC<ContainerProps> = ({
@@ -50,8 +58,29 @@ const BtnEditUser: React.FC<ContainerProps> = ({
     municipio,
     validateBirthdate,
     validateEmail,
-    validatesCell
+    validatesCell,
+    list
 }) => {
+
+    const [allJobs, setAllJobs] = useState<Array<Trabajo>>([]);
+    const [myJobs, setMyJobs] = useState<Array<Trabajo>>([]);
+
+    useEffect(() => {
+        const fetchJobs = async () => {
+            const jobs = await getJobsWithDpi(user.dpi)            
+            setMyJobs(jobs)
+        }
+
+        fetchJobs()        
+    },[user.dpi])
+
+    useEffect(() => {
+        const fetchAllJobs = async () => {
+            const jobs = await getJobsList();
+            setAllJobs(jobs);
+        };
+        fetchAllJobs();
+    }, []);
 
     const handleClick = () => {
         const updatedUser = {
@@ -64,6 +93,18 @@ const BtnEditUser: React.FC<ContainerProps> = ({
             email: email,
             municipio: municipio
         };
+
+        const jobsNotInMyJobs = list.filter(
+            (jobInList) => !myJobs.some((jobInMyJobs) => jobInMyJobs.nombre_trabajo === jobInList.nombre_trabajo)
+        )
+
+        jobsNotInMyJobs.forEach((job) => {
+            if (allJobs.some((jobInAllJobs) => jobInAllJobs.nombre_trabajo === job.nombre_trabajo)) {
+                addJobToWorker(user.dpi, job.nombre_trabajo)
+            } else {
+                addjob_toprofile(job.nombre_trabajo, user.dpi)
+            }
+        })
 
         localStorage.setItem('User', JSON.stringify(updatedUser));
         setUser(updatedUser);

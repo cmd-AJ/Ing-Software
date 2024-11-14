@@ -735,4 +735,20 @@ export async function gettrabajos() {
 	}
 }
 
+export async function setHiringState(idChat, state) {
+    try {
+		const query = {
+			text: `update chats 
+                set hiring = $1 
+                where idchat = $2`,
+			values: [state, idChat],
+		}
+        
+		await client.query(query);
+	} catch (error) {
+		console.error('Error while setting the working state:', error)
+		throw error
+	}
+}
+
 
