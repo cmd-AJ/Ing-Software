@@ -65,7 +65,6 @@ const Contrato: React.FC = () => {
     },
   ];
 
-  const text = "Quieres trabajar? ->";
   const text2 = "Quieres contratar? ->";
 
   return (
@@ -86,7 +85,6 @@ const Contrato: React.FC = () => {
                     Propia Red.
                   </p>
 
-                  <p className={styles.quieres}>{text}</p>
                 </div>
 
                 <div className={styles.productIdea}>
