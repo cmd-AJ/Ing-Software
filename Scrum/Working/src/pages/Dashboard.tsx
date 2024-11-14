@@ -110,9 +110,9 @@ const Dashboard: React.FC = () => {
               content={
                 <CloseContrat 
                   setShow={setShowMessage} 
-                  trabajo={selectedNote.trabajador} 
-                  pago={selectedNote.pago != undefined ? selectedNote.pago : selectedNote.precio} 
-                  foto={selectedNote.foto} 
+                  trabajo={selectedNote.trabajador != undefined ? selectedNote.trabajador : selectedNote.nombre} 
+                  pago={selectedNote.pago != undefined ? "Q."+selectedNote.pago : selectedNote.precio} 
+                  foto={selectedNote.foto != undefined ? selectedNote.foto : selectedNote.imagen} 
                   descripcion={selectedNote.descripcion}
                   idtrabajo={selectedNote.idtrabajo}  
                   updateHirings={handleUpdateHirings}  // Pasar el callback para actualizar los hirings
