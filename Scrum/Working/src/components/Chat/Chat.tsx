@@ -34,27 +34,37 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, time, sender, dpiEmplo
         return `${hour}:${minute}`;
     };
 
-    useEffect(()=>{
-        const data = localStorage.getItem("contratData")
-        if (data != null){
-            const formattedData = JSON.parse(data)
-            setTitle(formattedData.title)
-            setDate(formattedData.date)
-            setHour(formattedData.time)
-            setAmount(formattedData.amount)
+    useEffect(() => {
+        // Expresión regular para extraer los datos de la propuesta
+        const proposalRegex = /Propuesta de contratación\s+-----------------------------\s+(.+)\s+Fecha:\s+(\d{2})\/(\d{2})\/(\d{4})\s+Hora:\s+(\d{2}):(\d{2})\s+Precio:\s+Q\.(\d+)/;
+    
+        const match = proposalRegex.exec(message);
+    
+        if (match) {
+            const [_, proposalTitle, day, month, year, hour, minute, proposalAmount] = match;
+    
+            // Actualizamos los estados con los datos formateados
+            setTitle(proposalTitle.trim());  // Título de la propuesta
+            setDate(dayjs(`${year}-${month}-${day}T${hour}:${minute}`).format("YYYY-MM-DDTHH:mm")); // Fecha en formato deseado
+            setHour(`${hour}:${minute}`);    // Hora
+            setAmount(proposalAmount);       // Precio
         }
-    },[])
+    }, [message]); // Solo se ejecutará cuando el mensaje cambie
+        
 
     const handleAccept = async () => {
        
         const hour = dayjs(time).add(6, 'hour').format('HH:mm')
+        console.log(message);
         const msg = message + "\nPropuesta aceptada"
 
         const msgID = await getMessageID(idChat, hour)
     
         const timeStampToUse = date || dayjs().format('YYYY-MM-DD') + 'T' + time;
+    console.log(date);
     
         await editMessageFromChat(msg, idChat, msgID.id_mensaje)
+        
         const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, Number(amount));
         
         try {
