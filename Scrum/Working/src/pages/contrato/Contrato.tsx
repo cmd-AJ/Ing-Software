@@ -84,7 +84,7 @@ const Contrato: React.FC = () => {
         <section className={styles.section2}>
           <div className={styles.innerContainer}>
             <div className={styles.aboutDisplayer}>
-              <h2 style={{}}>Construye Tu Propia</h2>
+              <h2 className={styles.sec2Tittles}>Construye Tu Propia</h2>
               <h1 className={styles.sec2Tittles}>RED</h1>
               <h1 className={styles.sec2Tittles}>DE</h1>
               <h1 className={styles.sec2Tittles}>CONFIANZA</h1>
