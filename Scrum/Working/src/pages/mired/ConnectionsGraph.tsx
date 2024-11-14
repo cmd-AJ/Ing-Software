@@ -1,6 +1,9 @@
+// src/components/ConnectionsGraph.tsx
+
 import React, { useEffect, useRef } from "react";
 import cytoscape from "cytoscape";
 import styles from "./ConnectionsGraph.module.css";
+import defaultAvatar from "./defaultAvatar.png"; // Import the default image
 
 type Worker = {
   nombre: string;
@@ -9,15 +12,15 @@ type Worker = {
   rating: number;
   apellido: string;
   dpi: string;
-  imagen: string;
+  imagen: string | null; // Ensure imagen can be null
 };
 
-interface ConnectionsGraph {
+interface ConnectionsGraphProps {
   connections: Worker[];
   currentdpi: string | null;
 }
 
-const ConnectionsGraph: React.FC<ConnectionsGraph> = ({
+const ConnectionsGraph: React.FC<ConnectionsGraphProps> = ({
   connections,
   currentdpi,
 }) => {
@@ -48,12 +51,12 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({
       }
     };
 
-    if (cyRef.current && currentdpi) {
+    if (cyRef.current && currentdpi && userData) {
       const centralNode = {
         data: {
           id: currentdpi,
           label: userData.nombre + " " + userData.apellidos,
-          imageUrl: userData?.imagen || null,
+          imageUrl: userData.imagen || defaultAvatar, // Use default image if user.imagen is null
         },
       };
 
@@ -63,7 +66,7 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({
           data: {
             id: worker.dpi,
             label: `${worker.nombre} ${worker.apellido}`,
-            imageUrl: worker.imagen,
+            imageUrl: worker.imagen || defaultAvatar, // Use default image if worker.imagen is null
           },
         })),
       ];
@@ -127,6 +130,7 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({
         zoomingEnabled: false,
         panningEnabled: false,
       });
+
       cy.fit();
       cy.center();
 
@@ -170,7 +174,7 @@ const ConnectionsGraph: React.FC<ConnectionsGraph> = ({
         window.removeEventListener("resize", resizeGraph);
       }
     };
-  }, [connections, currentdpi]);
+  }, [connections, currentdpi, userData]);
 
   return <div ref={cyRef} className={styles.cyContainer} />;
 };

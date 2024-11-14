@@ -65,8 +65,6 @@ const Contrato: React.FC = () => {
     },
   ];
 
-  const text = "Quieres trabajar? ->";
-  const text2 = "Quieres contratar? ->";
 
   return (
     <div className={styles.contratoPage}>
@@ -86,7 +84,6 @@ const Contrato: React.FC = () => {
                     Propia Red.
                   </p>
 
-                  <p className={styles.quieres}>{text}</p>
                 </div>
 
                 <div className={styles.productIdea}>
@@ -162,12 +159,7 @@ const Contrato: React.FC = () => {
                   Trabaja de manera independiente para las personas que desees.
                   ¡Sé tu propio jefe!
                 </p>
-                <p
-                  className={styles.quieres}
-                  style={{ marginLeft: "32% ", textAlign: "start" }}
-                >
-                  {text2}
-                </p>
+                
                 <button
                   onClick={() => history.push("/register")}
                   className={styles.startNowButton}
