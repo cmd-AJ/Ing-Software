@@ -169,7 +169,7 @@ const Contrato: React.FC = () => {
                 </button>
               </div>
               <div className={styles.hireImageContainer}>
-                <img src=""></img>
+                <img className={styles.hireImg} src="https://st.depositphotos.com/1000816/3025/i/450/depositphotos_30251097-stock-photo-business-people-shaking-hands.jpg"></img>
               </div>
             </div>
           </section>

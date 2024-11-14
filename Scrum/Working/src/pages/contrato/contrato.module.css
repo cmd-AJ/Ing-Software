@@ -212,6 +212,9 @@
   display: flex;
   flex: 1;
   min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .startNowButton{
@@ -225,6 +228,14 @@
   box-shadow: 0px 0px 17px 0px rgba(0,0,0,0.38);
   transition: background-color 0.1s;
 
+}
+
+.hireImg{
+  width: 564px;
+  height: 447px;
+  border-radius: 10px;
+  object-fit: cover;
+  object-fit: center;
 }
 
 .startNowButton:hover{
