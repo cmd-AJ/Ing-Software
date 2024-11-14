@@ -9,9 +9,10 @@ interface DetailsProps {
   setFirstInteraction : (firstInteraction : string) => void
   loggedUserDpi: string;
   selectedPersonDpi: string;
+  chatID: string
 }
 
-const Details: React.FC<DetailsProps> = ({ onClose, setFirstInteraction, loggedUserDpi, selectedPersonDpi }) => {
+const Details: React.FC<DetailsProps> = ({ onClose, setFirstInteraction, loggedUserDpi, selectedPersonDpi, chatID }) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   const handleDateChange = (date: Dayjs | null) => {
@@ -30,6 +31,7 @@ const Details: React.FC<DetailsProps> = ({ onClose, setFirstInteraction, loggedU
           setFirstInteraction={setFirstInteraction}
           loggedUserDpi={loggedUserDpi}
           selectedPersonDpi={selectedPersonDpi}
+          chatID={chatID}
         />
       </div>    
     </div>

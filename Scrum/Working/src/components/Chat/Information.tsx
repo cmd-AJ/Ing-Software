@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './information.css';
 import dayjs from 'dayjs';
-import { getChatIdWithDPI, insertChatMessage, makeHiring } from '../../controller/ChatController';
+import { getChatIdWithDPI, insertChatMessage, makeHiring, setHiringState } from '../../controller/ChatController';
 import Swal from 'sweetalert2'
 
 interface InformationProps {
@@ -10,10 +10,10 @@ interface InformationProps {
   setFirstInteraction : (firstInteraction : string) => void
   loggedUserDpi: string;
   selectedPersonDpi: string;
-
+  chatID : string
 }
 
-const Information: React.FC<InformationProps> = ({ date, onClose, setFirstInteraction, loggedUserDpi, selectedPersonDpi }) => {
+const Information: React.FC<InformationProps> = ({ date, onClose, setFirstInteraction, loggedUserDpi, selectedPersonDpi, chatID }) => {
   const [title, setTitle] = useState('');
   const [time, setTime] = useState('');
   const [amount, setAmount] = useState('');
@@ -112,39 +112,8 @@ const Information: React.FC<InformationProps> = ({ date, onClose, setFirstIntera
       localStorage.setItem("firstInteraction","false")
       setFirstInteraction("false")
 
-      //const response = await makeHiring(title, dpiEmployer, dpiEmployee, timeStampToUse, payment);
+      await setHiringState(chatID, true)
 
-    //   if (response.Success === 'Contrato realizado') {
-
-    //     Swal.fire({
-    //       title: "Contratación realizada",
-    //       text: "Has realizado una contratación con éxito",
-    //       icon: "success",
-    //       heightAuto: false,
-    //       timer: 2500,
-    //       timerProgressBar: true,
-    //       showCloseButton: false,
-    //       showConfirmButton: false
-    //     });
-
-    //   } else {
-
-    //     Swal.fire({
-    //       title: "Contratacion Fallida",
-    //       text: "No se ha podido realizar la contratación ",
-    //       icon: "error",
-    //       heightAuto: false,
-    //       timer: 2500,
-    //       timerProgressBar: true, // Optional: show a progress bar
-    //       showCloseButton: false, // Hide the close button
-    //       showConfirmButton: false // Hide the OK button
-    //     });
-    //   }
-
-    //   // Cerrar el modal después de confirmar
-    // } catch (error) {
-    //   console.error('Error al contratar:', error);
-    // }
     onClose();
   };
 

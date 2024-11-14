@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import { getUser2 } from "../../controller/UserController";
 import { getContacts, getChatMessages, getChatIdWithDPI } from "../../controller/ChatController";
 import { useLocation } from "react-router";
+import TextND from "../Txt/TextND";
+import { IonButton } from "@ionic/react";
 
 type chatUser = {
   dpi: string;
@@ -63,9 +65,6 @@ const Sidebar = () => {
       setHiring(data[0].hiring)
         
     }
-
-    console.log(chatID);
-    
 
     fecthChat()
   }, [selectedPerson]);
@@ -149,9 +148,19 @@ const Sidebar = () => {
 
   // Fetch messages every 5 seconds (Polling)
   useEffect(() => {
+
+    const fecthChat = async () => {
+      const data = await getChatIdWithDPI(loggedUserDpi, selectedPerson.dpi)        
+      console.log(data);
+      
+      setHiring(data[0].hiring)
+        
+    }
+
     const interval = setInterval(() => {
       if (selectedPerson) {
         updateMessages();
+        fecthChat()
       }
     }, 5000);
 
@@ -207,11 +216,6 @@ const Sidebar = () => {
           selectedPerson.dpi
         )) as ChatMessage[];
         const formattedMessages = formatMessagesWithDateDividers(chatMessages);
-
-        console.log(chatMessages.length);
-        console.log(messagesRef.current.length);
-        console.log(selectedPersonbef?.dpi);
-        console.log(selectedPersonRef.current.dpi);
 
         if (chatMessages.length > messagesRef.current.length) {
           playNotificationSound();
@@ -347,15 +351,24 @@ const Sidebar = () => {
               <span className="name">Selecciona un chat</span>
             )}
           </div>
+          { hiring &&
+            <div className="hiring-notification">
+              <TextND size="small" hex="#FFF" text="Contratación en proceso..."/>
+              <IonButton color="tertiary" onClick={() => setIsDetailsOpen(true)}>
+                Realizar nueva propuesta
+              </IonButton>
+            </div>
+          }
           {isDetailsOpen || firstInteraction === "true" ? (
             <Details
               onClose={() => setIsDetailsOpen(false)}
               setFirstInteraction={setFirstInteraction}
               loggedUserDpi={loggedUserDpi}
               selectedPersonDpi={selectedPerson ? selectedPerson.dpi : ""}
+              chatID={chatID}
             />
           ) : (
-            <Chat messages={messages} hiring={hiring} setHiring={setHiring} idChat={chatID}/>
+            <Chat messages={messages} hiring={hiring} idChat={chatID}/>
           )}
           <div className="bottom">
             <Bottom
