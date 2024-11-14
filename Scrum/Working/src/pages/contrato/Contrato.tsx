@@ -135,14 +135,38 @@ const Contrato: React.FC = () => {
           <section className={styles.hireSection}>
             <div className={styles.innerContainer}>
               <div className={styles.hireTextContainer}>
-                <p className={styles.mainSlogan}>¡Encuentra El Trabajo</p>
-                <p className={styles.mainSlogan}>Que Estás buscando!</p>
-                <p className={styles.quieres}>
+                <p
+                  className={styles.mainSlogan}
+                  style={{
+                    marginLeft: "25px",
+                    textAlign: "center",
+                    marginBottom: "40px",
+                  }}
+                >
+                  ¡Encuentra El Trabajo
+                </p>
+                <p
+                  className={styles.mainSlogan}
+                  style={{ marginLeft: "25px", textAlign: "center" }}
+                >
+                  Que Estás buscando!
+                </p>
+                <p
+                  className={styles.quieres}
+                  style={{ marginLeft: "9%", textAlign: "center"}}
+                >
                   Trabaja de manera independiente para las personas que desees.
                   ¡Sé tu propio jefe!
                 </p>
-                <p className={styles.quieres}>{text2}</p>
-                <button>¡EMPEZAR AHORA!</button>
+                <p
+                  className={styles.quieres}
+                  style={{ marginLeft: "32% ", textAlign: "start" }}
+                >
+                  {text2}
+                </p>
+                <button className={styles.startNowButton}>
+                  ¡EMPEZAR AHORA!
+                </button>
               </div>
               <div className={styles.hireImageContainer}>
                 <img src=""></img>
