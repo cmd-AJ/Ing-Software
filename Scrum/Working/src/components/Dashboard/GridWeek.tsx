@@ -12,6 +12,8 @@ interface NoteData {
   foto: string;
   timestampcita: string
   pago: string
+  imagen: string
+  nombre: string
 }
 
 

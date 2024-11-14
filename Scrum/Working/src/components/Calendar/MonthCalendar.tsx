@@ -3,8 +3,10 @@ import TextND from '../Txt/TextND'
 import './calendar.css'
 import { get_contrat_by_moventh } from '../../controller/UserController'
 import Note from '../Dashboard/Note'
+import dayjs from 'dayjs'
 
 interface ContainerProps {
+    notes: NoteData[];
     monthMatrix: Date[][]
     monthNumber: number
     setModal: (modal: boolean) => void;
@@ -22,9 +24,11 @@ interface NoteData {
     foto: string;
     timestampcita: string
     pago: string
+    imagen: string
+    nombre: string
 }
 
-const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, setModal, setSelectedNote }) => {
+const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, setModal, setSelectedNote, notes }) => {
     
     const [hiringsMonth, setHiringsMonth] = useState<NoteData[]>([])
 
@@ -80,7 +84,7 @@ const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, se
                             <div key={index} className='grid-item'>
                                 <div style={{ display: "flex", width: "100%", justifyContent: 'flex-end', padding: "10px", flexDirection: 'column' }}>
                                     <div>{day.getDate() > 0 ? day.getDate() : null}</div>
-                                    {hiringsMonth.map((hiring, i) => (
+                                    {notes.map((hiring, i) => (
                                         
                                         <>
                                         {
@@ -93,10 +97,10 @@ const MonthCalendar : React.FC<ContainerProps> = ({ monthMatrix, monthNumber, se
                                                        
                                                 }}>
                                                 <Note 
-                                                    trabajador={hiring.trabajador}
-                                                    hora=''
+                                                    trabajador={hiring.nombre}
+                                                    hora={dayjs(hiring.timestampcita).format('h:mm A')}
                                                     descripcion={hiring.descripcion}
-                                                    foto=''
+                                                    foto={hiring.imagen}
                                                 />
                                             </div>
                                         }

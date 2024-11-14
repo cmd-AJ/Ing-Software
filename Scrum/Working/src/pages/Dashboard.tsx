@@ -10,6 +10,7 @@ import MonthCalendar from '../components/Calendar/MonthCalendar';
 import { getHirings } from '../controller/ChatController';
 import ModalStructure from '../components/Modals/ModalStructure';
 import CloseContrat from '../components/Modals/Structures/CloseContrat';
+import { get_contrat_by_moventh } from '../controller/UserController';
 
 interface NoteData {
   idtrabajo: string;
@@ -21,6 +22,8 @@ interface NoteData {
   foto: string;
   timestampcita: string
   pago: string
+  imagen: string
+  nombre: string
 }
 
 const Dashboard: React.FC = () => {
@@ -34,6 +37,7 @@ const Dashboard: React.FC = () => {
   const [week, setWeek] = useState<number>(0);
   const [weekDays, setWeekDays] = useState<string[]>([]);  // Estado para almacenar las fechas de la semana actual
   const [elementos, setElementos] = useState<NoteData[]>([]);  // Estado para almacenar los datos dinámicos
+  const [hiringsMonth, setHiringsMonth] = useState<NoteData[]>([])
 
   const [showMessage, setShowMessage] = useState(false);
   const [selectedNote, setSelectedNote] = useState<NoteData>({
@@ -45,23 +49,37 @@ const Dashboard: React.FC = () => {
     precio: "",
     foto: "",
     timestampcita: "",
-    pago: ""
+    pago: "",
+    imagen: "",
+    nombre: ""
   });  // Estado para la Note seleccionada
 
   // Función para obtener los datos de hirings
   const fetchHirings = async () => {
     const dpi = localStorage.getItem('dpi'); 
-    const hirings = await getHirings(dpi);
-    setElementos(hirings);    
+    if (dpi != null) {
+      const hirings = await getHirings(dpi);
+      setElementos(hirings);    
+
+    }
   };
   
   // Callback para actualizar hirings después de completar la acción en CloseContrat
   const handleUpdateHirings = () => {
     fetchHirings();  // Llama a la función que actualiza los datos dinámicos
+    fetchMonth()
 
   };
   
-  useEffect(() =>  {})
+  const fetchMonth = async () => {
+    const data = localStorage.getItem('User')
+      if (data) {
+          const userData = JSON.parse(data) 
+          const hirings = await get_contrat_by_moventh(userData.dpi, (thisMonth.monthNumber+1).toString())
+          
+          setHiringsMonth(hirings)
+      }
+  }
 
   useEffect(() => {
     setThisMonth(new Month(month, year));
@@ -92,7 +110,8 @@ const Dashboard: React.FC = () => {
 
   // useEffect para obtener los datos dinámicos
   useEffect(() => {
-    fetchHirings();    
+    fetchHirings();  
+    fetchMonth()  
   }, []);
 
 
@@ -106,9 +125,9 @@ const Dashboard: React.FC = () => {
               content={
                 <CloseContrat 
                   setShow={setShowMessage} 
-                  trabajo={selectedNote.trabajador} 
-                  pago={selectedNote.pago != undefined ? selectedNote.pago : selectedNote.precio} 
-                  foto={selectedNote.foto} 
+                  trabajo={selectedNote.trabajador != undefined ? selectedNote.trabajador : selectedNote.nombre} 
+                  pago={selectedNote.pago != undefined ? "Q."+selectedNote.pago : selectedNote.precio} 
+                  foto={selectedNote.foto != undefined ? selectedNote.foto : selectedNote.imagen} 
                   descripcion={selectedNote.descripcion}
                   idtrabajo={selectedNote.idtrabajo}  
                   updateHirings={handleUpdateHirings}  // Pasar el callback para actualizar los hirings
@@ -155,6 +174,7 @@ const Dashboard: React.FC = () => {
               monthNumber={thisMonth.monthNumber+1}
               setModal={setShowMessage}
               setSelectedNote={setSelectedNote}  
+              notes={hiringsMonth}
             />
           }
         </div>
@@ -213,6 +233,7 @@ const Dashboard: React.FC = () => {
               monthNumber={thisMonth.monthNumber+1} 
               setModal={setShowMessage}
               setSelectedNote={setSelectedNote}
+              notes={hiringsMonth}
             />
           }
         </div>

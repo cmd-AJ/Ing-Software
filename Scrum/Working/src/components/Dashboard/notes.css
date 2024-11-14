@@ -12,11 +12,11 @@
   padding: 10px;
   position: relative; /* Required for absolute positioning the image */
   width: 100%; /* Make the card responsive */
-  height: 100%; /* Make the card responsive */
   max-width: 200px; /* Optional: Set a maximum width for larger cells */
   max-height: 150px; /* Optional: Set a maximum height for larger cells */
   box-sizing: border-box; /* Ensure padding doesn't affect the card's size */
 }
+
 
 .note-content {
   flex-grow: 1;
@@ -38,7 +38,6 @@
 }
 
 .note-image {
-  position: absolute;
   bottom: 10px;
   right: 10px;
   width: 20%; /* Make the image size responsive */

@@ -23,8 +23,10 @@ const Note: React.FC<NoteProps> = ({ trabajador, hora, descripcion, foto, setMod
         <p className="note-hora">
           {startHour} <br /> {endHour ? `- ${endHour}` : ''}
         </p>
+        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+          <img src={foto} alt={`Foto de ${trabajador}`} className="note-image" />
+        </div>
       </div>
-      <img src={foto} alt={`Foto de ${trabajador}`} className="note-image" />
     </div>
   );
 };
