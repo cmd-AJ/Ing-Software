@@ -42,7 +42,7 @@ const MyNetwork: React.FC = () => {
     <>
       <div className="myNetworkContainer">
         {loading ? (
-          <p>Loading...</p>
+          <p>Loading network...</p>
         ) : connections.length > 0 ? (
           <ConnectionsGraph connections={connections} currentdpi={currentdpi} />
         ) : (

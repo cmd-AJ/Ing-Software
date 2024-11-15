@@ -68,7 +68,7 @@ const Contrato: React.FC = () => {
 
   return (
     <div className={styles.contratoPage}>
-      <TopBar goWantToHire={goWantToHire} goWantToWork={goWantToWork} />
+      <TopBar goWantToHire={goWantToHire} goWantToWork={goWantToWork} currentSection={section} />
       <div className={styles.content}>
         {section == "hire" ? (
           // work section
