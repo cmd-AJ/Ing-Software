@@ -14,6 +14,7 @@ import SearchBar from "../Search/SearchBar";
 import "./Navigation.css";
 import ModalWithoutBack from "../Modals/ModalWithoutBack";
 import Logout from "../Modals/Structures/Logout";
+import logo from "../../assets/contratoGT_logo.svg"
 
 interface NavigationBarProps {}
 
@@ -59,7 +60,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({}) => {
       )}
       <IonHeader>
         <IonToolbar>
-          <IonGrid>
+          <IonGrid className="ion-grid">
             <IonRow className="ion-align-items-center responsive-navbar">
               <IonCol
                 className="ion-text-center"
@@ -68,7 +69,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({}) => {
                   console.log(location.pathname + location.search);
                 }}
               >
-                <IonText className="appName-text">Contrato-gt</IonText>
+                <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
+                <div style={{width: '100px'}}>
+                  <img src={logo} alt="Logo Contrato-gt"/>
+                </div>
+                  <IonText className="appName-text">Contrato-GT</IonText>
+                </div>
               </IonCol>
               {searching !== "/searched" && (
                 <IonCol className="search-bar-col">

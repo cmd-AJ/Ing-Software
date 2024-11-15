@@ -4,15 +4,19 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./TopBar.module.css";
 import { FaBars, FaTimes } from "react-icons/fa"; // Importing menu icons
 import { useHistory } from "react-router";
-
+import logo from "../../../assets/contratoGT_logo.svg";
 
 interface TopBarProps {
   goWantToWork(): void;
   goWantToHire(): void;
-
+  currentSection: string;
 }
 
-const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
+const TopBar: React.FC<TopBarProps> = ({
+  goWantToWork,
+  goWantToHire,
+  currentSection,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
@@ -65,8 +69,12 @@ const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
     <div className={styles.topBar}>
       <div className={styles.stylesWrapper}>
         {/* Title Container */}
-        <div className={styles.landBarTittleContainer}>
-          <h1>CONTRATOGT</h1>
+        <div
+          className={styles.landBarTittleContainer}
+          style={{ display: "flex" }}
+        >
+          <img src={logo} style={{ width: "110px" }} />
+          <h1>CONTRATO-GT</h1>
         </div>
 
         {/* Navigation Actions */}
@@ -75,16 +83,31 @@ const TopBar: React.FC<TopBarProps> = ({goWantToWork, goWantToHire}) => {
             isMenuOpen ? styles.active : ""
           }`}
         >
-          <button
+          {currentSection == "hire" ? <p></p> : <p></p>}
+
+          <p
+            className={styles.hireButton}
             onClick={goWantToHire}
-            ref={firstNavButtonRef}
-            aria-label="Quiero Contratar"
+            style={
+              currentSection == "hire"
+                ? { textDecoration: "underline" }
+                : { textDecoration: "none" }
+            }
           >
             QUIERO CONTRATAR
-          </button>
-          <button onClick={goWantToWork} aria-label="Quiero Trabajar">
+          </p>
+
+          <p
+            className={styles.workButton}
+            onClick={goWantToWork}
+            style={
+              currentSection == "work"
+                ? { textDecoration: "underline" }
+                : { textDecoration: "none" }
+            }
+          >
             QUIERO TRABAJAR
-          </button>
+          </p>
         </div>
 
         {/* Join Container */}

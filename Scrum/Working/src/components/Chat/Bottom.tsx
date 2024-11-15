@@ -56,7 +56,6 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
 
   return (
     <div className="bottom">
-      <FaImages className="icon gallery-icon" />
       <textarea
         ref={textareaRef} // Añadir referencia al <textarea>
         className="input-message"
@@ -73,10 +72,6 @@ const Bottom: React.FC<BottomProps> = ({ loggedUserDpi, selectedPersonDpi, updat
         className={`icon send-icon ${!message.trim() ? 'disabled' : ''}`}
         onClick={message.trim() ? sendMessage : undefined}
       /> 
-      <FaHandshake
-        className={`icon hire-icon ${role === 'Empleado' ? 'disabled' : ''}`}
-        onClick={role === 'Empleado' ? undefined : onHireClick}
-      />
     </div>
   );
 }

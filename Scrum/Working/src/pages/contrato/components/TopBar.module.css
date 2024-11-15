@@ -139,6 +139,24 @@
   cursor: pointer;
 }
 
+.hireButton,
+.workButton {
+  font-family: "Nunito Sans", sans-serif;
+  text-underline-offset: 8px;
+  padding: 5px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.hireButton:hover {
+  background-color: #92acd8;
+}
+
+.workButton:hover {
+  background-color: #92acd8;
+}
+
 /* Responsive Design */
 @media (max-width: 1450px) {
   .stylesWrapper {

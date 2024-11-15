@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Searched from "./pages/Searched";
 import MainLayout from "./pages/MainLayout/MainLayout";
-import About from "./pages/About";
 import Chat from "./pages/Chat";
 import Dashboard from "./pages/Dashboard";
 import Help from "./pages/Help";
@@ -71,10 +70,6 @@ const App: React.FC = () => (
           <Redirect to="/about" />
         </Route>
 
-        {/* landing v2*/}
-        <Route exact path="/oldabout">
-          <About />
-        </Route>
         {/* Protected Routes */}
         <ProtectedRoute exact path="/profile" component={Dashboard_Worker} />
         <ProtectedRoute exact path="/dashboard" component={Dashboard} />
