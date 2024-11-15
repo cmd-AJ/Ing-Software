@@ -9,9 +9,14 @@ import logo from "../../../assets/contratoGT_logo.svg";
 interface TopBarProps {
   goWantToWork(): void;
   goWantToHire(): void;
+  currentSection: string;
 }
 
-const TopBar: React.FC<TopBarProps> = ({ goWantToWork, goWantToHire }) => {
+const TopBar: React.FC<TopBarProps> = ({
+  goWantToWork,
+  goWantToHire,
+  currentSection,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const firstNavButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
@@ -78,13 +83,31 @@ const TopBar: React.FC<TopBarProps> = ({ goWantToWork, goWantToHire }) => {
             isMenuOpen ? styles.active : ""
           }`}
         >
-          <button className={styles.hireButton} onClick={goWantToHire}>
-            QUIERO CONTRATAR
-          </button>
+          {currentSection == "hire" ? <p></p> : <p></p>}
 
-          <button className={styles.workButton} onClick={goWantToWork}>
+          <p
+            className={styles.hireButton}
+            onClick={goWantToHire}
+            style={
+              currentSection == "hire"
+                ? { textDecoration: "underline" }
+                : { textDecoration: "none" }
+            }
+          >
+            QUIERO CONTRATAR
+          </p>
+
+          <p
+            className={styles.workButton}
+            onClick={goWantToWork}
+            style={
+              currentSection == "hire"
+                ? { textDecoration: "underline" }
+                : { textDecoration: "none" }
+            }
+          >
             QUIERO TRABAJAR
-          </button>
+          </p>
         </div>
 
         {/* Join Container */}
