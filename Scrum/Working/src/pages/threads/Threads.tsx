@@ -5,8 +5,7 @@ import PostField from "../../components/Threads/PostField";
 import Post from "../../components/Threads/Post";
 import { getThreadPosts } from "../../controller/ThreadController";
 import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import AdsenseInFeedAd from "../../ADS/In-feedthread";
+import "react-loading-skeleton/dist/skeleton.css";  
 
 const Threads: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -70,8 +69,6 @@ const Threads: React.FC = () => {
                     dpi={post.dpi}
                   />
               
-                  {/* Insert an ad every 3 posts with a unique key */}
-                  {(index + 1) % 3 === 0 && <AdsenseInFeedAd key={`ad-${post.idthreads}`} />}
                 </React.Fragment>
               ))
             )}
