@@ -101,7 +101,7 @@ const TopBar: React.FC<TopBarProps> = ({
             className={styles.workButton}
             onClick={goWantToWork}
             style={
-              currentSection == "hire"
+              currentSection == "work"
                 ? { textDecoration: "underline" }
                 : { textDecoration: "none" }
             }
