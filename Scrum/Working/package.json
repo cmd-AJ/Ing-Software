@@ -15,7 +15,7 @@
     "loginfeat": "node loginfeat.js",
     "test": "vitest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@capacitor/app": "5.0.7",
@@ -94,6 +94,6 @@
   },
   "description": "An Ionic project",
 
-  "homepage": "http://github.com/cmd-AJ/Ing-Software"
+  "homepage": "http://cmd-AJ.github.io/Ing-Software"
 
 }
