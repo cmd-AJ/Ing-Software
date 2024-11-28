@@ -2,7 +2,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './EmployerProfileView.css';
-import { Trabajador } from '../../components/Searched/type';
+
+type Trabajador = {
+  nombre: string;
+  dpi: string;
+  telefono: string;
+  municipio: string;
+  rating: string;
+};
+
 
 const EmployerProfileView: React.FC = () => {
   const location = useLocation<{ trabajador: Trabajador }>();

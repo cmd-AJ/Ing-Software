@@ -178,7 +178,7 @@ const Dashboard_Worker: React.FC = () => {
       <IonContent>
         <div className="contentC" ref={contentCRef}>
           {editModal && <ModalStructure setModal={setEditModal} content={<Profile user={myUser} setEdit={setEditModal} setUser={setMyUser} working={working}/>}/>}
-          {editTrabajo && <ModalStructure setModal={setEditTrabajo} content={<WorkAdd setModal={setEditTrabajo}/>}/>}
+          {editTrabajo && <ModalStructure setModal={setEditTrabajo} content={<WorkAdd setModal={setEditTrabajo} dpiTrabajador={""}/>}/>}
           {showDetails && <ModalStructure setModal={setShowDetails} content={<PopUpHiringsContainer items={contratsList}/>}/>}
           {showTrustedPeople && <ModalStructure setModal={setShowTrustedPeople} content={<TrustPeople dpi={myUser.dpi}/>}/>}
           <div className="header-card" ref={headerCardRef}>

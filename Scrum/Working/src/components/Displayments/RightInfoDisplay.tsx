@@ -11,7 +11,7 @@ const RightInfoDisplay: React.FC<ContainerProps> = ({selectedValue}) => {
         <div id="right-displayment">
             {selectedValue !== 'contrats' && 
             <>
-                <TextND text='Contrataciones SABTE' size='big'/>
+                <TextND text='Contrataciones SABTE' size='big' hex={''}/>
                 <HorizontalDivider/>
             </>
             }

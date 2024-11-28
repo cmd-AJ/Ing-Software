@@ -13,7 +13,7 @@ const CenterInfoDisplay: React.FC<ContainerProps> = ({selectedValue}) => {
             {
                 selectedValue !== 'works' &&
                 <>
-                    <TextND text='Trabajos realizados' size='big'/>
+                    <TextND text='Trabajos realizados' size='big' hex={''}/>
                     <HorizontalDivider/>
                 </>
             }

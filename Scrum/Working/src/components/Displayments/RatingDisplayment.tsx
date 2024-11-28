@@ -10,7 +10,7 @@ interface ContainerProps {
 const RatingDisplayment: React.FC<ContainerProps> = () => {
     return (
         <div id="rating-display">
-            <TextND text='Calificación:' size='big'/>
+            <TextND text='Calificación:' size='big' hex={''}/>
             <HorizontalDivider />
             <RateBar rating={1}/>
         </div>

@@ -21,8 +21,8 @@ const InfoDisplay: React.FC<ContainerProps> = ({ img, textLabel, textUser }) => 
         <div className="info-container">
             {isString ? <IonIcon icon={img as string} size="large" color="primary" /> : img}
             <div className="info-text-display">
-                <TextND text={textLabel} size="small"/>
-                <TextND text={textUser} size="medium"/>
+                <TextND text={textLabel} size="small" hex={""}/>
+                <TextND text={textUser} size="medium" hex={""}/>
             </div>
         </div>
     );

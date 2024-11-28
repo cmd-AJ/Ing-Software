@@ -14,6 +14,7 @@ type chatUser = {
   dpi: string;
   img: string;
   name: string;
+  preview:string;
 };
 
 type ChatMessage = {
@@ -34,7 +35,7 @@ const Sidebar = () => {
 
     const [firstInteraction, setFirstInteraction] = useState(localStorage.getItem("firstInteraction"))
     const [tempcontacts, settempcontact] = useState(new Set())
-    const defaultChatUser: chatUser = { dpi: '', name: '',img:'' }
+    const defaultChatUser: chatUser = { dpi: '', name: '',img:'', preview:'' }
     const [findbar, setfindbar] = useState('');
     const [selectedPerson, setSelectedPerson] = useState<chatUser>(defaultChatUser);
     const [selectedPersonbef, setSelectedPersonbef] = useState<chatUser | null>(null);
@@ -134,6 +135,7 @@ const Sidebar = () => {
             parsedUser.apellidos.split(" ")[0],
           img: parsedUser.imagen,
           dpi: parsedUser.dpi,
+          preview: parsedUser.preview
         });
       }
     }

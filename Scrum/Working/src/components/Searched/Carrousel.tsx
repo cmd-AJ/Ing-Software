@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./Carrousel.css";
 import Information from "./Information";
-import { Trabajador } from "./type";
 import { getWorkersByJob } from "../../controller/UserController";
 
 const Carrousel: React.FC<{ job: string }> = ({ job }) => {
+
+  type Trabajador = {
+    nombre: string,
+    telefono: string,
+    dpi: string,
+    contactos_en_comun: number,
+    direccion: string,
+    imagen: string,
+    rating: string,
+    trabajo: string,
+  } 
+  
+  
   const [workers, setWorkers] = useState<Trabajador[]>([]);
   const [selectedItem, setSelectedItem] = useState<number>(1);
 

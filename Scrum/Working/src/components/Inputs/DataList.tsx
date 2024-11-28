@@ -8,11 +8,12 @@ import { Popover, Typography, List, ListItem, ListItemText } from '@mui/material
 import { getJobsList } from '../../controller/HireControler';
 import { deleteJobToWorker } from '../../controller/UserController';
 
+
 interface ContainerProps {
     label: string;
     placeholder: string;
     list: Array<Trabajo>;
-    setList : (list : Array<Trabajo>) => void
+    setList: (list: Array<Trabajo>) => void
     value: string;
     setValue: (value: string) => void;
     validatesValue: boolean;
@@ -31,11 +32,8 @@ const DataList: React.FC<ContainerProps> = ({
     label,
     placeholder,
     list,
-    value,
-    setValue,
     validatesValue,
     setValidatesValue,
-    errorText,
     validation,
     setList,
     dpi
@@ -50,7 +48,7 @@ const DataList: React.FC<ContainerProps> = ({
     useEffect(() => {
         setMyJobs(list);
     }, [list]);
-    
+
     useEffect(() => {
         const fetchAllJobs = async () => {
             const jobs = await getJobsList();
@@ -61,7 +59,7 @@ const DataList: React.FC<ContainerProps> = ({
 
     useEffect(() => {
         setList(myJobs)
-    },[myJobs])
+    }, [myJobs])
 
     const handleAddJob = useCallback(() => {
         setMyJobs((prevJobs) => [...prevJobs, { nombre_trabajo: "", descripcion: "" }]);
@@ -79,7 +77,7 @@ const DataList: React.FC<ContainerProps> = ({
 
             // Filtrar sugerencias solo para el campo actual y evitar mostrar coincidencias exactas
             if (value.length > 2) {
-                const jobSuggestions = allJobs.filter(job => 
+                const jobSuggestions = allJobs.filter(job =>
                     job.nombre_trabajo.toLowerCase().includes(value.toLowerCase()) &&
                     job.nombre_trabajo.toLowerCase() !== value.toLowerCase()
                 );
@@ -176,13 +174,14 @@ const DataList: React.FC<ContainerProps> = ({
                                     border: "1px solid #ccc"
                                 }}>
                                     {filteredJobs[index].map((job, jobIndex) => (
-                                        <ListItem 
-                                            button 
-                                            key={jobIndex} 
-                                            onClick={() => handleSelectJob(job, index)}
-                                        >
-                                            <ListItemText primary={job.nombre_trabajo} />
-                                        </ListItem>
+                                        <ListItem
+                                        key={jobIndex}
+                                        onClick={() => handleSelectJob(job, index)}
+                                        component="div" // Render as a <div> instead of <li>
+                                      >
+                                        <ListItemText primary={job.nombre_trabajo} />
+                                      </ListItem>
+                                      
                                     ))}
                                 </List>
                             )}

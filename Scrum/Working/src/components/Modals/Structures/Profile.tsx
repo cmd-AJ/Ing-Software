@@ -27,8 +27,8 @@ type Trabajo = {
 }
 
 type User = {
-    nombre : string;
-    apellidos : string;
+    nombre: string;
+    apellidos: string;
     rating: number;
     sexo: string;
     fecha_nacimiento: string;
@@ -43,26 +43,26 @@ type User = {
     isworking: boolean;
 };
 
-const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) => {
+const Profile: React.FC<ContainerProps> = ({ user, setEdit, setUser, working }) => {
 
-    const [banner , setBanner] = useState(user.banner)
+    const [banner, setBanner] = useState(user.banner)
     const [profileImage, setProfileImage] = useState(user.imagen)
     const [job, setJob] = useState('')
     const [validateJob, setValidateJob] = useState(true)
     const [sex, setSex] = useState(user.sexo)
     const [date, setDate] = useState(user.fecha_nacimiento)
     const [validateDate, setValidateDate] = useState(false)
-    const [municipio, setMunicipio] = useState(user.municipio) 
+    const [municipio, setMunicipio] = useState(user.municipio)
     const [cellphone, setCellphone] = useState(user.telefono)
     const [validatesCell, setValidatesCell] = useState(false)
     const [email, setEmail] = useState(user.email)
     const [validatesEmail, setValidatesEmail] = useState(false)
 
-    const [jobArray, setJobArray] = useState<Trabajo[]>([]) 
+    const [jobArray, setJobArray] = useState<Trabajo[]>([])
 
     const phoneMask = useMaskito({
         options: {
-            mask: [...Array(4).fill(/\d/),'-',...Array(4).fill(/\d/)]
+            mask: [...Array(4).fill(/\d/), '-', ...Array(4).fill(/\d/)]
         }
     })
 
@@ -74,104 +74,115 @@ const Profile : React.FC<ContainerProps> = ({ user, setEdit, setUser, working}) 
         return /^\d{4}-\d{4}$/.test(phone)
     }
 
-    const sexos : Array<string> = ['Masculino', 'Femenino']
+    const sexos: Array<string> = ['Masculino', 'Femenino']
 
     useEffect(() => {
         const fetchJobs = async () => {
             const jobs = await getJobsWithDpi(user.dpi)
             console.log(jobs);
-            
+
             setJobArray(jobs)
         }
 
         fetchJobs()
         console.log(jobArray);
-        
-    },[user.dpi])
+
+    }, [user.dpi])
 
     useEffect(() => {
         console.log(jobArray);
-        
-    },[jobArray])
-    
+
+    }, [jobArray])
+
 
     return (
         <>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '5px'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
 
-                <ImgInput image={banner} setImage={setBanner} type={true}/>
-                    <div id="user-img">
-                        <ImgInput image={profileImage} setImage={setProfileImage} type={false}/>
+                <ImgInput image={banner} setImage={setBanner} type={true} />
+                <div id="user-img">
+                    <ImgInput image={profileImage} setImage={setProfileImage} type={false} />
+                </div>
+                <div id="input-display">
+                    <TextND text={user.nombre + ' ' + user.apellidos} hex="#000" size="big" />
+                    <HorizontalDivider />
+                    {working && <>
+                        <DataList
+                            dpi={user.dpi}
+                            label="Oficio:"
+                            placeholder="Ingresa tu oficio"
+                            list={jobArray}
+                            value={job}
+                            setValue={setJob}
+                            validatesValue={validateJob}
+                            setValidatesValue={setValidateJob}
+                            setList={setJobArray} errorText={""} validation={function (input: string): boolean {
+                                throw new Error("Function not implemented.");
+                            } }                        />
+                        <HorizontalDivider /></>}
+                    <div id="grid-components">
+                        <div className="element-center-input">
+                            <TextND text="Fecha de nacimiento:" size="medium-small" hex="#000" />
+                        </div>
+                        <DateSelector date={date} setDate={setDate} setValidateDate={setValidateDate} />
+                        <div className="element-center-input">
+                            <TextND text="Sexo:" size="medium-small" hex="#000" />
+                        </div>
+                        <InputSelector
+                            placeholder="Seleccione su sexo"
+                            list={sexos}
+                            value={sex}
+                            setValue={setSex}
+                        />
+                        <div className="element-center-input">
+                            <TextND text="Teléfono:" size="medium-small" hex="#000" />
+                        </div>
+                        <InputWrite
+                            value={cellphone}
+                            setValue={setCellphone}
+                            placeholder="Ingrese su telefono"
+                            mask={phoneMask}
+                            validatesValue={validatesCell}
+                            setValidatesValue={setValidatesCell}
+                            validation={validatePhone}
+                            errorText="Número inválido"
+                        />
+                        <div className="element-center-input">
+                            <TextND text="Correo electrónico:" size="medium-small" hex="#000" />
+                        </div>
+
+                        <InputWrite
+                            value={email}
+                            setValue={setEmail}
+                            placeholder="Ingrese su correo electrónico"
+                            mask={null}
+                            validatesValue={validatesEmail}
+                            setValidatesValue={setValidatesEmail}
+                            validation={validateEmail}
+                            errorText="Correo inválido"
+                        />
+                        <div className="element-center-input">
+                            <TextND text="Municipio:" size="medium-small" hex="#000" />
+                        </div>
+                        <InputSelector
+                            value={municipio}
+                            setValue={setMunicipio}
+                            placeholder="Seleccione su municipio"
+                            list={getMunicipios(Departamentos(user.dpi))}
+                        />
+
                     </div>
-                    <div id="input-display">
-                        <TextND text={user.nombre + ' ' + user.apellidos} hex="#000" size="big"/>
-                        <HorizontalDivider/>
-			{working && <>
-			<DataList dpi={user.dpi} label="Oficio:" placeholder="Ingresa tu oficio" list={jobArray} value={job} setValue={setJob} validatesJob={validateJob} setValidatesJob={setValidateJob} setList={setJobArray}/>
-                 	<HorizontalDivider/></>}
-			<div id="grid-components">
-				<div className="element-center-input">
-					<TextND text="Fecha de nacimiento:" size="medium-small" hex="#000"/>
-				</div>
-                        	<DateSelector date={date} setDate={setDate} setValidateDate={setValidateDate}/>
-				<div className="element-center-input">
-					<TextND text="Sexo:" size="medium-small" hex="#000"/>
-				</div>
-				<InputSelector 
-                                	placeholder="Seleccione su sexo" 
-                                	list={sexos}
-                                	value={sex}
-                                	setValue={setSex}
-				/>
-				<div className="element-center-input">
-					<TextND text="Teléfono:" size="medium-small" hex="#000"/>
-				</div>
-				<InputWrite 
-                                	value={cellphone} 
-	                                setValue={setCellphone} 
-        	                        placeholder="Ingrese su telefono" 
-	                                mask={phoneMask}
-        	                        validatesValue={validatesCell}
-                	                setValidatesValue={setValidatesCell}
-                        	        validation={validatePhone}
-                                	errorText="Número inválido"
-                            	/>
-				<div className="element-center-input">
-					<TextND text="Correo electrónico:" size="medium-small" hex="#000"/>
-				</div>
 
-                            	<InputWrite 
-                               	 	value={email} 
-	                                setValue={setEmail} 
-        	                        placeholder="Ingrese su correo electrónico" 
-                	                mask={null}    
-                        	        validatesValue={validatesEmail}
-	                                setValidatesValue={setValidatesEmail}
-        	                        validation={validateEmail}
-                	                errorText="Correo inválido"
-                        	/>
-				<div className="element-center-input">
-					<TextND text="Municipio:" size="medium-small" hex="#000"/>
-				</div>
-				<InputSelector
-                                	value={municipio}
-	                                setValue={setMunicipio}
-                	                placeholder="Seleccione su municipio"
-                        	        list={getMunicipios(Departamentos(user.dpi))}
-	                        />
-
-			</div>
-				
                     <div>
-                        <HorizontalDivider/>
-                                   <HorizontalDivider/>
+                        <HorizontalDivider />
+                        <HorizontalDivider />
                     </div>
                 </div>
             </div>
             <div id="buttons-display">
                 <IonButton id="button-up" shape="round" color="primary" onClick={() => setEdit(false)}> Cancelar </IonButton>
-                <BtnEditUser 
-                    user={user} 
+                <BtnEditUser
+                    user={user}
                     banner={banner}
                     profpic={profileImage}
                     job=""
