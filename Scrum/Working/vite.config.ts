@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     legacy()
   ],
-  base: "https://cmd-aj.github.io/Ing-Software/",
+  base: "./Ing-Software/",
   test: {
     globals: true,
     environment: 'jsdom',
