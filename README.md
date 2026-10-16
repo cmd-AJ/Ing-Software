@@ -1,38 +1,88 @@
-# Ing-Software
+# Ing-Software × SonarQube
 
-Nuestro objetivo es facilitar la conexión entre trabajadores especializados y personas no afiliadas a empresas o que no tiene acceso en primera línea a empleados, brindando oportunidades de trabajo y fomentando el acceso rápido para empleadores.
+Fork de [cmd-AJ/Ing-Software](https://github.com/cmd-AJ/Ing-Software) (ContratoGT) para el ejercicio de análisis estático con SonarQube. Todo corre local en Docker.
 
-Por lo tanto nuestro grupo formado por:
-    1. Andre Jo 
-    2. Irving Morales
-    3. Ricardo Chuy
-    4. Jose Prince
-    5. Josue Marroquín
+## Levantar
 
-A continuacion en este repositorio se mostrara todos los avances de cada miembro del grupo y además todos los archivos que se realizaron para poder llegar al programa. 
+Requisito: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-A continuación se encontraran Todos los diferentes link para accesar a cada folder.
+```bash
+git clone https://github.com/josuemj/Ing-SoftwarXSonarQube.git
+cd Ing-SoftwarXSonarQube
+docker compose up -d --build
+```
 
-[Avances 1](https://github.com/MrAndrewlol/Ing-Software/tree/main/Avances%201)
-Avances 1 conlleva con el progreso del corte 1 donde se identifica el posible problema e identificación de usuarios.
+La primera vez tarda ~5-10 minutos. Las API keys y el token de SonarQube se generan solos.
 
+Apagar: `docker compose down` (agregar `-v` para borrar los datos)
 
-[Corte 1](https://github.com/MrAndrewlol/Ing-Software/tree/main/Corte%201)
-El Corte 1 se encuentra los avances de la primera fase del proyecto. 
+## Correr el scanner de SonarQube
 
+El análisis no corre con `docker compose up`; se lanza aparte cuando el stack ya está arriba.
 
-Esta es la siguiente fase de nuestro proyecto. 
-En esta parte se encuentra:
-**Avances: Corte 2**
-**Corte 2**
-[Avance 2](https://github.com/MrAndrewlol/Ing-Software/tree/main/Avances%202)
-Para esta fase se estara atacando la problematica planteada en el corte 1 utilizando **Design Studio**.
+### Manual
 
-[Corte 2](https://github.com/MrAndrewlol/Ing-Software/tree/main/Corte%202)
-Para este corte del proyecto lo que se busca es poder definir y especificar los caracteristicas generales del sistema que se desea realizar.
+1. Entrar a http://localhost:9000 con `admin` / `SonarLocal123!`.
+2. Generar un token: *My Account → Security → Generate Tokens*, tipo **Global Analysis Token**. Copiarlo (`sqp_...`).
+3. Desde la raíz del repo, correr el scanner con ese token:
 
+   ```powershell
+   # PowerShell
+   docker run --rm `
+     -e SONAR_HOST_URL="http://host.docker.internal:9000" `
+     -e SONAR_TOKEN="sqp_tu_token" `
+     -v "${PWD}:/usr/src" `
+     sonarsource/sonar-scanner-cli
+   ```
 
+   ```bash
+   # Linux / macOS / Git Bash
+   docker run --rm \
+     -e SONAR_HOST_URL="http://host.docker.internal:9000" \
+     -e SONAR_TOKEN="sqp_tu_token" \
+     -v "$(pwd):/usr/src" \
+     sonarsource/sonar-scanner-cli
+   ```
 
+   Alternativa sin Docker (requiere Node y Java 17+), más rápida en Windows:
 
-Ahora con ustedes presentamos nuestro proyecto:
-https://contratogt.com/
+   ```bash
+   npx @sonar/scan -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_tu_token
+   ```
+
+4. Esperar a que muestre `ANALYSIS SUCCESSFUL`.
+5. Ver los resultados en http://localhost:9000/dashboard?id=Ing-Software-ContratoGT.
+
+### Rápido (token automático)
+
+El stack ya genera un token al arrancar; este comando lo usa directamente:
+
+```bash
+docker compose run --rm scanner
+```
+
+Para volver a analizar después de cambiar código, repetir el paso 3 (o este comando).
+
+Lo que se analiza está definido en [`sonar-project.properties`](sonar-project.properties): `Scrum/Working/src` (frontend y backend), sin `node_modules`, `dist` ni tests.
+
+> Si tienes `node_modules` instalado en `Scrum/Working`, el análisis puede tardar ~7 minutos (el scanner lo lee a través del volumen montado).
+
+## Recursos
+
+| Servicio | URL | Credenciales |
+|---|---|---|
+| App | http://localhost:8100 | ver abajo |
+| SonarQube | http://localhost:9000 | `admin` / `SonarLocal123!` |
+| Resultados del análisis | http://localhost:9000/dashboard?id=Ing-Software-ContratoGT | |
+| API | http://localhost:3001/api | header `api-key`: `docker compose exec api cat /keys/app.env` |
+| Neo4j | http://localhost:7474 | `neo4j` / `contratogt_local` |
+| PostgreSQL | `localhost:5433` | `contratogt` / `contratogt_local` (BD `contratogt`) |
+
+## Usuarios de prueba
+
+| DPI | Contraseña | Rol |
+|---|---|---|
+| `1000000000101` | `demo1234` | Empleador |
+| `1000000000102` | `demo1234` | Empleado (Plomero) |
+| `1000000000103` | `demo1234` | Empleado (Electricista) |
+| `9000000000001` | `admin1234` | Moderador |

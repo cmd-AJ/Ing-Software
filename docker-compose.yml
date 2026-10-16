@@ -1,0 +1,247 @@
+# Stack local completo de ContratoGT + SonarQube + Dependency-Check. Todo se levanta y configura con:
+#
+#   docker compose up -d --build
+#
+#   Frontend   http://localhost:8100
+#   API        http://localhost:3001/api
+#   Neo4j      http://localhost:7474   (neo4j / contratogt_local)
+#   SonarQube  http://localhost:9000   (admin / SONAR_ADMIN_PASSWORD, por defecto SonarLocal123!)
+#
+# Las API keys y el token de SonarQube se generan solos (volumen "keys").
+#
+# Flujo de análisis (en este orden):
+#   1) docker compose run --rm dependency-check   -> genera ./reports/dependency-check-report.{json,html}
+#   2) docker compose run --rm scanner            -> analiza el código e importa los reportes a SonarQube
+#
+# Opcional: crear un archivo .env con NVD_API_KEY=... (acelera mucho la descarga de la base NVD)
+
+x-sonar-admin-password: &sonar-admin-password ${SONAR_ADMIN_PASSWORD:-SonarLocal123!}
+
+services:
+  # ---------- Configuración automática ----------
+  keys:
+    image: alpine:3
+    volumes:
+      - keys:/keys
+      - ./docker/generate-keys.sh:/generate-keys.sh:ro
+    command: ["sh", "/generate-keys.sh"]
+
+  sonar-setup:
+    image: curlimages/curl
+    user: "0"
+    environment:
+      SONAR_ADMIN_PASSWORD: *sonar-admin-password
+    volumes:
+      - keys:/keys
+      - ./docker/sonar-setup.sh:/sonar-setup.sh:ro
+    entrypoint: ["sh", "/sonar-setup.sh"]
+    depends_on:
+      - sonarqube
+
+  # ---------- Aplicación ----------
+  app-db:
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: contratogt
+      POSTGRES_USER: contratogt
+      POSTGRES_PASSWORD: contratogt_local
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./Scrum/Working/src/controller/local/init:/docker-entrypoint-initdb.d:ro
+      - app_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contratogt -d contratogt"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  neo4j:
+    image: neo4j:5
+    environment:
+      NEO4J_AUTH: neo4j/contratogt_local
+      NEO4J_PLUGINS: '["apoc"]'
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p contratogt_local 'RETURN 1'"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 30s
+
+  # Carga los datos de prueba en Neo4j (idempotente: usa MERGE) y termina.
+  neo4j-seed:
+    image: neo4j:5
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - ./Scrum/Working/src/controller/local/seed.cypher:/seed.cypher:ro
+    entrypoint: ["cypher-shell", "-a", "neo4j://neo4j:7687", "-u", "neo4j", "-p", "contratogt_local", "-f", "/seed.cypher"]
+
+  api:
+    build: ./Scrum/Working/src/controller
+    # Carga API_KEY y ADMIN_API_KEY generadas por el servicio "keys"
+    command: ["sh", "-c", "set -a && . /keys/app.env && set +a && exec node main.js"]
+    environment:
+      POSTGRES_DB: contratogt
+      POSTGRES_USER: contratogt
+      POSTGRES_PASSWORD: contratogt_local
+      HOST: app-db
+      PORT: 5432
+      PORTI: 3001
+      NEO4J_URI: neo4j://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: contratogt_local
+      LOCAL_UPLOADS_DIR: /app/uploads
+      IMAGE_BASE_URL: http://localhost:3001/api/image/
+      FRONTEND_ORIGIN: http://localhost:8100
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - keys:/keys:ro
+      - api_uploads:/app/uploads
+    depends_on:
+      keys:
+        condition: service_completed_successfully
+      app-db:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+
+  frontend:
+    build: ./Scrum/Working
+    ports:
+      - "8100:80"
+    volumes:
+      - keys:/keys:ro
+    depends_on:
+      keys:
+        condition: service_completed_successfully
+      api:
+        condition: service_started
+
+  # ---------- SonarQube ----------
+
+  # Descarga el plugin de Dependency-Check a la carpeta de plugins de SonarQube (una sola vez) y termina.
+  # Revisa https://github.com/dependency-check/dependency-check-sonar-plugin/releases
+  # y usa la versión más reciente compatible con tu versión de SonarQube.
+  sonar-plugins:
+    image: curlimages/curl
+    user: "0"
+    volumes:
+      - sonarqube_extensions:/extensions
+    entrypoint:
+      - sh
+      - -c
+      - |
+        mkdir -p /extensions/plugins
+        [ -f /extensions/plugins/sonar-dependency-check-plugin-5.0.0.jar ] || \
+        curl -fsSL -o /extensions/plugins/sonar-dependency-check-plugin-5.0.0.jar \
+          https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/5.0.0/sonar-dependency-check-plugin-5.0.0.jar
+        chown -R 1000:0 /extensions
+
+  sonarqube:
+    image: sonarqube:community
+    depends_on:
+      sonar-db:
+        condition: service_healthy
+      sonar-plugins:
+        condition: service_completed_successfully
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://sonar-db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: sonar
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+    ports:
+      - "9000:9000"
+
+  sonar-db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d sonar -U sonar"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # No corre con "up". Para generar el reporte de dependencias: docker compose run --rm dependency-check
+  # Escribe los reportes en ./reports (la carpeta se crea sola).
+  dependency-check:
+    image: owasp/dependency-check
+    profiles: ["scan"]
+    environment:
+      NVD_API_KEY: ${NVD_API_KEY:-}
+    # --nvdApiKey solo se pasa si hay clave (una clave vacía hace fallar la descarga de NVD)
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set --
+        if [ -n "$$NVD_API_KEY" ]; then set -- --nvdApiKey "$$NVD_API_KEY"; else unset NVD_API_KEY; fi
+        exec /usr/share/dependency-check/bin/dependency-check.sh \
+          --project ContratoGT \
+          --scan /src/package-lock.json \
+          --scan /src/Scrum/package-lock.json \
+          --scan /src/Scrum/Working/package-lock.json \
+          --scan /src/Scrum/Working/src/controller/package-lock.json \
+          --format JSON --format HTML --out /report "$$@"
+    volumes:
+      - ./:/src:ro
+      - ./reports:/report
+      - dc_data:/usr/share/dependency-check/data
+
+
+    # No corre con "up". Para análisis SAST con Semgrep: docker compose run --rm semgrep
+  # Escribe ./reports/semgrep.sarif
+  semgrep:
+    image: semgrep/semgrep
+    profiles: ["scan"]
+    working_dir: /src
+    command: >
+      semgrep scan --config p/javascript --config p/owasp-top-ten
+      --metrics=off --exclude node_modules --exclude reports
+      --sarif --output reports/semgrep.sarif .
+    volumes:
+      - ./:/src
+
+
+  # No corre con "up". Para analizar: docker compose run --rm scanner
+  scanner:
+    image: sonarsource/sonar-scanner-cli
+    profiles: ["scan"]
+    entrypoint: ["sh", "-c", "export SONAR_TOKEN=$$(cat /keys/sonar_token) && exec /usr/bin/entrypoint.sh sonar-scanner"]
+    environment:
+      SONAR_HOST_URL: http://sonarqube:9000
+    volumes:
+      - keys:/keys:ro
+      - ./:/usr/src
+    depends_on:
+      sonar-setup:
+        condition: service_completed_successfully
+
+volumes:
+  keys:
+  app_pgdata:
+  neo4j_data:
+  api_uploads:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
+  postgresql:
+  dc_data:

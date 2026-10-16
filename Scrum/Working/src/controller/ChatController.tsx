@@ -6,7 +6,7 @@ export async function editMessageFromChat(new_msg: string, chatId: string, msgId
             id_msg: msgId
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/editMessage`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/editMessage`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -31,7 +31,7 @@ export async function editMessageFromChat(new_msg: string, chatId: string, msgId
 
 export async function getContacts(dpi: String) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ export async function getChatMessages(dpi1: string, dpi2: string) {
             dpi2: dpi2
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/messages`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/messages`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -83,7 +83,7 @@ export async function getChatIdWithDPI(dpi1: string, dpi2: string) {
             dpi2: dpi2
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/chatID`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/chatID`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -128,7 +128,7 @@ export async function createNewChatIfNotExists(dpi1: string, dpi2: string) {
                 dpi2: dpi2
             };
 
-            const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/createChat`, {
+            const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/createChat`, {
                 method: 'POST',
                 headers: {
                     'api-key': import.meta.env.VITE_API_KEY,
@@ -155,7 +155,7 @@ export async function insertChatMessage(content: string, chatID: string, dpi: st
             dpi: dpi
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/message`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/message`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -191,7 +191,7 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
             pago: payment
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/hire`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/hire`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -217,7 +217,7 @@ export async function makeHiring(description: string, dpiEmployer: string, dpiEm
 export async function getHirings(dpi: string) {
 
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/contacts/hirings/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/contacts/hirings/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -273,7 +273,7 @@ export async function sendmessages(dpi: string, method :string) {
                 nombre: dpi
             };
     
-            const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/sendforgot_mail/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/sendforgot_mail/`, {
                 method: 'POST',
                 headers: {
                     'api-key': import.meta.env.VITE_API_KEY,
@@ -295,7 +295,7 @@ export async function sendmessages(dpi: string, method :string) {
                 dpi:dpi
             };
     
-            const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/sendforgot_phone/`, {
+            const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/sendforgot_phone/`, {
                 method: 'POST',
                 headers: {
                     'api-key': import.meta.env.VITE_API_KEY,
@@ -324,7 +324,7 @@ export async function sendmessages(dpi: string, method :string) {
 
 export async function getcode(dpi: String, code:string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/getcode/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/getcode/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -353,7 +353,7 @@ export async function cambiarcontra(password: string, dpi: string) {
     }
     
 
-    const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/codechange`,
+    const data = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/codechange`,
         {
             method: 'PUT',
             headers: {
@@ -369,7 +369,7 @@ export async function cambiarcontra(password: string, dpi: string) {
 
 export async function getreview(id : string) {
     try {
-      const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/review/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/review/${id}`, {
         method: 'GET',
         headers: {
           'api-key': import.meta.env.VITE_API_KEY,
@@ -395,7 +395,7 @@ export async function setHiringState(chatID: string, state: boolean) {
     };
     
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setHiringState/`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/setHiringState/`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -414,7 +414,7 @@ export async function setHiringState(chatID: string, state: boolean) {
 }
 
 export async function getMessageID(chatID: string, time: string) {
-    const url = `https://${import.meta.env.VITE_API_HOSTI}/api/messageID/?chatID=${chatID}&time=${time}`;
+    const url = `${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/messageID/?chatID=${chatID}&time=${time}`;
 
     try {
         const response = await fetch(url, {

@@ -110,19 +110,19 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ message, time, sender, dpiEmplo
         
     }
 
-    const formattedMessage = message.replace(/\n/g, '<br />');
+    const isAnswered = message.includes("Propuesta aceptada") || message.includes("Propuesta rechazada");
+
+    // Se renderiza como texto (React escapa el contenido) y los saltos de línea
+    // se respetan con white-space: pre-line, evitando XSS por innerHTML.
+    const displayedMessage = (sender === 'me' && !isAnswered)
+        ? message + "\nEsperando respuesta"
+        : message;
 
     return (
         <div className={`chat-bubble ${sender === 'me' ? 'me' : 'you'}`}>
-            <div 
-                className="message-content"
-                dangerouslySetInnerHTML={{__html: (sender === 'me' && !formattedMessage.includes("Propuesta aceptada") && 
-                    !formattedMessage.includes("Propuesta rechazada")) ? (formattedMessage + "\nEsperando respuesta").replace(/\n/g, '<br />')
-                
-                : formattedMessage}}/>
-                {(formattedMessage.includes("-----------------------------") && 
-                (!formattedMessage.includes("Propuesta aceptada") && 
-                !formattedMessage.includes("Propuesta rechazada")) && sender !== 'me') && <>
+            <div className="message-content">{displayedMessage}</div>
+                {(message.includes("-----------------------------") &&
+                !isAnswered && sender !== 'me') && <>
                 <IonButton color="danger" onClick={handleReject}>Rechazar</IonButton>
                 <IonButton color="success" onClick={handleAccept}>Aceptar</IonButton></>}
             <div className="message-time">{formattedTime(time)}</div>

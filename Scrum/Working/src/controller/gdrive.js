@@ -4,8 +4,26 @@ import path from 'path'
 
 import stream from 'stream'
 
+// Desarrollo local: si LOCAL_UPLOADS_DIR está definido, las imágenes se guardan en disco en vez de Google Drive.
+const localUploadsDir = process.env.LOCAL_UPLOADS_DIR
+
+function saveLocalFile(fileId, picturename, basedon64) {
+  const fileExtension = picturename.split('.').pop().toLowerCase();
+  if (!['png', 'jpg', 'jpeg'].includes(fileExtension)) {
+    throw new Error('Unsupported file type. Only .png and .jpg/.jpeg are allowed.');
+  }
+  fs.mkdirSync(localUploadsDir, { recursive: true });
+  const base64Image = basedon64.replace(/^data:image\/\w+;base64,/, '');
+  fs.writeFileSync(path.join(localUploadsDir, fileId), Buffer.from(base64Image, 'base64'));
+  return fileId;
+}
+
 
 export async function uploadFile(picturename, basedon64) {
+  if (localUploadsDir) {
+    return saveLocalFile(Date.now() + '-' + Math.random().toString(36).slice(2, 8), picturename, basedon64);
+  }
+
   // Load the service account key JSON file
   const auth = new google.auth.GoogleAuth({
     keyFile: './contratogtgg.json', // Replace with your service account key file
@@ -62,6 +80,13 @@ export async function uploadFile(picturename, basedon64) {
 
 
 export async function getImageFromDrive(fileId) {
+  if (localUploadsDir) {
+    const filePath = path.join(localUploadsDir, path.basename(fileId));
+    if (!fs.existsSync(filePath)) {
+      throw new Error('Image not found: ' + fileId);
+    }
+    return fs.createReadStream(filePath);
+  }
 
   const auth = new google.auth.GoogleAuth({
     keyFile: './contratogtgg.json', // Replace with your service account key file
@@ -80,6 +105,9 @@ export async function getImageFromDrive(fileId) {
 
 
 export async function updatePhoto( picturename ,fileId, base64Data) {
+  if (localUploadsDir) {
+    return saveLocalFile(path.basename(fileId), picturename, base64Data);
+  }
 
   const auth = new google.auth.GoogleAuth({
     keyFile: './contratogtgg.json', // Replace with your service account key file

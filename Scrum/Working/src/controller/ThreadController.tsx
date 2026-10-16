@@ -1,7 +1,7 @@
 export async function getThreadPosts() {
     try {
-        // console.log(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/getPosts`)
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/getPosts`, {
+        // console.log(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/threads/getPosts`)
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/threads/getPosts`, {
             
             method: 'GET',
             headers: {
@@ -32,7 +32,7 @@ export async function getThreadPosts() {
                 "postImage": post_Image
             };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/createPost`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/threads/createPost`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -62,7 +62,7 @@ export async function insertCommentToThread(threadIdForComment: string, comment:
             senderDpi: commenterDpi,
         }
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/insertComment`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/threads/insertComment`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -86,7 +86,7 @@ export async function insertCommentToThread(threadIdForComment: string, comment:
 export async function getThreadComments(threadID: string) {
 
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/${threadID}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/threads/${threadID}`, {
             method: 'GET',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,

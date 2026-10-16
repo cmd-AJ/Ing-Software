@@ -6,7 +6,7 @@ export async function addNewJobToNeo(jobName: string, jobDescription: string) {
             description: jobDescription 
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/addJob`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/neo/addJob`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -30,7 +30,7 @@ export async function addNewJobToNeo(jobName: string, jobDescription: string) {
 export async function Existing_admin(dpi: string, password: string) {
     try {
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/login_admin/${dpi}/${password}`,{
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/login_admin/${dpi}/${password}`,{
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export async function Existing_admin(dpi: string, password: string) {
 export async function gettingreports() {
     try {
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/reports`,{
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/reports`,{
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ export async function gettingreports() {
 export async function Getbanusers() {
     try {
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/banprev`,{
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/banprev`,{
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ export async function Getbanusers() {
 export async function Getallbannedusers() {
     try {
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/banusers`,{
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/banusers`,{
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
                 'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ export async function unban(dpi: string) {
             DPI: dpi
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/unbanuser`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/unbanuser`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
@@ -156,7 +156,7 @@ export async function extendunban(dpi: string, fecha : string) {
             fecha: fecha
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/extendban`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/extendban`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_ADMIN_API_KEY,
@@ -186,7 +186,7 @@ export async function removeJob(trabajo: string) {
             trabajo: trabajo
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/removework`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/removework`, {
             method: 'DELETE',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -217,7 +217,7 @@ export async function addjob_toprofile(trabajo: string, dpi: string) {
             dpi: dpi 
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/pfnework`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/pfnework`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -247,7 +247,7 @@ export async function update_descripcion(trabajo: string, descripcion: string) {
             descripcion: descripcion 
         };
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/changedescription`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/changedescription`, {
             method: 'PUT',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -274,7 +274,7 @@ export async function gettrabajosnuevos() {
     try {
 
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/gettrabajos`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/gettrabajos`, {
             method: 'GET',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,

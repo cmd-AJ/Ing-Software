@@ -2,7 +2,7 @@ import { Departamentos } from "../Departamentos/Departamentos";
 
 export async function deleteJobToWorker(dpi: string, job: string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/DeleteJobToWorker`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/neo/DeleteJobToWorker`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export async function deleteJobToWorker(dpi: string, job: string) {
 
 export async function addJobToWorker(dpi: string, job: string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/AddJobToWorker`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/neo/AddJobToWorker`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export async function addJobToWorker(dpi: string, job: string) {
 
 export async function getJobsWithDpi(dpi:string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/neo/WorkerJobList/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/neo/WorkerJobList/${dpi}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
@@ -91,7 +91,7 @@ async function createUser(
     }
 
     try {
-	const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users`, {
+	const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/users`, {
         	method: 'POST',
         	headers: {
             		'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ async function createUser(
             "telefono": phoneNumber
         }
     
-        const neoResponse = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/usersNeo`, {
+        const neoResponse = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/usersNeo`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ export async function getLoginUser(dpi: any, password: any) {
     }
 
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/LoginUser`,{
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/LoginUser`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ async function getWorkersByJob(job: String, usrDpi: string) {
         // Obtain the trusted people of the user
         const usrTrustedpeople = await getTrustedPeople(usrDpi);
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/workers/${job}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/workers/${job}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
@@ -245,7 +245,7 @@ export async function getWorkersByName(name: String, usrDpi: string) {
         // Obtain the trusted people of the user
         const usrTrustedpeople = await getTrustedPeople(usrDpi);
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/nameSearch/${name}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/nameSearch/${name}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'api-key': import.meta.env.VITE_API_KEY
@@ -297,7 +297,7 @@ async function updatecuenta(municipio: string, imagen: string, sexo: string, fec
         banner: banner
     }
 
-    await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setsettings`,
+    await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/setsettings`,
         {
             method: 'PUT',
             headers: {
@@ -319,7 +319,7 @@ export async function updatecuentaNEO4J(municipio: string, imagen: string, DPI: 
         telefono: telefono,
     }
 
-    await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setNeoSettings`,
+    await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/setNeoSettings`,
         {
             method: 'PUT',
             headers: {
@@ -336,7 +336,7 @@ export { createUser, userExists, getWorkersByJob, updatecuenta }
 
 export async function conseguirtrabajo(dpi: string) {
     try {
-        const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/ctrabajo/${dpi}`,
+        const data = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/ctrabajo/${dpi}`,
             {
                 method: 'GET',
                 headers: {
@@ -354,7 +354,7 @@ export async function conseguirtrabajo(dpi: string) {
 
 export async function getTrustedPeople(dpi: string): Promise<any[]> {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trustNetwork/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/trustNetwork/${dpi}`, {
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
                 'Content-Type': 'application/json'
@@ -376,7 +376,7 @@ export async function addTrustedPeople(userDpi: string, newtrusteduserDpi: strin
             dpi2: newtrusteduserDpi
         }
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trustNetwork/addTrust`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/trustNetwork/addTrust`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -399,7 +399,7 @@ export async function configurartrabajo(trabajo: string, dpi: string) {
         dpi: dpi
     }
 
-    const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/confitrab`,
+    const data = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/confitrab`,
         {
             method: 'PUT',
             headers: {
@@ -415,7 +415,7 @@ export async function configurartrabajo(trabajo: string, dpi: string) {
 
 export async function gettrabajoanterior(dpi: string) {
 
-    const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trabajoanterior/${dpi}`,
+    const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/trabajoanterior/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -438,7 +438,7 @@ export async function insertrabajoanterior(dpiTrabajador: string, titulo: string
         imagen: imagen
     }
 
-    const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trabajaoanterior/`,
+    const data = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/trabajaoanterior/`,
         {
             method: 'POST',
             headers: {
@@ -451,7 +451,7 @@ export async function insertrabajoanterior(dpiTrabajador: string, titulo: string
 }
 
 export async function getContratEmployer(dpi : string) {
-    const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trabajoanteriorSABTEemploy/${dpi}`,
+    const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/trabajoanteriorSABTEemploy/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -466,7 +466,7 @@ export async function getContratEmployer(dpi : string) {
 }
 
 export async function getContratWorker(dpi : string) {
-    const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/trabajoanteriorSABTE/${dpi}`,
+    const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/trabajoanteriorSABTE/${dpi}`,
         {
             method: 'GET',
             headers: {
@@ -485,7 +485,7 @@ export async function getContratWorker(dpi : string) {
 
 export async function insertartipodetrabajo(trabajo: object) {
 
-    const data = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/instipotrabajo/`,
+    const data = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/instipotrabajo/`,
         {
             method: 'POST',
             headers: {
@@ -501,7 +501,7 @@ export async function insertartipodetrabajo(trabajo: object) {
 
 export async function getUser2(dpi: string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/users/${dpi}`, {
             method: 'GET',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -525,7 +525,7 @@ export async function getUser2(dpi: string) {
 
 export async function getUserName(dpi: string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/users/${dpi}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/users/${dpi}`, {
             method: 'GET',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -560,7 +560,7 @@ export async function sendSatisfactionSurvey(jobId: Number, rating: Number, dpi_
             descripcion: description
         }
 
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/survey`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/survey`, {
             method: 'POST',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -583,7 +583,7 @@ export async function sendSatisfactionSurvey(jobId: Number, rating: Number, dpi_
 
 export async function get_contrat_by_moventh(dpi: string, mes: string) {
     try {
-        const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/getcontrat_bymonth/${dpi}/${mes}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/getcontrat_bymonth/${dpi}/${mes}`, {
             method: 'GET',
             headers: {
                 'api-key': import.meta.env.VITE_API_KEY,
@@ -607,7 +607,7 @@ export async function get_contrat_by_moventh(dpi: string, mes: string) {
 
 export async function getDpiByTrabajo(idtrabajo : string) {
     try {
-      const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/threads/getDpiByTrabajo/${idtrabajo}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/threads/getDpiByTrabajo/${idtrabajo}`, {
         method: 'GET',
         headers: {
           'api-key': import.meta.env.VITE_API_KEY,
@@ -631,7 +631,7 @@ export async function setWorking(dpi : string) {
 		dpi: dpi
 	}
 	try {
-		const response = await fetch(`https://${import.meta.env.VITE_API_HOSTI}/api/setWorking/`, {
+		const response = await fetch(`${import.meta.env.VITE_API_PROTOCOL || 'https'}://${import.meta.env.VITE_API_HOSTI}/api/setWorking/`, {
         method: 'PUT',
         headers: {
           'api-key': import.meta.env.VITE_API_KEY,

@@ -83,9 +83,9 @@ export async function insertNewJob(job, description) {
     const session = createSession();
 
     try {
-        const query = `CREATE (:Trabajo {nombre_trabajo:'${job}', descripcion:'${description}'})`;
+        const query = `CREATE (:Trabajo {nombre_trabajo: $job, descripcion: $description})`;
 
-        const result = await session.run(query);
+        const result = await session.run(query, { job, description });
 
         return result
     } catch (error) {
@@ -121,10 +121,10 @@ export async function addUserAsTrustedPerson(dpi1, dpi2) {
     const session = createSession();
 
     try {
-        const query = `MATCH (usr1:Usuario {dpi:'${dpi1}'}), (usr2:Usuario {dpi:'${dpi2}'})
+        const query = `MATCH (usr1:Usuario {dpi: $dpi1}), (usr2:Usuario {dpi: $dpi2})
                        CREATE (usr1)-[:confia_en]->(usr2)`
 
-        const result = await session.run(query)
+        const result = await session.run(query, { dpi1, dpi2 })
         return result
 
     } catch (error) {
@@ -140,8 +140,8 @@ export async function creatNeoUser(nombre, apellidos, municipio, rating, imagen,
     const session = createSession();
 
     try {
-        const query = `CREATE (:Usuario {nombre: '${nombre}', apellidos: '${apellidos}', municipio: '${municipio}', rating: '${rating}', imagen: '${imagen}', dpi: '${dpi}', telefono:'${telefono}'})`;
-        const result = await session.run(query);
+        const query = `CREATE (:Usuario {nombre: $nombre, apellidos: $apellidos, municipio: $municipio, rating: $rating, imagen: $imagen, dpi: $dpi, telefono: $telefono})`;
+        const result = await session.run(query, { nombre, apellidos, municipio, rating, imagen, dpi, telefono });
 
         return result;
     } catch (error) {
@@ -157,11 +157,11 @@ export async function updateNeoUser(dpi, municipio, imagen, telefono) {
     const session = createSession();
 
     try {
-        const query = `MATCH (usr:Usuario {dpi: '${dpi}'})
-                       SET usr.municipio = '${municipio}', usr.imagen = '${imagen}',  usr.telefono = '${telefono}'
+        const query = `MATCH (usr:Usuario {dpi: $dpi})
+                       SET usr.municipio = $municipio, usr.imagen = $imagen, usr.telefono = $telefono
                        RETURN usr
                         `;
-        const result = await session.run(query);
+        const result = await session.run(query, { dpi, municipio, imagen, telefono });
 
         return result;
     } catch (error) {
@@ -258,11 +258,11 @@ export async function getTrustedUsersByDpi(dpi) {
 
     try {
         const query = `
-            MATCH p=(usr1:Usuario {dpi: '${dpi}'})-[:confia_en]->(usr2:Usuario) 
+            MATCH p=(usr1:Usuario {dpi: $dpi})-[:confia_en]->(usr2:Usuario) 
             RETURN usr2 
             ORDER BY usr2.rating DESC
         `;
-        const result = await session.run(query);
+        const result = await session.run(query, { dpi });
 
         // Transformar los registros obtenidos en un arreglo de objetos JSON
         const users = await Promise.all(result.records.map(async record => {

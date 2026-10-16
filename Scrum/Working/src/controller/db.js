@@ -256,10 +256,13 @@ export async function insertUser(DPI, name, lastnames, password, email, phoneNum
 
 export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI, rol, telefono, trabajo, banner) {
     try {
-        const result = await client.query(`update usuarios set municipio = '${municipio}', imagen = '${imagen}', sexo = '${sexo}',  fecha_nacimiento = '${fecha_nacimiento}', role = '${rol}', telefono = '${telefono}', banner = '${banner}' where DPI = '${DPI}'`);
+        await client.query({
+            text: "UPDATE usuarios SET municipio = $1, imagen = $2, sexo = $3, fecha_nacimiento = $4, role = $5, telefono = $6, banner = $7 WHERE dpi = $8",
+            values: [municipio, imagen, sexo, fecha_nacimiento, rol, telefono, banner, DPI]
+        })
         console.log('Data inserted successfully')
         if (rol !== 'Empleador') {
-            updatetrab(trabajo, DPI)
+            await updatetrab(trabajo, DPI)
         }
     } catch (error) {
         console.error('Error inserting user:', error);
@@ -271,8 +274,10 @@ export async function setsettings(municipio, imagen, sexo, fecha_nacimiento, DPI
 
 export async function gettrabajo(dpi) {
     try {
-        const result = await client.query(`select nombre_trabajo  from usuarios left join trabajador on usuarios.dpi = trabajador.dpi where usuarios.dpi = '${dpi}'`
-        )
+        const result = await client.query({
+            text: "SELECT nombre_trabajo FROM usuarios LEFT JOIN trabajador ON usuarios.dpi = trabajador.dpi WHERE usuarios.dpi = $1",
+            values: [dpi]
+        })
         return result.rows
 
     } catch (error) {
@@ -363,7 +368,10 @@ export async function getContactsByUserDPI(dpi) {
 
 export async function updatetrab(trabajo, dpi) {
     try {
-        const result = await client.query(`UPDATE trabajador set nombre_trabajo  = '${trabajo}' where dpi = '${dpi}';`);
+        await client.query({
+            text: "UPDATE trabajador SET nombre_trabajo = $1 WHERE dpi = $2",
+            values: [trabajo, dpi]
+        });
         console.log('Data updated  successfully')
     } catch (error) {
         console.error('Error inserting user:', error);
@@ -375,10 +383,10 @@ export async function updatetrab(trabajo, dpi) {
 export async function gettrabajoant(dpi) {
     try {
 
-        const result = await client.query(`select estado, titulo, imagen from completado c 
-            where dpiempleador is null
-            and dpitrabajador = '${dpi}'`
-        )
+        const result = await client.query({
+            text: "SELECT estado, titulo, imagen FROM completado c WHERE dpiempleador IS NULL AND dpitrabajador = $1",
+            values: [dpi]
+        })
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
@@ -389,12 +397,14 @@ export async function gettrabajoant(dpi) {
 //Trabajados en SABTE trabajador
 export async function gettrabajoSABTE(dpi) {
     try {
-        const result = await client.query(`select u.nombre as nombreE, u.apellidos as apellidoE, u.imagen as picE, u2.nombre as nombreT, u2.apellidos as apellidoT, u2.imagen as picT, dpiempleador, dpitrabajador, fecha, fechafin, r.calificacion, pago, c.titulo from completado c
-		left join resena r on c.idresena = r.idresena
-		join usuarios u on u.dpi = c.dpiempleador
-		join usuarios u2 on u2.dpi = c.dpitrabajador
-		where dpitrabajador = '${dpi}'
-		or dpiempleador = '${dpi}';`)
+        const result = await client.query({
+            text: "SELECT u.nombre AS nombreE, u.apellidos AS apellidoE, u.imagen AS picE, u2.nombre AS nombreT, u2.apellidos AS apellidoT, u2.imagen AS picT, dpiempleador, dpitrabajador, fecha, fechafin, r.calificacion, pago, c.titulo FROM completado c " +
+                  "LEFT JOIN resena r ON c.idresena = r.idresena " +
+                  "JOIN usuarios u ON u.dpi = c.dpiempleador " +
+                  "JOIN usuarios u2 ON u2.dpi = c.dpitrabajador " +
+                  "WHERE dpitrabajador = $1 OR dpiempleador = $1",
+            values: [dpi]
+        })
         return result.rows
     } catch (error) {
         console.error('Error getting user:', error);
@@ -405,12 +415,14 @@ export async function gettrabajoSABTE(dpi) {
 //Trabajadores en SABTE empleador
 export async function getTrabajoSABTEemple(dpi) { 
 	try {
-		const result = await client.query(`select c.titulo , u.nombre , u.apellidos, dpitrabajador, t.nombre_trabajo , u.imagen  , fecha, fechafin, r.calificacion from completado c 
-            left join resena r on c.idresena = r.idresena 
-            join usuarios u on u.dpi = c.dpitrabajador 
-            join trabajador t on t.dpi = c.dpitrabajador
-            where dpiempleador = '${dpi}'
-            and dpitrabajador is not null;`)
+		const result = await client.query({
+            text: "SELECT c.titulo, u.nombre, u.apellidos, dpitrabajador, t.nombre_trabajo, u.imagen, fecha, fechafin, r.calificacion FROM completado c " +
+                  "LEFT JOIN resena r ON c.idresena = r.idresena " +
+                  "JOIN usuarios u ON u.dpi = c.dpitrabajador " +
+                  "JOIN trabajador t ON t.dpi = c.dpitrabajador " +
+                  "WHERE dpiempleador = $1 AND dpitrabajador IS NOT NULL",
+            values: [dpi]
+        })
         return result.rows
 	} catch (error) {
 		console.error('Error in getTrabajoSABTEemple function:', error);
@@ -419,18 +431,25 @@ export async function getTrabajoSABTEemple(dpi) {
 }
 
 //Estado es la descripcion eg. Se termino con aticipio o lo mejor de todo
-export async function insertartrabant(dpitrabajador, dpiempleador, titulo, estado, imagen) {
+export async function insertartrabant(dpitrabajador, titulo, estado, imagen) {
 	try {
-	const result = await client.query(`insert into completado(estado, dpitrabajador, titulo, imagen) values( '${estado}', '${dpitrabajador}','${dpiempleador}', '${titulo}', '${imagen}')`);
+	await client.query({
+		text: "INSERT INTO completado(estado, dpitrabajador, titulo, imagen) VALUES ($1, $2, $3, $4)",
+		values: [estado, dpitrabajador, titulo, imagen]
+	});
 	console.log('Data inserted successfully');
 	} catch (error) {
 		console.error('Error inserting user:',error);
+		throw error;
 	}
 }
 
 export async function insertartipotrabajo(nombre_trabajo, descripcion) {
 	try {
-	const result = await client.query(`insert into tipotrabajo (nombre_trabajo, descripcion) values ('${nombre_trabajo}', '${descripcion}')`);
+	await client.query({
+		text: "INSERT INTO tipotrabajo (nombre_trabajo, descripcion) VALUES ($1, $2)",
+		values: [nombre_trabajo, descripcion]
+	});
 	console.log('Data inserted successfully');
 	} catch (error) {
 		console.log('Error inserting user:', error);

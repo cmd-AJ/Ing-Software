@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.env.*
+src/controller/node_modules
+src/controller/.env
+src/controller/local
+src/controller/contratogtgg.json
